@@ -1,0 +1,34 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 11,
+        "nbCountActuel": 9,
+        "pokemonPresentActuel": {
+            "996549061530361967": null
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 8,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 275,
+                "name": {
+                    "nameEng": "Shiftry",
+                    "nameFr": "Tengalice"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Dark"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0275-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}

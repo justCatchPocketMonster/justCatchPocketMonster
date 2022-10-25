@@ -1,0 +1,189 @@
+{
+    "spawnPokemonActivate": {
+        "Fr": ["Les Pokémons sont en route."],
+        "Eng": ["Pokemons are on the way."]
+    },
+    "spawnPokemonAlreadyActivate": {
+        "Fr": ["Ce salon a déjà la possibilité d'accueillir des Pokémons."],
+        "Eng": ["This channel has already the possibility to have pokemon."]
+    },
+    "spawnPokemonDesactivate": {
+        "Fr": ["Oh non, les Pokémons ont disparu."],
+        "Eng": ["Oh no the pokemons are gone."]
+    },
+    "spawnPokemonAlreadyDesactivate": {
+        "Fr": ["Mais il n'y a aucun Pokémons ici."],
+        "Eng": ["But there are no pokemon here."]
+    },
+
+
+
+
+
+    "helpTitle": {
+        "Fr": ["Les commandes"],
+        "Eng": ["The command"]
+    },
+    "commandSpawnExplication": {
+        "Fr": ["Autorisé le spawn dans un salon (modo seulement)."],
+        "Eng": ["Allow spawning in a channel (mod only)."]
+    },
+    "commandUnspawnExplication": {
+        "Fr": ["Supprimé une autorisation le spawn dans un salon (modo seulement)."],
+        "Eng": ["Removed a permission to spawn in a room (modo only)."]
+    },
+    "commandCatchExplication": {
+        "Fr": ["Permet d'attraper le Pokémons présent."],
+        "Eng": ["Allows you to catch the pokemon present."]
+    },
+    "commandPokedexExplication": {
+        "Fr": ["Permet de visualiser l'avancement du pokédex."],
+        "Eng": ["Allows you to visualize the progress of the pokedex."]
+    },
+    "commandCatchExtension": {
+        "Fr": ["nom du Pokémon"],
+        "Eng": ["pokemon's name"]
+    },
+    "commandPokedexExtension": {
+        "Fr": ["Nombre de la page"],
+        "Eng": ["Number of the page"]
+    },
+
+
+
+
+
+    "embedPokemonTitle": {
+        "Fr": ["Un Pokémon sauvage apparaît !"],
+        "Eng": ["Wild Pokemon appeared!"]
+    },
+    "embedPokemonDescription": {
+        "Fr": ["Pour l'attraper faites \"!catch [nom du Pokémon]\"."],
+        "Eng": ["To catch it, do \"!catch [Pokemon's name]\"."]
+    },
+
+    "congratYouCatchPart1": {
+        "Fr": ["Félicitations "],
+        "Eng": ["Congratulations "]
+    },
+    "congratYouCatchPart2": {
+        "Fr": [", vous avez attrapé un "],
+        "Eng": [", you caught one "]
+    },
+    "newAtPokedex": {
+        "Fr": ["Les données du Pokémon ont été ajoutées au Pokédex."],
+        "Eng": ["Pokemon's data has been added to the Pokedex."]
+    },
+    "failCatchGoodPokemon": {
+        "Fr": ["L'orthographe du Pokémon ne doit pas être bonne."],
+        "Eng": ["The spelling of the pokemon must not be correct."]
+    },
+    "noPokemonDisponible": {
+        "Fr": ["Aucun Pokémon n'est présent actuellement."],
+        "Eng": ["No pokemon is currently present."]
+    },
+
+    "noCatch": {
+        "Fr": ["Non capturé"],
+        "Eng": ["Not captured"]
+    },
+    "catched": {
+        "Fr": ["Capturé: "],
+        "Eng": ["Captured: "]
+    },
+
+    "noPage": {
+        "Fr": ["Page indisponible."],
+        "Eng": ["Page unavailable"]
+    },
+    "pokedexOf": {
+        "Fr": ["Pokédex de "],
+        "Eng": ["Pokedex from "]
+    },
+    "nationalDex": {
+        "Fr": ["Pokédex national"],
+        "Eng": ["National pokedex"]
+    },
+    "shinyDex": {
+        "Fr": ["ShinyDex national"],
+        "Eng": ["National ShinyDex"]
+    },
+
+
+
+
+
+    "noAutorisation": {
+        "Fr": ["Vous n'avez pas les droits."],
+        "Eng": ["You don't have the rights."]
+    },
+    "errorLanguageChoose": {
+        "Fr": ["Je n'ai pas cette langue."],
+        "Eng": ["I don't have this language."]
+    },
+
+
+    "rightTitle": {
+        "Fr": ["Droit"],
+        "Eng": ["Right"]
+    },
+    "stopTitle": {
+        "Fr": ["Stop"],
+        "Eng": ["Stop"]
+    },
+    "rightText": {
+        "Fr": ["Je ne possède pas les droits de la licence Pokémon. Nintendo/Creatures Inc./GAME FREAK inc."],
+        "Eng": ["I do not own the Pokemon license rights. Nintendo/Creatures Inc./GAME FREAK inc."]
+    },
+    "stopText": {
+        "Fr": ["Je peux stopper ce service avec ou sans préavis intentionnellement ou à la demande des ayant droit."],
+        "Eng": ["I can stop this service with or without notice intentionally or at the request of the rights holders."]
+    },
+
+
+    "codeAlreadyUsed": {
+        "Fr": ["Le code saisie a déjà été utilisé."],
+        "Eng": ["The code entered has already been used."]
+    },
+    "codeDontExist": {
+        "Fr": ["Le code n'existe pas."],
+        "Eng": ["The code does not exist."]
+    },
+
+    "charmeChromaWin" : {
+        "Fr": ["Bravo vous avec débloquez le charme chroma."],
+        "Eng": ["Well done you with unlock chroma charm."]
+    },
+    "charmeChromaLose" : {
+        "Fr": ["Aie, vous avez perdu le charme chroma."],
+        "Eng": ["Ouch, you lost the chroma charm"]
+    },
+
+
+    "eventMontagnardTitre" : {
+        "Fr": ["Un Montagnard passe par là."],
+        "Eng": ["A Mountaineer passes by here"]
+    },
+    "eventMontagnardDesc" : {
+        "Fr": ["Juste un Montagnard sympathique"],
+        "Eng": ["Just a friendly mountaineer"]
+    },
+    "eventPixelasTitre" : {
+        "Fr": ["¿Un pequeño píxel?"],
+        "Eng": ["¿Un pequeño píxel?"]
+    },
+    "eventPixelasDesc" : {
+        "Fr": ["píxeles por todas partes"],
+        "Eng": ["píxeles por todas partes"]
+    },
+    "eventCuisineTitre" : {
+        "Fr": ["Un cuisinier sauvage apparait."],
+        "Eng": ["A wild cook appears"]
+    },
+    "eventCuisineDesc" : {
+        "Fr": ["...pourquoi il cuisine une pokeball ?"],
+        "Eng": ["...Pourquoi il cuisine une pokeball ?"]
+    }
+    
+
+}

@@ -1,0 +1,51 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 15,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 375,
+                "name": {
+                    "nameEng": "Metang",
+                    "nameFr": "Métang"
+                },
+                "typeListEng": [
+                    "Steel",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0375-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 18,
+        "nbCountActuel": 13,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 65,
+                "name": {
+                    "nameEng": "Alakazam",
+                    "nameFr": "Alakazam"
+                },
+                "typeListEng": [
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0065-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}

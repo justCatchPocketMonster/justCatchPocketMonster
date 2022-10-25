@@ -1,0 +1,39 @@
+[
+    {
+        "id" : 0,
+        "nom": "",
+        "description": "",
+        "type": "",
+        "color": "",
+        "quand": "",
+        "image" : ""
+    },
+    {
+        "id" : 1,
+        "nom": "eventMontagnardTitre",
+        "description": "eventMontagnardDesc",
+        "type": "justEmbed",
+        "color": "734101",
+        "quand": "avant",
+        "image" : "0001-000"
+    },
+    {
+        "id" : 2,
+        "nom": "eventPixelasTitre",
+        "description": "eventPixelasDesc",
+        "type": "justEmbed",
+        "color": "13FF00",
+        "quand": "avant",
+        "image" : "0002-000"
+    },
+    {
+        "id" : 3,
+        "nom": "eventCuisineTitre",
+        "description": "eventCuisineDesc",
+        "type": "justEmbed",
+        "color": "FFFFFF",
+        "quand": "avant",
+        "image" : "0003-000"
+    }
+
+]

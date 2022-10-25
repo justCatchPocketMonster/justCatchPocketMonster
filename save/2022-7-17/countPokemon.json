@@ -1,0 +1,34 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 14,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "996549061530361967": null
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 11,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 73,
+                "name": {
+                    "nameEng": "Tentacruel",
+                    "nameFr": "Tentacruel"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0073-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}}
