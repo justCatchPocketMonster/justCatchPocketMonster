@@ -16,7 +16,7 @@ module.exports = async (message, interaction, pages, time = 60000) => {
         customId:"1",
         label: "<",
         style: "PRIMARY",
-        disabled: index === 0
+        disabled: false
     },
     {
         type:"BUTTON",
@@ -37,7 +37,7 @@ module.exports = async (message, interaction, pages, time = 60000) => {
         customId:"2",
         label: ">",
         style: "PRIMARY",
-        disabled: pages.length <= index+1
+        disabled: false
     }
     
 
@@ -63,8 +63,16 @@ module.exports = async (message, interaction, pages, time = 60000) => {
             
             if(i.customId === "1"){
                 index--;
+
+                if(index <= -1){
+                    index = (pages.length)-1
+                }
             } else if (i.customId === "2"){
                 index++;
+
+                if(index >= pages.length){
+                    index = 0;
+                }
             } else if(i.customId === "4"){
                 /*
                 col.resetTimer({time: time*2})
@@ -102,7 +110,7 @@ module.exports = async (message, interaction, pages, time = 60000) => {
                     customId:"1",
                     label: "<",
                     style: "PRIMARY",
-                    disabled: index === 0
+                    disabled: false
                 },
                 {
                     type:"BUTTON",
@@ -123,7 +131,7 @@ module.exports = async (message, interaction, pages, time = 60000) => {
                     customId:"2",
                     label: ">",
                     style: "PRIMARY",
-                    disabled: pages.length <= index+1
+                    disabled: false
                 }
             
                 ])
