@@ -1,4 +1,4 @@
-const { MessageAttachment, Client } = require("discord.js")
+const { MessageAttachment, Client, ButtonInteraction, Interaction } = require("discord.js")
 const variableGlobal = require("../parameters/variableGlobal")
 const stat = require("../fonction/stat")
 const pokeData = require("../bdd/pokemon.json");
@@ -11,6 +11,8 @@ const fonction = require("../fonction/fonctionJs")
 const allowChannel = require("./allowSpawnChannel")
 const spawnCount = require("./spawnCount")
 const language = require("./language")
+
+const pagination = require("./pagination")
 
 const prefix = variableGlobal.prefix;
 var pokemon = undefined;
@@ -160,9 +162,10 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
 /**
  * creer un embed avec la sauvegarde pokemon
  */
- function embedPokemonSaveUser(Discord, message, nbPage, Client){
+ function embedPokemonSaveUser(Discord, message, Client){
     const maxPokemonParPage = 21;
-    var listPokemon = []
+    var listPokemon = [];
+    var arrayEmbed = [];
     var savePokemon = savePokemonUser.getSave(message.member.id);
     var saveShiny = saveShinyUser.getSave(message.member.id);
     const emotePokeballDark = "<:pokeballDark:981974919212572682>";
@@ -174,48 +177,71 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
         savePokemonUser.updateNumberPossibilitySave(message.member.id)
         savePokemon = savePokemonUser.getSave(message.member.id);
     }
-    
-    for (let i = 1+maxPokemonParPage*(nbPage-1); i < maxPokemonParPage*nbPage+1; i++){
-        pokeFields = {};
-        if(pokemonObject.getNamePokemon(i, message.guild.id) != null){
-            
-            if(saveShiny[i] === 0){
-                if(savePokemon[i] === 0){
-                    pokeFields = { name: i+" ?????  "+ emotePokeballDark, value: language.getText(message.guild.id, "noCatch") , inline: true}
-                } else {
-                    pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, message.guild.id)+"  "+emotePokeballLight, value: language.getText(message.guild.id, "catched")+ savePokemon[i] , inline: true}
-                }
-            } else {
-                pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, message.guild.id)+"  "+emotePokeballShiny, value: language.getText(message.guild.id, "catched")+ savePokemon[i] , inline: true}
-            }
-
-            
-            listPokemon.push(pokeFields)
-        }
+    let pokeSave
+    nbPage = 1;
+    nbPageMax = 1;
+    while(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPageMax), message.guild.id) !== null){
+        nbPageMax++
     }
-    
 
-    
-    
-    var sautLigne = [
-        { name: '\u200B', value: '\u200B' },
-    ]
+    while(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPage-1), message.guild.id) !== null){
+        pokeSave = new Discord.MessageEmbed()
 
-    if(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPage-1), message.guild.id) === null){
-        message.channel.send(language.getText(message.guild.id, "noPage"))
-    } else {
-        let pokeSave = new Discord.MessageEmbed()
+        for (let i = 1+maxPokemonParPage*(nbPage-1); i < maxPokemonParPage*nbPage+1; i++){
+            pokeFields = {};
+            if(pokemonObject.getNamePokemon(i, message.guild.id) != null){
+                
+                if(saveShiny[i] === 0){
+                    if(savePokemon[i] === 0){
+                        pokeFields = { name: i+" ?????  "+ emotePokeballDark, value: language.getText(message.guild.id, "noCatch") , inline: true}
+                    } else {
+                        pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, message.guild.id)+"  "+emotePokeballLight, value: language.getText(message.guild.id, "catched")+ savePokemon[i] , inline: true}
+                    }
+                } else {
+                    pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, message.guild.id)+"  "+emotePokeballShiny, value: language.getText(message.guild.id, "catched")+ savePokemon[i] , inline: true}
+                }
+    
+                
+                listPokemon.push(pokeFields)
+            }
+        }
+
+        
+        var sautLigne = [
+            { name: '\u200B', value: '\u200B' },
+        ]
+    
+        
+            pokeSave
             .setThumbnail(message.author.avatarURL())
             .setColor("#0099FF")
+            .setDescription("\u200B")
             .setTitle(language.getText(message.guild.id, "pokedexOf") + message.author.username)
             .addFields(
-                { name: language.getText(message.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ savePokemonUser.getPercentageNational(message.member.id)+"%" },
-                { name: language.getText(message.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ saveShinyUser.getPercentageNational(message.member.id)+"%" }
+                { name: language.getText(message.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ savePokemonUser.getPercentageNational(message.member.id)+"%" , inline: true},
+                { name: language.getText(message.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ saveShinyUser.getPercentageNational(message.member.id)+"%" , inline: true},
+                { name: "\u200B", value: "\u200B" , inline: false}
             )
             .addFields(listPokemon)
-
-            message.channel.send({ embeds: [pokeSave]});
+            .setFooter({text: "Pages:  "+ nbPage + "/" + nbPageMax +"."})
+ 
+        listPokemon = [];
+        nbPage++;
+        arrayEmbed.push(pokeSave)
+       
     }
+    
+    pagination(message, Interaction, arrayEmbed);
+    /*
+    pagination({
+        author: message.author,
+        embeds: arrayEmbed,
+        channel: message.channel,
+        time: 60000,
+    })
+    */
+    //message.channel.send({ embeds: [pokeSave]});
+    
 }
 
 module.exports= { spawnPokemon, embedPokemonSaveUser}

@@ -1,0 +1,151 @@
+const { MessageActionRow, ButtonInteraction, Interaction, Message, MessageButton} = require("discord.js")
+
+/**
+ * @param {Message} message
+ * @param {Interaction} interaction 
+ * @param {*} pages 
+ * @param {*} time 
+ */
+module.exports = async (message, interaction, pages, time = 60000) => {
+
+    if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
+
+    var index = 0, row = new MessageActionRow().addComponents([
+    {
+        type:"BUTTON",
+        customId:"1",
+        label: "<",
+        style: "PRIMARY",
+        disabled: index === 0
+    },
+    {
+        type:"BUTTON",
+        customId:"3",
+        label: "X",
+        style: "DANGER",
+        disabled: false
+    },/*
+    {
+        type:"BUTTON",
+        customId:"4",
+        label: "#",
+        style: "SECONDARY",
+        disabled: false
+    },*/
+    {
+        type:"BUTTON",
+        customId:"2",
+        label: ">",
+        style: "PRIMARY",
+        disabled: pages.length <= index+1
+    }
+    
+
+    ]);
+
+    let data = {
+        embeds: [pages[index]],
+        components: [row]
+        //,fetchReply: true
+    };
+    
+    const filter = (interaction) => {
+        return interaction.user.id === message.author.id
+    }
+
+    await message.channel.send(data).then(messageSendBot => {
+        const col = messageSendBot.createMessageComponentCollector({
+            filter: filter,
+            time: time
+        });
+        col.on('collect', (i) => {
+
+            
+            if(i.customId === "1"){
+                index--;
+            } else if (i.customId === "2"){
+                index++;
+            } else if(i.customId === "4"){
+                /*
+                col.resetTimer({time: time*2})
+
+                message.channel.send({content: "Vous avez 1 minute pour saisir le numéro de la page voulu."}).then(messagePageBot => {
+                    const collectReponse = messagePageBot.channel.createMessageCollector({
+                        //filter: filter,
+                        time: time
+                    })
+
+                    collectReponse.on("collect", messageSend => {
+                        if(isNaN(Number(messageSend))){
+                            col.resetTimer({time: time*2})
+                            messagePageBot.resetTimer({time: time})
+                            messagePageBot.edit({content: "La valeur inscrise n'est pas un nombre. veuillez recommencer"})
+                        } else {
+                            index = Number(messageSend);
+                            collectReponse.stop();
+                        }
+                    })
+
+                    collectReponse.on("end", () => {
+                        messagePageBot.delete()
+                    })
+                })
+                */
+
+            } else{
+                return col.stop();
+            }
+    
+            row = new MessageActionRow().addComponents([
+                {
+                    type:"BUTTON",
+                    customId:"1",
+                    label: "<",
+                    style: "PRIMARY",
+                    disabled: index === 0
+                },
+                {
+                    type:"BUTTON",
+                    customId:"3",
+                    label: "X",
+                    style: "DANGER",
+                    disabled: false
+                },/*
+                {
+                    type:"BUTTON",
+                    customId:"4",
+                    label: "#",
+                    style: "SECONDARY",
+                    disabled: false
+                },*/
+                {
+                    type:"BUTTON",
+                    customId:"2",
+                    label: ">",
+                    style: "PRIMARY",
+                    disabled: pages.length <= index+1
+                }
+            
+                ])
+            
+            i.update({
+                components:[row],
+                embeds:[pages[index]]
+            })
+            col.resetTimer({time: time})
+        })
+    
+        col.on('end', () => {
+            messageSendBot.edit({
+                components:[]
+            })
+        })
+    })
+
+    
+
+
+   
+
+
+}

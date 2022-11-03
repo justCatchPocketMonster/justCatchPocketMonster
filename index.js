@@ -22,7 +22,6 @@ const prefix = variableGlobal.prefix;
 
 fileConnexion.connexion(Discord, Client);
 
-
 var repeteSave = setInterval(saveAllBdd.createCopyAllBdd, variableGlobal.timeIntervalSave)
 try{
     /**
@@ -52,7 +51,7 @@ try{
             }
             return
         }
-
+        
         if(message.content.substring(0,(prefix+"code ").length) === prefix + "code "){
             
             codeEntered.enterCode(message.member.id, message.content.substring((prefix+"code ").length), message)

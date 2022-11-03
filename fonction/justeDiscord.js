@@ -1,9 +1,16 @@
 
 const language = require("./language")
 const variableGlobal = require("../parameters/variableGlobal")
-const stat = require("./stat")
+const stat = require("./stat");
+const { Message } = require("discord.js");
+const Discord = require("discord.js");
 const prefix = variableGlobal.prefix;
 
+/**
+ * 
+ * @param {Discord} Discord 
+ * @param {Message} message 
+ */
 function embedHelp(Discord, message){
     let embedDiscord = new Discord.MessageEmbed()
             .setColor("#0099FF")
@@ -15,7 +22,9 @@ function embedHelp(Discord, message){
                 { name: prefix+"pokedex ["+language.getText(message.guild.id, "commandPokedexExtension")+"]" , value: language.getText(message.guild.id, "commandPokedexExplication") , inline: true},
             ]
             )
-            message.channel.send({ embeds: [embedDiscord]});
+    message.channel.send({ embeds: [embedDiscord]})
+    .then(console.log("tamere"))
+    .catch(console.log("nul nul nul"))
 }
 
 function embedMention(Discord, message){
