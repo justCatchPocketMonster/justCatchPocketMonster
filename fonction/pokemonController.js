@@ -279,7 +279,7 @@ function generateFiledRandomStat(idUser, idGuild){
     while(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPage-1), message.guild.id) !== null){
         pokeSave = new Discord.MessageEmbed()
 
-        for (let i = 1+maxPokemonParPage*(nbPage-2); i < maxPokemonParPage*nbPage+1; i++){
+        for (let i = 1+maxPokemonParPage*(nbPage-2); i <= maxPokemonParPage*nbPage+1; i++){
             pokeFields = {};
             if(pokemonObject.getNamePokemon(i, message.guild.id) != null){
                 
