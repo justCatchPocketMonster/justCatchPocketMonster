@@ -104,6 +104,10 @@
         "Fr": ["Pokédex national"],
         "Eng": ["National pokedex"]
     },
+    "nationalDexServer": {
+        "Fr": ["Pokédex national du serveur"],
+        "Eng": ["Server's National pokedex"]
+    },
     "shinyDex": {
         "Fr": ["ShinyDex national"],
         "Eng": ["National ShinyDex"]
@@ -183,7 +187,107 @@
     "eventCuisineDesc" : {
         "Fr": ["...pourquoi il cuisine une pokeball ?"],
         "Eng": ["...Pourquoi il cuisine une pokeball ?"]
+    },
+
+    "pokedexDeKanto": {
+        "Fr": ["Pokedex Kanto"],
+        "Eng": ["Kanto's Pokedex"]
+    },
+    "pokedexDeJohto": {
+        "Fr": ["Pokedex Johto"],
+        "Eng": ["Johto's Pokedex"]
+    },
+    "pokedexDeHoenn": {
+        "Fr": ["Pokedex Hoenn"],
+        "Eng": ["Hoenn's Pokedex"]
+    },
+    "pokedexDeSinnoh": {
+        "Fr": ["Pokedex Sinnoh"],
+        "Eng": ["Sinnoh's Pokedex"]
+    },
+    "pokedexDeUnys": {
+        "Fr": ["Pokedex Unys"],
+        "Eng": ["Unova's Pokedex"]
+    },
+    "pokedexDeKalos": {
+        "Fr": ["Pokedex Kalos"],
+        "Eng": ["Kalos's Pokedex"]
+    },
+    "pokedexDeAlola": {
+        "Fr": ["Pokedex Alola"],
+        "Eng": ["Alola's Pokedex"]
+    },
+    "pokedexDeGalar": {
+        "Fr": ["Pokedex Galar"],
+        "Eng": ["Galar's Pokedex"]
+    },
+    "pokedexDePaldea": {
+        "Fr": ["Pokedex Paldea"],
+        "Eng": ["Paldea's Pokedex"]
+    },
+
+    "shinydexDeKanto": {
+        "Fr": ["Shinydex Kanto"],
+        "Eng": ["Kanto's Shinydex"]
+    },
+    "shinydexDeJohto": {
+        "Fr": ["Shinydex Johto"],
+        "Eng": ["Johto's Shinydex"]
+    },
+    "shinydexDeHoenn": {
+        "Fr": ["Shinydex Hoenn"],
+        "Eng": ["Hoenn's Shinydex"]
+    },
+    "shinydexDeSinnoh": {
+        "Fr": ["Shinydex Sinnoh"],
+        "Eng": ["Sinnoh's Shinydex"]
+    },
+    "shinydexDeUnys": {
+        "Fr": ["Shinydex Unys"],
+        "Eng": ["Unova's Shinydex"]
+    },
+    "shinydexDeKalos": {
+        "Fr": ["Shinydex Kalos"],
+        "Eng": ["Kalos's Shinydex"]
+    },
+    "shinydexDeAlola": {
+        "Fr": ["Shinydex Alola"],
+        "Eng": ["Alola's Shinydex"]
+    },
+    "shinydexDeGalar": {
+        "Fr": ["Shinydex Galar"],
+        "Eng": ["Galar's Shinydex"]
+    },
+    "shinydexDePaldea": {
+        "Fr": ["Shinydex Paldea"],
+        "Eng": ["Paldea's Shinydex"]
+    },
+
+
+    "pokemonManquant": {
+        "Fr": ["Pokémon non capturé"],
+        "Eng": ["Pokemon not caught"]
+    },
+    "pokemonManquantShiny": {
+        "Fr": ["Pokémon non capturé en shiny"],
+        "Eng": ["Pokemon not caught in shiny"]
+    },
+
+    "felicitation": {
+        "Fr": ["Félicitations"],
+        "Eng": ["Congratulation"]
+    },
+    "vousLesAvezTous": {
+        "Fr": ["Vous avez attrapé tous les Pokémon."],
+        "Eng": ["You have caught all Pokémon."]
+    },
+
+    "nombreDeCapture": {
+        "Fr": ["Nombre de capture"],
+        "Eng": ["Number of caught"]
     }
+    
+    
     
 
 }

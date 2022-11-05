@@ -153,10 +153,73 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
         embedPokemon(Discord, message, pokemon, Client, idChannelRandom)
     //}
 
-    
+}
+
+function generateFieldRegionStat(idUser, idGuild){
+    field = [];
+    valueMax = 151;
+    valueMin = 0;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+            field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        } else {
+            field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        }
+    } else {
+        field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeKanto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
 
 
+    valueMax = 251;
+    valueMin = 151;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+            field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        } else {
+            field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        }
+    } else {
+        field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeJohto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+
+    valueMax = 386;
+    valueMin = 251;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+            field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        } else {
+            field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        }
+    } else {
+        field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeHoenn"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+    return field
+}
+
+function generateFiledRandomStat(idUser, idGuild){
+    field = [];
+
+    listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser)
+    listPokemonShinyUncatch = saveShinyUser.getAllPokemonWithZeroCapture(idUser)
+
+    if(listPokemonUncatch.length <= 0){
+        field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    } else {
+        field.push({ name: language.getText(idGuild,"pokemonManquant"), value: pokeData[listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
+    }
+
     
+    if(listPokemonShinyUncatch.length <= 0){
+        field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    } else {
+        field.push({ name: language.getText(idGuild,"pokemonManquant")+ " shiny", value: pokeData[listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
+    }
+
+    field.push({ name: language.getText(idGuild,"nombreDeCapture"), value: ""+savePokemonUser.getCountAllPokemon(idUser) , inline: true})
+
+    return field
 }
 
 /**
@@ -184,10 +247,39 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
         nbPageMax++
     }
 
+    nbPageMax++
+
+
+    mainPage = new Discord.MessageEmbed();
+    mainPage
+    .setThumbnail(message.author.avatarURL())
+            .setColor("#0099FF")
+            .setDescription("\u200B")
+            .setTitle(language.getText(message.guild.id, "pokedexOf") + message.author.username)
+            .addFields(
+                { name: language.getText(message.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ savePokemonUser.getPercentageNational(message.member.id)+"%" , inline: true},
+                { name: language.getText(message.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(message.member.id)+"/"+ (pokeData.length-1)+" - "+ saveShinyUser.getPercentageNational(message.member.id)+"%" , inline: true},
+                { name: language.getText(message.guild.id, "nationalDexServer"), value: savePokemonServer.getCountNational(message.guild.id)+"/"+ (pokeData.length-1)+" - "+ savePokemonServer.getPercentageNational(message.guild.id)+"%" , inline: true},
+                { name: "\u200B", value: "\u200B" , inline: false}
+            )
+            .addFields(
+                generateFieldRegionStat(message.member.id, message.guild.id),
+                { name: "\u200B", value: "\u200B" , inline: false}
+            )
+            .addFields(
+                generateFiledRandomStat(message.member.id, message.guild.id)
+            )
+            .setFooter({text: "Pages:  "+ nbPage + "/" + nbPageMax +"."})
+
+
+
+        arrayEmbed.push(mainPage)
+    
+    nbPage++;
     while(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPage-1), message.guild.id) !== null){
         pokeSave = new Discord.MessageEmbed()
 
-        for (let i = 1+maxPokemonParPage*(nbPage-1); i < maxPokemonParPage*nbPage+1; i++){
+        for (let i = 1+maxPokemonParPage*(nbPage-2); i < maxPokemonParPage*nbPage+1; i++){
             pokeFields = {};
             if(pokemonObject.getNamePokemon(i, message.guild.id) != null){
                 
@@ -232,15 +324,7 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
     }
     
     pagination(message, Interaction, arrayEmbed);
-    /*
-    pagination({
-        author: message.author,
-        embeds: arrayEmbed,
-        channel: message.channel,
-        time: 60000,
-    })
-    */
-    //message.channel.send({ embeds: [pokeSave]});
+
     
 }
 

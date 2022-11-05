@@ -68,8 +68,8 @@ try{
             return
         }
 
-        if(message.content.substring(0,(prefix+"pokedex ").length) === prefix + "pokedex "){
-            filePokemon.embedPokemonSaveUser(Discord, message, message.content.substring((prefix+"pokedex ").length), Client);
+        if(message.content.substring(0,(prefix+"pokedex ").length)){
+            filePokemon.embedPokemonSaveUser(Discord, message, Client);
             return
         }
 

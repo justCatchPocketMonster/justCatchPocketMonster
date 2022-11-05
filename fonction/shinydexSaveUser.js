@@ -62,9 +62,37 @@ function getCountNational(idUser){
     return(countPokemon)
 }
 
+function getCountMaxMin(idUser, max, min){
+    countPokemon = 0;
+    min++;
+    Object.keys(pokedexBDD[idUser]).forEach(key => {
+        if(pokedexBDD[idUser][key] > 0 && key <= max && key >= min){
+            countPokemon ++;
+        }
+
+    });
+    return(countPokemon)
+}
+
+function getAllPokemonWithZeroCapture(idUser){
+    array = [];
+
+    Object.keys(pokedexBDD[idUser]).forEach(key => {
+        if(pokedexBDD[idUser][key] <= 0){
+            array.push(key)
+        }
+
+    });
+    return array
+}
+
 function getPercentageNational(idUser){
     return(Math.floor((100*getCountNational(idUser))/((pokeData.length)-1)))
 }
+function getPercentageMaxMin(idUser, max, min){
+    return(Math.floor((100*getCountMaxMin(idUser, max, min))/(max-min)))
+}
+
 
 function SaveBdd(){
     fs.writeFile("./bdd/shinydexSaveUser.json", JSON.stringify(pokedexBDD, null, 4), (err)=> {
@@ -73,4 +101,4 @@ function SaveBdd(){
     })
 }
 
-module.exports= { pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational}
+module.exports= { pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational, getPercentageMaxMin, getCountMaxMin, getAllPokemonWithZeroCapture}

@@ -69,10 +69,51 @@ function getPercentageNational(idUser){
     return(Math.floor((100*getCountNational(idUser))/((pokeData.length)-1)))
 }
 
+function getCountMaxMin(idUser, max, min){
+    countPokemon = 0;
+    min++;
+    Object.keys(pokedexBDD[idUser]).forEach(key => {
+        if(pokedexBDD[idUser][key] > 0 && key <= max && key >= min){
+            countPokemon ++;
+        }
+
+    });
+    return(countPokemon)
+}
+
+
+function getCountAllPokemon(idUser){
+    countPokemon = 0;
+
+    Object.keys(pokedexBDD[idUser]).forEach(key => {
+       
+        countPokemon += pokedexBDD[idUser][key];
+
+    });
+    return(countPokemon)
+}
+
+function getAllPokemonWithZeroCapture(idUser){
+    array = [];
+
+    Object.keys(pokedexBDD[idUser]).forEach(key => {
+        if(pokedexBDD[idUser][key] <= 0){
+            array.push(key)
+        }
+
+    });
+    return array
+}
+
+
+function getPercentageMaxMin(idUser, max, min){
+    return(Math.floor((100*getCountMaxMin(idUser, max, min))/(max-min)))
+}
+
 function SaveBdd(){
     fs.writeFile("./bdd/pokedexSaveUser.json", JSON.stringify(pokedexBDD, null, 4), (err)=> {
         if (err)console.log("erreur")
     })
 }
 
-module.exports= {getNumberCapturePokemon, pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational}
+module.exports= {getNumberCapturePokemon, pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational, getCountMaxMin,getPercentageMaxMin, getAllPokemonWithZeroCapture, getCountAllPokemon}

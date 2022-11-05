@@ -77,6 +77,26 @@ function getSave(idServerCreate){
     }
     return pokedexBDD[idServerCreate]
 }
+function getCountNational(idServer){
+    countPokemon = 0;
+    if(pokedexBDD[idServer] === undefined){
+        createSaveServer(idServer)
+    }
+    if(pokedexBDD[idServer][nbPokemon] === undefined){
+        updateNumberPossibilitySave(idServer);
+    }
+    Object.keys(pokedexBDD[idServer]).forEach(key => {
+        if(pokedexBDD[idServer][key] > 0){
+            countPokemon ++;
+        }
+
+    });
+    return(countPokemon)
+}
+
+function getPercentageNational(idServer){
+    return(Math.floor((100*getCountNational(idServer))/((pokeData.length)-1)))
+}
 
 //ajoute de nouvelle possibility si des pokemons sont ajoutés dans la bdd
 function updateNumberPossibilitySave(idServerUpdate){
@@ -100,4 +120,4 @@ function SaveBddCharmeChroma(){
     })
 }
 
-module.exports= {hasCharmChroma, pokedex, createSaveServer, getSave}
+module.exports= {hasCharmChroma, pokedex, createSaveServer, getSave,getPercentageNational ,getCountNational}
