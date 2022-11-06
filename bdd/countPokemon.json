@@ -1,9 +1,30 @@
 {
     "972893923359998053": {
-        "nbCountMax": 17,
-        "nbCountActuel": 2,
+        "nbCountMax": 9,
+        "nbCountActuel": 0,
         "pokemonPresentActuel": {
-            "972896634105110528": null
+            "972896634105110528": {
+                "id": 245,
+                "name": {
+                    "nameEng": "Suicune",
+                    "nameFr": "Suicune"
+                },
+                "typeListEng": [
+                    "Water"
+                ],
+                "theType": "legendaire",
+                "imgName": [
+                    "0245-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}e
+            }
         }
     }
 }

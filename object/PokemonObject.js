@@ -35,19 +35,23 @@ function typeIntToStr(nb){
  * vérifie si le type correspond avec l'id et true si ça n'est pas le cas
  */
 
- function pokemonChoice(type, gen){
+ function pokemonChoice(type, gen, typeReal){
     let pokemonSelected = []
     pokeData.forEach(pokemon =>{
         if(pokemon["gen"] === gen){
             if(pokemon["theType"] === type){
-                pokemonSelected.push(pokemon)
+                if(pokemon["typeListEng"].includes(typeReal)){
+                    pokemonSelected.push(pokemon)
+                }
                 
             }
         }
     })
+    console.log([gen, type, typeReal])
+    console.log(pokemonSelected)
 
     if(pokemonSelected[0] === undefined){
-        return undefined
+        return {}
     }
     let pokemonDoSpawn = pokemonSelected[(fonctionJs.getRandomInt(pokemonSelected.length))];
     return pokemonDoSpawn
@@ -61,14 +65,66 @@ function pokemonSelect(){
     
     let randomTypePokemon = typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom));
     let randomGen = generationSelect()
+    let randomType = typeSelect()
     let pokemonChoiced = {};
     while(pokemonChoiced["id"] === undefined){
-        pokemonChoiced = pokemonChoice(randomTypePokemon, randomGen)
+        
+        let randomTypePokemon = typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom));
+        let randomGen = generationSelect()
+        let randomType = typeSelect()
+        pokemonChoiced = pokemonChoice(randomTypePokemon, randomGen, randomType)
     }
 
     return(pokemonChoiced)
 }
 
+
+function typeSelect(){
+    randomNumber = (fonctionJs.getRandomInt(variableGlobal.nbType*100)+1)
+
+    if(randomNumber <= variableGlobal.acier){
+        return "Steel"
+    }else if(randomNumber <= variableGlobal.dragon){
+        return "Dragon"
+    }else if(randomNumber <= variableGlobal.electrik){
+        return "Electric"
+    }else if(randomNumber <= variableGlobal.feu){
+        return "Fire"
+    }else if(randomNumber <= variableGlobal.insecte){
+        return "Bug"
+    }else if(randomNumber <= variableGlobal.plante){
+        return "Grass"
+    }else if(randomNumber <= variableGlobal.psy){
+        return "Psychic"
+    }else if(randomNumber <= variableGlobal.sol){
+        return "Ground"
+    }else if(randomNumber <= variableGlobal.tenebres){
+        return "Dark"
+    }else if(randomNumber <= variableGlobal.combat){
+        return "Fighting"
+    }else if(randomNumber <= variableGlobal.eau){
+        return "Water"
+    }else if(randomNumber <= variableGlobal.fee){
+        return "Fairy"
+    }else if(randomNumber <= variableGlobal.glace){
+        return "Ice"
+    }else if(randomNumber <= variableGlobal.normal){
+        return "Normal"
+    }else if(randomNumber <= variableGlobal.poison){
+        return "Poison"
+    }else if(randomNumber <= variableGlobal.roche){
+        return "Rock"
+    }else if(randomNumber <= variableGlobal.spectre){
+        return "Ghost"
+    }else if(randomNumber <= variableGlobal.vol){
+        return "Flying"
+    }else {
+        console.log("erreur dans le choix de la génération")
+        return 0;
+    }
+
+
+}
 
 function generationSelect(){
     randomNumber = (fonctionJs.getRandomInt(variableGlobal.nbGeneration*100)+1)

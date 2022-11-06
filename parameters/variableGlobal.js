@@ -45,7 +45,28 @@ const gen8 = 800
 const gen9 = 900
 
 
+const nbType = 18
+
+const acier = 100
+const dragon = 200
+const electrik = 300
+const feu = 400
+const insecte = 500
+const plante = 600
+const psy = 700
+const sol = 800
+const tenebres = 900
+const combat = 1000
+const eau = 1100
+const fee = 1200
+const glace = 1300
+const normal = 1400
+const poison = 1500
+const roche = 1600
+const spectre = 1700
+const vol = 1800
 
 
 
-module.exports = {nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux}
+
+module.exports = {vol, spectre, roche, poison, normal, glace, fee, eau, combat, tenebres, sol, psy, plante, insecte, feu, electrik, dragon, acier, nbType, nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux}
