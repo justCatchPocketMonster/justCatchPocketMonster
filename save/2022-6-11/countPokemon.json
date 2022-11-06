@@ -1,0 +1,19 @@
+{
+    "993648961544011917": {
+        "nbCountMax": 7,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "994242338081746954": null,
+            "994234895121518753": null,
+            "994234528455462942": null,
+            "994241909457436762": null
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 13,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "994614918483546152": null
+        }
+    }
+}

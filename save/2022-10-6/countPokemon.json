@@ -1,0 +1,57 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 18,
+        "nbCountActuel": 8,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 346,
+                "name": {
+                    "nameEng": "Cradily",
+                    "nameFr": "Vacilys"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Grass"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0346-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 6,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 346,
+                "name": {
+                    "nameEng": "Cradily",
+                    "nameFr": "Vacilys"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Grass"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0346-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}

@@ -285,6 +285,14 @@
     "nombreDeCapture": {
         "Fr": ["Nombre de capture"],
         "Eng": ["Number of caught"]
+    },
+    "ilFautUnNombre": {
+        "Fr": ["Il fallait une valeur numérique de saisie."],
+        "Eng": ["It required a numeric input value."]
+    },
+    "valeurTropHaute": {
+        "Fr": ["Valeur saisie trop haute."],
+        "Eng": ["Entered value too high."]
     }
     
     

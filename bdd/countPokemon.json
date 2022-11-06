@@ -1,30 +1,56 @@
 {
-    "972893923359998053": {
-        "nbCountMax": 9,
-        "nbCountActuel": 0,
+    "405443913864839188": {
+        "nbCountMax": 12,
+        "nbCountActuel": 3,
         "pokemonPresentActuel": {
-            "972896634105110528": {
-                "id": 245,
+            "996549061530361967": {
+                "id": 303,
                 "name": {
-                    "nameEng": "Suicune",
-                    "nameFr": "Suicune"
+                    "nameEng": "Mawile",
+                    "nameFr": "Mysdibule"
                 },
                 "typeListEng": [
-                    "Water"
+                    "Steel",
+                    "Fairy"
                 ],
-                "theType": "legendaire",
+                "theType": "ordinaire",
                 "imgName": [
-                    "0245-000"
+                    "0303-000"
                 ],
-                "gen": 2,
+                "gen": 3,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true
             }
         }
-    }
-}e
+    },
+    "992210891426762872": {
+        "nbCountMax": 19,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 316,
+                "name": {
+                    "nameEng": "Gulpin",
+                    "nameFr": "Gloupti"
+                },
+                "typeListEng": [
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0316-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
             }
         }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
     }
 }

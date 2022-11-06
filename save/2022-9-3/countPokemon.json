@@ -1,0 +1,51 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 19,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 298,
+                "name": {
+                    "nameEng": "Azurill",
+                    "nameFr": "Azurill"
+                },
+                "typeListEng": [
+                    "Normal",
+                    "Fairy"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0298-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 18,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 105,
+                "name": {
+                    "nameEng": "Marowak",
+                    "nameFr": "Ossatueur"
+                },
+                "typeListEng": [
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0105-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}

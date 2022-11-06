@@ -6,11 +6,11 @@ const { MessageActionRow, ButtonInteraction, Interaction, Message, MessageButton
  * @param {*} pages 
  * @param {*} time 
  */
-module.exports = async (message, interaction, pages, time = 60000) => {
+module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 60000) => {
 
     if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
 
-    var index = 0, row = new MessageActionRow().addComponents([
+    var index = pageParDefaut-1, row = new MessageActionRow().addComponents([
     {
         type:"BUTTON",
         customId:"1",

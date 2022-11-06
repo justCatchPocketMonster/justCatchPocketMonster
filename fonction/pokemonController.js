@@ -240,7 +240,7 @@ function generateFiledRandomStat(idUser, idGuild){
 /**
  * creer un embed avec la sauvegarde pokemon
  */
- function embedPokemonSaveUser(Discord, message, Client){
+ function embedPokemonSaveUser(Discord, message, Client, pageChoice){
     const maxPokemonParPage = 21;
     var listPokemon = [];
     var arrayEmbed = [];
@@ -249,6 +249,9 @@ function generateFiledRandomStat(idUser, idGuild){
     const emotePokeballDark = "<:pokeballDark:981974919212572682>";
     const emotePokeballLight = "<:pokeballLight:981974905568522331>";
     const emotePokeballShiny = "<:pokeballShinyStar:1005992732541603960>";
+    var pageDeBase
+
+    
 
     if(savePokemon === undefined){
         savePokemonUser.createSaveUser(message.member.id)
@@ -264,6 +267,15 @@ function generateFiledRandomStat(idUser, idGuild){
 
     nbPageMax++
 
+    if(isNaN(Number(pageChoice))){
+        message.channel.send(language.getText(message.guild.id, "ilFautUnNombre"))
+        pageDeBase = 1
+    } else if(pageChoice > nbPageMax){
+        message.channel.send(language.getText(message.guild.id, "valeurTropHaute"))
+        pageDeBase = 1
+    } else{
+        pageDeBase = pageChoice
+    }
 
     mainPage = new Discord.MessageEmbed();
     mainPage
@@ -340,7 +352,7 @@ function generateFiledRandomStat(idUser, idGuild){
        
     }
     
-    pagination(message, Interaction, arrayEmbed);
+    pagination(message, Interaction, arrayEmbed, pageDeBase);
 
     
 }

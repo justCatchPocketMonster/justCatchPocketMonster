@@ -1,0 +1,56 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 15,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 239,
+                "name": {
+                    "nameEng": "Elekid",
+                    "nameFr": "Élekid"
+                },
+                "typeListEng": [
+                    "Electric"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0239-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 19,
+        "nbCountActuel": 12,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 102,
+                "name": {
+                    "nameEng": "Exeggcute",
+                    "nameFr": "Noeunoeuf"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0102-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}
