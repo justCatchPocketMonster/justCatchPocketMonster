@@ -5,6 +5,8 @@ const stat = require("./stat");
 const { Message } = require("discord.js");
 const Discord = require("discord.js");
 const prefix = variableGlobal.prefix;
+const codeBdd = require("../bdd/code.json")
+const fonction = require("../fonction/fonctionJs")
 
 /**
  * 
@@ -23,8 +25,6 @@ function embedHelp(Discord, message){
             ]
             )
     message.channel.send({ embeds: [embedDiscord]})
-    .then(console.log("tamere"))
-    .catch(console.log("nul nul nul"))
 }
 
 function embedMention(Discord, message){
@@ -57,7 +57,7 @@ function embedCreateur(Discord, message){
 
 
 function randomStatus(Client){
-    let nbStatus = 12;
+    let nbStatus = 13;
     let randomStatus = Math.floor(Math.random()* nbStatus);
     /*
     les types
@@ -103,6 +103,9 @@ function randomStatus(Client){
             break
         case 11:
             Client.user.setActivity("I cost 1.5 euro hosting each month.", {type: "PLAYING"});
+            break
+        case 12:
+            Client.user.setActivity("!code " + codeBdd["shiny"][fonction.getRandomInt(codeBdd["shiny"].length)], {type: "PLAYING"});
             break
     }
 

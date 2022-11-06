@@ -3,13 +3,8 @@ const language = require("../fonction/language")
 const pokemonObject = require("../object/PokemonObject")
 const savePokemonUser = require("./pokedexSaveUser")
 const saveShinyUser = require("./shinydexSaveUser")
+const codeBdd = require("../bdd/code.json")
 const fs = require("fs");
-
-//Les codes
-const code1 = "LeBotADesBugs"
-const code2 = "5000SPAWNS"
-const code3 = "10000SPAWNS"
-
 
 async function enterCode(idUser, code, message){
     if(codeEntered[idUser] === undefined){
@@ -25,22 +20,21 @@ function createUser(idUser){
 }
 
 async function codeHasEffect (idUser, code, message){
-    switch(code){
-        case code1:
-        case code2:
-        case code3:
-            if(codeEntered[idUser].includes(code)){
-                message.channel.send(language.getText(message.guild.id, "codeAlreadyUsed"));
-            } else {
-                effectCode1(idUser, message);
-                codeEntered[idUser].push(code);
-            }
-            SaveBdd();
-            return
-            break;
-        default:
-            message.channel.send(language.getText(message.guild.id, "codeDontExist"));
+
+    if(codeBdd["shiny"].includes(code)){
+        if(codeEntered[idUser].includes(code)){
+            message.channel.send(language.getText(message.guild.id, "codeAlreadyUsed"));
+        } else {
+            effectCode1(idUser, message);
+            codeEntered[idUser].push(code);
+        }
+        SaveBdd();
+        return
     }
+
+
+    message.channel.send(language.getText(message.guild.id, "codeDontExist"));
+
 }
 
 /**
