@@ -25,14 +25,14 @@ const timeIntervalSave= 86400000;
 const timeIntervalStatut = 60000;
 
 //version du programme
-const version = "1.1.0"
+const version = "1.2.0"
 
 //taux de shiny
 const tauxMaxShiny = 4096;
 
 //pour modifier des stats d'apparition par génération
 //nombre de génération (multiplier par 100)
-const nbGeneration = 3
+const nbGeneration = 4
 //valeur max par gen
 const gen1 = 100
 const gen2 = 200

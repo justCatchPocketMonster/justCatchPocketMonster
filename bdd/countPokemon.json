@@ -1,7 +1,9 @@
 {
     "972893923359998053": {
-        "nbCountMax": 7,
-        "nbCountActuel": 4,
-        "pokemonPresentActuel": {}
+        "nbCountMax": 17,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "972896634105110528": null
+        }
     }
 }
