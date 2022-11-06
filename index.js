@@ -68,7 +68,7 @@ try{
             return
         }
 
-        if(message.content.substring(0,(prefix+"pokedex ").length)){
+        if(message.content === prefix +"pokedex"){
             filePokemon.embedPokemonSaveUser(Discord, message, Client);
             return
         }
