@@ -1,7 +1,7 @@
 const fs = require("fs");
 const fonction = require("../fonction/fonctionJs")
 
-const allFileJson = ["catchError.json","countPokemon.json","languageSelected.json","pokedexSaveUser.json","pokedexSaveServer.json","serversAllowThisChannel.json","stat.json"]
+const allFileJson = ["catchError.json","countPokemon.json","languageSelected.json","pokedexSaveUser.json","pokedexSaveServer.json","serversAllowThisChannel.json","stat.json", "shinydexSaveUser.json", "enteredCode.json", "charmeChroma.json"]
 
 function createCopyAllBdd(){
     var emplacement = fonction.actualDate();
