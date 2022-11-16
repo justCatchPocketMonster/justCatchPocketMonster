@@ -52,5 +52,29 @@
         "nbCountMax": 20,
         "nbCountActuel": 0,
         "pokemonPresentActuel": {}
+    },
+    "972893923359998053": {
+        "nbCountMax": 3,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 466,
+                "name": {
+                    "nameEng": "Electivire",
+                    "nameFr": "Élekable"
+                },
+                "typeListEng": [
+                    "Electric"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0466-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
     }
 }
