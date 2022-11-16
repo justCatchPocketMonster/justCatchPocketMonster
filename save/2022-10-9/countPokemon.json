@@ -1,0 +1,57 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 15,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 184,
+                "name": {
+                    "nameEng": "Azumarill",
+                    "nameFr": "Azumarill"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Fairy"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0184-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 18,
+        "nbCountActuel": 16,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 208,
+                "name": {
+                    "nameEng": "Steelix",
+                    "nameFr": "Steelix"
+                },
+                "typeListEng": [
+                    "Steel",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0208-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}

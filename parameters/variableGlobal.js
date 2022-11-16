@@ -4,8 +4,8 @@ const prefix = "!";
 // minimum et max du random pour le compteur du spawn de pokemon
 // Fichier: spawnCount.js
 
-const minimumCount = 0+1;
-const maximumCount = 5;
+const minimumCount = 0+5;
+const maximumCount = 20;
 
 //pour modifier des stats d'apparition celon le type du pokemon
 //valeur maximum pour tombé sur le pokemon
@@ -34,10 +34,10 @@ const tauxMaxShiny = 4096;
 //nombre de génération (multiplier par 100)
 const nbGeneration = 4
 //valeur max par gen
-const gen1 = 0
-const gen2 = 0
-const gen3 = 0
-const gen4 = 100
+const gen1 = 100
+const gen2 = 200
+const gen3 = 300
+const gen4 = 400
 const gen5 = 500
 const gen6 = 600
 const gen7 = 700
@@ -45,26 +45,26 @@ const gen8 = 800
 const gen9 = 900
 
 
-const nbType = 1
+const nbType = 18
 
-const acier = 0
-const dragon = 0
-const electrik = 100
-const feu = 0
-const insecte = 0
-const plante = 0
-const psy = 0
-const sol = 0
-const tenebres = 0
-const combat = 0
-const eau = 0
-const fee = 0
-const glace = 0
-const normal = 0
-const poison = 0
-const roche = 0
-const spectre = 0
-const vol = 0
+const acier = 100
+const dragon = 200
+const electrik = 300
+const feu = 400
+const insecte = 500
+const plante = 600
+const psy = 700
+const sol = 800
+const tenebres = 900
+const combat = 1000
+const eau = 1100
+const fee = 1200
+const glace = 1300
+const normal = 1400
+const poison = 1500
+const roche = 1600
+const spectre = 1700
+const vol = 1800
 
 
 

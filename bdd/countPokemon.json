@@ -1,47 +1,30 @@
 {
     "405443913864839188": {
-        "nbCountMax": 12,
+        "nbCountMax": 6,
         "nbCountActuel": 3,
         "pokemonPresentActuel": {
-            "996549061530361967": {
-                "id": 303,
-                "name": {
-                    "nameEng": "Mawile",
-                    "nameFr": "Mysdibule"
-                },
-                "typeListEng": [
-                    "Steel",
-                    "Fairy"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0303-000"
-                ],
-                "gen": 3,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true
-            }
+            "996549061530361967": null
         }
     },
     "992210891426762872": {
-        "nbCountMax": 19,
-        "nbCountActuel": 6,
+        "nbCountMax": 6,
+        "nbCountActuel": 1,
         "pokemonPresentActuel": {
             "994614918483546152": {
-                "id": 316,
+                "id": 76,
                 "name": {
-                    "nameEng": "Gulpin",
-                    "nameFr": "Gloupti"
+                    "nameEng": "Golem",
+                    "nameFr": "Grolem"
                 },
                 "typeListEng": [
-                    "Poison"
+                    "Rock",
+                    "Ground"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0316-000"
+                    "0076-000"
                 ],
-                "gen": 3,
+                "gen": 1,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true
@@ -52,29 +35,5 @@
         "nbCountMax": 20,
         "nbCountActuel": 0,
         "pokemonPresentActuel": {}
-    },
-    "972893923359998053": {
-        "nbCountMax": 3,
-        "nbCountActuel": 2,
-        "pokemonPresentActuel": {
-            "972896634105110528": {
-                "id": 466,
-                "name": {
-                    "nameEng": "Electivire",
-                    "nameFr": "Élekable"
-                },
-                "typeListEng": [
-                    "Electric"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0466-000"
-                ],
-                "gen": 4,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true
-            }
-        }
     }
 }

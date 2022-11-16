@@ -47,15 +47,11 @@ function typeIntToStr(nb){
             }
         }
     })
-    console.log([gen, type, typeReal])
-    console.log(pokemonSelected)
 
     if(pokemonSelected[0] === undefined){
         return {}
     }
     let pokemonDoSpawn = pokemonSelected[(fonctionJs.getRandomInt(pokemonSelected.length))];
-
-    console.log(pokemonDoSpawn)
     return pokemonDoSpawn
  }
 
@@ -76,7 +72,7 @@ function pokemonSelect(){
         let randomType = typeSelect()
         pokemonChoiced = pokemonChoice(randomTypePokemon, randomGen, randomType)
     }
-    console.log(pokemonChoiced)
+
     return(pokemonChoiced)
 }
 

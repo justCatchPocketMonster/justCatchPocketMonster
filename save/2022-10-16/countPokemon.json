@@ -1,0 +1,38 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 11,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "996549061530361967": null
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 6,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 27,
+                "name": {
+                    "nameEng": "Sandshrew",
+                    "nameFr": "Sabelette"
+                },
+                "typeListEng": [
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0027-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}
