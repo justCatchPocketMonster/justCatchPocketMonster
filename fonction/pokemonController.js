@@ -11,6 +11,7 @@ const fonction = require("../fonction/fonctionJs")
 const allowChannel = require("./allowSpawnChannel")
 const spawnCount = require("./spawnCount")
 const language = require("./language")
+const pokemonSpawnFollow = require("./pokemonSpawnFollow")
 
 const pagination = require("./pagination")
 
@@ -151,6 +152,7 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
         pokemon["capturable"] = true;
         spawnCount.setPokemonPresent(idServer, pokemon, idChannelRandom);
         embedPokemon(Discord, message, pokemon, Client, idChannelRandom)
+        pokemonSpawnFollow.addPokemon(pokemon);
     //}
 
 }

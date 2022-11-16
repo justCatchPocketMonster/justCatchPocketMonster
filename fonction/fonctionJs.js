@@ -73,4 +73,15 @@ function actualDate(){
     
 }
 
-module.exports = {getRandomInt, colorByType, actualDate}
+function actualHour(){
+    var date = new Date();
+    
+    var heure = date.getHours();
+    var minute = date.getMinutes();
+    var seconde = date.getSeconds();
+
+
+    return(heure+":"+minute+":"+seconde)
+}
+
+module.exports = {getRandomInt, colorByType, actualDate, actualHour}
