@@ -1,5 +1,6 @@
 
-const {SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const {SlashCommandBuilder} = require("@discordjs/builders");
+const {Permissions} = require("discord.js");
 module.exports = {
     commands = [
         new SlashCommandBuilder()
@@ -12,7 +13,7 @@ module.exports = {
                     .setRequired(false)
             })
             .setDescriptionLocalization('de')
-            .setDefaultMembersPermissions(PermissionFlagsBits.)
+            .setDefaultMembersPermissions(Permissions.DEFAULT)
             
     ]
     
