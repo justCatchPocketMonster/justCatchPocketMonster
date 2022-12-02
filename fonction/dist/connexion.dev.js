@@ -5,9 +5,9 @@ var variableGlobal = require("../parameters/variableGlobal"); //sert a la connex
 
 function connexion(Discord, Client) {
   //vrai token
-  var token = "OTgyOTg4NzQwMjcwMTIwOTYw.GWOXi9.KU-C-7BKbgSeWcVKTZYfP7j3xec6_20XsMc_No"; //token de teste
-  //let token = "OTcyODk0MTg1MDM4NDI2MTEy.GvHgE6.I84o58L0aeIu1TN3i_GYOeQN20Zq5Wz-uNiPW4";
-
+  //let token = "OTgyOTg4NzQwMjcwMTIwOTYw.GWOXi9.KU-C-7BKbgSeWcVKTZYfP7j3xec6_20XsMc_No";
+  //token de teste
+  var token = "OTcyODk0MTg1MDM4NDI2MTEy.GvHgE6.I84o58L0aeIu1TN3i_GYOeQN20Zq5Wz-uNiPW4";
   Client.on('ready', function () {
     console.log("Je suis fonctionnel");
   });

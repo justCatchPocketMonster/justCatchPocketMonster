@@ -1,5 +1,6 @@
 const variableGlobal = require("./parameters/variableGlobal")
 const Discord = require('discord.js');
+const {SlashCommandBuilder} = require("@discordjs/builders");
 const fileConnexion = require("./fonction/connexion");
 const filePokemon = require("./fonction/pokemonController.js")
 const pokedexSaveUser = require("./fonction/pokedexSaveUser")
@@ -12,7 +13,7 @@ const codeEntered = require("./fonction/code")
 const saveAllBdd = require("./fonction/createSave")
 const catchError = require("./fonction/catchError")
 
-var Client = new Discord.Client({
+var Client = new Discord.Client({ 
     intents: [
         Discord.Intents.FLAGS.GUILDS,
         Discord.Intents.FLAGS.GUILD_MESSAGES
@@ -109,12 +110,55 @@ try{
         spawnCount.createCount(guild.id)
     })
 
+    const data = new SlashCommandBuilder()
+        .setName("quoi")
+        .setDescription("bas c'est un test")
+        
+        .addStringOption(option => option.setName("utilisateur").setDescription("Utilisateur que vous souhaitez mentionner").setRequired(false))
+        
+
+    Client.on("interactionCreate", interaction => {
+        if(interaction.isCommand()){
+            if(interaction.commandName === "quoi"){
+                let pokemon = interaction.options.getString("utilisateur")
+
+                if(pokemon != undefined){
+
+                }
+                interaction.reply("feur" + pokemon)
+            }
+        }
+    })
+
 
     Client.on("ready", () => {
         
+        Client.guilds.cache.get("972893923359998053").commands.fetch()
+            .then(commands => {
+                commands.map(command => {
+                    command.delete();
+                })
+            })
+
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
+
+        //application au general
+        //Client.application.commands.create(data)
+
+
+        //Client.guilds.cache.get("972893923359998053").commands.create(data)
+        //console.log(Client.guilds.cache.get("972893923359998053").commands.cache)
+        
+        
+            
+
+
     });
+
+
+
+    
 
 }catch (error){
     catchError.saveError(message.guild.id, error)
