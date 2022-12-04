@@ -1,4 +1,4 @@
-const { AttachmentBuilder, Client, ButtonInteraction, Interaction } = require("discord.js")
+const { AttachmentBuilder, Client, ButtonInteraction, Interaction, BaseInteraction } = require("discord.js")
 const variableGlobal = require("../parameters/variableGlobal")
 const stat = require("../fonction/stat")
 const pokeData = require("../bdd/pokemon.json");
@@ -354,7 +354,7 @@ function generateFiledRandomStat(idUser, idGuild){
        
     }
     
-    pagination(message, Interaction, arrayEmbed, pageDeBase);
+    pagination(message, BaseInteraction, arrayEmbed, pageDeBase);
 
     
 }
