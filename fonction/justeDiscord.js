@@ -14,7 +14,7 @@ const fonction = require("../fonction/fonctionJs")
  * @param {Message} message 
  */
 function embedHelp(Discord, message){
-    let embedDiscord = new Discord.MessageEmbed()
+    let embedDiscord = new Discord.EmbedBuilder()
             .setColor("#0099FF")
             .setTitle(language.getText(message.guild.id, "helpTitle"))
             .addFields([
@@ -28,7 +28,7 @@ function embedHelp(Discord, message){
 }
 
 function embedMention(Discord, message){
-    let embedDiscord = new Discord.MessageEmbed()
+    let embedDiscord = new Discord.EmbedBuilder()
             .setColor("#FF0000")
             .setTitle("Quelque mention et note")
             .addFields([
@@ -43,10 +43,10 @@ function embedMention(Discord, message){
 
 //a faire plus tard
 function embedCreateur(Discord, message){
-    let embedDiscord = new Discord.MessageEmbed()
+    let embedDiscord = new Discord.EmbedBuilder()
             .setColor("#0099FF")
             .setTitle("This is PVCSAM")
-            .addField("wesh", "[salut](https://www.youtube.com/)")
+            .addFields([{name: "wesh", value:"[salut](https://www.youtube.com/)"}])
             .addFields([
                 { name: "Droit" , value:"[salut](https://www.youtube.com/)"  , inline: true},
                 { name: "Stop" , value: "oui" , inline: true}

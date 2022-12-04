@@ -1,4 +1,4 @@
-const { MessageAttachment, Client, ButtonInteraction, Interaction } = require("discord.js")
+const { AttachmentBuilder, Client, ButtonInteraction, Interaction } = require("discord.js")
 const variableGlobal = require("../parameters/variableGlobal")
 const stat = require("../fonction/stat")
 const pokeData = require("../bdd/pokemon.json");
@@ -36,10 +36,10 @@ function embedPokemon(Discord, message, pokemon, Client, idChannel, isShiny){
         var nameImage = pokemon["imgName"][imageRandom] + ".png";
     }
     
-    let pokeImg = new MessageAttachment(adressImage)
+    let pokeImg = new AttachmentBuilder(adressImage)
 
     
-    let pokeEmbed = new Discord.MessageEmbed()
+    let pokeEmbed = new Discord.EmbedBuilder()
         .setColor(fonction.colorByType(pokemon["typeListEng"][fonction.getRandomInt(pokemon["typeListEng"].length)]))
         .setTitle(language.getText(message.guild.id, "embedPokemonTitle"))
         .setDescription(language.getText(message.guild.id, "embedPokemonDescription"))
@@ -279,7 +279,7 @@ function generateFiledRandomStat(idUser, idGuild){
         pageDeBase = pageChoice
     }
 
-    mainPage = new Discord.MessageEmbed();
+    mainPage = new Discord.EmbedBuilder();
     mainPage
     .setThumbnail(message.author.avatarURL())
             .setColor("#0099FF")
@@ -306,7 +306,7 @@ function generateFiledRandomStat(idUser, idGuild){
     
     nbPage++;
     while(pokemonObject.getNamePokemon(1+maxPokemonParPage*(nbPage-2), message.guild.id) !== null){
-        pokeSave = new Discord.MessageEmbed()
+        pokeSave = new Discord.EmbedBuilder()
 
 
         for (let i = 1+maxPokemonParPage*(nbPage-2); i <= maxPokemonParPage*(nbPage-1); i++){

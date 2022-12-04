@@ -1,69 +1,28 @@
 {
-    "405443913864839188": {
-        "nbCountMax": 6,
-        "nbCountActuel": 3,
-        "pokemonPresentActuel": {
-            "996549061530361967": null
-        }
-    },
-    "992210891426762872": {
-        "nbCountMax": 6,
+    "972893923359998053": {
+        "nbCountMax": 11,
         "nbCountActuel": 1,
         "pokemonPresentActuel": {
-            "994614918483546152": {
-                "id": 76,
-                "name": {
-                    "nameEng": "Golem",
-                    "nameFr": "Grolem"
-                },
-                "typeListEng": [
-                    "Rock",
-                    "Ground"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0076-000"
-                ],
-                "gen": 1,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true
-            }
-        }
-    },
-    "360056084074987542": {
-        "nbCountMax": 20,
-        "nbCountActuel": 0,
-        "pokemonPresentActuel": {}
-    },
-    "972893923359998053": {
-        "nbCountMax": 9,
-        "nbCountActuel": 0,
-        "pokemonPresentActuel": {
             "972896634105110528": {
-                "id": 198,
+                "id": 448,
                 "name": {
-                    "nameEng": "Murkrow",
-                    "nameFr": "Cornèbre"
+                    "nameEng": "Lucario",
+                    "nameFr": "Lucario"
                 },
                 "typeListEng": [
-                    "Dark",
-                    "Flying"
+                    "Fighting",
+                    "Steel"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0198-000"
+                    "0448-000"
                 ],
-                "gen": 2,
+                "gen": 4,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2022-10-16",
-                "heure": "22:43:6"
-            }
-        }
-    }
-}:42:7"
+                "date": "2022-11-3",
+                "heure": "18:19:35"
             }
         }
     }

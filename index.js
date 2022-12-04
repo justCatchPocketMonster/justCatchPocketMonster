@@ -12,10 +12,13 @@ const codeEntered = require("./fonction/code")
 const saveAllBdd = require("./fonction/createSave")
 const catchError = require("./fonction/catchError")
 
+
 var Client = new Discord.Client({
     intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MESSAGES
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMembers,
+        Discord.GatewayIntentBits.MessageContent
     ]
 });
 const prefix = variableGlobal.prefix;
@@ -67,6 +70,7 @@ try{
             }
             return
         }
+
 
         if(message.content === prefix +"pokedex"){
             filePokemon.embedPokemonSaveUser(Discord, message, Client, 1);

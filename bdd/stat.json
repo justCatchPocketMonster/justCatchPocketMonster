@@ -1,6 +1,6 @@
 {
     "All": {
-        "pokemonSpawned": 17549,
+        "pokemonSpawned": 17550,
         "pokemonCatched": 2773,
         "listPokemonSpawned": {
             "1": 44,
@@ -232,7 +232,7 @@
             "227": 64,
             "228": 54,
             "229": 48,
-            "230": 114,
+            "230": 115,
             "231": 42,
             "232": 44,
             "233": 41,
@@ -3854,7 +3854,7 @@
         }
     },
     "1.2.0": {
-        "pokemonSpawned": 4350,
+        "pokemonSpawned": 4351,
         "pokemonCatched": 760,
         "pokemonSpawnedShiny": 3,
         "pokemonCatchedShiny": 3,
