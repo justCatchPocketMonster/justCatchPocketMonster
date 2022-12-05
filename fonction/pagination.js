@@ -2,7 +2,6 @@ const { ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder
 const { ButtonStyle } = require('discord.js');
 /**
  * @param {Message} message
- * @param {Interaction} interaction 
  * @param {*} pages 
  * @param {*} time 
  */

@@ -1,4 +1,4 @@
-const { AttachmentBuilder, Client, ButtonInteraction, Interaction, BaseInteraction } = require("discord.js")
+const { AttachmentBuilder, Client, ButtonInteraction } = require("discord.js")
 const variableGlobal = require("../parameters/variableGlobal")
 const stat = require("../fonction/stat")
 const pokeData = require("../bdd/pokemon.json");
@@ -243,6 +243,7 @@ function generateFiledRandomStat(idUser, idGuild){
  * creer un embed avec la sauvegarde pokemon
  */
  function embedPokemonSaveUser(Discord, message, Client, pageChoice){
+
     const maxPokemonParPage = 21;
     var listPokemon = [];
     var arrayEmbed = [];
@@ -354,7 +355,8 @@ function generateFiledRandomStat(idUser, idGuild){
        
     }
     
-    pagination(message, BaseInteraction, arrayEmbed, pageDeBase);
+    
+    pagination(message, ButtonInteraction, arrayEmbed, pageDeBase);
 
     
 }

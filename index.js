@@ -71,8 +71,11 @@ try{
             return
         }
 
-
+        /*
+        TODO:
+        EN COURS
         if(message.content === prefix +"pokedex"){
+            
             filePokemon.embedPokemonSaveUser(Discord, message, Client, 1);
             return
         }
@@ -81,6 +84,8 @@ try{
             filePokemon.embedPokemonSaveUser(Discord, message, Client, message.content.substring((prefix+"pokedex ").length));
             return
         }
+
+        */
 
         if(message.content === prefix + "help"){
             justDiscord.embedHelp(Discord, message); 
@@ -119,6 +124,7 @@ try{
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
     });
+    
 
 }catch (error){
     catchError.saveError(message.guild.id, error)

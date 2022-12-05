@@ -1,29 +1,9 @@
 {
     "972893923359998053": {
-        "nbCountMax": 11,
-        "nbCountActuel": 1,
+        "nbCountMax": 17,
+        "nbCountActuel": 13,
         "pokemonPresentActuel": {
-            "972896634105110528": {
-                "id": 448,
-                "name": {
-                    "nameEng": "Lucario",
-                    "nameFr": "Lucario"
-                },
-                "typeListEng": [
-                    "Fighting",
-                    "Steel"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0448-000"
-                ],
-                "gen": 4,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true,
-                "date": "2022-11-3",
-                "heure": "18:19:35"
-            }
+            "972896634105110528": null
         }
     }
 }

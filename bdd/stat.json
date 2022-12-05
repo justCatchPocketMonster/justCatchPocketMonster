@@ -1,7 +1,7 @@
 {
     "All": {
-        "pokemonSpawned": 17550,
-        "pokemonCatched": 2773,
+        "pokemonSpawned": 17551,
+        "pokemonCatched": 2774,
         "listPokemonSpawned": {
             "1": 44,
             "2": 40,
@@ -36,7 +36,7 @@
             "31": 44,
             "32": 47,
             "33": 44,
-            "34": 43,
+            "34": 44,
             "35": 60,
             "36": 51,
             "37": 48,
@@ -531,7 +531,7 @@
             "31": 10,
             "32": 7,
             "33": 7,
-            "34": 8,
+            "34": 9,
             "35": 9,
             "36": 10,
             "37": 9,
@@ -3854,8 +3854,8 @@
         }
     },
     "1.2.0": {
-        "pokemonSpawned": 4351,
-        "pokemonCatched": 760,
+        "pokemonSpawned": 4352,
+        "pokemonCatched": 761,
         "pokemonSpawnedShiny": 3,
         "pokemonCatchedShiny": 3,
         "listPokemonSpawned": 0,
