@@ -25,9 +25,18 @@
         "Eng": ["The command"]
     },
     "commandSpawnExplication": {
-        "Fr": ["Autorisé le spawn dans un salon (modo seulement)."],
-        "Eng": ["Allow spawning in a channel (mod only)."]
+        "Fr": ["Autorisé le spawn dans un salon."],
+        "Eng": ["Allow spawning in a channel"]
     },
+    "commandSpawnOptionName": {
+        "Fr": ["Salon"],
+        "Eng": ["Channel"]
+    },
+    "commandSpawnOptionDescription": {
+        "Fr": ["Le salon a autorisé. (si c'est vide, c'est le salon où est rentrée la commande.)"],
+        "Eng": ["Channel authorized. (if it's empty, it's the salon where the command came in.)"]
+    },
+    
     "commandUnspawnExplication": {
         "Fr": ["Supprimé une autorisation le spawn dans un salon (modo seulement)."],
         "Eng": ["Removed a permission to spawn in a room (modo only)."]

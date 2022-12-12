@@ -1,28 +1,29 @@
-const { MessageActionRow, ButtonInteraction, Interaction, Message, MessageButton} = require("discord.js")
-
+const { ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder} = require("discord.js")
+const { ButtonStyle } = require('discord.js');
 /**
  * @param {Message} message
- * @param {Interaction} interaction 
  * @param {*} pages 
  * @param {*} time 
  */
 module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 60000) => {
+    //probleme avec interaction
+    console.log(interaction)
 
     if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
 
-    var index = pageParDefaut-1, row = new MessageActionRow().addComponents([
+    var index = pageParDefaut-1, row = new ActionRowBuilder().addComponents([
     {
         type:"BUTTON",
         customId:"1",
         label: "<",
-        style: "PRIMARY",
+        style: ButtonStyle.Primary,
         disabled: false
     },
     {
         type:"BUTTON",
         customId:"3",
         label: "X",
-        style: "DANGER",
+        style: ButtonStyle.Danger,
         disabled: false
     },/*
     {
@@ -36,7 +37,7 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
         type:"BUTTON",
         customId:"2",
         label: ">",
-        style: "PRIMARY",
+        style: ButtonStyle.Primary,
         disabled: false
     }
     
@@ -104,19 +105,19 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
                 return col.stop();
             }
     
-            row = new MessageActionRow().addComponents([
+            row = new ActionRowBuilder().addComponents([
                 {
                     type:"BUTTON",
                     customId:"1",
                     label: "<",
-                    style: "PRIMARY",
+                    style: ButtonStyle.Primary,
                     disabled: false
                 },
                 {
                     type:"BUTTON",
                     customId:"3",
                     label: "X",
-                    style: "DANGER",
+                    style: ButtonStyle.Danger,
                     disabled: false
                 },/*
                 {
@@ -130,7 +131,7 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
                     type:"BUTTON",
                     customId:"2",
                     label: ">",
-                    style: "PRIMARY",
+                    style: ButtonStyle.Primary,
                     disabled: false
                 }
             

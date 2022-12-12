@@ -38,9 +38,9 @@ function eventJustEmbed(event, Discord ){
     var adressImage = "./src/image/pokeHome/"+event["image"]+".png";
     var nameImage = event["image"] + ".png";
     
-    let pokeImg = new MessageAttachment(adressImage)
+    let pokeImg = new AttachmentBuilder(adressImage)
 
-    let eventEmbed = new Discord.MessageEmbed()
+    let eventEmbed = new Discord.EmbedBuilder()
         .setColor(event["color"])
         .setTitle()
         .setDescription()

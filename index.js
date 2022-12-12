@@ -12,11 +12,16 @@ const language = require("./fonction/language")
 const codeEntered = require("./fonction/code")
 const saveAllBdd = require("./fonction/createSave")
 const catchError = require("./fonction/catchError")
+const createCommand = require("./fonction/commandCreate")
+
 
 var Client = new Discord.Client({ 
+
     intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MESSAGES
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMembers,
+        Discord.GatewayIntentBits.MessageContent
     ]
 });
 const prefix = variableGlobal.prefix;
@@ -69,7 +74,11 @@ try{
             return
         }
 
+        /*
+        TODO:
+        EN COURS
         if(message.content === prefix +"pokedex"){
+            
             filePokemon.embedPokemonSaveUser(Discord, message, Client, 1);
             return
         }
@@ -78,6 +87,8 @@ try{
             filePokemon.embedPokemonSaveUser(Discord, message, Client, message.content.substring((prefix+"pokedex ").length));
             return
         }
+
+        */
 
         if(message.content === prefix + "help"){
             justDiscord.embedHelp(Discord, message); 
@@ -110,22 +121,16 @@ try{
         spawnCount.createCount(guild.id)
     })
 
-    const data = new SlashCommandBuilder()
-        .setName("quoi")
-        .setDescription("bas c'est un test")
-        
-        .addStringOption(option => option.setName("utilisateur").setDescription("Utilisateur que vous souhaitez mentionner").setRequired(false))
-        
 
     Client.on("interactionCreate", interaction => {
         if(interaction.isCommand()){
-            if(interaction.commandName === "quoi"){
-                let pokemon = interaction.options.getString("utilisateur")
-
+            if(interaction.commandName === "spawn"){
+                //let pokemon = interaction.options.getChannel("utilisateur")
+/*
                 if(pokemon != undefined){
 
-                }
-                interaction.reply("feur" + pokemon)
+                }*/
+                interaction.reply("c'est ici que tu veux faire spawn")
             }
         }
     })
@@ -133,28 +138,21 @@ try{
 
     Client.on("ready", () => {
         
-        Client.guilds.cache.get("972893923359998053").commands.fetch()
-            .then(commands => {
-                commands.map(command => {
-                    command.delete();
-                })
-            })
-
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
 
         //application au general
         //Client.application.commands.create(data)
 
-
-        //Client.guilds.cache.get("972893923359998053").commands.create(data)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.spawnCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.codeCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.langCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.pokedexCommand)
+        
         //console.log(Client.guilds.cache.get("972893923359998053").commands.cache)
-        
-        
-            
-
 
     });
+    
 
 
 

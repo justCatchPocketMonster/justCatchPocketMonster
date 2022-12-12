@@ -1,3 +1,65 @@
 [
-
+    {
+        "id": 230,
+        "name": {
+            "nameEng": "Kingdra",
+            "nameFr": "Hyporoi"
+        },
+        "typeListEng": [
+            "Water",
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0230-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-3",
+        "heure": "18:13:9"
+    },
+    {
+        "id": 448,
+        "name": {
+            "nameEng": "Lucario",
+            "nameFr": "Lucario"
+        },
+        "typeListEng": [
+            "Fighting",
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0448-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-3",
+        "heure": "18:19:35"
+    },
+    {
+        "id": 34,
+        "name": {
+            "nameEng": "Nidoking",
+            "nameFr": "Nidoking"
+        },
+        "typeListEng": [
+            "Poison",
+            "Ground"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0034-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-5",
+        "heure": "18:18:34"
+    }
 ]

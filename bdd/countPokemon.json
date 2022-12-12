@@ -1,44 +1,7 @@
 {
-    "405443913864839188": {
-        "nbCountMax": 6,
-        "nbCountActuel": 3,
-        "pokemonPresentActuel": {
-            "996549061530361967": null
-        }
-    },
-    "992210891426762872": {
-        "nbCountMax": 6,
-        "nbCountActuel": 1,
-        "pokemonPresentActuel": {
-            "994614918483546152": {
-                "id": 76,
-                "name": {
-                    "nameEng": "Golem",
-                    "nameFr": "Grolem"
-                },
-                "typeListEng": [
-                    "Rock",
-                    "Ground"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0076-000"
-                ],
-                "gen": 1,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true
-            }
-        }
-    },
-    "360056084074987542": {
-        "nbCountMax": 20,
-        "nbCountActuel": 0,
-        "pokemonPresentActuel": {}
-    },
     "972893923359998053": {
         "nbCountMax": 8,
-        "nbCountActuel": 2,
+        "nbCountActuel": 4,
         "pokemonPresentActuel": {
             "972896634105110528": {
                 "id": 198,
