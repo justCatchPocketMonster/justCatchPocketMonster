@@ -20,22 +20,32 @@
 
 
 
-    "helpTitle": {
-        "Fr": ["Les commandes"],
-        "Eng": ["The command"]
-    },
+
     "commandSpawnExplication": {
-        "Fr": ["Autorisé le spawn dans un salon."],
+        "Fr": ["Autoriser le spawn dans un salon."],
         "Eng": ["Allow spawning in a channel"]
     },
-    "commandSpawnOptionName": {
-        "Fr": ["Salon"],
-        "Eng": ["Channel"]
+    "spawnNameOptionBool": {
+        "Fr": ["autorisation"],
+        "Eng": ["permission"]
     },
-    "commandSpawnOptionDescription": {
-        "Fr": ["Le salon a autorisé. (si c'est vide, c'est le salon où est rentrée la commande.)"],
-        "Eng": ["Channel authorized. (if it's empty, it's the salon where the command came in.)"]
+    "spawnDescOptionBool": {
+        "Fr": ["Pour autoriser le salon ou non."],
+        "Eng": ["To authorize the channel or not."]
     },
+    "spawnNameOptionChannel": {
+        "Fr": ["salon"],
+        "Eng": ["channel"]
+    },
+    "spawnDescOptionChannel": {
+        "Fr": ["Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"],
+        "Eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
+    },
+    "commandCodeExplication": {
+        "Fr": ["Permet de rentrer un code afin d'avoir des effets"],
+        "Eng": ["Allow spawning in a channel"]
+    },
+
     
     "commandUnspawnExplication": {
         "Fr": ["Supprimé une autorisation le spawn dans un salon (modo seulement)."],
