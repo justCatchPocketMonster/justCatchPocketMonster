@@ -13,6 +13,7 @@ const codeEntered = require("./fonction/code")
 const saveAllBdd = require("./fonction/createSave")
 const catchError = require("./fonction/catchError")
 const createCommand = require("./fonction/commandCreate")
+const bddText = require("./bdd/languageText.json")
 
 
 var Client = new Discord.Client({ 
@@ -125,13 +126,27 @@ try{
     Client.on("interactionCreate", interaction => {
         if(interaction.isCommand()){
             if(interaction.commandName === "spawn"){
-                //let pokemon = interaction.options.getChannel("utilisateur")
-/*
-                if(pokemon != undefined){
+                var channel
+                if(interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]) != null){
+                    
+                    channel = interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]);
 
-                }*/
-                interaction.reply("c'est ici que tu veux faire spawn")
+                }else {
+                    channel = interaction.channel;
+                }
+
+
+                if(interaction.options.getBoolean(bddText.spawnNameOptionBool.Eng[0])){
+                    serverAllow.addChannelAllow(channel.id, interaction.guild.id, interaction.channel)
+                }else {
+                    serverAllow.deleteChannelAllow(channel.id, interaction.guild.id, interaction.channel)
+                }
+                interaction.reply({
+                    content: `.`,
+                });
+                interaction.deleteReply();
             }
+
         }
     })
 
@@ -141,13 +156,16 @@ try{
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
 
+
+        Client.guilds.cache.get("972893923359998053").commands.set([
+            createCommand.spawnCommand,
+            createCommand.codeCommand,
+            createCommand.langCommand,
+            createCommand.pokedexCommand
+        ])
         //application au general
         //Client.application.commands.create(data)
 
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.spawnCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.codeCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.langCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.pokedexCommand)
         
         //console.log(Client.guilds.cache.get("972893923359998053").commands.cache)
 

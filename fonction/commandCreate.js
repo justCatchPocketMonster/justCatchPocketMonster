@@ -25,7 +25,7 @@ const spawnCommand = new SlashCommandBuilder()
         .addChannelOption(
                 new SlashCommandChannelOption()
                         //.addChannelTypes("GuildText")
-                        .setName(bddText.commandCodeExplication.Eng[0])
+                        .setName(bddText.spawnNameOptionChannel.Eng[0])
                         .setNameLocalizations({
                                 'fr': bddText.spawnNameOptionChannel.Fr[0]
                         })
@@ -41,38 +41,67 @@ const spawnCommand = new SlashCommandBuilder()
 
 const codeCommand = new SlashCommandBuilder()
         .setName("code")
-        .setDescription("codeDesc")
+        .setDescription(bddText.commandCodeExplication.Eng[0])
         .setDescriptionLocalizations({
-                'fr': bddText.spawnDescOptionChannel.Fr[0]
+                'fr': bddText.commandCodeExplication.Fr[0]
         })
         .addStringOption(
                 new SlashCommandStringOption()
-                        .setName("codecommandoptionname")
-                        .setDescription("codecommandoptiondesc")
+                        .setName(bddText.codeNameOptionString.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.codeNameOptionString.Fr[0]
+                        })
+                        .setDescription(bddText.codeDescOptionString.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.codeDescOptionString.Fr[0]
+                        })
                         .setRequired(true)
         )
         
 const langCommand = new SlashCommandBuilder()
-        .setName("lang")
-        .setDescription("langDesc")
+        .setName(bddText.commandLangName.Eng[0])
+        .setNameLocalizations({
+                'fr': bddText.commandLangName.Fr[0]
+        })
+        .setDescription(bddText.commandLangExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandLangExplication.Fr[0]
+        })
         .addStringOption(
                 new SlashCommandStringOption()
-                        .setName("langcommandoptionname")
-                        .setDescription("langcommandoptiondesc")
+                        .setName(bddText.langNameOptionString.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.langNameOptionString.Fr[0]
+                        })
+                        .setDescription(bddText.langDescOptionString.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.langDescOptionString.Fr[0]
+                        })
                         .addChoices(
                                 {name: "English", value: "eng"},
                                 {name: "Français", value: "fr"}
                         )
                         .setRequired(true)
 )
+
+
 const pokedexCommand = new SlashCommandBuilder()
         .setName("pokedex")
-        .setDescription("pokedexDesc")
+        .setDescription(bddText.commandPokedexExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandPokedexExplication.Fr[0]
+        })
         .addStringOption(
                 new SlashCommandStringOption()
-                        .setName("pokedexcommandoptionname")
-                        .setDescription("pokedexcommandoptiondesc")
-                        .setRequired(true)
+                        .setName(bddText.pokedexNameOptionStringPage.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.pokedexNameOptionStringPage.Fr[0]
+                        })
+                        .setDescription(bddText.pokedexDescOptionStringPage.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.pokedexDescOptionStringPage.Fr[0]
+                        })
+                        .setRequired(false)
 )
 
 

@@ -42,10 +42,46 @@
         "Eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
     },
     "commandCodeExplication": {
-        "Fr": ["Permet de rentrer un code afin d'avoir des effets"],
-        "Eng": ["Allow spawning in a channel"]
+        "Fr": ["Permet de rentrer un code afin d'avoir des effets en cadeau"],
+        "Eng": ["Allows you to enter a code in order to have effects as a gift"]
+    },
+    "codeNameOptionString": {
+        "Fr": ["code"],
+        "Eng": ["code"]
+    },
+    "codeDescOptionString": {
+        "Fr": ["Le code a rentrer."],
+        "Eng": ["The code to enter."]
+    },
+    "commandLangName": {
+        "Fr": ["langue"],
+        "Eng": ["language"]
+    },
+    "commandLangExplication": {
+        "Fr": ["Permet de changer la langue de réponse du bot"],
+        "Eng": ["Allows you to change the bot's response language"]
+    },
+    "langNameOptionString": {
+        "Fr": ["quellangue"],
+        "Eng": ["whichlanguage"]
+    },
+    "langDescOptionString": {
+        "Fr": ["La langue voulue."],
+        "Eng": ["The desired language."]
     },
 
+    "commandPokedexExplication": {
+        "Fr": ["Permet de voir le pokedex afin de suivre son avancement."],
+        "Eng": ["Allows you to see the pokedex for to follow its progress."]
+    },
+    "pokedexNameOptionStringPage": {
+        "Fr": ["page"],
+        "Eng": ["page"]
+    },
+    "pokedexDescOptionStringPage": {
+        "Fr": ["La page voulu."],
+        "Eng": ["The desired page."]
+    },
     
     "commandUnspawnExplication": {
         "Fr": ["Supprimé une autorisation le spawn dans un salon (modo seulement)."],
@@ -55,10 +91,7 @@
         "Fr": ["Permet d'attraper le Pokémons présent."],
         "Eng": ["Allows you to catch the pokemon present."]
     },
-    "commandPokedexExplication": {
-        "Fr": ["Permet de visualiser l'avancement du pokédex."],
-        "Eng": ["Allows you to visualize the progress of the pokedex."]
-    },
+
     "commandCatchExtension": {
         "Fr": ["nom du Pokémon"],
         "Eng": ["pokemon's name"]

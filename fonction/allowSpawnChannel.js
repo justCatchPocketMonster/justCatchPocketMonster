@@ -3,30 +3,31 @@ const allowSave = require("../bdd/serversAllowThisChannel.json");
 const language = require("./language")
 var Discord = require('discord.js');
 var fonction = require("./fonctionJs")
-const fs = require("fs")
+const fs = require("fs");
+const { channel } = require("diagnostics_channel");
 
 
-function addChannelAllow(idChannel, idServer, message){
+function addChannelAllow(idChannel, idServer, channel){
     createServerAllow(idServer)
     addAllowServer = allowSave[idServer]
     if(allowSave[idServer].indexOf(idChannel) ===-1){
         addAllowServer = addAllowServer.push(idChannel)
-        message.channel.send(language.getText(idServer, "spawnPokemonActivate"))
+        channel.send(language.getText(idServer, "spawnPokemonActivate"))
     } else{
-        message.channel.send(language.getText(idServer, "spawnPokemonAlreadyActivate"))
+        channel.send(language.getText(idServer, "spawnPokemonAlreadyActivate"))
     }
     
     SaveBdd();
 }
 
-function deleteChannelAllow(idChannel, idServer, message){
+function deleteChannelAllow(idChannel, idServer, channel){
     createServerAllow(idServer)
     deleteAllowServer = allowSave[idServer]
     if(allowSave[idServer].indexOf(idChannel) !=-1){
         deleteAllowServer.splice(allowSave[idServer].indexOf(idChannel), 1)
-        message.channel.send(language.getText(idServer, "spawnPokemonDesactivate"))
+        channel.send(language.getText(idServer, "spawnPokemonDesactivate"))
     } else{
-        message.channel.send(language.getText(idServer, "spawnPokemonAlreadyDesactivate"))
+        channel.send(language.getText(idServer, "spawnPokemonAlreadyDesactivate"))
     }
     
     SaveBdd();
