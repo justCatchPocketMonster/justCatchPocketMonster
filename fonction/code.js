@@ -6,12 +6,12 @@ const saveShinyUser = require("./shinydexSaveUser")
 const codeBdd = require("../bdd/code.json")
 const fs = require("fs");
 
-async function enterCode(idUser, code, message){
+async function enterCode(idUser, code, interaction){
     if(codeEntered[idUser] === undefined){
         createUser(idUser)
         SaveBdd();
     }
-    codeHasEffect(idUser, code, message)
+    codeHasEffect(idUser, code, interaction)
 }
 
 function createUser(idUser){
@@ -19,13 +19,14 @@ function createUser(idUser){
     return
 }
 
-async function codeHasEffect (idUser, code, message){
+async function codeHasEffect (idUser, code, interaction){
 
     if(codeBdd["shiny"].includes(code)){
         if(codeEntered[idUser].includes(code)){
-            message.channel.send(language.getText(message.guild.id, "codeAlreadyUsed"));
+            interaction.channel.send(language.getText(interaction.guild.id, "codeAlreadyUsed"));
+            
         } else {
-            effectCode1(idUser, message);
+            effectCode1(idUser, interaction);
             codeEntered[idUser].push(code);
         }
         SaveBdd();
@@ -33,23 +34,23 @@ async function codeHasEffect (idUser, code, message){
     }
 
 
-    message.channel.send(language.getText(message.guild.id, "codeDontExist"));
+    interaction.channel.send(language.getText(interaction.guild.id, "codeDontExist"));
 
 }
 
 /**
  * sert a donné un pokemon shiny
  */
-function effectCode1(idUser, message){
+function effectCode1(idUser, interaction){
     pokemon = pokemonObject.pokemonSelect();
 
     savePokemonUser.pokedex(pokemon["id"], idUser)
     saveShinyUser.pokedex(pokemon["id"], idUser)
 
     if(pokemon["name"]["nameFr"] != pokemon["name"]["nameEng"]){
-        message.channel.send(language.getText(message.guild.id, "congratYouCatchPart1")+message.author.username+language.getText(message.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
+        interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
     }else{
-        message.channel.send(language.getText(message.guild.id, "congratYouCatchPart1")+message.author.username+language.getText(message.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
+        interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
     }
 
 }

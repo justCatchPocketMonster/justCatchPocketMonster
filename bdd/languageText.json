@@ -92,13 +92,13 @@
         "Eng": ["Allows you to catch the pokemon present."]
     },
 
-    "commandCatchExtension": {
-        "Fr": ["nom du Pokémon"],
-        "Eng": ["pokemon's name"]
+    "commandCatchOptionName": {
+        "Fr": ["pokemon"],
+        "Eng": ["pokemon"]
     },
-    "commandPokedexExtension": {
-        "Fr": ["Nombre de la page"],
-        "Eng": ["Number of the page"]
+    "commandCatchOptionDesc": {
+        "Fr": ["Le nom du pokemon. Il faut le bon nom du Pokémon pour l'attraper sinon raté."],
+        "Eng": ["The name of the pokemon. You need the correct name of the Pokémon to catch it if not missed."]
     },
 
 

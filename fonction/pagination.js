@@ -7,11 +7,13 @@ const { ButtonStyle } = require('discord.js');
  */
 module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 60000) => {
     //probleme avec interaction
-    console.log(interaction)
 
     if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
 
-    var index = pageParDefaut-1, row = new ActionRowBuilder().addComponents([
+    var index = pageParDefaut-1
+    var row = new ActionRowBuilder()
+    
+    row.addComponents([
     {
         type:"BUTTON",
         customId:"1",
@@ -25,14 +27,7 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
         label: "X",
         style: ButtonStyle.Danger,
         disabled: false
-    },/*
-    {
-        type:"BUTTON",
-        customId:"4",
-        label: "#",
-        style: "SECONDARY",
-        disabled: false
-    },*/
+    },
     {
         type:"BUTTON",
         customId:"2",
@@ -43,6 +38,8 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
     
 
     ]);
+    console.log(row)
+    console.log(row.components)
 
     let data = {
         embeds: [pages[index]],
@@ -74,38 +71,13 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
                 if(index >= pages.length){
                     index = 0;
                 }
-            } else if(i.customId === "4"){
-                /*
-                col.resetTimer({time: time*2})
-
-                message.channel.send({content: "Vous avez 1 minute pour saisir le numéro de la page voulu."}).then(messagePageBot => {
-                    const collectReponse = messagePageBot.channel.createMessageCollector({
-                        //filter: filter,
-                        time: time
-                    })
-
-                    collectReponse.on("collect", messageSend => {
-                        if(isNaN(Number(messageSend))){
-                            col.resetTimer({time: time*2})
-                            messagePageBot.resetTimer({time: time})
-                            messagePageBot.edit({content: "La valeur inscrise n'est pas un nombre. veuillez recommencer"})
-                        } else {
-                            index = Number(messageSend);
-                            collectReponse.stop();
-                        }
-                    })
-
-                    collectReponse.on("end", () => {
-                        messagePageBot.delete()
-                    })
-                })
-                */
-
             } else{
                 return col.stop();
             }
     
-            row = new ActionRowBuilder().addComponents([
+            row = new ActionRowBuilder();
+            
+            row.addComponents([
                 {
                     type:"BUTTON",
                     customId:"1",

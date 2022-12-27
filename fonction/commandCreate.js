@@ -104,5 +104,25 @@ const pokedexCommand = new SlashCommandBuilder()
                         .setRequired(false)
 )
 
+const catchCommand = new SlashCommandBuilder()
+        .setName("catch")
+        .setDescription(bddText.commandCatchExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandCatchExplication.Fr[0]
+        })
+        .addStringOption(
+                new SlashCommandStringOption()
+                        .setName(bddText.commandCatchOptionName.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.commandCatchOptionName.Fr[0]
+                        })
+                        
+                        .setDescription(bddText.commandCatchOptionDesc.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.commandCatchOptionDesc.Fr[0]
+                        })
+                        .setRequired(true)
+        )
 
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand}
+
+module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand}

@@ -1,28 +1,28 @@
 {
     "972893923359998053": {
-        "nbCountMax": 8,
-        "nbCountActuel": 4,
+        "nbCountMax": 18,
+        "nbCountActuel": 0,
         "pokemonPresentActuel": {
-            "972896634105110528": {
-                "id": 198,
+            "972896634105110528": null,
+            "979660522767147018": {
+                "id": 351,
                 "name": {
-                    "nameEng": "Murkrow",
-                    "nameFr": "Cornèbre"
+                    "nameEng": "Castform",
+                    "nameFr": "Morphéo"
                 },
                 "typeListEng": [
-                    "Dark",
-                    "Flying"
+                    "Normal"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0198-000"
+                    "0351-000"
                 ],
-                "gen": 2,
+                "gen": 3,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2022-10-16",
-                "heure": "22:43:6"
+                "date": "2022-11-26",
+                "heure": "21:29:9"
             }
         }
     }

@@ -61,5 +61,87 @@
         "capturable": true,
         "date": "2022-11-5",
         "heure": "18:18:34"
+    },
+    {
+        "id": 344,
+        "name": {
+            "nameEng": "Claydol",
+            "nameFr": "Kaorine"
+        },
+        "typeListEng": [
+            "Ground",
+            "Psychic"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0344-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-26",
+        "heure": "21:27:55"
+    },
+    {
+        "id": 351,
+        "name": {
+            "nameEng": "Castform",
+            "nameFr": "Morphéo"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0351-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-26",
+        "heure": "21:29:9"
+    },
+    {
+        "id": 475,
+        "name": {
+            "nameEng": "Gallade",
+            "nameFr": "Gallame"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0475-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-26",
+        "heure": "22:52:17"
+    },
+    {
+        "id": 467,
+        "name": {
+            "nameEng": "Magmortar",
+            "nameFr": "Maganon"
+        },
+        "typeListEng": [
+            "Fire"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0467-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-26",
+        "heure": "23:20:23"
     }
 ]

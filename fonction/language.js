@@ -12,25 +12,25 @@ function getText(idServer, nameText){
 
 }
 
-function setLanguage(idServer, language, message){
+function setLanguage(idServer, language, interaction){
 
     language = language.toLowerCase();
 
     if(language === "fr"){
         languageBdd[idServer] = "Fr" 
-        if(message!= null){
-            message.channel.send("Vous avez choisie la langue Fr")
+        if(interaction!= null){
+            interaction.channel.send("Vous avez choisie la langue Fr")
         }
         SaveBdd();
     }else if(language === "eng"){
         languageBdd[idServer] = "Eng"
-        if(message!= null){
-            message.channel.send("You have chosen the language Eng")
+        if(interaction!= null){
+            interaction.channel.send("You have chosen the language Eng")
         }
         SaveBdd();
     } else{
-        if(message!= null){
-            message.channel.send(getText(message.guild.id, "errorLanguageChoose"))
+        if(interaction!= null){
+            interaction.channel.send(getText(interaction.guild.id, "errorLanguageChoose"))
         }
     }
     

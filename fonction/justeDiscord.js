@@ -8,24 +8,6 @@ const prefix = variableGlobal.prefix;
 const codeBdd = require("../bdd/code.json")
 const fonction = require("../fonction/fonctionJs")
 
-/**
- * 
- * @param {Discord} Discord 
- * @param {Message} message 
- */
-function embedHelp(Discord, message){
-    let embedDiscord = new Discord.EmbedBuilder()
-            .setColor("#0099FF")
-            .setTitle(language.getText(message.guild.id, "helpTitle"))
-            .addFields([
-                { name:prefix+"spawn" , value:language.getText(message.guild.id, "commandSpawnExplication")  , inline: true},
-                { name: prefix+"unspawn" , value: language.getText(message.guild.id, "commandUnspawnExplication") , inline: true},
-                { name: prefix+"catch [", value:+language.getText(message.guild.id, "commandCatchExtension")+"]" , value: language.getText(message.guild.id, "commandCatchExplication") , inline: true},
-                { name: prefix+"pokedex ["+language.getText(message.guild.id, "commandPokedexExtension")+"]" , value: language.getText(message.guild.id, "commandPokedexExplication") , inline: true},
-            ]
-            )
-    message.channel.send({ embeds: [embedDiscord]})
-}
 
 function embedMention(Discord, message){
     let embedDiscord = new Discord.EmbedBuilder()
@@ -35,21 +17,6 @@ function embedMention(Discord, message){
                 { name: language.getText(message.guild.id, "rightTitle") , value:language.getText(message.guild.id, "rightText")  , inline: true},
                 { name: language.getText(message.guild.id, "stopTitle") , value: language.getText(message.guild.id, "stopText") , inline: true},
 
-            ]
-            )
-            message.channel.send({ embeds: [embedDiscord]});
-}
-
-
-//a faire plus tard
-function embedCreateur(Discord, message){
-    let embedDiscord = new Discord.EmbedBuilder()
-            .setColor("#0099FF")
-            .setTitle("This is PVCSAM")
-            .addFields([{name: "wesh", value:"[salut](https://www.youtube.com/)"}])
-            .addFields([
-                { name: "Droit" , value:"[salut](https://www.youtube.com/)"  , inline: true},
-                { name: "Stop" , value: "oui" , inline: true}
             ]
             )
             message.channel.send({ embeds: [embedDiscord]});
@@ -112,4 +79,4 @@ function randomStatus(Client){
     
 }
 
-module.exports= {embedHelp, randomStatus, embedMention, embedCreateur}
+module.exports= { randomStatus, embedMention}

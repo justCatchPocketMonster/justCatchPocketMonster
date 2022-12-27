@@ -37,43 +37,6 @@ try{
     Client.on("messageCreate", message => {
         if(message.author.bot) return;
 
-        
-
-        if(message.content === prefix + "spawn"){
-            if(message.member.permissions.has("ADMINISTRATOR")){
-                serverAllow.addChannelAllow(message.channel.id, message.guild.id, message)
-            } else {
-                message.channel.send(language.getText(message.guild.id, "noAutorisation"))
-            }
-            return
-        }
-
-        
-
-        if(message.content === prefix + "unspawn"){
-            if(message.member.permissions.has("ADMINISTRATOR")){
-                serverAllow.deleteChannelAllow(message.channel.id, message.guild.id, message)
-            } else {
-                message.channel.send(language.getText(message.guild.id, "noAutorisation"))
-            }
-            return
-        }
-        
-        if(message.content.substring(0,(prefix+"code ").length) === prefix + "code "){
-            
-            codeEntered.enterCode(message.member.id, message.content.substring((prefix+"code ").length), message)
-            
-            return
-        }
-
-        if(message.content.substring(0,(prefix+"lang ").length) === prefix + "lang "){
-            if(message.member.permissions.has("ADMINISTRATOR")){
-                language.setLanguage(message.guild.id, message.content.substring((prefix+"lang ").length), message)
-            } else {
-                message.channel.send(language.getText(message.guild.id, "noAutorisation"))
-            }
-            return
-        }
 
         /*
         TODO:
@@ -91,21 +54,12 @@ try{
 
         */
 
-        if(message.content === prefix + "help"){
-            justDiscord.embedHelp(Discord, message); 
-            return
-        }
         
         if(message.content === prefix + "mention"){
             justDiscord.embedMention(Discord, message); 
             return
         }
-        /*
-        if(message.content === prefix + "creator"){
-            justDiscord.embedCreateur(Discord, message); 
-            return
-        }
-        */
+
         if(serverAllow.randomIdServer(message.guild.id) != undefined){
             filePokemon.spawnPokemon(Discord, message, Client)
             return
@@ -141,11 +95,45 @@ try{
                 }else {
                     serverAllow.deleteChannelAllow(channel.id, interaction.guild.id, interaction.channel)
                 }
-                interaction.reply({
-                    content: `.`,
-                });
-                interaction.deleteReply();
             }
+
+            if(interaction.commandName == "code"){
+                codeEntered.enterCode(interaction.member.id, interaction.options.getString(bddText.codeNameOptionString.Eng[0]), interaction)
+                
+                
+            }
+
+            if(interaction.commandName == bddText.commandLangName.Eng[0]){
+                language.setLanguage(interaction.guild.id, interaction.options.getString(bddText.langNameOptionString.Eng[0]), interaction)
+                
+            }
+
+            if(interaction.commandName == "catch"){
+
+                filePokemon.catchPokemon(Discord, interaction, Client, interaction.options.getString(bddText.commandCatchOptionName.Eng[0]))
+            }
+
+            
+            if(interaction.commandName == "pokedex"){
+                interaction.member.user.username
+
+                if(interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]) != null){
+                    filePokemon.embedPokemonSaveUser(Discord, interaction, Client, interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]))
+                } else {
+                    filePokemon.embedPokemonSaveUser(Discord, interaction, Client, 1);
+                }
+
+
+            }
+
+
+
+            interaction.reply({
+                content: `.`,
+            });
+            setTimeout(() => {
+                interaction.deleteReply();
+            }, 1000)
 
         }
     })
@@ -161,7 +149,8 @@ try{
             createCommand.spawnCommand,
             createCommand.codeCommand,
             createCommand.langCommand,
-            createCommand.pokedexCommand
+            createCommand.pokedexCommand,
+            createCommand.catchCommand
         ])
         //application au general
         //Client.application.commands.create(data)
