@@ -75,16 +75,16 @@ function createStatVersion(){
         statBdd["All"]["pokemonCatchedShiny"] = 0;
     }
     if(statBdd["All"]["listPokemonSpawned"] === undefined){
-        statBdd["All"]["listPokemonSpawned"] = 0;
+        statBdd["All"]["listPokemonSpawned"] = {};
     }
     if(statBdd["All"]["listPokemonCatched"] === undefined){
-        statBdd["All"]["listPokemonCatched"] = 0;
+        statBdd["All"]["listPokemonCatched"] = {};
     }
     if(statBdd["All"]["listPokemonSpawnedShiny"] === undefined){
-        statBdd["All"]["listPokemonSpawnedShiny"] = 0;
+        statBdd["All"]["listPokemonSpawnedShiny"] = {};
     }
     if(statBdd["All"]["listPokemonCatchedShiny"] === undefined){
-        statBdd["All"]["listPokemonCatchedShiny"] = 0;
+        statBdd["All"]["listPokemonCatchedShiny"] = {};
     }
     if(statBdd[version] === undefined){
         statBdd[version]= {};
@@ -102,16 +102,16 @@ function createStatVersion(){
         statBdd[version]["pokemonCatchedShiny"] = 0;
     }
     if(statBdd[version]["listPokemonSpawned"] === undefined){
-        statBdd[version]["listPokemonSpawned"] = 0;
+        statBdd[version]["listPokemonSpawned"] = {};
     }
     if(statBdd[version]["listPokemonCatched"] === undefined){
-        statBdd[version]["listPokemonCatched"] = 0;
+        statBdd[version]["listPokemonCatched"] = {};
     }
     if(statBdd[version]["listPokemonSpawnedShiny"] === undefined){
-        statBdd[version]["listPokemonSpawnedShiny"] = 0;
+        statBdd[version]["listPokemonSpawnedShiny"] = {};
     }
     if(statBdd[version]["listPokemonCatchedShiny"] === undefined){
-        statBdd[version]["listPokemonCatchedShiny"] = 0;
+        statBdd[version]["listPokemonCatchedShiny"] = {};
     }
 
 
@@ -191,6 +191,18 @@ function getCountAllCatchShiny(){
 function getCountAllSpawnShiny(){
     return statBdd["All"]["pokemonSpawnedShiny"]
 }
+function getCountAllCatchList(){
+    return statBdd["All"]["listPokemonCatched"]
+}
+function getCountAllSpawnList(){
+    return statBdd["All"]["listPokemonSpawned"]
+}
+function getCountAllCatchShinyList(){
+    return statBdd["All"]["listPokemonCatchedShiny"]
+}
+function getCountAllSpawnShinyList(){
+    return statBdd["All"]["listPokemonSpawnedShiny"]
+}
 
 
 function SaveBdd(){
@@ -199,4 +211,4 @@ function SaveBdd(){
     })
 }
 
-module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny}
+module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList}

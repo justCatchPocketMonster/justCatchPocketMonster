@@ -143,5 +143,582 @@
         "capturable": true,
         "date": "2022-11-26",
         "heure": "23:20:23"
+    },
+    {
+        "id": 463,
+        "name": {
+            "nameEng": "Lickilicky",
+            "nameFr": "Coudlangue"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0463-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-29",
+        "heure": "15:48:46"
+    },
+    {
+        "id": 407,
+        "name": {
+            "nameEng": "Roserade",
+            "nameFr": "Roserade"
+        },
+        "typeListEng": [
+            "Grass",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0407-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2022-11-29",
+        "heure": "15:49:34"
+    },
+    {
+        "id": 429,
+        "name": {
+            "nameEng": "Mismagius",
+            "nameFr": "Magirêve"
+        },
+        "typeListEng": [
+            "Ghost"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0429-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:8:26"
+    },
+    {
+        "id": 310,
+        "name": {
+            "nameEng": "Manectric",
+            "nameFr": "Élecsprint"
+        },
+        "typeListEng": [
+            "Electric"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0310-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:8:45"
+    },
+    {
+        "id": 214,
+        "name": {
+            "nameEng": "Heracross",
+            "nameFr": "Scarhino"
+        },
+        "typeListEng": [
+            "Bug",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0214-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:16:59"
+    },
+    {
+        "id": 147,
+        "name": {
+            "nameEng": "Dratini",
+            "nameFr": "Minidraco"
+        },
+        "typeListEng": [
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0147-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:17:3"
+    },
+    {
+        "id": 342,
+        "name": {
+            "nameEng": "Crawdaunt",
+            "nameFr": "Colhomard"
+        },
+        "typeListEng": [
+            "Water",
+            "Dark"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0342-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:17:56"
+    },
+    {
+        "id": 435,
+        "name": {
+            "nameEng": "Skuntank",
+            "nameFr": "Moufflair"
+        },
+        "typeListEng": [
+            "Poison",
+            "Dark"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0435-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:18:1"
+    },
+    {
+        "id": 406,
+        "name": {
+            "nameEng": "Budew",
+            "nameFr": "Rozbouton"
+        },
+        "typeListEng": [
+            "Grass",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0406-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:18:4"
+    },
+    {
+        "id": 145,
+        "name": {
+            "nameEng": "Zapdos",
+            "nameFr": "Électhor"
+        },
+        "typeListEng": [
+            "Electric",
+            "Flying"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0145-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:20:21"
+    },
+    {
+        "id": 382,
+        "name": {
+            "nameEng": "Kyogre",
+            "nameFr": "Kyogre"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0382-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:22:8"
+    },
+    {
+        "id": 245,
+        "name": {
+            "nameEng": "Suicune",
+            "nameFr": "Suicune"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0245-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:24:36"
+    },
+    {
+        "id": 439,
+        "name": {
+            "nameEng": "Mime Jr.",
+            "nameFr": "Mime Jr"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0439-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:27:55"
+    },
+    {
+        "id": 338,
+        "name": {
+            "nameEng": "Solrock",
+            "nameFr": "Solaroc"
+        },
+        "typeListEng": [
+            "Rock",
+            "Psychic"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0338-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:28:25"
+    },
+    {
+        "id": 108,
+        "name": {
+            "nameEng": "Lickitung",
+            "nameFr": "Excelangue"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0108-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:28:30"
+    },
+    {
+        "id": 564,
+        "name": {
+            "nameEng": "Tirtouga",
+            "nameFr": "Carapagos"
+        },
+        "typeListEng": [
+            "Water",
+            "Rock"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0564-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:28:33"
+    },
+    {
+        "id": 566,
+        "name": {
+            "nameEng": "Archen",
+            "nameFr": "Arkéapti"
+        },
+        "typeListEng": [
+            "Rock",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0566-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-1",
+        "heure": "19:28:44"
+    },
+    {
+        "id": 411,
+        "name": {
+            "nameEng": "Bastiodon",
+            "nameFr": "Bastiodon"
+        },
+        "typeListEng": [
+            "Rock",
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0411-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "19:35:30"
+    },
+    {
+        "id": 559,
+        "name": {
+            "nameEng": "Scraggy",
+            "nameFr": "Baggiguane"
+        },
+        "typeListEng": [
+            "Dark",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0559-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "19:35:31"
+    },
+    {
+        "id": 235,
+        "name": {
+            "nameEng": "Smeargle",
+            "nameFr": "Queulorior"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0235-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "19:38:31"
+    },
+    {
+        "id": 168,
+        "name": {
+            "nameEng": "Ariados",
+            "nameFr": "Migalos"
+        },
+        "typeListEng": [
+            "Bug",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0168-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "19:38:32"
+    },
+    {
+        "id": 416,
+        "name": {
+            "nameEng": "Vespiquen",
+            "nameFr": "Apireine"
+        },
+        "typeListEng": [
+            "Bug",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0416-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "20:1:23"
+    },
+    {
+        "id": 526,
+        "name": {
+            "nameEng": "Gigalith",
+            "nameFr": "Gigalithe"
+        },
+        "typeListEng": [
+            "Rock"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0526-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "20:21:2"
+    },
+    {
+        "id": 235,
+        "name": {
+            "nameEng": "Smeargle",
+            "nameFr": "Queulorior"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0235-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "20:22:14"
+    },
+    {
+        "id": 48,
+        "name": {
+            "nameEng": "Venonat",
+            "nameFr": "Mimitoss"
+        },
+        "typeListEng": [
+            "Bug",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0048-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "20:25:15"
+    },
+    {
+        "id": 408,
+        "name": {
+            "nameEng": "Cranidos",
+            "nameFr": "Kranidos"
+        },
+        "typeListEng": [
+            "Rock"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0408-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-2",
+        "heure": "20:27:55"
+    },
+    {
+        "id": 92,
+        "name": {
+            "nameEng": "Gastly",
+            "nameFr": "Fantominus"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0092-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-11",
+        "heure": "20:31:29"
+    },
+    {
+        "id": 633,
+        "name": {
+            "nameEng": "Deino",
+            "nameFr": "Solochi"
+        },
+        "typeListEng": [
+            "Dark",
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0633-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-11",
+        "heure": "20:33:44"
     }
 ]

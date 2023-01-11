@@ -21,7 +21,7 @@ function pokedex(idPokemon, idUser){
     SaveBdd();
 }
 
-//créer une savuegarde celon l'id de l'user
+//créer une sauvegarde celon l'id de l'user
 function createSaveUser(idUserCreate){
     pokedexBDD[idUserCreate] = {}
     SaveBdd();
@@ -51,6 +51,7 @@ function getSave(idUser){
 
 
 function getNumberCapturePokemon(idUser, idPokemon){
+
     return pokedexBDD[idUser][idPokemon]
 }
 

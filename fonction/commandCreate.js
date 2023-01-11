@@ -3,6 +3,8 @@ const {SlashCommandBuilder, SlashCommandChannelOption, SlashCommandBooleanOption
 const {PermissionFlagsBits, ChannelType } = require("discord.js");
 const bddText = require("../bdd/languageText.json")
 
+
+
 const spawnCommand = new SlashCommandBuilder()
         .setName("spawn")
         .setDescription(bddText.commandSpawnExplication.Eng[0])
@@ -24,7 +26,6 @@ const spawnCommand = new SlashCommandBuilder()
         )
         .addChannelOption(
                 new SlashCommandChannelOption()
-                        //.addChannelTypes("GuildText")
                         .setName(bddText.spawnNameOptionChannel.Eng[0])
                         .setNameLocalizations({
                                 'fr': bddText.spawnNameOptionChannel.Fr[0]
@@ -33,6 +34,7 @@ const spawnCommand = new SlashCommandBuilder()
                         .setDescriptionLocalizations({
                                 'fr': bddText.spawnDescOptionChannel.Fr[0]
                         })
+                        //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
                         .addChannelTypes(ChannelType.GuildText)
                         
                         .setRequired(false)
@@ -82,7 +84,44 @@ const langCommand = new SlashCommandBuilder()
                                 {name: "Français", value: "fr"}
                         )
                         .setRequired(true)
+                )
+        .setDefaultMemberPermissions(0)
+
+
+const howHaveThisPokemonCommand = new SlashCommandBuilder()
+        .setName("how")
+        .setNameLocalizations({
+                'fr': "combien"
+        })
+        .setDescription(bddText.commandHowExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandHowExplication.Fr[0]
+        })
+        .addStringOption(
+                new SlashCommandStringOption()
+                        .setName(bddText.commandHowOptionNameStringNumber.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.commandHowOptionNameStringNumber.Fr[0]
+                        })
+                        .setDescription(bddText.commandHowOptionDescStringNumber.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.commandHowOptionDescStringNumber.Fr[0]
+                        })
+                        .setRequired(false)
+        )
+        .addStringOption(
+                new SlashCommandStringOption()
+                        .setName(bddText.commandHowOptionNameStringPokemonName.Eng[0])
+                        .setNameLocalizations({
+                                'fr': bddText.commandHowOptionNameStringPokemonName.Fr[0]
+                        })
+                        .setDescription(bddText.commandHowOptionDescStringPokemonName.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.commandHowOptionDescStringPokemonName.Fr[0]
+                        })
+                        .setRequired(false)
 )
+
 
 
 const pokedexCommand = new SlashCommandBuilder()
@@ -125,4 +164,4 @@ const catchCommand = new SlashCommandBuilder()
         )
 
 
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand}
+module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand}

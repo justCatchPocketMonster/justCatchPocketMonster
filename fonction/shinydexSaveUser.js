@@ -86,6 +86,10 @@ function getAllPokemonWithZeroCapture(idUser){
     return array
 }
 
+function getNumberCapturePokemon(idUser, idPokemon){
+    return pokedexBDD[idUser][idPokemon]
+}
+
 function getPercentageNational(idUser){
     return(Math.floor((100*getCountNational(idUser))/((pokeData.length)-1)))
 }
@@ -101,4 +105,4 @@ function SaveBdd(){
     })
 }
 
-module.exports= { pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational, getPercentageMaxMin, getCountMaxMin, getAllPokemonWithZeroCapture}
+module.exports= {getNumberCapturePokemon, pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational, getPercentageMaxMin, getCountMaxMin, getAllPokemonWithZeroCapture}

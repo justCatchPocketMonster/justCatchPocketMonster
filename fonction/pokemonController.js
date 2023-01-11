@@ -1,4 +1,4 @@
-const { AttachmentBuilder, Client, ButtonInteraction } = require("discord.js")
+const { AttachmentBuilder, Client, ButtonInteraction, TextInputStyle } = require("discord.js")
 const Discord = require("discord.js")
 const variableGlobal = require("../parameters/variableGlobal")
 const stat = require("../fonction/stat")
@@ -92,54 +92,62 @@ function spawnPokemon(Discord, message, Client){
  */
 function catchPokemon(Discord, interaction, Client, optionString){
 
-    let messageEnvoyer = optionString;
+    messageEnvoyer = optionString;
     let idServer = interaction.guild.id;
     let idChannel = interaction.channel.id;
 
-    
-    if((messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"].toLowerCase()) || 
-        messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"].toLowerCase()){
+    if(spawnCount.getPokemonPresent(idServer,idChannel) != null && spawnCount.getPokemonPresent(idServer,idChannel)["capturable"] === true){
+        if((messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"].toLowerCase()) || 
+            messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"].toLowerCase()){
 
-            savePokemonUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
-            savePokemonServer.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.guild.id)
+                savePokemonUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
+                savePokemonServer.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.guild.id)
 
-            if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
-                saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
-            }
-            stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"])
-            if(spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] != spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"]){
-                let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] +"/"+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"];
                 if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
-                    messageCongratSend += ":star:. "
-                } else {
-                    messageCongratSend += ". "
+                    saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                 }
-                if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, spawnCount.getPokemonPresent(idServer, idChannel)["id"]) == 1){
-                    messageCongratSend += language.getText(interaction.guild.id, "newAtPokedex")
+                stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"])
+                if(spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] != spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"]){
+                    let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] +"/"+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"];
+                    if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
+                        messageCongratSend += ":star:. "
+                    } else {
+                        messageCongratSend += ". "
+                    }
+                    if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, spawnCount.getPokemonPresent(idServer, idChannel)["id"]) == 1){
+                        messageCongratSend += language.getText(interaction.guild.id, "newAtPokedex")
 
+                    }
+
+                    interaction.channel.send(messageCongratSend)
+                    
+                }else{
+                    let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"];
+                    if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
+                        messageCongratSend += ":star:. "
+                    } else {
+                        messageCongratSend += ". "
+                    }
+                    
+                    if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, spawnCount.getPokemonPresent(idServer, idChannel)["id"]) == 1){
+                        messageCongratSend += language.getText(interaction.guild.id, "newAtPokedex")
+
+                    }
+
+                    interaction.channel.send(messageCongratSend)
                 }
 
-                interaction.channel.send(messageCongratSend)
-                
+                spawnCount.setPokemonPresent(idServer,null, idChannel);
+                return
             }else{
-                let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"];
-                if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
-                    messageCongratSend += ":star:. "
-                } else {
-                    messageCongratSend += ". "
-                }
+
+                interaction.channel.send(language.getText(interaction.guild.id, "failCatchGoodPokemonPart1")+" "+ interaction.member.user.username +" "+ language.getText(interaction.guild.id, "failCatchGoodPokemonPart2")+" "+ optionString+".")
+                return
                 
-                if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, spawnCount.getPokemonPresent(idServer, idChannel)["id"]) == 1){
-                    messageCongratSend += language.getText(interaction.guild.id, "newAtPokedex")
-
-                }
-
-                interaction.channel.send(messageCongratSend)
             }
+        }else {
 
-            spawnCount.setPokemonPresent(idServer,null, idChannel);
-            return
-        } else {
+                
             interaction.channel.send(language.getText(interaction.guild.id, "noPokemonDisponible"))
             return
         }
@@ -219,6 +227,18 @@ function generateFieldRegionStat(idUser, idGuild){
         }
     } else {
         field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeSinnoh"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+    valueMax = 649;
+    valueMin = 493;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+            field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        } else {
+            field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        }
+    } else {
+        field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeUnys"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
     }
 
 
@@ -305,9 +325,9 @@ function generateFiledRandomStat(idUser, idGuild){
                 { name: "\u200B", value: "\u200B" , inline: false}
             )
             .addFields(
-                generateFieldRegionStat(interaction.member.id, interaction.guild.id),
-                { name: "\u200B", value: "\u200B" , inline: false}
+                generateFieldRegionStat(interaction.member.id, interaction.guild.id)
             )
+            .addFields({ name: "\u200B", value: "\u200B" , inline: false})
             .addFields(
                 generateFiledRandomStat(interaction.member.id, interaction.guild.id)
             )
@@ -368,9 +388,152 @@ function generateFiledRandomStat(idUser, idGuild){
     }
     
     
-    pagination(interaction, ButtonInteraction, arrayEmbed, pageDeBase);
+    pagination.pagination(interaction, ButtonInteraction, arrayEmbed, pageDeBase);
 
-    
 }
 
-module.exports= { spawnPokemon, embedPokemonSaveUser, catchPokemon}
+/**
+ * TODO:
+ * @param {Discord} Discord 
+ * @param {*} interaction 
+ * @param {*} Client 
+ * @param {*} pokemonName 
+ * @param {*} pokemonId 
+ * @returns 
+ */
+
+function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
+
+    var idPokemon = null;
+    if(pokemonName !== false){
+
+        pokeData.forEach(pokemon => {
+            if((pokemon.name.nameEng.toLowerCase() === pokemonName.toLowerCase() || 
+                pokemon.name.nameFr.toLowerCase() === pokemonName.toLowerCase()) &&
+                pokemon.id !== 0){
+                idPokemon = pokemon.id
+            }
+
+        })
+
+        if(idPokemon == null){
+            interaction.channel.send(language.getText(interaction.guild.id, "notExist"))
+            return
+        }
+
+    } else if(pokemonId !== false){
+        if(pokeData[pokemonId] === undefined || pokemonId == 0){
+            interaction.channel.send(language.getText(interaction.guild.id, "notExist"))
+            return
+        }
+        idPokemon = pokemonId;
+    } else {
+        interaction.channel.send(language.getText(interaction.guild.id, "noArgument"))
+        return
+    }
+    
+    let arrayPagination = [];
+    let arrayImage = [];
+
+    const actualPokemon = pokeData[idPokemon]
+
+// TODO:
+    let embed
+    let count = 0;
+    let countTotal = 0;
+    var adressImage;
+
+    if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
+        countTotal += actualPokemon["imgName"].length;
+        if(saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
+            countTotal += actualPokemon["imgName"].length;
+        }
+    }
+
+    
+    if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
+        actualPokemon["imgName"].forEach(imgName => {
+            count++;
+            embed = new Discord.EmbedBuilder()
+            //.setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
+            .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
+            .setImage("attachment://"+ imgName + ".png")
+            .setThumbnail(interaction.member.avatarURL())
+            .addFields(
+                { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCountAllCatchList()[idPokemon] , inline: false},
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCountAllCatchShinyList()[idPokemon] , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCountAllSpawnList()[idPokemon] , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCountAllSpawnShinyList()[idPokemon] , inline: true}
+            )
+            .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
+            .setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
+
+            adressImage = "./src/image/pokeHome/"+imgName+".png";
+
+            arrayPagination.push(embed)
+            arrayImage.push(adressImage)
+            
+        })
+        
+        if(saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
+
+            actualPokemon["imgName"].forEach(imgName => {
+                count++;
+                embed = new Discord.EmbedBuilder()
+                //.setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
+                .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
+                .setImage("attachment://"+ imgName + "-shiny.png")
+                .setThumbnail(interaction.member.avatarURL())
+                .addFields(
+                    { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCountAllCatchList()[idPokemon] , inline: false},
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCountAllCatchShinyList()[idPokemon] , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCountAllSpawnList()[idPokemon] , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCountAllSpawnShinyList()[idPokemon] , inline: true}
+
+                )
+                .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon ["typeListEng"].length)]))
+                .setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
+        
+                adressImage = "./src/image/pokeHome/"+imgName+"-shiny.png";
+        
+                arrayPagination.push(embed)
+                arrayImage.push(adressImage)
+                
+                })
+        }
+    } else {
+
+
+        embed = new Discord.EmbedBuilder()
+        .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
+        .setImage("attachment://0000-001.png")
+        .setThumbnail(interaction.member.avatarURL())
+        .addFields(
+            { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+            { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
+            { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
+            { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCountAllCatchList()[idPokemon] , inline: false},
+            { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCountAllCatchShinyList()[idPokemon] , inline: true},
+            { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCountAllSpawnList()[idPokemon] , inline: true},
+            { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCountAllSpawnShinyList()[idPokemon] , inline: true}
+
+        )
+
+        adressImage = "./src/image/pokeHome/0000-001.png";
+
+        arrayPagination.push(embed)
+        arrayImage.push(adressImage)
+        
+    }
+
+    pagination.pagination(interaction, ButtonInteraction,arrayPagination, 1, 60000, arrayImage)
+
+}
+
+module.exports= { spawnPokemon, embedPokemonSaveUser, catchPokemon, howThisPokemon}

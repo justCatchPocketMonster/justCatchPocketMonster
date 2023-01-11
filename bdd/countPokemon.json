@@ -1,29 +1,9 @@
 {
     "972893923359998053": {
-        "nbCountMax": 18,
-        "nbCountActuel": 0,
+        "nbCountMax": 3,
+        "nbCountActuel": 1,
         "pokemonPresentActuel": {
-            "972896634105110528": null,
-            "979660522767147018": {
-                "id": 351,
-                "name": {
-                    "nameEng": "Castform",
-                    "nameFr": "Morphéo"
-                },
-                "typeListEng": [
-                    "Normal"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0351-000"
-                ],
-                "gen": 3,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true,
-                "date": "2022-11-26",
-                "heure": "21:29:9"
-            }
+            "972896634105110528": null
         }
     }
 }

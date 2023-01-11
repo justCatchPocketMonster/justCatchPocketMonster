@@ -101,7 +101,41 @@
         "Eng": ["The name of the pokemon. You need the correct name of the Pokémon to catch it if not missed."]
     },
 
+    "commandHowExplication": {
+        "Fr": ["Voir combien de fois un Pokémon a été attrapé. Seulement 1 option ne sera acceptée."],
+        "Eng": ["See how many times a Pokémon has been caught. Only 1 option will be accepted."]
+    },
+    "commandHowOptionNameStringNumber": {
+        "Fr": ["idpokemon"],
+        "Eng": ["pokemonid"]
+    },
+    "commandHowOptionDescStringNumber": {
+        "Fr": ["l'identifiant du pokemon."],
+        "Eng": ["pokemon id."]
+    },
+    "commandHowOptionNameStringPokemonName": {
+        "Fr": ["nompokemon"],
+        "Eng": ["pokemonname"]
+    },
+    "commandHowOptionDescStringPokemonName": {
+        "Fr": ["Le nom du Pokemon"],
+        "Eng": ["Pokemon's name"]
+    },
 
+
+
+    "tooMuchPagination": {
+        "Fr": ["Il y a trop d'embed avec des pages. Veuillez fermé les précédents pour pouvoir de nouveau."],
+        "Eng": ["There are too many embeds with pages. Please close the previous ones to be able to use them again."]
+    },
+    "noArgument": {
+        "Fr": ["Il faut au minimum 1 option."],
+        "Eng": ["You need at least 1 option."]
+    },
+    "notExist": {
+        "Fr": ["Pokemon inexistant."],
+        "Eng": ["Non-existent pokemon."]
+    },
 
 
 
@@ -110,8 +144,8 @@
         "Eng": ["Wild Pokemon appeared!"]
     },
     "embedPokemonDescription": {
-        "Fr": ["Pour l'attraper faites \"!catch [nom du Pokémon]\"."],
-        "Eng": ["To catch it, do \"!catch [Pokemon's name]\"."]
+        "Fr": ["Pour l'attraper faites \"/catch [nom du Pokémon]\"."],
+        "Eng": ["To catch it, do \"/catch [Pokemon's name]\"."]
     },
 
     "congratYouCatchPart1": {
@@ -126,9 +160,13 @@
         "Fr": ["Les données du Pokémon ont été ajoutées au Pokédex."],
         "Eng": ["Pokemon's data has been added to the Pokedex."]
     },
-    "failCatchGoodPokemon": {
-        "Fr": ["L'orthographe du Pokémon ne doit pas être bonne."],
-        "Eng": ["The spelling of the pokemon must not be correct."]
+    "failCatchGoodPokemonPart2": {
+        "Fr": [". Le Pokémon actuel n'est pas"],
+        "Eng": [". The current Pokemon is not"]
+    },
+    "failCatchGoodPokemonPart1": {
+        "Fr": ["Désolé"],
+        "Eng": ["Sorry"]
     },
     "noPokemonDisponible": {
         "Fr": ["Aucun Pokémon n'est présent actuellement."],
@@ -337,6 +375,32 @@
     "nombreDeCapture": {
         "Fr": ["Nombre de capture"],
         "Eng": ["Number of caught"]
+    },
+    "nombreDeCaptureTotaly": {
+        "Fr": ["Nombre de capture général"],
+        "Eng": ["General catch number"]
+    },
+    "nombreDeSpawnTotaly": {
+        "Fr": ["Nombre de d'apparition général"],
+        "Eng": ["General spawn number"]
+    },
+    "nombreDeCaptureShinyTotaly": {
+        "Fr": ["Nombre de capture de shiny général"],
+        "Eng": ["General catch shiny number"]
+    },
+    "nombreDeSpawnShinyTotaly": {
+        "Fr": ["Nombre de d'apparition de shiny général"],
+        "Eng": ["General spawn shiny number"]
+    },
+
+
+    "nombreDeCaptureDuServer": {
+        "Fr": ["Nombre de capture du serveur"],
+        "Eng": ["Server catch count"]
+    },
+    "nombreDeCaptureShiny": {
+        "Fr": ["Nombre de capture en chromatique"],
+        "Eng": ["Number of caught in shiny"]
     },
     "ilFautUnNombre": {
         "Fr": ["Il fallait une valeur numérique de saisie."],

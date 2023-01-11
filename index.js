@@ -14,6 +14,7 @@ const saveAllBdd = require("./fonction/createSave")
 const catchError = require("./fonction/catchError")
 const createCommand = require("./fonction/commandCreate")
 const bddText = require("./bdd/languageText.json")
+const pagination = require("./fonction/pagination")
 
 
 var Client = new Discord.Client({ 
@@ -37,22 +38,6 @@ try{
     Client.on("messageCreate", message => {
         if(message.author.bot) return;
 
-
-        /*
-        TODO:
-        EN COURS
-        if(message.content === prefix +"pokedex"){
-            
-            filePokemon.embedPokemonSaveUser(Discord, message, Client, 1);
-            return
-        }
-
-        if(message.content.substring(0,(prefix+"pokedex ").length) === prefix + "pokedex "){
-            filePokemon.embedPokemonSaveUser(Discord, message, Client, message.content.substring((prefix+"pokedex ").length));
-            return
-        }
-
-        */
 
         
         if(message.content === prefix + "mention"){
@@ -115,13 +100,35 @@ try{
 
             
             if(interaction.commandName == "pokedex"){
-                interaction.member.user.username
 
                 if(interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]) != null){
                     filePokemon.embedPokemonSaveUser(Discord, interaction, Client, interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]))
                 } else {
                     filePokemon.embedPokemonSaveUser(Discord, interaction, Client, 1);
                 }
+
+
+            }
+            if(interaction.commandName == "how"){
+                
+                if(interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]) !== null){
+
+                    //numero du pokemon
+                    filePokemon.howThisPokemon(Discord, interaction, false, interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]))
+
+                } else if(interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]) !== null){
+
+                    //nom du poke
+                    filePokemon.howThisPokemon(Discord, interaction, interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]), false)
+
+                } else {
+                    
+                    filePokemon.howThisPokemon(Discord, interaction, false, false)
+
+                }
+
+                
+                //filePokemon.howThisPokemon(Discord, interaction, Client)
 
 
             }
@@ -135,6 +142,7 @@ try{
                 interaction.deleteReply();
             }, 1000)
 
+        
         }
     })
 
@@ -144,20 +152,21 @@ try{
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
 
+        pagination.resetAtZero()
 
-        Client.guilds.cache.get("972893923359998053").commands.set([
-            createCommand.spawnCommand,
-            createCommand.codeCommand,
-            createCommand.langCommand,
-            createCommand.pokedexCommand,
-            createCommand.catchCommand
-        ])
+
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.spawnCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.codeCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.langCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.pokedexCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.howHaveThisPokemonCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.catchCommand)
         //application au general
         //Client.application.commands.create(data)
 
-        
+        //Client.guilds.cache.get("972893923359998053").commands.
         //console.log(Client.guilds.cache.get("972893923359998053").commands.cache)
-
+        
     });
     
 

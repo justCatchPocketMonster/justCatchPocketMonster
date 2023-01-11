@@ -1,57 +1,101 @@
 const { ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder} = require("discord.js")
 const { ButtonStyle } = require('discord.js');
+const language = require("../fonction/language")
+const fs = require("fs")
+const limitPagination = require("../bdd/numberOfPagination.json")
 /**
- * @param {Message} message
+ * @param { Interaction} interactionSlash
  * @param {*} pages 
  * @param {*} time 
- */
-module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 60000) => {
+ */ 
+async function pagination(interactionSlash, interaction, pages, pageParDefaut = 1, time = 60000, arrayImage = []){
     //probleme avec interaction
+    var idUser = interactionSlash.member.id
 
-    if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
+    if(pageParDefaut < 1){
+        pageParDefaut = 1;
+    }
+
+    if(getNbPagination(idUser) >= 10){
+        interactionSlash.channel.send(language.getText(interactionSlash.guild.id, "tooMuchPagination"))
+        return
+    }
+
+    createNumberFollow(idUser);
+
+    if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ 
+        
+        if(!interaction){
+            throw new Error ("Invalid interaction")
+        }
+        
+        if(!pages){
+            throw new Error ("Invalid pages list")
+        }
+        
+        if(!(pages?.length > 0)){
+            throw new Error ("Invalid not enought page")
+        }
+        
+        if(!(time > 10000)){
+            throw new Error ("Invalid not enought time")
+        }
+  
+        
+    };
 
     var index = pageParDefaut-1
     var row = new ActionRowBuilder()
-    
+
+
     row.addComponents([
-    {
-        type:"BUTTON",
-        customId:"1",
-        label: "<",
-        style: ButtonStyle.Primary,
-        disabled: false
-    },
-    {
-        type:"BUTTON",
-        customId:"3",
-        label: "X",
-        style: ButtonStyle.Danger,
-        disabled: false
-    },
-    {
-        type:"BUTTON",
-        customId:"2",
-        label: ">",
-        style: ButtonStyle.Primary,
-        disabled: false
-    }
-    
+        new ButtonBuilder()
+            .setCustomId("1")
+            .setLabel("<")
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(pages.length<=1)
+        ,
+        new ButtonBuilder()
+            .setCustomId("3")
+            .setLabel("X")
+            .setStyle(ButtonStyle.Danger)
+            .setDisabled(false)
+        ,
+        new ButtonBuilder()
+            .setCustomId("2")
+            .setLabel(">")
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(pages.length<=1)
 
     ]);
-    console.log(row)
-    console.log(row.components)
 
-    let data = {
-        embeds: [pages[index]],
-        components: [row]
-        //,fetchReply: true
-    };
-    
-    const filter = (interaction) => {
-        return interaction.user.id === message.author.id
+    let data
+
+    if(arrayImage[index] !== undefined){
+        data = {
+            embeds: [pages[index]],
+            files: [arrayImage[index]],
+            components: [row]
+            
+        };
+    } else {
+        data = {
+            embeds: [pages[index]],
+            components: [row]
+        };
     }
 
-    await message.channel.send(data).then(messageSendBot => {
+    
+    
+    const filter = (interaction) => {
+        return interaction.user.id === interactionSlash.user.id
+    }
+    await interactionSlash.channel
+                    .send(data)
+                        .then(messageSendBot => {
+                    
+
+        plusOne(idUser)
         const col = messageSendBot.createMessageComponentCollector({
             filter: filter,
             time: time
@@ -78,41 +122,42 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
             row = new ActionRowBuilder();
             
             row.addComponents([
-                {
-                    type:"BUTTON",
-                    customId:"1",
-                    label: "<",
-                    style: ButtonStyle.Primary,
-                    disabled: false
-                },
-                {
-                    type:"BUTTON",
-                    customId:"3",
-                    label: "X",
-                    style: ButtonStyle.Danger,
-                    disabled: false
-                },/*
-                {
-                    type:"BUTTON",
-                    customId:"4",
-                    label: "#",
-                    style: "SECONDARY",
-                    disabled: false
-                },*/
-                {
-                    type:"BUTTON",
-                    customId:"2",
-                    label: ">",
-                    style: ButtonStyle.Primary,
-                    disabled: false
-                }
+                new ButtonBuilder()
+                    .setCustomId("1")
+                    .setLabel("<")
+                    .setStyle(ButtonStyle.Primary)
+                    .setDisabled(false)
+                ,
+                new ButtonBuilder()
+                    .setCustomId("3")
+                    .setLabel("X")
+                    .setStyle(ButtonStyle.Danger)
+                    .setDisabled(false)
+                ,
+                new ButtonBuilder()
+                    .setCustomId("2")
+                    .setLabel(">")
+                    .setStyle(ButtonStyle.Primary)
+                    .setDisabled(false)
             
                 ])
             
-            i.update({
-                components:[row],
-                embeds:[pages[index]]
-            })
+            if(arrayImage[index] !== undefined){
+
+                i.update({
+                    embeds: [pages[index]],
+                    components: [row],
+                    files: [arrayImage[index]]
+                })
+            } else {
+
+                i.update({
+                    embeds: [pages[index]],
+                    components: [row]
+                })
+            }
+
+            
             col.resetTimer({time: time})
         })
     
@@ -120,13 +165,44 @@ module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 6
             messageSendBot.edit({
                 components:[]
             })
+
+            moinsOne(idUser)
         })
     })
 
-    
-
-
-   
-
-
 }
+
+function createNumberFollow(idUser){
+    if(limitPagination[idUser] === undefined){
+        limitPagination[idUser] = 0
+    }
+    SaveBdd()
+}
+
+function resetAtZero(){
+    for (const [key, value] of Object.entries(limitPagination)){
+        limitPagination[key] = 0;
+    }
+    SaveBdd();
+}
+
+function plusOne(idUser){
+    limitPagination[idUser]++
+    SaveBdd();
+}
+function moinsOne(idUser){
+    limitPagination[idUser]--
+    SaveBdd();
+}
+
+function getNbPagination(idUser){
+    return limitPagination[idUser]
+}
+
+function SaveBdd(){
+    fs.writeFile("./bdd/numberOfPagination.json", JSON.stringify(limitPagination, null, 4), (err)=> {
+        if (err)console.log("erreur")
+    })
+}
+
+module.exports = {resetAtZero, pagination}

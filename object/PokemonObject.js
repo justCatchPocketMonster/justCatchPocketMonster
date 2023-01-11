@@ -31,47 +31,84 @@ function typeIntToStr(nb){
     }
 }
 
-/**
- * vérifie si le type correspond avec l'id et true si ça n'est pas le cas
- */
 
- function pokemonChoice(type, gen, typeReal){
+ function pokemonChoiceGen(pokeList, gen){
     let pokemonSelected = []
-    pokeData.forEach(pokemon =>{
+    pokeList.forEach(pokemon => {
         if(pokemon["gen"] === gen){
-            if(pokemon["theType"] === type){
-                if(pokemon["typeListEng"].includes(typeReal)){
-                    pokemonSelected.push(pokemon)
-                }
-                
-            }
+            pokemonSelected.push(pokemon)
         }
     })
 
     if(pokemonSelected[0] === undefined){
-        return {}
+        return []
     }
-    let pokemonDoSpawn = pokemonSelected[(fonctionJs.getRandomInt(pokemonSelected.length))];
-    return pokemonDoSpawn
+
+    return pokemonSelected
  }
+
+ 
+ function pokemonChoiceTypeRarity(pokeList, typeRarity){
+    let pokemonSelected = []
+    pokeList.forEach(pokemon => {
+        if(pokemon["theType"] === typeRarity){
+            pokemonSelected.push(pokemon)
+        }
+    })
+
+    if(pokemonSelected[0] === undefined){
+        return []
+    }
+
+    return pokemonSelected
+ }
+
+ function pokemonChoiceType(pokeList, type){
+    let pokemonSelected = []
+    pokeList.forEach(pokemon => {
+        if(pokemon["typeListEng"].includes(type)){
+            pokemonSelected.push(pokemon)
+        }
+    })
+
+    if(pokemonSelected[0] === undefined){
+        return []
+    }
+
+    return pokemonSelected
+ }
+
 
  /**
   * resort un objet "pokemon" aléatoire
   */
 
 function pokemonSelect(){
-    
-    let randomTypePokemon = typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom));
-    let randomGen = generationSelect()
-    let randomType = typeSelect()
-    let pokemonChoiced = {};
-    while(pokemonChoiced["id"] === undefined){
+
+    arrayPokemon = pokeData;
+
+    do{
         
-        let randomTypePokemon = typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom));
-        let randomGen = generationSelect()
-        let randomType = typeSelect()
-        pokemonChoiced = pokemonChoice(randomTypePokemon, randomGen, randomType)
-    }
+        arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect())
+
+    }while(arrayPokemonPass1[0] === undefined)
+
+
+    do{
+        
+        arrayPokemonPass2 = pokemonChoiceTypeRarity(arrayPokemonPass1, typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom)))
+
+    }while(arrayPokemonPass2[0] === undefined)
+
+
+    do{
+        
+        arrayPokemonPass3 = pokemonChoiceType(arrayPokemonPass2, typeSelect())
+
+    }while(arrayPokemonPass3[0] === undefined)
+
+    let pokemonChoiced = arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))];
+
 
     return(pokemonChoiced)
 }
