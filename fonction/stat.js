@@ -2,8 +2,10 @@ const statBdd = require("../bdd/stat.json")
 const pokeData = require("../bdd/pokemon.json");
 const variableGlobal = require("../parameters/variableGlobal")
 const nbPokemon = (pokeData.length);
+const language = require("./language")
 var version = variableGlobal.version;
 const fs = require("fs")
+const Discord = require("discord.js")
 
 
 /**
@@ -54,6 +56,199 @@ const fs = require("fs")
         statBdd["All"]["listPokemonCatchedShiny"][idPokemon]+=1;
     }
     SaveBdd();
+}
+
+function stringObjectPokemonMostAndLeastCatch(interaction){
+    let listPokemonCatched = getCountAllCatchList();
+
+    let leastPokemonCatch = {
+        "nbCapture": 9999999,
+        "listPokemon": []
+    }
+    let mostPokemonCatch = {
+        "nbCapture": 0,
+        "listPokemon": []
+    }
+
+    
+    for (const [key, value] of Object.entries(listPokemonCatched)) {
+
+        if(leastPokemonCatch.nbCapture == value){
+            leastPokemonCatch.listPokemon.push(key)
+        }
+        if(leastPokemonCatch.nbCapture > value){
+            leastPokemonCatch.nbCapture = value
+            leastPokemonCatch.listPokemon = []
+
+            leastPokemonCatch.listPokemon.push(key)
+        }
+        
+        if(mostPokemonCatch.nbCapture == value){
+            mostPokemonCatch.listPokemon.push(key)
+        }
+
+
+        if(mostPokemonCatch.nbCapture < value){
+            mostPokemonCatch.nbCapture = value
+            mostPokemonCatch.listPokemon = []
+
+            mostPokemonCatch.listPokemon.push(key)
+        }
+        
+
+    }
+
+
+
+    let chosenMostPokemonCatch = "";
+    let chosenLeastPokemonCatch = "";
+
+    if(leastPokemonCatch.listPokemon.length > 3){
+        chosenLeastPokemonCatch = language.getText(interaction.guild.id, "tooMuchPokemon") +" : " + leastPokemonCatch.nbCapture;
+    } else {
+        leastPokemonCatch.listPokemon.forEach( idPokemon => {
+            chosenLeastPokemonCatch += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+
+            
+        })
+        chosenLeastPokemonCatch += ": "+ leastPokemonCatch.nbCapture
+    }
+    if(mostPokemonCatch.listPokemon.length > 3){
+        chosenMostPokemonCatch = language.getText(interaction.guild.id, "tooMuchPokemon")+" : " + mostPokemonCatch.nbCapture;
+
+    } else {
+        mostPokemonCatch.listPokemon.forEach( idPokemon => {
+            chosenMostPokemonCatch += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+        
+            
+        })
+
+        chosenMostPokemonCatch += ": "+ mostPokemonCatch.nbCapture
+    }
+
+    return {
+        "most": chosenMostPokemonCatch,
+        "least": chosenLeastPokemonCatch
+    }
+
+    
+}
+
+function stringObjectPokemonMostAndLeastSpawn(interaction){
+    let listPokemonSpawned = getCountAllSpawnList();
+
+    let leastPokemonSpawn = {
+        "nbCapture": 9999999,
+        "listPokemon": []
+    }
+    let mostPokemonSpawn = {
+        "nbCapture": 0,
+        "listPokemon": []
+    }
+
+    
+    for (const [key, value] of Object.entries(listPokemonSpawned)) {
+
+        if(leastPokemonSpawn.nbCapture == value){
+            leastPokemonSpawn.listPokemon.push(key)
+        }
+        if(leastPokemonSpawn.nbCapture > value){
+            leastPokemonSpawn.nbCapture = value
+            leastPokemonSpawn.listPokemon = []
+
+            leastPokemonSpawn.listPokemon.push(key)
+        }
+        
+        if(mostPokemonSpawn.nbCapture == value){
+            mostPokemonSpawn.listPokemon.push(key)
+        }
+
+
+        if(mostPokemonSpawn.nbCapture < value){
+            mostPokemonSpawn.nbCapture = value
+            mostPokemonSpawn.listPokemon = []
+
+            mostPokemonSpawn.listPokemon.push(key)
+        }
+        
+
+    }
+
+
+
+    let chosenMostPokemonSpawn = "";
+    let chosenLeastPokemonSpawn = "";
+
+    if(leastPokemonSpawn.listPokemon.length > 3){
+        chosenLeastPokemonSpawn = language.getText(interaction.guild.id, "tooMuchPokemon") +" : " + leastPokemonSpawn.nbCapture;
+    } else {
+        leastPokemonSpawn.listPokemon.forEach( idPokemon => {
+            chosenLeastPokemonSpawn += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+
+            
+        })
+        chosenLeastPokemonSpawn += ": "+ leastPokemonSpawn.nbCapture
+    }
+    if(mostPokemonSpawn.listPokemon.length > 3){
+        chosenMostPokemonSpawn = language.getText(interaction.guild.id, "tooMuchPokemon")+" : " + mostPokemonSpawn.nbCapture;
+
+    } else {
+        mostPokemonSpawn.listPokemon.forEach( idPokemon => {
+            chosenMostPokemonSpawn += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+        
+            
+        })
+
+        chosenMostPokemonSpawn += ": "+ mostPokemonSpawn.nbCapture
+    }
+
+    return {
+        "most": chosenMostPokemonSpawn,
+        "least": chosenLeastPokemonSpawn
+    }
+
+    
+}
+
+
+
+function embedStat(interaction){
+    
+    mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
+    mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
+
+
+
+    let statEmbed = new Discord.EmbedBuilder()
+        .setTitle("stats")
+        .setColor("Purple")
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCountAllCatch()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCountAllCatchShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCountAllSpawn()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: getCountAllSpawnShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCountVersionCatch()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCountVersionCatchShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCountVersionSpawn()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCountVersionSpawnShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
+            )
+
+
+        interaction.channel.send({embeds: [statEmbed]});
 }
 
 
@@ -204,6 +399,47 @@ function getCountAllSpawnShinyList(){
     return statBdd["All"]["listPokemonSpawnedShiny"]
 }
 
+function getCountVersionCatch(){
+    createStatVersion();
+    return statBdd[version]["pokemonCatched"]
+}
+function getCountVersionSpawn(){
+    createStatVersion();
+    return statBdd[version]["pokemonSpawned"]
+}
+function getCountVersionCatchShiny(){
+    createStatVersion();
+    return statBdd[version]["pokemonCatchedShiny"]
+}
+function getCountVersionSpawnShiny(){
+    createStatVersion();
+    return statBdd[version]["pokemonSpawnedShiny"]
+}
+function getCountVersionCatchList(){
+    createStatVersion();
+    updateNumberPossibilitySpawned();
+    updateNumberPossibilityCatched();
+    return statBdd[version]["listPokemonCatched"]
+}
+function getCountVersionSpawnList(){
+    createStatVersion();
+    updateNumberPossibilitySpawned();
+    updateNumberPossibilityCatched();
+    return statBdd[version]["listPokemonSpawned"]
+}
+function getCountVersionCatchShinyList(){
+    createStatVersion();
+    updateNumberPossibilitySpawned();
+    updateNumberPossibilityCatched();
+    return statBdd[version]["listPokemonCatchedShiny"]
+}
+function getCountVersionSpawnShinyList(){
+    createStatVersion();
+    updateNumberPossibilitySpawned();
+    updateNumberPossibilityCatched();
+    return statBdd[version]["listPokemonSpawnedShiny"]
+}
+
 
 function SaveBdd(){
     fs.writeFile("./bdd/stat.json", JSON.stringify(statBdd, null, 4), (err)=> {
@@ -211,4 +447,4 @@ function SaveBdd(){
     })
 }
 
-module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList}
+module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList, embedStat}

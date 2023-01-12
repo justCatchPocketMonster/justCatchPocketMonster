@@ -121,7 +121,10 @@
         "Fr": ["Le nom du Pokemon"],
         "Eng": ["Pokemon's name"]
     },
-
+    "commandStatExplication": {
+        "Fr": ["Permet de voir des statistiques plus ou moins utiles."],
+        "Eng": ["Allows you to see more or less useful statistics."]
+    },
 
 
     "tooMuchPagination": {
@@ -391,6 +394,42 @@
     "nombreDeSpawnShinyTotaly": {
         "Fr": ["Nombre de d'apparition de shiny général"],
         "Eng": ["General spawn shiny number"]
+    },
+    "nombreDeCaptureVersion": {
+        "Fr": ["Nombre de capture de cette version"],
+        "Eng": ["Number of captures of this version"]
+    },
+    "nombreDeSpawnVersion": {
+        "Fr": ["Nombre de d'apparition  de cette version"],
+        "Eng": ["Number of appearances of this version"]
+    },
+    "nombreDeCaptureShinyVersion": {
+        "Fr": ["Nombre de capture de shiny  de cette version"],
+        "Eng": ["Number of shiny captures of this version"]
+    },
+    "nombreDeSpawnShinyVersion": {
+        "Fr": ["Nombre de d'apparition de shiny  de cette version"],
+        "Eng": ["Number of appearances of shiny of this version"]
+    },
+    "pokemonLeastCaught": {
+        "Fr": ["Pokemon le moins capturé"],
+        "Eng": ["Least caught Pokemon"]
+    },
+    "pokemonMostCaught": {
+        "Fr": ["Pokemon le plus capturé"],
+        "Eng": ["Most caught Pokemon"]
+    },
+    "pokemonLeastSpawn": {
+        "Fr": ["Pokemon le moins apparue"],
+        "Eng": ["Least spawn Pokemon"]
+    },
+    "pokemonMostSpawn": {
+        "Fr": ["Pokemon le plus apparue"],
+        "Eng": ["Most spawn Pokemon"]
+    },
+    "tooMuchPokemon": {
+        "Fr": ["Trop de Pokemon"],
+        "Eng": ["Too much Pokemon"]
     },
 
 

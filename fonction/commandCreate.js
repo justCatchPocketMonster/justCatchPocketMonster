@@ -164,4 +164,13 @@ const catchCommand = new SlashCommandBuilder()
         )
 
 
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand}
+const allStatCommand = new SlashCommandBuilder()
+        .setName("stat")
+        .setDescription(bddText.commandStatExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandStatExplication.Fr[0]
+        })
+
+
+
+module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand}

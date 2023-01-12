@@ -15,6 +15,7 @@ const catchError = require("./fonction/catchError")
 const createCommand = require("./fonction/commandCreate")
 const bddText = require("./bdd/languageText.json")
 const pagination = require("./fonction/pagination")
+const stat = require("./fonction/stat")
 
 
 var Client = new Discord.Client({ 
@@ -133,6 +134,12 @@ try{
 
             }
 
+            if(interaction.commandName == "stat"){
+                
+                stat.embedStat(interaction)
+
+            }
+
 
 
             interaction.reply({
@@ -161,6 +168,7 @@ try{
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.pokedexCommand)
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.howHaveThisPokemonCommand)
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.catchCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.allStatCommand)
         //application au general
         //Client.application.commands.create(data)
 
