@@ -13,6 +13,8 @@ const allowChannel = require("./allowSpawnChannel")
 const spawnCount = require("./spawnCount")
 const language = require("./language")
 const pokemonSpawnFollow = require("./pokemonSpawnFollow")
+const eventChoice = require("./eventChoice")
+const eventStatChange = require("./eventStatChange")
 
 const pagination = require("./pagination")
 
@@ -158,22 +160,22 @@ function catchPokemon(Discord, interaction, Client, optionString){
 
 
 function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, idServer){
-    /** 
+    
     nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
     
-    if(variableGlobal.valeurMaxEvent>= nbRand){
-        console.log("but nobody came")
+    if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
+        eventChoice.eventSelect("avant", Discord, interaction.guild.id, Client)
 
     } else {
-        */
-        pokemon = pokemonObject.pokemonSelect();
+        
+        pokemon = pokemonObject.pokemonSelect(idServer);
 
         pokemon = pokemonObject.shinySelect(pokemon, idServer, message);
         pokemon["capturable"] = true;
         spawnCount.setPokemonPresent(idServer, pokemon, idChannelRandom);
         embedPokemon(Discord, message, pokemon, Client, idChannelRandom)
         pokemonSpawnFollow.addPokemon(pokemon);
-    //}
+    }
 
 }
 

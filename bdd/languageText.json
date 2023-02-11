@@ -92,6 +92,10 @@
         "Eng": ["Allows you to catch the pokemon present."]
     },
 
+    "nothing": {
+        "Fr": ["rien"],
+        "Eng": ["nothing"]
+    },
     "commandCatchOptionName": {
         "Fr": ["pokemon"],
         "Eng": ["pokemon"]
@@ -124,6 +128,10 @@
     "commandStatExplication": {
         "Fr": ["Permet de voir des statistiques plus ou moins utiles."],
         "Eng": ["Allows you to see more or less useful statistics."]
+    },
+    "commandEffectEvent": {
+        "Fr": ["Permet de voir les effets actuels d'un événement actif"],
+        "Eng": ["Allows you to see the current effects of an active event"]
     },
 
 
@@ -262,16 +270,36 @@
         "Eng": ["A Mountaineer passes by here"]
     },
     "eventMontagnardDesc" : {
-        "Fr": ["Juste un Montagnard sympathique"],
-        "Eng": ["Just a friendly mountaineer"]
+        "Fr": ["Il vous donne une drôle de pierre."],
+        "Eng": ["He gives you a funny stone."]
     },
-    "eventPixelasTitre" : {
-        "Fr": ["¿Un pequeño píxel?"],
-        "Eng": ["¿Un pequeño píxel?"]
+    "auraLegendary" : {
+        "Fr": ["Aura légendaire de niveau "],
+        "Eng": ["Level of Legendary Aura "]
     },
-    "eventPixelasDesc" : {
-        "Fr": ["píxeles por todas partes"],
-        "Eng": ["píxeles por todas partes"]
+    "auraFabuleux" : {
+        "Fr": ["Aura légendaire de niveau "],
+        "Eng": ["Level of Legendary Aura "]
+    },
+    "auraGeneration" : {
+        "Fr": ["Aura de génération de niveau "],
+        "Eng": ["Level of Generation Aura "]
+    },
+    "auraChroma" : {
+        "Fr": ["Aura de chromatique de niveau "],
+        "Eng": ["Level of shiny Aura "]
+    },
+    "ofThisGeneration" : {
+        "Fr": ["Pour la génération "],
+        "Eng": ["For the generation "]
+    },
+    "ofThisType" : {
+        "Fr": ["Pour le type "],
+        "Eng": ["For the type "]
+    },
+    "pendantTrenteMinute" : {
+        "Fr" : ["Pendant 30 minutes."],
+        "Eng": ["During 30 minutes."]
     },
     "eventCuisineTitre" : {
         "Fr": ["Un cuisinier sauvage apparait."],
@@ -279,7 +307,39 @@
     },
     "eventCuisineDesc" : {
         "Fr": ["...pourquoi il cuisine une pokeball ?"],
-        "Eng": ["...Pourquoi il cuisine une pokeball ?"]
+        "Eng": ["...Why is he cooking a pokeball?"]
+    },
+    "eventScientifiqueTitre" : {
+        "Fr": ["Un scientifique un peu bizarre"],
+        "Eng": ["A weird scientist"]
+    },
+    "eventScientifiqueDesc" : {
+        "Fr": ["Il utilise une machine qui fait des \"bip boup\""],
+        "Eng": ["He uses a machine that makes noises"]
+    },
+    "eventSandwichTitre" : {
+        "Fr": ["Un magnifique sandwich"],
+        "Eng": ["A wonderful sandwich"]
+    },
+    "eventSandwichDesc" : {
+        "Fr": ["Il a l'air délicieux"],
+        "Eng": ["It looks delicious"]
+    },
+    "eventHackertitre" : {
+        "Fr": ["Un Hacker"],
+        "Eng": ["a Hacker"]
+    },
+    "eventHackerDesc" : {
+        "Fr": ["Un hacker qui... augmente le taux de shiny ? Sale tricheur"],
+        "Eng": ["A hacker who... increases the shiny rate? Dirty cheater"]
+    },
+    "eventSandwichVideSmolTitre" : {
+        "Fr": ["Un sandwich vide"],
+        "Eng": ["An empty sandwich"]
+    },
+    "eventSandwichVideSmolDesc" : {
+        "Fr": ["Probablement le repas d'un étudiant"],
+        "Eng": ["Probably a student's meal"]
     },
 
     "pokedexDeKanto": {
@@ -448,6 +508,101 @@
     "valeurTropHaute": {
         "Fr": ["Valeur saisie trop haute."],
         "Eng": ["Entered value too high."]
+    },
+    
+    "effect": {
+        "Fr": ["Effet :"],
+        "Eng": ["Effect :"]
+    },
+    
+    "timeLeft": {
+        "Fr": ["Temps restant :"],
+        "Eng": ["Remaining time :"]
+    },
+    
+    
+    "dragon": {
+        "Fr": ["dragon"],
+        "Eng": ["dragon"]
+    },
+    "electrik": {
+        "Fr": ["electrik"],
+        "Eng": ["electric"]
+    },
+    "feu": {
+        "Fr": ["feu"],
+        "Eng": ["fire"]
+    },
+    "insecte": {
+        "Fr": ["insecte"],
+        "Eng": ["bug"]
+    },
+    "plante": {
+        "Fr": ["plante"],
+        "Eng": ["grass"]
+    },
+    "psy": {
+        "Fr": ["psy"],
+        "Eng": ["psychic"]
+    },
+    "sol": {
+        "Fr": ["sol"],
+        "Eng": ["ground"]
+    },
+    "tenebres": {
+        "Fr": ["tenebres"],
+        "Eng": ["dark"]
+    },
+    
+    "combat": {
+        "Fr": ["combat"],
+        "Eng": ["fighting"]
+    },
+    
+    "eau": {
+        "Fr": ["eau"],
+        "Eng": ["water"]
+    },
+    
+    "fee": {
+        "Fr": ["fee"],
+        "Eng": ["fairy"]
+    },
+    
+    "glace": {
+        "Fr": ["glace"],
+        "Eng": ["ice"]
+    },
+    
+    "normal": {
+        "Fr": ["normal"],
+        "Eng": ["normal"]
+    },
+    
+    "poison": {
+        "Fr": ["poison"],
+        "Eng": ["poison"]
+    },
+    
+    "roche": {
+        "Fr": ["roche"],
+        "Eng": ["rock"]
+    },
+    
+    "spectre": {
+        "Fr": ["spectre"],
+        "Eng": ["ghost"]
+    },
+    
+    "vol": {
+        "Fr": ["vol"],
+        "Eng": ["flying"]
+    },
+    
+    
+    "acier": {
+        "Fr": ["acier"],
+        "Eng": ["steel"]
     }
     
     

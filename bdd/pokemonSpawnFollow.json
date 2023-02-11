@@ -720,5 +720,192 @@
         "capturable": true,
         "date": "2023-0-11",
         "heure": "20:33:44"
+    },
+    {
+        "id": 71,
+        "name": {
+            "nameEng": "Victreebel",
+            "nameFr": "Empiflor"
+        },
+        "typeListEng": [
+            "Grass",
+            "Poison"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0071-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-15",
+        "heure": "17:31:21"
+    },
+    {
+        "id": 334,
+        "name": {
+            "nameEng": "Altaria",
+            "nameFr": "Altaria"
+        },
+        "typeListEng": [
+            "Dragon",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0334-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-15",
+        "heure": "17:32:19"
+    },
+    {
+        "id": 620,
+        "name": {
+            "nameEng": "Mienshao",
+            "nameFr": "Shaofouine"
+        },
+        "typeListEng": [
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0620-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-15",
+        "heure": "17:32:23"
+    },
+    {
+        "id": 599,
+        "name": {
+            "nameEng": "Klink",
+            "nameFr": "Tic"
+        },
+        "typeListEng": [
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0599-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-15",
+        "heure": "17:32:25"
+    },
+    {
+        "id": 82,
+        "name": {
+            "nameEng": "Magneton",
+            "nameFr": "Magnéton"
+        },
+        "typeListEng": [
+            "Electric",
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0082-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-16",
+        "heure": "1:34:53"
+    },
+    {
+        "id": 277,
+        "name": {
+            "nameEng": "Swellow",
+            "nameFr": "Hélédelle"
+        },
+        "typeListEng": [
+            "Normal",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0277-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-16",
+        "heure": "1:35:11"
+    },
+    {
+        "id": 174,
+        "name": {
+            "nameEng": "Igglybuff",
+            "nameFr": "Toudoudou"
+        },
+        "typeListEng": [
+            "Normal",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0174-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-29",
+        "heure": "23:26:55"
+    },
+    {
+        "id": 411,
+        "name": {
+            "nameEng": "Bastiodon",
+            "nameFr": "Bastiodon"
+        },
+        "typeListEng": [
+            "Rock",
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0411-000"
+        ],
+        "gen": 4,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-29",
+        "heure": "23:26:57"
+    },
+    {
+        "id": 62,
+        "name": {
+            "nameEng": "Poliwrath",
+            "nameFr": "Tartard"
+        },
+        "typeListEng": [
+            "Water",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0062-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-0-29",
+        "heure": "23:26:58"
     }
 ]

@@ -98,6 +98,11 @@ function getPercentageNational(idServer){
     return(Math.floor((100*getCountNational(idServer))/((pokeData.length)-1)))
 }
 
+
+function getCharmChroma(idServe){
+    return charmeChroma[idServe]
+}
+
 //ajoute de nouvelle possibility si des pokemons sont ajoutés dans la bdd
 function updateNumberPossibilitySave(idServerUpdate){
     for(let i = 1; i < nbPokemon; i++){
@@ -120,4 +125,4 @@ function SaveBddCharmeChroma(){
     })
 }
 
-module.exports= {hasCharmChroma, pokedex, createSaveServer, getSave,getPercentageNational ,getCountNational}
+module.exports= {getCharmChroma, hasCharmChroma, pokedex, createSaveServer, getSave,getPercentageNational ,getCountNational}

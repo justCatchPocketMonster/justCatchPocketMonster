@@ -16,6 +16,8 @@ const createCommand = require("./fonction/commandCreate")
 const bddText = require("./bdd/languageText.json")
 const pagination = require("./fonction/pagination")
 const stat = require("./fonction/stat")
+const eventStatChange = require("./fonction/eventStatChange")
+const eventChoice = require("./fonction/eventChoice")
 
 
 var Client = new Discord.Client({ 
@@ -32,6 +34,12 @@ const prefix = variableGlobal.prefix;
 fileConnexion.connexion(Discord, Client);
 
 var repeteSave = setInterval(saveAllBdd.createCopyAllBdd, variableGlobal.timeIntervalSave)
+
+setInterval(() =>{
+    eventStatChange.time()
+}, 1000)
+
+
 try{
     /**
      * a l'envoie d'un message
@@ -139,6 +147,18 @@ try{
                 stat.embedStat(interaction)
 
             }
+            if(interaction.commandName == "currentminievent"){
+                
+                
+
+            }
+
+
+            if(interaction.commandName == "test"){
+
+                eventChoice.eventSelect("avant", Discord, interaction.guild.id, Client)
+
+            }
 
 
 
@@ -169,6 +189,12 @@ try{
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.howHaveThisPokemonCommand)
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.catchCommand)
         Client.guilds.cache.get("972893923359998053").commands.create(createCommand.allStatCommand)
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.effectCommand)
+
+        /*TODO:
+            a supprimé a la fin
+        */
+        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.testFonctionnality)
         //application au general
         //Client.application.commands.create(data)
 

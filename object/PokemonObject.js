@@ -3,6 +3,7 @@
  */
 const pokeData = require("../bdd/pokemon.json");
 const language = require("../fonction/language")
+const eventStat = require("../fonction/eventStatChange")
 
 /**
  * Les fichier requis (pour les fonctions)
@@ -12,23 +13,34 @@ const language = require("../fonction/language")
  const variableGlobal = require("../parameters/variableGlobal")
  const nbPokemon = pokeData.length;
  const valeurMaxRandom = variableGlobal.valeurMaxRandom+1;
- const savePokemonServer = require("../fonction/pokedexSaveServer")
+ const savePokemonServer = require("../fonction/pokedexSaveServer");
+const { eventSelect } = require("../fonction/eventChoice");
 
 /**
  * avec un int resort le type de pokemon
  */
 
-function typeIntToStr(nb){
+function raritySelect(idServer){
 
-    if(nb <= variableGlobal.valeurMaxOrdinaire){
+    let numberRandom = fonctionJs.getRandomInt(valeurMaxRandom);
+
+    let somRarity = eventStat.getStat(idServer, "rarity", "normal");
+
+    if(numberRandom <= somRarity){
         return "ordinaire";
+    } else {
+        somRarity += eventStat.getStat(idServer, "rarity", "legendaire")
+        if(numberRandom <= somRarity){
+            return "legendaire";
+        } else {
+            somRarity += eventStat.getStat(idServer, "rarity", "fabuleux")
+            if(numberRandom <= somRarity){
+                return "fabuleux";
+            }
+        }
     }
-    if(nb <= variableGlobal.valeurMaxLegendaire){
-        return "legendaire";
-    }
-    if(nb <= variableGlobal.valeurMaxFabuleux){
-        return "fabuleux";
-    }
+    
+    
 }
 
 
@@ -83,27 +95,27 @@ function typeIntToStr(nb){
   * resort un objet "pokemon" aléatoire
   */
 
-function pokemonSelect(){
+function pokemonSelect(idServer){
 
     arrayPokemon = pokeData;
 
     do{
         
-        arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect())
+        arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect(idServer))
 
     }while(arrayPokemonPass1[0] === undefined)
 
 
     do{
         
-        arrayPokemonPass2 = pokemonChoiceTypeRarity(arrayPokemonPass1, typeIntToStr(fonctionJs.getRandomInt(valeurMaxRandom)))
+        arrayPokemonPass2 = pokemonChoiceTypeRarity(arrayPokemonPass1, raritySelect(idServer))
 
     }while(arrayPokemonPass2[0] === undefined)
 
 
     do{
         
-        arrayPokemonPass3 = pokemonChoiceType(arrayPokemonPass2, typeSelect())
+        arrayPokemonPass3 = pokemonChoiceType(arrayPokemonPass2, typeSelect(idServer))
 
     }while(arrayPokemonPass3[0] === undefined)
 
@@ -114,81 +126,168 @@ function pokemonSelect(){
 }
 
 
-function typeSelect(){
+function typeSelect(idServer){
     randomNumber = (fonctionJs.getRandomInt(variableGlobal.nbType*100)+1)
 
-    if(randomNumber <= variableGlobal.acier){
-        return "Steel"
-    }else if(randomNumber <= variableGlobal.dragon){
-        return "Dragon"
-    }else if(randomNumber <= variableGlobal.electrik){
-        return "Electric"
-    }else if(randomNumber <= variableGlobal.feu){
-        return "Fire"
-    }else if(randomNumber <= variableGlobal.insecte){
-        return "Bug"
-    }else if(randomNumber <= variableGlobal.plante){
-        return "Grass"
-    }else if(randomNumber <= variableGlobal.psy){
-        return "Psychic"
-    }else if(randomNumber <= variableGlobal.sol){
-        return "Ground"
-    }else if(randomNumber <= variableGlobal.tenebres){
-        return "Dark"
-    }else if(randomNumber <= variableGlobal.combat){
-        return "Fighting"
-    }else if(randomNumber <= variableGlobal.eau){
-        return "Water"
-    }else if(randomNumber <= variableGlobal.fee){
-        return "Fairy"
-    }else if(randomNumber <= variableGlobal.glace){
-        return "Ice"
-    }else if(randomNumber <= variableGlobal.normal){
-        return "Normal"
-    }else if(randomNumber <= variableGlobal.poison){
-        return "Poison"
-    }else if(randomNumber <= variableGlobal.roche){
-        return "Rock"
-    }else if(randomNumber <= variableGlobal.spectre){
-        return "Ghost"
-    }else if(randomNumber <= variableGlobal.vol){
-        return "Flying"
-    }else {
-        console.log("erreur dans le choix de la génération")
-        return 0;
-    }
+    let somStatByType = eventStat.getStat(idServer, "type", "acier")
 
+    if(randomNumber <= somStatByType){
+        return "Steel"
+    }else {
+        somStatByType+= eventStat.getStat(idServer, "type", "dragon");
+        if(randomNumber <= somStatByType){
+            return "Dragon"
+        }else{
+            somStatByType+= eventStat.getStat(idServer, "type", "electrik");
+            if(randomNumber <= somStatByType){
+            return "Electric"
+            }else {
+                somStatByType+= eventStat.getStat(idServer, "type", "feu");
+                if(randomNumber <= somStatByType){
+                    return "Fire"
+                }else {
+                    somStatByType+= eventStat.getStat(idServer, "type", "insecte");
+                    if(randomNumber <= somStatByType){
+                        return "Bug"
+                    }else {
+                        somStatByType+= eventStat.getStat(idServer, "type", "plante");
+                        if(randomNumber <= somStatByType){
+                            return "Grass"
+                        }else {
+                            somStatByType+= eventStat.getStat(idServer, "type", "psy");
+                            if(randomNumber <= somStatByType){
+                                return "Psychic"
+                            }else{
+                                somStatByType+= eventStat.getStat(idServer, "type", "sol");
+                                if(randomNumber <= somStatByType){
+                                    return "Ground"
+                                }else{
+                                    somStatByType+= eventStat.getStat(idServer, "type", "tenebres");
+                                    if(randomNumber <= somStatByType){
+                                        return "Dark"
+                                    }else{
+                                        somStatByType+= eventStat.getStat(idServer, "type", "combat");
+                                        if(randomNumber <= somStatByType){
+                                            return "Fighting"
+                                        }else{
+                                            somStatByType+= eventStat.getStat(idServer, "type", "eau");
+                                            if(randomNumber <= somStatByType){
+                                                return "Water"
+                                            }else{
+                                                somStatByType+= eventStat.getStat(idServer, "type", "fee");
+                                                if(randomNumber <= somStatByType){
+                                                    return "Fairy"
+                                                }else{
+                                                    somStatByType+= eventStat.getStat(idServer, "type", "glace");
+                                                    if(randomNumber <= somStatByType){
+                                                        return "Ice"
+                                                    }else{
+                                                        somStatByType+= eventStat.getStat(idServer, "type", "normal");
+                                                        if(randomNumber <= somStatByType){
+                                                            return "Normal"
+                                                        }else{
+                                                            somStatByType+= eventStat.getStat(idServer, "type", "poison");
+                                                            if(randomNumber <= somStatByType){
+                                                                return "Poison"
+                                                            }else{
+                                                                somStatByType+= eventStat.getStat(idServer, "type", "roche");
+                                                                if(randomNumber <= somStatByType){
+                                                                    return "Rock"
+                                                                }else{
+                                                                    somStatByType+= eventStat.getStat(idServer, "type", "spectre");
+                                                                    if(randomNumber <= somStatByType){
+                                                                        return "Ghost"
+                                                                    }else{
+                                                                        somStatByType+= eventStat.getStat(idServer, "type", "vol");
+                                                                        if(randomNumber <= somStatByType){
+                                                                            return "Flying"
+                                                                        }else {
+                                                                            console.log("erreur dans le choix de la génération")
+                                                                            return 0;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }
 
-function generationSelect(){
+function generationSelect(idServer){
     randomNumber = (fonctionJs.getRandomInt(variableGlobal.nbGeneration*100)+1)
 
-    if(randomNumber <= variableGlobal.gen1){
+    let somStatByGen = eventStat.getStat(idServer, "gen", "1");
+
+    if(randomNumber <= somStatByGen){
         return 1
-    }else if(randomNumber <= variableGlobal.gen2){
-        return 2
-    }else if(randomNumber <= variableGlobal.gen3){
-        return 3
-    }else if(randomNumber <= variableGlobal.gen4){
-        return 4
-    }else if(randomNumber <= variableGlobal.gen5){
-        return 5
-    }else if(randomNumber <= variableGlobal.gen6){
-        return 6
-    }else if(randomNumber <= variableGlobal.gen7){
-        return 7
-    }else if(randomNumber <= variableGlobal.gen8){
-        return 8
-    }else if(randomNumber <= variableGlobal.gen9){
-        return 9
     }else {
-        console.log("erreur dans le choix de la génération")
-        return 0;
+        somStatByGen += eventStat.getStat(idServer, "gen", "2");
+        if(randomNumber <= somStatByGen){
+            return 2
+        }else 
+            {
+                somStatByGen += eventStat.getStat(idServer, "gen", "3");
+                if(randomNumber <= somStatByGen){
+                return 3
+            }else 
+                {
+                    somStatByGen += eventStat.getStat(idServer, "gen", "4");
+                    if(randomNumber <= somStatByGen){
+                    return 4
+                }else 
+                    {
+                        somStatByGen += eventStat.getStat(idServer, "gen", "5");
+                        if(randomNumber <= somStatByGen){
+                        return 5
+                    }else 
+                        {
+                            somStatByGen += eventStat.getStat(idServer, "gen", "6");
+                            if(randomNumber <= somStatByGen){
+                            return 6
+                        }else 
+                            {
+                                somStatByGen += eventStat.getStat(idServer, "gen", "7");
+                                if(randomNumber <= somStatByGen){
+                                return 7
+                            }else 
+                                {
+                                    somStatByGen += eventStat.getStat(idServer, "gen", "8");
+                                    if(randomNumber <= somStatByGen){
+                                    return 8
+                                }else 
+                                    {
+                                        somStatByGen += eventStat.getStat(idServer, "gen", "9");
+                                        if(randomNumber <= somStatByGen){
+                                        return 9
+                                    }else {
+                                        console.log("erreur dans le choix de la génération")
+                                        return 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
 }
+
+
 
 /**
  * sert à choisie si le pokemon a le caractère shiny
@@ -199,12 +298,10 @@ function generationSelect(){
  */
 function shinySelect(pokemon, idServer, message){
     
-    let tauxShiny = variableGlobal.tauxMaxShiny;
+    let tauxShiny = eventStat.getGeneralStat(idServer, "shiny");
     let saveServer = savePokemonServer.getSave(idServer);
 
-    if(savePokemonServer.hasCharmChroma(idServer,message )){
-        tauxShiny /= 2;
-    }
+
     if(saveServer[pokemon["id"]] >= 100){
         tauxShiny /= 2;
     } else if(saveServer[pokemon["id"]] >= 75){

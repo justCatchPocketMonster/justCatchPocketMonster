@@ -11,8 +11,8 @@ const maximumCount = 5;
 //valeur maximum pour tombé sur le pokemon
 const valeurMaxRandom = 1000;
 const valeurMaxOrdinaire = 990;
-const valeurMaxLegendaire = 999;
-const valeurMaxFabuleux = 1000
+const valeurMaxLegendaire = 9;
+const valeurMaxFabuleux = 1
 
 //pour modifier des stats d'apparition des event
 //valeur maximum pour tombé sur le pokemon
@@ -35,36 +35,36 @@ const tauxMaxShiny = 4096;
 const nbGeneration = 5
 //valeur max par gen
 const gen1 = 100
-const gen2 = 200
-const gen3 = 300
-const gen4 = 400
-const gen5 = 500
-const gen6 = 600
-const gen7 = 700
-const gen8 = 800
-const gen9 = 900
+const gen2 = 100
+const gen3 = 100
+const gen4 = 100
+const gen5 = 100
+const gen6 = 100
+const gen7 = 100
+const gen8 = 100
+const gen9 = 100
 
 
 const nbType = 18
 
 const acier = 100
-const dragon = 200
-const electrik = 300
-const feu = 400
-const insecte = 500
-const plante = 600
-const psy = 700
-const sol = 800
-const tenebres = 900
-const combat = 1000
-const eau = 1100
-const fee = 1200
-const glace = 1300
-const normal = 1400
-const poison = 1500
-const roche = 1600
-const spectre = 1700
-const vol = 1800
+const dragon = 100
+const electrik = 100
+const feu = 100
+const insecte = 100
+const plante = 100
+const psy = 100
+const sol = 100
+const tenebres = 100
+const combat = 100
+const eau = 100
+const fee = 100
+const glace = 100
+const normal = 100
+const poison = 100
+const roche = 100
+const spectre = 100
+const vol = 100
 
 
 

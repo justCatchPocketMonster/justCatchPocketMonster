@@ -171,6 +171,23 @@ const allStatCommand = new SlashCommandBuilder()
                 'fr': bddText.commandStatExplication.Fr[0]
         })
 
+        
+const effectCommand = new SlashCommandBuilder()
+        .setName("currentminievent")
+        .setNameLocalizations({
+                'fr': "actuelminievent"
+        })
+        .setDescription(bddText.commandEffectEvent.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandEffectEvent.Fr[0]
+        })
 
 
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand}
+
+const testFonctionnality = new SlashCommandBuilder()
+        .setName("test")
+        .setDescription("test")
+
+
+
+module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, testFonctionnality, effectCommand}
