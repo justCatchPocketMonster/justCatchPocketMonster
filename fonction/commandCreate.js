@@ -172,7 +172,7 @@ const allStatCommand = new SlashCommandBuilder()
                 'fr': bddText.commandStatExplication.Fr[0]
         })
 
-        
+
 const effectCommand = new SlashCommandBuilder()
         .setName("currentminievent")
         .setNameLocalizations({
