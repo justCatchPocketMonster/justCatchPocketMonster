@@ -136,8 +136,8 @@
 
 
     "tooMuchPagination": {
-        "Fr": ["Il y a trop d'embed avec des pages. Veuillez fermé les précédents pour pouvoir de nouveau."],
-        "Eng": ["There are too many embeds with pages. Please close the previous ones to be able to use them again."]
+        "Fr": ["Il y a trop d'embed avec des pages. Veuillez fermé les précédents pour en créer pouvoir de nouveau."],
+        "Eng": ["There are too many embeds with pages. Please close the previous ones to create new ones."]
     },
     "noArgument": {
         "Fr": ["Il faut au minimum 1 option."],
@@ -146,6 +146,14 @@
     "notExist": {
         "Fr": ["Pokemon inexistant."],
         "Eng": ["Non-existent pokemon."]
+    },
+    "finallyHesShiny": {
+        "Fr": ["Attends... Mais le Pokémon est peint ! Il est shiny !!!"],
+        "Eng": ["Wait... But the Pokémon is painted! It is shiny!!!"]
+    },
+    "finallyHesNotShiny": {
+        "Fr": ["Attends... Mais le Pokémon est peint ! Il n'est pas shiny ! Quelle déception..."],
+        "Eng": ["Wait... But the Pokémon is painted! It is not shiny! What a desappointment..."]
     },
 
 
@@ -518,6 +526,16 @@
     "timeLeft": {
         "Fr": ["Temps restant :"],
         "Eng": ["Remaining time :"]
+    },
+    
+    "actualEvent": {
+        "Fr": ["Événement actuellement actif"],
+        "Eng": ["Currently active event"]
+    },
+    
+    "secondes": {
+        "Fr": ["secondes"],
+        "Eng": ["second"]
     },
     
     

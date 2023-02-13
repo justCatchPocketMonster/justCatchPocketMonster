@@ -5,6 +5,10 @@ const statEvent = require("./eventStatChange")
 const language = require("./language")
 const allowChannel = require("./allowSpawnChannel")
 const variableGlobal = require("../parameters/variableGlobal")
+const Discord = require("discord.js")
+const spawnCount = require("./spawnCount")
+const pokemonObject = require("../object/PokemonObject")
+const pokeData = require("../bdd/pokemon.json");
 
 
 
@@ -13,7 +17,7 @@ const variableGlobal = require("../parameters/variableGlobal")
   * 
   */
 
- function eventSelect(typeEvent, Discord, idServer, Client){
+ function eventSelect(typeEvent, idServer, Client){
     let randomIdEvent
     let bool = true;
     while(bool){
@@ -24,7 +28,7 @@ const variableGlobal = require("../parameters/variableGlobal")
     }
 
     if(typeEvent == "avant"){
-        activeEventBefore(eventBdd[randomIdEvent], Discord, idServer , Client)
+        activeEventBefore(eventBdd[randomIdEvent], idServer , Client)
 
     } else if(typeEvent == "apres"){
 
@@ -36,7 +40,7 @@ const variableGlobal = require("../parameters/variableGlobal")
 }
 
 
-function activeEventBefore(event, Discord, idServer, Client){
+function activeEventBefore(event, idServer, Client){
 
     let numberRandom
     let level
@@ -66,14 +70,14 @@ function activeEventBefore(event, Discord, idServer, Client){
 
             event["textEffect"] = language.getText(idServer, "auraLegendary")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
-            eventJustEmbed(event, Discord , idServer, Client);
+            eventJustEmbed(event, idServer, Client);
 
         break
 
         case 2:
             event["textEffect"] = language.getText(idServer, "nothing");
 
-            eventJustEmbed(event, Discord , idServer, Client);
+            eventJustEmbed(event, idServer, Client);
 
         break
         case 3:
@@ -104,7 +108,7 @@ function activeEventBefore(event, Discord, idServer, Client){
 
             event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisGeneration")+theGenChoice+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-            eventJustEmbed(event, Discord , idServer, Client);
+            eventJustEmbed(event, idServer, Client);
 
         break
         case 4:
@@ -131,7 +135,7 @@ function activeEventBefore(event, Discord, idServer, Client){
             event["textEffect"] = language.getText(idServer, "auraFabuleux")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
 
-            eventJustEmbed(event, Discord , idServer, Client);
+            eventJustEmbed(event, idServer, Client);
 
         break
         case 5:
@@ -163,7 +167,7 @@ function activeEventBefore(event, Discord, idServer, Client){
 
             event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-            eventJustEmbed(event, Discord , idServer, Client);
+            eventJustEmbed(event,  idServer, Client);
 
         break
         case 6:
@@ -192,7 +196,7 @@ function activeEventBefore(event, Discord, idServer, Client){
             
             event["textEffect"] = language.getText(idServer, "auraChroma")+level+". "+language.getText(idServer, "pendantTrenteMinute")
 
-        eventJustEmbed(event, Discord , idServer, Client);
+        eventJustEmbed(event,idServer, Client);
 
 
         break
@@ -204,7 +208,7 @@ function activeEventBefore(event, Discord, idServer, Client){
 
 }
 
-function eventJustEmbed(event, Discord , idServer, Client){
+function eventJustEmbed(event, idServer, Client){
 
     var adressImage = "./src/image/eventImage/"+event["image"]+".png";
     var nameImage = event["image"] + ".png";
@@ -229,41 +233,102 @@ function eventJustEmbed(event, Discord , idServer, Client){
 }
 
 
-//TODO:
-function eventCommandEmbed(interaction, Discord , idServer){
+function eventCommandEmbed(interaction, idServer){
 
     let event = statEvent.getGeneralStat(idServer, "whatEvent")
 
-    let tempsRestantSeconde = statEvent.getGeneralStat(idServer, "timer")
 
-    let tempsConvertie = ""
+    if(event){
 
-    var adressImage = "./src/image/eventImage/"+event["image"]+".png";
-    var nameImage = event["image"] + ".png";
+        let tempsRestantSeconde = statEvent.getGeneralStat(idServer, "timer")
+
+        let minuteTime = Math.floor(tempsRestantSeconde/60)
+        let secondeTime = tempsRestantSeconde%60
+
+        var adressImage = "./src/image/eventImage/"+event["image"]+".png";
+        var nameImage = event["image"] + ".png";
+        
+        let pokeImg = new Discord.AttachmentBuilder(adressImage)
+
+
+        let eventEmbed = new Discord.EmbedBuilder()
+            .setColor(event["color"])
+            .setTitle(language.getText(idServer, "actualEvent"))
+            .addFields({
+                name: language.getText(idServer, "effect"),
+                value: event["textEffect"],
+                inline: false
+            })
+            .addFields({
+                name: language.getText(idServer, "timeLeft"),
+                value: minuteTime+" minutes " +secondeTime+" "+language.getText(idServer, "secondes"),
+                inline: false
+            })
+            .setImage("attachment://"+nameImage)
+
+
+        interaction.channel.send({embeds: [eventEmbed], files: [pokeImg]})
+
+
+    } else {
+        interaction.channel.send("aucun event")
+    }
+
     
-    let pokeImg = new Discord.AttachmentBuilder(adressImage)
+}
+
+function eventAfterShiny(interaction,isShiny){
+    let shinyEvent;
+    let randomNumber
+
+    if(isShiny){
+        randomNumber = fonctionJs.getRandomInt(10000)
+
+        if(randomNumber == 1){
+            shinyEvent = !isShiny
+            interaction.channel.send(language.getText(interaction.guild.id, "finallyHesNotShiny"))
+        } else{
+            shinyEvent = isShiny
+        }
+
+    }else {
+        randomNumber = fonctionJs.getRandomInt(4096)
+
+        if(randomNumber == 1){
+            shinyEvent = !isShiny
+            interaction.channel.send(language.getText(interaction.guild.id, "finallyHesShiny"))
+        } else{
+            shinyEvent = isShiny
+        }
+
+    }
+
+    return shinyEvent
+}
+
+function eventAfterPokemon(idServer, idChannel,isShiny){
+
+    randomNumber = fonctionJs.getRandomInt(500)
 
 
-    let eventEmbed = new Discord.EmbedBuilder()
-        .setColor(event["color"])
-        .setTitle(language.getText(idServer, event["nom"]))
-        .setDescription(language.getText(idServer, event["description"]))
-        .addFields({
-            name: language.getText(idServer, "effect"),
-            value: event["textEffect"],
-            inline: false
-        })
-        .addFields({
-            name: language.getText(idServer, "timeLeft"),
-            value: tempsConvertie,
-            inline: false
-        })
-        .setImage("attachment://"+nameImage)
+        if(randomNumber == 1){
 
+            arrayPokemonPossible = variableGlobal.pokemonEvent;
 
-    interaction.channel.send({embeds: [eventEmbed], files: [pokeImg]})
+            pokemonChoice = fonctionJs.getRandomInt(arrayPokemonPossible.length)
+
+            pokemon = pokeData[arrayPokemonPossible[pokemonChoice]];
+            pokemon["isShiny"] = isShiny
+            pokemon["capturable"] = true;
+
+            spawnCount.setPokemonPresent(idServer, pokemon, idChannel)
+
+        }
+
+    
+
 }
 
 
 
-module.exports = {eventSelect}
+module.exports = {eventAfterPokemon, eventSelect,eventCommandEmbed,eventAfterShiny}

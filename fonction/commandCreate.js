@@ -69,6 +69,7 @@ const langCommand = new SlashCommandBuilder()
         .setDescriptionLocalizations({
                 'fr': bddText.commandLangExplication.Fr[0]
         })
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addStringOption(
                 new SlashCommandStringOption()
                         .setName(bddText.langNameOptionString.Eng[0])
@@ -183,11 +184,4 @@ const effectCommand = new SlashCommandBuilder()
         })
 
 
-
-const testFonctionnality = new SlashCommandBuilder()
-        .setName("test")
-        .setDescription("test")
-
-
-
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, testFonctionnality, effectCommand}
+module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, effectCommand}

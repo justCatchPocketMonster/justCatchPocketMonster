@@ -1,28 +1,28 @@
 {
     "972893923359998053": {
-        "nbCountMax": 3,
+        "nbCountMax": 4,
         "nbCountActuel": 0,
         "pokemonPresentActuel": {
             "972896634105110528": {
-                "id": 62,
+                "id": 453,
                 "name": {
-                    "nameEng": "Poliwrath",
-                    "nameFr": "Tartard"
+                    "nameEng": "Croagunk",
+                    "nameFr": "Cradopaud"
                 },
                 "typeListEng": [
-                    "Water",
+                    "Poison",
                     "Fighting"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0062-000"
+                    "0453-000"
                 ],
-                "gen": 1,
+                "gen": 4,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2023-0-29",
-                "heure": "23:26:58"
+                "date": "2023-1-13",
+                "heure": "22:57:2"
             }
         }
     }

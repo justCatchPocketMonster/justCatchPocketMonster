@@ -47,7 +47,6 @@ try{
     Client.on("messageCreate", message => {
         if(message.author.bot) return;
 
-
         
         if(message.content === prefix + "mention"){
             justDiscord.embedMention(Discord, message); 
@@ -149,14 +148,14 @@ try{
             }
             if(interaction.commandName == "currentminievent"){
                 
-                
+                eventChoice.eventCommandEmbed(interaction,interaction.guild.id)
 
             }
 
 
             if(interaction.commandName == "test"){
 
-                eventChoice.eventSelect("avant", Discord, interaction.guild.id, Client)
+                eventChoice.eventSelect("avant", interaction.guild.id, Client)
 
             }
 
@@ -180,26 +179,17 @@ try{
         Client.user.setStatus("online")
 
         pagination.resetAtZero()
+        
+        Client.application.commands.create(createCommand.spawnCommand)
+        Client.application.commands.create(createCommand.codeCommand)
+        Client.application.commands.create(createCommand.langCommand)
+        Client.application.commands.create(createCommand.pokedexCommand)
+        Client.application.commands.create(createCommand.howHaveThisPokemonCommand)
+        Client.application.commands.create(createCommand.catchCommand)
+        Client.application.commands.create(createCommand.allStatCommand)
+        Client.application.commands.create(createCommand.effectCommand)
 
 
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.spawnCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.codeCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.langCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.pokedexCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.howHaveThisPokemonCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.catchCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.allStatCommand)
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.effectCommand)
-
-        /*TODO:
-            a supprimé a la fin
-        */
-        Client.guilds.cache.get("972893923359998053").commands.create(createCommand.testFonctionnality)
-        //application au general
-        //Client.application.commands.create(data)
-
-        //Client.guilds.cache.get("972893923359998053").commands.
-        //console.log(Client.guilds.cache.get("972893923359998053").commands.cache)
         
     });
     

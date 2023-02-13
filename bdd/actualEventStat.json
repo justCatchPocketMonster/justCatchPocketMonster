@@ -32,12 +32,22 @@
             "vol": 100
         },
         "rarity": {
-            "normal": 990,
-            "legendaire": 9,
+            "normal": 965,
+            "legendaire": 34,
             "fabuleux": 1
         },
         "shiny": 4096,
-        "timer": false,
-        "whatEvent": false
+        "timer": 215,
+        "whatEvent": {
+            "id": 1,
+            "nom": "eventMontagnardTitre",
+            "description": "eventMontagnardDesc",
+            "type": "justEmbed",
+            "color": "734101",
+            "rarity": "",
+            "quand": "avant",
+            "image": "0001-000",
+            "textEffect": "Aura légendaire de niveau 2. Pendant 30 minutes."
+        }
     }
 }

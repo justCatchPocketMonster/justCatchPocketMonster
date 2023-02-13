@@ -16,6 +16,7 @@ const pokemonSpawnFollow = require("./pokemonSpawnFollow")
 const eventChoice = require("./eventChoice")
 const eventStatChange = require("./eventStatChange")
 
+
 const pagination = require("./pagination")
 
 const prefix = variableGlobal.prefix;
@@ -77,8 +78,12 @@ function spawnPokemon(Discord, message, Client){
         
         
         
-        choiceTypeOfSpawn(Discord, message, spawnCount.getPokemonPresent(idServer, idChannelRandom), Client, idChannelRandom, idServer);
-        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannelRandom)["id"], spawnCount.getPokemonPresent(idServer, idChannelRandom)["isShiny"]);
+        let typeSpawn = choiceTypeOfSpawn(Discord, message, spawnCount.getPokemonPresent(idServer, idChannelRandom), Client, idChannelRandom, idServer);
+        
+        if(typeSpawn == "pokemon"){
+            stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannelRandom)["id"], spawnCount.getPokemonPresent(idServer, idChannelRandom)["isShiny"]);  
+        }
+
         spawnCount.setCount(idServer, 0, idChannel)
     }
 
@@ -102,16 +107,20 @@ function catchPokemon(Discord, interaction, Client, optionString){
         if((messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"].toLowerCase()) || 
             messageEnvoyer.toLowerCase() === spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"].toLowerCase()){
 
+                eventChoice.eventAfterPokemon(idServer,idChannel, spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"])
+
                 savePokemonUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                 savePokemonServer.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.guild.id)
+                shinyAfterEvent = eventChoice.eventAfterShiny(interaction,spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]);
 
-                if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
+
+                if(shinyAfterEvent){
                     saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                 }
-                stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"])
+                stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent)
                 if(spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] != spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"]){
                     let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] +"/"+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"];
-                    if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
+                    if(shinyAfterEvent){
                         messageCongratSend += ":star:. "
                     } else {
                         messageCongratSend += ". "
@@ -125,7 +134,7 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     
                 }else{
                     let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"];
-                    if(spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]){
+                    if(shinyAfterEvent){
                         messageCongratSend += ":star:. "
                     } else {
                         messageCongratSend += ". "
@@ -164,7 +173,9 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
     nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
     
     if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
-        eventChoice.eventSelect("avant", Discord, interaction.guild.id, Client)
+        eventChoice.eventSelect("avant", message.guild.id, Client)
+
+        return("event")
 
     } else {
         
@@ -175,7 +186,11 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
         spawnCount.setPokemonPresent(idServer, pokemon, idChannelRandom);
         embedPokemon(Discord, message, pokemon, Client, idChannelRandom)
         pokemonSpawnFollow.addPokemon(pokemon);
+
+        return("pokemon")
     }
+
+    
 
 }
 

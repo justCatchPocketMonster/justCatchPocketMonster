@@ -44,6 +44,28 @@ function raritySelect(idServer){
 }
 
 
+function pokemonChoiceNotOnlyEvent(pokeList, arrayIdPokemon){
+
+    let pokemonSelected = []
+    
+    pokeList.forEach(pokemon => {
+
+        if(!arrayIdPokemon.includes(pokemon["id"])){
+            pokemonSelected.push(pokemon)
+        }
+
+    })
+    
+
+    if(pokemonSelected[0] === undefined){
+        return []
+    }
+
+    return pokemonSelected
+
+}
+
+
  function pokemonChoiceGen(pokeList, gen){
     let pokemonSelected = []
     pokeList.forEach(pokemon => {
@@ -101,7 +123,13 @@ function pokemonSelect(idServer){
 
     do{
         
-        arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect(idServer))
+        arrayPokemonPass0 = pokemonChoiceNotOnlyEvent(arrayPokemon, variableGlobal.pokemonEvent)
+
+    }while(arrayPokemonPass0[0] === undefined)
+
+    do{
+        
+        arrayPokemonPass1 = pokemonChoiceGen(arrayPokemonPass0, generationSelect(idServer))
 
     }while(arrayPokemonPass1[0] === undefined)
 
