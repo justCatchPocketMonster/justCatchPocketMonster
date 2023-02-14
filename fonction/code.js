@@ -5,61 +5,93 @@ const savePokemonUser = require("./pokedexSaveUser")
 const saveShinyUser = require("./shinydexSaveUser")
 const codeBdd = require("../bdd/code.json")
 const fs = require("fs");
+const catchError = require("./catchError")
 
 async function enterCode(idUser, code, interaction){
-    if(codeEntered[idUser] === undefined){
-        createUser(idUser)
-        SaveBdd();
+
+    try{
+
+        if(codeEntered[idUser] === undefined){
+            createUser(idUser)
+            SaveBdd();
+        }
+        codeHasEffect(idUser, code, interaction)
+    } catch(e) {
+
+        catchError.saveError(interaction.guild.id, interaction.channel.id, "code.js", "enterCode", e)
+        console.error(e)
     }
-    codeHasEffect(idUser, code, interaction)
 }
 
 function createUser(idUser){
-    codeEntered[idUser] = []
-    return
+    try{
+        codeEntered[idUser] = []
+        return
+    } catch(e) {
+
+        catchError.saveError(null, null, "code.js", "createUser", e)
+        console.error(e)
+    }
 }
 
 async function codeHasEffect (idUser, code, interaction){
+    try{
 
-    if(codeBdd["shiny"].includes(code)){
-        if(codeEntered[idUser].includes(code)){
-            interaction.channel.send(language.getText(interaction.guild.id, "codeAlreadyUsed"));
-            
-        } else {
-            effectCode1(idUser, interaction);
-            codeEntered[idUser].push(code);
+        if(codeBdd["shiny"].includes(code)){
+            if(codeEntered[idUser].includes(code)){
+                interaction.channel.send(language.getText(interaction.guild.id, "codeAlreadyUsed"));
+                
+            } else {
+                effectCode1(idUser, interaction);
+                codeEntered[idUser].push(code);
+            }
+            SaveBdd();
+            return
         }
-        SaveBdd();
-        return
+
+
+        interaction.channel.send(language.getText(interaction.guild.id, "codeDontExist"));
+    } catch(e) {
+
+        catchError.saveError(interaction.guild.id, interaction.channel.id, "code.js", "codeHasEffect", e)
+        console.error(e)
     }
-
-
-    interaction.channel.send(language.getText(interaction.guild.id, "codeDontExist"));
-
 }
 
 /**
  * sert a donné un pokemon shiny
  */
 function effectCode1(idUser, interaction){
-    pokemon = pokemonObject.pokemonSelect();
+    try{
+        pokemon = pokemonObject.pokemonSelect();
 
-    savePokemonUser.pokedex(pokemon["id"], idUser)
-    saveShinyUser.pokedex(pokemon["id"], idUser)
+        savePokemonUser.pokedex(pokemon["id"], idUser)
+        saveShinyUser.pokedex(pokemon["id"], idUser)
 
-    if(pokemon["name"]["nameFr"] != pokemon["name"]["nameEng"]){
-        interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
-    }else{
-        interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
+        if(pokemon["name"]["nameFr"] != pokemon["name"]["nameEng"]){
+            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
+        }else{
+            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
+        }
+
+    } catch(e) {
+
+        catchError.saveError(interaction.guild.id, interaction.channel.id, "code.js", "effectCode1", e)
+        console.error(e)
     }
-
 }
 
 
 function SaveBdd(){
-    fs.writeFile("./bdd/enteredCode.json", JSON.stringify(codeEntered, null, 4), (err)=> {
-        if (err)console.log("erreur")
-    })
+    try{
+        fs.writeFile("./bdd/enteredCode.json", JSON.stringify(codeEntered, null, 4), (err)=> {
+            if (err)console.log("erreur")
+        })
+    } catch(e) {
+
+        catchError.saveError(null, null, "code.js", "saveBdd", e)
+        console.error(e)
+    }
 }
 
 module.exports = {enterCode}

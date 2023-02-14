@@ -1,18 +1,17 @@
 const bddCatchError = require('../bdd/catchError.json')
+const fs = require("fs")
 
-
-function createServerError(idServer){
-    if(bddCatchError[idServerCreate] === undefined){
-        bddCatchError[idServerCreate] = {}
-        SaveBdd();
-    }
-}
-
-function saveError(idServer, error){
-    if(bddCatchError[idServerCreate] === undefined){
-        createServerError(idServer);
-    }
-    bddCatchError[idServerCreate][dateActuel] = error;
+function saveError(idServer, idChannel,fileName, functionName, error){
+    date = dateActuel()
+    bddCatchError[date] = {
+        "idServe": idServer,
+        "idChannel": idChannel,
+        "file": fileName, 
+        "function": functionName, 
+        "errorName": error.name,
+        "errorMessage": error.message
+        
+    };
     SaveBdd();
 
 }
@@ -20,7 +19,10 @@ function saveError(idServer, error){
 function dateActuel(){
     var now = new Date();
 
-    return(now.getDate+ "/"+ now.getMonth+"/"+ now.getFullYear+"-"+ now.getHours+":"+ now.getMinutes+":"+now.getSeconds)
+    date = now.getDate()+ "/"+ now.getMonth()+"/"+ now.getFullYear()+" - "+ now.getHours()+":"+ now.getMinutes()+":"+now.getSeconds() +" - "+ now.getMilliseconds();
+
+    console.log(date)
+    return(date)
 
 }
 

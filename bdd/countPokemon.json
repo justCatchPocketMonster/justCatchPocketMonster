@@ -1,9 +1,29 @@
 {
     "972893923359998053": {
         "nbCountMax": 4,
-        "nbCountActuel": 1,
+        "nbCountActuel": 0,
         "pokemonPresentActuel": {
-            "972896634105110528": null
+            "972896634105110528": {
+                "id": 346,
+                "name": {
+                    "nameEng": "Cradily",
+                    "nameFr": "Vacilys"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Grass"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0346-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-14",
+                "heure": "16:58:23"
+            }
         }
     }
 }

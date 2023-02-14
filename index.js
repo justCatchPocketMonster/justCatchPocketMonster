@@ -1,9 +1,7 @@
 const variableGlobal = require("./parameters/variableGlobal")
 const Discord = require('discord.js');
-const {SlashCommandBuilder} = require("@discordjs/builders");
 const fileConnexion = require("./fonction/connexion");
 const filePokemon = require("./fonction/pokemonController.js")
-const pokedexSaveUser = require("./fonction/pokedexSaveUser")
 const pokedexSaveServer = require("./fonction/pokedexSaveServer")
 const serverAllow = require("./fonction/allowSpawnChannel");
 const justDiscord = require("./fonction/justeDiscord")
@@ -40,11 +38,14 @@ setInterval(() =>{
 }, 1000)
 
 
-try{
-    /**
-     * a l'envoie d'un message
-     */
-    Client.on("messageCreate", message => {
+
+/**
+ * a l'envoie d'un message
+ */
+Client.on("messageCreate", message => {
+
+    try{
+
         if(message.author.bot) return;
 
         
@@ -57,20 +58,38 @@ try{
             filePokemon.spawnPokemon(Discord, message, Client)
             return
         }
-    });
+    } catch(error) {
+
+        catchError.saveError(message.guild.id, message.channel.id, "index.js", "messageCreate", error)
+        console.error(error)
+    }
+});
 
 
-    /**
-     * au rajout du bot créer une sauvegarde serveur
-     */
-    Client.on("guildCreate", guild =>{
+/**
+ * au rajout du bot créer une sauvegarde serveur
+ */
+Client.on("guildCreate", guild =>{
+
+    try{
+
+
         pokedexSaveServer.createSaveServer(guild.id)
         serverAllow.createServerAllow(guild.id)
         spawnCount.createCount(guild.id)
-    })
+    } catch(e) {
 
+        catchError.saveError(guild.id, null, "index.js", "guildCreate", e)
+        console.error(e)
+    }
+})
 
-    Client.on("interactionCreate", interaction => {
+/**
+ * quand une interaction est lancé
+ */
+Client.on("interactionCreate", interaction => {
+    try{
+
         if(interaction.isCommand()){
             if(interaction.commandName === "spawn"){
                 var channel
@@ -170,10 +189,19 @@ try{
 
         
         }
-    })
+    } catch(e) {
 
+        catchError.saveError(interaction.guild.id, interaction.channel.id, "index.js", "interactionCreate", e)
+        console.error(e)
+    }
+})
 
-    Client.on("ready", () => {
+/**
+ * quand le bot est prêt
+ */
+Client.on("ready", () => {
+
+    try{
         
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
         Client.user.setStatus("online")
@@ -188,17 +216,13 @@ try{
         Client.application.commands.create(createCommand.catchCommand)
         Client.application.commands.create(createCommand.allStatCommand)
         Client.application.commands.create(createCommand.effectCommand)
+    } catch(e) {
 
-
-        
-    });
-    
-
-
+        catchError.saveError(null, null, "index.js", "interactionCreate", e)
+        console.error(e)
+    }
 
     
+});
+    
 
-}catch (error){
-    catchError.saveError(message.guild.id, error)
-    console.log(error)
-}

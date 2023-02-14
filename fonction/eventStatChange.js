@@ -2,6 +2,7 @@ const variableGlobal = require("../parameters/variableGlobal");
 const bddEventStat = require("../bdd/actualEventStat.json");
 const saveServer = require("./pokedexSaveServer")
 const fs = require("fs");
+const catchError = require("./catchError")
 
 
 
@@ -48,121 +49,168 @@ const defaultStat = {
 }
 
 function changeRarity(idServer,theRarityChoice, valueLessAll, timeInSec, event){
+    try{
     
-if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["rarity"]["normal"] -= valueLessAll
+        if(theRarityChoice == "normal"){
+            bddEventStat[idServer]["rarity"]["normal"] += 2*valueLessAll
+        } else {
+            bddEventStat[idServer]["rarity"][theRarityChoice] += valueLessAll
+        }
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "changeRarity", e)
+        console.error(e)
     }
-
-    bddEventStat[idServer]["rarity"]["normal"] -= valueLessAll
-    if(theRarityChoice == "normal"){
-        bddEventStat[idServer]["rarity"]["normal"] += 2*valueLessAll
-    } else {
-        bddEventStat[idServer]["rarity"][theRarityChoice] += valueLessAll
-    }
-
-    bddEventStat[idServer]["timer"] = timeInSec;
-    bddEventStat[idServer]["whatEvent"] = event;
-
-    SaveBdd()
     
 }
 
 function changeType(idServer,theTypeChoice, valueLessAll, timeInSec, event){
-    
-    if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
-    }
-
-    for (const [key, value] of Object.entries(getGeneralStat(idServer, "type"))) {
+    try{
         
-        bddEventStat[idServer]["type"][key] -= valueLessAll
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
 
-      }
-      bddEventStat[idServer]["type"][theTypeChoice] += valueLessAll*(variableGlobal.nbType-1)
+        for (const [key, value] of Object.entries(getGeneralStat(idServer, "type"))) {
+            
+            bddEventStat[idServer]["type"][key] -= valueLessAll
+
+        }
+        bddEventStat[idServer]["type"][theTypeChoice] += valueLessAll*(variableGlobal.nbType-1)
 
 
-    bddEventStat[idServer]["timer"] = timeInSec;
-    bddEventStat[idServer]["whatEvent"] = event;
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
 
-    SaveBdd()
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "changeType", e)
+        console.error(e)
+    }
 }
 
 function changeGen(idServer,theGenChoice, valueLessAll, timeInSec, event){
-    
-    if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
-    }
-
-    for (const [key, value] of Object.entries(getGeneralStat(idServer, "gen"))) {
+    try{
         
-        bddEventStat[idServer]["gen"][key] -= valueLessAll
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
 
-      }
-      bddEventStat[idServer]["gen"][theGenChoice] += valueLessAll*(variableGlobal.nbGeneration)+valueLessAll
+        for (const [key, value] of Object.entries(getGeneralStat(idServer, "gen"))) {
+            
+            bddEventStat[idServer]["gen"][key] -= valueLessAll
+
+        }
+        bddEventStat[idServer]["gen"][theGenChoice] += valueLessAll*(variableGlobal.nbGeneration)+valueLessAll
 
 
-    bddEventStat[idServer]["timer"] = timeInSec;
-    bddEventStat[idServer]["whatEvent"] = event;
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
 
-    SaveBdd()
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "changeGen", e)
+        console.error(e)
+    }
     
 }
 
 function changeShiny(idServer, valueToDivise, timeInSec, event){
-    if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["shiny"] /= valueToDivise
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "changeShiny", e)
+        console.error(e)
     }
-
-    bddEventStat[idServer]["shiny"] /= valueToDivise
-
-    bddEventStat[idServer]["timer"] = timeInSec;
-    bddEventStat[idServer]["whatEvent"] = event;
-    SaveBdd()
-
 }
 
 function createResetEventStat(idServer){
-    bddEventStat[idServer] = defaultStat;
-    SaveBdd();
+    try{
+        bddEventStat[idServer] = defaultStat;
+        SaveBdd();
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "createResetEventStat", e)
+        console.error(e)
+    }
 }
 
 
 
 function getGeneralStat(idServer, generalStat){
-    if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
-    }
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
 
-    return bddEventStat[idServer][generalStat]
+        return bddEventStat[idServer][generalStat]
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "getGeneralStat", e)
+        console.error(e)
+    }
 }
 
 function getStat(idServer, generalStat, specificStat){
-    if( bddEventStat[idServer] == undefined){
-        createResetEventStat(idServer)
-    }
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
 
-    return bddEventStat[idServer][generalStat][specificStat]
+        return bddEventStat[idServer][generalStat][specificStat]
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "getStat", e)
+        console.error(e)
+    }
 }
 
 
 function time(){
+    try{
     
-    for (const [key, value] of Object.entries(bddEventStat)) {
-        if(bddEventStat[key]["timer"] != false){
-            bddEventStat[key]["timer"]--;
+        for (const [key, value] of Object.entries(bddEventStat)) {
+            if(bddEventStat[key]["timer"] != false){
+                bddEventStat[key]["timer"]--;
 
-            if(bddEventStat[key]["timer"] <= 0){
-                statDefaultModificable = defaultStat;
-                if(saveServer.getCharmChroma(key)["charmeChroma"]){
-                    statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
+                if(bddEventStat[key]["timer"] <= 0){
+                    statDefaultModificable = defaultStat;
+                    if(saveServer.getCharmChroma(key)["charmeChroma"]){
+                        statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
+                    }
+
+                    bddEventStat[key] = statDefaultModificable;
                 }
-
-                bddEventStat[key] = statDefaultModificable;
             }
         }
-    }
 
-      SaveBdd()  
+        SaveBdd()  
+    } catch(e) {
+
+        catchError.saveError(null, null, "eventStatChange.js", "time", e)
+        console.error(e)
+    }
 
 }
 
@@ -170,9 +218,15 @@ function time(){
 
 
 function SaveBdd(){
-    fs.writeFile("./bdd/actualEventStat.json", JSON.stringify(bddEventStat, null, 4), (err)=> {
-        if (err)console.log("erreur")
-    })
+    try{
+        fs.writeFile("./bdd/actualEventStat.json", JSON.stringify(bddEventStat, null, 4), (err)=> {
+            if (err)console.log("erreur")
+        })
+    } catch(e) {
+
+        catchError.saveError(null, null, "eventStatChange.js", "SaveBdd", e)
+        console.error(e)
+    }
 }
 
 module.exports = {time, getStat, changeRarity, changeGen, changeType, changeShiny, getGeneralStat, getStat}

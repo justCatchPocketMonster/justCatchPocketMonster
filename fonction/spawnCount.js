@@ -5,63 +5,116 @@ const minimumCount = variableGlobal.minimumCount;
 const maxmumCount = variableGlobal.maximumCount;
 var random = 0;
 const fs = require("fs")
+const catchError = require("./catchError")
 
 
 
 //Créer une avancer 
 function createCount(idServer, idChannel){
-    if(bddCount[idServer] === undefined){
-        bddCount[idServer] = {"nbCountMax" : maxmumCount, "nbCountActuel" : 0, "pokemonPresentActuel": {}}
-    }
+    try {
+        if(bddCount[idServer] === undefined){
+            bddCount[idServer] = {"nbCountMax" : maxmumCount, "nbCountActuel" : 0, "pokemonPresentActuel": {}}
+        }
+    
+        SaveBdd();
+    } catch(error) {
 
-    SaveBdd();
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "createCount", error)
+        console.error(error)
+    }
 }
 
 
 function getPokemonPresent(idServer, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    return bddCount[idServer]["pokemonPresentActuel"][idChannel]
+    try {
+        verifPresenceCount(idServer, idChannel)
+        return bddCount[idServer]["pokemonPresentActuel"][idChannel]
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "getPokemonPresent", error)
+        console.error(error)
+    }
 }
 function getMaxRandom(idServer, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    return bddCount[idServer]["nbCountMax"]
+   try {
+     verifPresenceCount(idServer, idChannel)
+     return bddCount[idServer]["nbCountMax"]
+   } catch (error) {
+    
+   }
 }
 function getCount(idServer, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    return bddCount[idServer]["nbCountActuel"]
+    try {
+        verifPresenceCount(idServer, idChannel)
+        return bddCount[idServer]["nbCountActuel"]
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "getMaxRandom", error)
+        console.error(error)
+    }
 }
 
 function setPokemonPresent(idServer, value, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    bddCount[idServer]["pokemonPresentActuel"][idChannel] = value;
-    SaveBdd();
+    try {
+        verifPresenceCount(idServer, idChannel)
+        bddCount[idServer]["pokemonPresentActuel"][idChannel] = value;
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "setPokemonPresent", error)
+        console.error(error)
+    }
 }
 function setMaxRandom(idServer, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    do{
-        random = fonction.getRandomInt(maxmumCount);
-    }while(!(random>minimumCount))
-    bddCount[idServer]["nbCountMax"] = random;
-    SaveBdd();
+    try {
+        verifPresenceCount(idServer, idChannel)
+        do{
+            random = fonction.getRandomInt(maxmumCount);
+        }while(!(random>minimumCount))
+        bddCount[idServer]["nbCountMax"] = random;
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "setMaxRandom", error)
+        console.error(error)
+    }
 }
 function setCount(idServer, value, idChannel){
-    verifPresenceCount(idServer, idChannel)
-    bddCount[idServer]["nbCountActuel"] = value;
-    SaveBdd();
+    try {
+        verifPresenceCount(idServer, idChannel)
+        bddCount[idServer]["nbCountActuel"] = value;
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "setCount", error)
+        console.error(error)
+    }
 }
 
 function verifPresenceCount(idServer, idChannel){
-    if(bddCount[idServer]===undefined){
-        createCount(idServer, idChannel)
-        
+    try {
+        if(bddCount[idServer]===undefined){
+            createCount(idServer, idChannel)
+            
+        }
+    } catch(error) {
+
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "verifPresenceCount", error)
+        console.error(error)
     }
 }
 
 
 function SaveBdd(){
-    fs.writeFile("./bdd/countPokemon.json", JSON.stringify(bddCount, null, 4), (err)=> {
-        if (err)console.log("erreur")
-    })
+    try {
+        fs.writeFile("./bdd/countPokemon.json", JSON.stringify(bddCount, null, 4), (err)=> {
+            if (err)console.log("erreur")
+        })
+    } catch(error) {
+
+        catchError.saveError(null, null, "spawnCount.js", "SaveBdd", error)
+        console.error(error)
+    }
 }
 
 module.exports = {createCount, getPokemonPresent, getCount,getMaxRandom, setCount, setMaxRandom, setPokemonPresent}

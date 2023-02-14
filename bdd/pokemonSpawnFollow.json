@@ -1283,5 +1283,88 @@
         "capturable": true,
         "date": "2023-1-13",
         "heure": "23:27:26"
+    },
+    {
+        "id": 127,
+        "name": {
+            "nameEng": "Pinsir",
+            "nameFr": "Scarabrute"
+        },
+        "typeListEng": [
+            "Bug"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0127-000"
+        ],
+        "gen": 1,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-1-14",
+        "heure": "16:47:29"
+    },
+    {
+        "id": 292,
+        "name": {
+            "nameEng": "Shedinja",
+            "nameFr": "Munja"
+        },
+        "typeListEng": [
+            "Bug",
+            "Ghost"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0292-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-1-14",
+        "heure": "16:50:45"
+    },
+    {
+        "id": 623,
+        "name": {
+            "nameEng": "Golurk",
+            "nameFr": "Golemastoc"
+        },
+        "typeListEng": [
+            "Ground",
+            "Ghost"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0623-000"
+        ],
+        "gen": 5,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-1-14",
+        "heure": "16:51:42"
+    },
+    {
+        "id": 346,
+        "name": {
+            "nameEng": "Cradily",
+            "nameFr": "Vacilys"
+        },
+        "typeListEng": [
+            "Rock",
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0346-000"
+        ],
+        "gen": 3,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-1-14",
+        "heure": "16:58:23"
     }
 ]

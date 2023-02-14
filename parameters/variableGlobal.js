@@ -44,9 +44,10 @@ const gen7 = 100
 const gen8 = 100
 const gen9 = 100
 
-
+//pour modifier des stats d'apparition par type
+//nombre de type (multiplier par 100)
 const nbType = 18
-
+//valeur max par type
 const acier = 100
 const dragon = 100
 const electrik = 100
@@ -66,6 +67,7 @@ const roche = 100
 const spectre = 100
 const vol = 100
 
+//Les id des pokemon qui pourront de na spawn a part par transformation
 const pokemonEvent = [132, 570, 571];
 
 
