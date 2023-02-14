@@ -1,29 +1,9 @@
 {
     "972893923359998053": {
         "nbCountMax": 4,
-        "nbCountActuel": 0,
+        "nbCountActuel": 1,
         "pokemonPresentActuel": {
-            "972896634105110528": {
-                "id": 453,
-                "name": {
-                    "nameEng": "Croagunk",
-                    "nameFr": "Cradopaud"
-                },
-                "typeListEng": [
-                    "Poison",
-                    "Fighting"
-                ],
-                "theType": "ordinaire",
-                "imgName": [
-                    "0453-000"
-                ],
-                "gen": 4,
-                "differentSpawn": false,
-                "isShiny": false,
-                "capturable": true,
-                "date": "2023-1-13",
-                "heure": "22:57:2"
-            }
+            "972896634105110528": null
         }
     }
 }

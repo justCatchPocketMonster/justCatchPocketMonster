@@ -1262,5 +1262,26 @@
         "capturable": true,
         "date": "2023-1-13",
         "heure": "22:57:2"
+    },
+    {
+        "id": 226,
+        "name": {
+            "nameEng": "Mantine",
+            "nameFr": "Démanta"
+        },
+        "typeListEng": [
+            "Water",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0226-000"
+        ],
+        "gen": 2,
+        "differentSpawn": false,
+        "isShiny": false,
+        "capturable": true,
+        "date": "2023-1-13",
+        "heure": "23:27:26"
     }
 ]
