@@ -1,161 +1,252 @@
-const { MessageActionRow, ButtonInteraction, Interaction, Message, MessageButton} = require("discord.js")
-
+const { ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder} = require("discord.js")
+const { ButtonStyle } = require('discord.js');
+const language = require("../fonction/language")
+const fs = require("fs")
+const limitPagination = require("../bdd/numberOfPagination.json")
+const catchError = require("./catchError")
 /**
- * @param {Message} message
- * @param {Interaction} interaction 
+ * @param { Interaction} interactionSlash
  * @param {*} pages 
  * @param {*} time 
- */
-module.exports = async (message, interaction, pages, pageParDefaut = 0, time = 60000) => {
+ */ 
+async function pagination(interactionSlash, interaction, pages, pageParDefaut = 1, time = 60000, arrayImage = []){
+    try {
+        //probleme avec interaction
+        var idUser = interactionSlash.member.id
 
-    console.log(interaction)
-
-    if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ throw new Error ("Invalid parameters")};
-
-    var index = pageParDefaut-1, row = new MessageActionRow().addComponents([
-    {
-        type:"BUTTON",
-        customId:"1",
-        label: "<",
-        style: "PRIMARY",
-        disabled: false
-    },
-    {
-        type:"BUTTON",
-        customId:"3",
-        label: "X",
-        style: "DANGER",
-        disabled: false
-    },/*
-    {
-        type:"BUTTON",
-        customId:"4",
-        label: "#",
-        style: "SECONDARY",
-        disabled: false
-    },*/
-    {
-        type:"BUTTON",
-        customId:"2",
-        label: ">",
-        style: "PRIMARY",
-        disabled: false
-    }
     
-
-    ]);
-
-    let data = {
-        embeds: [pages[index]],
-        components: [row]
-        //,fetchReply: true
-    };
+        if(pageParDefaut < 1){
+            pageParDefaut = 1;
+        }
     
-    const filter = (interaction) => {
-        return interaction.user.id === message.author.id
-    }
-
-    await message.channel.send(data).then(messageSendBot => {
-        const col = messageSendBot.createMessageComponentCollector({
-            filter: filter,
-            time: time
-        });
-        col.on('collect', (i) => {
-
+        if(getNbPagination(idUser) >= 10){
+            interactionSlash.channel.send(language.getText(interactionSlash.guild.id, "tooMuchPagination"))
+            return
+        }
+    
+        createNumberFollow(idUser);
+    
+        if(!interaction || !pages || !(pages?.length > 0) || !(time > 10000)){ 
             
-            if(i.customId === "1"){
-                index--;
-
-                if(index <= -1){
-                    index = (pages.length)-1
-                }
-            } else if (i.customId === "2"){
-                index++;
-
-                if(index >= pages.length){
-                    index = 0;
-                }
-            } else if(i.customId === "4"){
-                /*
-                col.resetTimer({time: time*2})
-
-                message.channel.send({content: "Vous avez 1 minute pour saisir le numéro de la page voulu."}).then(messagePageBot => {
-                    const collectReponse = messagePageBot.channel.createMessageCollector({
-                        //filter: filter,
-                        time: time
-                    })
-
-                    collectReponse.on("collect", messageSend => {
-                        if(isNaN(Number(messageSend))){
-                            col.resetTimer({time: time*2})
-                            messagePageBot.resetTimer({time: time})
-                            messagePageBot.edit({content: "La valeur inscrise n'est pas un nombre. veuillez recommencer"})
-                        } else {
-                            index = Number(messageSend);
-                            collectReponse.stop();
-                        }
-                    })
-
-                    collectReponse.on("end", () => {
-                        messagePageBot.delete()
-                    })
-                })
-                */
-
-            } else{
-                return col.stop();
+            if(!interaction){
+                throw new Error ("Invalid interaction")
             }
+            
+            if(!pages){
+                throw new Error ("Invalid pages list")
+            }
+            
+            if(!(pages?.length > 0)){
+                throw new Error ("Invalid not enought page")
+            }
+            
+            if(!(time > 10000)){
+                throw new Error ("Invalid not enought time")
+            }
+      
+            
+        };
     
-            row = new MessageActionRow().addComponents([
-                {
-                    type:"BUTTON",
-                    customId:"1",
-                    label: "<",
-                    style: "PRIMARY",
-                    disabled: false
-                },
-                {
-                    type:"BUTTON",
-                    customId:"3",
-                    label: "X",
-                    style: "DANGER",
-                    disabled: false
-                },/*
-                {
-                    type:"BUTTON",
-                    customId:"4",
-                    label: "#",
-                    style: "SECONDARY",
-                    disabled: false
-                },*/
-                {
-                    type:"BUTTON",
-                    customId:"2",
-                    label: ">",
-                    style: "PRIMARY",
-                    disabled: false
+        var index = pageParDefaut-1
+        var row = new ActionRowBuilder()
+    
+    
+        row.addComponents([
+            new ButtonBuilder()
+                .setCustomId("1")
+                .setLabel("<")
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(pages.length<=1)
+            ,
+            new ButtonBuilder()
+                .setCustomId("3")
+                .setLabel("X")
+                .setStyle(ButtonStyle.Danger)
+                .setDisabled(false)
+            ,
+            new ButtonBuilder()
+                .setCustomId("2")
+                .setLabel(">")
+                .setStyle(ButtonStyle.Primary)
+                .setDisabled(pages.length<=1)
+    
+        ]);
+    
+        let data
+    
+        if(arrayImage[index] !== undefined){
+            data = {
+                embeds: [pages[index]],
+                files: [arrayImage[index]],
+                components: [row]
+                
+            };
+        } else {
+            data = {
+                embeds: [pages[index]],
+                components: [row]
+            };
+        }
+    
+        
+        
+        const filter = (interaction) => {
+            return interaction.user.id === interactionSlash.user.id
+        }
+        await interactionSlash.channel
+                        .send(data)
+                            .then(messageSendBot => {
+                        
+    
+            plusOne(idUser)
+            const col = messageSendBot.createMessageComponentCollector({
+                filter: filter,
+                time: time
+            });
+            col.on('collect', (i) => {
+    
+                
+                if(i.customId === "1"){
+                    index--;
+    
+                    if(index <= -1){
+                        index = (pages.length)-1
+                    }
+                } else if (i.customId === "2"){
+                    index++;
+    
+                    if(index >= pages.length){
+                        index = 0;
+                    }
+                } else{
+                    return col.stop();
                 }
-            
-                ])
-            
-            i.update({
-                components:[row],
-                embeds:[pages[index]]
+        
+                row = new ActionRowBuilder();
+                
+                row.addComponents([
+                    new ButtonBuilder()
+                        .setCustomId("1")
+                        .setLabel("<")
+                        .setStyle(ButtonStyle.Primary)
+                        .setDisabled(false)
+                    ,
+                    new ButtonBuilder()
+                        .setCustomId("3")
+                        .setLabel("X")
+                        .setStyle(ButtonStyle.Danger)
+                        .setDisabled(false)
+                    ,
+                    new ButtonBuilder()
+                        .setCustomId("2")
+                        .setLabel(">")
+                        .setStyle(ButtonStyle.Primary)
+                        .setDisabled(false)
+                
+                    ])
+                
+                if(arrayImage[index] !== undefined){
+    
+                    i.update({
+                        embeds: [pages[index]],
+                        components: [row],
+                        files: [arrayImage[index]]
+                    })
+                } else {
+    
+                    i.update({
+                        embeds: [pages[index]],
+                        components: [row]
+                    })
+                }
+    
+                
+                col.resetTimer({time: time})
             })
-            col.resetTimer({time: time})
+        
+            col.on('end', () => {
+                messageSendBot.edit({
+                    components:[]
+                })
+    
+                moinsOne(idUser)
+            })
         })
     
-        col.on('end', () => {
-            messageSendBot.edit({
-                components:[]
-            })
-        })
-    })
+    } catch(error) {
 
-    
-
-
-   
-
-
+        catchError.saveError(null, null, "pagination.js", "pagination", error)
+        console.error(error)
+    }
 }
+
+function createNumberFollow(idUser){
+    try {
+        if(limitPagination[idUser] === undefined){
+            limitPagination[idUser] = 0
+        }
+        SaveBdd()
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "createNumberFollow", error)
+        console.error(error)
+    }
+}
+
+function resetAtZero(){
+    try {
+        for (const [key, value] of Object.entries(limitPagination)){
+            limitPagination[key] = 0;
+        }
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "resetAtZero", error)
+        console.error(error)
+    }
+}
+
+function plusOne(idUser){
+    try {
+        limitPagination[idUser]++
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "plusOne", error)
+        console.error(error)
+    }
+}
+function moinsOne(idUser){
+    try {
+        limitPagination[idUser]--
+        SaveBdd();
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "moinsOne", error)
+        console.error(error)
+    }
+}
+
+function getNbPagination(idUser){
+    try {
+        return limitPagination[idUser]
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "getNbPagination", error)
+        console.error(error)
+    }
+}
+
+function SaveBdd(){
+    try {
+        fs.writeFile("./bdd/numberOfPagination.json", JSON.stringify(limitPagination, null, 4), (err)=> {
+            if (err)console.log("erreur")
+        })
+    } catch(error) {
+
+        catchError.saveError(null, null, "pagination.js", "SaveBdd", error)
+        console.error(error)
+    }
+}
+
+module.exports = {resetAtZero, pagination}
