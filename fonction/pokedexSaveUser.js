@@ -78,7 +78,7 @@ function getSave(idUser){
 function getNumberCapturePokemon(idUser, idPokemon){
 
     try {
-        return pokedexBDD[idUser][idPokemon]
+        return getSave(idUser)[idPokemon]
     } catch(error) {
 
         catchError.saveError(null, null, "pokedexSaveUser.js", "getNumberCapturePokemon", error)

@@ -425,6 +425,8 @@ try {
 
 function getCountAllCatch(){
 try {
+        createStatVersion();
+        updateNumberPossibilityCatched();
         return statBdd["All"]["pokemonCatched"]
 } catch(error) {
 
@@ -434,6 +436,8 @@ try {
 }
 function getCountAllSpawn(){
 try {
+        createStatVersion();
+        updateNumberPossibilitySpawned();
         return statBdd["All"]["pokemonSpawned"]
 } catch(error) {
 
@@ -443,6 +447,8 @@ try {
 }
 function getCountAllCatchShiny(){
 try {
+        createStatVersion();
+        updateNumberPossibilityCatched();
         return statBdd["All"]["pokemonCatchedShiny"]
 } catch(error) {
 
@@ -452,6 +458,8 @@ try {
 }
 function getCountAllSpawnShiny(){
 try {
+        createStatVersion();
+        updateNumberPossibilitySpawned();
         return statBdd["All"]["pokemonSpawnedShiny"]
 } catch(error) {
 
@@ -461,6 +469,8 @@ try {
 }
 function getCountAllCatchList(){
 try {
+        createStatVersion();
+        updateNumberPossibilityCatched();
         return statBdd["All"]["listPokemonCatched"]
 } catch(error) {
 
@@ -470,6 +480,8 @@ try {
 }
 function getCountAllSpawnList(){
 try {
+        createStatVersion();
+        updateNumberPossibilitySpawned();
         return statBdd["All"]["listPokemonSpawned"]
 } catch(error) {
 
@@ -479,6 +491,8 @@ try {
 }
 function getCountAllCatchShinyList(){
 try {
+    createStatVersion();
+    updateNumberPossibilityCatched();
         return statBdd["All"]["listPokemonCatchedShiny"]
 } catch(error) {
 
@@ -488,6 +502,9 @@ try {
 }
 function getCountAllSpawnShinyList(){
 try {
+        createStatVersion();
+        updateNumberPossibilitySpawned();
+
         return statBdd["All"]["listPokemonSpawnedShiny"]
 } catch(error) {
 
@@ -499,6 +516,7 @@ try {
 function getCountVersionCatch(){
 try {
         createStatVersion();
+        updateNumberPossibilityCatched();
         return statBdd[version]["pokemonCatched"]
 } catch(error) {
 
@@ -509,6 +527,7 @@ try {
 function getCountVersionSpawn(){
 try {
         createStatVersion();
+        updateNumberPossibilitySpawned();
         return statBdd[version]["pokemonSpawned"]
 } catch(error) {
 
@@ -519,6 +538,7 @@ try {
 function getCountVersionCatchShiny(){
 try {
         createStatVersion();
+        updateNumberPossibilityCatched();
         return statBdd[version]["pokemonCatchedShiny"]
 } catch(error) {
 
@@ -529,6 +549,7 @@ try {
 function getCountVersionSpawnShiny(){
 try {
         createStatVersion();
+        updateNumberPossibilitySpawned();
         return statBdd[version]["pokemonSpawnedShiny"]
 } catch(error) {
 
@@ -539,7 +560,6 @@ try {
 function getCountVersionCatchList(){
 try {
         createStatVersion();
-        updateNumberPossibilitySpawned();
         updateNumberPossibilityCatched();
         return statBdd[version]["listPokemonCatched"]
 } catch(error) {
@@ -552,7 +572,6 @@ function getCountVersionSpawnList(){
 try {
         createStatVersion();
         updateNumberPossibilitySpawned();
-        updateNumberPossibilityCatched();
         return statBdd[version]["listPokemonSpawned"]
 } catch(error) {
 
@@ -563,7 +582,6 @@ try {
 function getCountVersionCatchShinyList(){
 try {
         createStatVersion();
-        updateNumberPossibilitySpawned();
         updateNumberPossibilityCatched();
         return statBdd[version]["listPokemonCatchedShiny"]
 } catch(error) {
@@ -576,7 +594,6 @@ function getCountVersionSpawnShinyList(){
 try {
         createStatVersion();
         updateNumberPossibilitySpawned();
-        updateNumberPossibilityCatched();
         return statBdd[version]["listPokemonSpawnedShiny"]
 } catch(error) {
 

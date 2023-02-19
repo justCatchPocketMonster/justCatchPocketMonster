@@ -4,8 +4,8 @@ const prefix = "!";
 // minimum et max du random pour le compteur du spawn de pokemon
 // Fichier: spawnCount.js
 
-const minimumCount = 0+1;
-const maximumCount = 5;
+const minimumCount = 5+1;
+const maximumCount = 20;
 
 //pour modifier des stats d'apparition celon le type du pokemon
 //valeur maximum pour tombé sur le pokemon

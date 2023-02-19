@@ -90,7 +90,7 @@ const langCommand = new SlashCommandBuilder()
 
 
 const howHaveThisPokemonCommand = new SlashCommandBuilder()
-        .setName("how")
+        .setName("howmuch")
         .setNameLocalizations({
                 'fr': "combien"
         })

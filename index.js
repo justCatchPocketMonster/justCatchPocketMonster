@@ -48,13 +48,9 @@ Client.on("messageCreate", message => {
 
         if(message.author.bot) return;
 
-        
-        if(message.content === prefix + "mention"){
-            justDiscord.embedMention(Discord, message); 
-            return
-        }
 
         if(serverAllow.randomIdServer(message.guild.id) != undefined){
+
             filePokemon.spawnPokemon(Discord, message, Client)
             return
         }
@@ -136,7 +132,7 @@ Client.on("interactionCreate", interaction => {
 
 
             }
-            if(interaction.commandName == "how"){
+            if(interaction.commandName == "howmuch"){
                 
                 if(interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]) !== null){
 
@@ -167,7 +163,7 @@ Client.on("interactionCreate", interaction => {
             }
             if(interaction.commandName == "currentminievent"){
                 
-                eventChoice.eventCommandEmbed(interaction,interaction.guild.id)
+                eventChoice.eventCommandEmbed(interaction, interaction.guild.id)
 
             }
 
@@ -216,6 +212,7 @@ Client.on("ready", () => {
         Client.application.commands.create(createCommand.catchCommand)
         Client.application.commands.create(createCommand.allStatCommand)
         Client.application.commands.create(createCommand.effectCommand)
+        
     } catch(e) {
 
         catchError.saveError(null, null, "index.js", "interactionCreate", e)

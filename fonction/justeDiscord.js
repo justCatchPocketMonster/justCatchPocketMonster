@@ -12,7 +12,7 @@ const catchError = require("./catchError")
 
 function randomStatus(Client){
     try{
-        let nbStatus = 13;
+        let nbStatus = 21;
         let randomStatus = Math.floor(Math.random()* nbStatus);
         /*
         les types
@@ -62,6 +62,18 @@ function randomStatus(Client){
             case 12:
                 Client.user.setActivity("!code " + codeBdd["shiny"][fonction.getRandomInt(codeBdd["shiny"].length)], {type: "PLAYING"});
                 break
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+                Client.user.setActivity("No more \"!\". Use \"/\".");
+            break
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+                Client.user.setActivity("Plus jamais de \"!\". utilise \"/\".");
+            break
         }
 
     } catch(e) {

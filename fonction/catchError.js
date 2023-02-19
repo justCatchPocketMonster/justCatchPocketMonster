@@ -1,5 +1,7 @@
 const bddCatchError = require('../bdd/catchError.json')
 const fs = require("fs")
+const {Client} = require("discord.js")
+
 
 function saveError(idServer, idChannel,fileName, functionName, error){
     date = dateActuel()
@@ -12,6 +14,7 @@ function saveError(idServer, idChannel,fileName, functionName, error){
         "errorMessage": error.message
         
     };
+
     SaveBdd();
 
 }
@@ -21,7 +24,6 @@ function dateActuel(){
 
     date = now.getDate()+ "/"+ now.getMonth()+"/"+ now.getFullYear()+" - "+ now.getHours()+":"+ now.getMinutes()+":"+now.getSeconds() +" - "+ now.getMilliseconds();
 
-    console.log(date)
     return(date)
 
 }

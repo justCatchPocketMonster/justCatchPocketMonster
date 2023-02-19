@@ -2,7 +2,7 @@ const fs = require("fs");
 const fonction = require("../fonction/fonctionJs")
 const catchError = require("./catchError")
 
-const allFileJson = ["catchError.json","countPokemon.json","languageSelected.json","pokedexSaveUser.json","pokedexSaveServer.json","serversAllowThisChannel.json","stat.json", "shinydexSaveUser.json", "enteredCode.json", "charmeChroma.json"]
+const allFileJson = ["catchError.json","countPokemon.json","languageSelected.json","pokedexSaveUser.json","pokedexSaveServer.json","serversAllowThisChannel.json","stat.json", "shinydexSaveUser.json", "enteredCode.json", "charmeChroma.json", "catchError.json"]
 
 function createCopyAllBdd(){
 

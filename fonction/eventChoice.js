@@ -301,7 +301,7 @@ function eventCommandEmbed(interaction, idServer){
 
 
         } else {
-            interaction.channel.send("aucun event")
+            interaction.channel.send(language.getText(idServer, "noEvent"))
         }
     } catch(e) {
 
@@ -357,7 +357,7 @@ function eventAfterPokemon(idServer, idChannel,isShiny){
     try{
 
 
-        randomNumber = fonctionJs.getRandomInt(500)
+        randomNumber = fonctionJs.getRandomInt(100)
 
 
         if(randomNumber == 1){

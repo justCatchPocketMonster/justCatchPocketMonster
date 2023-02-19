@@ -138,7 +138,7 @@ function getPercentageNational(idServer){
 
 function getCharmChroma(idServe){
     try {
-        return charmeChroma[idServe]
+        return getSave(idServe)
     } catch(error) {
 
         catchError.saveError(idServe, null, "pokedexSaveServer.js", "getCharmChroma", error)

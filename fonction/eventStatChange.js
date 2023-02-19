@@ -187,25 +187,31 @@ function getStat(idServer, generalStat, specificStat){
 }
 
 
-function time(){
+async function time(){
     try{
     
         for (const [key, value] of Object.entries(bddEventStat)) {
-            if(bddEventStat[key]["timer"] != false){
+
+            if(bddEventStat[key]["timer"] !== false){
                 bddEventStat[key]["timer"]--;
+                SaveBdd();
 
                 if(bddEventStat[key]["timer"] <= 0){
+                    console.log("normalement je passe par la")
                     statDefaultModificable = defaultStat;
                     if(saveServer.getCharmChroma(key)["charmeChroma"]){
                         statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
                     }
 
                     bddEventStat[key] = statDefaultModificable;
+                    SaveBdd();
                 }
+                
             }
+            
         }
 
-        SaveBdd()  
+        
     } catch(e) {
 
         catchError.saveError(null, null, "eventStatChange.js", "time", e)

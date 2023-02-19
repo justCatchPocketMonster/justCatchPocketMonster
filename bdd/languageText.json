@@ -5,7 +5,7 @@
     },
     "spawnPokemonAlreadyActivate": {
         "Fr": ["Ce salon a déjà la possibilité d'accueillir des Pokémons."],
-        "Eng": ["This channel has already the possibility to have pokemon."]
+        "Eng": ["This channel has already the possibility to have Pokémon."]
     },
     "spawnPokemonDesactivate": {
         "Fr": ["Oh non, les Pokémons ont disparu."],
@@ -13,7 +13,7 @@
     },
     "spawnPokemonAlreadyDesactivate": {
         "Fr": ["Mais il n'y a aucun Pokémons ici."],
-        "Eng": ["But there are no pokemon here."]
+        "Eng": ["But there are no Pokémon here."]
     },
 
 
@@ -89,7 +89,7 @@
     },
     "commandCatchExplication": {
         "Fr": ["Permet d'attraper le Pokémons présent."],
-        "Eng": ["Allows you to catch the pokemon present."]
+        "Eng": ["Allows you to catch the Pokémon present."]
     },
 
     "nothing": {
@@ -101,8 +101,8 @@
         "Eng": ["pokemon"]
     },
     "commandCatchOptionDesc": {
-        "Fr": ["Le nom du pokemon. Il faut le bon nom du Pokémon pour l'attraper sinon raté."],
-        "Eng": ["The name of the pokemon. You need the correct name of the Pokémon to catch it if not missed."]
+        "Fr": ["Le nom du Pokémon. Il faut le bon nom du Pokémon pour l'attraper sinon raté."],
+        "Eng": ["The name of the Pokémon. You need the correct name of the Pokémon to catch it if not missed."]
     },
 
     "commandHowExplication": {
@@ -114,16 +114,16 @@
         "Eng": ["pokemonid"]
     },
     "commandHowOptionDescStringNumber": {
-        "Fr": ["l'identifiant du pokemon."],
-        "Eng": ["pokemon id."]
+        "Fr": ["l'identifiant du Pokémon."],
+        "Eng": ["Pokémon id."]
     },
     "commandHowOptionNameStringPokemonName": {
         "Fr": ["nompokemon"],
         "Eng": ["pokemonname"]
     },
     "commandHowOptionDescStringPokemonName": {
-        "Fr": ["Le nom du Pokemon"],
-        "Eng": ["Pokemon's name"]
+        "Fr": ["Le nom du Pokémon"],
+        "Eng": ["Pokémon's name"]
     },
     "commandStatExplication": {
         "Fr": ["Permet de voir des statistiques plus ou moins utiles."],
@@ -144,8 +144,8 @@
         "Eng": ["You need at least 1 option."]
     },
     "notExist": {
-        "Fr": ["Pokemon inexistant."],
-        "Eng": ["Non-existent pokemon."]
+        "Fr": ["Pokémon inexistant."],
+        "Eng": ["Non-existent Pokémon."]
     },
     "finallyHesShiny": {
         "Fr": ["Attends... Mais le Pokémon est peint ! Il est shiny !!!"],
@@ -160,11 +160,11 @@
 
     "embedPokemonTitle": {
         "Fr": ["Un Pokémon sauvage apparaît !"],
-        "Eng": ["Wild Pokemon appeared!"]
+        "Eng": ["Wild Pokémon appeared!"]
     },
     "embedPokemonDescription": {
         "Fr": ["Pour l'attraper faites \"/catch [nom du Pokémon]\"."],
-        "Eng": ["To catch it, do \"/catch [Pokemon's name]\"."]
+        "Eng": ["To catch it, do \"/catch [Pokémon's name]\"."]
     },
 
     "congratYouCatchPart1": {
@@ -177,11 +177,11 @@
     },
     "newAtPokedex": {
         "Fr": ["Les données du Pokémon ont été ajoutées au Pokédex."],
-        "Eng": ["Pokemon's data has been added to the Pokedex."]
+        "Eng": ["Pokémon's data has been added to the Pokedex."]
     },
     "failCatchGoodPokemonPart2": {
         "Fr": [". Le Pokémon actuel n'est pas"],
-        "Eng": [". The current Pokemon is not"]
+        "Eng": [". The current Pokémon is not"]
     },
     "failCatchGoodPokemonPart1": {
         "Fr": ["Désolé"],
@@ -189,15 +189,15 @@
     },
     "noPokemonDisponible": {
         "Fr": ["Aucun Pokémon n'est présent actuellement."],
-        "Eng": ["No pokemon is currently present."]
+        "Eng": ["No Pokémon is currently present."]
     },
 
     "noCatch": {
-        "Fr": ["Non capturé"],
+        "Fr": ["Non capturés"],
         "Eng": ["Not captured"]
     },
     "catched": {
-        "Fr": ["Capturé: "],
+        "Fr": ["Capturés: "],
         "Eng": ["Captured: "]
     },
 
@@ -246,7 +246,7 @@
     },
     "rightText": {
         "Fr": ["Je ne possède pas les droits de la licence Pokémon. Nintendo/Creatures Inc./GAME FREAK inc."],
-        "Eng": ["I do not own the Pokemon license rights. Nintendo/Creatures Inc./GAME FREAK inc."]
+        "Eng": ["I do not own the Pokémon license rights. Nintendo/Creatures Inc./GAME FREAK inc."]
     },
     "stopText": {
         "Fr": ["Je peux stopper ce service avec ou sans préavis intentionnellement ou à la demande des ayant droit."],
@@ -286,8 +286,8 @@
         "Eng": ["Level of Legendary Aura "]
     },
     "auraFabuleux" : {
-        "Fr": ["Aura légendaire de niveau "],
-        "Eng": ["Level of Legendary Aura "]
+        "Fr": ["Aura fabuleux de niveau "],
+        "Eng": ["Level of Mythical Aura "]
     },
     "auraGeneration" : {
         "Fr": ["Aura de génération de niveau "],
@@ -338,8 +338,8 @@
         "Eng": ["a Hacker"]
     },
     "eventHackerDesc" : {
-        "Fr": ["Un hacker qui... augmente le taux de shiny ? Sale tricheur"],
-        "Eng": ["A hacker who... increases the shiny rate? Dirty cheater"]
+        "Fr": ["Un hacker qui... augmente le taux de shinies ? Sale tricheur !!!"],
+        "Eng": ["A hacker who... increases the shiny rate? Dirty cheater !!!"]
     },
     "eventSandwichVideSmolTitre" : {
         "Fr": ["Un sandwich vide"],
@@ -426,12 +426,16 @@
 
 
     "pokemonManquant": {
-        "Fr": ["Pokémon non capturé"],
-        "Eng": ["Pokemon not caught"]
+        "Fr": ["Pokémon manquant"],
+        "Eng": ["Pokémon missing"]
     },
     "pokemonManquantShiny": {
-        "Fr": ["Pokémon non capturé en shiny"],
-        "Eng": ["Pokemon not caught in shiny"]
+        "Fr": ["Pokémon shiny manquant"],
+        "Eng": ["Shiny Pokémon missing"]
+    },
+    "noEvent": {
+        "Fr": ["Aucun evenement actuellement"],
+        "Eng": ["no current event"]
     },
 
     "felicitation": {
@@ -444,70 +448,70 @@
     },
 
     "nombreDeCapture": {
-        "Fr": ["Nombre de capture"],
-        "Eng": ["Number of caught"]
+        "Fr": ["Captures"],
+        "Eng": ["Caught"]
     },
     "nombreDeCaptureTotaly": {
-        "Fr": ["Nombre de capture général"],
-        "Eng": ["General catch number"]
+        "Fr": ["Capturés : "],
+        "Eng": ["Caught : "]
     },
     "nombreDeSpawnTotaly": {
-        "Fr": ["Nombre de d'apparition général"],
-        "Eng": ["General spawn number"]
+        "Fr": ["Apparitions au total : "],
+        "Eng": ["Spawned in total : "]
     },
     "nombreDeCaptureShinyTotaly": {
-        "Fr": ["Nombre de capture de shiny général"],
-        "Eng": ["General catch shiny number"]
+        "Fr": ["Shinies capturés : "],
+        "Eng": ["Shiny captured : "]
     },
     "nombreDeSpawnShinyTotaly": {
-        "Fr": ["Nombre de d'apparition de shiny général"],
-        "Eng": ["General spawn shiny number"]
+        "Fr": ["Apparitions shinies au total : "],
+        "Eng": ["Shiny spotted in total : "]
     },
     "nombreDeCaptureVersion": {
-        "Fr": ["Nombre de capture de cette version"],
-        "Eng": ["Number of captures of this version"]
+        "Fr": ["Captures dans cette version du bot : "],
+        "Eng": ["Caught in this bot's version : "]
     },
     "nombreDeSpawnVersion": {
-        "Fr": ["Nombre de d'apparition  de cette version"],
-        "Eng": ["Number of appearances of this version"]
+        "Fr": ["Apparitions dans cette version du bot : "],
+        "Eng": ["Spawned in this bot's version :"]
     },
     "nombreDeCaptureShinyVersion": {
-        "Fr": ["Nombre de capture de shiny  de cette version"],
-        "Eng": ["Number of shiny captures of this version"]
+        "Fr": ["Shinies capturés dans cette version du bot : "],
+        "Eng": ["Shiny caught in this bot's version :"]
     },
     "nombreDeSpawnShinyVersion": {
-        "Fr": ["Nombre de d'apparition de shiny  de cette version"],
-        "Eng": ["Number of appearances of shiny of this version"]
+        "Fr": ["Shinies apparus dans cette version du bot : "],
+        "Eng": ["Shiny Spotted in this bot's version : "]
     },
     "pokemonLeastCaught": {
-        "Fr": ["Pokemon le moins capturé"],
-        "Eng": ["Least caught Pokemon"]
+        "Fr": ["Le moins capturé : "],
+        "Eng": ["Least caught : "]
     },
     "pokemonMostCaught": {
-        "Fr": ["Pokemon le plus capturé"],
-        "Eng": ["Most caught Pokemon"]
+        "Fr": ["Le plus capturé : "],
+        "Eng": ["Most caught Pokémon : "]
     },
     "pokemonLeastSpawn": {
-        "Fr": ["Pokemon le moins apparue"],
-        "Eng": ["Least spawn Pokemon"]
+        "Fr": ["Le moins apparu : "],
+        "Eng": ["Least spawn : "]
     },
     "pokemonMostSpawn": {
-        "Fr": ["Pokemon le plus apparue"],
-        "Eng": ["Most spawn Pokemon"]
+        "Fr": ["Le plus apparu : "],
+        "Eng": ["Most spawn : "]
     },
     "tooMuchPokemon": {
-        "Fr": ["Trop de Pokemon"],
-        "Eng": ["Too much Pokemon"]
+        "Fr": ["Trop de Pokémon"],
+        "Eng": ["Too much Pokémon"]
     },
 
 
     "nombreDeCaptureDuServer": {
-        "Fr": ["Nombre de capture du serveur"],
-        "Eng": ["Server catch count"]
+        "Fr": ["Nombre de capture du serveur : "],
+        "Eng": ["Server catch count : "]
     },
     "nombreDeCaptureShiny": {
-        "Fr": ["Nombre de capture en chromatique"],
-        "Eng": ["Number of caught in shiny"]
+        "Fr": ["Nombre de capture en chromatique : "],
+        "Eng": ["Number caught in shiny : "]
     },
     "ilFautUnNombre": {
         "Fr": ["Il fallait une valeur numérique de saisie."],

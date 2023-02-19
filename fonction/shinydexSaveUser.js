@@ -131,7 +131,7 @@ function getAllPokemonWithZeroCapture(idUser){
 
 function getNumberCapturePokemon(idUser, idPokemon){
     try {
-        return pokedexBDD[idUser][idPokemon]
+        return getSave(idUser)[idPokemon]
     } catch(error) {
 
         catchError.saveError(null, null, "shinydexSaveUser.js", "getNumberCapturePokemon", error)

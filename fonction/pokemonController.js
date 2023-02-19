@@ -69,10 +69,8 @@ function embedPokemon(Discord, message, pokemon, Client, idChannel, isShiny){
  */
 function spawnPokemon(Discord, message, Client){
     try {
-        let messageEnvoyer = message.content;
         let idServer = message.guild.id;
         let idChannel = message.channel.id;
-        
         
         if(spawnCount.getCount(idServer, idChannel) === 0){
             spawnCount.setMaxRandom(idServer, idChannel)
@@ -166,7 +164,7 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     return
                 }else{
     
-                    interaction.channel.send(language.getText(interaction.guild.id, "failCatchGoodPokemonPart1")+" "+ interaction.member.user.username +" "+ language.getText(interaction.guild.id, "failCatchGoodPokemonPart2")+" "+ optionString+".")
+                    interaction.channel.send(language.getText(interaction.guild.id, "failCatchGoodPokemonPart1")+" "+ interaction.member.user.username +""+ language.getText(interaction.guild.id, "failCatchGoodPokemonPart2")+" "+ optionString+".")
                     return
                     
                 }
@@ -192,7 +190,7 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
     try {
         nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
         
-        if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
+        if(variableGlobal.valeurMaxEvent>= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
             eventChoice.eventSelect("avant", message.guild.id, Client)
     
             return("event")
@@ -312,7 +310,7 @@ function generateFiledRandomStat(idUser, idGuild){
         if(listPokemonShinyUncatch.length <= 0){
             field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
         } else {
-            field.push({ name: language.getText(idGuild,"pokemonManquant")+ " shiny", value: pokeData[listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
+            field.push({ name: language.getText(idGuild,"pokemonManquantShiny"), value: pokeData[listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
         }
     
         field.push({ name: language.getText(idGuild,"nombreDeCapture"), value: ""+savePokemonUser.getCountAllPokemon(idUser) , inline: true})
