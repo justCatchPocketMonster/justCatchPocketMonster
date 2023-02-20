@@ -1,0 +1,57 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 12,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 165,
+                "name": {
+                    "nameEng": "Ledyba",
+                    "nameFr": "Coxy"
+                },
+                "typeListEng": [
+                    "Bug",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0165-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 17,
+        "nbCountActuel": 9,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 164,
+                "name": {
+                    "nameEng": "Noctowl",
+                    "nameFr": "Noarfang"
+                },
+                "typeListEng": [
+                    "Normal",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0164-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}

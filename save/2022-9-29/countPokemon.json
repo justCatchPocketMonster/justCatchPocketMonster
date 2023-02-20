@@ -1,0 +1,56 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 10,
+        "nbCountActuel": 7,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 299,
+                "name": {
+                    "nameEng": "Nosepass",
+                    "nameFr": "Tarinor"
+                },
+                "typeListEng": [
+                    "Rock"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0299-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 14,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 165,
+                "name": {
+                    "nameEng": "Ledyba",
+                    "nameFr": "Coxy"
+                },
+                "typeListEng": [
+                    "Bug",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0165-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 20,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {}
+    }
+}

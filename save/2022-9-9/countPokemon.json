@@ -1,0 +1,52 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 10,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 103,
+                "name": {
+                    "nameEng": "Exeggutor",
+                    "nameFr": "Noadkoko"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0103-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 12,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 18,
+                "name": {
+                    "nameEng": "Pidgeot",
+                    "nameFr": "Roucarnage"
+                },
+                "typeListEng": [
+                    "Normal",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0018-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}

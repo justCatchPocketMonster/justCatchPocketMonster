@@ -1,0 +1,1465 @@
+[
+    {
+        "id": 722,
+        "name": {
+            "nameEng": "Rowlet",
+            "nameFr": "Brindibou"
+        },
+        "typeListEng": [
+            "Grass",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0722-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 723,
+        "name": {
+            "nameEng": "Dartrix",
+            "nameFr": "Efflèche"
+        },
+        "typeListEng": [
+            "Grass",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0723-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 724,
+        "name": {
+            "nameEng": "Decidueye",
+            "nameFr": "Archéduc"
+        },
+        "typeListEng": [
+            "Grass",
+            "Ghost"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0724-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 725,
+        "name": {
+            "nameEng": "Litten",
+            "nameFr": "Flamiaou"
+        },
+        "typeListEng": [
+            "Fire"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0725-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 726,
+        "name": {
+            "nameEng": "Torracat",
+            "nameFr": "Matoufeu"
+        },
+        "typeListEng": [
+            "Fire"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0726-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 727,
+        "name": {
+            "nameEng": "Incineroar",
+            "nameFr": "Félinferno"
+        },
+        "typeListEng": [
+            "Fire",
+            "Dark"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0727-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 728,
+        "name": {
+            "nameEng": "Popplio",
+            "nameFr": "Otaquin"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0728-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 729,
+        "name": {
+            "nameEng": "Brionne",
+            "nameFr": "Otarlette"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0729-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 730,
+        "name": {
+            "nameEng": "Primarina",
+            "nameFr": "Oratoria"
+        },
+        "typeListEng": [
+            "Water",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0730-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 731,
+        "name": {
+            "nameEng": "Pikipek",
+            "nameFr": "Picassaut"
+        },
+        "typeListEng": [
+            "Normal",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0731-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 732,
+        "name": {
+            "nameEng": "Trumbeak",
+            "nameFr": "Piclairon"
+        },
+        "typeListEng": [
+            "Normal",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0732-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 733,
+        "name": {
+            "nameEng": "Toucannon",
+            "nameFr": "Bazoucan"
+        },
+        "typeListEng": [
+            "Normal",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0733-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 734,
+        "name": {
+            "nameEng": "Yungoos",
+            "nameFr": "Manglouton"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0734-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 735,
+        "name": {
+            "nameEng": "Gumshoos",
+            "nameFr": "Argouste"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0735-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 736,
+        "name": {
+            "nameEng": "Grubbin",
+            "nameFr": "Larvibule"
+        },
+        "typeListEng": [
+            "Bug"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0736-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 737,
+        "name": {
+            "nameEng": "Charjabug",
+            "nameFr": "Chrysapile"
+        },
+        "typeListEng": [
+            "Bug",
+            "Electric"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0737-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 738,
+        "name": {
+            "nameEng": "Vikavolt",
+            "nameFr": "Lucanon"
+        },
+        "typeListEng": [
+            "Bug",
+            "Electric"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0738-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 739,
+        "name": {
+            "nameEng": "Crabrawler",
+            "nameFr": "Crabagarre"
+        },
+        "typeListEng": [
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0739-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 740,
+        "name": {
+            "nameEng": "Crabominable",
+            "nameFr": "Crabominable"
+        },
+        "typeListEng": [
+            "Fighting",
+            "Ice"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0740-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 741,
+        "name": {
+            "nameEng": "Oricorio",
+            "nameFr": "Plumeline"
+        },
+        "typeListEng": [
+            "Fire",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0741-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 742,
+        "name": {
+            "nameEng": "Cutiefly",
+            "nameFr": "Bombydou"
+        },
+        "typeListEng": [
+            "Bug",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0742-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 743,
+        "name": {
+            "nameEng": "Ribombee",
+            "nameFr": "Rubombelle"
+        },
+        "typeListEng": [
+            "Bug",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0743-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 744,
+        "name": {
+            "nameEng": "Rockruff",
+            "nameFr": "Rocabot"
+        },
+        "typeListEng": [
+            "Rock"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0744-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 745,
+        "name": {
+            "nameEng": "Lycanroc",
+            "nameFr": "Lougaroc"
+        },
+        "typeListEng": [
+            "Rock"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0745-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 746,
+        "name": {
+            "nameEng": "Wishiwashi",
+            "nameFr": "Froussardine"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0746-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 747,
+        "name": {
+            "nameEng": "Mareanie",
+            "nameFr": "Vorastérie"
+        },
+        "typeListEng": [
+            "Poison",
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0747-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 748,
+        "name": {
+            "nameEng": "Toxapex",
+            "nameFr": "Prédastérie"
+        },
+        "typeListEng": [
+            "Poison",
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0748-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 749,
+        "name": {
+            "nameEng": "Mudbray",
+            "nameFr": "Tiboudet"
+        },
+        "typeListEng": [
+            "Ground"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0749-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 750,
+        "name": {
+            "nameEng": "Mudsdale",
+            "nameFr": "Bourrinos"
+        },
+        "typeListEng": [
+            "Ground"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0750-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 751,
+        "name": {
+            "nameEng": "Dewpider",
+            "nameFr": "Araqua"
+        },
+        "typeListEng": [
+            "Water",
+            "Bug"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0751-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 752,
+        "name": {
+            "nameEng": "Araquanid",
+            "nameFr": "Tarenbulle"
+        },
+        "typeListEng": [
+            "Water",
+            "Bug"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0752-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 753,
+        "name": {
+            "nameEng": "Fomantis",
+            "nameFr": "Mimantis"
+        },
+        "typeListEng": [
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0753-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 754,
+        "name": {
+            "nameEng": "Lurantis",
+            "nameFr": "Floramantis"
+        },
+        "typeListEng": [
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0754-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 755,
+        "name": {
+            "nameEng": "Morelull",
+            "nameFr": "Spododo"
+        },
+        "typeListEng": [
+            "Grass",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0755-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 756,
+        "name": {
+            "nameEng": "Shiinotic",
+            "nameFr": "Lampignon"
+        },
+        "typeListEng": [
+            "Grass",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0756-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 757,
+        "name": {
+            "nameEng": "Salandit",
+            "nameFr": "Tritox"
+        },
+        "typeListEng": [
+            "Poison",
+            "Fire"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0757-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 758,
+        "name": {
+            "nameEng": "Salazzle",
+            "nameFr": "Malamandre"
+        },
+        "typeListEng": [
+            "Poison",
+            "Fire"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0758-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 759,
+        "name": {
+            "nameEng": "Stufful",
+            "nameFr": "Nounourson"
+        },
+        "typeListEng": [
+            "Normal",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0759-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 760,
+        "name": {
+            "nameEng": "Bewear",
+            "nameFr": "Chelours"
+        },
+        "typeListEng": [
+            "Normal",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0760-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 761,
+        "name": {
+            "nameEng": "Bounsweet",
+            "nameFr": "Croquine"
+        },
+        "typeListEng": [
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0761-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 762,
+        "name": {
+            "nameEng": "Steenee",
+            "nameFr": "Candine"
+        },
+        "typeListEng": [
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0762-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 763,
+        "name": {
+            "nameEng": "Tsareena",
+            "nameFr": "Sucreine"
+        },
+        "typeListEng": [
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0763-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 764,
+        "name": {
+            "nameEng": "Comfey",
+            "nameFr": "Guérilande"
+        },
+        "typeListEng": [
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0764-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 765,
+        "name": {
+            "nameEng": "Oranguru",
+            "nameFr": "Gouroutan"
+        },
+        "typeListEng": [
+            "Normal",
+            "Psychic"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0765-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 766,
+        "name": {
+            "nameEng": "Passimian",
+            "nameFr": "Quartermac"
+        },
+        "typeListEng": [
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0766-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 767,
+        "name": {
+            "nameEng": "Wimpod",
+            "nameFr": "Sovkipou"
+        },
+        "typeListEng": [
+            "Bug",
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0767-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 768,
+        "name": {
+            "nameEng": "Golisopod",
+            "nameFr": "Sarmuraï"
+        },
+        "typeListEng": [
+            "Bug",
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0768-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 769,
+        "name": {
+            "nameEng": "Sandygast",
+            "nameFr": "Bacabouh"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Ground"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0769-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 770,
+        "name": {
+            "nameEng": "Palossand",
+            "nameFr": "Trépassable"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Ground"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0770-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 771,
+        "name": {
+            "nameEng": "Pyukumuku",
+            "nameFr": "Concombaffe"
+        },
+        "typeListEng": [
+            "Water"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0771-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 772,
+        "name": {
+            "nameEng": "Type: Null",
+            "nameFr": "Type:0"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0772-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 773,
+        "name": {
+            "nameEng": "Silvally",
+            "nameFr": "Silvallié"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0773-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 774,
+        "name": {
+            "nameEng": "Minior",
+            "nameFr": "Météno"
+        },
+        "typeListEng": [
+            "Rock",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0774-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 775,
+        "name": {
+            "nameEng": "Komala",
+            "nameFr": "Dodoala"
+        },
+        "typeListEng": [
+            "Normal"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0775-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 776,
+        "name": {
+            "nameEng": "Turtonator",
+            "nameFr": "Boumata"
+        },
+        "typeListEng": [
+            "Fire",
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0776-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 777,
+        "name": {
+            "nameEng": "Togedemaru",
+            "nameFr": "Togedemaru"
+        },
+        "typeListEng": [
+            "Electric",
+            "Steel"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0777-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 778,
+        "name": {
+            "nameEng": "Mimikyu",
+            "nameFr": "Mimiqui"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Fairy"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0778-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 779,
+        "name": {
+            "nameEng": "Bruxish",
+            "nameFr": "Denticrisse"
+        },
+        "typeListEng": [
+            "Water",
+            "Psychic"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0779-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 780,
+        "name": {
+            "nameEng": "Drampa",
+            "nameFr": "Draïeul"
+        },
+        "typeListEng": [
+            "Normal",
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0780-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 781,
+        "name": {
+            "nameEng": "Dhelmise",
+            "nameFr": "Sinistrail"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Grass"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0781-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 782,
+        "name": {
+            "nameEng": "Jangmo-o",
+            "nameFr": "Bébécaille"
+        },
+        "typeListEng": [
+            "Dragon"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0782-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 783,
+        "name": {
+            "nameEng": "Hakamo-o",
+            "nameFr": "Écaïd"
+        },
+        "typeListEng": [
+            "Dragon",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0783-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 784,
+        "name": {
+            "nameEng": "Kommo-o",
+            "nameFr": "Ékaïser"
+        },
+        "typeListEng": [
+            "Dragon",
+            "Fighting"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0784-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 785,
+        "name": {
+            "nameEng": "Tapu Koko",
+            "nameFr": "Tokorico"
+        },
+        "typeListEng": [
+            "Electric",
+            "Fairy"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0785-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 786,
+        "name": {
+            "nameEng": "Tapu Lele",
+            "nameFr": "Tokopiyon"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Fairy"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0786-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 787,
+        "name": {
+            "nameEng": "Tapu Bulu",
+            "nameFr": "Tokotoro"
+        },
+        "typeListEng": [
+            "Grass",
+            "Fairy"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0787-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 788,
+        "name": {
+            "nameEng": "Tapu Fini",
+            "nameFr": "Tokopisco"
+        },
+        "typeListEng": [
+            "Water",
+            "Fairy"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0788-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 789,
+        "name": {
+            "nameEng": "Cosmog",
+            "nameFr": "Cosmog"
+        },
+        "typeListEng": [
+            "Psychic"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0789-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 790,
+        "name": {
+            "nameEng": "Cosmoem",
+            "nameFr": "Cosmovum"
+        },
+        "typeListEng": [
+            "Psychic"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0790-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 791,
+        "name": {
+            "nameEng": "Solgaleo",
+            "nameFr": "Solgaleo"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Steel"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0791-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 792,
+        "name": {
+            "nameEng": "Lunala",
+            "nameFr": "Lunala"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Ghost"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0792-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 793,
+        "name": {
+            "nameEng": "Nihilego",
+            "nameFr": "Zéroïd"
+        },
+        "typeListEng": [
+            "Rock",
+            "Poison"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0793-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 794,
+        "name": {
+            "nameEng": "Buzzwole",
+            "nameFr": "Mouscoto"
+        },
+        "typeListEng": [
+            "Bug",
+            "Fighting"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0794-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 795,
+        "name": {
+            "nameEng": "Pheromosa",
+            "nameFr": "Cancrelove"
+        },
+        "typeListEng": [
+            "Bug",
+            "Fighting"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0795-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 796,
+        "name": {
+            "nameEng": "Xurkitree",
+            "nameFr": "Câblifère"
+        },
+        "typeListEng": [
+            "Electric"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0796-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 797,
+        "name": {
+            "nameEng": "Celesteela",
+            "nameFr": "Bamboiselle"
+        },
+        "typeListEng": [
+            "Steel",
+            "Flying"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0797-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 798,
+        "name": {
+            "nameEng": "Kartana",
+            "nameFr": "Katagami"
+        },
+        "typeListEng": [
+            "Grass",
+            "Steel"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0798-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 799,
+        "name": {
+            "nameEng": "Guzzlord",
+            "nameFr": "Engloutyran"
+        },
+        "typeListEng": [
+            "Dark",
+            "Dragon"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0799-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 800,
+        "name": {
+            "nameEng": "Necrozma",
+            "nameFr": "Necrozma"
+        },
+        "typeListEng": [
+            "Psychic"
+        ],
+        "theType": "legendaire",
+        "imgName": [
+            "0800-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 801,
+        "name": {
+            "nameEng": "Magearna",
+            "nameFr": "Magearna"
+        },
+        "typeListEng": [
+            "Steel",
+            "Fairy"
+        ],
+        "theType": "fabuleux",
+        "imgName": [
+            "0801-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 802,
+        "name": {
+            "nameEng": "Marshadow",
+            "nameFr": "Marshadow"
+        },
+        "typeListEng": [
+            "Fighting",
+            "Ghost"
+        ],
+        "theType": "fabuleux",
+        "imgName": [
+            "0802-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 803,
+        "name": {
+            "nameEng": "Poipole",
+            "nameFr": "Vémini"
+        },
+        "typeListEng": [
+            "Poison"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0803-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 804,
+        "name": {
+            "nameEng": "Naganadel",
+            "nameFr": "Mandrillon"
+        },
+        "typeListEng": [
+            "Poison",
+            "Dragon"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0804-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 805,
+        "name": {
+            "nameEng": "Stakataka",
+            "nameFr": "Ama-Ama"
+        },
+        "typeListEng": [
+            "Rock",
+            "Steel"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0805-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 806,
+        "name": {
+            "nameEng": "Blacephalon",
+            "nameFr": "Pierroteknik"
+        },
+        "typeListEng": [
+            "Fire",
+            "Ghost"
+        ],
+        "theType": "ultraChimere",
+        "imgName": [
+            "0806-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 807,
+        "name": {
+            "nameEng": "Zeraora",
+            "nameFr": "Zeraora"
+        },
+        "typeListEng": [
+            "Electric"
+        ],
+        "theType": "fabuleux",
+        "imgName": [
+            "0807-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 808,
+        "name": {
+            "nameEng": "Meltan",
+            "nameFr": "Meltan"
+        },
+        "typeListEng": [
+            "Steel"
+        ],
+        "theType": "fabuleux",
+        "imgName": [
+            "0808-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 809,
+        "name": {
+            "nameEng": "Melmetal",
+            "nameFr": "Melmetal"
+        },
+        "typeListEng": [
+            "Steel"
+        ],
+        "theType": "fabuleux",
+        "imgName": [
+            "0809-000"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    }
+]

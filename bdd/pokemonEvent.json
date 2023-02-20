@@ -1,0 +1,73 @@
+[
+    {
+        "id" : 0,
+        "nom": "",
+        "description": "",
+        "rarity": "",
+        "type": "",
+        "color": "",
+        "quand": "",
+        "image" : ""
+    },
+    {
+        "id" : 1,
+        "nom": "eventMontagnardTitre",
+        "description": "eventMontagnardDesc",
+        "type": "justEmbed",
+        "color": "734101",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0001-000"
+    },
+    {
+        "id" : 2,
+        "nom": "eventSandwichVideSmolTitre",
+        "description": "eventSandwichVideSmolDesc",
+        "type": "justEmbed",
+        "color": "13FF00",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0007-000"
+    },
+    {
+        "id" : 3,
+        "nom": "eventCuisineTitre",
+        "description": "eventCuisineDesc",
+        "type": "justEmbed",
+        "color": "FFFFFF",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0003-000"
+    },
+    {
+        "id" : 4,
+        "nom": "eventScientifiqueTitre",
+        "description": "eventScientifiqueDesc",
+        "type": "justEmbed",
+        "color": "FFFFFF",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0008-000"
+    },
+    {
+        "id" : 5,
+        "nom": "eventSandwichTitre",
+        "description": "eventSandwichDesc",
+        "type": "justEmbed",
+        "color": "F6A760",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0005-000"
+    },
+    {
+        "id" : 6,
+        "nom": "eventHackertitre",
+        "description": "eventHackerDesc",
+        "type": "justEmbed",
+        "color": "FDFD96",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0009-000"
+    }
+
+]

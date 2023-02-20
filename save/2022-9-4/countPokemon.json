@@ -1,0 +1,52 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 10,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 177,
+                "name": {
+                    "nameEng": "Natu",
+                    "nameFr": "Natu"
+                },
+                "typeListEng": [
+                    "Psychic",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0177-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 16,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 93,
+                "name": {
+                    "nameEng": "Haunter",
+                    "nameFr": "Spectrum"
+                },
+                "typeListEng": [
+                    "Ghost",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0093-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true
+            }
+        }
+    }
+}

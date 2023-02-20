@@ -1,0 +1,43 @@
+{
+    "993648961544011917": {
+        "nbCountMax": 8,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "994242338081746954": null,
+            "994234895121518753": null,
+            "994234528455462942": null,
+            "994241909457436762": null
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 6,
+        "nbCountActuel": 2,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 134,
+                "nameEng": "Vaporeon",
+                "nameFr": "Aquali",
+                "typeListEng": [
+                    "Water"
+                ],
+                "typeListFr": [
+                    "Eau"
+                ],
+                "theType": "ordinaire",
+                "imgAdress": [
+                    "./src/image/pokeHome/0134-000.png"
+                ],
+                "imgName": [
+                    "0134-000.png"
+                ]
+            }
+        }
+    },
+    "405443913864839188": {
+        "nbCountMax": 14,
+        "nbCountActuel": 13,
+        "pokemonPresentActuel": {
+            "996549061530361967": null
+        }
+    }
+}
