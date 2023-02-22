@@ -4,8 +4,51 @@ const saveServer = require("./pokedexSaveServer")
 const fs = require("fs");
 const catchError = require("./catchError")
 
-
-
+function defaultStat(){
+    return{
+        "gen" : {
+            "1":variableGlobal.gen1,
+            "2":variableGlobal.gen2,
+            "3":variableGlobal.gen3,
+            "4":variableGlobal.gen4,
+            "5":variableGlobal.gen5,
+            "6":variableGlobal.gen6,
+            "7":variableGlobal.gen7,
+            "8":variableGlobal.gen8,
+            "9":variableGlobal.gen9,
+        },
+        "type" : {
+            "acier" : variableGlobal.acier,
+            "dragon" : variableGlobal.dragon,
+            "electrik" : variableGlobal.electrik,
+            "feu" : variableGlobal.feu,
+            "insecte" : variableGlobal.insecte,
+            "plante" : variableGlobal.plante,
+            "psy" : variableGlobal.psy,
+            "sol" : variableGlobal.sol,
+            "tenebres" : variableGlobal.tenebres,
+            "combat" : variableGlobal.combat,
+            "eau" : variableGlobal.eau,
+            "fee" : variableGlobal.fee,
+            "glace" : variableGlobal.glace,
+            "normal" : variableGlobal.normal,
+            "poison" : variableGlobal.poison,
+            "roche" : variableGlobal.roche,
+            "spectre" : variableGlobal.spectre,
+            "vol" : variableGlobal.vol
+        },
+        "rarity" : {
+            "normal": variableGlobal.valeurMaxOrdinaire ,
+            "legendaire": variableGlobal.valeurMaxLegendaire ,
+            "fabuleux": variableGlobal.valeurMaxFabuleux 
+        },
+        "shiny" : variableGlobal.tauxMaxShiny,
+        "timer": false,
+        "whatEvent": false
+    }
+}
+/*
+TODO: montre ça au prof je comprend que dalle de la logique.
 const defaultStat = {
     "gen" : {
         "1":variableGlobal.gen1,
@@ -47,6 +90,7 @@ const defaultStat = {
     "timer": false,
     "whatEvent": false
 }
+*/
 
 function changeRarity(idServer,theRarityChoice, valueLessAll, timeInSec, event){
     try{
@@ -147,7 +191,7 @@ function changeShiny(idServer, valueToDivise, timeInSec, event){
 
 function createResetEventStat(idServer){
     try{
-        bddEventStat[idServer] = defaultStat;
+        bddEventStat[idServer] = defaultStat();
         SaveBdd();
     } catch(e) {
 
@@ -186,25 +230,31 @@ function getStat(idServer, generalStat, specificStat){
     }
 }
 
+function resetAtZero(key){
+    statDefaultModificable = defaultStat();
+
+
+    if(saveServer.getCharmChroma(key)["charmeChroma"]){
+        statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
+    }
+
+    bddEventStat[key] = statDefaultModificable;
+    SaveBdd();
+}
+
 
 async function time(){
     try{
-    
         for (const [key, value] of Object.entries(bddEventStat)) {
+            
 
             if(bddEventStat[key]["timer"] !== false){
                 bddEventStat[key]["timer"]--;
                 SaveBdd();
 
                 if(bddEventStat[key]["timer"] <= 0){
-                    console.log("normalement je passe par la")
-                    statDefaultModificable = defaultStat;
-                    if(saveServer.getCharmChroma(key)["charmeChroma"]){
-                        statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
-                    }
-
-                    bddEventStat[key] = statDefaultModificable;
-                    SaveBdd();
+                    
+                    resetAtZero(key);
                 }
                 
             }
