@@ -5,10 +5,10 @@ function connexion(Discord, Client){
 
     try{
         //vrai token
-        //let token = "OTgyOTg4NzQwMjcwMTIwOTYw.G8XY_h.BaaOJSAoxnuaBNlLoCSWyVpjnYTHpnZLueFils";
+        //let token = "";
 
         //token de teste
-        let token = "OTcyODk0MTg1MDM4NDI2MTEy.GvHgE6.I84o58L0aeIu1TN3i_GYOeQN20Zq5Wz-uNiPW4";
+        let token = "";
 
         Client.on('ready', () => {
             console.log("Je suis fonctionnel")
