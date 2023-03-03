@@ -177,7 +177,7 @@ function activeEventBefore(event, idServer, Client){
                 
 
 
-                event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
+                event["textEffect"] = language.getText(idServer, "auraType")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
 
                 eventJustEmbed(event,  idServer, Client);
 

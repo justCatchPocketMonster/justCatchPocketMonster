@@ -297,6 +297,10 @@
         "Fr": ["Aura de chromatique de niveau "],
         "Eng": ["Level of shiny Aura "]
     },
+    "auraType" : {
+        "Fr": ["Aura de type de niveau "],
+        "Eng": ["Level of type Aura "]
+    },
     "ofThisGeneration" : {
         "Fr": ["Pour la génération "],
         "Eng": ["For the generation "]
