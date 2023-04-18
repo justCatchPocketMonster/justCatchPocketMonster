@@ -84,7 +84,7 @@ Client.on("guildCreate", guild =>{
  * quand une interaction est lancé
  */
 Client.on("interactionCreate", interaction => {
-    try{
+		 try{
 
         if(interaction.isCommand()){
             if(interaction.commandName === "spawn"){
@@ -168,11 +168,12 @@ Client.on("interactionCreate", interaction => {
             }
 
 
+
+            
             if(interaction.commandName == "test"){
-
-                eventChoice.eventSelect("avant", interaction.guild.id, Client)
-
+                testAllPokemon.listAllPokemon(Discord, interaction, Client, interaction.channel.id)
             }
+
 
 
 
@@ -191,6 +192,25 @@ Client.on("interactionCreate", interaction => {
         console.error(e)
     }
 })
+
+Client.on('disconnect', () => {
+    const channelId = "994614918483546152";
+  const channel = Client.channels.cache.get(channelId);
+  if (channel) {
+    channel.send('Je suis en train de m\'éteindre...');
+  } else {
+    console.log(`Impossible de trouver le salon avec l'ID ${channelId}`);
+  }
+
+});
+process.on('SIGINT', function() {
+  client.destroy()
+    .then(() => {
+      console.log('Déconnexion réussie');
+      process.exit(0);
+    })
+    .catch(console.error);
+});
 
 /**
  * quand le bot est prêt

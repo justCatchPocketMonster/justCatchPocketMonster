@@ -129,6 +129,9 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     if(shinyAfterEvent){
                         saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                     }
+                    if(shinyAfterEvent == true && spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"] == false){
+                        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent)
+                    }
                     stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent)
                     if(spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] != spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"]){
                         let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameFr"] +"/"+ spawnCount.getPokemonPresent(idServer, idChannel)["name"]["nameEng"];
@@ -190,7 +193,7 @@ function choiceTypeOfSpawn(Discord, message, pokemon, Client, idChannelRandom, i
     try {
         nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
         
-        if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
+        if(variableGlobal.valeurMaxEvent>= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
             eventChoice.eventSelect("avant", message.guild.id, Client)
     
             return("event")

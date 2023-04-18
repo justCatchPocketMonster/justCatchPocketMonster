@@ -1,13 +1,13 @@
+const variableGlobal = require("../parameters/variableGlobal")
 const catchError = require("./catchError")
 //sert a la connexion sur discord
 function connexion(Discord, Client){
-
     try{
         //vrai token
-        //let token = "";
+        let token = "OTgyOTg4NzQwMjcwMTIwOTYw.GsOf84.dJivLtJpNT-ahlNLEBA887OUJ87yHW2MYa3uVk";
 
         //token de teste
-        let token = "OTcyODk0MTg1MDM4NDI2MTEy.G16x6C.sUiRrKCrJ7UVlnsDzqtYzZqsf87B5T826oSu-c";
+        //let token = "OTcyODk0MTg1MDM4NDI2MTEy.GvHgE6.I84o58L0aeIu1TN3i_GYOeQN20Zq5Wz-uNiPW4";
 
         Client.on('ready', () => {
             console.log("Je suis fonctionnel")

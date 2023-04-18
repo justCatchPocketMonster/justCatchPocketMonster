@@ -56,7 +56,6 @@ function activeEventBefore(event, idServer, Client){
 
         let numberRandom
         let level
-        console.log(event["id"])
         switch(event["id"]){
             case 1:
 
@@ -65,16 +64,16 @@ function activeEventBefore(event, idServer, Client){
 
                 if(100 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "legendaire", 50, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 50, 1800, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "legendaire", 25, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 25, 1800, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "legendaire", 10, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 10, 1800, event)
                     
 
                 }
@@ -102,16 +101,16 @@ function activeEventBefore(event, idServer, Client){
                 theGenChoice++
                 if(100 <= numberRandom){
                     level = 3
-                    statEvent.changeGen(idServer, theGenChoice, 20, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 20, 1800, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeGen(idServer, theGenChoice, 10, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 10, 1800, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeGen(idServer, theGenChoice, 5, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 5, 1800, event)
                     
 
                 }
@@ -129,16 +128,16 @@ function activeEventBefore(event, idServer, Client){
 
                 if(100 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "fabuleux", 10, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 10, 1800, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "fabuleux", 5, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 5, 1800, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "fabuleux", 2, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 2, 1800, event)
                     
 
                 }
@@ -156,21 +155,21 @@ function activeEventBefore(event, idServer, Client){
             
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
-
+                
                 let theTypeChoice = fonctionJs.getRandomInt(arrayOfType.length)
-                theTypeChoice++
+
                 if(100 <= numberRandom){
                     level = 3
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, 1800, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, 1800, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, 1800, event)
                     
 
                 }
@@ -190,16 +189,16 @@ function activeEventBefore(event, idServer, Client){
 
                 if(100 <= numberRandom){
                     level = 3
-                    statEvent.changeShiny(idServer, 2, 60, event)
+                    statEvent.changeShiny(idServer, 2, 1800, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeShiny(idServer, 1.5, 60, event)
+                    statEvent.changeShiny(idServer, 1.5, 1800, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeShiny(idServer, 1.25, 60, event)
+                    statEvent.changeShiny(idServer, 1.25, 1800, event)
                     
 
                 }

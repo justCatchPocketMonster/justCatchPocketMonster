@@ -13,7 +13,6 @@ async function pagination(interactionSlash, interaction, pages, pageParDefaut = 
     try {
         //probleme avec interaction
         var idUser = interactionSlash.member.id
-
     
         if(pageParDefaut < 1){
             pageParDefaut = 1;

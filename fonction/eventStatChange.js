@@ -233,7 +233,6 @@ function getStat(idServer, generalStat, specificStat){
 function resetAtZero(key){
     statDefaultModificable = defaultStat();
 
-
     if(saveServer.getCharmChroma(key)["charmeChroma"]){
         statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
     }

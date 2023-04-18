@@ -1,7 +1,182 @@
 {
+    "405443913864839188": {
+        "nbCountMax": 11,
+        "nbCountActuel": 10,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 407,
+                "name": {
+                    "nameEng": "Roserade",
+                    "nameFr": "Roserade"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0407-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-3-18",
+                "heure": "11:44:46"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 8,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "994614918483546152": null
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 9,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 71,
+                "name": {
+                    "nameEng": "Victreebel",
+                    "nameFr": "Empiflor"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0071-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-3-11",
+                "heure": "17:43:22"
+            }
+        }
+    },
     "972893923359998053": {
-        "nbCountMax": 14,
+        "nbCountMax": 9,
         "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 198,
+                "name": {
+                    "nameEng": "Murkrow",
+                    "nameFr": "Cornèbre"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0198-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2022-10-16",
+                "heure": "22:43:6"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 13,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "1046761688344580096": null
+        }
+    },
+    "993648961544011917": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
         "pokemonPresentActuel": {}
+    },
+    "807721959608549416": {
+        "nbCountMax": 18,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 621,
+                "name": {
+                    "nameEng": "Druddigon",
+                    "nameFr": "Drakkarmin"
+                },
+                "typeListEng": [
+                    "Dragon"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0621-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-3-11",
+                "heure": "19:55:39"
+            }
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 8,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1075093451705696286": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-16",
+                "heure": "0:58:29"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 9,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 183,
+                "name": {
+                    "nameEng": "Marill",
+                    "nameFr": "Marill"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Fairy"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0183-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-3-18",
+                "heure": "13:36:50"
+            }
+        }
     }
-}}
+}

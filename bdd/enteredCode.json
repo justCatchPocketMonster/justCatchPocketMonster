@@ -6,7 +6,11 @@
         "15000SPAWNS",
         "20000SPAWNS",
         "5000CAUGHT",
-        "GEN9"
+        "GEN9",
+        "40000SPAWNS",
+        "FIRSTAT500",
+        "50000SPAWNS",
+        "10000CATCHS"
     ],
     "299953631057149962": [
         "LeBotADesBugs",
@@ -17,7 +21,12 @@
         "5000CAUGHT",
         "GEN9",
         "30000SPAWNS",
-        "VERSION1.3"
+        "VERSION1.3",
+        "40000SPAWNS",
+        "FIRSTAT500",
+        "50000SPAWNS",
+        "10000CATCHS",
+        "60000SPAWNS"
     ],
     "398461637570592778": [
         "LeBotADesBugs",
@@ -28,13 +37,20 @@
         "5000CAUGHT",
         "GEN9",
         "30000SPAWNS",
-        "VERSION1.3"
+        "VERSION1.3",
+        "40000SPAWNS",
+        "FIRSTAT500",
+        "50000SPAWNS",
+        "10000CATCHS"
     ],
     "475247277422673920": [
-        "LeBotADesBugs"
+        "LeBotADesBugs",
+        "FIRSTAT500"
     ],
     "395224718501871627": [
-        "LeBotADesBugs"
+        "LeBotADesBugs",
+        "40000SPAWNS",
+        "FIRSTAT500"
     ],
     "926231053285347338": [
         "LeBotADesBugs"
@@ -51,5 +67,22 @@
     ],
     "396343509956952064": [
         "30000SPAWNS"
+    ],
+    "771763122582585395": [
+        "40000SPAWNS",
+        "GEN9"
+    ],
+    "556846777953681427": [
+        "40000SPAWNS",
+        "GEN9"
+    ],
+    "265839062013706250": [
+        "40000SPAWNS",
+        "FIRSTAT500"
+    ],
+    "282476289477181450": [
+        "40000SPAWNS",
+        "GEN9",
+        "FIRSTAT500"
     ]
 }

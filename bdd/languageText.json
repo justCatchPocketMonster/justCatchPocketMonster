@@ -289,6 +289,10 @@
         "Fr": ["Aura fabuleux de niveau "],
         "Eng": ["Level of Mythical Aura "]
     },
+    "auraType" : {
+        "Fr": ["Aura de type de niveau "],
+        "Eng": ["Level of type Aura "]
+    },
     "auraGeneration" : {
         "Fr": ["Aura de génération de niveau "],
         "Eng": ["Level of Generation Aura "]
@@ -296,10 +300,6 @@
     "auraChroma" : {
         "Fr": ["Aura de chromatique de niveau "],
         "Eng": ["Level of shiny Aura "]
-    },
-    "auraType" : {
-        "Fr": ["Aura de type de niveau "],
-        "Eng": ["Level of type Aura "]
     },
     "ofThisGeneration" : {
         "Fr": ["Pour la génération "],

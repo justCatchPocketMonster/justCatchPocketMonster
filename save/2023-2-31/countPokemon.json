@@ -1,0 +1,226 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 17,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 36,
+                "name": {
+                    "nameEng": "Clefable",
+                    "nameFr": "Mélodelfe"
+                },
+                "typeListEng": [
+                    "Fairy"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0036-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-31",
+                "heure": "16:10:38"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 15,
+        "nbCountActuel": 12,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 247,
+                "name": {
+                    "nameEng": "Pupitar",
+                    "nameFr": "Ymphect"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0247-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-31",
+                "heure": "17:35:31"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 15,
+        "nbCountActuel": 9,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 499,
+                "name": {
+                    "nameEng": "Pignite",
+                    "nameFr": "Grotichon"
+                },
+                "typeListEng": [
+                    "Fire",
+                    "Fighting"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0499-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-29",
+                "heure": "14:15:51"
+            }
+        }
+    },
+    "972893923359998053": {
+        "nbCountMax": 9,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 198,
+                "name": {
+                    "nameEng": "Murkrow",
+                    "nameFr": "Cornèbre"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0198-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2022-10-16",
+                "heure": "22:43:6"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 18,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 102,
+                "name": {
+                    "nameEng": "Exeggcute",
+                    "nameFr": "Noeunoeuf"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0102-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-31",
+                "heure": "19:18:28"
+            }
+        }
+    },
+    "993648961544011917": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    },
+    "807721959608549416": {
+        "nbCountMax": 19,
+        "nbCountActuel": 7,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 240,
+                "name": {
+                    "nameEng": "Magby",
+                    "nameFr": "Magby"
+                },
+                "typeListEng": [
+                    "Fire"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0240-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-31",
+                "heure": "16:41:14"
+            }
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 8,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1075093451705696286": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-16",
+                "heure": "0:58:29"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 19,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 124,
+                "name": {
+                    "nameEng": "Jynx",
+                    "nameFr": "Lippoutou"
+                },
+                "typeListEng": [
+                    "Ice",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0124-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-2-31",
+                "heure": "13:55:45"
+            }
+        }
+    },
+    "1090011324555214969": {
+        "nbCountMax": 19,
+        "nbCountActuel": 15,
+        "pokemonPresentActuel": {}
+    }
+}
