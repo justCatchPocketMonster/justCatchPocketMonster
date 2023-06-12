@@ -4,10 +4,10 @@ const catchError = require("./catchError")
 function connexion(Discord, Client){
     try{
         //vrai token
-        let token = "OTgyOTg4NzQwMjcwMTIwOTYw.GsOf84.dJivLtJpNT-ahlNLEBA887OUJ87yHW2MYa3uVk";
+        //let token = "OTgyOTg4NzQwMjcwMTIwOTYw.GsOf84.dJivLtJpNT-ahlNLEBA887OUJ87yHW2MYa3uVk";
 
         //token de teste
-        //let token = "OTcyODk0MTg1MDM4NDI2MTEy.GvHgE6.I84o58L0aeIu1TN3i_GYOeQN20Zq5Wz-uNiPW4";
+        let token = "OTgyOTg4NzQwMjcwMTIwOTYw.Gn1BcS.HMQSU15r2Li4enG82YKQ6K91fEaYPAh_8UTYvM";
 
         Client.on('ready', () => {
             console.log("Je suis fonctionnel")

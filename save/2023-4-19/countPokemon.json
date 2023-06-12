@@ -1,0 +1,227 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 14,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 429,
+                "name": {
+                    "nameEng": "Mismagius",
+                    "nameFr": "Magirêve"
+                },
+                "typeListEng": [
+                    "Ghost"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0429-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-18",
+                "heure": "20:10:22"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 16,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 476,
+                "name": {
+                    "nameEng": "Probopass",
+                    "nameFr": "Tarinorme"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Steel"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0476-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-19",
+                "heure": "1:5:7"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 15,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 527,
+                "name": {
+                    "nameEng": "Woobat",
+                    "nameFr": "Chovsourir"
+                },
+                "typeListEng": [
+                    "Psychic",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0527-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-9",
+                "heure": "10:21:51"
+            }
+        }
+    },
+    "972893923359998053": {
+        "nbCountMax": 9,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 198,
+                "name": {
+                    "nameEng": "Murkrow",
+                    "nameFr": "Cornèbre"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0198-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2022-10-16",
+                "heure": "22:43:6"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 13,
+        "nbCountActuel": 9,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 607,
+                "name": {
+                    "nameEng": "Litwick",
+                    "nameFr": "Funécire"
+                },
+                "typeListEng": [
+                    "Ghost",
+                    "Fire"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0607-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-18",
+                "heure": "22:25:36"
+            }
+        }
+    },
+    "993648961544011917": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    },
+    "807721959608549416": {
+        "nbCountMax": 18,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 561,
+                "name": {
+                    "nameEng": "Sigilyph",
+                    "nameFr": "Cryptéro"
+                },
+                "typeListEng": [
+                    "Psychic",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0561-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-14",
+                "heure": "1:1:41"
+            }
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 8,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1075093451705696286": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-16",
+                "heure": "0:58:29"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 16,
+        "nbCountActuel": 15,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 564,
+                "name": {
+                    "nameEng": "Tirtouga",
+                    "nameFr": "Carapagos"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Rock"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0564-000"
+                ],
+                "gen": 5,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-17",
+                "heure": "20:15:42"
+            }
+        }
+    },
+    "1090011324555214969": {
+        "nbCountMax": 19,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    }
+}

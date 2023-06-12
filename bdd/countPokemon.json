@@ -1,62 +1,81 @@
 {
     "405443913864839188": {
-        "nbCountMax": 11,
-        "nbCountActuel": 10,
+        "nbCountMax": 14,
+        "nbCountActuel": 3,
         "pokemonPresentActuel": {
             "996549061530361967": {
-                "id": 407,
+                "id": 388,
                 "name": {
-                    "nameEng": "Roserade",
-                    "nameFr": "Roserade"
+                    "nameEng": "Grotle",
+                    "nameFr": "Boskara"
                 },
                 "typeListEng": [
-                    "Grass",
-                    "Poison"
+                    "Grass"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0407-000"
+                    "0388-000"
                 ],
                 "gen": 4,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2023-3-18",
-                "heure": "11:44:46"
+                "date": "2023-5-12",
+                "heure": "13:57:9"
             }
         }
     },
     "992210891426762872": {
-        "nbCountMax": 8,
-        "nbCountActuel": 3,
+        "nbCountMax": 18,
+        "nbCountActuel": 14,
         "pokemonPresentActuel": {
-            "994614918483546152": null
-        }
-    },
-    "360056084074987542": {
-        "nbCountMax": 9,
-        "nbCountActuel": 5,
-        "pokemonPresentActuel": {
-            "796144803611279360": {
-                "id": 71,
+            "994614918483546152": {
+                "id": 221,
                 "name": {
-                    "nameEng": "Victreebel",
-                    "nameFr": "Empiflor"
+                    "nameEng": "Piloswine",
+                    "nameFr": "Cochignon"
                 },
                 "typeListEng": [
-                    "Grass",
-                    "Poison"
+                    "Ice",
+                    "Ground"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0071-000"
+                    "0221-000"
                 ],
-                "gen": 1,
+                "gen": 2,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2023-3-11",
-                "heure": "17:43:22"
+                "date": "2023-5-11",
+                "heure": "16:24:3"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 11,
+        "nbCountActuel": 10,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 278,
+                "name": {
+                    "nameEng": "Wingull",
+                    "nameFr": "Goélise"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0278-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-5-5",
+                "heure": "1:32:57"
             }
         }
     },
@@ -88,10 +107,30 @@
         }
     },
     "767378842863140864": {
-        "nbCountMax": 13,
-        "nbCountActuel": 11,
+        "nbCountMax": 14,
+        "nbCountActuel": 8,
         "pokemonPresentActuel": {
-            "1046761688344580096": null
+            "1046761688344580096": {
+                "id": 396,
+                "name": {
+                    "nameEng": "Starly",
+                    "nameFr": "Étourmi"
+                },
+                "typeListEng": [
+                    "Normal",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0396-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-5-12",
+                "heure": "10:33:33"
+            }
         }
     },
     "993648961544011917": {
@@ -100,28 +139,29 @@
         "pokemonPresentActuel": {}
     },
     "807721959608549416": {
-        "nbCountMax": 18,
-        "nbCountActuel": 3,
+        "nbCountMax": 19,
+        "nbCountActuel": 18,
         "pokemonPresentActuel": {
             "1062806790569476237": {
-                "id": 621,
+                "id": 392,
                 "name": {
-                    "nameEng": "Druddigon",
-                    "nameFr": "Drakkarmin"
+                    "nameEng": "Infernape",
+                    "nameFr": "Simiabraz"
                 },
                 "typeListEng": [
-                    "Dragon"
+                    "Fire",
+                    "Fighting"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0621-000"
+                    "0392-000"
                 ],
-                "gen": 5,
+                "gen": 4,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2023-3-11",
-                "heure": "19:55:39"
+                "date": "2023-4-20",
+                "heure": "11:24:53"
             }
         }
     },
@@ -153,30 +193,37 @@
         }
     },
     "1050028719319818320": {
-        "nbCountMax": 9,
+        "nbCountMax": 11,
         "nbCountActuel": 5,
         "pokemonPresentActuel": {
             "1087441927399559188": {
-                "id": 183,
+                "id": 111,
                 "name": {
-                    "nameEng": "Marill",
-                    "nameFr": "Marill"
+                    "nameEng": "Rhyhorn",
+                    "nameFr": "Rhinocorne"
                 },
                 "typeListEng": [
-                    "Water",
-                    "Fairy"
+                    "Ground",
+                    "Rock"
                 ],
                 "theType": "ordinaire",
                 "imgName": [
-                    "0183-000"
+                    "0111-000"
                 ],
-                "gen": 2,
+                "gen": 1,
                 "differentSpawn": false,
                 "isShiny": false,
                 "capturable": true,
-                "date": "2023-3-18",
-                "heure": "13:36:50"
+                "date": "2023-5-9",
+                "heure": "19:27:31"
             }
+        }
+    },
+    "1090011324555214969": {
+        "nbCountMax": 13,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "1090011564163215471": null
         }
     }
 }

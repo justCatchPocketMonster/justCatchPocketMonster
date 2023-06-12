@@ -1,0 +1,227 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 19,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-25",
+                "heure": "19:35:10"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 17,
+        "nbCountActuel": 14,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 468,
+                "name": {
+                    "nameEng": "Togekiss",
+                    "nameFr": "Togekiss"
+                },
+                "typeListEng": [
+                    "Fairy",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0468-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-25",
+                "heure": "21:1:10"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 18,
+        "nbCountActuel": 8,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 434,
+                "name": {
+                    "nameEng": "Stunky",
+                    "nameFr": "Moufouette"
+                },
+                "typeListEng": [
+                    "Poison",
+                    "Dark"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0434-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-20",
+                "heure": "13:29:29"
+            }
+        }
+    },
+    "972893923359998053": {
+        "nbCountMax": 9,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 198,
+                "name": {
+                    "nameEng": "Murkrow",
+                    "nameFr": "Cornèbre"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0198-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2022-10-16",
+                "heure": "22:43:6"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 16,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 342,
+                "name": {
+                    "nameEng": "Crawdaunt",
+                    "nameFr": "Colhomard"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Dark"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0342-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-26",
+                "heure": "11:55:53"
+            }
+        }
+    },
+    "993648961544011917": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    },
+    "807721959608549416": {
+        "nbCountMax": 13,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 392,
+                "name": {
+                    "nameEng": "Infernape",
+                    "nameFr": "Simiabraz"
+                },
+                "typeListEng": [
+                    "Fire",
+                    "Fighting"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0392-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-20",
+                "heure": "11:24:53"
+            }
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 8,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1075093451705696286": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-16",
+                "heure": "0:58:29"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 12,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 289,
+                "name": {
+                    "nameEng": "Slaking",
+                    "nameFr": "Monaflèmit"
+                },
+                "typeListEng": [
+                    "Normal"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0289-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-25",
+                "heure": "13:59:36"
+            }
+        }
+    },
+    "1090011324555214969": {
+        "nbCountMax": 19,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    }
+}
