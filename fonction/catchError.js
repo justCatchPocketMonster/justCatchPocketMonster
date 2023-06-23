@@ -1,6 +1,8 @@
 const bddCatchError = require('../bdd/catchError.json')
 const fs = require("fs")
 const {Client} = require("discord.js")
+const lockfile = require('lockfile');
+const path = require('path');
 
 
 function saveError(idServer, idChannel,fileName, functionName, error){
@@ -29,11 +31,30 @@ function dateActuel(){
 }
 
 
-
 function SaveBdd(){
-    fs.writeFile("./bdd/catchError.json", JSON.stringify(bddCatchError, null, 4), (err)=> {
-        if (err)console.log("erreur")
-    })
+
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'catchError.lock');
+
+    
+
+
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'catchError.json'), JSON.stringify(bddCatchError, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    
+
 }
 
 module.exports = {saveError}

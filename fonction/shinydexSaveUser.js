@@ -5,6 +5,8 @@ const pokeData = require("../bdd/pokemon.json");
 const nbPokemon = (pokeData.length);
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 /**
  * Ajout +1 a l'index du pokemon dans la sauvegarde et créer la sauvegarde si elle n'existe pas et la met a jour si elle ne l'est pas
@@ -160,16 +162,32 @@ function getPercentageMaxMin(idUser, max, min){
 
 
 function SaveBdd(){
-    try {
-        fs.writeFile("./bdd/shinydexSaveUser.json", JSON.stringify(pokedexBDD, null, 4), (err)=> {
-            if (err)console.log("erreur")
-    
-        })
-    } catch(error) {
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'shinydexSaveUser.lock');
 
-        catchError.saveError(null, null, "shinydexSaveUser.js", "SaveBdd", error)
-        console.error(error)
+    
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'shinydexSaveUser.json'), JSON.stringify(pokedexBDD, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "shinydexSaveUser.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
 module.exports= {getNumberCapturePokemon, pokedex, getSave, createSaveUser, updateNumberPossibilitySave, getCountNational, getPercentageNational, getPercentageMaxMin, getCountMaxMin, getAllPokemonWithZeroCapture}

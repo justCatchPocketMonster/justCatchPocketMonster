@@ -43,7 +43,7 @@ function raritySelect(idServer){
         catchError.saveError(idServer, null, "PokemonObject.js", "raritySelect", e)
         console.error(e)
     }
-    
+
 }
 
 
@@ -162,13 +162,7 @@ function pokemonSelect(idServer){
 
         do{
             
-            arrayPokemonPass0 = pokemonChoiceNotOnlyEvent(arrayPokemon, variableGlobal.pokemonEvent)
-
-        }while(arrayPokemonPass0[0] === undefined)
-
-        do{
-            
-            arrayPokemonPass1 = pokemonChoiceGen(arrayPokemonPass0, generationSelect(idServer))
+            arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect(idServer))
 
         }while(arrayPokemonPass1[0] === undefined)
 
@@ -188,12 +182,39 @@ function pokemonSelect(idServer){
 
         let pokemonChoiced = arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))];
 
+        pokemonChoiced = pokemonIsHide(pokemonChoiced);
 
         return(pokemonChoiced)
 
     } catch(e) {
 
         catchError.saveError(idServer, null, "PokemonObject.js", "pokemonSelect", e)
+        console.error(e)
+    }
+}
+
+function pokemonIsHide(pokemonChoice){
+    
+    try{
+        randomNumber = fonctionJs.getRandomInt(100)
+
+        if(randomNumber == 1){
+            arrayPokemonPossible = variableGlobal.pokemonEvent;
+
+            pokemonEventChoice = fonctionJs.getRandomInt(arrayPokemonPossible.length)
+
+            pokemonEvent = pokeData.find(pokemon => arrayPokemonPossible[pokemonEventChoice] == pokemon.id)
+            
+            pokemonChoice["id"] = pokemonEvent["id"];
+            pokemonChoice["typeListEng"] = pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])
+        }
+
+        return pokemonChoice
+        
+
+    } catch(e) {
+
+        catchError.saveError(null, null, "PokemonObject.js", "pokemonIsHide", e)
         console.error(e)
     }
 }

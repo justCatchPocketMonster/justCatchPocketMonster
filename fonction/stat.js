@@ -7,6 +7,8 @@ var version = variableGlobal.version;
 const fs = require("fs")
 const Discord = require("discord.js")
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 
 /**
@@ -602,17 +604,32 @@ try {
     }
 }
 
-
 function SaveBdd(){
-try {
-        fs.writeFile("./bdd/stat.json", JSON.stringify(statBdd, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-} catch(error) {
 
-        catchError.saveError(null, null, "stat.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'stat.lock');
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'stat.json'), JSON.stringify(statBdd, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "stat.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
 module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList, embedStat}

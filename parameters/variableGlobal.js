@@ -32,7 +32,7 @@ const tauxMaxShiny = 4096;
 
 //pour modifier des stats d'apparition par génération
 //nombre de génération (multiplier par 100)
-const nbGeneration = 5
+const nbGeneration = 6
 //valeur max par gen
 const gen1 = 100
 const gen2 = 100

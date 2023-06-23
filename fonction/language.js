@@ -2,6 +2,8 @@ const languageBdd = require("../bdd/languageSelected.json")
 const languageTextBdd = require("../bdd/languageText.json")
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 function getText(idServer, nameText){
     try {
@@ -58,17 +60,32 @@ function getLanguage(idServer){
         console.error(error)
     }
 }
-
 function SaveBdd(){
-    try {
-        fs.writeFile("./bdd/languageSelected.json", JSON.stringify(languageBdd, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-    } catch(error) {
 
-        catchError.saveError(null, null, "language.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'languageSelected.lock');
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'languageSelected.json'), JSON.stringify(languageBdd, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "language.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
 module.exports = {getText, setLanguage, getLanguage}

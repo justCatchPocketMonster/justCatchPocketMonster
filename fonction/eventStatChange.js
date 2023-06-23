@@ -3,6 +3,8 @@ const bddEventStat = require("../bdd/actualEventStat.json");
 const saveServer = require("./pokedexSaveServer")
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 function defaultStat(){
     return{
@@ -271,12 +273,26 @@ async function time(){
 
 
 
-
 function SaveBdd(){
+
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'actualEventStat.lock');
+
     try{
-        fs.writeFile("./bdd/actualEventStat.json", JSON.stringify(bddEventStat, null, 4), (err)=> {
+        lockfile.lock(lockfilePath, {"retries": 1000, "retryWait": 1000}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'actualEventStat.json'), JSON.stringify(bddEventStat, null, 4), (err)=> {
             if (err)console.log("erreur")
-        })
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
     } catch(e) {
 
         catchError.saveError(null, null, "eventStatChange.js", "SaveBdd", e)

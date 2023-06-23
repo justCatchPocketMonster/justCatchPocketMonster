@@ -6,6 +6,8 @@ const maxmumCount = variableGlobal.maximumCount;
 var random = 0;
 const fs = require("fs")
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 
 
@@ -106,15 +108,33 @@ function verifPresenceCount(idServer, idChannel){
 
 
 function SaveBdd(){
-    try {
-        fs.writeFile("./bdd/countPokemon.json", JSON.stringify(bddCount, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-    } catch(error) {
 
-        catchError.saveError(null, null, "spawnCount.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'countPokemon.lock');
+
+    
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'countPokemon.json'), JSON.stringify(bddCount, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "spawnCount.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
 module.exports = {createCount, getPokemonPresent, getCount,getMaxRandom, setCount, setMaxRandom, setPokemonPresent}

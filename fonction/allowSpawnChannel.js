@@ -6,6 +6,8 @@ var fonction = require("./fonctionJs")
 const fs = require("fs");
 const { channel } = require("diagnostics_channel");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 
 function addChannelAllow(idChannel, idServer, channel){
@@ -67,6 +69,24 @@ function createServerAllow(idServerCreate){
     }
 }
 
+function idChannelExist(idChannel, idServer){
+    
+        try{
+    
+            createServerAllow(idServer)
+            if(allowSave[idServer].indexOf(idChannel) ===-1){
+                return false
+            } else{
+                return true
+            }
+            
+        } catch(e) {
+    
+            catchError.saveError(idServer, idChannel, "allowSpawnChannel.js", "idChannelExist", e)
+            console.error(e)
+        }
+}
+
 /**
  *ressort un salon aléatoirement ou undefined si inexistant
  */
@@ -91,14 +111,27 @@ function randomIdServer(idServer){
     
 }
 
-
 function SaveBdd(){
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'serversAllowThisChannel.lock');
+
+    
 
     try{
-
-        fs.writeFile("./bdd/serversAllowThisChannel.json", JSON.stringify(allowSave, null, 4), (err)=> {
+        lockfile.lock(lockfilePath, {"retries": 1000, "retryWait": 100}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'serversAllowThisChannel.json'), JSON.stringify(allowSave, null, 4), (err)=> {
             if (err)console.log("erreur")
-        })
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
     } catch(e) {
 
         catchError.saveError(null, null, "allowSpawnChannel.js", "SaveBdd", e)
@@ -106,4 +139,4 @@ function SaveBdd(){
     }
 }
 
-module.exports= {addChannelAllow, createServerAllow, deleteChannelAllow, randomIdServer}
+module.exports= {idChannelExist, addChannelAllow, createServerAllow, deleteChannelAllow, randomIdServer}

@@ -7,7 +7,7 @@ function connexion(Discord, Client){
         //let token = "OTgyOTg4NzQwMjcwMTIwOTYw.GsOf84.dJivLtJpNT-ahlNLEBA887OUJ87yHW2MYa3uVk";
 
         //token de teste
-        let token = "OTgyOTg4NzQwMjcwMTIwOTYw.Gn1BcS.HMQSU15r2Li4enG82YKQ6K91fEaYPAh_8UTYvM";
+        let token = "OTcyODk0MTg1MDM4NDI2MTEy.G6C0QA.nMNvYwt5CoF-H-z3ehOH6U8QuVKaIaLaTcHzq4";
 
         Client.on('ready', () => {
             console.log("Je suis fonctionnel")

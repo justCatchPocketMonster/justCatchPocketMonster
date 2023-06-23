@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "discord.js": "^14.9.0"
+    "discord.js": "^14.9.0",
+    "lockfile": "^1.0.4"
   }
 }

@@ -18,7 +18,7 @@ const catchError = require("./catchError")
   * 
   */
 
- function eventSelect(typeEvent, idServer, Client){
+ function eventSelect(typeEvent, idServer, Client , idChannel){
 
     try{
 
@@ -32,7 +32,7 @@ const catchError = require("./catchError")
         }
 
         if(typeEvent == "avant"){
-            activeEventBefore(eventBdd[randomIdEvent], idServer , Client)
+            activeEventBefore(eventBdd[randomIdEvent], idServer , Client, idChannelRandom)
 
         } else if(typeEvent == "apres"){
 
@@ -49,7 +49,7 @@ const catchError = require("./catchError")
 }
 
 
-function activeEventBefore(event, idServer, Client){
+function activeEventBefore(event, idServer, Client, idChannel){
 
     try{
 
@@ -81,14 +81,14 @@ function activeEventBefore(event, idServer, Client){
 
                 event["textEffect"] = language.getText(idServer, "auraLegendary")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
 
             case 2:
                 event["textEffect"] = language.getText(idServer, "nothing");
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 3:
@@ -119,7 +119,7 @@ function activeEventBefore(event, idServer, Client){
 
                 event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisGeneration")+theGenChoice+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 4:
@@ -146,7 +146,7 @@ function activeEventBefore(event, idServer, Client){
                 event["textEffect"] = language.getText(idServer, "auraFabuleux")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 5:
@@ -178,7 +178,7 @@ function activeEventBefore(event, idServer, Client){
 
                 event["textEffect"] = language.getText(idServer, "auraType")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event,  idServer, Client);
+                eventJustEmbed(event,  idServer, Client, idChannel);
 
             break
             case 6:
@@ -207,7 +207,7 @@ function activeEventBefore(event, idServer, Client){
                 
                 event["textEffect"] = language.getText(idServer, "auraChroma")+level+". "+language.getText(idServer, "pendantTrenteMinute")
 
-            eventJustEmbed(event,idServer, Client);
+            eventJustEmbed(event,idServer, Client, idChannel);
 
 
             break
@@ -225,7 +225,7 @@ function activeEventBefore(event, idServer, Client){
 
 }
 
-function eventJustEmbed(event, idServer, Client){
+function eventJustEmbed(event, idServer, Client, idChannel){
 
     try{
 
@@ -245,9 +245,9 @@ function eventJustEmbed(event, idServer, Client){
                 inline: false
             })
             .setImage("attachment://"+nameImage)
+
         
         
-        idChannelRandom = allowChannel.randomIdServer(idServer)
 
         Client.channels.cache.get(idChannelRandom).send({ embeds: [eventEmbed], files: [pokeImg]});
         
@@ -365,9 +365,11 @@ function eventAfterPokemon(idServer, idChannel,isShiny){
 
             pokemonChoice = fonctionJs.getRandomInt(arrayPokemonPossible.length)
 
-            pokemon = pokeData[arrayPokemonPossible[pokemonChoice]];
-            pokemon["isShiny"] = isShiny
-            pokemon["capturable"] = true;
+           
+
+            pokemonEvent = pokeData.find(pokemon => arrayPokemonPossible[pokemonChoice] == pokemon.id);
+            pokemonEvent["isShiny"] = isShiny
+            pokemonEvent["capturable"] = true;
 
             spawnCount.setPokemonPresent(idServer, pokemon, idChannel)
 

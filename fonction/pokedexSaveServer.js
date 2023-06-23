@@ -7,6 +7,8 @@ const nbPokemon = (pokeData.length);
 const language = require("../fonction/language")
 const fs = require("fs")
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 /**
  * Ajout +1 a l'index du pokemon dans la sauvegarde et créer la sauvegarde si elle n'existe pas et la met a jour si elle ne l'est pas
@@ -162,28 +164,64 @@ function updateNumberPossibilitySave(idServerUpdate){
         console.error(error)
     }
 }
-
 function SaveBdd(){
-    try {
-        fs.writeFile("./bdd/pokedexSaveServer.json", JSON.stringify(pokedexBDD, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-    } catch(error) {
 
-        catchError.saveError(null, null, "pokedexSaveServer.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'pokedexSaveServer.lock');
+
+    
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'pokedexSaveServer.json'), JSON.stringify(pokedexBDD, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "pokedexSaveServer.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 function SaveBddCharmeChroma(){
-    try {
-        fs.writeFile("./bdd/charmeChroma.json", JSON.stringify(charmeChroma, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-    } catch(error) {
 
-        catchError.saveError(null, null, "pokedexSaveServer.js", "SaveBddCharmeChroma", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'charmeChroma.lock');
+
+    
+
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'charmeChroma.json'), JSON.stringify(charmeChroma, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "pokedexSaveServer.js", "SaveBddCharmeChroma", e)
+        console.error(e)
     }
+
 }
 
 module.exports= {getCharmChroma, hasCharmChroma, pokedex, createSaveServer, getSave,getPercentageNational ,getCountNational}

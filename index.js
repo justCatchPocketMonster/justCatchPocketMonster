@@ -33,9 +33,11 @@ fileConnexion.connexion(Discord, Client);
 
 var repeteSave = setInterval(saveAllBdd.createCopyAllBdd, variableGlobal.timeIntervalSave)
 
-setInterval(() =>{
-    eventStatChange.time()
-}, 1000)
+function waitOneSecond(){
+    setInterval(() =>{
+        eventStatChange.time()
+    }, 1000)
+}
 
 
 
@@ -220,10 +222,13 @@ Client.on("ready", () => {
     try{
         
         setInterval(justDiscord.randomStatus, variableGlobal.timeIntervalStatut, Client)
-        Client.user.setStatus("online")
+        Client.user.setStatus("online");
+
+        setTimeout(waitOneSecond, 10000)
 
         pagination.resetAtZero()
-        
+
+
         Client.application.commands.create(createCommand.spawnCommand)
         Client.application.commands.create(createCommand.codeCommand)
         Client.application.commands.create(createCommand.langCommand)

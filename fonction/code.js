@@ -6,6 +6,8 @@ const saveShinyUser = require("./shinydexSaveUser")
 const codeBdd = require("../bdd/code.json")
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
 
 async function enterCode(idUser, code, interaction){
 
@@ -81,17 +83,35 @@ function effectCode1(idUser, interaction){
     }
 }
 
-
 function SaveBdd(){
+
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'enteredCode.lock');
+
+    
+
     try{
-        fs.writeFile("./bdd/enteredCode.json", JSON.stringify(codeEntered, null, 4), (err)=> {
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'enteredCode.json'), JSON.stringify(codeEntered, null, 4), (err)=> {
             if (err)console.log("erreur")
-        })
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
     } catch(e) {
 
-        catchError.saveError(null, null, "code.js", "saveBdd", e)
+        catchError.saveError(null, null, "code.js", "SaveBdd", e)
         console.error(e)
     }
+
+
 }
 
 module.exports = {enterCode}

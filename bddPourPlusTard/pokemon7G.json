@@ -332,6 +332,57 @@
         "differentSpawn": false
     },
     {
+        "id": 741,
+        "name": {
+            "nameEng": "Oricorio",
+            "nameFr": "Plumeline"
+        },
+        "typeListEng": [
+            "Electric",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0741-001"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 741,
+        "name": {
+            "nameEng": "Oricorio",
+            "nameFr": "Plumeline"
+        },
+        "typeListEng": [
+            "Psychic",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0741-002"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
+        "id": 741,
+        "name": {
+            "nameEng": "Oricorio",
+            "nameFr": "Plumeline"
+        },
+        "typeListEng": [
+            "Ghost",
+            "Flying"
+        ],
+        "theType": "ordinaire",
+        "imgName": [
+            "0741-003"
+        ],
+        "gen": 7,
+        "differentSpawn": false
+    },
+    {
         "id": 742,
         "name": {
             "nameEng": "Cutiefly",
