@@ -35,8 +35,13 @@ var repeteSave = setInterval(saveAllBdd.createCopyAllBdd, variableGlobal.timeInt
 
 function waitOneSecond(){
     setInterval(() =>{
-        eventStatChange.time()
+        eventStatChange.time();
+        
     }, 1000)
+
+    //setInterval(() =>{
+        codeEntered.codeIsOutdated();
+    //}, 1000 * 60 * 10)
 }
 
 
