@@ -9,6 +9,7 @@ const Discord = require("discord.js")
 const catchError = require("./catchError")
 const lockfile = require('lockfile');
 const path = require('path');
+const pagination = require("./pagination")
 
 
 /**
@@ -237,46 +238,272 @@ try {
     }
 }
 
+function principalEmbedStat(interaction){
+    mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
+    mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
 
 
-function embedStat(interaction){
-try {
+
+    let statEmbed = new Discord.EmbedBuilder()
+        .setTitle("stats")
+        .setColor("Purple")
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCountAllCatch()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCountAllCatchShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCountAllSpawn()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: getCountAllSpawnShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCountVersionCatch()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCountVersionCatchShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCountVersionSpawn()+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCountVersionSpawnShiny()+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
+            )
+
+            return statEmbed;
+}
+
+/**classer les pokemon par rareté et par capture ou spawn et les ranges dans un tableau d'objet qui detient le nombre + un tableau des id des pokemon
+ * 
+ * @param {string} type est le niveau de rareté du poké (commun, legendaire, fabuleux)
+ * @param {string} moinsOrPlus determine si c'est le top des plus ou des moins
+ * @param {bool} catchOrSpawn determine si c'est le top des capture ou des spawn
+ */
+function topStat(type, moinsOrPlus, isCatch){
+
+    let listPokemon
+    
+    if(isCatch){
+        listPokemon = getCountAllCatchList();
+    } else {
+        listPokemon = getCountAllSpawnList();
+    }
+
+    let listPokemonType = {};
+
+    pokeData.forEach(pokemon => {
+
+        if(pokemon.theType === type){
+            listPokemonType[pokemon.id] = listPokemon[pokemon.id]
+        }
+
+    })
+    listPokemonSort = [];
+
+    //regarde si c'est le top des plus ou des moins et le tri
+    if(moinsOrPlus === "moins"){
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => a[1] - b[1]);
+    } else {
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => b[1] - a[1]);
+    }
+
+    listObjectPokemon = [];
+    arrayCount = 0;
+    nextPokemonSameCount = false;
+
+
+    while(listPokemonSort.length != 0){
+
+
+        if(listPokemonSort.length != 1 && listPokemonSort[0][1] == listPokemonSort[1][1]){
+            nextPokemonSameCount = true;
+        } else {
+            nextPokemonSameCount = false;
+        }
+
+        if(listObjectPokemon[arrayCount] === undefined){
+            listObjectPokemon[arrayCount] = {}
+        }
+        if(listObjectPokemon[arrayCount]["count"] === undefined){
+            listObjectPokemon[arrayCount] = {"count": listPokemonSort[0][1]}
+        }
+        if(listObjectPokemon[arrayCount]["arrayIdPokemon"] == undefined){
+            listObjectPokemon[arrayCount]["arrayIdPokemon"] = []
+        }
+        listObjectPokemon[arrayCount]["arrayIdPokemon"].push(listPokemonSort[0][0])
+
+        //suppresion du pokemon actuel dans la liste
+        listPokemonSort.splice(0, 1)
+
+        if(!nextPokemonSameCount){
+            arrayCount++;
+        }
+ 
+    }
+
+    return listObjectPokemon;
+
+}
+
+function embedClassement(interaction, arraySortPokemon, title, color){
+
+    count = 0;
+
+    var embed = new Discord.EmbedBuilder()
+        .setTitle(title)
+        .setColor(color)
+
+    arraySortPokemon.forEach( statPokemon => {
+        count++;
+        let textPokemon = "";
+        let countId = 0;
+        let limiteDepasse = false;
+
+        if(count <= 21){
+            statPokemon.arrayIdPokemon.forEach( idPokemon => {
+                if(!limiteDepasse){
+                    if(countId > 2){
+                        if(countId == 3){
+
+                            textPokemon+= "... (+ "+ (Number(statPokemon.arrayIdPokemon.length)-3).toString() +" autres)"
+                        }
+                        limiteDepasse = true;
+                    } else {
+                        textPokemon+= pokeData.find(pokemon => pokemon.id == idPokemon).name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                    }
+                    countId++;
+                }
+            })
+
+            embed.addFields(
+                {name: count + ". "+statPokemon.count , value: textPokemon, inline:true},
+                )
+
+        }
         
-        mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
-        mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
+    })
+       
+    return embed;
+
+}
+
+//TODO: faire tout les pages de stat
+//TODO: géré les textes pour le pagination par langue
+
+function embedStatGeneral(interaction){
+try {
     
+    arrayEmbed = [
+        {
+            "page": principalEmbedStat(interaction),
+            "image": null,
+            "information": {
+                "nameSelection": "pagePrincipal",
+                "descriptionSelection": "pagePrincipalDescription"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "moins", true), "pokemonLeastCaught ordinaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastCaught ordinaire",
+                "descriptionSelection": "pokemonLeastCaughtDescription ordinaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "plus", true), "pokemonMostCaught ordinaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostCaught ordinaire",
+                "descriptionSelection": "pokemonMostCaughtDescription ordinaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "moins", false), "pokemonLeastSpawn ordinaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastSpawn ordinaire",
+                "descriptionSelection": "pokemonLeastSpawnDescription ordinaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "plus", false), "pokemonMostSpawn ordinaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostSpawn ordinaire",
+                "descriptionSelection": "pokemonMostSpawnDescription ordinaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "moins", true), "pokemonLeastCaught legendaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastCaught legendaire",
+                "descriptionSelection": "pokemonLeastCaughtDescription legendaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "plus", true), "pokemonMostCaught legendaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostCaught legendaire",
+                "descriptionSelection": "pokemonMostCaughtDescription legendaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "moins", false), "pokemonLeastSpawn legendaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastSpawn legendaire",
+                "descriptionSelection": "pokemonLeastSpawnDescription legendaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "plus", false), "pokemonMostSpawn legendaire", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostSpawn legendaire",
+                "descriptionSelection": "pokemonMostSpawnDescription legendaire"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "moins", true), "pokemonLeastCaught fabuleux", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastCaught fabuleux",
+                "descriptionSelection": "pokemonLeastCaughtDescription fabuleux"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "plus", true), "pokemonMostCaught fabuleux", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostCaught fabuleux",
+                "descriptionSelection": "pokemonMostCaughtDescription fabuleux"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "moins", false), "pokemonLeastSpawn fabuleux", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonLeastSpawn fabuleux",
+                "descriptionSelection": "pokemonLeastSpawnDescription fabuleux"
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "plus", false), "pokemonMostSpawn fabuleux", "00FF0F"),
+            "image": null,
+            "information": {
+                "nameSelection": "pokemonMostSpawn fabuleux",
+                "descriptionSelection": "pokemonMostSpawnDescription fabuleux"
+                }
+        },
+    ]
+
+    pagination.paginationMenu(interaction,"textDefault", arrayEmbed)
     
-    
-        let statEmbed = new Discord.EmbedBuilder()
-            .setTitle("stats")
-            .setColor("Purple")
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCountAllCatch()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCountAllCatchShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCountAllSpawn()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: getCountAllSpawnShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCountVersionCatch()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCountVersionCatchShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCountVersionSpawn()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCountVersionSpawnShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
-                )
-    
-    
-            interaction.channel.send({embeds: [statEmbed]});
 } catch(error) {
 
         catchError.saveError(null, null, "stat.js", "embedStat", error)
@@ -632,4 +859,4 @@ function SaveBdd(){
 
 }
 
-module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList, embedStat}
+module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList, embedStatGeneral}

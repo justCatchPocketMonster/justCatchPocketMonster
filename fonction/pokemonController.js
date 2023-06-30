@@ -208,7 +208,7 @@ function choiceTypeOfSpawn(Discord, message, pokemon, idChannel, Client, idServe
         nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
 
         
-        if(variableGlobal.valeurMaxEvent>= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
+        if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
             eventChoice.eventSelect("avant", message.guild.id, Client, idChannel)
     
             return("event")

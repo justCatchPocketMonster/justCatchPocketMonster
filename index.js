@@ -39,9 +39,9 @@ function waitOneSecond(){
         
     }, 1000)
 
-    //setInterval(() =>{
+    setInterval(() =>{
         codeEntered.codeIsOutdated();
-    //}, 1000 * 60 * 10)
+    }, 1000 * 60 * 10)
 }
 
 
@@ -165,7 +165,7 @@ Client.on("interactionCreate", interaction => {
 
             if(interaction.commandName == "stat"){
                 
-                stat.embedStat(interaction)
+                stat.embedStatGeneral(interaction)
 
             }
             if(interaction.commandName == "currentminievent"){

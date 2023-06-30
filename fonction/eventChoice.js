@@ -56,24 +56,28 @@ function activeEventBefore(event, idServer, Client, idChannel){
 
         let numberRandom
         let level
+
+        date = new Date()
+
+        date.setTime(date.getTime() + 30 * 60 * 1000)
         switch(event["id"]){
             case 1:
 
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "legendaire", 50, 1800, event)
+                    statEvent.changeRarity(idServer, "legendaire", 50, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "legendaire", 25, 1800, event)
+                    statEvent.changeRarity(idServer, "legendaire", 25, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "legendaire", 10, 1800, event)
+                    statEvent.changeRarity(idServer, "legendaire", 10, date, event)
                     
 
                 }
@@ -99,18 +103,18 @@ function activeEventBefore(event, idServer, Client, idChannel){
 
                 let theGenChoice = fonctionJs.getRandomInt(variableGlobal.nbGeneration)
                 theGenChoice++
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeGen(idServer, theGenChoice, 20, 1800, event)
+                    statEvent.changeGen(idServer, theGenChoice, 20, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeGen(idServer, theGenChoice, 10, 1800, event)
+                    statEvent.changeGen(idServer, theGenChoice, 10, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeGen(idServer, theGenChoice, 5, 1800, event)
+                    statEvent.changeGen(idServer, theGenChoice, 5, date, event)
                     
 
                 }
@@ -126,18 +130,18 @@ function activeEventBefore(event, idServer, Client, idChannel){
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "fabuleux", 10, 1800, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 10, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "fabuleux", 5, 1800, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 5, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "fabuleux", 2, 1800, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 2, date, event)
                     
 
                 }
@@ -158,18 +162,18 @@ function activeEventBefore(event, idServer, Client, idChannel){
                 
                 let theTypeChoice = fonctionJs.getRandomInt(arrayOfType.length)
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, 1800, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, 1800, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, 1800, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, date, event)
                     
 
                 }
@@ -187,18 +191,18 @@ function activeEventBefore(event, idServer, Client, idChannel){
                 level
 
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeShiny(idServer, 2, 1800, event)
+                    statEvent.changeShiny(idServer, 2, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeShiny(idServer, 1.5, 1800, event)
+                    statEvent.changeShiny(idServer, 1.5, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeShiny(idServer, 1.25, 1800, event)
+                    statEvent.changeShiny(idServer, 1.25, date, event)
                     
 
                 }
@@ -269,10 +273,10 @@ function eventCommandEmbed(interaction, idServer){
 
         if(event){
 
-            let tempsRestantSeconde = statEvent.getGeneralStat(idServer, "timer")
+            let dateEnd = statEvent.getGeneralStat(idServer, "timer")
+            actualDate = new Date();
 
-            let minuteTime = Math.floor(tempsRestantSeconde/60)
-            let secondeTime = tempsRestantSeconde%60
+            dateDiffValue = fonctionJs.dateDiff(actualDate, dateEnd)
 
             var adressImage = "./src/image/eventImage/"+event["image"]+".png";
             var nameImage = event["image"] + ".png";
@@ -290,7 +294,7 @@ function eventCommandEmbed(interaction, idServer){
                 })
                 .addFields({
                     name: language.getText(idServer, "timeLeft"),
-                    value: minuteTime+" minutes " +secondeTime+" "+language.getText(idServer, "secondes"),
+                    value: dateDiffValue.min+" minutes " +dateDiffValue.sec+" "+language.getText(idServer, "secondes"),
                     inline: false
                 })
                 .setImage("attachment://"+nameImage)

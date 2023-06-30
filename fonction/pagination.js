@@ -236,7 +236,8 @@ async function paginationMenu(interaction, defaultText, pages, pageParDefaut = 1
         })
 
         col.on('collect', async (i) => {
-
+            const selectedOption = i.values[0];
+            menu.components[0].data.placeholder = pages[selectedOption].information.nameSelection
 
             if(pages[i.values[0]].imagePage !== undefined){
     

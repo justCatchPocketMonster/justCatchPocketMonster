@@ -5,6 +5,7 @@ const fs = require("fs");
 const catchError = require("./catchError")
 const lockfile = require('lockfile');
 const path = require('path');
+const fonctionJs = require("./fonctionJs")
 
 function defaultStat(){
     return{
@@ -247,18 +248,18 @@ function resetAtZero(key){
 async function time(){
     try{
         for (const [key, value] of Object.entries(bddEventStat)) {
+
+            dateEnd = new Date(bddEventStat[key]["timer"])
+            actualDate = new Date();
+
+            dateDiff = fonctionJs.dateDiff(actualDate, dateEnd)
             
 
-            if(bddEventStat[key]["timer"] !== false){
-                bddEventStat[key]["timer"]--;
-                SaveBdd();
-
-                if(bddEventStat[key]["timer"] <= 0){
-                    
-                    resetAtZero(key);
-                }
+            if(dateDiff.sec < 0 && dateDiff.min < 0 && dateDiff.hour < 0 && dateDiff.day < 0 && dateDiff.month < 0 && dateDiff.year < 0){
                 
+                resetAtZero(key);
             }
+
             
         }
 
