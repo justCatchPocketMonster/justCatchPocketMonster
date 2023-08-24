@@ -19,6 +19,9 @@ const valeurMaxFabuleux = 1
 const valeurMaxChoiceEvent = 1000;
 const valeurMaxEvent = 10;
 
+const valeurMaxChoiceEgg = 300;
+const valeurMaxEgg = 1;
+
 //Interval entre chaque savegarde des bdd (en milliseconde)
 const timeIntervalSave= 86400000;
 //interval entre chaque changement de status
@@ -67,9 +70,18 @@ const roche = 100
 const spectre = 100
 const vol = 100
 
+const form = [
+    //"alola",
+    //"galar",
+    //"hisui",
+    //"paldea",
+    "mega",
+    //"giga"
+]
+
 //Les id des pokemon qui pourront de na spawn a part par transformation
 const pokemonEvent = [132, 570, 571];
 
 
 
-module.exports = {pokemonEvent, vol, spectre, roche, poison, normal, glace, fee, eau, combat, tenebres, sol, psy, plante, insecte, feu, electrik, dragon, acier, nbType, nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux}
+module.exports = {pokemonEvent, vol, spectre, roche, poison, normal, glace, fee, eau, combat, tenebres, sol, psy, plante, insecte, feu, electrik, dragon, acier, nbType, nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux, valeurMaxChoiceEgg, valeurMaxEgg, form}

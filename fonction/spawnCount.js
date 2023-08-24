@@ -8,6 +8,7 @@ const fs = require("fs")
 const catchError = require("./catchError")
 const lockfile = require('lockfile');
 const path = require('path');
+const language = require("../fonction/language")
 
 
 
@@ -56,9 +57,80 @@ function getCount(idServer, idChannel){
     }
 }
 
+function updateHint(){
+    try {
+        for (const [key, value] of Object.entries(bddCount)) {
+            for (const [key2, value2] of Object.entries(value["pokemonPresentActuel"])) {
+ 
+                if(value2 !== undefined && value2 !== null){
+                    value2["hint"] = createHint(value2["hint"], value2["name"]["name"+(language.getLanguage(key))], true)
+                }
+            }
+        }
+        SaveBdd();
+    } catch(error) {
+            
+            catchError.saveError(null, null, "spawnCount.js", "updateHint", error)
+            console.error(error)
+        }
+
+}
+
+function getHint(idServer, idChannel){
+    try {
+        verifPresenceCount(idServer, idChannel)
+
+        if(bddCount[idServer]["pokemonPresentActuel"][idChannel] === undefined){
+            return undefined
+        }
+        return bddCount[idServer]["pokemonPresentActuel"][idChannel]["hint"]
+    } catch(error) {
+        
+        catchError.saveError(idServer, idChannel, "spawnCount.js", "getHint", error)
+        console.error(error)
+    }
+}
+
+
+function createHint(namePokemon,realName, isAlreadyHint){
+    
+    try {
+        if(isAlreadyHint && namePokemon === realName){
+            return namePokemon
+        }
+        var letterReaveal = fonction.getRandomInt(namePokemon.length);
+
+        var nameHint
+        var nameChange = realName.split("");
+        if(namePokemon !== realName){
+            nameHint = namePokemon.split("");
+        }else{
+            nameHint = namePokemon.replace(/[a-zA-Z0-9]/g, "_");
+            nameHint = nameHint.split("");
+        }
+        
+        while(nameHint[letterReaveal] === nameChange[letterReaveal]
+        && namePokemon !== realName){
+            letterReaveal = fonction.getRandomInt(nameChange.length);
+        }
+        
+        nameHint[letterReaveal] = nameChange[letterReaveal];
+        return nameHint.join("");
+
+
+    } catch(error) {
+            
+            catchError.saveError(null, null, "spawnCount.js", "createHint", error)
+            console.error(error)
+        }
+}
+
 function setPokemonPresent(idServer, value, idChannel){
     try {
         verifPresenceCount(idServer, idChannel)
+        if(value !== null){
+            value["hint"] = createHint(value["name"]["name"+(language.getLanguage(idServer))],value["name"]["name"+(language.getLanguage(idServer))], false)
+        }
         bddCount[idServer]["pokemonPresentActuel"][idChannel] = value;
         SaveBdd();
     } catch(error) {
@@ -137,4 +209,4 @@ function SaveBdd(){
 
 }
 
-module.exports = {createCount, getPokemonPresent, getCount,getMaxRandom, setCount, setMaxRandom, setPokemonPresent}
+module.exports = {createCount, getPokemonPresent, getCount,getMaxRandom, setCount, setMaxRandom, setPokemonPresent, getHint, updateHint}

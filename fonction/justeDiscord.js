@@ -33,10 +33,10 @@ function randomStatus(Client){
                 Client.user.setActivity("Un oublie de commande ? "+ prefix+"help", {type: "PLAYING"});
                 break
             case 3:
-                Client.user.setActivity(stat.getCountAllSpawn()+ " Pokémon sont apparus depuis le début.", {type: "PLAYING"});
+                Client.user.setActivity(stat.getCount(false, true, false)+ " Pokémon sont apparus depuis le début.", {type: "PLAYING"});
                 break
             case 4:
-                Client.user.setActivity(stat.getCountAllCatch()+" Pokémon ont été capturés.", {type: "PLAYING"});
+                Client.user.setActivity(stat.getCount(false, false, false)+" Pokémon ont été capturés.", {type: "PLAYING"});
                 break
             case 5:
                 Client.user.setActivity("I'm on "+ variableGlobal.version +" :D", {type: "PLAYING"});
@@ -48,10 +48,10 @@ function randomStatus(Client){
                 Client.user.setActivity("Forgot a command ? "+ prefix+"help", {type: "PLAYING"});
                 break
             case 8:
-                Client.user.setActivity(stat.getCountAllSpawn()+ " pokemon have spawned from the start.", {type: "PLAYING"});
+                Client.user.setActivity(stat.getCount(false, true, false, "version")+ " pokemon have spawned from the start.", {type: "PLAYING"});
                 break
             case 9:
-                Client.user.setActivity(stat.getCountAllCatch()+" pokemon have been catched.", {type: "PLAYING"});
+                Client.user.setActivity(stat.getCount(false, true, false, "version")+" pokemon have been catched.", {type: "PLAYING"});
                 break
             case 10:
                 Client.user.setActivity("Je coûte 1,5 euro d'hébergement chaque mois.", {type: "PLAYING"});
@@ -62,18 +62,6 @@ function randomStatus(Client){
             case 12:
                 Client.user.setActivity("!code " + codeBdd["shiny"][fonction.getRandomInt(codeBdd["shiny"].length)], {type: "PLAYING"});
                 break
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-                Client.user.setActivity("No more \"!\". Use \"/\".");
-            break
-            case 17:
-            case 18:
-            case 19:
-            case 20:
-                Client.user.setActivity("Plus jamais de \"!\". utilise \"/\".");
-            break
         }
 
     } catch(e) {

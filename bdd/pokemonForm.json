@@ -1,0 +1,464 @@
+{
+    "320699762795872257": {
+        "galar": {
+            "52": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "77": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "78": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "79": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "80": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "83": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "110": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "122": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "144": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "145": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "146": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "199": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "222": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "263": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "264": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "554": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "555": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "562": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "618": {
+                "normal": 0,
+                "shiny": 0
+            }
+        },
+        "alola": {
+            "19": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "20": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "26": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "27": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "28": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "37": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "38": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "50": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "51": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "52": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "53": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "74": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "75": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "76": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "88": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "89": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "103": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "105": {
+                "normal": 0,
+                "shiny": 0
+            }
+        },
+        "hisui": {
+            "58": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "59": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "100": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "101": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "157": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "211": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "215": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "503": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "549": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "570": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "571": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "628": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "705": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "706": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "713": {
+                "normal": 0,
+                "shiny": 0
+            }
+        },
+        "paldea": {
+            "128": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "194": {
+                "normal": 0,
+                "shiny": 0
+            }
+        },
+        "mega": {
+            "3": {
+                "normal": 1,
+                "shiny": 0
+            },
+            "6": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "9": {
+                "normal": 1,
+                "shiny": 1
+            },
+            "15": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "18": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "65": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "80": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "94": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "115": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "127": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "130": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "142": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "150": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "181": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "208": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "212": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "214": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "229": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "248": {
+                "normal": 1,
+                "shiny": 0
+            },
+            "254": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "257": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "260": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "282": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "302": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "303": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "306": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "308": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "310": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "319": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "323": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "334": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "354": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "359": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "362": {
+                "normal": 1,
+                "shiny": 0
+            },
+            "373": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "376": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "380": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "381": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "384": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "428": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "445": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "448": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "460": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "475": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "531": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "719": {
+                "normal": 0,
+                "shiny": 0
+            }
+        },
+        "giga": {
+            "3": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "6": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "9": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "12": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "25": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "52": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "68": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "94": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "99": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "131": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "133": {
+                "normal": 0,
+                "shiny": 0
+            },
+            "143": {
+                "normal": 0,
+                "shiny": 0
+            }
+        }
+    }
+}

@@ -197,12 +197,15 @@ async function paginationMenu(interaction, defaultText, pages, pageParDefaut = 1
         let count = 0
 
         pages.forEach(element => {
-            components.push(
-                new StringSelectMenuOptionBuilder()
-                    .setLabel(element.information.nameSelection)
-                    .setDescription(element.information.descriptionSelection)
-                    .setValue(count+"")
-            )
+            selectMenuCreation = new StringSelectMenuOptionBuilder()
+                .setLabel(element.information.nameSelection)
+                .setValue(count+"")
+
+            if(element.information.descriptionSelection !== undefined && element.information.descriptionSelection !== null && element.information.descriptionSelection !== ""){
+                selectMenuCreation.setDescription(element.information.descriptionSelection)
+            }
+
+            components.push(selectMenuCreation)
             count++
         });
 
@@ -236,20 +239,24 @@ async function paginationMenu(interaction, defaultText, pages, pageParDefaut = 1
         })
 
         col.on('collect', async (i) => {
-            const selectedOption = i.values[0];
+            let selectedOption = i.values[0];
+
+            while(pages[selectedOption].page === undefined || pages[selectedOption].page === null){
+                selectedOption++
+            }
             menu.components[0].data.placeholder = pages[selectedOption].information.nameSelection
 
             if(pages[i.values[0]].imagePage !== undefined){
     
                 await i.update({
-                    embeds: [pages[i.values[0]].page],
+                    embeds: [pages[selectedOption].page],
                     components: [menu],
-                    files: [pages[i.values[0]].imagePage]
+                    files: [pages[selectedOption].imagePage]
                 })
             } else {
 
                 await i.update({
-                    embeds: [pages[i.values[0]].page],
+                    embeds: [pages[selectedOption].page],
                     components: [menu]
                 })
             }

@@ -13,6 +13,14 @@ function connexion(Discord, Client){
             console.log("Je suis fonctionnel")
         });
 
+        Client.on('error', (error) => {
+            console.error(error)
+        });
+/*
+        Client.on("debug", (info) => {
+            console.log(info)
+        });
+*/
         Client.login(token);
         return
     } catch(e) {

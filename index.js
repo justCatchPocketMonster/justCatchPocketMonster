@@ -16,6 +16,7 @@ const pagination = require("./fonction/pagination")
 const stat = require("./fonction/stat")
 const eventStatChange = require("./fonction/eventStatChange")
 const eventChoice = require("./fonction/eventChoice")
+const pokeDataAll = require("./bdd/pokemon.json");
 
 
 var Client = new Discord.Client({ 
@@ -42,6 +43,10 @@ function waitOneSecond(){
     setInterval(() =>{
         codeEntered.codeIsOutdated();
     }, 1000 * 60 * 10)
+
+    setInterval(() =>{
+        spawnCount.updateHint();
+    }, 1000 * 60 * 1)
 }
 
 
@@ -181,6 +186,27 @@ Client.on("interactionCreate", interaction => {
                 testAllPokemon.listAllPokemon(Discord, interaction, Client, interaction.channel.id)
             }
 
+            if(interaction.commandName == "hint"){
+                if(interaction.options.getChannel("channel") != null){
+                    channel = interaction.options.getChannel("channel");
+                }else {
+                    channel = interaction.channel;
+                }
+
+                idChannel = channel.id;
+
+                hint = (spawnCount.getHint(interaction.guild.id, idChannel));
+                
+                if(hint == undefined){
+                    interaction.channel.send(language.getText(interaction.guild.id, "noHint"))
+                    return
+                } else {
+                    hint = hint.replace("_", "\\$&");
+                    interaction.channel.send(language.getText(interaction.guild.id, "hintIs")+hint+" "+language.getText(interaction.guild.id, "forChannel")+channel.toString())
+                }
+
+            }
+
 
 
 
@@ -242,6 +268,7 @@ Client.on("ready", () => {
         Client.application.commands.create(createCommand.catchCommand)
         Client.application.commands.create(createCommand.allStatCommand)
         Client.application.commands.create(createCommand.effectCommand)
+        Client.application.commands.create(createCommand.hintPokemonCommand)
         
     } catch(e) {
 

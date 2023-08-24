@@ -12,24 +12,24 @@
             "9": 100
         },
         "type": {
-            "acier": 90,
-            "dragon": 90,
-            "electrik": 90,
-            "feu": 90,
-            "insecte": 90,
-            "plante": 90,
-            "psy": 90,
-            "sol": 90,
-            "tenebres": 90,
-            "combat": 90,
-            "eau": 90,
-            "fee": 90,
-            "glace": 260,
-            "normal": 90,
-            "poison": 90,
-            "roche": 90,
-            "spectre": 90,
-            "vol": 90
+            "acier": 100,
+            "dragon": 100,
+            "electrik": 100,
+            "feu": 100,
+            "insecte": 100,
+            "plante": 100,
+            "psy": 100,
+            "sol": 100,
+            "tenebres": 100,
+            "combat": 100,
+            "eau": 100,
+            "fee": 100,
+            "glace": 100,
+            "normal": 100,
+            "poison": 100,
+            "roche": 100,
+            "spectre": 100,
+            "vol": 100
         },
         "rarity": {
             "normal": 990,
@@ -37,17 +37,13 @@
             "fabuleux": 1
         },
         "shiny": 4096,
-        "timer": "2023-06-27T14:28:07.228Z",
-        "whatEvent": {
-            "id": 5,
-            "nom": "eventSandwichTitre",
-            "description": "eventSandwichDesc",
-            "type": "justEmbed",
-            "color": "F6A760",
-            "rarity": "",
-            "quand": "avant",
-            "image": "0005-000",
-            "textEffect": "Aura de type de niveau 2. Pour le type glace. Pendant 30 minutes."
-        }
+        "timer": false,
+        "whatEvent": false,
+        "allowMega": false,
+        "messageSpawn": {
+            "min": 6,
+            "max": 20
+        },
+        "valeurMaxChoiceEgg": 300
     }
 }

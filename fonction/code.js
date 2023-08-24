@@ -82,8 +82,8 @@ function modifierDonneesSpawn(palier, type) {
 
 async function codeIsOutdated() {
 
-    statCatch = stat.getCountAllCatch();
-    statSpawn = stat.getCountAllSpawn();
+    statCatch = stat.getCount(false, false, false);
+    statSpawn = stat.getCount(false, true, false);
 
     //if(statSpawn == undefined || statCatch == undefined) return;
 

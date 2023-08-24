@@ -177,7 +177,7 @@ function SaveBdd(){
                 return;
             }
         fs.writeFile(path.join(__dirname,"..", 'bdd', 'pokedexSaveServer.json'), JSON.stringify(pokedexBDD, null, 4), (err)=> {
-            if (err)console.log("erreur")
+            if (err)console.log("erreur:", err)
 
             lockfile.unlock(lockfilePath, (err) => {
                 if (err) {

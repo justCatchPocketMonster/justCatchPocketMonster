@@ -160,9 +160,17 @@ function pokemonSelect(idServer){
 
         arrayPokemon = pokeData;
 
+        arrayTestPokemon = []
+
+        pokeData.forEach(pokemon => {
+            if(pokemon["pokemonForm"].hasOwnProperty("mega")){
+                arrayTestPokemon.push(pokemon)
+            }
+        })
+
         do{
             
-            arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect(idServer))
+            arrayPokemonPass1 = pokemonChoiceGen(arrayTestPokemon, generationSelect(idServer))
 
         }while(arrayPokemonPass1[0] === undefined)
 
@@ -182,6 +190,21 @@ function pokemonSelect(idServer){
 
         let pokemonChoiced = arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))];
 
+
+
+        if(pokemonChoiced.pokemonForm.hasOwnProperty("mega") && eventStat.getGeneralStat(idServer, "allowMega")){
+            pokemonChoiced["isMega"] = true;
+
+            MegaChoice = pokemonChoiced.pokemonForm["mega"][(fonctionJs.getRandomInt(pokemonChoiced.pokemonForm["mega"].length))]
+
+            pokemonChoiced["typeListEng"] = JSON.parse(JSON.stringify(MegaChoice["typeListEng"])) 
+            pokemonChoiced["imgName"] = JSON.parse(JSON.stringify(MegaChoice["imgName"])) 
+        }else {
+            pokemonChoiced["isMega"] = false;
+        }
+
+        
+        
         pokemonChoiced = pokemonIsHide(pokemonChoiced);
 
         return(pokemonChoiced)
@@ -406,12 +429,16 @@ function generationSelect(idServer){
  * @param {pour envoyé des messages} message 
  * @returns le pokemon avec le caractère shiny en format booléen plus
  */
-function shinySelect(pokemon, idServer, message){
+function shinySelect(pokemon, idServer, isEgg){
 
     try{
     
         let tauxShiny = eventStat.getGeneralStat(idServer, "shiny");
         let saveServer = savePokemonServer.getSave(idServer);
+
+        if(isEgg){
+            tauxShiny /= 2;
+        }
 
 
         if(saveServer[pokemon["id"]] >= 100){

@@ -301,6 +301,13 @@
         "Fr": ["Aura de chromatique de niveau "],
         "Eng": ["Level of shiny Aura "]
     },
+    "auraMega": {
+        "Fr": ["Aura de méga-évolution de niveau "],
+        "Eng": ["Level of Mega evolution Aura "]
+    },
+
+
+
     "ofThisGeneration" : {
         "Fr": ["Pour la génération "],
         "Eng": ["For the generation "]
@@ -312,6 +319,14 @@
     "pendantTrenteMinute" : {
         "Fr" : ["Pendant 30 minutes."],
         "Eng": ["During 30 minutes."]
+    },
+    "pendantUneHeure" : {
+        "Fr" : ["Pendant 1 heure."],
+        "Eng": ["During 1 hour."]
+    },
+    "pendantQuinzeMinute" : {
+        "Fr" : ["Pendant 15 minutes."],
+        "Eng": ["During 15 minutes."]
     },
     "eventCuisineTitre" : {
         "Fr": ["Un cuisinier sauvage apparait."],
@@ -353,6 +368,61 @@
         "Fr": ["Probablement le repas d'un étudiant"],
         "Eng": ["Probably a student's meal"]
     },
+    "eventMegaTitre" : {
+        "Fr": ["Une pluit de méga gemme"],
+        "Eng": ["A rain of mega gem"]
+    },
+    "eventMegaDesc" : {
+        "Fr": ["Elle tombe du ciel"],
+        "Eng": ["It falls from the sky"]
+    },
+    "eventTrollOnePokemonTitre" : {
+        "Fr": ["Mais ? Qu'est-ce qu'il fait là ?"],
+        "Eng": ["But ? What is he doing here ?"]
+    },
+    "eventTrollOnePokemonDesc" : {
+        "Fr": ["MAIS IL N'Y A QUE LUI !!!"],
+        "Eng": ["BUT THERE IS ONLY HIM !!!"]
+    },
+
+    "eventMostPokemonTitre" : {
+        "Fr": ["Un Encens"],
+        "Eng": ["An Incense"]
+    },
+    "eventMostPokemonDesc" : {
+        "Fr": ["Il attire plus de Pokémons trop bien !"],
+        "Eng": ["It attracts more Pokémon too good!"]
+    },
+    "eventLeastPokemonTitre" : {
+        "Fr": ["Un Repousse"],
+        "Eng": ["A Repel"]
+    },
+    "eventLeastPokemonDesc" : {
+        "Fr": ["Oh non il y a moins de Pokémons ! (Une occasion de faire une pause.)"],
+        "Eng": ["Oh no there are fewer Pokémon! (An opportunity to take a break.)"]
+    },
+    "eventDarkTitre" : {
+        "Fr": ["Oh non il n'y a plus de lumière !"],
+        "Eng": ["Oh no there is no more light!"]
+    },
+    "eventDarkDesc" : {
+        "Fr": ["Il va falloir attendre les réparations de l'électricien."],
+        "Eng": ["We will have to wait for the electrician's repairs."]
+    },
+    "eventEggTitre" : {
+        "Fr": ["Une fermière fort sympathique"],
+        "Eng": ["A very nice farmer"]
+    },
+    "eventEggDesc" : {
+        "Fr": ["Elle vous montre le fameux charme ovale."],
+        "Eng": ["She shows you the famous oval charm."]
+    },
+
+
+
+
+
+
 
     "pokedexDeKanto": {
         "Fr": ["Pokedex Kanto"],
@@ -629,6 +699,61 @@
     "acier": {
         "Fr": ["acier"],
         "Eng": ["steel"]
+    },
+
+
+
+    "statMainPageName": {
+        "Fr": ["Page principale"],
+        "Eng": ["Main page"]
+    },
+    "statMainPageDesc": {
+        "Fr": ["Page principale des statistiques générals."],
+        "Eng": ["Main page of general statistics."]
+    },
+    "statCategoryOrdinary": {
+        "Fr": ["Ordinaire"],
+        "Eng": ["Ordinary"]
+    },
+    "statCategoryLegendary": {
+        "Fr": ["Légendaire"],
+        "Eng": ["Legendary"]
+    },
+    "statCategoryMythical": {
+        "Fr": ["Fabuleux"],
+        "Eng": ["Mythical"]
+    },
+    "statTopSpawns": {
+        "Fr": ["Top des apparitions"],
+        "Eng": ["Top spawns"]
+    },
+    "statTopCatches": {
+        "Fr": ["Top des captures"],
+        "Eng": ["Top catches"]
+    },
+
+    "commandHintExplication": {
+        "Fr": ["Permet de voir le nom du Pokémon incomplet. (debloque une nouvelle lettre tout les 3 minutes)"],
+        "Eng": ["Allows you to see the name of the incomplete Pokemon. (unlock a new letter every 3 minutes)"]
+    },
+    "commandHintOptionDescChannel": {
+        "Fr": ["Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"],
+        "Eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
+    },
+
+
+
+    "hintIs":{
+        "Fr" : ["L'indice est : "],
+        "Eng" : ["The hint is : "]
+    },
+    "forChannel":{
+        "Fr" : ["pour le salon "],
+        "Eng" : ["for the channel "]
+    },
+    "noHint": {
+        "Fr" : ["Aucun Pokémon disponible pour ce salon."],
+        "Eng" : ["No Pokémon available for this channel."]
     }
     
     
