@@ -182,6 +182,14 @@ async function paginationButton(interactionSlash, pages, pageParDefaut = 1, time
     }
 }
 
+function createPageForMenu(page, image = null, nameSelection, descriptionSelection){
+    if(image !== null){
+        return {page: page, imagePage: image, information: {nameSelection: nameSelection, descriptionSelection: descriptionSelection}}
+    } else {
+        return {page: page, information: {nameSelection: nameSelection, descriptionSelection: descriptionSelection}}
+    }
+}
+
 /**
  * 
  * @param {Interaction} interaction 
@@ -191,7 +199,6 @@ async function paginationButton(interactionSlash, pages, pageParDefaut = 1, time
  * @param {*} arrayImage 
  */
 async function paginationMenu(interaction, defaultText, pages, pageParDefaut = 1, time = 60000){
-    //TODO : géré les images
     try {
         let components = []
         let count = 0
@@ -356,4 +363,4 @@ function SaveBdd(){
 
 }
 
-module.exports = {resetAtZero, paginationButton, paginationMenu}
+module.exports = {createPageForMenu, resetAtZero, paginationButton, paginationMenu}

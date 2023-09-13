@@ -27,7 +27,7 @@ const catchError = require("./catchError")
         while(bool){
             //randomIdEvent = fonctionJs.getRandomInt(nbEvent);
             //TODO : en mode teste
-            randomIdEvent = 7;
+            randomIdEvent = 11;
             if(eventBdd[randomIdEvent]["quand"] === typeEvent){
                 bool = false;
             }
@@ -90,7 +90,6 @@ function activeEventBefore(event, idServer, Client, idChannel){
                 eventJustEmbed(event, idServer, Client , idChannel);
 
             break
-
             case 2:
                 //sandwich vide
                 event["textEffect"] = language.getText(idServer, "nothing");
@@ -224,7 +223,6 @@ function activeEventBefore(event, idServer, Client, idChannel){
 
 
             break
-
             case 7:
                 // mega
 
@@ -257,19 +255,145 @@ function activeEventBefore(event, idServer, Client, idChannel){
 
                 break
             case 8:
-                //troll
+                //plus de pokemon
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
+
+                if(99 <= numberRandom){
+
+                    level = 3
+                    statEvent.maxMessageSpawn(idServer,10 , date, event)
+                    statEvent.minMessageSpawn(idServer,3 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }else if(70 <= numberRandom){
+                    
+                    level = 2
+                    statEvent.maxMessageSpawn(idServer,13 , date, event)
+                    statEvent.minMessageSpawn(idServer,4 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+
+                    level = 1
+                    statEvent.maxMessageSpawn(idServer,15 , date, event)
+                    statEvent.minMessageSpawn(idServer,5 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
                 break
             case 9:
-                //plus de pokemon
+                //moins de pokemon
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                
+
+                if(99 <= numberRandom){
+                    date.setTime(date.getTime() + 60 * 60 * 1000)
+                    level = 3
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-002"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantUneHeure")
+
+                }else if(70 <= numberRandom){
+                    date.setTime(date.getTime() + 30 * 60 * 1000)
+                    
+                    level = 2
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-001"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+                    date.setTime(date.getTime() + 15 * 60 * 1000)
+                    level = 1
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-000"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantQuinzeMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
                 break
             case 10:
-                //moins de pokemon
+                //il fait nuit
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+
+                if(99 <= numberRandom){
+                    date.setTime(date.getTime() + 60 * 60 * 1000)
+
+                    level = 3
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantUneHeure")
+
+                }else if(70 <= numberRandom){
+                    date.setTime(date.getTime() + 30 * 60 * 1000)
+                    
+                    level = 2
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+                    date.setTime(date.getTime() + 15 * 60 * 1000)
+
+                    level = 1
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantQuinzeMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+
                 break
             case 11:
-                //il fait nuit
-                break
-            case 12:
                 //oeuf
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
+
+                if(99 <= numberRandom){
+
+                    level = 3
+                    statEvent.maxValeurChoiceEgg(idServer,50 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }else if(70 <= numberRandom){
+                    
+                    level = 2
+                    statEvent.maxValeurChoiceEgg(idServer,100 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+
+                    level = 1
+                    statEvent.maxValeurChoiceEgg(idServer,200 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
                 break
 
             default:

@@ -17,6 +17,7 @@ const stat = require("./fonction/stat")
 const eventStatChange = require("./fonction/eventStatChange")
 const eventChoice = require("./fonction/eventChoice")
 const pokeDataAll = require("./bdd/pokemon.json");
+const fs = require("fs");
 
 
 var Client = new Discord.Client({ 
@@ -61,7 +62,7 @@ Client.on("messageCreate", message => {
         if(message.author.bot) return;
 
 
-        if(serverAllow.randomIdServer(message.guild.id) != undefined){
+        if(serverAllow.randomIdServer(message.guild.id, Client) != undefined){
 
             filePokemon.spawnPokemon(Discord, message, Client)
             return
@@ -96,126 +97,158 @@ Client.on("guildCreate", guild =>{
  * quand une interaction est lancé
  */
 Client.on("interactionCreate", interaction => {
-		 try{
+    try{
+        console.log(interaction.commandName)
 
+    const permissionRequiredSendMessage = "SendMessages";
+    const permissionRequiredViewChannel = "ViewChannel";
+
+    server = interaction.guild;
+    botMember = server.members.cache.get(Client.user.id);
+    
+    canSendMessage = botMember.permissionsIn(interaction.channel).has(permissionRequiredSendMessage);
+    canViewChannel = botMember.permissionsIn(interaction.channel).has(permissionRequiredViewChannel);
+
+    canGiveResponse = (canViewChannel && canSendMessage)
         if(interaction.isCommand()){
-            if(interaction.commandName === "spawn"){
-                var channel
-                if(interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]) != null){
+
+            if(canGiveResponse){
+                
+                if(interaction.commandName === "spawn"){
+
                     
-                    channel = interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]);
+                    var channel
+                    if(interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]) != null){
+                        
+                        channel = interaction.options.getChannel(bddText.spawnNameOptionChannel.Eng[0]);
 
-                }else {
-                    channel = interaction.channel;
+                    }else {
+                        channel = interaction.channel;
+                    }
+
+
+                    if(interaction.options.getBoolean(bddText.spawnNameOptionBool.Eng[0])){
+                        serverAllow.addChannelAllow(channel.id, interaction.guild.id, interaction.channel)
+                    }else {
+                        serverAllow.deleteChannelAllow(channel.id, interaction.guild.id, interaction.channel)
+                    }
                 }
 
-
-                if(interaction.options.getBoolean(bddText.spawnNameOptionBool.Eng[0])){
-                    serverAllow.addChannelAllow(channel.id, interaction.guild.id, interaction.channel)
-                }else {
-                    serverAllow.deleteChannelAllow(channel.id, interaction.guild.id, interaction.channel)
-                }
-            }
-
-            if(interaction.commandName == "code"){
-                codeEntered.enterCode(interaction.member.id, interaction.options.getString(bddText.codeNameOptionString.Eng[0]), interaction)
-                
-                
-            }
-
-            if(interaction.commandName == bddText.commandLangName.Eng[0]){
-                language.setLanguage(interaction.guild.id, interaction.options.getString(bddText.langNameOptionString.Eng[0]), interaction)
-                
-            }
-
-            if(interaction.commandName == "catch"){
-
-                filePokemon.catchPokemon(Discord, interaction, Client, interaction.options.getString(bddText.commandCatchOptionName.Eng[0]))
-            }
-
-            
-            if(interaction.commandName == "pokedex"){
-
-                if(interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]) != null){
-                    filePokemon.embedPokemonSaveUser(Discord, interaction, Client, interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]))
-                } else {
-                    filePokemon.embedPokemonSaveUser(Discord, interaction, Client, 1);
-                }
-
-
-            }
-            if(interaction.commandName == "howmuch"){
-                
-                if(interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]) !== null){
-
-                    //numero du pokemon
-                    filePokemon.howThisPokemon(Discord, interaction, false, interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]))
-
-                } else if(interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]) !== null){
-
-                    //nom du poke
-                    filePokemon.howThisPokemon(Discord, interaction, interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]), false)
-
-                } else {
+                if(interaction.commandName == "code"){
+                    codeEntered.enterCode(interaction.member.id, interaction.options.getString(bddText.codeNameOptionString.Eng[0]), interaction)
                     
-                    filePokemon.howThisPokemon(Discord, interaction, false, false)
+                    
+                }
 
+                if(interaction.commandName == bddText.commandLangName.Eng[0]){
+                    language.setLanguage(interaction.guild.id, interaction.options.getString(bddText.langNameOptionString.Eng[0]), interaction)
+                    
+                }
+
+                if(interaction.commandName == "catch"){
+
+                    filePokemon.catchPokemon(Discord, interaction, Client, interaction.options.getString(bddText.commandCatchOptionName.Eng[0]))
                 }
 
                 
-                //filePokemon.howThisPokemon(Discord, interaction, Client)
+                if(interaction.commandName == "pokedex"){
+
+                    if(interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]) != null){
+                        filePokemon.embedPokemonSaveUser(Discord, interaction, Client, interaction.options.getString(bddText.pokedexNameOptionStringPage.Eng[0]))
+                    } else {
+                        filePokemon.embedPokemonSaveUser(Discord, interaction, Client, 1);
+                    }
 
 
-            }
+                }
+                if(interaction.commandName == "howmuch"){
+                    
+                    if(interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]) !== null){
 
-            if(interaction.commandName == "stat"){
-                
-                stat.embedStatGeneral(interaction)
+                        //numero du pokemon
+                        filePokemon.howThisPokemon(Discord, interaction, false, interaction.options.getString(bddText.commandHowOptionNameStringNumber.Eng[0]))
 
-            }
-            if(interaction.commandName == "currentminievent"){
-                
-                eventChoice.eventCommandEmbed(interaction, interaction.guild.id)
+                    } else if(interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]) !== null){
 
-            }
+                        //nom du poke
+                        filePokemon.howThisPokemon(Discord, interaction, interaction.options.getString(bddText.commandHowOptionNameStringPokemonName.Eng[0]), false)
+
+                    } else {
+                        
+                        filePokemon.howThisPokemon(Discord, interaction, false, false)
+
+                    }
+
+                    
+                    //filePokemon.howThisPokemon(Discord, interaction, Client)
 
 
-
-            
-            if(interaction.commandName == "test"){
-                testAllPokemon.listAllPokemon(Discord, interaction, Client, interaction.channel.id)
-            }
-
-            if(interaction.commandName == "hint"){
-                if(interaction.options.getChannel("channel") != null){
-                    channel = interaction.options.getChannel("channel");
-                }else {
-                    channel = interaction.channel;
                 }
 
-                idChannel = channel.id;
+                if(interaction.commandName == "stat"){
+                    
+                    stat.embedStatGeneral(interaction)
 
-                hint = (spawnCount.getHint(interaction.guild.id, idChannel));
-                
-                if(hint == undefined){
-                    interaction.channel.send(language.getText(interaction.guild.id, "noHint"))
-                    return
-                } else {
-                    hint = hint.replace("_", "\\$&");
-                    interaction.channel.send(language.getText(interaction.guild.id, "hintIs")+hint+" "+language.getText(interaction.guild.id, "forChannel")+channel.toString())
+                }
+                if(interaction.commandName == "currentminievent"){
+                    
+                    eventChoice.eventCommandEmbed(interaction, interaction.guild.id)
+
                 }
 
+
+
+                
+                if(interaction.commandName == "test"){
+                    testAllPokemon.listAllPokemon(Discord, interaction, Client, interaction.channel.id)
+                }
+
+                if(interaction.commandName == "hint"){
+                    if(interaction.options.getChannel("channel") != null){
+                        channel = interaction.options.getChannel("channel");
+                    }else {
+                        channel = interaction.channel;
+                    }
+
+                    idChannel = channel.id;
+
+                    hint = (spawnCount.getHint(interaction.guild.id, idChannel));
+                    
+                    if(hint == undefined){
+                        interaction.channel.send(language.getText(interaction.guild.id, "noHint"))
+                        return
+                    } else {
+                        hint = hint.replace("_", "\\$&");
+                        interaction.channel.send(language.getText(interaction.guild.id, "hintIs")+hint+" "+language.getText(interaction.guild.id, "forChannel")+channel.toString())
+                    }
+
+                }
+
+                if(interaction.commandName == "information"){
+
+                    justDiscord.information(interaction)
+                }
+
+
+                if(interaction.commandName == "howido"){
+
+                    justDiscord.tutorial(interaction)
+                }
+
+
+
+
+                interaction.reply({
+                    content: `.`,
+                });
+                setTimeout(() => {
+                    interaction.deleteReply();
+                }, 1000)
+            } else {
+                interaction.reply({
+                    content: language.getText(interaction.guild.id, "botNoPermission")
+                });
             }
-
-
-
-
-            interaction.reply({
-                content: `.`,
-            });
-            setTimeout(() => {
-                interaction.deleteReply();
-            }, 1000)
 
         
         }
@@ -245,6 +278,18 @@ process.on('SIGINT', function() {
     .catch(console.error);
 });
 
+// supprimer tout les fichiers du dossier lock
+fs.readdir("./lock", (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+        fs.unlink("./lock/"+file, err => {
+            if (err) throw err;
+        });
+    }
+});
+
+
 /**
  * quand le bot est prêt
  */
@@ -269,6 +314,8 @@ Client.on("ready", () => {
         Client.application.commands.create(createCommand.allStatCommand)
         Client.application.commands.create(createCommand.effectCommand)
         Client.application.commands.create(createCommand.hintPokemonCommand)
+        Client.application.commands.create(createCommand.informationCommand)
+        Client.application.commands.create(createCommand.commentJeFaisCommand)
         
     } catch(e) {
 

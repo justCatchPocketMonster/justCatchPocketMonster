@@ -227,7 +227,7 @@
         "mega": {
             "3": {
                 "normal": 1,
-                "shiny": 0
+                "shiny": 1
             },
             "6": {
                 "normal": 0,
@@ -286,7 +286,7 @@
                 "shiny": 0
             },
             "212": {
-                "normal": 0,
+                "normal": 1,
                 "shiny": 0
             },
             "214": {
@@ -294,7 +294,7 @@
                 "shiny": 0
             },
             "229": {
-                "normal": 0,
+                "normal": 2,
                 "shiny": 0
             },
             "248": {
@@ -402,11 +402,11 @@
                 "shiny": 0
             },
             "531": {
-                "normal": 0,
+                "normal": 3,
                 "shiny": 0
             },
             "719": {
-                "normal": 0,
+                "normal": 5,
                 "shiny": 0
             }
         },

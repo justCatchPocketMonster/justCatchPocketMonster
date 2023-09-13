@@ -9,6 +9,7 @@ const catchError = require("./catchError")
 const lockfile = require('lockfile');
 const path = require('path');
 const language = require("../fonction/language")
+const eventStatChange = require("./eventStatChange")
 
 
 
@@ -108,14 +109,38 @@ function createHint(namePokemon,realName, isAlreadyHint){
             nameHint = namePokemon.replace(/[a-zA-Z0-9]/g, "_");
             nameHint = nameHint.split("");
         }
+
+        let arrayWithOutSlash = []
+        nameHint.forEach(element => {
+            if(element !== "\\"){
+                arrayWithOutSlash.push(element)
+            }
+        })
         
-        while(nameHint[letterReaveal] === nameChange[letterReaveal]
+        while(arrayWithOutSlash[letterReaveal] === nameChange[letterReaveal]
         && namePokemon !== realName){
             letterReaveal = fonction.getRandomInt(nameChange.length);
         }
         
-        nameHint[letterReaveal] = nameChange[letterReaveal];
-        return nameHint.join("");
+        arrayWithOutSlash[letterReaveal] = nameChange[letterReaveal];
+
+        
+
+
+
+        emplacementLetter = 0;
+        finalHint = []
+        arrayWithOutSlash.forEach(element =>{
+            if(element === "_" && emplacementLetter !== 0){
+                finalHint.push("\\")
+            }
+            if(element === "_" && emplacementLetter === 0){
+                emplacementLetter++;
+            }
+            finalHint.push(element)
+            
+        })
+        return finalHint.join("");
 
 
     } catch(error) {
@@ -143,8 +168,8 @@ function setMaxRandom(idServer, idChannel){
     try {
         verifPresenceCount(idServer, idChannel)
         do{
-            random = fonction.getRandomInt(maxmumCount);
-        }while(!(random>minimumCount))
+            random = fonction.getRandomInt(eventStatChange.getGeneralStat(idServer, "messageSpawn")["max"]);
+        }while(!(random>eventStatChange.getGeneralStat(idServer, "messageSpawn")["min"]))
         bddCount[idServer]["nbCountMax"] = random;
         SaveBdd();
     } catch(error) {

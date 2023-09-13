@@ -9,6 +9,7 @@ const catchError = require("./catchError")
 const lockfile = require('lockfile');
 const path = require('path');
 const stat = require("../fonction/stat.js")
+const Discord = require("discord.js")
 
 const paliers = [5000, 10000, 15000, 20000, 30000, 50000, 75000, 100000, 150000, 200000, 250000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 2500000, 3000000];
 
@@ -78,7 +79,45 @@ function modifierDonneesSpawn(palier, type) {
     }
 
 
-  }
+}
+
+function codeListEmbed(idUser, idServer){
+    try{
+        if(codeEntered[idUser] === undefined){
+            createUser(idUser)
+            SaveBdd();
+        }
+        const embed = new Discord.EmbedBuilder()
+        embed.setTitle(language.getText(idServer, "codeListEmbedTitle"))
+        embed.setDescription(language.getText(idServer, "codeListEmbedDescription"))
+        for(const [key, value] of Object.entries(codeBdd)){
+            value.forEach(code => {
+                if(codeEntered[idUser].includes(code)){
+                    embed.addFields(
+                        { 
+                            name: code , 
+                            value: ":white_check_mark:", 
+                            inline: true
+                        },
+                    )
+                }else {
+                    embed.addFields(
+                        { 
+                            name: code, 
+                            value: ":x:", 
+                            inline: true
+                        }
+                    )
+                }
+            })
+        }
+        return embed
+    } catch(e) {
+
+        catchError.saveError(null, null, "code.js", "codeListEmbed", e)
+        console.error(e)
+    }
+}
 
 async function codeIsOutdated() {
 
@@ -180,4 +219,4 @@ function SaveBdd(){
 
 }
 
-module.exports = {enterCode, codeIsOutdated}
+module.exports = {codeListEmbed, enterCode, codeIsOutdated}

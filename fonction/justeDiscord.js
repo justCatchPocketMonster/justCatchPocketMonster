@@ -8,6 +8,8 @@ const prefix = variableGlobal.prefix;
 const codeBdd = require("../bdd/code.json")
 const fonction = require("../fonction/fonctionJs")
 const catchError = require("./catchError")
+const pagination = require("./pagination")
+const code = require("./code")
 
 
 function randomStatus(Client){
@@ -72,4 +74,101 @@ function randomStatus(Client){
     
 }
 
-module.exports= { randomStatus}
+function embedMentionObligatoire(idServer){
+    embed = new Discord.EmbedBuilder()
+        .setColor("Red")
+        .setTitle(language.getText(idServer, "mentionObligatoireTitle"))
+        .setDescription(language.getText(idServer, "mentionObligatoireDesc"))
+        .setFooter({ text: language.getText(idServer, "mentionObligatoireFooter")})
+        .addFields(
+            {name: language.getText(idServer, "mentionObligatoireFieldNonAffiliationTitle"), value: language.getText(idServer, "mentionObligatoireFieldNonAffiliationDesc"), inline: false},
+            )
+
+            return embed
+}
+
+function information(interaction){
+    pages = []
+
+    mainPage = new Discord.EmbedBuilder()
+        .setColor('#0099ff')
+        .setTitle('Information')
+        .setDescription(language.getText(interaction.guild.id, "informationDescription"))
+    pages.push(
+        pagination.createPageForMenu(
+            mainPage,
+            null,
+            language.getText(interaction.guild.id, "principalPage"),
+            ""
+            )
+            )
+
+    pages.push(
+        pagination.createPageForMenu(
+            embedMentionObligatoire(interaction.guild.id),
+            null,
+            language.getText(interaction.guild.id, "mentionObligatoireTitle"),
+            language.getText(interaction.guild.id, "mentionObligatoireDesc")
+            )
+        )
+    pages.push(
+        pagination.createPageForMenu(
+                code.codeListEmbed(interaction.user.id),
+                null,
+                language.getText(interaction.guild.id, "codeListEmbedTitle"),
+                language.getText(interaction.guild.id, "codeListEmbedDescription")
+            )
+        )
+    
+    pagination.paginationMenu(interaction, language.getText(interaction.guild.id, "selectAPage"), pages)
+
+}
+
+
+function tutorial(interaction){
+
+    pages = []
+
+    mainPage = 
+    pages.push(
+        pagination.createPageForMenu(
+            new Discord.EmbedBuilder()
+                .setColor('#0099ff')
+                .setTitle(language.getText(interaction.guild.id, "tutorialTitle"))
+                .setDescription(language.getText(interaction.guild.id, "tutorialDescription"))
+                .addFields(
+                    {name: language.getText(interaction.guild.id, "tutorialField1Title"), value: language.getText(interaction.guild.id, "tutorialField1Desc"), inline: false},
+                    {name: language.getText(interaction.guild.id, "tutorialField2Title"), value: language.getText(interaction.guild.id, "tutorialField2Desc"), inline: false},
+                    {name: language.getText(interaction.guild.id, "tutorialField3Title"), value: language.getText(interaction.guild.id, "tutorialField3Desc"), inline: false},
+                    )
+                .setImage("https://cdn.discordapp.com/attachments/1150766647905366086/1150767117206036510/botGifTuto.gif")
+            ,
+            null,
+            language.getText(interaction.guild.id, "baseTutorialTitle"),
+            ""
+        )
+    )
+
+    pages.push(
+        pagination.createPageForMenu(
+            new Discord.EmbedBuilder()
+                .setColor('#7B68EE')
+                .setTitle(language.getText(interaction.guild.id, "tutorialAdminTitle"))
+                .setDescription(language.getText(interaction.guild.id, "tutorialAdminDescription"))
+                .addFields(
+                    {name: language.getText(interaction.guild.id, "tutorialAdminField1Title"), value: language.getText(interaction.guild.id, "tutorialAdminField1Desc"), inline: false},
+                    {name: language.getText(interaction.guild.id, "tutorialAdminField2Title"), value: language.getText(interaction.guild.id, "tutorialAdminField2Desc"), inline: false},
+                    )
+            ,
+            null,
+            language.getText(interaction.guild.id, "tutorialAdminTitle"),
+            ""
+        )
+    )
+
+
+    pagination.paginationMenu(interaction, language.getText(interaction.guild.id, "selectAPage"), pages)
+
+}
+
+module.exports= {tutorial, randomStatus, information}

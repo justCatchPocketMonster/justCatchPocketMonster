@@ -55,9 +55,31 @@ function defaultStat(){
             "max": variableGlobal.maximumCount
         
         },
+        "nightMode": false,
         "valeurMaxChoiceEgg": variableGlobal.valeurMaxChoiceEgg,
     }
 }
+
+function setNightMode(idServer, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["nightMode"] = true
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "setNightMode", e)
+        console.error(e)
+    }
+}
+
 
 function maxMessageSpawn(idServer, nbMessageMax, timeInSec, event){
     try{
@@ -97,6 +119,26 @@ function minMessageSpawn(idServer, nbMessageMin, timeInSec, event){
         console.error(e)
     }
 }
+
+function maxValeurChoiceEgg(idServer, valeurMax, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["valeurMaxChoiceEgg"] = valeurMax
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "specificPokemonSpawn", e)
+        console.error(e)
+    }
+}
+
 
 
 
@@ -345,4 +387,4 @@ function SaveBdd(){
     }
 }
 
-module.exports = {maxMessageSpawn, minMessageSpawn, specificPokemonSpawn, megaAllow, time, getStat, changeRarity, changeGen, changeType, changeShiny, getGeneralStat, getStat}
+module.exports = {setNightMode, maxValeurChoiceEgg, maxMessageSpawn, minMessageSpawn, specificPokemonSpawn, megaAllow, time, getStat, changeRarity, changeGen, changeType, changeShiny, getGeneralStat, getStat}

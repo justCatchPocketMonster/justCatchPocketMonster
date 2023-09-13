@@ -90,7 +90,7 @@ function idChannelExist(idChannel, idServer){
 /**
  *ressort un salon aléatoirement ou undefined si inexistant
  */
-function randomIdServer(idServer){
+function randomIdServer(idServer, Client){
 
     try{
 
@@ -98,8 +98,32 @@ function randomIdServer(idServer){
         if(allowSave[idServer][0] === undefined){
             return undefined
         } else {
-            var nbChannelAllow = allowSave[idServer].length
-            var randomWithCount = fonction.getRandomInt(nbChannelAllow);
+            var nbChannelAllow
+            server = Client.guilds.cache.get(idServer);
+            botMember = server.members.cache.get(Client.user.id);
+            const permissionRequiredSendMessage = "SendMessages";
+            const permissionRequiredViewChannel = "ViewChannel";
+            let channelValid = false;
+
+            do{
+
+                nbChannelAllow = allowSave[idServer].length
+                var randomWithCount = fonction.getRandomInt(nbChannelAllow);
+
+                canSendMessage = botMember.permissionsIn(Client.channels.cache.get(allowSave[idServer][randomWithCount])).has(permissionRequiredSendMessage);
+                canViewChannel = botMember.permissionsIn(Client.channels.cache.get(allowSave[idServer][randomWithCount])).has(permissionRequiredViewChannel);
+
+                canGiveResponse = (canViewChannel && canSendMessage)
+
+                if(canGiveResponse === false){
+                    allowSave[idServer].splice(randomWithCount, 1)
+                    SaveBdd();
+                    channelNotValid = false;
+                } else {
+                    channelNotValid = true;
+                }
+
+            } while( !(channelNotValid === true || allowSave[idServer].length === 0));
             return allowSave[idServer][randomWithCount]
         }
 

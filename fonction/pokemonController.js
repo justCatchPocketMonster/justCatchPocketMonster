@@ -35,18 +35,26 @@ function embedPokemon(Discord, message, pokemon, Client, idChannel, isShiny){
 
     try {
         let imageRandom = fonction.getRandomInt(pokemon["imgName"].length);
-        if(pokemon["isShiny"]){
-            
-            var adressImage = "./src/image/pokeHome/"+pokemon["imgName"][imageRandom]+"-shiny.png";
-            var nameImage = pokemon["imgName"][imageRandom] + "-shiny.png";
-        } else {
-            var adressImage = "./src/image/pokeHome/"+pokemon["imgName"][imageRandom]+".png";
+
+        if(eventStatChange.getGeneralStat(message.guild.id, "nightMode")){
+            adressImage = "./src/image/pokeHomeShadow/"+pokemon["imgName"][imageRandom]+".png";
             var nameImage = pokemon["imgName"][imageRandom] + ".png";
+        } else {
+            if(pokemon["isShiny"]){
+            
+                var adressImage = "./src/image/pokeHome/"+pokemon["imgName"][imageRandom]+"-shiny.png";
+                var nameImage = pokemon["imgName"][imageRandom] + "-shiny.png";
+            } else {
+                var adressImage = "./src/image/pokeHome/"+pokemon["imgName"][imageRandom]+".png";
+                var nameImage = pokemon["imgName"][imageRandom] + ".png";
+            }
         }
+        
+        
         
         let pokeImg = new AttachmentBuilder(adressImage)
     
-        
+    
         let pokeEmbed = new Discord.EmbedBuilder()
             .setColor(fonction.colorByType(pokemon["typeListEng"][fonction.getRandomInt(pokemon["typeListEng"].length)]))
             .setTitle(language.getText(message.guild.id, "embedPokemonTitle"))
@@ -87,13 +95,13 @@ function spawnPokemon(Discord, message, Client){
                 idChannelRandom = message.channel.id
             } else {
     
-                idChannelRandom = allowChannel.randomIdServer(idServer)
+                idChannelRandom = allowChannel.randomIdServer(idServer, Client)
             }
             
             let typeSpawn = choiceTypeOfSpawn(Discord, message, spawnCount.getPokemonPresent(idServer, idChannelRandom), idChannelRandom, Client, idServer);
             
             if(typeSpawn == "pokemon"){
-                stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannelRandom)["id"], spawnCount.getPokemonPresent(idServer, idChannelRandom)["isShiny"]);  
+                stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannelRandom)["id"], spawnCount.getPokemonPresent(idServer, idChannelRandom)["isShiny"], spawnCount.getPokemonPresent(idServer, idChannelRandom)["form"]);  
             }
     
             spawnCount.setCount(idServer, 0, idChannel)
@@ -142,9 +150,9 @@ function catchPokemon(Discord, interaction, Client, optionString){
                         saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                     }
                     if(shinyAfterEvent == true && spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"] == false){
-                        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent)
+                        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannelRandom)["form"])
                     }
-                    stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent)
+                    stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannelRandom)["form"])
                     realPokemon = pokeDataAll.find(pokemon => pokemon.id == spawnCount.getPokemonPresent(idServer, idChannel)["id"])
                     
 
@@ -153,9 +161,9 @@ function catchPokemon(Discord, interaction, Client, optionString){
 
 
                         let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ realPokemon["name"]["nameFr"] +"/"+ realPokemon["name"]["nameEng"];
-                        if(eventStatChange.getGeneralStat(interaction.guild.id, "allowMega") == true){
+                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null){
                             messageCongratSend += " <:MEGA:1139228792989155359>"
-                            pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], "mega", shinyAfterEvent)
+                            pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], spawnCount.getPokemonPresent(idServer, idChannel)["form"], shinyAfterEvent)
                         } 
                         if(shinyAfterEvent){
                             messageCongratSend += ":star:. "
@@ -172,9 +180,9 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     }else{
                         let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ realPokemon["name"]["nameFr"];
                         
-                        if(eventStatChange.getGeneralStat(interaction.guild.id, "allowMega") == true){
+                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null){
                             messageCongratSend += " <:MEGA:1139228792989155359>"
-                            pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], "mega", shinyAfterEvent)
+                            pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], spawnCount.getPokemonPresent(idServer, idChannel)["form"], shinyAfterEvent)
                         } 
                         if(shinyAfterEvent){
                             messageCongratSend += ":star:. "
@@ -220,15 +228,15 @@ function choiceTypeOfSpawn(Discord, message, pokemon, idChannel, Client, idServe
     try {
         nbRand = fonction.getRandomInt(variableGlobal.valeurMaxChoiceEvent)
 
-        if(variableGlobal.valeurMaxEvent<= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
+        if(variableGlobal.valeurMaxEvent>= nbRand && eventStatChange.getGeneralStat(idServer,"whatEvent") === false){
             eventChoice.eventSelect("avant", message.guild.id, Client, idChannel)
     
             return("event")
     
         } else {
 
-            nbRand = fonction.getRandomInt(variableGlobal.valeurMaxEgg)
-            if(variableGlobal.valeurMaxEgg <= nbRand){
+            nbRand = fonction.getRandomInt(eventStatChange.getGeneralStat(message.guild.id, "valeurMaxChoiceEgg"))
+            if(variableGlobal.valeurMaxEgg >= nbRand){
                 pokemonEgg = Object.assign({},pokeDataAll[fonction.getRandomInt(pokeDataAll.length)]);
                 pokemonEgg["imgName"] = pokeDataAll[0]["imgName"]
                 pokemonEgg["name"] = pokeDataAll[0]["name"]
@@ -579,7 +587,7 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
         if(arrayPokemonValide.length > 1){
             for(let i = 1; i < arrayPokemonValide.length; i++){
                 arrayPokemonValide[i]["imgName"].forEach(imgName => {
-                    firstPokemonValid["imgName"].push(imgName)
+                    firstPokemonValid["imgName"].push(JSON.parse(JSON.stringify(imgName)))
                 })
                 variableGlobal.form.forEach(form => {
                     arrayPokemonValide[i]["pokemonForm"][form].forEach(pokemonForm => {
@@ -592,40 +600,31 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
         const actualPokemon = firstPokemonValid
     
         let embed
-        let count = 0;
-        let countTotal = 0;
         var adressImage;
-    
-        if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
-            countTotal += actualPokemon["imgName"].length;
-            if(saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
-                countTotal += actualPokemon["imgName"].length;
-            }
-        }
-    
         
         if(savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
             actualPokemon["imgName"].forEach(imgName => {
-                count++;
                 embed = new Discord.EmbedBuilder()
                 //.setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
                 .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
-                .setImage("attachment://"+ imgName + ".png")
+                .setImage("attachment://"+ JSON.parse(JSON.stringify(imgName)) + ".png")
                 .setThumbnail(interaction.member.avatarURL())
                 .addFields(
                     { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                     { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                     { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
-                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount("CatchList", false, "All")[idPokemon] , inline: false},
-                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount("CatchListShiny", true, "All")[idPokemon] , inline: true},
-                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount("SpawnList", false, "All")[idPokemon] , inline: true},
-                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount("SpawnListShiny", true, "All")[idPokemon] , inline: true}
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount(true, false, false)[idPokemon] , inline: false},
+                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount(true, false, true)[idPokemon] , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount(true, true, false)[idPokemon] , inline: true},
+                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount(true, true, true)[idPokemon] , inline: true}
                 )
                 .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
-                .setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
-    
-                adressImage = "./src/image/pokeHome/"+imgName+".png";
-    
+                
+                if(eventStatChange.getGeneralStat(interaction.guild.id, "nightMode")){
+                    adressImage = "./src/image/pokeHomeShadow/"+JSON.parse(JSON.stringify(imgName))+".png";
+                } else {
+                    adressImage = "./src/image/pokeHome/"+JSON.parse(JSON.stringify(imgName))+".png";
+                }
                 arrayPagination.push({page: embed, imagePage: adressImage})
                 
             })
@@ -633,27 +632,29 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
             if(saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) >0){
     
                 actualPokemon["imgName"].forEach(imgName => {
-                    count++;
                     embed = new Discord.EmbedBuilder()
                     //.setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon["typeListEng"].length)]))
                     .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
-                    .setImage("attachment://"+ imgName + "-shiny.png")
+                    .setImage("attachment://"+ JSON.parse(JSON.stringify(imgName)) + "-shiny.png")
                     .setThumbnail(interaction.member.avatarURL())
                     .addFields(
                         { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                         { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                         { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
-                        { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount("CatchList", false, "All")[idPokemon] , inline: false},
-                        { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount("CatchListShiny", true, "All")[idPokemon] , inline: true},
-                        { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount("SpawnList", false, "All")[idPokemon] , inline: true},
-                        { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount("SpawnListShiny", true, "All")[idPokemon] , inline: true}
+                        { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount(true, false, false)[idPokemon] , inline: false},
+                        { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount(true, false, true)[idPokemon] , inline: true},
+                        { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount(true, true, false)[idPokemon] , inline: true},
+                        { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount(true, true, true)[idPokemon] , inline: true}
     
                     )
                     .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon ["typeListEng"].length)]))
-                    .setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
-            
-                    adressImage = "./src/image/pokeHome/"+imgName+"-shiny.png";
-            
+                    
+                    if(eventStatChange.getGeneralStat(interaction.guild.id, "nightMode")){
+                        adressImage = "./src/image/pokeHomeShadow/"+JSON.parse(JSON.stringify(imgName))+"-shiny.png";
+                    } else {
+                        adressImage = "./src/image/pokeHome/"+JSON.parse(JSON.stringify(imgName))+"-shiny.png";
+                    }
+
                     arrayPagination.push({page: embed, imagePage: adressImage})
                     
                     })
@@ -665,34 +666,71 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
                 if(actualPokemon.pokemonForm.hasOwnProperty(form)){
                     saveForm = pokemonForm.getSaveByForm(interaction.member.id, form)
                     //vérif si l'utilisateur à déjà attrapé le pokemon de cette form
-                    if(saveForm[actualPokemon["id"]] > 0){
+                    if(saveForm[actualPokemon["id"]]["normal"] > 0){
                         //List les variation de la même form (genre tauros de paldea)
                         actualPokemon.pokemonForm[form].forEach(pokemonForm => {
                             // List les variation dans la variation (genre male et femelle)
                             //qui chez gamefreak trouve ça drole ? fdp va
                             pokemonForm["imgName"].forEach(imgName => {
 
-                                //TODO: a finir
                                 embed = new Discord.EmbedBuilder()
                                 
                                 .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
-                                .setImage("attachment://"+ imgName + ".png")
+                                .setImage("attachment://"+ JSON.parse(JSON.stringify(imgName)) + ".png")
                                 .setThumbnail(interaction.member.avatarURL())
                                 .addFields(
-                                    { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+saveForm["normal"] , inline: true},
-                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveForm["shiny"] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+saveForm[actualPokemon["id"]]["normal"] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveForm[actualPokemon["id"]]["shiny"] , inline: true},
                                     //{ name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
-                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount("CatchList", false, "All")[idPokemon] , inline: false},
-                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount("CatchListShiny", true, "All")[idPokemon] , inline: true},
-                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount("SpawnList", false, "All")[idPokemon] , inline: true},
-                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount("SpawnListShiny", true, "All")[idPokemon] , inline: true}
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount(true, false, false)[idPokemon] , inline: false},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount(true, false, true)[idPokemon] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount(true, true, false)[idPokemon] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount(true, true, true)[idPokemon] , inline: true}
                 
                                 )
                                 .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon ["typeListEng"].length)]))
-                                .setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
-                        
-                                adressImage = "./src/image/pokeHome/"+imgName+".png";
-                        
+                                
+                                if(eventStatChange.getGeneralStat(interaction.guild.id, "nightMode")){
+                                    adressImage = "./src/image/pokeHomeShadow/"+JSON.parse(JSON.stringify(imgName))+".png";
+                                } else {
+                                    adressImage = "./src/image/pokeHome/"+JSON.parse(JSON.stringify(imgName))+".png";
+                                }
+                                arrayPagination.push({page: embed, imagePage: adressImage})
+                                
+
+                            })
+                        })
+                    }
+                    if(saveForm[actualPokemon["id"]]["shiny"] > 0){
+                        //List les variation de la même form (genre tauros de paldea)
+                        actualPokemon.pokemonForm[form].forEach(pokemonForm => {
+                            // List les variation dans la variation (genre male et femelle)
+                            //qui chez gamefreak trouve ça drole ? fdp va
+                            //MAIS EN SHINY
+                            pokemonForm["imgName"].forEach(imgName => {
+
+                                embed = new Discord.EmbedBuilder()
+                                
+                                .setTitle(actualPokemon["name"]['name'+language.getLanguage(interaction.guild.id)])
+                                .setImage("attachment://"+ JSON.parse(JSON.stringify(imgName)) + "-shiny.png")
+                                .setThumbnail(interaction.member.avatarURL())
+                                .addFields(
+                                    { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+saveForm[actualPokemon["id"]]["normal"] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveForm[actualPokemon["id"]]["shiny"] , inline: true},
+                                    //{ name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount(true, false, false)[idPokemon] , inline: false},
+                                    { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount(true, false, true)[idPokemon] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount(true, true, false)[idPokemon] , inline: true},
+                                    { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount(true, true, true)[idPokemon] , inline: true}
+                
+                                )
+                                .setColor(fonction.colorByType(actualPokemon["typeListEng"][fonction.getRandomInt(actualPokemon ["typeListEng"].length)]))
+                                
+                                if(eventStatChange.getGeneralStat(interaction.guild.id, "nightMode")){
+                                    adressImage = "./src/image/pokeHomeShadow/"+JSON.parse(JSON.stringify(imgName))+"-shiny.png";
+                                } else {
+                                    adressImage = "./src/image/pokeHome/"+JSON.parse(JSON.stringify(imgName))+"-shiny.png";
+                                }
                                 arrayPagination.push({page: embed, imagePage: adressImage})
                                 
 
@@ -713,18 +751,30 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
                 { name: language.getText(interaction.guild.id, "nombreDeCapture"), value: ""+savePokemonUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                 { name: language.getText(interaction.guild.id, "nombreDeCaptureShiny"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: true},
                 { name: language.getText(interaction.guild.id, "nombreDeCaptureDuServer"), value: ""+saveShinyUser.getNumberCapturePokemon(interaction.member.id, idPokemon) , inline: false},
-                { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount("CatchList", false, "All")[idPokemon] , inline: false},
-                { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount("CatchListShiny", true, "All")[idPokemon] , inline: true},
-                { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount("SpawnList", false, "All")[idPokemon] , inline: true},
-                { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount("SpawnListShiny", true, "All")[idPokemon] , inline: true}
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: ""+stat.getCount(true, false, false)[idPokemon] , inline: false},
+                { name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: ""+stat.getCount(true, false, true)[idPokemon] , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: ""+stat.getCount(true, true, false)[idPokemon] , inline: true},
+                { name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: ""+stat.getCount(true, true, true)[idPokemon] , inline: true}
     
             )
-    
-            adressImage = "./src/image/pokeHome/0000-001.png";
+
+            if(eventStatChange.getGeneralStat(interaction.guild.id, "nightMode")){
+                adressImage = "./src/image/pokeHomeShadow/0000-001.png";
+            } else {
+                adressImage = "./src/image/pokeHome/0000-001.png";
+            }
     
             arrayPagination.push({page: embed, imagePage: adressImage})
             
         }
+
+        let count = 0;
+        let countTotal = arrayPagination.length;
+
+        arrayPagination.forEach(page => {
+            count++;
+            page.page.setFooter({text: "Pages:  "+ count + "/" + countTotal +"."})
+        })
     
         pagination.paginationButton(interaction,arrayPagination, 1, 60000)
     

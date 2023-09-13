@@ -1,9 +1,72 @@
 {
     "972893923359998053": {
-        "nbCountMax": 11,
-        "nbCountActuel": 3,
+        "nbCountMax": 10,
+        "nbCountActuel": 6,
         "pokemonPresentActuel": {
             "972896634105110528": null
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 6,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1037740604030996482": {
+                "id": 531,
+                "name": {
+                    "nameEng": "Audino",
+                    "nameFr": "Nanméouïe"
+                },
+                "typeListEng": [
+                    "Normal"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0531-000"
+                ],
+                "gen": 5,
+                "pokemonForm": {
+                    "mega": [
+                        {
+                            "imgName": [
+                                "0531-000-mega"
+                            ],
+                            "typeListEng": [
+                                "Normal",
+                                "Fairy"
+                            ],
+                            "numeroVersion": 1
+                        }
+                    ]
+                },
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Audino",
+                "date": "2023-8-9",
+                "heure": "22:44:23"
+            },
+            "1075093451705696286": {
+                "id": 525,
+                "name": {
+                    "nameEng": "Boldore",
+                    "nameFr": "Géolithe"
+                },
+                "typeListEng": [
+                    "Rock"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0525-000"
+                ],
+                "gen": 5,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Boldore",
+                "date": "2023-8-11",
+                "heure": "18:28:49"
+            }
         }
     }
 }

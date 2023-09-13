@@ -1,7 +1,7 @@
 const pokemonForm = require('../bdd/pokemonForm.json');
 const pokeBdd = require('../bdd/pokemon.json');
 const path = require('path');
-const variableGlobal = require('../variableGlobal.js');
+const variableGlobal = require('../parameters/variableGlobal.js');
 
 const form = variableGlobal.form;
 const fs = require('fs');

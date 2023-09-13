@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "discord.js": "^14.9.0",
+    "dotenv": "^16.3.1",
     "lockfile": "^1.0.4"
   }
 }

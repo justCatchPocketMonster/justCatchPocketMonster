@@ -206,6 +206,22 @@ const hintPokemonCommand = new SlashCommandBuilder()
                         .setRequired(false)
                         )
 
+const informationCommand = new SlashCommandBuilder()
+        .setName("information")
+        .setDescription(bddText.commandInformationExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandInformationExplication.Fr[0]
+        })
+
+const commentJeFaisCommand = new SlashCommandBuilder()
+        .setName("howido")
+        .setNameLocalizations({
+                'fr': "commentjefais"
+        })
+        .setDescription(bddText.commandHowIDoExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandHowIDoExplication.Fr[0]
+        })
 
 
-module.exports = {hintPokemonCommand, spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, effectCommand}
+module.exports = {commentJeFaisCommand, informationCommand, hintPokemonCommand, spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, effectCommand}
