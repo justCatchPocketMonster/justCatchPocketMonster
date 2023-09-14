@@ -843,19 +843,19 @@
     },
 
     "tutorialField1Title": {
-        "Fr": ["1 - Apparition des Pokémons"],
+        "Fr": ["1 - Apparition des Pokémon"],
         "Eng": ["1 - Pokémon spawn"]
     },
     "tutorialField1Desc": {
-        "Fr": ["Simplement parlé et ils arriveront de manière aléatoire dans les salons choisie par les administrateurs. Des événements peuvent venir faire des effets différents comme augmentés le nombre de Pokémon feu."],
+        "Fr": ["Simplement parler et ils arriveront de manière aléatoire dans les salons choisis par les administrateurs. Des évènements peuvent venir faire des effets différents comme augmenter le nombre de Pokémon Feu."],
         "Eng": ["Simply talk and it will arrive randomly in the channels chosen by the administrators. Events can appear randomly as well and have different effects, such as increasing the number of fire Pokémon, ect... "]
     },
     "tutorialField2Title": {
-        "Fr": ["2 - Capture des Pokémons"],
+        "Fr": ["2 - Capturer des Pokémons"],
         "Eng": ["2 - Pokémon catch"]
     },
     "tutorialField2Desc": {
-        "Fr": ["Pour capturer un Pokémon il faut faire la commande \"/catch [nom du Pokémon]\". Si le nom est correcte vous l'aurez attrapé sinon vous l'aurez manqué. Le nom français/anglais compte. (attention seulement le premier pourra l'attraper)"],
+        "Fr": ["Pour capturer un Pokémon il faut faire la commande \"/catch [nom du Pokémon]\". Si le nom est correct, vous le saisirez avec succès ; sinon, vous le laisserez échapper. Le nom français/anglais compte. (Attention seulement le premier pourra l'attraper)"],
         "Eng": ["Pokemon To catch a Pokémon you have to do the command \"/catch [Pokémon's name]\". If the name of the pokemon is correct you caught it ! Only French/English name counts. (Only one person per pokemon.)"]
     },
     "tutorialField3Title": {
@@ -863,7 +863,7 @@
         "Eng": ["3 - Have fun"]
     },
     "tutorialField3Desc": {
-        "Fr": ["C'est tout. Simplement s'amuser de collectionner. Tu peux regarder ton avancement avec /pokedex. Il existe d'autres de commande bien sûre."],
+        "Fr": ["C'est tout. Simplement s'amuser de collectionner. Tu peux regarder ton avancement avec /pokedex. Il existe d'autres commandes bien sûr."],
         "Eng": ["That's all. Just have fun collecting. You can watch your progress with /pokedex. There are other commands of course."]
     },
     "baseTutorialTitle": {
@@ -880,7 +880,7 @@
         "Eng": ["Admin stuff"]
     },
     "tutorialAdminDescription": {
-        "Fr": ["Voici ce que les administrateurs peuvent faire avec le bot pour une meilleur expérience."],
+        "Fr": ["Voici ce que les administrateurs peuvent faire avec le bot pour une meilleure expérience."],
         "Eng": ["Here's what administrators can do with the bot for a better experience."]
     },
     "tutorialAdminField1Title": {
@@ -888,15 +888,15 @@
         "Eng": ["1 - Change the language"]
     },
     "tutorialAdminField1Desc": {
-        "Fr": ["Pour changé la langue du bot il faut faire la commande \"/language [langue]\". Seulement 2 langues sont disponibles pour le moment : Français et Anglais. (par défaut anglais)"],
-        "Eng": ["To change the language of the bot you have to do the command \"/language [language]\". Only 2 languages are available at the moment: French and English. (default English)"]
+        "Fr": ["Pour changer la langue du bot il faut faire la commande \"/langue [langue]\". Seulement 2 langues sont disponibles pour le moment : Français et Anglais. (Par défaut anglais)"],
+        "Eng": ["To change the language of the bot you have to do the command \"/language [language]\". Only 2 languages are available at the moment: French and English. (Default English)"]
     },
     "tutorialAdminField2Title": {
         "Fr": ["2 - Autorisation de spawn"],
         "Eng": ["2 - Spawn authorization"]
     },
     "tutorialAdminField2Desc": {
-        "Fr": ["Pour autoriser le spawn dans un salon il faut faire la commande \"/spawn [true/false]\". Attention les pokémons peuvent spawn avec des messages d'autres salons. (sauf si le bot ne vois pas les autres salons)"],
+        "Fr": ["Pour autoriser le spawn dans un salon il faut faire la commande \"/spawn [true/false]\". Attention les Pokémon peuvent spawn avec des messages d'autres salons. (Sauf si le bot ne voit pas les autres salons)"],
         "Eng": ["To authorize the spawn in a room you have to do the command \"/spawn [true/false]\". Be careful the Pokémon can spawn with messages from other channels. (unless the bot doesn't see the other channels)"]
     }
 

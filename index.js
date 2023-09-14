@@ -18,6 +18,7 @@ const eventStatChange = require("./fonction/eventStatChange")
 const eventChoice = require("./fonction/eventChoice")
 const pokeDataAll = require("./bdd/pokemon.json");
 const fs = require("fs");
+const path = require('path');
 
 
 var Client = new Discord.Client({ 
@@ -98,7 +99,6 @@ Client.on("guildCreate", guild =>{
  */
 Client.on("interactionCreate", interaction => {
     try{
-        console.log(interaction.commandName)
 
     const permissionRequiredSendMessage = "SendMessages";
     const permissionRequiredViewChannel = "ViewChannel";
@@ -232,7 +232,9 @@ Client.on("interactionCreate", interaction => {
 
                 if(interaction.commandName == "howido"){
 
-                    justDiscord.tutorial(interaction)
+                    //justDiscord.tutorial(interaction)
+                    if(pastis){
+                    }
                 }
 
 
@@ -325,5 +327,85 @@ Client.on("ready", () => {
 
     
 });
+
+process.on('uncaughtException', function (err) {
     
+    catchError.saveError(null, null, "GENERAL", "GENERAL", err)
+    verifBdd();
+    //process.exit(1) // exit application
+
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+    verifBdd();
+    // Gérer les promesses rejetées ici
+    console.error('Promesse rejetée sans gestionnaire :', reason);
+  });
+    
+
+process.on('exit', (code) => {
+    verifBdd();
+    console.log(`Le processus se termine avec le code de sortie ${code}`);
+
+
+});
+
+function verifBdd(){
+    
+    const folderPath = path.join(__dirname,"..", 'bdd/');
+
+    fs.readdir(folderPath, (err, files) => {
+        if (err) {
+          console.error(`Erreur lors de la lecture du dossier ${folderPath}: ${err}`);
+          return;
+        }
+      
+        files.forEach((file) => {
+          const filePath = path.join(folderPath, file);
+      
+          // Vérifiez si le fichier est un fichier JSON
+          if (path.extname(file).toLowerCase() === '.json') {
+            repairJSON(filePath);
+          }
+        });
+      });  
+}
+
+
+function repairJSON(filePath) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+        console.error(`Erreur lors de la lecture du fichier ${filePath}: ${err}`);
+        return;
+        }
+
+        if (!isValidJSON(data)) {
+        try {
+            const parsedData = JSON.parse(data);
+            const repairedData = JSON.stringify(parsedData, null, 2); // Indentation de 2 espaces
+
+            fs.writeFile(filePath, repairedData, (err) => {
+            if (err) {
+                console.error(`Erreur lors de la réparation du fichier JSON ${filePath}: ${err}`);
+            } else {
+                console.log(`Fichier JSON réparé : ${filePath}`);
+            }
+            });
+        } catch (error) {
+            console.error(`Erreur lors de la réparation du fichier JSON ${filePath}: ${error}`);
+        }
+        }
+    });
+}
+
+
+
+function isValidJSON(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
 

@@ -7,8 +7,8 @@
         }
     },
     "1037740602697195561": {
-        "nbCountMax": 6,
-        "nbCountActuel": 0,
+        "nbCountMax": 12,
+        "nbCountActuel": 9,
         "pokemonPresentActuel": {
             "1037740604030996482": {
                 "id": 531,
@@ -41,7 +41,7 @@
                 "form": null,
                 "isShiny": false,
                 "capturable": true,
-                "hint": "Audino",
+                "hint": "Nanméouïe",
                 "date": "2023-8-9",
                 "heure": "22:44:23"
             },
@@ -63,9 +63,31 @@
                 "form": null,
                 "isShiny": false,
                 "capturable": true,
-                "hint": "Boldore",
+                "hint": "Géolithe",
                 "date": "2023-8-11",
                 "heure": "18:28:49"
+            },
+            "1150842732416356401": {
+                "id": 328,
+                "name": {
+                    "nameEng": "Trapinch",
+                    "nameFr": "Kraknoix"
+                },
+                "typeListEng": [
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0328-000"
+                ],
+                "gen": 3,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Kraknoix",
+                "date": "2023-8-13",
+                "heure": "22:14:45"
             }
         }
     }

@@ -113,7 +113,7 @@ function information(interaction){
         )
     pages.push(
         pagination.createPageForMenu(
-                code.codeListEmbed(interaction.user.id),
+                code.codeListEmbed(interaction.user.id, interaction.guild.id),
                 null,
                 language.getText(interaction.guild.id, "codeListEmbedTitle"),
                 language.getText(interaction.guild.id, "codeListEmbedDescription")

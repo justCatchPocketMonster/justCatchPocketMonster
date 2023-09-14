@@ -1,1 +1,10 @@
-[]
+{
+    "14/8/2023 - 12:9:28 - 377": {
+        "idServe": null,
+        "idChannel": null,
+        "file": "GENERAL",
+        "function": "GENERAL",
+        "errorName": "ReferenceError",
+        "errorMessage": "pastis is not defined"
+    }
+}
