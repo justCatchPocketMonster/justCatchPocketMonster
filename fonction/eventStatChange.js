@@ -3,6 +3,9 @@ const bddEventStat = require("../bdd/actualEventStat.json");
 const saveServer = require("./pokedexSaveServer")
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
+const fonctionJs = require("./fonctionJs")
 
 function defaultStat(){
     return{
@@ -44,53 +47,140 @@ function defaultStat(){
         },
         "shiny" : variableGlobal.tauxMaxShiny,
         "timer": false,
-        "whatEvent": false
+        "whatEvent": false,
+        "allowMega": false,
+        "specificPokemonSpawn": undefined,
+        "messageSpawn": {
+            "min": variableGlobal.minimumCount,
+            "max": variableGlobal.maximumCount
+        
+        },
+        "nightMode": false,
+        "valeurMaxChoiceEgg": variableGlobal.valeurMaxChoiceEgg,
     }
 }
-/*
-TODO: montre ça au prof je comprend que dalle de la logique.
-const defaultStat = {
-    "gen" : {
-        "1":variableGlobal.gen1,
-        "2":variableGlobal.gen2,
-        "3":variableGlobal.gen3,
-        "4":variableGlobal.gen4,
-        "5":variableGlobal.gen5,
-        "6":variableGlobal.gen6,
-        "7":variableGlobal.gen7,
-        "8":variableGlobal.gen8,
-        "9":variableGlobal.gen9,
-    },
-    "type" : {
-        "acier" : variableGlobal.acier,
-        "dragon" : variableGlobal.dragon,
-        "electrik" : variableGlobal.electrik,
-        "feu" : variableGlobal.feu,
-        "insecte" : variableGlobal.insecte,
-        "plante" : variableGlobal.plante,
-        "psy" : variableGlobal.psy,
-        "sol" : variableGlobal.sol,
-        "tenebres" : variableGlobal.tenebres,
-        "combat" : variableGlobal.combat,
-        "eau" : variableGlobal.eau,
-        "fee" : variableGlobal.fee,
-        "glace" : variableGlobal.glace,
-        "normal" : variableGlobal.normal,
-        "poison" : variableGlobal.poison,
-        "roche" : variableGlobal.roche,
-        "spectre" : variableGlobal.spectre,
-        "vol" : variableGlobal.vol
-    },
-    "rarity" : {
-        "normal": variableGlobal.valeurMaxOrdinaire ,
-        "legendaire": variableGlobal.valeurMaxLegendaire ,
-        "fabuleux": variableGlobal.valeurMaxFabuleux 
-    },
-    "shiny" : variableGlobal.tauxMaxShiny,
-    "timer": false,
-    "whatEvent": false
+
+function setNightMode(idServer, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["nightMode"] = true
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "setNightMode", e)
+        console.error(e)
+    }
 }
-*/
+
+
+function maxMessageSpawn(idServer, nbMessageMax, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["messageSpawn"]["max"] = nbMessageMax
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "specificPokemonSpawn", e)
+        console.error(e)
+    }
+}
+
+
+function minMessageSpawn(idServer, nbMessageMin, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["messageSpawn"]["min"] = nbMessageMin
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "specificPokemonSpawn", e)
+        console.error(e)
+    }
+}
+
+function maxValeurChoiceEgg(idServer, valeurMax, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["valeurMaxChoiceEgg"] = valeurMax
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "specificPokemonSpawn", e)
+        console.error(e)
+    }
+}
+
+
+
+
+function specificPokemonSpawn(idServer, pokemonId, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["specificPokemonSpawn"] = pokemonId
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "specificPokemonSpawn", e)
+        console.error(e)
+    }
+}
+
+
+
+function megaAllow(idServer, timeInSec, event){
+    try{
+        if( bddEventStat[idServer] == undefined){
+            createResetEventStat(idServer)
+        }
+
+        bddEventStat[idServer]["allowMega"] = true
+
+        bddEventStat[idServer]["timer"] = timeInSec;
+        bddEventStat[idServer]["whatEvent"] = event;
+
+        SaveBdd()
+    } catch(e) {
+
+        catchError.saveError(idServer, null, "eventStatChange.js", "megaAllow", e)
+        console.error(e)
+    }
+}
 
 function changeRarity(idServer,theRarityChoice, valueLessAll, timeInSec, event){
     try{
@@ -233,7 +323,6 @@ function getStat(idServer, generalStat, specificStat){
 function resetAtZero(key){
     statDefaultModificable = defaultStat();
 
-
     if(saveServer.getCharmChroma(key)["charmeChroma"]){
         statDefaultModificable["shiny"] = variableGlobal.tauxMaxShiny/2;
     }
@@ -246,18 +335,17 @@ function resetAtZero(key){
 async function time(){
     try{
         for (const [key, value] of Object.entries(bddEventStat)) {
+
+            dateEnd = new Date(bddEventStat[key]["timer"])
+            actualDate = new Date();
+
+            dateDiff = fonctionJs.dateDiff(actualDate, dateEnd)
             
-
-            if(bddEventStat[key]["timer"] !== false){
-                bddEventStat[key]["timer"]--;
-                SaveBdd();
-
-                if(bddEventStat[key]["timer"] <= 0){
-                    
-                    resetAtZero(key);
-                }
+            if(dateDiff.sec < 0 || dateDiff.min < 0 || dateDiff.hour < 0 || dateDiff.day < 0 || dateDiff.month < 0 || dateDiff.year < 0){
                 
+                resetAtZero(key);
             }
+
             
         }
 
@@ -272,12 +360,26 @@ async function time(){
 
 
 
-
 function SaveBdd(){
+
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'actualEventStat.lock');
+
     try{
-        fs.writeFile("./bdd/actualEventStat.json", JSON.stringify(bddEventStat, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
+        lockfile.lock(lockfilePath, {"retries": 1000, "retryWait": 1000}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'actualEventStat.json'), JSON.stringify(bddEventStat, null, 4), (err)=> {
+            if (err)console.log("erreur: ", err)
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
     } catch(e) {
 
         catchError.saveError(null, null, "eventStatChange.js", "SaveBdd", e)
@@ -285,4 +387,4 @@ function SaveBdd(){
     }
 }
 
-module.exports = {time, getStat, changeRarity, changeGen, changeType, changeShiny, getGeneralStat, getStat}
+module.exports = {setNightMode, maxValeurChoiceEgg, maxMessageSpawn, minMessageSpawn, specificPokemonSpawn, megaAllow, time, getStat, changeRarity, changeGen, changeType, changeShiny, getGeneralStat, getStat}

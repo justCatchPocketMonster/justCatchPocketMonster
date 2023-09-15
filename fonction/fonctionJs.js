@@ -112,4 +112,23 @@ function actualHour(){
     }
 }
 
-module.exports = {getRandomInt, colorByType, actualDate, actualHour}
+function dateDiff(date1, date2){
+    var diff = {}                           
+    var tmp = date2 - date1;
+ 
+    tmp = Math.floor(tmp/1000);             
+    diff.sec = tmp % 60;                    
+ 
+    tmp = Math.floor((tmp-diff.sec)/60);  
+    diff.min = tmp % 60;                    
+ 
+    tmp = Math.floor((tmp-diff.min)/60);    
+    diff.hour = tmp % 24;                   
+     
+    tmp = Math.floor((tmp-diff.hour)/24);   
+    diff.day = tmp;
+     
+    return diff;
+}
+
+module.exports = {getRandomInt, colorByType, actualDate, actualHour, dateDiff}

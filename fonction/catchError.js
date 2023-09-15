@@ -1,6 +1,8 @@
 const bddCatchError = require('../bdd/catchError.json')
 const fs = require("fs")
 const {Client} = require("discord.js")
+const lockfile = require('lockfile');
+const path = require('path');
 
 
 function saveError(idServer, idChannel,fileName, functionName, error){
@@ -29,11 +31,13 @@ function dateActuel(){
 }
 
 
-
 function SaveBdd(){
-    fs.writeFile("./bdd/catchError.json", JSON.stringify(bddCatchError, null, 4), (err)=> {
+
+    fs.writeFile(path.join(__dirname,"..", 'bdd', 'catchError.json'), JSON.stringify(bddCatchError, null, 4), (err)=> {
         if (err)console.log("erreur")
-    })
+    });
+    
+
 }
 
 module.exports = {saveError}

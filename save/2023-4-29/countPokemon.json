@@ -1,0 +1,210 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 17,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 93,
+                "name": {
+                    "nameEng": "Haunter",
+                    "nameFr": "Spectrum"
+                },
+                "typeListEng": [
+                    "Ghost",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0093-000"
+                ],
+                "gen": 1,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-28",
+                "heure": "0:21:48"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 8,
+        "nbCountActuel": 7,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 257,
+                "name": {
+                    "nameEng": "Blaziken",
+                    "nameFr": "Braségali"
+                },
+                "typeListEng": [
+                    "Fire",
+                    "Fighting"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0257-000"
+                ],
+                "gen": 3,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-29",
+                "heure": "2:13:45"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 18,
+        "nbCountActuel": 8,
+        "pokemonPresentActuel": {
+            "796144803611279360": {
+                "id": 434,
+                "name": {
+                    "nameEng": "Stunky",
+                    "nameFr": "Moufouette"
+                },
+                "typeListEng": [
+                    "Poison",
+                    "Dark"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0434-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-20",
+                "heure": "13:29:29"
+            }
+        }
+    },
+    "972893923359998053": {
+        "nbCountMax": 9,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "972896634105110528": {
+                "id": 198,
+                "name": {
+                    "nameEng": "Murkrow",
+                    "nameFr": "Cornèbre"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Flying"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0198-000"
+                ],
+                "gen": 2,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2022-10-16",
+                "heure": "22:43:6"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 16,
+        "nbCountActuel": 13,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 395,
+                "name": {
+                    "nameEng": "Empoleon",
+                    "nameFr": "Pingoléon"
+                },
+                "typeListEng": [
+                    "Water",
+                    "Steel"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0395-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-29",
+                "heure": "1:36:27"
+            }
+        }
+    },
+    "993648961544011917": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    },
+    "807721959608549416": {
+        "nbCountMax": 19,
+        "nbCountActuel": 7,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 392,
+                "name": {
+                    "nameEng": "Infernape",
+                    "nameFr": "Simiabraz"
+                },
+                "typeListEng": [
+                    "Fire",
+                    "Fighting"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0392-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-4-20",
+                "heure": "11:24:53"
+            }
+        }
+    },
+    "1037740602697195561": {
+        "nbCountMax": 8,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1075093451705696286": {
+                "id": 389,
+                "name": {
+                    "nameEng": "Torterra",
+                    "nameFr": "Torterra"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0389-000"
+                ],
+                "gen": 4,
+                "differentSpawn": false,
+                "isShiny": false,
+                "capturable": true,
+                "date": "2023-1-16",
+                "heure": "0:58:29"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 10,
+        "nbCountActuel": 0,
+        "pokemonPresentActuel": {
+            "1087441927399559188": null
+        }
+    },
+    "1090011324555214969": {
+        "nbCountMax": 13,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "1090011564163215471": null
+        }
+    }
+}

@@ -7,19 +7,27 @@ var version = variableGlobal.version;
 const fs = require("fs")
 const Discord = require("discord.js")
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
+const pagination = require("./pagination");
+const { fips } = require("crypto");
 
 
 /**
  * Ajout +1 a l'index du pokemon dans la sauvegarde et créer la sauvegarde si elle n'existe pas et la met a jour si elle ne l'est pas
  * @param {int} idPokemon //id pour l'index
  */
- function statAddSpawn(idPokemon, isShiny){
+ function statAddSpawn(idPokemon, isShiny, form = null){
 try {
     
         createStatVersion()
     
-        if(statBdd[version]["listPokemonSpawned"][nbPokemon] === undefined){
+        if(statBdd[version]["listPokemonSpawned"] === null){
             updateNumberPossibilitySpawned();
+        } else {
+            if(statBdd[version]["listPokemonSpawned"][nbPokemon] === null){
+                updateNumberPossibilitySpawned();
+            }
         }
     
         statBdd[version]["pokemonSpawned"]+=1;
@@ -32,6 +40,28 @@ try {
             statBdd[version]["listPokemonSpawnedShiny"][idPokemon]+=1;
             statBdd["All"]["listPokemonSpawnedShiny"][idPokemon]+=1;
         }
+
+        if(form != null){
+            if(statBdd[version][form]["listPokemonSpawned"] === undefined ){
+                updateNumberPossibilitySpawned();
+            } else {
+                if(statBdd[version][form]["listPokemonSpawned"][idPokemon] === undefined){
+                updateNumberPossibilitySpawned();
+                }
+            }
+            statBdd[version][form]["pokemonSpawned"]+=1;
+            statBdd["All"][form]["pokemonSpawned"]+=1;
+            statBdd[version][form]["listPokemonSpawned"][idPokemon]+=1;
+            statBdd["All"][form]["listPokemonSpawned"][idPokemon]+=1;
+            if(isShiny){
+                statBdd[version][form]["pokemonSpawnedShiny"]+=1;
+                statBdd["All"][form]["pokemonSpawnedShiny"]+=1;
+                statBdd[version][form]["listPokemonSpawnedShiny"][idPokemon]+=1;
+                statBdd["All"][form]["listPokemonSpawnedShiny"][idPokemon]+=1;
+            }
+        }
+
+
         SaveBdd();
 } catch(error) {
 
@@ -44,15 +74,18 @@ try {
  * Ajout +1 a l'index du pokemon dans la sauvegarde et créer la sauvegarde si elle n'existe pas et la met a jour si elle ne l'est pas
  * @param {int} idPokemon //id pour l'index
  */
- function statAddCatch(idPokemon, isShiny){
+ function statAddCatch(idPokemon, isShiny, form = null){
 try {
     
         createStatVersion()
-    
-    
-        if(statBdd[version]["listPokemonCatched"][nbPokemon] === undefined){
+        if(statBdd[version]["listPokemonCatched"] === undefined ){
             updateNumberPossibilityCatched();
+        } else {
+            if(statBdd[version]["listPokemonCatched"][idPokemon] === undefined){
+                updateNumberPossibilityCatched();
+            }
         }
+
         statBdd[version]["pokemonCatched"]+=1;
         statBdd["All"]["pokemonCatched"]+=1;
         statBdd[version]["listPokemonCatched"][idPokemon]+=1;
@@ -62,6 +95,26 @@ try {
             statBdd["All"]["pokemonCatchedShiny"]+=1;
             statBdd[version]["listPokemonCatchedShiny"][idPokemon]+=1;
             statBdd["All"]["listPokemonCatchedShiny"][idPokemon]+=1;
+        }
+
+        if(form != null){
+            if(statBdd[version][form]["listPokemonCatched"] === undefined ){
+                updateNumberPossibilityCatched();
+            } else {
+                if(statBdd[version][form]["listPokemonCatched"][idPokemon] === undefined){
+                    updateNumberPossibilityCatched();
+                }
+            }
+            statBdd[version][form]["pokemonCatched"]+=1;
+            statBdd["All"][form]["pokemonCatched"]+=1;
+            statBdd[version][form]["listPokemonCatched"][idPokemon]+=1;
+            statBdd["All"][form]["listPokemonCatched"][idPokemon]+=1;
+            if(isShiny){
+                statBdd[version][form]["pokemonCatchedShiny"]+=1;
+                statBdd["All"][form]["pokemonCatchedShiny"]+=1;
+                statBdd[version][form]["listPokemonCatchedShiny"][idPokemon]+=1;
+                statBdd["All"][form]["listPokemonCatchedShiny"][idPokemon]+=1;
+            }
         }
         SaveBdd();
 } catch(error) {
@@ -73,7 +126,7 @@ try {
 
 function stringObjectPokemonMostAndLeastCatch(interaction){
 try {
-        let listPokemonCatched = getCountAllCatchList();
+        let listPokemonCatched = getCount(true, false, false);
     
         let leastPokemonCatch = {
             "nbCapture": 9999999,
@@ -155,7 +208,7 @@ try {
 
 function stringObjectPokemonMostAndLeastSpawn(interaction){
 try {
-        let listPokemonSpawned = getCountAllSpawnList();
+        let listPokemonSpawned = getCount(true, true, false)
     
         let leastPokemonSpawn = {
             "nbCapture": 9999999,
@@ -235,46 +288,411 @@ try {
     }
 }
 
+function principalEmbedStat(interaction){
+    mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
+    mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
 
 
-function embedStat(interaction){
-try {
+
+    let statEmbed = new Discord.EmbedBuilder()
+        .setTitle("stats")
+        .setColor("Purple")
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCount(false, false, false)+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCount(false, false, true)+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCount(false, true, false)+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value:getCount(false, true, true)+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCount(false, false, false, "version")+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCount(false, false, true, "version")+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCount(false, true, false, "version")+"", inline:true},
+            {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCount(false, true, true, "version")+"", inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
+            )
+        .addFields(
+            {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
+            {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
+            )
+
+            return statEmbed;
+}
+
+/**classer les pokemon par rareté et par capture ou spawn et les ranges dans un tableau d'objet qui detient le nombre + un tableau des id des pokemon
+ * 
+ * @param {string} type est le niveau de rareté du poké (commun, legendaire, fabuleux)
+ * @param {string} moinsOrPlus determine si c'est le top des plus ou des moins
+ * @param {bool} catchOrSpawn determine si c'est le top des capture ou des spawn
+ */
+function topStat(type, moinsOrPlus, isCatch){
+
+    let listPokemon
+    
+    if(isCatch){
+        listPokemon = getCount(true, false, false);
+    } else {
+        listPokemon = getCount(true, true, false);
+    }
+
+    let listPokemonType = {};
+
+    pokeData.forEach(pokemon => {
+
+        if(pokemon.theType === type){
+            listPokemonType[pokemon.id] = listPokemon[pokemon.id]
+        }
+
+    })
+    listPokemonSort = [];
+
+    //regarde si c'est le top des plus ou des moins et le tri
+    if(moinsOrPlus === "moins"){
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => a[1] - b[1]);
+    } else {
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => b[1] - a[1]);
+    }
+
+    listObjectPokemon = [];
+    arrayCount = 0;
+    nextPokemonSameCount = false;
+
+
+    while(listPokemonSort.length != 0){
+
+
+        if(listPokemonSort.length != 1 && listPokemonSort[0][1] == listPokemonSort[1][1]){
+            nextPokemonSameCount = true;
+        } else {
+            nextPokemonSameCount = false;
+        }
+
+        if(listObjectPokemon[arrayCount] === undefined){
+            listObjectPokemon[arrayCount] = {}
+        }
+
+        if(listObjectPokemon[arrayCount]["count"] === undefined){
+            listObjectPokemon[arrayCount] = {"count": listPokemonSort[0][1]}
+        }
+
+        if(listObjectPokemon[arrayCount]["arrayIdPokemon"] == undefined){
+            listObjectPokemon[arrayCount]["arrayIdPokemon"] = []
+        }
+        listObjectPokemon[arrayCount]["arrayIdPokemon"].push(listPokemonSort[0][0])
+
+        //suppresion du pokemon actuel dans la liste
+        listPokemonSort.splice(0, 1)
+
+        if(!nextPokemonSameCount){
+            arrayCount++;
+        }
+ 
+    }
+
+    return listObjectPokemon;
+
+}
+
+/**classer les pokemon par rareté et par capture ou spawn et les ranges dans un tableau d'objet qui detient le nombre + un tableau des id des pokemon
+ * 
+ * @param {string} type est le niveau de rareté du poké (commun, legendaire, fabuleux)
+ * @param {string} moinsOrPlus determine si c'est le top des plus ou des moins
+ * @param {bool} catchOrSpawn determine si c'est le top des capture ou des spawn
+ */
+function topStatForm(form, moinsOrPlus, isCatch){
+
+    let listPokemon
+    
+    if(isCatch){
+        listPokemon = getCount(true, false, false, "All", form);
+    } else {
+        listPokemon = getCount(true, true, false, "All", form);
+    }
+
+    let listPokemonType = {};
+
+    pokeData.forEach(pokemon => {
+
+        if(pokemon.pokemonForm.hasOwnProperty(form)){
+            listPokemonType[pokemon.id] = listPokemon[pokemon.id]
+        }
+
+    })
+    listPokemonSort = [];
+
+    //regarde si c'est le top des plus ou des moins et le tri
+    if(moinsOrPlus === "moins"){
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => a[1] - b[1]);
+    } else {
+        listPokemonSort = Object.entries(listPokemonType).sort((a, b) => b[1] - a[1]);
+    }
+
+    listObjectPokemon = [];
+    arrayCount = 0;
+    nextPokemonSameCount = false;
+
+
+    while(listPokemonSort.length != 0){
+
+
+        if(listPokemonSort.length != 1 && listPokemonSort[0][1] == listPokemonSort[1][1]){
+            nextPokemonSameCount = true;
+        } else {
+            nextPokemonSameCount = false;
+        }
+
+        if(listObjectPokemon[arrayCount] === undefined){
+            listObjectPokemon[arrayCount] = {}
+        }
+        if(listObjectPokemon[arrayCount]["count"] === undefined){
+            listObjectPokemon[arrayCount] = {"count": listPokemonSort[0][1]}
+        }
+        if(listObjectPokemon[arrayCount]["arrayIdPokemon"] == undefined){
+            listObjectPokemon[arrayCount]["arrayIdPokemon"] = []
+        }
+        listObjectPokemon[arrayCount]["arrayIdPokemon"].push(listPokemonSort[0][0])
+
+        //suppresion du pokemon actuel dans la liste
+        listPokemonSort.splice(0, 1)
+
+        if(!nextPokemonSameCount){
+            arrayCount++;
+        }
+ 
+    }
+
+    return listObjectPokemon;
+
+}
+
+function embedClassement(interaction, arraySortPokemon, title, color){
+
+    count = 0;
+
+    var embed = new Discord.EmbedBuilder()
+        .setTitle(title)
+        .setColor(color)
+
+    arraySortPokemon.forEach( statPokemon => {
+        count++;
+        let textPokemon = "";
+        let countId = 0;
+        let limiteDepasse = false;
+
+        if(count <= 21){
+            statPokemon.arrayIdPokemon.forEach( idPokemon => {
+                if(!limiteDepasse){
+                    if(countId > 2){
+                        if(countId == 3){
+
+                            textPokemon+= "... (+ "+ (Number(statPokemon.arrayIdPokemon.length)-3).toString() +" autres)"
+                        }
+                        limiteDepasse = true;
+                    } else {
+                        textPokemon+= pokeData.find(pokemon => pokemon.id == idPokemon).name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                    }
+                    countId++;
+                }
+            })
+
+            embed.addFields(
+                {name: count + ". "+statPokemon.count , value: textPokemon, inline:true},
+                )
+
+        }
         
-        mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
-        mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
+    })
+       
+    return embed;
+
+}
+
+
+
+function embedStatGeneral(interaction){
+try {
     
+    arrayEmbed = [
+        {
+            "page": principalEmbedStat(interaction),
+            "image": null,
+            "information": {
+                "nameSelection": language.getText(interaction.guild.id, "statMainPageName"),
+                "descriptionSelection": language.getText(interaction.guild.id, "statMainPageDesc")
+                }
+        },
+        {
+            "page": null,
+            "image": null,
+            "information": {
+                "nameSelection": "------"+language.getText(interaction.guild.id, "statCategoryOrdinary")+"------",
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "moins", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "plus", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "moins", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("ordinaire", "plus", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryOrdinary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": null,
+            "image": null,
+            "information": {
+                "nameSelection": "------"+language.getText(interaction.guild.id, "statCategoryLegendary")+"------",
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "moins", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "plus", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "moins", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("legendaire", "plus", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryLegendary"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": null,
+            "image": null,
+            "information": {
+                "nameSelection": "------"+language.getText(interaction.guild.id, "statCategoryMythical")+"------",
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "moins", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "plus", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "moins", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStat("fabuleux", "plus", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMythical"),
+                "descriptionSelection": ""
+                }
+        },
+
+
+        {
+            "page": null,
+            "image": null,
+            "information": {
+                "nameSelection": "------"+language.getText(interaction.guild.id, "statCategoryMega")+"------",
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStatForm("mega", "moins", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMega"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMega"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStatForm("mega", "plus", true), language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMega"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopCatches")+ " "+language.getText(interaction.guild.id, "statCategoryMega"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStatForm("mega", "moins", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMega"), "B22222"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔽 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMega"),
+                "descriptionSelection": ""
+                }
+        },
+        {
+            "page": embedClassement(interaction, topStatForm("mega", "plus", false), language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMega"), "32CD32"),
+            "image": null,
+            "information": {
+                "nameSelection": "🔼 "+language.getText(interaction.guild.id, "statTopSpawns")+ " "+language.getText(interaction.guild.id, "statCategoryMega"),
+                "descriptionSelection": ""
+                }
+        },
+    ]
+
+    pagination.paginationMenu(interaction,language.getText(interaction.guild.id, "selectAPage"), arrayEmbed)
     
-    
-        let statEmbed = new Discord.EmbedBuilder()
-            .setTitle("stats")
-            .setColor("Purple")
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCountAllCatch()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCountAllCatchShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCountAllSpawn()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value: getCountAllSpawnShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCountVersionCatch()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCountVersionCatchShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCountVersionSpawn()+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCountVersionSpawnShiny()+"", inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
-                )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
-                )
-    
-    
-            interaction.channel.send({embeds: [statEmbed]});
 } catch(error) {
 
         catchError.saveError(null, null, "stat.js", "embedStat", error)
@@ -340,7 +758,69 @@ try {
         if(statBdd[version]["listPokemonCatchedShiny"] === undefined){
             statBdd[version]["listPokemonCatchedShiny"] = {};
         }
-    
+
+        // on recommence mais spécifiquement pour les forms
+
+        form = variableGlobal.form
+
+        form.forEach(formName => {
+            if(statBdd["All"][formName] === undefined){
+                statBdd["All"][formName] = {};
+            }
+            if(statBdd[version][formName] === undefined){
+                statBdd[version][formName] = {};
+            }
+            
+
+        if(statBdd["All"][formName]["pokemonSpawned"] === undefined){
+            statBdd["All"][formName]["pokemonSpawned"] = 0;
+        }
+        if(statBdd["All"][formName]["pokemonCatched"] === undefined){
+            statBdd["All"][formName]["pokemonCatched"] = 0;
+        }
+        if(statBdd["All"][formName]["pokemonSpawnedShiny"] === undefined){
+            statBdd["All"][formName]["pokemonSpawnedShiny"] = 0;
+        }
+        if(statBdd["All"][formName]["pokemonCatchedShiny"] === undefined){
+            statBdd["All"][formName]["pokemonCatchedShiny"] = 0;
+        }
+        if(statBdd["All"][formName]["listPokemonSpawned"] === undefined){
+            statBdd["All"][formName]["listPokemonSpawned"] = {};
+        }
+        if(statBdd["All"][formName]["listPokemonCatched"] === undefined){
+            statBdd["All"][formName]["listPokemonCatched"] = {};
+        }
+        if(statBdd["All"][formName]["listPokemonSpawnedShiny"] === undefined){
+            statBdd["All"][formName]["listPokemonSpawnedShiny"] = {};
+        }
+        if(statBdd["All"][formName]["listPokemonCatchedShiny"] === undefined){
+            statBdd["All"][formName]["listPokemonCatchedShiny"] = {};
+        }
+        if(statBdd[version][formName]["pokemonSpawned"] === undefined){
+            statBdd[version][formName]["pokemonSpawned"] = 0;
+        }
+        if(statBdd[version][formName]["pokemonCatched"] === undefined){
+            statBdd[version][formName]["pokemonCatched"] = 0;
+        }
+        if(statBdd[version][formName]["pokemonSpawnedShiny"] === undefined){
+            statBdd[version][formName]["pokemonSpawnedShiny"] = 0;
+        }
+        if(statBdd[version][formName]["pokemonCatchedShiny"] === undefined){
+            statBdd[version][formName]["pokemonCatchedShiny"] = 0;
+        }
+        if(statBdd[version][formName]["listPokemonSpawned"] === undefined){
+            statBdd[version][formName]["listPokemonSpawned"] = {};
+        }
+        if(statBdd[version][formName]["listPokemonCatched"] === undefined){
+            statBdd[version][formName]["listPokemonCatched"] = {};
+        }
+        if(statBdd[version][formName]["listPokemonSpawnedShiny"] === undefined){
+            statBdd[version][formName]["listPokemonSpawnedShiny"] = {};
+        }
+        if(statBdd[version][formName]["listPokemonCatchedShiny"] === undefined){
+            statBdd[version][formName]["listPokemonCatchedShiny"] = {};
+        }
+    })
     
     
     
@@ -356,29 +836,65 @@ try {
 function updateNumberPossibilitySpawned(){
 try {
         for(let i = 1; i < nbPokemon; i++){
-            if(statBdd["All"]["listPokemonSpawned"][i]=== undefined){
-                statBdd["All"]["listPokemonSpawned"][i] = 0;
+            if(statBdd["All"]["listPokemonSpawned"][pokeData[i].id]=== undefined){
+                statBdd["All"]["listPokemonSpawned"][pokeData[i].id] = 0;
             } else {
-                statBdd["All"]["listPokemonSpawned"][i] = statBdd["All"]["listPokemonSpawned"][i];
+                statBdd["All"]["listPokemonSpawned"][pokeData[i].id] = statBdd["All"]["listPokemonSpawned"][pokeData[i].id];
             }
-            if(statBdd["All"]["listPokemonSpawnedShiny"][i]=== undefined){
-                statBdd["All"]["listPokemonSpawnedShiny"][i] = 0;
+            if(statBdd["All"]["listPokemonSpawnedShiny"][pokeData[i].id]=== undefined){
+                statBdd["All"]["listPokemonSpawnedShiny"][pokeData[i].id] = 0;
             } else {
-                statBdd["All"]["listPokemonSpawnedShiny"][i] = statBdd["All"]["listPokemonSpawnedShiny"][i];
+                statBdd["All"]["listPokemonSpawnedShiny"][pokeData[i].id] = statBdd["All"]["listPokemonSpawnedShiny"][pokeData[i].id];
             }
-            if(statBdd[version]["listPokemonSpawned"][i]=== undefined){
-                statBdd[version]["listPokemonSpawned"][i] = 0;
+            if(statBdd[version]["listPokemonSpawned"][pokeData[i].id]=== undefined){
+                statBdd[version]["listPokemonSpawned"][pokeData[i].id] = 0;
             } else {
-                statBdd[version]["listPokemonSpawned"][i] = statBdd[version]["listPokemonSpawned"][i];
+                statBdd[version]["listPokemonSpawned"][pokeData[i].id] = statBdd[version]["listPokemonSpawned"][pokeData[i].id];
             }
             
-            if(statBdd[version]["listPokemonSpawnedShiny"][i]=== undefined){
-                statBdd[version]["listPokemonSpawnedShiny"][i] = 0;
+            if(statBdd[version]["listPokemonSpawnedShiny"][pokeData[i].id]=== undefined){
+                statBdd[version]["listPokemonSpawnedShiny"][pokeData[i].id] = 0;
             } else {
-                statBdd[version]["listPokemonSpawnedShiny"][i] = statBdd[version]["listPokemonSpawnedShiny"][i];
+                statBdd[version]["listPokemonSpawnedShiny"][pokeData[i].id] = statBdd[version]["listPokemonSpawnedShiny"][pokeData[i].id];
             }
             
         }
+        //recommence mais que pour les forms
+
+        form = variableGlobal.form
+
+        for(let y = 1; y < nbPokemon; y++){
+            form.forEach(formName => {
+                
+
+                if(pokeData[y]["pokemonForm"][formName] !== undefined){
+                
+                    if(statBdd["All"][formName]["listPokemonSpawned"][pokeData[y].id]=== undefined){
+                        statBdd["All"][formName]["listPokemonSpawned"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd["All"][formName]["listPokemonSpawned"][pokeData[y].id] = statBdd["All"][formName]["listPokemonSpawned"][pokeData[y].id];
+                    }
+                    if(statBdd["All"][formName]["listPokemonSpawnedShiny"][pokeData[y].id]=== undefined){
+                        statBdd["All"][formName]["listPokemonSpawnedShiny"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd["All"][formName]["listPokemonSpawnedShiny"][pokeData[y].id] = statBdd["All"][formName]["listPokemonSpawnedShiny"][pokeData[y].id];
+                    }
+                    if(statBdd[version][formName]["listPokemonSpawned"][pokeData[y].id]=== undefined){
+                        statBdd[version][formName]["listPokemonSpawned"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd[version][formName]["listPokemonSpawned"][pokeData[y].id] = statBdd[version][formName]["listPokemonSpawned"][pokeData[y].id];
+                    }
+                    
+                    if(statBdd[version][formName]["listPokemonSpawnedShiny"][pokeData[y].id]=== undefined){
+                        statBdd[version][formName]["listPokemonSpawnedShiny"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd[version][formName]["listPokemonSpawnedShiny"][pokeData[y].id] = statBdd[version][formName]["listPokemonSpawnedShiny"][pokeData[y].id];
+                    }
+                }
+            })
+        }
+
+
         SaveBdd();
         
 } catch(error) {
@@ -391,29 +907,68 @@ try {
 function updateNumberPossibilityCatched(){
 try {
         for(let i = 1; i < nbPokemon; i++){
-            if(statBdd["All"]["listPokemonCatched"][i]=== undefined){
-                statBdd["All"]["listPokemonCatched"][i] = 0;
+            if(statBdd["All"]["listPokemonCatched"][pokeData[i].id]=== undefined){
+                statBdd["All"]["listPokemonCatched"][pokeData[i].id] = 0;
             }else {
-                statBdd["All"]["listPokemonCatched"][i] = statBdd["All"]["listPokemonCatched"][i];
+                statBdd["All"]["listPokemonCatched"][pokeData[i].id] = statBdd["All"]["listPokemonCatched"][pokeData[i].id];
             }
-            if(statBdd["All"]["listPokemonCatchedShiny"][i]=== undefined){
-                statBdd["All"]["listPokemonCatchedShiny"][i] = 0;
+            if(statBdd["All"]["listPokemonCatchedShiny"][pokeData[i].id]=== undefined){
+                statBdd["All"]["listPokemonCatchedShiny"][pokeData[i].id] = 0;
             }else {
-                statBdd["All"]["listPokemonCatchedShiny"][i] = statBdd["All"]["listPokemonCatchedShiny"][i];
+                statBdd["All"]["listPokemonCatchedShiny"][pokeData[i].id] = statBdd["All"]["listPokemonCatchedShiny"][pokeData[i].id];
             }
-            if(statBdd[version]["listPokemonCatched"][i]=== undefined){
-                statBdd[version]["listPokemonCatched"][i] = 0;
+            if(statBdd[version]["listPokemonCatched"][pokeData[i].id]=== undefined){
+                statBdd[version]["listPokemonCatched"][pokeData[i].id] = 0;
             }else {
-                statBdd[version]["listPokemonCatched"][i] = statBdd[version]["listPokemonCatched"][i];
+                statBdd[version]["listPokemonCatched"][pokeData[i].id] = statBdd[version]["listPokemonCatched"][pokeData[i].id];
             }
             
-            if(statBdd[version]["listPokemonCatchedShiny"][i]=== undefined){
-                statBdd[version]["listPokemonCatchedShiny"][i] = 0;
+            if(statBdd[version]["listPokemonCatchedShiny"][pokeData[i].id]=== undefined){
+                statBdd[version]["listPokemonCatchedShiny"][pokeData[i].id] = 0;
             }else {
-                statBdd[version]["listPokemonCatchedShiny"][i] = statBdd[version]["listPokemonCatchedShiny"][i];
+                statBdd[version]["listPokemonCatchedShiny"][pokeData[i].id] = statBdd[version]["listPokemonCatchedShiny"][pokeData[i].id];
             }
             
         }
+
+
+        
+        //recommence mais que pour les forms
+
+        form = variableGlobal.form
+
+        for(let y = 1; y < nbPokemon; y++){
+            form.forEach(formName => {
+                
+
+                if(pokeData[y]["pokemonForm"][formName] !== undefined){
+                
+                    if(statBdd["All"][formName]["listPokemonCatched"][pokeData[y].id]=== undefined){
+                        statBdd["All"][formName]["listPokemonCatched"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd["All"][formName]["listPokemonCatched"][pokeData[y].id] = statBdd["All"][formName]["listPokemonSpawned"][pokeData[y].id];
+                    }
+                    if(statBdd["All"][formName]["listPokemonCatchedShiny"][pokeData[y].id]=== undefined){
+                        statBdd["All"][formName]["listPokemonCatchedShiny"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd["All"][formName]["listPokemonCatchedShiny"][pokeData[y].id] = statBdd["All"][formName]["listPokemonSpawnedShiny"][pokeData[y].id];
+                    }
+                    if(statBdd[version][formName]["listPokemonCatched"][pokeData[y].id]=== undefined){
+                        statBdd[version][formName]["listPokemonCatched"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd[version][formName]["listPokemonCatched"][pokeData[y].id] = statBdd[version][formName]["listPokemonSpawned"][pokeData[y].id];
+                    }
+                    
+                    if(statBdd[version][formName]["listPokemonCatchedShiny"][pokeData[y].id]=== undefined){
+                        statBdd[version][formName]["listPokemonCatchedShiny"][pokeData[y].id] = 0;
+                    } else {
+                        statBdd[version][formName]["listPokemonCatchedShiny"][pokeData[y].id] = statBdd[version][formName]["listPokemonSpawnedShiny"][pokeData[y].id];
+                    }
+                }
+            })
+        }
+
+
         SaveBdd();
 } catch(error) {
 
@@ -423,196 +978,86 @@ try {
     
 }
 
-function getCountAllCatch(){
-try {
+function getCount(isList, isSpawn, isShiny, version = "All", form = null) {
+    try {
         createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd["All"]["pokemonCatched"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllCatch", error)
-        console.error(error)
-    }
-}
-function getCountAllSpawn(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd["All"]["pokemonSpawned"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllSpawn", error)
-        console.error(error)
-    }
-}
-function getCountAllCatchShiny(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd["All"]["pokemonCatchedShiny"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllCatchShiny", error)
-        console.error(error)
-    }
-}
-function getCountAllSpawnShiny(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd["All"]["pokemonSpawnedShiny"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllSpawnShiny", error)
-        console.error(error)
-    }
-}
-function getCountAllCatchList(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd["All"]["listPokemonCatched"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllCatchList", error)
-        console.error(error)
-    }
-}
-function getCountAllSpawnList(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd["All"]["listPokemonSpawned"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllSpawnList", error)
-        console.error(error)
-    }
-}
-function getCountAllCatchShinyList(){
-try {
-    createStatVersion();
-    updateNumberPossibilityCatched();
-        return statBdd["All"]["listPokemonCatchedShiny"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountAllCatchShinyList", error)
-        console.error(error)
-    }
-}
-function getCountAllSpawnShinyList(){
-try {
-        createStatVersion();
+        updateNumberPossibilityCatched(); 
         updateNumberPossibilitySpawned();
 
-        return statBdd["All"]["listPokemonSpawnedShiny"]
-} catch(error) {
+        
 
-        catchError.saveError(null, null, "stat.js", "getCountAllSpawnShinyList", error)
-        console.error(error)
-    }
-}
+        let statKey;
+        if (version == "All") {
+            statKey = "All";
+        } else {
+            statKey = variableGlobal.version;
+        }
 
-function getCountVersionCatch(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd[version]["pokemonCatched"]
-} catch(error) {
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionCatch", error)
-        console.error(error)
-    }
-}
-function getCountVersionSpawn(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd[version]["pokemonSpawned"]
-} catch(error) {
+        let listText = "";
+        if(isList){
+            listText = "list";
+        }
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionSpawn", error)
-        console.error(error)
-    }
-}
-function getCountVersionCatchShiny(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd[version]["pokemonCatchedShiny"]
-} catch(error) {
+        let spawnText = "";
+        if(isSpawn){
+            spawnText = "Spawned";
+        } else {
+            spawnText = "Catched";
+        }
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionCatchShiny", error)
-        console.error(error)
-    }
-}
-function getCountVersionSpawnShiny(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd[version]["pokemonSpawnedShiny"]
-} catch(error) {
+        let shinyText = "";
+        if(isShiny){
+            shinyText = "Shiny";
+        }
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionSpawnShiny", error)
-        console.error(error)
-    }
-}
-function getCountVersionCatchList(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd[version]["listPokemonCatched"]
-} catch(error) {
+        if(isList){
+            countKey = listText+"Pokemon"+spawnText+shinyText;
+        } else {
+            countKey = "pokemon"+spawnText+shinyText;
+        }
+        
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionCatchList", error)
-        console.error(error)
-    }
-}
-function getCountVersionSpawnList(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd[version]["listPokemonSpawned"]
-} catch(error) {
+        if(form !== null){
+            return statBdd[statKey][form][countKey];
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionSpawnList", error)
-        console.error(error)
-    }
-}
-function getCountVersionCatchShinyList(){
-try {
-        createStatVersion();
-        updateNumberPossibilityCatched();
-        return statBdd[version]["listPokemonCatchedShiny"]
-} catch(error) {
+        } else {
 
-        catchError.saveError(null, null, "stat.js", "getCountVersionCatchShinyList", error)
-        console.error(error)
-    }
-}
-function getCountVersionSpawnShinyList(){
-try {
-        createStatVersion();
-        updateNumberPossibilitySpawned();
-        return statBdd[version]["listPokemonSpawnedShiny"]
-} catch(error) {
-
-        catchError.saveError(null, null, "stat.js", "getCountVersionSpawnShinyList", error)
-        console.error(error)
+            return statBdd[statKey][countKey];
+        }
+    } catch (error) {
+        catchError.saveError(null, null, "stat.js", "getCount", error);
+        console.error(error);
     }
 }
 
 
 function SaveBdd(){
-try {
-        fs.writeFile("./bdd/stat.json", JSON.stringify(statBdd, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-} catch(error) {
 
-        catchError.saveError(null, null, "stat.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'stat.lock');
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'stat.json'), JSON.stringify(statBdd, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "stat.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
-module.exports = {statAddCatch, statAddSpawn, getCountAllCatch, getCountAllSpawn, version, getCountAllCatchShiny,getCountAllSpawnShiny, getCountAllCatchList, getCountAllSpawnList, getCountAllCatchShinyList, getCountAllSpawnShinyList, embedStat}
+module.exports = {getCount, statAddCatch, statAddSpawn, embedStatGeneral}

@@ -4,7 +4,7 @@ const prefix = "!";
 // minimum et max du random pour le compteur du spawn de pokemon
 // Fichier: spawnCount.js
 
-const minimumCount = 5+1;
+const minimumCount = 4+1;
 const maximumCount = 20;
 
 //pour modifier des stats d'apparition celon le type du pokemon
@@ -19,6 +19,9 @@ const valeurMaxFabuleux = 1
 const valeurMaxChoiceEvent = 1000;
 const valeurMaxEvent = 10;
 
+const valeurMaxChoiceEgg = 300;
+const valeurMaxEgg = 1;
+
 //Interval entre chaque savegarde des bdd (en milliseconde)
 const timeIntervalSave= 86400000;
 //interval entre chaque changement de status
@@ -32,7 +35,7 @@ const tauxMaxShiny = 4096;
 
 //pour modifier des stats d'apparition par génération
 //nombre de génération (multiplier par 100)
-const nbGeneration = 5
+const nbGeneration = 6
 //valeur max par gen
 const gen1 = 100
 const gen2 = 100
@@ -67,9 +70,18 @@ const roche = 100
 const spectre = 100
 const vol = 100
 
+const form = [
+    //"alola",
+    //"galar",
+    //"hisui",
+    //"paldea",
+    "mega",
+    //"giga"
+]
+
 //Les id des pokemon qui pourront de na spawn a part par transformation
 const pokemonEvent = [132, 570, 571];
 
 
 
-module.exports = {pokemonEvent, vol, spectre, roche, poison, normal, glace, fee, eau, combat, tenebres, sol, psy, plante, insecte, feu, electrik, dragon, acier, nbType, nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux}
+module.exports = {pokemonEvent, vol, spectre, roche, poison, normal, glace, fee, eau, combat, tenebres, sol, psy, plante, insecte, feu, electrik, dragon, acier, nbType, nbGeneration, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9,tauxMaxShiny, valeurMaxEvent,valeurMaxChoiceEvent,minimumCount, maximumCount, valeurMaxRandom, valeurMaxOrdinaire, valeurMaxLegendaire, timeIntervalSave, prefix, timeIntervalStatut, version, valeurMaxFabuleux, valeurMaxChoiceEgg, valeurMaxEgg, form}

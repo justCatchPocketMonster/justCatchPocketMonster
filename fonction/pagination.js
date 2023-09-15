@@ -1,26 +1,29 @@
-const { ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder} = require("discord.js")
+const {StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ButtonInteraction, Interaction, Message, ButtonBuilder} = require("discord.js")
 const { ButtonStyle } = require('discord.js');
-const language = require("../fonction/language")
 const fs = require("fs")
 const limitPagination = require("../bdd/numberOfPagination.json")
+const path = require('path');
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+
 /**
- * @param { Interaction} interactionSlash
- * @param {*} pages 
+ * @param { Interaction} 
+ * @param {[{page, imagePage}]} pages 
  * @param {*} time 
  */ 
-async function pagination(interactionSlash, interaction, pages, pageParDefaut = 1, time = 60000, arrayImage = []){
+async function paginationButton(interactionSlash, pages, pageParDefaut = 1, time = 60000){
     try {
+
+        interaction = ButtonInteraction
         //probleme avec interaction
         var idUser = interactionSlash.member.id
-
     
         if(pageParDefaut < 1){
             pageParDefaut = 1;
         }
     
         if(getNbPagination(idUser) >= 10){
-            interactionSlash.channel.send(language.getText(interactionSlash.guild.id, "tooMuchPagination"))
+            interactionSlash.channel.send("Trop de page")
             return
         }
     
@@ -74,16 +77,16 @@ async function pagination(interactionSlash, interaction, pages, pageParDefaut = 
     
         let data
     
-        if(arrayImage[index] !== undefined){
+        if(pages[index].imagePage !== undefined){
             data = {
-                embeds: [pages[index]],
-                files: [arrayImage[index]],
+                embeds: [pages[index].page],
+                files: [pages[index].imagePage],
                 components: [row]
                 
             };
         } else {
             data = {
-                embeds: [pages[index]],
+                embeds: [pages[index].page],
                 components: [row]
             };
         }
@@ -145,17 +148,17 @@ async function pagination(interactionSlash, interaction, pages, pageParDefaut = 
                 
                     ])
                 
-                if(arrayImage[index] !== undefined){
+                if(pages[index].imagePage !== undefined){
     
                     i.update({
-                        embeds: [pages[index]],
+                        embeds: [pages[index].page],
                         components: [row],
-                        files: [arrayImage[index]]
+                        files: [pages[index].imagePage]
                     })
                 } else {
     
                     i.update({
-                        embeds: [pages[index]],
+                        embeds: [pages[index].page],
                         components: [row]
                     })
                 }
@@ -175,7 +178,107 @@ async function pagination(interactionSlash, interaction, pages, pageParDefaut = 
     
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "pagination", error)
+        console.error(error)
+    }
+}
+
+function createPageForMenu(page, image = null, nameSelection, descriptionSelection){
+    if(image !== null){
+        return {page: page, imagePage: image, information: {nameSelection: nameSelection, descriptionSelection: descriptionSelection}}
+    } else {
+        return {page: page, information: {nameSelection: nameSelection, descriptionSelection: descriptionSelection}}
+    }
+}
+
+/**
+ * 
+ * @param {Interaction} interaction 
+ * @param {[{page, image , information : {nameSelection, descriptionSelection}}]} menuInformation 
+ * @param {int} pageParDefaut 
+ * @param {*} time 
+ * @param {*} arrayImage 
+ */
+async function paginationMenu(interaction, defaultText, pages, pageParDefaut = 1, time = 60000){
+    try {
+        let components = []
+        let count = 0
+
+        pages.forEach(element => {
+            selectMenuCreation = new StringSelectMenuOptionBuilder()
+                .setLabel(element.information.nameSelection)
+                .setValue(count+"")
+
+            if(element.information.descriptionSelection !== undefined && element.information.descriptionSelection !== null && element.information.descriptionSelection !== ""){
+                selectMenuCreation.setDescription(element.information.descriptionSelection)
+            }
+
+            components.push(selectMenuCreation)
+            count++
+        });
+
+        const menuSelect = new StringSelectMenuBuilder()
+        .setCustomId('menu')
+        .setPlaceholder(defaultText)
+        .addOptions(
+            components.map((e) => e.toJSON())
+        )
+
+        const menu = new ActionRowBuilder()
+            .addComponents(
+                menuSelect
+            )
+
+        const data = {
+            fetchReply: true,
+            components: [menu],
+            embeds: [pages[pageParDefaut-1].page]
+        }
+
+        if(pages[pageParDefaut-1].imagePage !== undefined){
+            data.files = [pages[pageParDefaut-1].imagePage]
+        }
+
+        msg = await interaction.channel.send(data)
+
+        const col = msg.createMessageComponentCollector({
+            filter: (i) => i.user.id === interaction.user.id,
+            time: time
+        })
+
+        col.on('collect', async (i) => {
+            let selectedOption = i.values[0];
+
+            while(pages[selectedOption].page === undefined || pages[selectedOption].page === null){
+                selectedOption++
+            }
+            menu.components[0].data.placeholder = pages[selectedOption].information.nameSelection
+
+            if(pages[i.values[0]].imagePage !== undefined){
+    
+                await i.update({
+                    embeds: [pages[selectedOption].page],
+                    components: [menu],
+                    files: [pages[selectedOption].imagePage]
+                })
+            } else {
+
+                await i.update({
+                    embeds: [pages[selectedOption].page],
+                    components: [menu]
+                })
+            }
+            col.resetTimer({time: time})
+
+        })
+
+        col.on('end', async () => {
+            await msg.edit({
+                components: []
+            })
+        })
+
+    } catch(error) {
+
         console.error(error)
     }
 }
@@ -188,7 +291,6 @@ function createNumberFollow(idUser){
         SaveBdd()
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "createNumberFollow", error)
         console.error(error)
     }
 }
@@ -201,7 +303,6 @@ function resetAtZero(){
         SaveBdd();
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "resetAtZero", error)
         console.error(error)
     }
 }
@@ -212,8 +313,6 @@ function plusOne(idUser){
         SaveBdd();
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "plusOne", error)
-        console.error(error)
     }
 }
 function moinsOne(idUser){
@@ -222,7 +321,6 @@ function moinsOne(idUser){
         SaveBdd();
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "moinsOne", error)
         console.error(error)
     }
 }
@@ -232,21 +330,37 @@ function getNbPagination(idUser){
         return limitPagination[idUser]
     } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "getNbPagination", error)
         console.error(error)
     }
 }
 
 function SaveBdd(){
-    try {
-        fs.writeFile("./bdd/numberOfPagination.json", JSON.stringify(limitPagination, null, 4), (err)=> {
-            if (err)console.log("erreur")
-        })
-    } catch(error) {
 
-        catchError.saveError(null, null, "pagination.js", "SaveBdd", error)
-        console.error(error)
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'numberOfPagination.lock');
+
+    try{
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+            
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'numberOfPagination.json'), JSON.stringify(limitPagination, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "pagination.js", "SaveBdd", e)
+        console.error(e)
     }
+
 }
 
-module.exports = {resetAtZero, pagination}
+module.exports = {createPageForMenu, resetAtZero, paginationButton, paginationMenu}

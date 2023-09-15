@@ -1,19 +1,23 @@
 const variableGlobal = require("../parameters/variableGlobal")
 const catchError = require("./catchError")
+require('dotenv').config()
 //sert a la connexion sur discord
 function connexion(Discord, Client){
-
     try{
-        //vrai token
-        //let token = "";
-
-        //token de teste
-        let token = "";
+        let token = process.env.TOKEN;
 
         Client.on('ready', () => {
             console.log("Je suis fonctionnel")
         });
 
+        Client.on('error', (error) => {
+            console.error(error)
+        });
+/*
+        Client.on("debug", (info) => {
+            console.log(info)
+        });
+*/
         Client.login(token);
         return
     } catch(e) {

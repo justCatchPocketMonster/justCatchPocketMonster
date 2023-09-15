@@ -289,6 +289,10 @@
         "Fr": ["Aura fabuleux de niveau "],
         "Eng": ["Level of Mythical Aura "]
     },
+    "auraType" : {
+        "Fr": ["Aura de type de niveau "],
+        "Eng": ["Level of type Aura "]
+    },
     "auraGeneration" : {
         "Fr": ["Aura de génération de niveau "],
         "Eng": ["Level of Generation Aura "]
@@ -297,6 +301,29 @@
         "Fr": ["Aura de chromatique de niveau "],
         "Eng": ["Level of shiny Aura "]
     },
+    "auraMega": {
+        "Fr": ["Aura de méga-évolution de niveau "],
+        "Eng": ["Level of Mega evolution Aura "]
+    },
+    "auraEncen": {
+        "Fr": ["Aura d'encens de niveau "],
+        "Eng": ["Level of Incense Aura "]
+    },
+    "auraRepousse": {
+        "Fr": ["Aura de repousse de niveau "],
+        "Eng": ["Level of Repel Aura "]
+    },
+    "auraOvale": {
+        "Fr": ["Aura de charme ovale de niveau "],
+        "Eng": ["Level of Oval Charm Aura "]
+    },
+    "auraNuit": {
+        "Fr": ["Il n'y a pas d'aura vu qu'il fait juste nuit mais la panne est de niveau "],
+        "Eng": ["There is no aura since it is just night but the breakdown is level "]
+    },
+
+
+
     "ofThisGeneration" : {
         "Fr": ["Pour la génération "],
         "Eng": ["For the generation "]
@@ -308,6 +335,14 @@
     "pendantTrenteMinute" : {
         "Fr" : ["Pendant 30 minutes."],
         "Eng": ["During 30 minutes."]
+    },
+    "pendantUneHeure" : {
+        "Fr" : ["Pendant 1 heure."],
+        "Eng": ["During 1 hour."]
+    },
+    "pendantQuinzeMinute" : {
+        "Fr" : ["Pendant 15 minutes."],
+        "Eng": ["During 15 minutes."]
     },
     "eventCuisineTitre" : {
         "Fr": ["Un cuisinier sauvage apparait."],
@@ -349,6 +384,61 @@
         "Fr": ["Probablement le repas d'un étudiant"],
         "Eng": ["Probably a student's meal"]
     },
+    "eventMegaTitre" : {
+        "Fr": ["Une pluit de méga gemme"],
+        "Eng": ["A rain of mega gem"]
+    },
+    "eventMegaDesc" : {
+        "Fr": ["Elle tombe du ciel"],
+        "Eng": ["It falls from the sky"]
+    },
+    "eventTrollOnePokemonTitre" : {
+        "Fr": ["Mais ? Qu'est-ce qu'il fait là ?"],
+        "Eng": ["But ? What is he doing here ?"]
+    },
+    "eventTrollOnePokemonDesc" : {
+        "Fr": ["MAIS IL N'Y A QUE LUI !!!"],
+        "Eng": ["BUT THERE IS ONLY HIM !!!"]
+    },
+
+    "eventMostPokemonTitre" : {
+        "Fr": ["Un Encens"],
+        "Eng": ["An Incense"]
+    },
+    "eventMostPokemonDesc" : {
+        "Fr": ["Il attire plus de Pokémons trop bien !"],
+        "Eng": ["It attracts more Pokémon too good!"]
+    },
+    "eventLeastPokemonTitre" : {
+        "Fr": ["Un Repousse"],
+        "Eng": ["A Repel"]
+    },
+    "eventLeastPokemonDesc" : {
+        "Fr": ["Oh non il y a moins de Pokémons ! (Une occasion de faire une pause.)"],
+        "Eng": ["Oh no there are fewer Pokémon! (An opportunity to take a break.)"]
+    },
+    "eventDarkTitre" : {
+        "Fr": ["Oh non il n'y a plus de lumière !"],
+        "Eng": ["Oh no there is no more light!"]
+    },
+    "eventDarkDesc" : {
+        "Fr": ["Il va falloir attendre les réparations de l'électricien."],
+        "Eng": ["We will have to wait for the electrician's repairs."]
+    },
+    "eventEggTitre" : {
+        "Fr": ["Une fermière fort sympathique"],
+        "Eng": ["A very nice farmer"]
+    },
+    "eventEggDesc" : {
+        "Fr": ["Elle vous montre le fameux charme ovale."],
+        "Eng": ["She shows you the famous oval charm."]
+    },
+
+
+
+
+
+
 
     "pokedexDeKanto": {
         "Fr": ["Pokedex Kanto"],
@@ -625,7 +715,191 @@
     "acier": {
         "Fr": ["acier"],
         "Eng": ["steel"]
+    },
+
+
+
+    "statMainPageName": {
+        "Fr": ["Page principale"],
+        "Eng": ["Main page"]
+    },
+    "statMainPageDesc": {
+        "Fr": ["Page principale des statistiques générals."],
+        "Eng": ["Main page of general statistics."]
+    },
+    "statCategoryOrdinary": {
+        "Fr": ["Ordinaire"],
+        "Eng": ["Ordinary"]
+    },
+    "statCategoryLegendary": {
+        "Fr": ["Légendaire"],
+        "Eng": ["Legendary"]
+    },
+    "statCategoryMythical": {
+        "Fr": ["Fabuleux"],
+        "Eng": ["Mythical"]
+    },
+    "statCategoryMega": {
+        "Fr": ["Méga-évolution"],
+        "Eng": ["Mega evolution"]
+    },
+    "statTopSpawns": {
+        "Fr": ["Top des apparitions"],
+        "Eng": ["Top spawns"]
+    },
+    "statTopCatches": {
+        "Fr": ["Top des captures"],
+        "Eng": ["Top catches"]
+    },
+
+    "commandHintExplication": {
+        "Fr": ["Permet de voir le nom du Pokémon incomplet. (debloque une nouvelle lettre toutes les 3 minutes)"],
+        "Eng": ["Allows you to see the name of the incomplete Pokemon. (unlock a new letter every 3 minutes)"]
+    },
+    "commandHintOptionDescChannel": {
+        "Fr": ["Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"],
+        "Eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
+    },
+    "commandInformationExplication": {
+        "Fr": ["Permet de voir les informations diverses que je ne sais pas où mettre"],
+        "Eng": ["Allows you to see the various information that I don't know where to put"]
+    },
+
+    "codeListEmbedTitle": {
+        "Fr": ["Liste des codes"],
+        "Eng": ["Code list"]
+    },
+    "codeListEmbedDescription": {
+        "Fr": ["Voici la liste des codes disponibles."],
+        "Eng": ["Here is the list of available codes."]
+    },
+
+    "mentionObligatoireTitle": {
+        "Fr": ["Mention obligatoire"],
+        "Eng": ["Mandatory mention"]
+    },
+    "mentionObligatoireDesc": {
+        "Fr": ["Information obligatoire sinon on me déglingue"],
+        "Eng": ["Mandatory information otherwise i get beat up"]
+    },
+    "mentionObligatoireFooter": {
+        "Fr": ["Merci de votre compréhension (de toute façon personne ne lit ces mentions)"],
+        "Eng": ["Thank you for your understanding (anyway no one reads these mentions)"]
+    },
+
+    "mentionObligatoireFieldNonAffiliationTitle": {
+        "Fr": ["Non affiliation"],
+        "Eng": ["Non affiliation"]
+    },
+    "mentionObligatoireFieldNonAffiliationDesc": {
+        "Fr": ["Je ne suis pas affilié, associé, autorisé, approuvé par, ou autrement lié à Nintendo ou à The Pokémon Company. Les marques Pokémon et Nintendo sont des marques commerciales de Nintendo. Les autres marques commerciales et images sont la propriété de leurs propriétaires respectifs."],
+        "Eng": ["I am not affiliated, associated, authorized, endorsed by, or in any way officially connected with Nintendo or The Pokémon Company. Pokémon and Nintendo trademarks are trademarks of Nintendo. Other trademarks and pictures are the property of their respective owners."]
+    },
+
+
+
+    "hintIs":{
+        "Fr" : ["L'indice est : "],
+        "Eng" : ["The hint is : "]
+    },
+    "forChannel":{
+        "Fr" : ["pour le salon "],
+        "Eng" : ["for the channel "]
+    },
+    "noHint": {
+        "Fr" : ["Aucun Pokémon disponible pour ce salon."],
+        "Eng" : ["No Pokémon available for this channel."]
+    },
+
+    "informationDescription": {
+        "Fr" : ["informations disponibles qui ont leur place nul part ailleurs."],
+        "Eng" : ["available information that have their place nowhere else."]
+    },
+    "principalPage": {
+        "Fr" : ["Page principale"],
+        "Eng" : ["Main page"]
+    },
+    "selectAPage": {
+        "Fr" : ["Sélectionnez une page"],
+        "Eng" : ["Select a page"]
+    },
+    "botNoPermission": {
+        "Fr" : ["Je n'ai pas les permissions pour parlé ici"],
+        "Eng" : ["I don't have the permissions to speak here"]
+    },
+
+    "commandHowIDoExplication": {
+        "Fr": ["Permet de savoir comment faire une action. Aussi appelé \"tutoriel\"."],
+        "Eng": ["Allows you to know how to do an action. Also called \"tutorial\"."]
+    },
+    "tutorialTitle": {
+        "Fr": ["Fonctionnement de base"],
+        "Eng": ["Basic operation"]
+    
+    },
+    "tutorialDescription": {
+        "Fr": ["Voici le fonctionnement de base du bot."],
+        "Eng": ["Here is the basic operation of the bot."]
+    },
+
+    "tutorialField1Title": {
+        "Fr": ["1 - Apparition des Pokémon"],
+        "Eng": ["1 - Pokémon spawn"]
+    },
+    "tutorialField1Desc": {
+        "Fr": ["Simplement parler et ils arriveront de manière aléatoire dans les salons choisis par les administrateurs. Des évènements peuvent venir faire des effets différents comme augmenter le nombre de Pokémon Feu."],
+        "Eng": ["Simply talk and it will arrive randomly in the channels chosen by the administrators. Events can appear randomly as well and have different effects, such as increasing the number of fire Pokémon, ect... "]
+    },
+    "tutorialField2Title": {
+        "Fr": ["2 - Capturer des Pokémons"],
+        "Eng": ["2 - Pokémon catch"]
+    },
+    "tutorialField2Desc": {
+        "Fr": ["Pour capturer un Pokémon il faut faire la commande \"/catch [nom du Pokémon]\". Si le nom est correct, vous le saisirez avec succès ; sinon, vous le laisserez échapper. Le nom français/anglais compte. (Attention seulement le premier pourra l'attraper)"],
+        "Eng": ["Pokemon To catch a Pokémon you have to do the command \"/catch [Pokémon's name]\". If the name of the pokemon is correct you caught it ! Only French/English name counts. (Only one person per pokemon.)"]
+    },
+    "tutorialField3Title": {
+        "Fr": ["3 - S'amuser"],
+        "Eng": ["3 - Have fun"]
+    },
+    "tutorialField3Desc": {
+        "Fr": ["C'est tout. Simplement s'amuser de collectionner. Tu peux regarder ton avancement avec /pokedex. Il existe d'autres commandes bien sûr."],
+        "Eng": ["That's all. Just have fun collecting. You can watch your progress with /pokedex. There are other commands of course."]
+    },
+    "baseTutorialTitle": {
+        "Fr": ["Fonctionnement de base"],
+        "Eng": ["Basic operation"]
+    },
+    "tutorialAdmin": {
+        "Fr": ["Truc d'admin"],
+        "Eng": ["Admin stuff"]
+    },
+
+    "tutorialAdminTitle": {
+        "Fr": ["Truc d'admin"],
+        "Eng": ["Admin stuff"]
+    },
+    "tutorialAdminDescription": {
+        "Fr": ["Voici ce que les administrateurs peuvent faire avec le bot pour une meilleure expérience."],
+        "Eng": ["Here's what administrators can do with the bot for a better experience."]
+    },
+    "tutorialAdminField1Title": {
+        "Fr": ["1 - Changé la langue"],
+        "Eng": ["1 - Change the language"]
+    },
+    "tutorialAdminField1Desc": {
+        "Fr": ["Pour changer la langue du bot il faut faire la commande \"/langue [langue]\". Seulement 2 langues sont disponibles pour le moment : Français et Anglais. (Par défaut anglais)"],
+        "Eng": ["To change the language of the bot you have to do the command \"/language [language]\". Only 2 languages are available at the moment: French and English. (Default English)"]
+    },
+    "tutorialAdminField2Title": {
+        "Fr": ["2 - Autorisation de spawn"],
+        "Eng": ["2 - Spawn authorization"]
+    },
+    "tutorialAdminField2Desc": {
+        "Fr": ["Pour autoriser le spawn dans un salon il faut faire la commande \"/spawn [true/false]\". Attention les Pokémon peuvent spawn avec des messages d'autres salons. (Sauf si le bot ne voit pas les autres salons)"],
+        "Eng": ["To authorize the spawn in a room you have to do the command \"/spawn [true/false]\". Be careful the Pokémon can spawn with messages from other channels. (unless the bot doesn't see the other channels)"]
     }
+
     
     
     

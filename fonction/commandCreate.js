@@ -183,5 +183,45 @@ const effectCommand = new SlashCommandBuilder()
                 'fr': bddText.commandEffectEvent.Fr[0]
         })
 
+const hintPokemonCommand = new SlashCommandBuilder()
+        .setName("hint")
+        .setNameLocalizations({
+                'fr': "indice"
+        })
+        .setDescription(bddText.commandHintExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandHintExplication.Fr[0]
+        })
+        .addChannelOption(
+                new SlashCommandChannelOption()
+                        .setName("channel")
+                        .setNameLocalizations({
+                                'fr': "salon"
+                        })
+                        .setDescription(bddText.commandHintOptionDescChannel.Eng[0])
+                        .setDescriptionLocalizations({
+                                'fr': bddText.commandHintOptionDescChannel.Fr[0]
+                        })
+                        .addChannelTypes(ChannelType.GuildText)
+                        .setRequired(false)
+                        )
 
-module.exports = {spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, effectCommand}
+const informationCommand = new SlashCommandBuilder()
+        .setName("information")
+        .setDescription(bddText.commandInformationExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandInformationExplication.Fr[0]
+        })
+
+const commentJeFaisCommand = new SlashCommandBuilder()
+        .setName("howido")
+        .setNameLocalizations({
+                'fr': "commentjefais"
+        })
+        .setDescription(bddText.commandHowIDoExplication.Eng[0])
+        .setDescriptionLocalizations({
+                'fr': bddText.commandHowIDoExplication.Fr[0]
+        })
+
+
+module.exports = {commentJeFaisCommand, informationCommand, hintPokemonCommand, spawnCommand, codeCommand, langCommand, pokedexCommand, catchCommand, howHaveThisPokemonCommand, allStatCommand, effectCommand}

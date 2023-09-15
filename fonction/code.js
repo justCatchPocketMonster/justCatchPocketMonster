@@ -6,6 +6,13 @@ const saveShinyUser = require("./shinydexSaveUser")
 const codeBdd = require("../bdd/code.json")
 const fs = require("fs");
 const catchError = require("./catchError")
+const lockfile = require('lockfile');
+const path = require('path');
+const stat = require("../fonction/stat.js")
+const Discord = require("discord.js")
+
+const paliers = [5000, 10000, 15000, 20000, 30000, 50000, 75000, 100000, 150000, 200000, 250000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 2500000, 3000000];
+
 
 async function enterCode(idUser, code, interaction){
 
@@ -32,6 +39,106 @@ function createUser(idUser){
         catchError.saveError(null, null, "code.js", "createUser", e)
         console.error(e)
     }
+}
+
+/**
+ * 
+ * @param {int} palier 
+ * @param {string} type 
+ */
+function modifierDonneesSpawn(palier, type) {
+    try{
+        // Suppression des codes existants liés au spawn
+        var codesASupprimer = codeBdd.shiny.filter(code => code.includes(type));
+        codeBdd.shiny = codeBdd.shiny.filter(code => !codesASupprimer.includes(code));
+    
+
+        var nouveauCode = palier + type;
+        codeBdd.shiny.push(nouveauCode);
+        const lockfilePath = path.join(__dirname,"..", 'lock', 'code.lock');
+    
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'code.json'), JSON.stringify(codeBdd, null, 4), (err)=> {
+            if (err)console.log("erreur")
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
+    } catch(e) {
+
+        catchError.saveError(null, null, "code.js", "SaveBdd", e)
+        console.error(e)
+    }
+
+
+}
+
+function codeListEmbed(idUser, idServer){
+    try{
+        if(codeEntered[idUser] === undefined){
+            createUser(idUser)
+            SaveBdd();
+        }
+        const embed = new Discord.EmbedBuilder()
+        embed.setTitle(language.getText(idServer, "codeListEmbedTitle"))
+        embed.setDescription(language.getText(idServer, "codeListEmbedDescription"))
+        for(const [key, value] of Object.entries(codeBdd)){
+            value.forEach(code => {
+                if(codeEntered[idUser].includes(code)){
+                    embed.addFields(
+                        { 
+                            name: code , 
+                            value: ":white_check_mark:", 
+                            inline: true
+                        },
+                    )
+                }else {
+                    embed.addFields(
+                        { 
+                            name: code, 
+                            value: ":x:", 
+                            inline: true
+                        }
+                    )
+                }
+            })
+        }
+        return embed
+    } catch(e) {
+
+        catchError.saveError(null, null, "code.js", "codeListEmbed", e)
+        console.error(e)
+    }
+}
+
+async function codeIsOutdated() {
+
+    statCatch = stat.getCount(false, false, false);
+    statSpawn = stat.getCount(false, true, false);
+
+    //if(statSpawn == undefined || statCatch == undefined) return;
+
+    actualCodeValueSpawn = codeBdd.shiny.filter(code => code.includes("SPAWNS"))[0].split("SPAWNS")[0];
+    actualCodeValueCatch = codeBdd.shiny.filter(code => code.includes("CATCHS"))[0].split("CATCHS")[0];
+
+    
+    paliers.forEach(palier => {
+        if (statSpawn >= palier && actualCodeValueSpawn < palier) {
+            modifierDonneesSpawn(palier, "SPAWNS");
+        }
+        if (statCatch >= palier && actualCodeValueCatch < palier) {
+            modifierDonneesSpawn(palier, "CATCHS");
+        }
+    });
+
 }
 
 async function codeHasEffect (idUser, code, interaction){
@@ -81,17 +188,35 @@ function effectCode1(idUser, interaction){
     }
 }
 
-
 function SaveBdd(){
+
+    const lockfilePath = path.join(__dirname,"..", 'lock', 'enteredCode.lock');
+
+    
+
     try{
-        fs.writeFile("./bdd/enteredCode.json", JSON.stringify(codeEntered, null, 4), (err)=> {
+        lockfile.lock(lockfilePath, {"retries": 100, "retryWait": 200}, (err) => {
+            if (err) {
+                console.error('Erreur lors du verrouillage du fichier :', err);
+                return;
+            }
+        fs.writeFile(path.join(__dirname,"..", 'bdd', 'enteredCode.json'), JSON.stringify(codeEntered, null, 4), (err)=> {
             if (err)console.log("erreur")
-        })
+
+            lockfile.unlock(lockfilePath, (err) => {
+                if (err) {
+                    console.error('Erreur lors du déverrouillage du fichier :', err);
+                }
+            });
+        });
+    });
     } catch(e) {
 
-        catchError.saveError(null, null, "code.js", "saveBdd", e)
+        catchError.saveError(null, null, "code.js", "SaveBdd", e)
         console.error(e)
     }
+
+
 }
 
-module.exports = {enterCode}
+module.exports = {codeListEmbed, enterCode, codeIsOutdated}

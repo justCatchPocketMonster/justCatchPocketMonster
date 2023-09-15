@@ -68,6 +68,57 @@
         "rarity": "",
         "quand": "avant",
         "image" : "0009-000"
+    },
+
+    {
+        "id" : 7,
+        "nom": "eventMegaTitre",
+        "description": "eventMegaDesc",
+        "type": "justEmbed",
+        "color": "F8F8FF",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0010-000"
+    },
+    {
+        "id" : 8,
+        "nom": "eventMostPokemonTitre",
+        "description": "eventMostPokemonDesc",
+        "type": "justEmbed",
+        "color": "66CC00",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0011-000"
+    },
+    {
+        "id" : 9,
+        "nom": "eventLeastPokemonTitre",
+        "description": "eventLeastPokemonDesc",
+        "type": "justEmbed",
+        "color": "660000",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0000-000"
+    },
+    {
+        "id" : 10,
+        "nom": "eventDarkTitre",
+        "description": "eventDarkDesc",
+        "type": "justEmbed",
+        "color": "000000",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0013-000"
+    },
+    {
+        "id" : 11,
+        "nom": "eventEggTitre",
+        "description": "eventEggDesc",
+        "type": "justEmbed",
+        "color": "FDE9E0",
+        "rarity": "",
+        "quand": "avant",
+        "image" : "0014-000"
     }
 
 ]

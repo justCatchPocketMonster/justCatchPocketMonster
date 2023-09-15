@@ -18,21 +18,22 @@ const catchError = require("./catchError")
   * 
   */
 
- function eventSelect(typeEvent, idServer, Client){
+ function eventSelect(typeEvent, idServer, Client , idChannel){
 
     try{
 
         let randomIdEvent
         let bool = true;
         while(bool){
-            randomIdEvent = fonctionJs.getRandomInt(nbEvent);
+            //randomIdEvent = fonctionJs.getRandomInt(nbEvent);
+            //TODO : en mode teste
+            randomIdEvent = 11;
             if(eventBdd[randomIdEvent]["quand"] === typeEvent){
                 bool = false;
             }
         }
-
         if(typeEvent == "avant"){
-            activeEventBefore(eventBdd[randomIdEvent], idServer , Client)
+            activeEventBefore(eventBdd[randomIdEvent], idServer , Client, idChannelRandom)
 
         } else if(typeEvent == "apres"){
 
@@ -49,32 +50,36 @@ const catchError = require("./catchError")
 }
 
 
-function activeEventBefore(event, idServer, Client){
+function activeEventBefore(event, idServer, Client, idChannel){
 
     try{
 
 
         let numberRandom
         let level
-        console.log(event["id"])
+
+        date = new Date()
+
+        
         switch(event["id"]){
             case 1:
-
+                //montagnard legendaire
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "legendaire", 50, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 50, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "legendaire", 25, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 25, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "legendaire", 10, 60, event)
+                    statEvent.changeRarity(idServer, "legendaire", 10, date, event)
                     
 
                 }
@@ -82,36 +87,37 @@ function activeEventBefore(event, idServer, Client){
 
                 event["textEffect"] = language.getText(idServer, "auraLegendary")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
-
             case 2:
+                //sandwich vide
                 event["textEffect"] = language.getText(idServer, "nothing");
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 3:
 
-
+                //cuisine generation
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
 
                 let theGenChoice = fonctionJs.getRandomInt(variableGlobal.nbGeneration)
                 theGenChoice++
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeGen(idServer, theGenChoice, 20, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 20, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeGen(idServer, theGenChoice, 10, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 10, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeGen(idServer, theGenChoice, 5, 60, event)
+                    statEvent.changeGen(idServer, theGenChoice, 5, date, event)
                     
 
                 }
@@ -120,25 +126,27 @@ function activeEventBefore(event, idServer, Client){
 
                 event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisGeneration")+theGenChoice+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 4:
+                //scientifique fabuleux
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeRarity(idServer, "fabuleux", 10, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 10, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeRarity(idServer, "fabuleux", 5, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 5, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeRarity(idServer, "fabuleux", 2, 60, event)
+                    statEvent.changeRarity(idServer, "fabuleux", 2, date, event)
                     
 
                 }
@@ -147,59 +155,62 @@ function activeEventBefore(event, idServer, Client){
                 event["textEffect"] = language.getText(idServer, "auraFabuleux")+level+". " + language.getText(idServer, "pendantTrenteMinute")
 
 
-                eventJustEmbed(event, idServer, Client);
+                eventJustEmbed(event, idServer, Client , idChannel);
 
             break
             case 5:
-
+                //type sandwich
             arrayOfType = ["acier","dragon","electrik","feu","insecte","plante","psy","sol","tenebres","combat","eau","fee","glace","normal","poison","roche","spectre","vol"]
             
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
-
+                date.setTime(date.getTime() + 30 * 60 * 1000)
+                
                 let theTypeChoice = fonctionJs.getRandomInt(arrayOfType.length)
-                theTypeChoice++
-                if(100 <= numberRandom){
+
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 20, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 10, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, 60, event)
+                    statEvent.changeType(idServer, arrayOfType[theTypeChoice], 5, date, event)
                     
 
                 }
                 
 
 
-                event["textEffect"] = language.getText(idServer, "auraGeneration")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
+                event["textEffect"] = language.getText(idServer, "auraType")+level+". "+language.getText(idServer, "ofThisType")+language.getText(idServer, arrayOfType[theTypeChoice])+". "  + language.getText(idServer, "pendantTrenteMinute")
 
-                eventJustEmbed(event,  idServer, Client);
+                eventJustEmbed(event,  idServer, Client, idChannel);
 
             break
             case 6:
+                //hackeur shiny
 
                 numberRandom = fonctionJs.getRandomInt(100)
                 level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
 
 
-                if(100 <= numberRandom){
+                if(99 <= numberRandom){
                     level = 3
-                    statEvent.changeShiny(idServer, 2, 60, event)
+                    statEvent.changeShiny(idServer, 2, date, event)
                     
                 }else if(70 <= numberRandom){
                     level = 2
-                    statEvent.changeShiny(idServer, 1.5, 60, event)
+                    statEvent.changeShiny(idServer, 1.5, date, event)
                     
 
                 } else {
                     level = 1
-                    statEvent.changeShiny(idServer, 1.25, 60, event)
+                    statEvent.changeShiny(idServer, 1.25, date, event)
                     
 
                 }
@@ -208,10 +219,182 @@ function activeEventBefore(event, idServer, Client){
                 
                 event["textEffect"] = language.getText(idServer, "auraChroma")+level+". "+language.getText(idServer, "pendantTrenteMinute")
 
-            eventJustEmbed(event,idServer, Client);
+            eventJustEmbed(event,idServer, Client, idChannel);
 
 
             break
+            case 7:
+                // mega
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+
+
+                if(99 <= numberRandom){
+                    date.setTime(date.getTime() + 60 * 60 * 1000)
+                    level = 3
+                    statEvent.megaAllow(idServer, date, event)
+                    event["textEffect"] = language.getText(idServer, "auraMega")+level+". "+language.getText(idServer, "pendantUneHeure")
+
+                }else if(70 <= numberRandom){
+                    date.setTime(date.getTime() + 30 * 60 * 1000)
+                    level = 2
+                    statEvent.megaAllow(idServer, date, event)
+                    event["textEffect"] = language.getText(idServer, "auraMega")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+                    date.setTime(date.getTime() + 15 * 60 * 1000)
+                    level = 1
+
+                    statEvent.megaAllow(idServer, date, event)
+                    event["textEffect"] = language.getText(idServer, "auraMega")+level+". "+language.getText(idServer, "pendantQuinzeMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+
+                break
+            case 8:
+                //plus de pokemon
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
+
+                if(99 <= numberRandom){
+
+                    level = 3
+                    statEvent.maxMessageSpawn(idServer,10 , date, event)
+                    statEvent.minMessageSpawn(idServer,3 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }else if(70 <= numberRandom){
+                    
+                    level = 2
+                    statEvent.maxMessageSpawn(idServer,13 , date, event)
+                    statEvent.minMessageSpawn(idServer,4 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+
+                    level = 1
+                    statEvent.maxMessageSpawn(idServer,15 , date, event)
+                    statEvent.minMessageSpawn(idServer,5 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraEncen")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+                break
+            case 9:
+                //moins de pokemon
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                
+
+                if(99 <= numberRandom){
+                    date.setTime(date.getTime() + 60 * 60 * 1000)
+                    level = 3
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-002"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantUneHeure")
+
+                }else if(70 <= numberRandom){
+                    date.setTime(date.getTime() + 30 * 60 * 1000)
+                    
+                    level = 2
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-001"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+                    date.setTime(date.getTime() + 15 * 60 * 1000)
+                    level = 1
+                    statEvent.maxMessageSpawn(idServer,40 , date, event)
+                    statEvent.minMessageSpawn(idServer,10 , date, event)
+
+                    event["image"] = "0012-000"
+                    event["textEffect"] = language.getText(idServer, "auraRepousse")+level+". "+language.getText(idServer, "pendantQuinzeMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+                break
+            case 10:
+                //il fait nuit
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+
+                if(99 <= numberRandom){
+                    date.setTime(date.getTime() + 60 * 60 * 1000)
+
+                    level = 3
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantUneHeure")
+
+                }else if(70 <= numberRandom){
+                    date.setTime(date.getTime() + 30 * 60 * 1000)
+                    
+                    level = 2
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+                    date.setTime(date.getTime() + 15 * 60 * 1000)
+
+                    level = 1
+                    statEvent.setNightMode(idServer, date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraNuit")+level+". "+language.getText(idServer, "pendantQuinzeMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+
+                break
+            case 11:
+                //oeuf
+
+                numberRandom = fonctionJs.getRandomInt(100)
+                level
+                date.setTime(date.getTime() + 30 * 60 * 1000)
+
+                if(99 <= numberRandom){
+
+                    level = 3
+                    statEvent.maxValeurChoiceEgg(idServer,50 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }else if(70 <= numberRandom){
+                    
+                    level = 2
+                    statEvent.maxValeurChoiceEgg(idServer,100 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                } else {
+
+                    level = 1
+                    statEvent.maxValeurChoiceEgg(idServer,200 , date, event)
+
+                    event["textEffect"] = language.getText(idServer, "auraOvale")+level+". "+language.getText(idServer, "pendantTrenteMinute")
+
+                }
+                eventJustEmbed(event,idServer, Client, idChannel);
+
+                break
 
             default:
                 console.log("connai pas frere");
@@ -226,7 +409,7 @@ function activeEventBefore(event, idServer, Client){
 
 }
 
-function eventJustEmbed(event, idServer, Client){
+function eventJustEmbed(event, idServer, Client, idChannel){
 
     try{
 
@@ -246,9 +429,9 @@ function eventJustEmbed(event, idServer, Client){
                 inline: false
             })
             .setImage("attachment://"+nameImage)
+
         
         
-        idChannelRandom = allowChannel.randomIdServer(idServer)
 
         Client.channels.cache.get(idChannelRandom).send({ embeds: [eventEmbed], files: [pokeImg]});
         
@@ -270,10 +453,10 @@ function eventCommandEmbed(interaction, idServer){
 
         if(event){
 
-            let tempsRestantSeconde = statEvent.getGeneralStat(idServer, "timer")
+            let dateEnd = new Date(statEvent.getGeneralStat(idServer, "timer"));
+            actualDate = new Date();
 
-            let minuteTime = Math.floor(tempsRestantSeconde/60)
-            let secondeTime = tempsRestantSeconde%60
+            dateDiffValue = fonctionJs.dateDiff(actualDate, dateEnd)
 
             var adressImage = "./src/image/eventImage/"+event["image"]+".png";
             var nameImage = event["image"] + ".png";
@@ -291,7 +474,7 @@ function eventCommandEmbed(interaction, idServer){
                 })
                 .addFields({
                     name: language.getText(idServer, "timeLeft"),
-                    value: minuteTime+" minutes " +secondeTime+" "+language.getText(idServer, "secondes"),
+                    value: dateDiffValue.min+" minutes " +dateDiffValue.sec+" "+language.getText(idServer, "secondes"),
                     inline: false
                 })
                 .setImage("attachment://"+nameImage)
@@ -352,34 +535,7 @@ function eventAfterShiny(interaction,isShiny){
     
 }
 
-function eventAfterPokemon(idServer, idChannel,isShiny){
-
-    try{
-
-
-        randomNumber = fonctionJs.getRandomInt(100)
-
-
-        if(randomNumber == 1){
-
-            arrayPokemonPossible = variableGlobal.pokemonEvent;
-
-            pokemonChoice = fonctionJs.getRandomInt(arrayPokemonPossible.length)
-
-            pokemon = pokeData[arrayPokemonPossible[pokemonChoice]];
-            pokemon["isShiny"] = isShiny
-            pokemon["capturable"] = true;
-
-            spawnCount.setPokemonPresent(idServer, pokemon, idChannel)
-
-        }
-    } catch(e) {
-
-        catchError.saveError(idServer, idChannel, "eventChoice.js", "eventAfterPokemon", e)
-        console.error(e)
-    }
-}
 
 
 
-module.exports = {eventAfterPokemon, eventSelect,eventCommandEmbed,eventAfterShiny}
+module.exports = {eventSelect,eventCommandEmbed,eventAfterShiny}

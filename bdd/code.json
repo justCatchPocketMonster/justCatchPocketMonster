@@ -1,3 +1,10 @@
 {
-    "shiny":["LeBotADesBugs", "30000SPAWNS", "GEN9", "VERSION1.3"]
+    "shiny": [
+        "LeBotADesBugs",
+        "GEN9",
+        "VERSION1.4",
+        "FIRSTAT500",
+        "30000CATCHS",
+        "50000SPAWNS"
+    ]
 }

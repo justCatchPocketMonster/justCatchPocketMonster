@@ -43,7 +43,7 @@ function raritySelect(idServer){
         catchError.saveError(idServer, null, "PokemonObject.js", "raritySelect", e)
         console.error(e)
     }
-    
+
 }
 
 
@@ -160,15 +160,18 @@ function pokemonSelect(idServer){
 
         arrayPokemon = pokeData;
 
+/*
+        arrayTestPokemon = []
+
+        pokeData.forEach(pokemon => {
+            if(pokemon["pokemonForm"].hasOwnProperty("mega")){
+                arrayTestPokemon.push(pokemon)
+            }
+        })
+*/
         do{
             
-            arrayPokemonPass0 = pokemonChoiceNotOnlyEvent(arrayPokemon, variableGlobal.pokemonEvent)
-
-        }while(arrayPokemonPass0[0] === undefined)
-
-        do{
-            
-            arrayPokemonPass1 = pokemonChoiceGen(arrayPokemonPass0, generationSelect(idServer))
+            arrayPokemonPass1 = pokemonChoiceGen(arrayPokemon, generationSelect(idServer))
 
         }while(arrayPokemonPass1[0] === undefined)
 
@@ -189,11 +192,53 @@ function pokemonSelect(idServer){
         let pokemonChoiced = arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))];
 
 
+
+        if(pokemonChoiced.pokemonForm.hasOwnProperty("mega") && eventStat.getGeneralStat(idServer, "allowMega")){
+            pokemonChoiced["form"] = "mega";
+
+            MegaChoice = pokemonChoiced.pokemonForm["mega"][(fonctionJs.getRandomInt(pokemonChoiced.pokemonForm["mega"].length))]
+
+            pokemonChoiced["typeListEng"] = JSON.parse(JSON.stringify(MegaChoice["typeListEng"])) 
+            pokemonChoiced["imgName"] = JSON.parse(JSON.stringify(MegaChoice["imgName"])) 
+        }else {
+            pokemonChoiced["form"] = null;
+        }
+
+        
+        
+        pokemonChoiced = pokemonIsHide(pokemonChoiced);
+
         return(pokemonChoiced)
 
     } catch(e) {
 
         catchError.saveError(idServer, null, "PokemonObject.js", "pokemonSelect", e)
+        console.error(e)
+    }
+}
+
+function pokemonIsHide(pokemonChoice){
+    
+    try{
+        randomNumber = fonctionJs.getRandomInt(100)
+
+        if(randomNumber == 1){
+            arrayPokemonPossible = variableGlobal.pokemonEvent;
+
+            pokemonEventChoice = fonctionJs.getRandomInt(arrayPokemonPossible.length)
+
+            pokemonEvent = pokeData.find(pokemon => arrayPokemonPossible[pokemonEventChoice] == pokemon.id)
+            
+            pokemonChoice["id"] = pokemonEvent["id"];
+            pokemonChoice["typeListEng"] = pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])
+        }
+
+        return pokemonChoice
+        
+
+    } catch(e) {
+
+        catchError.saveError(null, null, "PokemonObject.js", "pokemonIsHide", e)
         console.error(e)
     }
 }
@@ -385,12 +430,16 @@ function generationSelect(idServer){
  * @param {pour envoyé des messages} message 
  * @returns le pokemon avec le caractère shiny en format booléen plus
  */
-function shinySelect(pokemon, idServer, message){
+function shinySelect(pokemon, idServer, isEgg){
 
     try{
     
         let tauxShiny = eventStat.getGeneralStat(idServer, "shiny");
         let saveServer = savePokemonServer.getSave(idServer);
+
+        if(isEgg){
+            tauxShiny /= 2;
+        }
 
 
         if(saveServer[pokemon["id"]] >= 100){

@@ -1,5 +1,0 @@
-truc a faire
-2-enregistrer en cas d'erreur
-3-mention légal
-4-sauvegarde auto
-5-finission (genre statut)
