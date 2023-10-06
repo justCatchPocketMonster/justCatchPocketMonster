@@ -189,7 +189,7 @@ function pokemonSelect(idServer){
 
         }while(arrayPokemonPass3[0] === undefined)
 
-        let pokemonChoiced = arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))];
+        let pokemonChoiced = JSON.parse(JSON.stringify(arrayPokemonPass3[(fonctionJs.getRandomInt(arrayPokemonPass3.length))]));
 
 
 
@@ -205,7 +205,7 @@ function pokemonSelect(idServer){
         }
 
         
-        
+    
         pokemonChoiced = pokemonIsHide(pokemonChoiced);
 
         return(pokemonChoiced)
@@ -229,11 +229,11 @@ function pokemonIsHide(pokemonChoice){
 
             pokemonEvent = pokeData.find(pokemon => arrayPokemonPossible[pokemonEventChoice] == pokemon.id)
             
-            pokemonChoice["id"] = pokemonEvent["id"];
-            pokemonChoice["typeListEng"] = pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])
+            pokemonChoice["id"] = JSON.parse(JSON.stringify(pokemonEvent["id"]));
+            pokemonChoice["typeListEng"] = JSON.parse(JSON.stringify(pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])))
         }
 
-        return pokemonChoice
+        return JSON.parse(JSON.stringify(pokemonChoice))
         
 
     } catch(e) {
