@@ -25,9 +25,9 @@ const catchError = require("./catchError")
         let randomIdEvent
         let bool = true;
         while(bool){
-            //randomIdEvent = fonctionJs.getRandomInt(nbEvent);
+            randomIdEvent = fonctionJs.getRandomInt(nbEvent);
             //TODO : en mode teste
-            randomIdEvent = 11;
+            //randomIdEvent = 11;
             if(eventBdd[randomIdEvent]["quand"] === typeEvent){
                 bool = false;
             }
