@@ -233,7 +233,7 @@ function pokemonIsHide(pokemonChoice){
             pokemonChoice["typeListEng"] = JSON.parse(JSON.stringify(pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])))
         }
 
-        return pokemonChoice
+        return JSON.parse(JSON.stringify(pokemonChoice))
         
 
     } catch(e) {
