@@ -488,9 +488,12 @@ function getNamePokemon(id, idServer){
 
     try{
 
-        if(pokeData[id]!= undefined){
+        //cherche le pokemon avec l'id dans la bdd pokeData qui est un tableau
+        pokemonSearchName = pokeData.find(pokemon => pokemon.id == id);
 
-            return pokeData[id]["name"]["name"+language.getLanguage(idServer)];
+        if(pokemonSearchName!= undefined){
+
+            return pokemonSearchName["name"]["name"+language.getLanguage(idServer)];
         } else {
             return null;
         }

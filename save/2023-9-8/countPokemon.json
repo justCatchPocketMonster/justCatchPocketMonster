@@ -1,0 +1,147 @@
+{
+    "1037740602697195561": {
+        "nbCountMax": 18,
+        "nbCountActuel": 7,
+        "pokemonPresentActuel": {
+            "1150842732416356401": null
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 13,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 246,
+                "name": {
+                    "nameEng": "Larvitar",
+                    "nameFr": "Embrylex"
+                },
+                "typeListEng": [
+                    "Rock",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0246-000"
+                ],
+                "gen": 2,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Embrylex",
+                "date": "2023-9-8",
+                "heure": "10:1:19"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 11,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 208,
+                "name": {
+                    "nameEng": "Steelix",
+                    "nameFr": "Steelix"
+                },
+                "typeListEng": [
+                    "Steel",
+                    "Ground"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0208-000",
+                    "0208-001"
+                ],
+                "gen": 2,
+                "pokemonForm": {
+                    "mega": [
+                        {
+                            "imgName": [
+                                "0208-000-mega"
+                            ],
+                            "typeListEng": [
+                                "Steel",
+                                "Ground"
+                            ],
+                            "numeroVersion": 1
+                        }
+                    ]
+                },
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "_t\\_\\_\\_\\_\\_",
+                "date": "2023-9-8",
+                "heure": "11:5:1"
+            }
+        }
+    },
+    "405443913864839188": {
+        "nbCountMax": 12,
+        "nbCountActuel": 8,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 413,
+                "name": {
+                    "nameEng": "Wormadam",
+                    "nameFr": "Cheniselle"
+                },
+                "typeListEng": [
+                    "Bug",
+                    "Steel"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0413-002"
+                ],
+                "gen": 4,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "_\\_\\_\\_\\_s\\_\\_\\_\\_",
+                "date": "2023-9-8",
+                "heure": "11:5:18"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 14,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 315,
+                "name": {
+                    "nameEng": "Roselia",
+                    "nameFr": "Rosélia"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0315-000",
+                    "0315-001"
+                ],
+                "gen": 3,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Rosélia",
+                "date": "2023-9-8",
+                "heure": "8:28:31"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 13,
+        "nbCountActuel": 11,
+        "pokemonPresentActuel": {
+            "796144803611279360": null
+        }
+    }
+}

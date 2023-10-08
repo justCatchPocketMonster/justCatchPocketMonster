@@ -2,7 +2,7 @@ const pokedexBDD = require("../bdd/pokedexSaveUser.json");
 const variableGlobal = require("../parameters/variableGlobal")
 var Discord = require('discord.js');
 const pokeData = require("../bdd/pokemon.json");
-const nbPokemon = (pokeData.length);
+const nbPokemon = pokeData[pokeData.length-1]["id"]
 const fs = require("fs");
 const catchError = require("./catchError")
 const lockfile = require('lockfile');
@@ -14,6 +14,7 @@ const path = require('path');
  * @param {string} idUser //id de l'user pour la bonne sauvegarde
  */
 function pokedex(idPokemon, idUser){
+    
     try {
         if(pokedexBDD[idUser] === undefined){
             createSaveUser(idUser)
@@ -156,7 +157,7 @@ function getAllPokemonWithZeroCapture(idUser){
         array = [];
     
         Object.keys(pokedexBDD[idUser]).forEach(key => {
-            if(pokedexBDD[idUser][key] <= 0){
+            if(pokedexBDD[idUser][key] <= 0 && key < nbPokemon){
                 array.push(key)
             }
     

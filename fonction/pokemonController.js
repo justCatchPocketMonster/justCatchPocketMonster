@@ -144,15 +144,14 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     savePokemonUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                     savePokemonServer.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.guild.id)
                     shinyAfterEvent = eventChoice.eventAfterShiny(interaction,spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"]);
-    
-    
+
                     if(shinyAfterEvent){
                         saveShinyUser.pokedex(spawnCount.getPokemonPresent(idServer, idChannel)["id"], interaction.member.id)
                     }
                     if(shinyAfterEvent == true && spawnCount.getPokemonPresent(idServer, idChannel)["isShiny"] == false){
-                        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannelRandom)["form"])
+                        stat.statAddSpawn(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannel)["form"])
                     }
-                    stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannelRandom)["form"])
+                    stat.statAddCatch(spawnCount.getPokemonPresent(idServer, idChannel)["id"], shinyAfterEvent, spawnCount.getPokemonPresent(idServer, idChannel)["form"])
                     realPokemon = pokeDataAll.find(pokemon => pokemon.id == spawnCount.getPokemonPresent(idServer, idChannel)["id"])
                     
 
@@ -365,18 +364,31 @@ function generateFiledRandomStat(idUser, idGuild){
     
         listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser)
         listPokemonShinyUncatch = saveShinyUser.getAllPokemonWithZeroCapture(idUser)
-    
-        if(listPokemonUncatch.length <= 0){
+
+        let pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
+        let pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+
+        while (pokemonRandomUncatch === undefined && listPokemonUncatch.length > 0){
+            pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
+        }
+        while (pokemonShinyRandomUncatch === undefined && listPokemonShinyUncatch.length > 0){
+            pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+        }
+
+        if(listPokemonUncatch.length <= 0 ){
             field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
         } else {
-            field.push({ name: language.getText(idGuild,"pokemonManquant"), value: pokeDataAll[listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
+            field.push({ name: language.getText(idGuild,"pokemonManquant"), 
+            value: pokemonRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] , 
+            inline: true})
         }
-    
         
         if(listPokemonShinyUncatch.length <= 0){
             field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
         } else {
-            field.push({ name: language.getText(idGuild,"pokemonManquantShiny"), value: pokeDataAll[listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]]["name"]["name"+ language.getLanguage(idGuild)] , inline: true})
+            field.push({ name: language.getText(idGuild,"pokemonManquantShiny"), 
+            value: pokemonShinyRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] , 
+            inline: true})
         }
     
         field.push({ name: language.getText(idGuild,"nombreDeCapture"), value: ""+savePokemonUser.getCountAllPokemon(idUser) , inline: true})
@@ -441,9 +453,9 @@ function generateFiledRandomStat(idUser, idGuild){
                 .setDescription("\u200B")
                 .setTitle(language.getText(interaction.guild.id, "pokedexOf") + interaction.member.user.username)
                 .addFields(
-                    { name: language.getText(interaction.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll.length-1)+" - "+ savePokemonUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
-                    { name: language.getText(interaction.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll.length-1)+" - "+ saveShinyUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
-                    { name: language.getText(interaction.guild.id, "nationalDexServer"), value: savePokemonServer.getCountNational(interaction.guild.id)+"/"+ (pokeDataAll.length-1)+" - "+ savePokemonServer.getPercentageNational(interaction.guild.id)+"%" , inline: true},
+                    { name: language.getText(interaction.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll[pokeDataAll.length-1]["id"])+" - "+ savePokemonUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
+                    { name: language.getText(interaction.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll[pokeDataAll.length-1]["id"])+" - "+ saveShinyUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
+                    { name: language.getText(interaction.guild.id, "nationalDexServer"), value: savePokemonServer.getCountNational(interaction.guild.id)+"/"+ (pokeDataAll[pokeDataAll.length-1]["id"])+" - "+ savePokemonServer.getPercentageNational(interaction.guild.id)+"%" , inline: true},
                     { name: "\u200B", value: "\u200B" , inline: false}
                 )
                 .addFields(
@@ -472,10 +484,12 @@ function generateFiledRandomStat(idUser, idGuild){
                         if(savePokemon[i] === 0){
                             pokeFields = { name: i+" ?????  "+ emotePokeballDark, value: language.getText(interaction.guild.id, "noCatch") , inline: true}
                         } else {
-                            pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, interaction.guild.id)+"  "+emotePokeballLight, value: language.getText(interaction.guild.id, "catched")+ savePokemon[i] , inline: true}
+                            pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, interaction.guild.id)+"  "+emotePokeballLight, 
+                            value: language.getText(interaction.guild.id, "catched")+ savePokemon[i] , inline: true}
                         }
                     } else {
-                        pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, interaction.guild.id)+"  "+emotePokeballShiny, value: language.getText(interaction.guild.id, "catched")+ savePokemon[i] , inline: true}
+                        pokeFields = { name: i+" "+pokemonObject.getNamePokemon(i, interaction.guild.id)+"  "+emotePokeballShiny, 
+                        value: language.getText(interaction.guild.id, "catched")+ savePokemon[i] , inline: true}
                     }
 
                     saveMega = pokemonForm.getSaveByForm(interaction.member.id, "mega")
@@ -510,8 +524,8 @@ function generateFiledRandomStat(idUser, idGuild){
                 .setDescription("\u200B")
                 .setTitle(language.getText(interaction.guild.id, "pokedexOf") + interaction.member.user.username)
                 .addFields(
-                    { name: language.getText(interaction.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll.length-1)+" - "+ savePokemonUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
-                    { name: language.getText(interaction.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll.length-1)+" - "+ saveShinyUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
+                    { name: language.getText(interaction.guild.id, "nationalDex"), value: savePokemonUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll[pokeDataAll.length-1]["id"])+" - "+ savePokemonUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
+                    { name: language.getText(interaction.guild.id, "shinyDex"), value: saveShinyUser.getCountNational(interaction.member.id)+"/"+ (pokeDataAll[pokeDataAll.length-1]["id"])+" - "+ saveShinyUser.getPercentageNational(interaction.member.id)+"%" , inline: true},
                     { name: "\u200B", value: "\u200B" , inline: false}
                 )
                 .addFields(listPokemon)

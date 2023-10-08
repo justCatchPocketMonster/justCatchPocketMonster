@@ -2,7 +2,7 @@ const pokedexBDD = require("../bdd/shinydexSaveUser.json");
 const variableGlobal = require("../parameters/variableGlobal")
 var Discord = require('discord.js');
 const pokeData = require("../bdd/pokemon.json");
-const nbPokemon = (pokeData.length);
+const nbPokemon = pokeData[pokeData.length-1]["id"]
 const fs = require("fs");
 const catchError = require("./catchError")
 const lockfile = require('lockfile');
@@ -118,7 +118,7 @@ function getAllPokemonWithZeroCapture(idUser){
         array = [];
     
         Object.keys(pokedexBDD[idUser]).forEach(key => {
-            if(pokedexBDD[idUser][key] <= 0){
+            if(pokedexBDD[idUser][key] <= 0 && key < nbPokemon){
                 array.push(key)
             }
     
@@ -126,7 +126,7 @@ function getAllPokemonWithZeroCapture(idUser){
         return array
     } catch(error) {
 
-        catchError.saveError(null, null, "shinydexSaveUser.js", "getAllPokemonWithZeroCapture", error)
+        catchError.saveError(null, null, "pokedexSaveUser.js", "getAllPokemonWithZeroCapture", error)
         console.error(error)
     }
 }

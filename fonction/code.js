@@ -174,11 +174,17 @@ function effectCode1(idUser, interaction){
 
         savePokemonUser.pokedex(pokemon["id"], idUser)
         saveShinyUser.pokedex(pokemon["id"], idUser)
+        
+        if(interaction.member.nickname != null){
+            name = interaction.member.nickname
+        } else {
+            name = interaction.member.displayName;
+        }
 
         if(pokemon["name"]["nameFr"] != pokemon["name"]["nameEng"]){
-            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
+            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"] +"/"+ pokemon["name"]["nameEng"]+":star:")
         }else{
-            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+interaction.user.username+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
+            interaction.channel.send(language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ pokemon["name"]["nameFr"]+":star:")
         }
 
     } catch(e) {
