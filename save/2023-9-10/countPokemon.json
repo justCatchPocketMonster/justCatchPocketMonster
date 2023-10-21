@@ -1,0 +1,174 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 9,
+        "nbCountActuel": 3,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 40,
+                "name": {
+                    "nameEng": "Wigglytuff",
+                    "nameFr": "Grodoudou"
+                },
+                "typeListEng": [
+                    "Normal",
+                    "Fairy"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0040-000"
+                ],
+                "gen": 1,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "G_\\_doudo\\_",
+                "date": "2023-9-10",
+                "heure": "11:59:54"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 19,
+        "nbCountActuel": 10,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 205,
+                "name": {
+                    "nameEng": "Forretress",
+                    "nameFr": "Foretress"
+                },
+                "typeListEng": [
+                    "Bug",
+                    "Steel"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0205-000"
+                ],
+                "gen": 2,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Foretress",
+                "date": "2023-9-10",
+                "heure": "7:55:32"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 16,
+        "nbCountActuel": 10,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 229,
+                "name": {
+                    "nameEng": "Houndoom",
+                    "nameFr": "Démolosse"
+                },
+                "typeListEng": [
+                    "Dark",
+                    "Fire"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0229-000",
+                    "0229-001"
+                ],
+                "gen": 2,
+                "pokemonForm": {
+                    "mega": [
+                        {
+                            "imgName": [
+                                "0229-000-mega"
+                            ],
+                            "typeListEng": [
+                                "Dark",
+                                "Fire"
+                            ],
+                            "numeroVersion": 1
+                        }
+                    ]
+                },
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Démolosse",
+                "date": "2023-9-10",
+                "heure": "10:9:31"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 10,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 475,
+                "name": {
+                    "nameEng": "Gallade",
+                    "nameFr": "Gallame"
+                },
+                "typeListEng": [
+                    "Psychic",
+                    "Fighting"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0475-000"
+                ],
+                "gen": 4,
+                "pokemonForm": {
+                    "mega": [
+                        {
+                            "imgName": [
+                                "0475-000-mega"
+                            ],
+                            "typeListEng": [
+                                "Psychic",
+                                "Fighting"
+                            ],
+                            "numeroVersion": 1
+                        }
+                    ]
+                },
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Gallame",
+                "date": "2023-9-10",
+                "heure": "11:42:59"
+            }
+        }
+    },
+    "807721959608549416": {
+        "nbCountMax": 11,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {
+            "1062806790569476237": {
+                "id": 344,
+                "name": {
+                    "nameEng": "Claydol",
+                    "nameFr": "Kaorine"
+                },
+                "typeListEng": [
+                    "Ground",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0344-000"
+                ],
+                "gen": 3,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Kaorine",
+                "date": "2023-9-10",
+                "heure": "8:56:12"
+            }
+        }
+    }
+}

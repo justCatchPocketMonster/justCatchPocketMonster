@@ -604,9 +604,11 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
                     firstPokemonValid["imgName"].push(JSON.parse(JSON.stringify(imgName)))
                 })
                 variableGlobal.form.forEach(form => {
-                    arrayPokemonValide[i]["pokemonForm"][form].forEach(pokemonForm => {
-                        firstPokemonValid["pokemonForm"][form].push(pokemonForm)
-                    })
+                    if(arrayPokemonValide[i]["pokemonForm"][form] !== undefined){
+                        arrayPokemonValide[i]["pokemonForm"][form].forEach(pokemonForm => {
+                            firstPokemonValid["pokemonForm"][form].push(pokemonForm)
+                        })
+                    }
                 })
             }
         }

@@ -1,0 +1,123 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 18,
+        "nbCountActuel": 9,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 316,
+                "name": {
+                    "nameEng": "Gulpin",
+                    "nameFr": "Gloupti"
+                },
+                "typeListEng": [
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0316-000",
+                    "0316-001"
+                ],
+                "gen": 3,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "_\\_\\_u\\_\\_\\_",
+                "date": "2023-9-15",
+                "heure": "12:44:38"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 12,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 704,
+                "name": {
+                    "nameEng": "Goomy",
+                    "nameFr": "Mucuscule"
+                },
+                "typeListEng": [
+                    "Dragon"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0704-000"
+                ],
+                "gen": 6,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Mucuscule",
+                "date": "2023-9-15",
+                "heure": "11:46:52"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 19,
+        "nbCountActuel": 5,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 269,
+                "name": {
+                    "nameEng": "Dustox",
+                    "nameFr": "Papinox"
+                },
+                "typeListEng": [
+                    "Bug",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0269-000",
+                    "0269-001"
+                ],
+                "gen": 3,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Papinox",
+                "date": "2023-9-14",
+                "heure": "23:32:7"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 18,
+        "nbCountActuel": 4,
+        "pokemonPresentActuel": {
+            "1087441927399559188": {
+                "id": 437,
+                "name": {
+                    "nameEng": "Bronzong",
+                    "nameFr": "Archéodong"
+                },
+                "typeListEng": [
+                    "Steel",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0437-000"
+                ],
+                "gen": 4,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Archéodong",
+                "date": "2023-9-14",
+                "heure": "20:7:59"
+            }
+        }
+    },
+    "360056084074987542": {
+        "nbCountMax": 15,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    }
+}

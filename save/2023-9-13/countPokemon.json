@@ -1,0 +1,125 @@
+{
+    "405443913864839188": {
+        "nbCountMax": 19,
+        "nbCountActuel": 14,
+        "pokemonPresentActuel": {
+            "996549061530361967": {
+                "id": 437,
+                "name": {
+                    "nameEng": "Bronzong",
+                    "nameFr": "Archéodong"
+                },
+                "typeListEng": [
+                    "Steel",
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0437-000"
+                ],
+                "gen": 4,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "_\\_c\\_é\\_\\_\\_\\_\\_",
+                "date": "2023-9-13",
+                "heure": "14:21:40"
+            }
+        }
+    },
+    "767378842863140864": {
+        "nbCountMax": 10,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "1046761688344580096": {
+                "id": 201,
+                "name": {
+                    "nameEng": "Unown",
+                    "nameFr": "Zarbi"
+                },
+                "typeListEng": [
+                    "Psychic"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0201-000",
+                    "0201-001",
+                    "0201-002",
+                    "0201-003",
+                    "0201-004",
+                    "0201-005",
+                    "0201-006",
+                    "0201-007",
+                    "0201-008",
+                    "0201-009",
+                    "0201-010",
+                    "0201-011",
+                    "0201-012",
+                    "0201-013",
+                    "0201-014",
+                    "0201-015",
+                    "0201-016",
+                    "0201-017",
+                    "0201-018",
+                    "0201-019",
+                    "0201-020",
+                    "0201-021",
+                    "0201-022",
+                    "0201-023",
+                    "0201-024",
+                    "0201-025",
+                    "0201-025",
+                    "0201-026"
+                ],
+                "gen": 2,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Zarbi",
+                "date": "2023-9-13",
+                "heure": "14:1:48"
+            }
+        }
+    },
+    "992210891426762872": {
+        "nbCountMax": 18,
+        "nbCountActuel": 6,
+        "pokemonPresentActuel": {
+            "994614918483546152": {
+                "id": 590,
+                "name": {
+                    "nameEng": "Foongus",
+                    "nameFr": "Trompignon"
+                },
+                "typeListEng": [
+                    "Grass",
+                    "Poison"
+                ],
+                "theType": "ordinaire",
+                "imgName": [
+                    "0590-000"
+                ],
+                "gen": 5,
+                "pokemonForm": {},
+                "form": null,
+                "isShiny": false,
+                "capturable": true,
+                "hint": "Trompignon",
+                "date": "2023-9-12",
+                "heure": "20:54:10"
+            }
+        }
+    },
+    "1050028719319818320": {
+        "nbCountMax": 17,
+        "nbCountActuel": 8,
+        "pokemonPresentActuel": {}
+    },
+    "360056084074987542": {
+        "nbCountMax": 17,
+        "nbCountActuel": 1,
+        "pokemonPresentActuel": {}
+    }
+}
