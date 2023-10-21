@@ -114,7 +114,9 @@ function getCountNational(idServer){
             updateNumberPossibilitySave(idServer);
         }
         Object.keys(pokedexBDD[idServer]).forEach(key => {
-            if(pokedexBDD[idServer][key] > 0){
+
+            if(pokedexBDD[idServer][key] > 0 && key <= nbPokemon){
+                
                 countPokemon ++;
             }
     
@@ -129,7 +131,7 @@ function getCountNational(idServer){
 
 function getPercentageNational(idServer){
     try {
-        return(Math.floor((100*getCountNational(idServer))/((pokeData.length)-1)))
+        return(Math.floor((100*getCountNational(idServer))/((nbPokemon)-1)))
     } catch(error) {
 
         catchError.saveError(idServer, null, "pokedexSaveServer.js", "getPercentageNational", error)

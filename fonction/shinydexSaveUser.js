@@ -82,7 +82,7 @@ function getCountNational(idUser){
     try {
         countPokemon = 0;
         Object.keys(pokedexBDD[idUser]).forEach(key => {
-            if(pokedexBDD[idUser][key] > 0){
+            if(pokedexBDD[idUser][key] > 0 && key <= nbPokemon){
                 countPokemon ++;
             }
     
@@ -143,7 +143,7 @@ function getNumberCapturePokemon(idUser, idPokemon){
 
 function getPercentageNational(idUser){
     try {
-        return(Math.floor((100*getCountNational(idUser))/((pokeData.length)-1)))
+        return(Math.floor((100*getCountNational(idUser))/((nbPokemon)-1)))
     } catch(error) {
 
         catchError.saveError(null, null, "shinydexSaveUser.js", "getPercentageNational", error)
