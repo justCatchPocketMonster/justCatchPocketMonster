@@ -160,7 +160,7 @@ function catchPokemon(Discord, interaction, Client, optionString){
 
 
                         let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ realPokemon["name"]["nameFr"] +"/"+ realPokemon["name"]["nameEng"];
-                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null){
+                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null && spawnCount.getPokemonPresent(idServer, idChannel)["pokemonForm"][spawnCount.getPokemonPresent(idServer, idChannel)["form"]] != undefined){
                             messageCongratSend += " <:MEGA:1139228792989155359>"
                             pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], spawnCount.getPokemonPresent(idServer, idChannel)["form"], shinyAfterEvent)
                         } 
@@ -179,7 +179,7 @@ function catchPokemon(Discord, interaction, Client, optionString){
                     }else{
                         let messageCongratSend = language.getText(interaction.guild.id, "congratYouCatchPart1")+name+language.getText(interaction.guild.id, "congratYouCatchPart2")+ realPokemon["name"]["nameFr"];
                         
-                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null){
+                        if(spawnCount.getPokemonPresent(idServer, idChannel)["form"] != null && spawnCount.getPokemonPresent(idServer, idChannel)["pokemonForm"][spawnCount.getPokemonPresent(idServer, idChannel)["form"]] != undefined){
                             messageCongratSend += " <:MEGA:1139228792989155359>"
                             pokemonForm.addPokemon(interaction.member.id, realPokemon["id"], spawnCount.getPokemonPresent(idServer, idChannel)["form"], shinyAfterEvent)
                         } 
