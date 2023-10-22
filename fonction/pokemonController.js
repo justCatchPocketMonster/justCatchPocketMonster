@@ -246,6 +246,8 @@ function choiceTypeOfSpawn(Discord, message, pokemon, idChannel, Client, idServe
                 embedPokemon(Discord, message, pokemonEgg, Client, idChannel)
                 pokemonSpawnFollow.addPokemon(pokemonEgg);
 
+                return("pokemon")
+
             } else {
 
             
@@ -593,7 +595,7 @@ function howThisPokemon(Discord, interaction, pokemonName, pokemonId){
 
         pokeDataAll.forEach(pokemon => {
             if(pokemon.id == idPokemon){
-                arrayPokemonValide.push(pokemon)
+                arrayPokemonValide.push(JSON.parse(JSON.stringify(pokemon)))
             }
         })
         firstPokemonValid = arrayPokemonValide[0]

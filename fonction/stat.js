@@ -174,7 +174,9 @@ try {
             chosenLeastPokemonCatch = language.getText(interaction.guild.id, "tooMuchPokemon") +" : " + leastPokemonCatch.nbCapture;
         } else {
             leastPokemonCatch.listPokemon.forEach( idPokemon => {
-                chosenLeastPokemonCatch += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                pokemon = JSON.parse(JSON.stringify(pokeData.find(pokemon => pokemon.id == idPokemon)))
+
+                chosenLeastPokemonCatch += pokemon.name["name"+ language.getLanguage(interaction.guild.id)]+" "
     
                 
             })
@@ -185,7 +187,8 @@ try {
     
         } else {
             mostPokemonCatch.listPokemon.forEach( idPokemon => {
-                chosenMostPokemonCatch += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                pokemon = JSON.parse(JSON.stringify(pokeData.find(pokemon => pokemon.id == idPokemon)))
+                chosenMostPokemonCatch += pokemon.name["name"+ language.getLanguage(interaction.guild.id)]+" "
             
                 
             })
@@ -256,7 +259,8 @@ try {
             chosenLeastPokemonSpawn = language.getText(interaction.guild.id, "tooMuchPokemon") +" : " + leastPokemonSpawn.nbCapture;
         } else {
             leastPokemonSpawn.listPokemon.forEach( idPokemon => {
-                chosenLeastPokemonSpawn += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                pokemon = JSON.parse(JSON.stringify(pokeData.find(pokemon => pokemon.id == idPokemon)))
+                chosenLeastPokemonSpawn += pokemon.name["name"+ language.getLanguage(interaction.guild.id)]+" "
     
                 
             })
@@ -267,7 +271,8 @@ try {
     
         } else {
             mostPokemonSpawn.listPokemon.forEach( idPokemon => {
-                chosenMostPokemonSpawn += pokeData[idPokemon].name["name"+ language.getLanguage(interaction.guild.id)]+" "
+                pokemon = JSON.parse(JSON.stringify(pokeData.find(pokemon => pokemon.id == idPokemon)))
+                chosenMostPokemonSpawn += pokemon.name["name"+ language.getLanguage(interaction.guild.id)]+" "
             
                 
             })
