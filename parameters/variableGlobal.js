@@ -28,7 +28,7 @@ const timeIntervalSave= 86400000;
 const timeIntervalStatut = 60000;
 
 //version du programme
-const version = "1.3.0"
+const version = "1.4.0"
 
 //taux de shiny
 const tauxMaxShiny = 4096;

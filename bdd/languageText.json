@@ -524,8 +524,8 @@
         "Eng": ["Shiny Pokémon missing"]
     },
     "noEvent": {
-        "Fr": ["Aucun evenement actuellement"],
-        "Eng": ["no current event"]
+        "Fr": ["Aucun évènement actuellement."],
+        "Eng": ["No event currently."]
     },
 
     "felicitation": {

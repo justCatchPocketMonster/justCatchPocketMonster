@@ -222,6 +222,8 @@ function pokemonIsHide(pokemonChoice){
     try{
         randomNumber = fonctionJs.getRandomInt(100)
 
+        let pokemonModified = JSON.parse(JSON.stringify(pokemonChoice))
+
         if(randomNumber == 1){
             arrayPokemonPossible = variableGlobal.pokemonEvent;
 
@@ -229,11 +231,11 @@ function pokemonIsHide(pokemonChoice){
 
             pokemonEvent = pokeData.find(pokemon => arrayPokemonPossible[pokemonEventChoice] == pokemon.id)
             
-            pokemonChoice["id"] = JSON.parse(JSON.stringify(pokemonEvent["id"]));
-            pokemonChoice["typeListEng"] = JSON.parse(JSON.stringify(pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])))
+            pokemonModified["id"] = JSON.parse(JSON.stringify(pokemonEvent["id"]));
+            pokemonModified["typeListEng"] = JSON.parse(JSON.stringify(pokemonChoice["typeListEng"].concat(pokemonEvent["typeListEng"])))
         }
 
-        return JSON.parse(JSON.stringify(pokemonChoice))
+        return JSON.parse(JSON.stringify(pokemonModified))
         
 
     } catch(e) {
@@ -486,9 +488,12 @@ function getNamePokemon(id, idServer){
 
     try{
 
-        if(pokeData[id]!= undefined){
+        //cherche le pokemon avec l'id dans la bdd pokeData qui est un tableau
+        pokemonSearchName = pokeData.find(pokemon => pokemon.id == id);
 
-            return pokeData[id]["name"]["name"+language.getLanguage(idServer)];
+        if(pokemonSearchName!= undefined){
+
+            return pokemonSearchName["name"]["name"+language.getLanguage(idServer)];
         } else {
             return null;
         }

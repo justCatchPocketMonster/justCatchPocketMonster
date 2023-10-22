@@ -232,9 +232,7 @@ Client.on("interactionCreate", interaction => {
 
                 if(interaction.commandName == "howido"){
 
-                    //justDiscord.tutorial(interaction)
-                    if(pastis){
-                    }
+                    justDiscord.tutorial(interaction)
                 }
 
 
