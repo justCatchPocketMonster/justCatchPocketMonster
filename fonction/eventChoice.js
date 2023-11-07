@@ -538,3 +538,4 @@ function eventAfterShiny(interaction,isShiny){
 
 
 module.exports = {eventSelect,eventCommandEmbed,eventAfterShiny}
+
