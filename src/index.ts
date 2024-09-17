@@ -22,9 +22,7 @@ var ClientDiscord: Client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildInvites,
-        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.MessageContent
     ]
 });
 

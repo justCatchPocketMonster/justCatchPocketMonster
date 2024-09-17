@@ -1,13 +1,15 @@
 import {SlashCommandBuilder} from "@discordjs/builders";
-import {PermissionFlagsBits } from "discord.js";
 import logger from "../../middlewares/error"
+import bddText from "../../lang/language.json"
 
 module.exports = {
-    "name": "update-rule",
+    "name": "information",
     "command": new SlashCommandBuilder()
-    .setName("update-rule")
-    .setDescription("Permet de mettre à jour les règles")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setName("information")
+    .setDescription(bddText.commandInformationExplication.Eng[0])
+    .setDescriptionLocalizations({
+            'fr': bddText.commandInformationExplication.Fr[0]
+    }),
     "actif": true,
     async execute(){
         try{

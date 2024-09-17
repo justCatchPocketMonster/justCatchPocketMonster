@@ -11,13 +11,8 @@ export default async (interaction: Interaction) => {
         interaction.reply({
             content: `Chargement ...`,
         });
-    if(interaction.commandName == actualStream.name){
-        await actualStream.execute(interaction);
-    }
-    if(interaction.commandName == schedule.name){
-        await schedule.execute(interaction);
-    }
-    await interaction.deleteReply();
+
+        await interaction.deleteReply();
     }
 } catch (e) {
     logger.error(e)

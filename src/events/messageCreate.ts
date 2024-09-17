@@ -9,10 +9,7 @@ export default async (message: Message<boolean>) => {
         if(message.author.bot){
             return;
         }
-        // TODO: truc a faire
-        await securityCheck(message)
-        await handleXpGain(message)
-        
+
 
     } catch (e) {
         logger.error(e)

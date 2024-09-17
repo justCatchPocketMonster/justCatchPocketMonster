@@ -1,12 +1,13 @@
-import {Client, TextChannel} from 'discord.js';
+import {Client, ActivityType} from 'discord.js';
 import {readdirSync} from 'fs';
-import updateMessagePlanning from '../features/planningTwitch';
-
-import generatePlanningImage from '../utils/planningImage/planningImage';
+import error from '../middlewares/error';
 
 export default (ClientDiscord: Client) => {
     try{
-
+    if(!ClientDiscord || !ClientDiscord.user) {
+        return console.error("Bot is not ready")
+    }
+    ClientDiscord.user.setActivity("Bot is ready", {type: ActivityType.Playing})
     console.log("Bot is ready")
 
     for (const folder of readdirSync('./src/commands')) {
@@ -25,21 +26,6 @@ export default (ClientDiscord: Client) => {
         }
     }
 
-    let guild = ClientDiscord.guilds.cache.get("848669435618656306");
-    if (guild){
-        const idChannelSchedule = process.env.SCHEDULE_CHANNEL_ID;
-        if(!idChannelSchedule) throw new Error('SCHEDULE_CHANNEL_ID is not defined');
-        let channel = guild.channels.cache.get(idChannelSchedule);
-        if (channel){
-            const textChannel = channel as TextChannel;
-            updateMessagePlanning(textChannel);
-            setInterval(() => {
-                updateMessagePlanning(textChannel)
-            }, 1000 * 60 * 10 )
-        }
-    }
-
-    generatePlanningImage();
 } catch (e) {
     console.error(e)
 }
