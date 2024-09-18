@@ -1,5 +1,5 @@
-import {SlashCommandBuilder, SlashCommandChannelOption} from "@discordjs/builders";
-import { ChannelType } from "discord.js";
+import {SlashCommandBuilder} from "@discordjs/builders";
+import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
 import bddText from "../../lang/language.json"
 
@@ -12,7 +12,7 @@ module.exports = {
             'fr': bddText.commandStatExplication.Fr[0]
     }),
     "actif": true,
-    async execute(){
+    async execute(interaction: Interaction){
         try{
             
         } catch (e) {

@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, SlashCommandBooleanOption, SlashCommandChannelOption} from "@discordjs/builders";
-import {PermissionFlagsBits, ChannelType } from "discord.js";
+import {PermissionFlagsBits, ChannelType, Interaction } from "discord.js";
 import logger from "../../middlewares/error"
 import bddText from "../../lang/language.json"
 
@@ -41,7 +41,7 @@ module.exports = {
                         
         ),
     "actif": true,
-    async execute(){
+    async execute(interaction: Interaction){
         try{
             
         } catch (e) {

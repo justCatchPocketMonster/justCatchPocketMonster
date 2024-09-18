@@ -1,4 +1,5 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
+import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
 import bddText from "../../lang/language.json"
 
@@ -23,7 +24,7 @@ module.exports = {
                     .setRequired(false)
     ),
     "actif": true,
-    async execute(){
+    async execute(interaction: Interaction){
         try{
             
         } catch (e) {

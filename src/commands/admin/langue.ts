@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
-import {PermissionFlagsBits } from "discord.js";
+import {PermissionFlagsBits, Interaction } from "discord.js";
 import logger from "../../middlewares/error"
 import bddText from "../../lang/language.json"
 
@@ -33,7 +33,7 @@ module.exports = {
             )
     .setDefaultMemberPermissions(0),
     "actif": true,
-    async execute(){
+    async execute(interaction: Interaction){
         try{
             
         } catch (e) {
