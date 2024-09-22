@@ -1,38 +1,39 @@
 import {SlashCommandBuilder, SlashCommandBooleanOption, SlashCommandChannelOption} from "@discordjs/builders";
 import {PermissionFlagsBits, ChannelType, Interaction } from "discord.js";
 import logger from "../../middlewares/error"
+// @ts-ignore
 import bddText from "../../lang/language.json"
 
-module.exports = {
+export default {
     "name": "spawn",
     "command": new SlashCommandBuilder()
     .setName("spawn")
-        .setDescription(bddText.commandSpawnExplication.Eng[0])
+        .setDescription(bddText.commandSpawnExplication.eng[0])
         .setDescriptionLocalizations({
-                'fr': bddText.commandSpawnExplication.Fr[0]
+                'fr': bddText.commandSpawnExplication.fr[0]
         })
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addBooleanOption(
                 new SlashCommandBooleanOption()
-                        .setName(bddText.spawnNameOptionBool.Eng[0])
+                        .setName(bddText.spawnNameOptionBool.eng[0])
                         .setNameLocalizations({
-                                'fr': bddText.spawnNameOptionBool.Fr[0]
+                                'fr': bddText.spawnNameOptionBool.fr[0]
                         })
-                        .setDescription(bddText.spawnDescOptionBool.Eng[0])
+                        .setDescription(bddText.spawnDescOptionBool.eng[0])
                         .setDescriptionLocalizations({
-                                'fr': bddText.spawnDescOptionBool.Fr[0]
+                                'fr': bddText.spawnDescOptionBool.fr[0]
                         })
                         .setRequired(true)
         )
         .addChannelOption(
                 new SlashCommandChannelOption()
-                        .setName(bddText.spawnNameOptionChannel.Eng[0])
+                        .setName(bddText.spawnNameOptionChannel.eng[0])
                         .setNameLocalizations({
-                                'fr': bddText.spawnNameOptionChannel.Fr[0]
+                                'fr': bddText.spawnNameOptionChannel.fr[0]
                         })
-                        .setDescription(bddText.spawnDescOptionChannel.Eng[0])
+                        .setDescription(bddText.spawnDescOptionChannel.eng[0])
                         .setDescriptionLocalizations({
-                                'fr': bddText.spawnDescOptionChannel.Fr[0]
+                                'fr': bddText.spawnDescOptionChannel.fr[0]
                         })
                         //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
                         .addChannelTypes(ChannelType.GuildText)

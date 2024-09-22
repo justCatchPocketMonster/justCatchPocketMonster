@@ -1,26 +1,27 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
 import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
+// @ts-ignore
 import bddText from "../../lang/language.json"
 
-module.exports = {
+export default {
     "name": "catch",
     "command": new SlashCommandBuilder()
     .setName("catch")
-        .setDescription(bddText.commandCatchExplication.Eng[0])
+        .setDescription(bddText.commandCatchExplication.eng[0])
         .setDescriptionLocalizations({
-                'fr': bddText.commandCatchExplication.Fr[0]
+                'fr': bddText.commandCatchExplication.fr[0]
         })
         .addStringOption(
                 new SlashCommandStringOption()
-                        .setName(bddText.commandCatchOptionName.Eng[0])
+                        .setName(bddText.commandCatchOptionName.eng[0])
                         .setNameLocalizations({
-                                'fr': bddText.commandCatchOptionName.Fr[0]
+                                'fr': bddText.commandCatchOptionName.fr[0]
                         })
                         
-                        .setDescription(bddText.commandCatchOptionDesc.Eng[0])
+                        .setDescription(bddText.commandCatchOptionDesc.eng[0])
                         .setDescriptionLocalizations({
-                                'fr': bddText.commandCatchOptionDesc.Fr[0]
+                                'fr': bddText.commandCatchOptionDesc.fr[0]
                         })
                         .setRequired(true)
         )

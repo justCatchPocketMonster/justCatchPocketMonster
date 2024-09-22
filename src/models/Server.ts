@@ -48,10 +48,10 @@ const ServerSchema = new mongoose.Schema<ServerType>({
             type: Number,
             required: true,
         },
-        pokemonPresent: {
-            type: [Pokemon],
-            required: true,
-        },
+        pokemonPresent: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'EventSpawn',
+        }],
 
     
 }, {

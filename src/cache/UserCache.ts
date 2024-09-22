@@ -1,3 +1,4 @@
+// @ts-ignore
 import NodeCache from 'node-cache';
 import User from '../models/User';
 import UserType from '../types/UserType';

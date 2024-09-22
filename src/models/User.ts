@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema<UserType>({
             ],
             save: [{
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'SaveOnePokemon',
+                ref: 'Pokemon',
                 required: true,
             }],
             countPagination: {

@@ -1,25 +1,26 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
 import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
+// @ts-ignore
 import bddText from "../../lang/language.json"
 
-module.exports = {
+export default {
     "name": "pokedex",
     "command": new SlashCommandBuilder()
     .setName("pokedex")
-    .setDescription(bddText.commandPokedexExplication.Eng[0])
+    .setDescription(bddText.commandPokedexExplication.eng[0])
     .setDescriptionLocalizations({
-            'fr': bddText.commandPokedexExplication.Fr[0]
+            'fr': bddText.commandPokedexExplication.fr[0]
     })
     .addStringOption(
             new SlashCommandStringOption()
-                    .setName(bddText.pokedexNameOptionStringPage.Eng[0])
+                    .setName(bddText.pokedexNameOptionStringPage.eng[0])
                     .setNameLocalizations({
-                            'fr': bddText.pokedexNameOptionStringPage.Fr[0]
+                            'fr': bddText.pokedexNameOptionStringPage.fr[0]
                     })
-                    .setDescription(bddText.pokedexDescOptionStringPage.Eng[0])
+                    .setDescription(bddText.pokedexDescOptionStringPage.eng[0])
                     .setDescriptionLocalizations({
-                            'fr': bddText.pokedexDescOptionStringPage.Fr[0]
+                            'fr': bddText.pokedexDescOptionStringPage.fr[0]
                     })
                     .setRequired(false)
     ),

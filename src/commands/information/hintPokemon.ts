@@ -1,18 +1,19 @@
 import {SlashCommandBuilder, SlashCommandChannelOption} from "@discordjs/builders";
 import { ChannelType, Interaction } from "discord.js";
 import logger from "../../middlewares/error"
+// @ts-ignore
 import bddText from "../../lang/language.json"
 
-module.exports = {
+export default {
     "name": "hint",
     "command": new SlashCommandBuilder()
     .setName("hint")
     .setNameLocalizations({
             'fr': "indice"
     })
-    .setDescription(bddText.commandHintExplication.Eng[0])
+    .setDescription(bddText.commandHintExplication.eng[0])
     .setDescriptionLocalizations({
-            'fr': bddText.commandHintExplication.Fr[0]
+            'fr': bddText.commandHintExplication.fr[0]
     })
     .addChannelOption(
             new SlashCommandChannelOption()
@@ -20,9 +21,9 @@ module.exports = {
                     .setNameLocalizations({
                             'fr': "salon"
                     })
-                    .setDescription(bddText.commandHintOptionDescChannel.Eng[0])
+                    .setDescription(bddText.commandHintOptionDescChannel.eng[0])
                     .setDescriptionLocalizations({
-                            'fr': bddText.commandHintOptionDescChannel.Fr[0]
+                            'fr': bddText.commandHintOptionDescChannel.fr[0]
                     })
                     .addChannelTypes(ChannelType.GuildText)
                     .setRequired(false)
