@@ -1,8 +1,7 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
 import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
+import language from "../../lang/language";
 
 export default {
     "name": "howmuch",
@@ -11,31 +10,31 @@ export default {
     .setNameLocalizations({
             'fr': "combien"
     })
-    .setDescription(bddText.commandHowExplication.eng[0])
+    .setDescription(language("commandHowExplication","eng"))
     .setDescriptionLocalizations({
-            'fr': bddText.commandHowExplication.fr[0]
+            'fr': language("commandHowExplication","fr")
     })
     .addStringOption(
             new SlashCommandStringOption()
-                    .setName(bddText.commandHowOptionNameStringNumber.eng[0])
+                    .setName(language("commandHowOptionNameStringNumber","eng"))
                     .setNameLocalizations({
-                            'fr': bddText.commandHowOptionNameStringNumber.fr[0]
+                            'fr': language("commandHowOptionNameStringNumber","fr")
                     })
-                    .setDescription(bddText.commandHowOptionDescStringNumber.eng[0])
+                    .setDescription(language("commandHowOptionDescStringNumber","eng"))
                     .setDescriptionLocalizations({
-                            'fr': bddText.commandHowOptionDescStringNumber.fr[0]
+                            'fr': language("commandHowOptionDescStringNumber","fr")
                     })
                     .setRequired(false)
     )
     .addStringOption(
             new SlashCommandStringOption()
-                    .setName(bddText.commandHowOptionNameStringPokemonName.eng[0])
+                    .setName(language("commandHowOptionNameStringPokemonName","eng"))
                     .setNameLocalizations({
-                            'fr': bddText.commandHowOptionNameStringPokemonName.fr[0]
+                            'fr': language("commandHowOptionNameStringPokemonName","fr")
                     })
-                    .setDescription(bddText.commandHowOptionDescStringPokemonName.eng[0])
+                    .setDescription(language("commandHowOptionDescStringPokemonName","eng"))
                     .setDescriptionLocalizations({
-                            'fr': bddText.commandHowOptionDescStringPokemonName.fr[0]
+                            'fr': language("commandHowOptionDescStringPokemonName","fr")
                     })
                     .setRequired(false)
                 ),

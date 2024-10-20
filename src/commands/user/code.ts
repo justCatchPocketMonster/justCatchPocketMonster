@@ -1,34 +1,52 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
-import { Interaction } from "discord.js";
+import {ChatInputCommandInteraction} from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
+
+import { getUser, updateUser} from "../../cache/UserCache";
+import {codeType, activeCode} from "../../features/code/code";
+import language from "../../lang/language";
 
 export default {
     "name": "code",
     "command": new SlashCommandBuilder()
     .setName("code")
-    .setDescription(bddText.commandCodeExplication.eng[0])
+    .setDescription(language("commandCodeExplication","eng"))
     .setDescriptionLocalizations({
-            'fr': bddText.commandCodeExplication.fr[0]
+            'fr': language("commandCodeExplication","fr")
     })
     .addStringOption(
             new SlashCommandStringOption()
-                    .setName(bddText.codeNameOptionString.eng[0])
+                    .setName(language("codeNameOptionString","eng"))
                     .setNameLocalizations({
-                            'fr': bddText.codeNameOptionString.fr[0]
+                            'fr': language("codeNameOptionString","fr")
                     })
-                    .setDescription(bddText.codeDescOptionString.eng[0])
+                    .setDescription(language("codeDescOptionString","eng"))
                     .setDescriptionLocalizations({
-                            'fr': bddText.codeDescOptionString.fr[0]
+                            'fr': language("codeDescOptionString","fr")
                     })
                     .setRequired(true)
     )
     ,
     "actif": true,
-    async execute(interaction: Interaction){
+    async execute(interaction: ChatInputCommandInteraction){
         try{
-            
+            // @ts-ignore
+            let codeEntered = interaction.options.getString(language("codeNameOptionString","eng")).toLowerCase();
+
+            let typeCode = codeType(codeEntered);
+            if(typeCode === null){
+                return interaction.reply({content: language("codeNotExist","eng"), ephemeral: true});
+            }
+
+            let user = await getUser(interaction.user.id);
+            if(user.enteredCode.includes(codeEntered)) {
+                return interaction.reply({content: language("codeAlreadyUsed","eng"), ephemeral: true});
+            }
+
+            activeCode(typeCode);
+
+            user.enteredCode.push(codeEntered);
+            updateUser(user.id, user);
         } catch (e) {
             logger.error(e)
         }

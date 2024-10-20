@@ -1,8 +1,7 @@
 import {SlashCommandBuilder} from "@discordjs/builders";
 import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
+import language from "../../lang/language";
 
 export default {
     "name": "currentminievent",
@@ -11,9 +10,9 @@ export default {
         .setNameLocalizations({
                 'fr': "actuelminievent"
         })
-        .setDescription(bddText.commandEffectEvent.eng[0])
+        .setDescription(language("commandEffectEvent","eng"))
         .setDescriptionLocalizations({
-                'fr': bddText.commandEffectEvent.fr[0]
+                'fr': language("commandEffectEvent","fr")
         })
     ,
     "actif": true,

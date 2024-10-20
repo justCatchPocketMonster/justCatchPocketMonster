@@ -1,33 +1,31 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
-import { Interaction } from "discord.js";
+import {ChatInputCommandInteraction} from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
+import language from "../../lang/language";
 
 export default {
     "name": "catch",
     "command": new SlashCommandBuilder()
     .setName("catch")
-        .setDescription(bddText.commandCatchExplication.eng[0])
+        .setDescription(language("commandCatchExplication","eng"))
         .setDescriptionLocalizations({
-                'fr': bddText.commandCatchExplication.fr[0]
+                'fr': language("commandCatchExplication","fr")
         })
         .addStringOption(
                 new SlashCommandStringOption()
-                        .setName(bddText.commandCatchOptionName.eng[0])
+                        .setName(language("commandCatchOptionName","eng"))
                         .setNameLocalizations({
-                                'fr': bddText.commandCatchOptionName.fr[0]
+                                'fr': language("commandCatchOptionName","fr")
                         })
-                        
-                        .setDescription(bddText.commandCatchOptionDesc.eng[0])
+                        .setDescription(language("commandCatchOptionDesc","en,g"))
                         .setDescriptionLocalizations({
-                                'fr': bddText.commandCatchOptionDesc.fr[0]
+                                'fr': language("commandCatchOptionDesc","fr")
                         })
                         .setRequired(true)
         )
     ,
     "actif": true,
-    async execute(interaction: Interaction){
+    async execute(interaction: ChatInputCommandInteraction){
         try{
             
         } catch (e) {

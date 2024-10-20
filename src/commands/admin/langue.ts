@@ -1,32 +1,31 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
 import {PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
 import { getServer, updateServer} from "../../cache/ServerCache"
-import server from "../../models/Server";
+import language from "../../lang/language";
 
 export default {
-    "name": bddText.commandLangName.eng[0],
+    "name": language("commandLangName","eng"),
     "command": new SlashCommandBuilder()
-    .setName(bddText.commandLangName.eng[0])
+    .setName(language("commandLangName","eng"))
     .setNameLocalizations({
-            'fr': bddText.commandLangName.fr[0]
+            'fr': language("commandLangName","fr")
     })
-    .setDescription(bddText.commandLangExplication.eng[0])
+    .setDescription(language("commandLangExplication","eng"))
     .setDescriptionLocalizations({
-            'fr': bddText.commandLangExplication.fr[0]
+            'fr': language("commandLangExplication","fr")
     })
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption(
             new SlashCommandStringOption()
-                    .setName(bddText.langNameOptionString.eng[0])
+                    .setName(language("langNameOptionString","eng"))
                     .setNameLocalizations({
-                            'fr': bddText.langNameOptionString.fr[0]
+
+                            'fr': language("langNameOptionString","fr")
                     })
-                    .setDescription(bddText.langDescOptionString.eng[0])
+                    .setDescription(language("langDescOptionString","eng"))
                     .setDescriptionLocalizations({
-                            'fr': bddText.langDescOptionString.fr[0]
+                            'fr': language("langDescOptionString","fr")
                     })
                     .addChoices(
                             {name: "English", value: "eng"},
@@ -38,16 +37,18 @@ export default {
     "actif": true,
     async execute(interaction: ChatInputCommandInteraction){
         try{
+            if(!interaction.guildId){ return; }
             let server = await getServer(interaction.guildId);
 
-            server.language = interaction.options.getString(bddText.langNameOptionString.eng[0]).toLowerCase();
+            // @ts-ignore
+            server.language = interaction.options.getString(language("langNameOptionString","eng")).toLowerCase() ?? "eng";
 
-            await updateServer(server.id, server);
+            updateServer(server.id, server);
             
         } catch (e) {
             logger.error(e)
         }
-        
+
     }
 
 }

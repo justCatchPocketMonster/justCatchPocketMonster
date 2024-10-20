@@ -1,16 +1,15 @@
 import {SlashCommandBuilder} from "@discordjs/builders";
 import { Interaction } from "discord.js";
 import logger from "../../middlewares/error"
-// @ts-ignore
-import bddText from "../../lang/language.json"
+import language from "../../lang/language";
 
 export default {
     "name": "information",
     "command": new SlashCommandBuilder()
     .setName("information")
-    .setDescription(bddText.commandInformationExplication.eng[0])
+    .setDescription(language("commandInformationExplication","eng"))
     .setDescriptionLocalizations({
-            'fr': bddText.commandInformationExplication.fr[0]
+            'fr': language("commandInformationExplication","fr")
     }),
     "actif": true,
     async execute(interaction: Interaction){
