@@ -1,7 +1,7 @@
 import activeCode from "./activeCode";
 import {codeConfig} from "../../defaultValue";
 import codeType from "./codeType";
-let code = {
+let code: { [key: string]: string[] } = {
     "shiny": []
 };
 
@@ -10,13 +10,14 @@ export function getCode(){
     return code;
 }
 
-export function setCode(newCode){
+export function setCode(newCode: typeof code){
     code = newCode;
 }
 
 export function updateArrayCode(){
     let code = getCode();
     for(let key in codeConfig.eventCode){
+        // @ts-ignore
         code[key] = JSON.parse(JSON.stringify(codeConfig.eventCode[key]));
     }
     const statCatch = 0;

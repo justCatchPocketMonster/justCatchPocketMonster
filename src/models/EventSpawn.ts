@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import EventSpawnType from '../types/EventSpawnType';
-import defaultValue from '../defaultValue';
-import Event from './Event';
+import {defaultValueGen, defaultValueType, defaultRarity, tauxMaxShiny} from '../defaultValue';
 
 
 
@@ -15,162 +14,162 @@ gen: {
     "1": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[1]
+        default: defaultValueGen[1]
     },
     "2": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[2]
+        default: defaultValueGen[2]
     },
     "3": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[3]
+        default: defaultValueGen[3]
     },
     "4": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[4]
+        default: defaultValueGen[4]
     },
     "5": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[5]
+        default: defaultValueGen[5]
     },
     "6": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[6]
+        default: defaultValueGen[6]
     },
     "7": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[7]
+        default: defaultValueGen[7]
     },
     "8": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[8]
+        default: defaultValueGen[8]
     },
     "9": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueGen[9]
+        default: defaultValueGen[9]
     },
 },
 type: {
     "acier": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.acier
+        default: defaultValueType.acier
     },
     "dragon": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.dragon
+        default: defaultValueType.dragon
     },
     "electrik": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.electrik
+        default: defaultValueType.electrik
     },
     "feu": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.feu
+        default: defaultValueType.feu
     },
     "insecte": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.insecte
+        default: defaultValueType.insecte
     },
     "plante": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.plante
+        default: defaultValueType.plante
     },
     "psy": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.psy
+        default: defaultValueType.psy
     },
     "sol": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.sol
+        default: defaultValueType.sol
     },
     "tenebres": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.tenebres
+        default: defaultValueType.tenebres
     },
     "combat": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.combat
+        default: defaultValueType.combat
     },
     "eau": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.eau
+        default: defaultValueType.eau
     },
     "fee": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.fee
+        default: defaultValueType.fee
     },
     "glace": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.glace
+        default: defaultValueType.glace
     },
     "normal": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.normal
+        default: defaultValueType.normal
     },
     "poison": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.poison
+        default: defaultValueType.poison
     },
     "roche": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.roche
+        default: defaultValueType.roche
     },
     "spectre": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.spectre
+        default: defaultValueType.spectre
     },
     "vol": {
         type: Number,
         required: true,
-        default: defaultValue.defaultValueType.vol
+        default: defaultValueType.vol
     },
 },
 rarity: {
     "normal": {
         type: Number,
         required: true,
-        default: defaultValue.defaultRarity.normal
+        default: defaultRarity.normal
     },
     "legendaire": {
         type: Number,
         required: true,
-        default: defaultValue.defaultRarity.legendaire
+        default: defaultRarity.legendaire
     },
     "fabuleux": {
         type: Number,
         required: true,
-        default: defaultValue.defaultRarity.fabuleux
+        default: defaultRarity.fabuleux
     },
 },
 shiny: {
     type: Number,
     required: true,
-    default: defaultValue.tauxMaxShiny,
+    default: tauxMaxShiny,
 },
 timer: {
     type: String,

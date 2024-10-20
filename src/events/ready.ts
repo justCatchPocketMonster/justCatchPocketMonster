@@ -1,13 +1,15 @@
 import {Client, ActivityType} from 'discord.js';
 import {readdirSync} from 'fs';
-import error from '../middlewares/error';
+
+import logger from "../middlewares/error";
+import randomStatus from "../features/other/randomStatus";
 
 export default (ClientDiscord: Client) => {
     try{
     if(!ClientDiscord || !ClientDiscord.user) {
         return console.error("Bot is not ready")
     }
-    ClientDiscord.user.setActivity("Bot is ready", {type: ActivityType.Playing})
+    randomStatus(ClientDiscord);
     console.log("Bot is ready")
 
     for (const folder of readdirSync('./src/commands')) {
@@ -27,7 +29,7 @@ export default (ClientDiscord: Client) => {
     }
 
 } catch (e) {
-    console.error(e)
+    logger.error(e)
 }
 
 }
