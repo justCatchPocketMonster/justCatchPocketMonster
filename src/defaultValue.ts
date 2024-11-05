@@ -74,14 +74,19 @@ export const defaultValueType = {
     "vol": 100
 }
 
-export const form = [
-    //"alola",
-    //"galar",
-    //"hisui",
-    //"paldea",
-    "mega",
-    //"giga"
-]
+
+//TODO: a voir la gestion des forms
+export const formRegionValue = {
+    "alola": 70,
+    "galar": 70,
+    "hisui": 70,
+    "paldea": 70
+}
+
+export const formSpecialValue = {
+    "mega": 0,
+    "giga": 0
+}
 
 //Les id des pokemon qui pourront de na spawn a part par transformation
 export const pokemonEvent = [132, 570, 571];

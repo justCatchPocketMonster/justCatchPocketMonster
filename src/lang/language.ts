@@ -1,4 +1,4 @@
-import language from "./language.json";
+import language from "../data/language.json";
 import logger from "../middlewares/error"
 
 interface Translation {

@@ -9,8 +9,8 @@ interface ServerType {
     language: string;
     save: SaveOnePokemonType[];
     eventSpawn: EventSpawnType;
-    maxMessage: number;
-    minMessage: number;
+    maxMessageForRandom: number;
+    minMessageForRandom: number;
 
     maxCountMessage: number;
     countMessage: number;

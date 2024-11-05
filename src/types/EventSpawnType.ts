@@ -41,8 +41,9 @@ interface EventSpawnType {
     "shiny": number,
     "timer": string,
     "whatEvent": EventType|null,
-    "allowForm": {
+    "allowedForm": {
         "mega": boolean,
+        "paldea": boolean
     },
     "messageSpawn": {
         "min": number,
