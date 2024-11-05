@@ -1,5 +1,5 @@
 import PokemonType from "../../types/PokemonType";
-import {defaultRarity, defaultValueType, nbGeneration} from "../../defaultValue"
+import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../defaultValue"
 import ServerType from "../../types/ServerType";
 import pokemonType from "../../types/PokemonType";
 const allPokemon: PokemonType[] = require('../../data/pokemon.json');
@@ -11,16 +11,31 @@ const selectPokemon  = (server: ServerType ,idPokemon : number = 0) : PokemonTyp
     const allowedPokemon : pokemonType[] = megaIsAllowed(server, allPokemon);
     if(idPokemon === 0){
         pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
+
+        pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
     } else {
         pokemonChoiced = selectPokemonWithId(idPokemon);
     }
-
-
 
     return pokemonChoiced
 }
 
 export default selectPokemon;
+
+function isHiddenPokemon(server: ServerType, pokemon: PokemonType): PokemonType {
+
+    let randomNumber : number = Math.floor(Math.random() * hidePokemon.maxValue);
+
+    if(randomNumber == 1){
+        const allPokemonWithId = allPokemon.filter(pokemon => hidePokemon.idPokemon.includes(pokemon.id));
+        const choicePokemon = allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+
+        pokemon.id = choicePokemon.id;
+        pokemon.arrayType.push(...choicePokemon.arrayType);
+    }
+
+    return pokemon;
+}
 
 function megaIsAllowed(server: ServerType, allowedPokemon: PokemonType[]): PokemonType[]{
     if(server.eventSpawn.allowedForm.mega){

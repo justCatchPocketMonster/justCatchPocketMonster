@@ -7,10 +7,11 @@ interface PokemonType {
     };
     arrayType: string[];
     rarity: string;
-    imgName: string[];
+    imgName: string;
     gen: number;
     form: string;
     versionForm: number;
+    isShiny: boolean;
 
     idChannel: null|string;
 }

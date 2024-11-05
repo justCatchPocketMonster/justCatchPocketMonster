@@ -40,13 +40,13 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 }
 
 // @ts-ignore
-function choiceTypeOfSpawn() : EventType | PokemonType{
+function choiceTypeOfSpawn(server: ServerType) : EventType | PokemonType{
     const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
     // TODO: Add the return type
     if(randomCategorySpawn <= valeurMaxEvent) return "event";
 
-    return selectPokemon();
+    return selectPokemon(server);
 
 
 

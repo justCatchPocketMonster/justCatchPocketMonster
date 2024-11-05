@@ -88,6 +88,11 @@ export const formSpecialValue = {
     "giga": 0
 }
 
+export const hidePokemon = {
+    "idPokemon": [132, 570, 571],
+    "maxValue": 100
+}
+
 //Les id des pokemon qui pourront de na spawn a part par transformation
 export const pokemonEvent = [132, 570, 571];
 
