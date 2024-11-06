@@ -13,6 +13,8 @@ const spawn  = async (idServer: string, idChannel: string) : Promise<{ embed: Em
     const channelId = choiceChannel(server, idChannel);
     if(!channelId || hasReachedSpawnLimit(server)) return null;
 
+    choiceTypeOfSpawn(server);
+
     return null;
 }
 
