@@ -1,13 +1,5 @@
 [
     {
-        "id" : 0,
-        "nom": "",
-        "description": "",
-        "type": "",
-        "color": "",
-        "image" : ""
-    },
-    {
         "id" : 1,
         "nom": "eventMontagnardTitre",
         "description": "eventMontagnardDesc",

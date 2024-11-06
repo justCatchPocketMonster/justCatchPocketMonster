@@ -5,6 +5,7 @@ import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
 import EventType from "../../types/EventType";
 import PokemonType from "../../types/PokemonType";
 import selectPokemon from "../pokemon/selectPokemon";
+import selectEvent from "../event/selectEvent";
 
 
 const spawn  = async (idServer: string, idChannel: string) : Promise<{ embed: EmbedBuilder, image: AttachmentBuilder, channelId: string } | null> => {
@@ -40,11 +41,11 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 }
 
 // @ts-ignore
-function choiceTypeOfSpawn(server: ServerType) : EventType | PokemonType{
+async function choiceTypeOfSpawn(server: ServerType) : EventType | PokemonType{
     const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
     // TODO: Add the return type
-    if(randomCategorySpawn <= valeurMaxEvent) return "event";
+    if(randomCategorySpawn <= valeurMaxEvent) return selectEvent();
 
     return selectPokemon(server);
 
