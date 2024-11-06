@@ -2,6 +2,7 @@ import PokemonType from "../../types/PokemonType";
 import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../defaultValue"
 import ServerType from "../../types/ServerType";
 import pokemonType from "../../types/PokemonType";
+import serverType from "../../types/ServerType";
 const allPokemon: PokemonType[] = require('../../data/pokemon.json');
 
 
@@ -17,10 +18,46 @@ const selectPokemon  = (server: ServerType ,idPokemon : number = 0) : PokemonTyp
         pokemonChoiced = selectPokemonWithId(idPokemon);
     }
 
+    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, false);
+
     return pokemonChoiced
 }
 
 export default selectPokemon;
+
+function shinySelect(idPokemon: number, server:serverType, isEgg: boolean): boolean{
+    let tauxShiny = 4096;
+    let saveServer = server.save.find(save => save.idPokemon === idPokemon)?.catch;
+
+    if(saveServer === undefined){
+        saveServer = 0;
+    }
+
+    if(isEgg){
+        tauxShiny /= 2;
+    }
+
+    if(saveServer >= 100){
+        tauxShiny /= 2;
+    } else if(saveServer >= 75){
+        tauxShiny /= 1.80;
+    }else if(saveServer >= 50){
+        tauxShiny /= 1.60;
+    }else if(saveServer >= 30){
+        tauxShiny /= 1.40;
+    }else if(saveServer >= 20){
+        tauxShiny /= 1.30;
+    }else if(saveServer >= 10){
+        tauxShiny /= 1.20;
+    }else if(saveServer >= 5){
+        tauxShiny /= 1.15;
+    }else if(saveServer >= 3){
+        tauxShiny /= 1.10;
+    }
+
+    let nbRandomShiny:number = Math.floor(Math.random() * tauxShiny);
+    return nbRandomShiny === 1
+}
 
 function isHiddenPokemon(server: ServerType, pokemon: PokemonType): PokemonType {
 
