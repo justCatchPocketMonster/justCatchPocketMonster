@@ -6,7 +6,7 @@ import serverType from "../../types/ServerType";
 const allPokemon: PokemonType[] = require('../../data/pokemon.json');
 
 
-const selectPokemon  = (server: ServerType ,idPokemon : number = 0) : PokemonType => {
+const selectPokemon  = (server: ServerType ,idPokemon : number = 0, isEgg: boolean = false) : PokemonType => {
     let pokemonChoiced: PokemonType;
 
     const allowedPokemon : pokemonType[] = megaIsAllowed(server, allPokemon);
@@ -18,7 +18,7 @@ const selectPokemon  = (server: ServerType ,idPokemon : number = 0) : PokemonTyp
         pokemonChoiced = selectPokemonWithId(idPokemon);
     }
 
-    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, false);
+    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, isEgg);
 
     return pokemonChoiced
 }
