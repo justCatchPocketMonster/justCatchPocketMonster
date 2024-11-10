@@ -6,6 +6,7 @@ interface EventType {
     "type": string;
     "color": string;
     "image": string;
+    "effectDescription": string;
 }
 
 export default EventType;

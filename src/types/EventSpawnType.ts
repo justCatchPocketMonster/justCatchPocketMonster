@@ -39,7 +39,7 @@ interface EventSpawnType {
         "fabuleux": number
     },
     "shiny": number,
-    "timer": string,
+    "endTime": Date,
     "whatEvent": EventType|null,
     "allowedForm": {
         "mega": boolean,
