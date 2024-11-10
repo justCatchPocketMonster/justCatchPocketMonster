@@ -1,6 +1,6 @@
 import {code} from "./code";
 
-const codeType = (codeEntered): string => {
+const codeType = (codeEntered): string|null => {
 
     for(let key in code){
         if(code[key].includes(codeEntered)){
