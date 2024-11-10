@@ -17,7 +17,7 @@ const spawn  = async (idServer: string, idChannel: string) : Promise<{ embed: Em
     const server = await getServer(idServer);
     const channelId = choiceChannel(server, idChannel);
     if(!channelId || hasReachedSpawnLimit(server)) return null;
-
+// TODO: implement spawn when the countMessage is more or equal than maxCountMessage
 
     return {...choiceTypeOfSpawn(server, channelId), channelId};
 }
@@ -51,7 +51,7 @@ async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embe
     const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
     if(randomCategorySpawn <= valeurMaxEvent) {
-        //return selectEvent();
+        const event : EventType =  selectEvent();
 
 
     };
@@ -100,8 +100,4 @@ function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embe
         embed: pokeEmbed,
         image: new AttachmentBuilder(adressImage)
     };
-}
-
-function spawnEvent(server: ServerType): EventType {
-    return selectEvent();
 }

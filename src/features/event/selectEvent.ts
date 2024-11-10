@@ -1,7 +1,6 @@
 import EventType from "../../types/EventType";
 import {getServer} from "../../cache/ServerCache";
 import ServerType from "../../types/ServerType";
-import serverType from "../../types/ServerType";
 const eventData : EventType[] = require('../../data/event.json');
 
 const selectEvent = (): EventType => {
