@@ -1,7 +1,7 @@
 [
     {
         "id" : 1,
-        "nom": "eventMontagnardTitre",
+       "name": "eventMontagnardTitre",
         "description": "eventMontagnardDesc",
         "type": "justEmbed",
         "color": "734101",
@@ -9,7 +9,7 @@
     },
     {
         "id" : 2,
-        "nom": "eventSandwichVideSmolTitre",
+       "name": "eventSandwichVideSmolTitre",
         "description": "eventSandwichVideSmolDesc",
         "type": "justEmbed",
         "color": "13FF00",
@@ -17,7 +17,7 @@
     },
     {
         "id" : 3,
-        "nom": "eventCuisineTitre",
+       "name": "eventCuisineTitre",
         "description": "eventCuisineDesc",
         "type": "justEmbed",
         "color": "FFFFFF",
@@ -25,7 +25,7 @@
     },
     {
         "id" : 4,
-        "nom": "eventScientifiqueTitre",
+       "name": "eventScientifiqueTitre",
         "description": "eventScientifiqueDesc",
         "type": "justEmbed",
         "color": "FFFFFF",
@@ -33,7 +33,7 @@
     },
     {
         "id" : 5,
-        "nom": "eventSandwichTitre",
+       "name": "eventSandwichTitre",
         "description": "eventSandwichDesc",
         "type": "justEmbed",
         "color": "F6A760",
@@ -41,7 +41,7 @@
     },
     {
         "id" : 6,
-        "nom": "eventHackertitre",
+       "name": "eventHackertitre",
         "description": "eventHackerDesc",
         "type": "justEmbed",
         "color": "FDFD96",
@@ -50,7 +50,7 @@
 
     {
         "id" : 7,
-        "nom": "eventMegaTitre",
+       "name": "eventMegaTitre",
         "description": "eventMegaDesc",
         "type": "justEmbed",
         "color": "F8F8FF",
@@ -58,7 +58,7 @@
     },
     {
         "id" : 8,
-        "nom": "eventMostPokemonTitre",
+       "name": "eventMostPokemonTitre",
         "description": "eventMostPokemonDesc",
         "type": "justEmbed",
         "color": "66CC00",
@@ -66,7 +66,7 @@
     },
     {
         "id" : 9,
-        "nom": "eventLeastPokemonTitre",
+       "name": "eventLeastPokemonTitre",
         "description": "eventLeastPokemonDesc",
         "type": "justEmbed",
         "color": "660000",
@@ -74,7 +74,7 @@
     },
     {
         "id" : 10,
-        "nom": "eventDarkTitre",
+       "name": "eventDarkTitre",
         "description": "eventDarkDesc",
         "type": "justEmbed",
         "color": "000000",
@@ -82,7 +82,7 @@
     },
     {
         "id" : 11,
-        "nom": "eventEggTitre",
+       "name": "eventEggTitre",
         "description": "eventEggDesc",
         "type": "justEmbed",
         "color": "FDE9E0",

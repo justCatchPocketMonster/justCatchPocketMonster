@@ -1,7 +1,7 @@
 
 interface EventType {
     "id": string;
-    "nom": string;
+    "name": string;
     "description": string;
     "type": string;
     "color": string;

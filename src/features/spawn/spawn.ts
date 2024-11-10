@@ -10,6 +10,7 @@ import pokemonType from "../../types/PokemonType";
 import serverType from "../../types/ServerType";
 import getText from "../../lang/language";
 import {colorByType} from "../../utils/helperFunction";
+import effectEvent from "../event/effectEvent";
 const allPokemon: PokemonType[] = require('../../data/pokemon.json');
 
 
@@ -51,8 +52,11 @@ async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embe
     const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
     if(randomCategorySpawn <= valeurMaxEvent) {
-        const event : EventType =  selectEvent();
+        let event : EventType|null =  selectEvent();
+        event = effectEvent(event, server);
+        if(event) throw new Error("Event not found");
 
+        return generateEmbedEvent(event, server);
 
     };
     const isEgg = valeurMaxChoiceEgg== Math.floor(Math.random() * server.eventSpawn.valeurMaxChoiceEgg)
@@ -80,8 +84,8 @@ function addPokemonToServer(server: ServerType, pokemon: PokemonType): boolean {
 
 function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
     const basePath = server.eventSpawn.nightMode
-        ? "./src/image/pokeHomeShadow/"
-        : "./src/image/pokeHome/";
+        ? "./src/assets/pokeHomeShadow/"
+        : "./src/assets/pokeHome/";
 
     const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
 
@@ -98,6 +102,31 @@ function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embe
 
     return {
         embed: pokeEmbed,
+        image: new AttachmentBuilder(adressImage)
+    };
+}
+
+function generateEmbedEvent(event: EventType, server: serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
+    const basePath = "./src/assets/eventImage/";
+
+    const adressImage: string = basePath + event.name;
+    const nameImage: string = event.image;
+
+    const color: ColorResolvable = colorByType(event.color) as ColorResolvable;
+
+    let eventEmbed = new EmbedBuilder()
+        .setColor(color)
+        .setTitle(getText(event.name, server.language))
+        .setDescription(event.description)
+        .addFields({
+            name: getText("effect", server.language),
+            value: event.effectDescription,
+            inline: false
+        })
+        .setImage("attachment://"+ nameImage)
+
+    return {
+        embed: eventEmbed,
         image: new AttachmentBuilder(adressImage)
     };
 }
