@@ -171,40 +171,46 @@ shiny: {
     required: true,
     default: tauxMaxShiny,
 },
-timer: {
-    type: String,
+endTime: {
+    type: Date,
     required: true,
-    default: "",
+    default: Date.now,
 },
 whatEvent: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event',
     required: true,
 },
-allowForm: {
-    mega: {
+    allowedForm: {
+        mega: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        giga: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
+    },
+    messageSpawn: {
+        min: {
+            type: Number,
+            required: true,
+        },
+        max: {
+            type: Number,
+            required: true,
+        },
+    },
+    nightMode: {
         type: Boolean,
         required: true,
     },
-},
-messageSpawn: {
-    min: {
+    valeurMaxChoiceEgg: {
         type: Number,
         required: true,
-    },
-    max: {
-        type: Number,
-        required: true,
-    },
-},
-nightMode: {
-    type: Boolean,
-    required: true,
-},
-valeurMaxChoiceEgg: {
-    type: Number,
-    required: true,
-},
+    }
 }, {
     timestamps: true
 });

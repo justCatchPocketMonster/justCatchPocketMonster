@@ -32,11 +32,11 @@ const ServerSchema = new mongoose.Schema<ServerType>({
             ref: 'EventSpawn',
             required: true,
         }],
-        maxMessage: {
+        maxMessageForRandom: {
             type: Number,
             required: true,
         },
-        minMessage: {
+        minMessageForRandom: {
             type: Number,
             required: true,
         },

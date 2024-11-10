@@ -9,7 +9,7 @@ const gameImageSchema = new mongoose.Schema<EventType>({
         required: true,
         default: "",
     },
-    nom: {
+    name: {
         type: String,
         required: true,
         default: "",
@@ -34,16 +34,11 @@ const gameImageSchema = new mongoose.Schema<EventType>({
         required: true,
         default: "",
     },
-    rarity: {
+    effectDescription: {
         type: String,
         required: true,
         default: "",
-    },
-    quand: {
-        type: String,
-        required: true,
-        default: "",
-    },
+    }
 
 }, {
     timestamps: true

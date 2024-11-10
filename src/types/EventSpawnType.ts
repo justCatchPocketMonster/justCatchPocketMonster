@@ -43,7 +43,7 @@ interface EventSpawnType {
     "whatEvent": EventType|null,
     "allowedForm": {
         "mega": boolean,
-        "paldea": boolean
+        "giga": boolean
     },
     "messageSpawn": {
         "min": number,

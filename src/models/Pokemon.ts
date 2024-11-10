@@ -27,7 +27,7 @@ const PokemonSchema = new mongoose.Schema<PokemonType>({
         required: true,
     },
     imgName: {
-        type: [String],
+        type: String,
         required: true,
     },
     gen: {
