@@ -1,1 +1,5 @@
 2024-09-22T13:22:36.083Z error: not authorized on botDiscordPokemonDev to execute command { find: "servers", filter: { id: "972893923359998053" }, limit: 1, singleBatch: true, batchSize: 1, lsid: { id: UUID("81869e9a-4b98-4225-a689-95a6da4faa51") }, $db: "botDiscordPokemonDev" }
+2024-11-11T11:26:00.049Z error: Key not found :commandCatchOptionDesc
+2024-11-11T11:46:32.756Z error: Key not found :commandCatchOptionDesc
+2024-11-11T11:46:53.656Z error: Key not found :commandCatchOptionDesc
+2024-11-11T11:48:11.508Z error: Key not found :commandCatchOptionDesc

@@ -10,7 +10,7 @@ import allPokemon from '../../data/pokemon.json';
 const selectPokemon  = (server: ServerType ,idPokemon : number = 0, isEgg: boolean = false) : PokemonType => {
     let pokemonChoiced: PokemonType;
 
-    const allowedPokemon : pokemonType[] = megaIsAllowed(server, allPokemon);
+    const allowedPokemon : pokemonType[] = megaIsAllowed(server, allPokemon as pokemonType[]);
     if(idPokemon === 0){
         pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
 
@@ -86,7 +86,11 @@ function megaIsAllowed(server: ServerType, allowedPokemon: PokemonType[]): Pokem
 function selectPokemonWithId(idPokemon: number): PokemonType {
     const allPokemonWithId = allPokemon.filter(pokemon => pokemon.id === idPokemon);
 
-    return allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+    return {
+        ...allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)],
+        idChannel: null,
+        isShiny: false
+    };
 }
 function selectRandomPokemon(server: ServerType, allowedPokemon : PokemonType[]): PokemonType {
     let pokemonPassGen : PokemonType[]

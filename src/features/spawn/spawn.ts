@@ -1,7 +1,7 @@
 import {AttachmentBuilder, ColorResolvable, EmbedBuilder} from "discord.js";
 import {getServer, updateServer} from "../../cache/ServerCache";
 import ServerType from "../../types/ServerType";
-import {valeurMaxChoiceEgg, valeurMaxChoiceEvent, valeurMaxEgg, valeurMaxEvent} from "../../defaultValue";
+import {valeurMaxChoiceEgg, valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
 import EventType from "../../types/EventType";
 import PokemonType from "../../types/PokemonType";
 import selectPokemon from "../pokemon/selectPokemon";
@@ -11,7 +11,7 @@ import serverType from "../../types/ServerType";
 import getText from "../../lang/language";
 import {colorByType} from "../../utils/helperFunction";
 import effectEvent from "../event/effectEvent";
-const allPokemon: PokemonType[] = require('../../data/pokemon.json');
+import allPokemon from '../../data/pokemon.json';
 
 
 const spawn  = async (idServer: string, idChannel: string) : Promise<{ embed: EmbedBuilder, image: AttachmentBuilder, channelId: string } | null> => {
@@ -113,15 +113,17 @@ function generateEmbedEvent(event: EventType, server: serverType): { embed: Embe
 
     const color: ColorResolvable = colorByType(event.color) as ColorResolvable;
 
+
     let eventEmbed = new EmbedBuilder()
         .setColor(color)
         .setTitle(getText(event.name, server.language))
         .setDescription(event.description)
         .addFields({
-            name: getText("effect", server.language),
-            value: event.effectDescription,
-            inline: false
-        })
+                // @ts-ignore
+                name: getText("effect", server.language),
+                value: event.effectDescription,
+                inline: false
+            })
         .setImage("attachment://"+ nameImage)
 
     return {

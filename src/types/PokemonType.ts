@@ -2,8 +2,8 @@
 interface PokemonType {
     id: number;
     name: {
-        "nameEng": string;
-        "nameFr": string;
+        "nameEng": string[];
+        "nameFr": string[];
     };
     arrayType: string[];
     rarity: string;

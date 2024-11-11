@@ -1,12 +1,14 @@
 import EventType from "../../types/EventType";
-import {getServer} from "../../cache/ServerCache";
-import ServerType from "../../types/ServerType";
-const eventData : EventType[] = require('../../data/event.json');
+import eventData from '../../data/eventData.json';
 
 const selectEvent = (): EventType => {
 
     let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
-    return randomEvent;
+    return {
+        ...randomEvent,
+        id: randomEvent.id.toString(),
+        effectDescription: ""
+    };
 }
 
 export default selectEvent;
