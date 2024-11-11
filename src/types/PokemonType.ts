@@ -11,7 +11,7 @@ interface PokemonType {
     gen: number;
     form: string;
     versionForm: number;
-    isShiny: boolean;
+    isShiny: boolean|undefined;
 
     idChannel: null|string;
 }

@@ -3,7 +3,8 @@ import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../
 import ServerType from "../../types/ServerType";
 import pokemonType from "../../types/PokemonType";
 import serverType from "../../types/ServerType";
-const allPokemon: PokemonType[] = require('../../data/pokemon.json');
+import allPokemon from '../../data/pokemon.json';
+
 
 
 const selectPokemon  = (server: ServerType ,idPokemon : number = 0, isEgg: boolean = false) : PokemonType => {
