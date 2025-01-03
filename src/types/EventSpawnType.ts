@@ -1,7 +1,7 @@
 import EventType from "./EventType";
 
 interface EventSpawnType {
-    id: string;
+    _id: string;
     gen: {
         "1": number;
         "2": number;
@@ -14,32 +14,32 @@ interface EventSpawnType {
         "9": number;
     };
     type: {
-        "acier": number,
-        "dragon": number,
-        "electrik": number,
-        "feu": number,
-        "insecte": number,
-        "plante": number,
-        "psy": number,
-        "sol": number,
-        "tenebres": number,
-        "combat": number,
-        "eau": number,
-        "fee": number,
-        "glace": number,
-        "normal": number,
-        "poison": number,
-        "roche": number,
-        "spectre": number,
-        "vol": number
+        "Steel": number,
+        "Dragon": number,
+        "Electric": number,
+        "Fire": number,
+        "Bug": number,
+        "Grass": number,
+        "Psychic": number,
+        "Ground": number,
+        "Dark": number,
+        "Fighting": number,
+        "Water": number,
+        "Fairy": number,
+        "Ice": number,
+        "Normal": number,
+        "Poison": number,
+        "Rock": number,
+        "Ghost": number,
+        "Flying": number
     },
     rarity: {
-        "normal": number,
+        "ordinaire": number,
         "legendaire": number,
         "fabuleux": number
     },
     "shiny": number,
-    "endTime": Date,
+    "endTime": Date|null,
     "whatEvent": EventType|null,
     "allowedForm": {
         "mega": boolean,

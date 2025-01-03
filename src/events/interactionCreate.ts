@@ -1,4 +1,4 @@
-import { Interaction, ChatInputCommandInteraction } from 'discord.js';
+import {Interaction, ChatInputCommandInteraction, Client, GuildChannelResolvable} from 'discord.js';
 import langue from "../commands/admin/langue"
 import spawn from "../commands/admin/spawn";
 import hintPokemon from "../commands/information/hintPokemon";
@@ -13,13 +13,14 @@ import catchPokemon from "../commands/user/catchPokemon";
 
 import logger from "../middlewares/error"
 
-export default async (interaction: Interaction) => {
+export default async (client: Client,interaction: Interaction) => {
     try{
+        if(!verification(client, interaction as ChatInputCommandInteraction)){
+            return;
+        }
         
-    if(interaction instanceof ChatInputCommandInteraction){
-        await interaction.reply({
-            content: `Chargement ...`,
-        });
+    if(interaction instanceof ChatInputCommandInteraction && interaction.isCommand()){
+
         switch (interaction.commandName) {
             case langue.name:
                 await langue.execute(interaction)
@@ -57,10 +58,33 @@ export default async (interaction: Interaction) => {
         }
 
 
-        await interaction.deleteReply();
+        interaction.reply({
+            content: `.`,
+        });
+        setTimeout(() => {
+            interaction.deleteReply();
+        }, 1000)
     }
 } catch (e) {
     logger.error(e);
 }
     
+}
+
+function verification(client: Client , interaction: ChatInputCommandInteraction): boolean {
+    const permissionRequiredSendMessage = "SendMessages";
+    const permissionRequiredViewChannel = "ViewChannel";
+
+    const server = interaction.guild;
+    const botMember = client.user ? server?.members.cache.get(client.user.id) : undefined;
+
+    let canSendMessage = false;
+    let canViewChannel = false;
+    if (botMember && interaction.channel) {
+        if (interaction.channel?.isTextBased()) {
+            canSendMessage = botMember.permissionsIn(interaction.channel as GuildChannelResolvable).has(permissionRequiredSendMessage);
+            canViewChannel = botMember.permissionsIn(interaction.channel as GuildChannelResolvable).has(permissionRequiredViewChannel);
+        }
+    }
+    return (canViewChannel && canSendMessage);
 }

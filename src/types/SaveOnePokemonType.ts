@@ -1,4 +1,5 @@
 interface SaveOnePokemonType {
+    _id: string;
     idPokemon: number;
     form: string;
     versionForm: number;

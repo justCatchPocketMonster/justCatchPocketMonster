@@ -1,15 +1,17 @@
 import mongoose from 'mongoose';
 import EventSpawnType from '../types/EventSpawnType';
-import {defaultValueGen, defaultValueType, defaultRarity, tauxMaxShiny} from '../defaultValue';
+import {
+    defaultValueGen,
+    defaultValueType,
+    defaultRarity,
+    tauxMaxShiny,
+    maximumCount,
+    minimumCount
+} from '../defaultValue';
 
 
 
 const EventSpawnSchema = new mongoose.Schema<EventSpawnType>({
-id: {
-    type: String,
-    required: true,
-    default: "",
-},
 gen: {
     "1": {
         type: Number,
@@ -58,102 +60,102 @@ gen: {
     },
 },
 type: {
-    "acier": {
+    "Steel": {
         type: Number,
         required: true,
-        default: defaultValueType.acier
+        default: defaultValueType.Steel
     },
-    "dragon": {
+    "Dragon": {
         type: Number,
         required: true,
-        default: defaultValueType.dragon
+        default: defaultValueType.Dragon
     },
-    "electrik": {
+    "Electric": {
         type: Number,
         required: true,
-        default: defaultValueType.electrik
+        default: defaultValueType.Electric
     },
-    "feu": {
+    "Fire": {
         type: Number,
         required: true,
-        default: defaultValueType.feu
+        default: defaultValueType.Fire
     },
-    "insecte": {
+    "Bug": {
         type: Number,
         required: true,
-        default: defaultValueType.insecte
+        default: defaultValueType.Bug
     },
-    "plante": {
+    "Grass": {
         type: Number,
         required: true,
-        default: defaultValueType.plante
+        default: defaultValueType.Grass
     },
-    "psy": {
+    "Psychic": {
         type: Number,
         required: true,
-        default: defaultValueType.psy
+        default: defaultValueType.Psychic
     },
-    "sol": {
+    "Ground": {
         type: Number,
         required: true,
-        default: defaultValueType.sol
+        default: defaultValueType.Ground
     },
-    "tenebres": {
+    "Dark": {
         type: Number,
         required: true,
-        default: defaultValueType.tenebres
+        default: defaultValueType.Dark
     },
-    "combat": {
+    "Fighting": {
         type: Number,
         required: true,
-        default: defaultValueType.combat
+        default: defaultValueType.Fighting
     },
-    "eau": {
+    "Water": {
         type: Number,
         required: true,
-        default: defaultValueType.eau
+        default: defaultValueType.Water
     },
-    "fee": {
+    "Fairy": {
         type: Number,
         required: true,
-        default: defaultValueType.fee
+        default: defaultValueType.Fairy
     },
-    "glace": {
+    "Ice": {
         type: Number,
         required: true,
-        default: defaultValueType.glace
+        default: defaultValueType.Ice
     },
-    "normal": {
+    "Normal": {
         type: Number,
         required: true,
-        default: defaultValueType.normal
+        default: defaultValueType.Normal
     },
-    "poison": {
+    "Poison": {
         type: Number,
         required: true,
-        default: defaultValueType.poison
+        default: defaultValueType.Poison
     },
-    "roche": {
+    "Rock": {
         type: Number,
         required: true,
-        default: defaultValueType.roche
+        default: defaultValueType.Rock
     },
-    "spectre": {
+    "Ghost": {
         type: Number,
         required: true,
-        default: defaultValueType.spectre
+        default: defaultValueType.Ghost
     },
-    "vol": {
+    "Flying": {
         type: Number,
         required: true,
-        default: defaultValueType.vol
+        default: defaultValueType.Flying
     },
 },
 rarity: {
-    "normal": {
+    "ordinaire": {
         type: Number,
         required: true,
-        default: defaultRarity.normal
+        default: defaultRarity.ordinaire
     },
     "legendaire": {
         type: Number,
@@ -177,9 +179,41 @@ endTime: {
     default: Date.now,
 },
 whatEvent: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Event',
-    required: true,
+    id: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    name: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    description: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    type: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    color: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    image: {
+        type: String,
+        required: true,
+        default: "",
+    },
+    effectDescription: {
+        type: String,
+        required: true,
+        default: "",
+    }
 },
     allowedForm: {
         mega: {
@@ -197,15 +231,18 @@ whatEvent: {
         min: {
             type: Number,
             required: true,
+            default: minimumCount,
         },
         max: {
             type: Number,
             required: true,
+            default: maximumCount,
         },
     },
     nightMode: {
         type: Boolean,
         required: true,
+        default: false,
     },
     valeurMaxChoiceEgg: {
         type: Number,
@@ -215,7 +252,7 @@ whatEvent: {
     timestamps: true
 });
 
-const GameImage = mongoose.model<EventSpawnType>('EventSpawn', EventSpawnSchema);
+const EventSpawn = mongoose.model<EventSpawnType>('EventSpawn', EventSpawnSchema);
 
-export default GameImage;
+export default EventSpawn;
     

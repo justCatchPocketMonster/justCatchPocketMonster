@@ -12,6 +12,7 @@ export default async (client: Client,message: Message<boolean>) => {
             if (result) {
                 const channel = client.channels.cache.get(result.channelId);
                 if (channel && channel.isTextBased()) {
+                    console.log(result)
                     channel.send({embeds: [result.embed], files: [result.image]});
                 }
             }

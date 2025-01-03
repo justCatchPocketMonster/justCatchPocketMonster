@@ -14,6 +14,7 @@ interface PokemonType {
     isShiny: boolean|undefined;
 
     idChannel: null|string;
+    idServer: null|string;
 }
 
 export default PokemonType;

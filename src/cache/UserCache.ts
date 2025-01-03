@@ -2,54 +2,54 @@
 import NodeCache from 'node-cache';
 import User from '../models/User';
 import UserType from '../types/UserType';
+import {ttlAllData} from "../defaultValue";
+import ServerType from "../types/ServerType";
+import SaveOnePokemon from "../models/SaveOnePokemon";
+import EventSpawn from "../models/EventSpawn";
+import Server from "../models/Server";
 
-const userCache = new NodeCache({ stdTTL: 600, checkperiod: 120 });
-let userUpdates: { [id: string]: String } = {};
+const userCache = new NodeCache({ stdTTL: ttlAllData, checkperiod: 10 });
 
 const getUser = async (id: string): Promise<UserType> => {
-    let userString:String | undefined = userCache.get<String>(id);
+    let userFromCache:UserType | undefined = userCache.get<UserType>(id);
     console.log(id)
 
-    if (userString === undefined || userString === null) {
+    if (userFromCache === undefined || userFromCache === null) {
         let user = await User.findOne({ id }).exec();
         
         if (!user) {
             user = new User({ id });
             
         }
-        userCache.set(id, JSON.stringify(user));
-        userString = userCache.get<String>(id);
+        userCache.set(id, user);
+        userFromCache = userCache.get<UserType>(id);
     }
 
-    if (userString === undefined) {
+    if (userFromCache === undefined) {
         throw new Error("userString est undefined, impossible de parser.");
     }
-    console.log("data:",JSON.parse(userString as string))
-    return JSON.parse(userString as string);
+    return userFromCache;
 };
 
 const updateUser = (id: string, data: UserType) => {
 
-    userUpdates[id] = JSON.stringify(data);
     userCache.set(id, JSON.stringify(data));
 };
 
-const scheduleSave = () => {
-    setInterval(async () => {
-        const updates: { [id: string]: UserType } = {} = {}
-        for (const id in userUpdates) {
-            updates[id] = JSON.parse(userUpdates[id] as string);
+// @ts-ignore
+userCache.on('expired', async (key: String, value: UserType) => {
+
+    try {
+        const user : UserType = value;
+        for (const pokemonSave of user.savePokemon) {
+            await SaveOnePokemon.updateOne({ _id: pokemonSave._id }, pokemonSave, { upsert: true });
         }
 
-        userUpdates = {};
+        console.log(`Serveur ${user.id} traité et sauvegardé.`);
+    } catch (error) {
+        console.error('Erreur lors du traitement des données expirées :', error);
+    }
+});
 
-        for (const id in updates) {
-            const user = updates[id];
-            await User.updateOne({ id }, user, { upsert: true });
-        }
-    }, 60000);
-};
-
-scheduleSave();
 
 export { getUser, updateUser };

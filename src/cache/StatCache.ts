@@ -2,54 +2,54 @@
 import NodeCache from 'node-cache';
 import Stat from '../models/Stat';
 import StatType from '../types/StatType';
+import {ttlAllData} from "../defaultValue";
+import ServerType from "../types/ServerType";
+import SaveOnePokemon from "../models/SaveOnePokemon";
+import EventSpawn from "../models/EventSpawn";
+import Server from "../models/Server";
 
-const statCache = new NodeCache({ stdTTL: 600, checkperiod: 120 });
-let statUpdates: { [id: string]: String } = {};
+const statCache = new NodeCache({ stdTTL: ttlAllData, checkperiod: 10 });
 
 const getStat = async (version: string): Promise<StatType> => {
-    let statString:String | undefined = statCache.get<String>(version);
+    let statFromCache:StatType | undefined = statCache.get<StatType>(version);
     console.log(version)
 
-    if (statString === undefined || statString === null) {
+    if (statFromCache === undefined || statFromCache === null) {
         let stat = await Stat.findOne({ version }).exec();
 
         if (!stat) {
             stat = new Stat({ version });
 
         }
-        statCache.set(version, JSON.stringify(stat));
-        statString = statCache.get<String>(version);
+        statCache.set(version, stat);
+        statFromCache = statCache.get<StatType>(version);
     }
 
-    if (statString === undefined) {
+    if (statFromCache === undefined) {
         throw new Error("statString est undefined, impossible de parser.");
     }
-    console.log("data:",JSON.parse(statString as string))
-    return JSON.parse(statString as string);
+    return statFromCache;
 };
 
 const updateStat = (version: string, data: StatType) => {
 
-    statUpdates[version] = JSON.stringify(data);
-    statCache.set(version, JSON.stringify(data));
+    statCache.set(version, data);
 };
 
-const scheduleSave = () => {
-    setInterval(async () => {
-        const updates: { [version: string]: StatType } = {} = {}
-        for (const version in statUpdates) {
-            updates[version] = JSON.parse(statUpdates[version] as string);
+// @ts-ignore
+statCache.on('expired', async (key: String, value: StatType) => {
+
+    try {
+        const stat : StatType = value;
+        for (const pokemonSave of stat.savePokemon) {
+            await SaveOnePokemon.updateOne({ _id: pokemonSave._id }, pokemonSave, { upsert: true });
         }
 
-        statUpdates = {};
+        console.log(`stat ${stat.version} traité et sauvegardé.`);
+    } catch (error) {
+        console.error('Erreur lors du traitement des données expirées :', error);
+    }
+});
 
-        for (const version in updates) {
-            const stat = updates[version];
-            await Stat.updateOne({ version }, stat, { upsert: true });
-        }
-    }, 60000);
-};
-
-scheduleSave();
 
 export { getStat, updateStat };

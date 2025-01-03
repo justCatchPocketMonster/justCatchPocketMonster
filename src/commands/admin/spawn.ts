@@ -47,6 +47,10 @@ export default {
             let guildId = interaction.guildId;
             if (!guildId) { return; }
             let server = await getServer(guildId);
+            console.log(server)
+            if(interaction.channel == null){
+                throw new Error("Channel not found");
+            }
 
             let channel : CategoryChannel | GuildTextBasedChannel | any
             if(interaction.options.getChannel(language("spawnNameOptionChannel","eng")) != null){
@@ -59,22 +63,30 @@ export default {
 
             if(server.channelAllowed.includes(channel.id)){
                 if(interaction.options.getBoolean(language("spawnNameOptionBool","eng"))){
-                    interaction.reply({content: language("spawnPokemonAlreadyActivate",server.language), ephemeral: true});
+                    await interaction.channel.send({
+                        content: language("spawnPokemonAlreadyActivate", server.language)
+                    });
                 }
                 else{
-                    interaction.reply({content: language("spawnPokemonDesactivate",server.language), ephemeral: true});
+                    await interaction.channel.send({
+                        content: language("spawnPokemonDesactivate", server.language)
+                    });
                     server.channelAllowed = server.channelAllowed.filter(item => item !== channel.id)
                 }
             } else {
                 if(interaction.options.getBoolean(language("spawnNameOptionBool","eng"))){
-                    interaction.reply({content: language("spawnPokemonActivate",server.language), ephemeral: true});
+                    await interaction.channel.send({
+                        content: language("spawnPokemonActivate", server.language)
+                    });
                     server.channelAllowed.push(channel.id)
                 }
                 else{
-                    interaction.reply({content: language("spawnPokemonAlreadyDesactivate",server.language), ephemeral: true});
+                    await interaction.channel.send({
+                        content: language("spawnPokemonAlreadyDesactivate", server.language)
+                    });
                 }
             }
-            await updateServer(server.id, server);
+            updateServer(server.id, server);
 
         } catch (e) {
             logger.error(e)

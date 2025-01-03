@@ -17,7 +17,7 @@ export default {
                         .setNameLocalizations({
                                 'fr': language("commandCatchOptionName","fr")
                         })
-                        .setDescription(language("commandCatchOptionDesc","en,g"))
+                        .setDescription(language("commandCatchOptionDesc","eng"))
                         .setDescriptionLocalizations({
                                 'fr': language("commandCatchOptionDesc","fr")
                         })

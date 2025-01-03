@@ -8,11 +8,11 @@ export const maximumCount = 20;
 //pour modifier des stats d'apparition celon le type du pokemon
 //valeur maximum pour tombé sur le pokemon
 export const defaultRarity = {
-    "normal": 990,
+    "ordinaire": 990,
     "legendaire": 9,
     "fabuleux": 1
 }
-export const valeurMaxRandom = defaultRarity.normal+defaultRarity.legendaire+defaultRarity.fabuleux;
+export const valeurMaxRandom = defaultRarity.ordinaire+defaultRarity.legendaire+defaultRarity.fabuleux;
 
 //pour modifier des stats d'apparition des event
 //valeur maximum pour tombé sur le pokemon
@@ -54,24 +54,24 @@ export const defaultValueGen = {
 export const nbType = 18
 //valeur max par type
 export const defaultValueType = {
-    "acier": 100,
-    "dragon": 100,
-    "electrik": 100,
-    "feu": 100,
-    "insecte": 100,
-    "plante": 100,
-    "psy": 100,
-    "sol": 100,
-    "tenebres": 100,
-    "combat": 100,
-    "eau": 100,
-    "fee": 100,
-    "glace": 100,
-    "normal": 100,
-    "poison": 100,
-    "roche": 100,
-    "spectre": 100,
-    "vol": 100
+    "Steel": 100,
+    "Dragon": 100,
+    "Electric": 100,
+    "Fire": 100,
+    "Bug": 100,
+    "Grass": 100,
+    "Psychic": 100,
+    "Ground": 100,
+    "Dark": 100,
+    "Fighting": 100,
+    "Water": 100,
+    "Fairy": 100,
+    "Ice": 100,
+    "Normal": 100,
+    "Poison": 100,
+    "Rock": 100,
+    "Ghost": 100,
+    "Flying": 100
 }
 
 
@@ -83,15 +83,17 @@ export const formRegionValue = {
     "paldea": 70
 }
 
-export const formSpecialValue = {
-    "mega": 0,
-    "giga": 0
+export const formSpecialAllowed = {
+    "mega": false,
+    "giga": false
 }
 
 export const hidePokemon = {
     "idPokemon": [132, 570, 571],
     "maxValue": 100
 }
+
+export const ttlAllData = 10;
 
 //Les id des pokemon qui pourront de na spawn a part par transformation
 export const pokemonEvent = [132, 570, 571];

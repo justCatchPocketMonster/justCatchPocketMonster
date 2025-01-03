@@ -30,7 +30,7 @@ const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
     timestamps: true
 });
 
-const GameImage = mongoose.model<SaveOnePokemonType>('SaveOnePokemon', SaveOnePokemonSchema);
+const SaveOnePokemon = mongoose.model<SaveOnePokemonType>('SaveOnePokemon', SaveOnePokemonSchema);
 
-export default GameImage;
+export default SaveOnePokemon;
     

@@ -637,46 +637,46 @@
         "fr": ["dragon"],
         "eng": ["dragon"]
     },
-    "electrik": {
+    "electric": {
         "fr": ["electrik"],
         "eng": ["electric"]
     },
-    "feu": {
+    "fire": {
         "fr": ["feu"],
         "eng": ["fire"]
     },
-    "insecte": {
+    "bug": {
         "fr": ["insecte"],
         "eng": ["bug"]
     },
-    "plante": {
+    "grass": {
         "fr": ["plante"],
         "eng": ["grass"]
     },
-    "psy": {
+    "psychic": {
         "fr": ["psy"],
         "eng": ["psychic"]
     },
-    "sol": {
+    "ground": {
         "fr": ["sol"],
         "eng": ["ground"]
     },
-    "tenebres": {
+    "dark": {
         "fr": ["tenebres"],
         "eng": ["dark"]
     },
     
-    "combat": {
+    "fighting": {
         "fr": ["combat"],
         "eng": ["fighting"]
     },
     
-    "eau": {
+    "water": {
         "fr": ["eau"],
         "eng": ["water"]
     },
     
-    "fee": {
+    "fairy": {
         "fr": ["fee"],
         "eng": ["fairy"]
     },
@@ -696,23 +696,23 @@
         "eng": ["poison"]
     },
     
-    "roche": {
+    "rock": {
         "fr": ["roche"],
         "eng": ["rock"]
     },
     
-    "spectre": {
+    "ghost": {
         "fr": ["spectre"],
         "eng": ["ghost"]
     },
     
-    "vol": {
+    "flying": {
         "fr": ["vol"],
         "eng": ["flying"]
     },
     
     
-    "acier": {
+    "steel": {
         "fr": ["acier"],
         "eng": ["steel"]
     },

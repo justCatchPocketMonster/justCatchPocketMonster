@@ -15,7 +15,7 @@ const StatSchema = new mongoose.Schema<StatType>({
         type: Number,
         required: true
     },
-    save: [{
+    savePokemon: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SaveOnePokemon',
         required: true
@@ -24,7 +24,7 @@ const StatSchema = new mongoose.Schema<StatType>({
     timestamps: true
 });
 
-const GameImage = mongoose.model<StatType>('Stat', StatSchema);
+const Stat = mongoose.model<StatType>('Stat', StatSchema);
 
-export default GameImage;
+export default Stat;
     

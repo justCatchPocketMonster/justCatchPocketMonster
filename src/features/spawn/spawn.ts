@@ -1,42 +1,64 @@
 import {AttachmentBuilder, ColorResolvable, EmbedBuilder} from "discord.js";
 import {getServer, updateServer} from "../../cache/ServerCache";
 import ServerType from "../../types/ServerType";
-import {valeurMaxChoiceEgg, valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
+import serverType from "../../types/ServerType";
+import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
 import EventType from "../../types/EventType";
 import PokemonType from "../../types/PokemonType";
+import pokemonType from "../../types/PokemonType";
 import selectPokemon from "../pokemon/selectPokemon";
 import selectEvent from "../event/selectEvent";
-import pokemonType from "../../types/PokemonType";
-import serverType from "../../types/ServerType";
 import getText from "../../lang/language";
 import {colorByType} from "../../utils/helperFunction";
 import effectEvent from "../event/effectEvent";
 import allPokemon from '../../data/pokemon.json';
+import logger from "../../middlewares/error";
 
+interface spawnData {
+    embed: EmbedBuilder,
+    image: AttachmentBuilder,
+    channelId: string
+}
 
-const spawn  = async (idServer: string, idChannel: string) : Promise<{ embed: EmbedBuilder, image: AttachmentBuilder, channelId: string } | null> => {
-    const server = await getServer(idServer);
-    const channelId = choiceChannel(server, idChannel);
-    if(!channelId || hasReachedSpawnLimit(server)) return null;
+const spawn  = async (idServer: string, idChannel: string) : Promise<spawnData | null> => {
+    try {
+        const server = await getServer(idServer);
+        const channelId = choiceChannel(server, idChannel);
+        console.log(server.countMessage+"/"+server.maxCountMessage)
+        if (!channelId || !hasReachedSpawnLimit(server)) return null;
+        console.log("ok")
 
-    return {...choiceTypeOfSpawn(server, channelId), channelId};
+        let spawnData : spawnData|null = {...(await choiceTypeOfSpawn(server, channelId)), channelId};
+
+        if(
+            spawnData.embed === null ||
+            spawnData.image === null ||
+            spawnData.channelId === null
+        ) spawnData = null;
+
+        return spawnData;
+    } catch (e) {
+        logger.error(e);
+    }
 }
 
 export default spawn;
 
 function hasReachedSpawnLimit(server: ServerType): boolean {
+    server.countMessage = server.countMessage + 1;
     initMaxCount(server);
-    return server.countMessage >= server.maxCountMessage;
+    updateServer(server.id, server);
+    return server.countMessage == 0;
 
 }
 
 function initMaxCount(server: ServerType): void {
-    if (server.maxCountMessage && server.maxCountMessage > 0) return;
-    do{
-        server.maxCountMessage = Math.floor(Math.random() * server.maxMessageForRandom);
-    } while(server.maxCountMessage < server.minMessageForRandom);
-    updateServer(server.id, server);
+    if (server.maxCountMessage && server.maxCountMessage > 0 && server.countMessage< server.maxCountMessage) return;
 
+    do{
+        server.maxCountMessage = Math.floor(Math.random() * server.eventSpawn.messageSpawn.max);
+    } while(server.maxCountMessage < server.eventSpawn.messageSpawn.min);
+    server.countMessage = 0;
 }
 
 function choiceChannel(server: ServerType, idChannel: string): string {
@@ -48,30 +70,33 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 
 // @ts-ignore
 async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embed: EmbedBuilder, image: AttachmentBuilder } {
-    const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
+    try {
 
-    if(randomCategorySpawn <= valeurMaxEvent) {
-        let event : EventType|null =  selectEvent();
-        event = effectEvent(event, server);
-        if(event === null) throw new Error("Event not found");
+        const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
-        return generateEmbedEvent(event, server);
+        //TODO : j'ai invversé pour le test
+        if (randomCategorySpawn >= valeurMaxEvent) {
+            let event: EventType | null = selectEvent();
+            event = effectEvent(event, server);
+            if (event === null) throw new Error("Event not found");
 
+            return generateEmbedEvent(event, server);
+
+        }
+        const isEgg = 0 == Math.floor(Math.random() * server.eventSpawn.valeurMaxChoiceEgg)
+        const pokemonChoice: pokemonType = selectPokemon(server, 0, isEgg);
+        if (isEgg) {
+            const eggObject = allPokemon[0]
+
+            pokemonChoice.name = eggObject.name;
+            pokemonChoice.imgName = eggObject.imgName;
+        }
+        pokemonChoice.idChannel = idChannel;
+        addPokemonToServer(server, pokemonChoice);
+        return generateEmbedPokemon(pokemonChoice, server);
+    } catch (e) {
+        logger.error(e);
     }
-    const isEgg = valeurMaxChoiceEgg== Math.floor(Math.random() * server.eventSpawn.valeurMaxChoiceEgg)
-    const pokemonChoice : pokemonType = selectPokemon(server, 0, isEgg);
-
-    if(isEgg) {
-        const eggObject = allPokemon[0]
-
-        pokemonChoice.name = eggObject.name;
-        pokemonChoice.imgName = eggObject.imgName;
-    }
-
-    pokemonChoice.idChannel = idChannel;
-    addPokemonToServer(server, pokemonChoice);
-
-    return generateEmbedPokemon(pokemonChoice, server);
 }
 
 function addPokemonToServer(server: ServerType, pokemon: PokemonType): boolean {
@@ -81,35 +106,40 @@ function addPokemonToServer(server: ServerType, pokemon: PokemonType): boolean {
     return true;
 }
 
+// @ts-ignore
 function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
-    const basePath = server.eventSpawn.nightMode
-        ? "./src/assets/pokeHomeShadow/"
-        : "./src/assets/pokeHome/";
+    try {
+        const basePath = server.eventSpawn.nightMode
+            ? "./src/assets/pokeHomeShadow/"
+            : "./src/assets/pokeHome/";
 
-    const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
+        const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
 
-    const adressImage: string = basePath + pokemon.imgName + suffix;
-    const nameImage: string = pokemon.imgName + suffix;
+        const adressImage: string = basePath + pokemon.imgName + suffix;
+        const nameImage: string = pokemon.imgName + suffix;
 
-    const color: ColorResolvable = colorByType(pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)]) as ColorResolvable;
+        const color: ColorResolvable = colorByType(pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)]) as ColorResolvable;
 
-    let pokeEmbed = new EmbedBuilder()
-        .setColor(color)
-        .setTitle(getText("embedPokemonTitle", server.language))
-        .setDescription(getText("embedPokemonDescription", server.language))
-        .setImage("attachment://"+ nameImage)
+        let pokeEmbed = new EmbedBuilder()
+            .setColor(color)
+            .setTitle(getText("embedPokemonTitle", server.language))
+            .setDescription(getText("embedPokemonDescription", server.language))
+            .setImage("attachment://" + nameImage)
 
-    return {
-        embed: pokeEmbed,
-        image: new AttachmentBuilder(adressImage)
-    };
+        return {
+            embed: pokeEmbed,
+            image: new AttachmentBuilder(adressImage)
+        };
+    } catch (e) {
+        logger.error(e);
+    }
 }
 
 function generateEmbedEvent(event: EventType, server: serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
     const basePath = "./src/assets/eventImage/";
 
-    const adressImage: string = basePath + event.name;
-    const nameImage: string = event.image;
+    const adressImage: string = basePath + event.image + ".png";
+    const nameImage: string = event.image+".png";
 
     const color: ColorResolvable = colorByType(event.color) as ColorResolvable;
 
@@ -117,7 +147,7 @@ function generateEmbedEvent(event: EventType, server: serverType): { embed: Embe
     let eventEmbed = new EmbedBuilder()
         .setColor(color)
         .setTitle(getText(event.name, server.language))
-        .setDescription(event.description)
+        .setDescription(getText(event.description, server.language))
         .addFields({
                 // @ts-ignore
                 name: getText("effect", server.language),

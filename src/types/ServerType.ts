@@ -7,7 +7,7 @@ interface ServerType {
     channelAllowed: string[];
     charmeChroma: boolean;
     language: string;
-    save: SaveOnePokemonType[];
+    savePokemon: SaveOnePokemonType[];
     eventSpawn: EventSpawnType;
     maxMessageForRandom: number;
     minMessageForRandom: number;

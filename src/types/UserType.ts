@@ -1,9 +1,9 @@
-import SaveOnePokemon from './SaveOnePokemon';
+import SaveOnePokemon from './SaveOnePokemonType';
 
 interface UserType {
     id: string;
     enteredCode: string[];
-    save: SaveOnePokemon[];
+    savePokemon: SaveOnePokemon[];
     countPagination: number;
 }
 

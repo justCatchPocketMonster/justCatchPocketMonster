@@ -30,10 +30,10 @@ await ClientDiscord.login(process.env.DISCORD_TOKEN);
 
 
 
-ClientDiscord.on("messageCreate", messageCreate);
+ClientDiscord.on("messageCreate", (message) => messageCreate(ClientDiscord, message));
 ClientDiscord.on('inviteCreate', inviteCreate);
 ClientDiscord.on('inviteDelete', inviteDelete);
-ClientDiscord.on("interactionCreate", interactionCreate)
+ClientDiscord.on("interactionCreate", (interaction) => interactionCreate(ClientDiscord, interaction));
 ClientDiscord.on("guildMemberAdd", guildMemberAdd)
 
 ClientDiscord.on("ready", () => ready(ClientDiscord));

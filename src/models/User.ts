@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import UserType from '../types/UserType';
-import Pokemon from './Pokemon';
 
 
 
@@ -16,7 +15,7 @@ const UserSchema = new mongoose.Schema<UserType>({
                     required: true,
                 }
             ],
-            save: [{
+            savePokemon: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Pokemon',
                 required: true,
@@ -31,7 +30,7 @@ const UserSchema = new mongoose.Schema<UserType>({
     timestamps: true
 });
 
-const GameImage = mongoose.model<UserType>('User', UserSchema);
+const User = mongoose.model<UserType>('User', UserSchema);
 
-export default GameImage;
+export default User;
     

@@ -4,7 +4,7 @@ interface StatType {
     version: string;
     pokemonSpawned: number;
     pokemonCaught: number;
-    save: SaveOnePokemon[];
+    savePokemon: SaveOnePokemon[];
 }
 
 export default StatType;
