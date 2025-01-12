@@ -1,0 +1,7 @@
+
+node_modules/*
+
+.env
+.timetracker
+
+node_modules
