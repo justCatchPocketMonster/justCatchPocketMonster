@@ -8,5 +8,5 @@ node_modules/*
 .npm
 .env
 .timetracker
-
+dist
 node_modules

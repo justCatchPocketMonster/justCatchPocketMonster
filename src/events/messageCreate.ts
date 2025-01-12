@@ -1,6 +1,7 @@
 import {Client, Message} from 'discord.js';
 import logger from "../middlewares/error"
 import spawn from "../features/spawn/spawn";
+import checkTimeForResetEventStat from "../features/event/checkTimeForResetEventStat";
 
 export default async (client: Client,message: Message<boolean>) => {
     try{
@@ -8,6 +9,8 @@ export default async (client: Client,message: Message<boolean>) => {
             return;
         }
         if (!message.guild) return;
+
+        checkTimeForResetEventStat(message.guild.id);
         spawn(message.guild.id, message.channel.id).then((result) => {
             if (result) {
                 const channel = client.channels.cache.get(result.channelId);

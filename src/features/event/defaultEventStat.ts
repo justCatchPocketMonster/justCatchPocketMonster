@@ -3,13 +3,13 @@ import {
     defaultRarity,
     defaultValueGen,
     defaultValueType,
-    formSpecialAllowed,
-    formSpecialValue, maximumCount, minimumCount
+    formSpecialAllowed, maximumCount, minimumCount
 } from "../../defaultValue";
 
 
 export default function defaultEventStat(): EventSpawnType {
     const defaultEventStat: EventSpawnType = {
+        _id: "0",
         gen: {
             ...defaultValueGen
         },
@@ -33,5 +33,5 @@ export default function defaultEventStat(): EventSpawnType {
         valeurMaxChoiceEgg: 0
 
     }
-
+    return defaultEventStat;
 }

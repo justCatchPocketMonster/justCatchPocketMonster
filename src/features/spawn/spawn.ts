@@ -20,7 +20,7 @@ interface spawnData {
     channelId: string
 }
 
-const spawn  = async (idServer: string, idChannel: string) : Promise<spawnData | null> => {
+const spawn  = async (idServer: string, idChannel: string) : Promise<spawnData | null | undefined> => {
     try {
         const server = await getServer(idServer);
         const channelId = choiceChannel(server, idChannel);

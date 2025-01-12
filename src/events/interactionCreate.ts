@@ -12,15 +12,16 @@ import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 
 import logger from "../middlewares/error"
+import checkTimeForResetEventStat from "../features/event/checkTimeForResetEventStat";
 
 export default async (client: Client,interaction: Interaction) => {
     try{
         if(!verification(client, interaction as ChatInputCommandInteraction)){
             return;
         }
-        
-    if(interaction instanceof ChatInputCommandInteraction && interaction.isCommand()){
 
+    if(interaction instanceof ChatInputCommandInteraction && interaction.isCommand()){
+        checkTimeForResetEventStat(interaction.guildId as string);
         switch (interaction.commandName) {
             case langue.name:
                 await langue.execute(interaction)
