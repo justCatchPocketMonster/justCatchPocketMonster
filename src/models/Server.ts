@@ -65,6 +65,7 @@ const ServerSchema = new mongoose.Schema<ServerType>({
             form: { type: String, required: true },
             versionForm: { type: Number, required: true },
             isShiny: { type: Boolean, required: true },
+            hint: { type: String, required: true },
             idChannel: { type: String, required: true },
             idServer: { type: String, required: true },
         }],
