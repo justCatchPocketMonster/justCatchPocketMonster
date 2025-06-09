@@ -1,11 +1,11 @@
 import {AttachmentBuilder, ColorResolvable, EmbedBuilder} from "discord.js";
 import {getServer, updateServer} from "../../cache/ServerCache";
-import ServerClass from "../../types/ServerClass";
-import serverType from "../../types/ServerClass";
+import ServerType from "../../types/ServerType";
+import serverType from "../../types/ServerType";
 import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
-import EventClass from "../../types/EventClass";
-import PokemonClass from "../../types/PokemonClass";
-import pokemonType from "../../types/PokemonClass";
+import EventClass from "../../types/EventType";
+import PokemonClass from "../../types/PokemonType";
+import pokemonType from "../../types/PokemonType";
 import selectPokemon from "../pokemon/selectPokemon";
 import selectEvent from "../event/selectEvent";
 import getText from "../../lang/language";
@@ -44,7 +44,7 @@ const spawn  = async (idServer: string, idChannel: string) : Promise<spawnData |
 
 export default spawn;
 
-function hasReachedSpawnLimit(server: ServerClass): boolean {
+function hasReachedSpawnLimit(server: ServerType): boolean {
     server.countMessage = server.countMessage + 1;
     initMaxCount(server);
     updateServer(server.id, server);
@@ -52,7 +52,7 @@ function hasReachedSpawnLimit(server: ServerClass): boolean {
 
 }
 
-function initMaxCount(server: ServerClass): void {
+function initMaxCount(server: ServerType): void {
     if (server.maxCountMessage && server.maxCountMessage > 0 && server.countMessage< server.maxCountMessage) return;
 
     do{
@@ -61,7 +61,7 @@ function initMaxCount(server: ServerClass): void {
     server.countMessage = 0;
 }
 
-function choiceChannel(server: ServerClass, idChannel: string): string {
+function choiceChannel(server: ServerType, idChannel: string): string {
     if (server.channelAllowed.length === 0) return "";
     if(server.channelAllowed.includes(idChannel)) return idChannel;
 
@@ -69,7 +69,7 @@ function choiceChannel(server: ServerClass, idChannel: string): string {
 }
 
 // @ts-ignore
-async function choiceTypeOfSpawn(server: ServerClass, idChannel: string) : { embed: EmbedBuilder, image: AttachmentBuilder } {
+async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embed: EmbedBuilder, image: AttachmentBuilder } {
     try {
 
         const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
@@ -98,7 +98,7 @@ async function choiceTypeOfSpawn(server: ServerClass, idChannel: string) : { emb
     }
 }
 
-function addPokemonToServer(server: ServerClass, pokemon: PokemonClass): boolean {
+function addPokemonToServer(server: ServerType, pokemon: PokemonClass): boolean {
     if (!server.pokemonPresent) server.pokemonPresent = [];
     if(server.pokemonPresent.find(pokemonServer => pokemonServer.idChannel === pokemon.idChannel && pokemonServer.idServer === pokemon.idServer)){
         server.pokemonPresent.forEach((pokemonServer) => {

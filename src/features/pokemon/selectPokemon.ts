@@ -1,14 +1,14 @@
-import PokemonClass from "../../types/PokemonClass";
+import PokemonClass from "../../types/PokemonType";
 import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../defaultValue"
-import ServerClass from "../../types/ServerClass";
-import pokemonType from "../../types/PokemonClass";
-import serverType from "../../types/ServerClass";
+import ServerType from "../../types/ServerType";
+import pokemonType from "../../types/PokemonType";
+import serverType from "../../types/ServerType";
 import allPokemon from '../../data/pokemon.json';
 import checkTimeForResetEventStat from "../event/checkTimeForResetEventStat";
 
 
 
-const selectPokemon  = (server: ServerClass , idPokemon : number = 0, isEgg: boolean = false) : PokemonClass => {
+const selectPokemon  = (server: ServerType , idPokemon : number = 0, isEgg: boolean = false) : PokemonClass => {
     checkTimeForResetEventStat(server.id)
     let pokemonChoiced: PokemonClass;
 
@@ -61,7 +61,7 @@ function shinySelect(idPokemon: number, server:serverType, isEgg: boolean): bool
     return nbRandomShiny === 1
 }
 
-function isHiddenPokemon(server: ServerClass, pokemon: PokemonClass): PokemonClass {
+function isHiddenPokemon(server: ServerType, pokemon: PokemonClass): PokemonClass {
 
     let randomNumber : number = Math.floor(Math.random() * hidePokemon.maxValue);
 
@@ -76,7 +76,7 @@ function isHiddenPokemon(server: ServerClass, pokemon: PokemonClass): PokemonCla
     return pokemon;
 }
 
-function megaIsAllowed(server: ServerClass, allowedPokemon: PokemonClass[]): PokemonClass[]{
+function megaIsAllowed(server: ServerType, allowedPokemon: PokemonClass[]): PokemonClass[]{
     if(server.eventSpawn.allowedForm.mega){
         return allowedPokemon;
     } else {
@@ -95,7 +95,7 @@ function selectPokemonWithId(idPokemon: number): PokemonClass {
         hint: ""
     };
 }
-function selectRandomPokemon(server: ServerClass, allowedPokemon : PokemonClass[]): PokemonClass {
+function selectRandomPokemon(server: ServerType, allowedPokemon : PokemonClass[]): PokemonClass {
     let pokemonPassGen : PokemonClass[]
     let generation : string
     do{
@@ -126,7 +126,7 @@ function selectRandomPokemon(server: ServerClass, allowedPokemon : PokemonClass[
     }
 }
 
-function generationSelect(server: ServerClass): string {
+function generationSelect(server: ServerType): string {
     const randomNumber = Math.floor(Math.random() * (nbGeneration*100));
     let somStatByGen = 0;
 
@@ -140,7 +140,7 @@ function generationSelect(server: ServerClass): string {
     return "";
 }
 
-function raritySelect(server: ServerClass): string {
+function raritySelect(server: ServerType): string {
     const randomNumber = Math.floor(Math.random() * 100);
     let somStatByRarity = 0;
 
@@ -156,7 +156,7 @@ function raritySelect(server: ServerClass): string {
     return "";
 }
 
-function typeSelect(server: ServerClass): string {
+function typeSelect(server: ServerType): string {
     const randomNumber = Math.floor(Math.random() * Object.values(defaultValueType).reduce((a, b) => a + b, 0));
     let somStatByType = 0;
 

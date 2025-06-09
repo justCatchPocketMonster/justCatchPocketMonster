@@ -21,7 +21,7 @@ import {
 import {getUser, updateUser} from "../../cache/UserCache";
 const fs = require('fs');
 import {exceptions} from "winston";
-import UserClass from "../../types/UserClass";
+import UserClass from "../../types/UserType";
 
 interface pageType {
     page: Embed,
