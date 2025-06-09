@@ -1,7 +1,7 @@
-import EventType from "../../types/EventType";
+import EventClass from "../../types/EventClass";
 import eventData from '../../data/eventData.json';
 
-const selectEvent = (): EventType => {
+const selectEvent = (): EventClass => {
 
     let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
     return {

@@ -1,11 +1,11 @@
 import {AttachmentBuilder, ColorResolvable, EmbedBuilder} from "discord.js";
 import {getServer, updateServer} from "../../cache/ServerCache";
-import ServerType from "../../types/ServerType";
-import serverType from "../../types/ServerType";
+import ServerClass from "../../types/ServerClass";
+import serverType from "../../types/ServerClass";
 import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
-import EventType from "../../types/EventType";
-import PokemonType from "../../types/PokemonType";
-import pokemonType from "../../types/PokemonType";
+import EventClass from "../../types/EventClass";
+import PokemonClass from "../../types/PokemonClass";
+import pokemonType from "../../types/PokemonClass";
 import selectPokemon from "../pokemon/selectPokemon";
 import selectEvent from "../event/selectEvent";
 import getText from "../../lang/language";
@@ -44,7 +44,7 @@ const spawn  = async (idServer: string, idChannel: string) : Promise<spawnData |
 
 export default spawn;
 
-function hasReachedSpawnLimit(server: ServerType): boolean {
+function hasReachedSpawnLimit(server: ServerClass): boolean {
     server.countMessage = server.countMessage + 1;
     initMaxCount(server);
     updateServer(server.id, server);
@@ -52,7 +52,7 @@ function hasReachedSpawnLimit(server: ServerType): boolean {
 
 }
 
-function initMaxCount(server: ServerType): void {
+function initMaxCount(server: ServerClass): void {
     if (server.maxCountMessage && server.maxCountMessage > 0 && server.countMessage< server.maxCountMessage) return;
 
     do{
@@ -61,7 +61,7 @@ function initMaxCount(server: ServerType): void {
     server.countMessage = 0;
 }
 
-function choiceChannel(server: ServerType, idChannel: string): string {
+function choiceChannel(server: ServerClass, idChannel: string): string {
     if (server.channelAllowed.length === 0) return "";
     if(server.channelAllowed.includes(idChannel)) return idChannel;
 
@@ -69,14 +69,13 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 }
 
 // @ts-ignore
-async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embed: EmbedBuilder, image: AttachmentBuilder } {
+async function choiceTypeOfSpawn(server: ServerClass, idChannel: string) : { embed: EmbedBuilder, image: AttachmentBuilder } {
     try {
 
         const randomCategorySpawn = Math.floor(Math.random() * valeurMaxChoiceEvent);
 
-        //TODO : j'ai invversé pour le test
-        if (randomCategorySpawn >= valeurMaxEvent) {
-            let event: EventType | null = selectEvent();
+        if (randomCategorySpawn <= valeurMaxEvent) {
+            let event: EventClass | null = selectEvent();
             event = effectEvent(event, server);
             if (event === null) throw new Error("Event not found");
 
@@ -99,15 +98,25 @@ async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embe
     }
 }
 
-function addPokemonToServer(server: ServerType, pokemon: PokemonType): boolean {
-    server.pokemonPresent.push(pokemon);
+function addPokemonToServer(server: ServerClass, pokemon: PokemonClass): boolean {
+    if (!server.pokemonPresent) server.pokemonPresent = [];
+    if(server.pokemonPresent.find(pokemonServer => pokemonServer.idChannel === pokemon.idChannel && pokemonServer.idServer === pokemon.idServer)){
+        server.pokemonPresent.forEach((pokemonServer) => {
+            if (pokemonServer.id !== pokemon.id) {
+                Object.assign(pokemonServer, pokemon);
+            }
+        });
+    } else {
+        server.pokemonPresent.push(pokemon);
+    }
+
     updateServer(server.id, server);
 
     return true;
 }
 
 // @ts-ignore
-function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
+function generateEmbedPokemon(pokemon: PokemonClass, server : serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
     try {
         const basePath = server.eventSpawn.nightMode
             ? "./src/assets/pokeHomeShadow/"
@@ -135,7 +144,7 @@ function generateEmbedPokemon(pokemon: PokemonType, server : serverType): { embe
     }
 }
 
-function generateEmbedEvent(event: EventType, server: serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
+function generateEmbedEvent(event: EventClass, server: serverType): { embed: EmbedBuilder, image: AttachmentBuilder } {
     const basePath = "./src/assets/eventImage/";
 
     const adressImage: string = basePath + event.image + ".png";

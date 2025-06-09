@@ -1,5 +1,5 @@
-import EventType from "../../types/EventType";
-import ServerType from "../../types/ServerType";
+import EventClass from "../../types/EventClass";
+import ServerClass from "../../types/ServerClass";
 import { defaultValueType, nbGeneration, nbType } from "../../defaultValue";
 import getText from "../../lang/language";
 import {updateServer} from "../../cache/ServerCache";
@@ -14,7 +14,7 @@ const DURATIONS = {
     oneHour: 60 * 60 * 1000,
 };
 const imagePerLvl = ["0012-000", "0012-001", "0012-002"]
-const effectEvent = (event: EventType, server: ServerType): EventType | null => {
+const effectEvent = (event: EventClass, server: ServerClass): EventClass | null => {
     const date = new Date();
     const level = getLevel();
 

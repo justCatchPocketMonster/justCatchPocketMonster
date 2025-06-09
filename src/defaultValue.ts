@@ -105,3 +105,5 @@ export const codeConfig = {
     }
 
 }
+
+export const languagePossibility = ["fr","eng"];

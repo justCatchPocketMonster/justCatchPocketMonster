@@ -37,7 +37,6 @@ export default {
                         })
                         //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
                         .addChannelTypes(ChannelType.GuildText)
-                        
                         .setRequired(false)
                         
         ),
@@ -47,7 +46,6 @@ export default {
             let guildId = interaction.guildId;
             if (!guildId) { return; }
             let server = await getServer(guildId);
-            console.log(server)
             if(interaction.channel == null){
                 throw new Error("Channel not found");
             }

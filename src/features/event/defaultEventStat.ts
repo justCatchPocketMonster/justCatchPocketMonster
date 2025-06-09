@@ -1,4 +1,4 @@
-import EventSpawnType from "../../types/EventSpawnType";
+import EventSpawnClass from "../../types/EventSpawnClass";
 import {
     defaultRarity,
     defaultValueGen,
@@ -7,8 +7,8 @@ import {
 } from "../../defaultValue";
 
 
-export default function defaultEventStat(): EventSpawnType {
-    const defaultEventStat: EventSpawnType = {
+export default function defaultEventStat(): EventSpawnClass {
+    const defaultEventStat: EventSpawnClass = {
         _id: "0",
         gen: {
             ...defaultValueGen

@@ -21,7 +21,7 @@ import {
 import {getUser, updateUser} from "../../cache/UserCache";
 const fs = require('fs');
 import {exceptions} from "winston";
-import UserType from "../../types/UserType";
+import UserClass from "../../types/UserClass";
 
 interface pageType {
     page: Embed,
@@ -32,7 +32,7 @@ const paginationButton = async (interactionSlash: ChatInputCommandInteraction, p
     try {
 
         const idUser: string = (interactionSlash.member as GuildMember | APIInteractionGuildMember).user.id;
-        const user: UserType = await getUser(idUser);
+        const user: UserClass = await getUser(idUser);
 
         if (user.countPagination >= 10) {
             interactionSlash.channel?.send("Trop de page");
@@ -58,7 +58,7 @@ const sendInitialPage = async (
     interactionSlash: ChatInputCommandInteraction,
     pages: pageType[],
     index: number,
-    user: UserType,
+    user: UserClass,
     row: ActionRowBuilder<ButtonBuilder>,
     time: number
 ) => {

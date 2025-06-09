@@ -35,15 +35,14 @@ function formatHintWithSlashes(hintArray: string[]): string {
     return finalHint.join("");
 }
 
-export default function createHint(namePokemon: string, realName: string, isAlreadyHint: boolean): string {
-    if (isAlreadyHint && namePokemon === realName) {
-        return namePokemon;
+export default function createHint(namePokemonHinted: string, realNameCompleted: string): string {
+    if (namePokemonHinted === realNameCompleted) {
+        return namePokemonHinted;
     }
-
-    let nameHint = generateInitialHint(namePokemon, realName);
-    let nameChange = realName.split("");
+    let nameHint = generateInitialHint(namePokemonHinted, realNameCompleted);
+    let nameChange = realNameCompleted.split("");
     let cleanedHint = cleanNameHint(nameHint);
-    let modifiedHint = revealRandomLetter(cleanedHint, nameChange, namePokemon, realName);
+    let modifiedHint = revealRandomLetter(cleanedHint, nameChange, namePokemonHinted, realNameCompleted);
     return formatHintWithSlashes(modifiedHint);
 }
 

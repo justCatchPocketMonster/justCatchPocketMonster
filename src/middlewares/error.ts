@@ -10,10 +10,11 @@ interface LogEntry {
 interface TransformableInfo {
     level: string;
     message: string;
-    [key: string]: any; // Pour les propriétés supplémentaires
+    [key: string]: any;
   }
 
 const logFormat = printf((info: TransformableInfo) => {
+    console.log(info);
     const { level, message, timestamp } = info as LogEntry;
     return `${timestamp} ${level}: ${message}`;
 });

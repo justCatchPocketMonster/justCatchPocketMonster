@@ -10,6 +10,7 @@ export default (ClientDiscord: Client) => {
         return console.error("Bot is not ready")
     }
     randomStatus(ClientDiscord);
+    ClientDiscord.user.setStatus("online");
     console.log("Bot is ready")
 
     for (const folder of readdirSync('./src/commands')) {
