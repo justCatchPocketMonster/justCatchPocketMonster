@@ -1,4 +1,4 @@
-import EventSpawnClass from "../../types/EventSpawnType";
+import EventSpawnClass from "../../core/types/EventSpawnType";
 import {
     defaultRarity,
     defaultValueGen,

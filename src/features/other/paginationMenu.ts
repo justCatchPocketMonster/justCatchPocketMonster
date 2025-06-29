@@ -4,7 +4,7 @@ import {
     StringSelectMenuOptionBuilder
 } from "discord.js";
 import fs from "fs";
-import UserClass from "../../types/UserType";
+import UserClass from "../../core/types/UserType";
 import {getUser, updateUser} from "../../cache/UserCache";
 
 interface MenuPage {

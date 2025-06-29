@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import SaveOnePokemonType from '../types/SaveOnePokemonType';
+import {SaveOnePokemonType} from '../types/SaveOnePokemonType';
 
 
 
-const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
+export const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
     
     idPokemon: {
         type: Number,
@@ -17,20 +17,17 @@ const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
         type: Number,
         required: true,
     },
-    catch: {
+    catchCount: {
         type: Number,
         required: true,
     },
-    shiny: {
+    shinyCount: {
         type: Number,
         required: true,
-    },
-    
+    }
 }, {
-    timestamps: true
+    _id: false,
+    timestamps: false
 });
 
-const SaveOnePokemon = mongoose.model<SaveOnePokemonType>('SaveOnePokemon', SaveOnePokemonSchema);
-
-export default SaveOnePokemon;
     

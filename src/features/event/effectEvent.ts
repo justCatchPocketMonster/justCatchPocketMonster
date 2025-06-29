@@ -1,5 +1,5 @@
-import EventClass from "../../types/EventType";
-import ServerType from "../../types/ServerType";
+import EventClass from "../../core/types/EventType";
+import ServerType from "../../core/types/ServerType";
 import { defaultValueType, nbGeneration, nbType } from "../../defaultValue";
 import getText from "../../lang/language";
 import {updateServer} from "../../cache/ServerCache";

@@ -1,6 +1,6 @@
 
-interface PokemonType {
-    id: number;
+export interface PokemonType {
+    id: string;
     name: {
         "nameEng": string[];
         "nameFr": string[];
@@ -18,5 +18,4 @@ interface PokemonType {
     idServer: null|string;
 }
 
-export default PokemonType;
     

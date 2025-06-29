@@ -1,8 +1,8 @@
-import PokemonClass from "../../types/PokemonType";
+import PokemonClass from "../../core/types/PokemonType";
 import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../defaultValue"
-import ServerType from "../../types/ServerType";
-import pokemonType from "../../types/PokemonType";
-import serverType from "../../types/ServerType";
+import ServerType from "../../core/types/ServerType";
+import pokemonType from "../../core/types/PokemonType";
+import serverType from "../../core/types/ServerType";
 import allPokemon from '../../data/pokemon.json';
 import checkTimeForResetEventStat from "../event/checkTimeForResetEventStat";
 

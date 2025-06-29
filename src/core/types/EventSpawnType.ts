@@ -1,6 +1,6 @@
 import EventType from "./EventType";
 
-interface genStat {
+export interface genStat {
     "1": number;
     "2": number;
     "3": number;
@@ -12,7 +12,7 @@ interface genStat {
     "9": number;
 }
 
-interface typeStat {
+export interface typeStat {
     "Steel": number;
     "Dragon": number;
     "Electric": number;
@@ -34,15 +34,14 @@ interface typeStat {
 
 }
 
-interface rarityStat {
+export interface rarityStat {
     "ordinaire": number;
     "legendaire": number;
     "fabuleux": number;
 
 }
 
-interface EventSpawnType {
-    _id: string;
+export interface EventSpawnType {
     gen: genStat;
     type: typeStat;
     rarity: rarityStat;
@@ -61,5 +60,3 @@ interface EventSpawnType {
     "valeurMaxChoiceEgg": number
 
 }
-
-export default EventSpawnType;

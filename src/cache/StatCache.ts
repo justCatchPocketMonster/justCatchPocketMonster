@@ -1,12 +1,14 @@
+// TODO
+/**
 // @ts-ignore
 import NodeCache from 'node-cache';
-import Stat from '../models/Stat';
-import StatType from '../types/StatType';
+import Stat from '../core/schemas/Stat';
+import StatType from '../core/types/StatType';
 import {ttlAllData} from "../defaultValue";
-import ServerType from "../types/ServerType";
-import SaveOnePokemon from "../models/SaveOnePokemon";
-import EventSpawn from "../models/EventSpawn";
-import Server from "../models/Server";
+import ServerType from "../core/types/ServerType";
+import SaveOnePokemon from "../core/schemas/SaveOnePokemon";
+import EventSpawn from "../core/schemas/EventSpawn";
+import Server from "../core/schemas/Server";
 
 const statCache = new NodeCache({ stdTTL: ttlAllData, checkperiod: 10 });
 
@@ -40,7 +42,7 @@ const updateStat = (version: string, data: StatType) => {
 statCache.on('expired', async (key: String, value: StatType) => {
 
     try {
-        const stat : StatType = value;
+        const stat: StatType = value;
         for (const pokemonSave of stat.savePokemon) {
             await SaveOnePokemon.updateOne({ _id: pokemonSave._id }, pokemonSave, { upsert: true });
         }
@@ -53,3 +55,4 @@ statCache.on('expired', async (key: String, value: StatType) => {
 
 
 export { getStat, updateStat };
+**/

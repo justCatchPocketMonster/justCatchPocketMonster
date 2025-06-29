@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import EventSpawnType from '../types/EventSpawnType';
+import {EventSpawnType} from '../types/EventSpawnType';
 import {
     defaultValueGen,
     defaultValueType,
@@ -7,11 +7,11 @@ import {
     tauxMaxShiny,
     maximumCount,
     minimumCount
-} from '../defaultValue';
+} from '../../defaultValue';
 
 
 
-const EventSpawnSchema = new mongoose.Schema<EventSpawnType>({
+export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>({
 gen: {
     "1": {
         type: Number,
@@ -252,7 +252,5 @@ whatEvent: {
     timestamps: true
 });
 
-const EventSpawn = mongoose.model<EventSpawnType>('EventSpawn', EventSpawnSchema);
 
-export default EventSpawn;
     

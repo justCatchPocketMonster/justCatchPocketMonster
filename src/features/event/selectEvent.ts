@@ -1,4 +1,4 @@
-import EventClass from "../../types/EventType";
+import EventClass from "../../core/types/EventType";
 import eventData from '../../data/eventData.json';
 
 const selectEvent = (): EventClass => {

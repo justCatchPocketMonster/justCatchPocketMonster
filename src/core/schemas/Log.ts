@@ -6,6 +6,5 @@ const logSchema = new mongoose.Schema({
     timestamp: { type: Date, default: Date.now }
 });
 
-const Log = mongoose.model('Log', logSchema);
+export const Log = mongoose.model('Log', logSchema);
 
-export default Log;

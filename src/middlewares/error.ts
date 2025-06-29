@@ -1,6 +1,6 @@
 import { createLogger, format, transports } from 'winston';
 const { combine, timestamp, printf } = format;
-import Log from '../models/Log';
+import Log from '../core/schemas/Log';
 
 interface LogEntry {
     level: string; 

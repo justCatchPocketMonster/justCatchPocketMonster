@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import StatType from '../types/StatType';
+import {StatType} from '../types/StatType';
+import {SaveOnePokemonSchema} from "./SaveOnePokemon";
 
 const StatSchema = new mongoose.Schema<StatType>({
     version: {
@@ -15,16 +16,15 @@ const StatSchema = new mongoose.Schema<StatType>({
         type: Number,
         required: true
     },
-    savePokemon: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SaveOnePokemon',
-        required: true
-    }],
+    savePokemon: {
+        type: mongoose.Schema.Types.Map,
+        of: SaveOnePokemonSchema,
+        required: true,
+    },
 }, {
     timestamps: true
 });
 
-const Stat = mongoose.model<StatType>('Stat', StatSchema);
+export const Stat = mongoose.model<StatType>('Stat', StatSchema);
 
-export default Stat;
     

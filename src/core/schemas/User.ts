@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import UserType from '../types/UserType';
+import {UserType} from '../types/UserType';
+import {SaveOnePokemonSchema} from "./SaveOnePokemon";
 
 
 
@@ -15,11 +16,11 @@ const UserSchema = new mongoose.Schema<UserType>({
                     required: true,
                 }
             ],
-            savePokemon: [{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Pokemon',
+            savePokemon: {
+                type: mongoose.Schema.Types.Map,
+                of: SaveOnePokemonSchema,
                 required: true,
-            }],
+            },
             countPagination: {
                 type: Number,
                 required: true,
@@ -30,7 +31,6 @@ const UserSchema = new mongoose.Schema<UserType>({
     timestamps: true
 });
 
-const User = mongoose.model<UserType>('User', UserSchema);
+export const User = mongoose.model<UserType>('User', UserSchema);
 
-export default User;
     
