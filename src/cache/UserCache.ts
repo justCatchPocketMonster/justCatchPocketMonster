@@ -1,57 +1,28 @@
-// @ts-ignore
-
-// TODO
-/**
 import NodeCache from 'node-cache';
-import UserType from '../core/types/UserType';
-import {ttlAllData} from "../defaultValue";
-import ServerType from "../core/types/ServerType";
+import { User as UserModel } from '../core/schemas/User';
+import { User } from '../core/classes/User';
+import { type UserType } from '../core/types/UserType';
+
+const cache = new NodeCache({ stdTTL: 600 });
 
 
-const userCache = new NodeCache({ stdTTL: ttlAllData, checkperiod: 10 });
+export async function getUserById(userId: string): Promise<User | null> {
+    const cached = cache.get<User>(userId);
+    if (cached) return cached;
 
-const getUser = async (id: string): Promise<UserType> => {
-    let userFromCache:UserType | undefined = userCache.get<UserType>(id);
-    console.log(id)
+    const data = await UserModel.findOne({ userId }).lean<UserType>();
+    if (!data) return null;
 
-    if (userFromCache === undefined || userFromCache === null) {
-        let user = await User.findOne({ id }).exec();
+    const user = User.fromMongo(data);
+    cache.set(userId, user);
+    return user;
+}
 
-        if (!user) {
-            user = new User({ id });
+export async function updateUser(userId: string, update: Partial<UserType>): Promise<User | null> {
+    const updated = await UserModel.findOneAndUpdate({ userId }, update, { new: true }).lean<UserType>();
+    if (!updated) return null;
 
-        }
-        userCache.set(id, user);
-        userFromCache = userCache.get<UserType>(id);
-    }
-
-    if (userFromCache === undefined) {
-        throw new Error("userString est undefined, impossible de parser.");
-    }
-    return userFromCache;
-};
-
-const updateUser = (id: string, data: UserType) => {
-
-    userCache.set(id, JSON.stringify(data));
-};
-
-// @ts-ignore
-userCache.on('expired', async (key: String, value: UserType) => {
-
-    try {
-        const user: UserType = value;
-        for (const pokemonSave of user.savePokemon) {
-            await SaveOnePokemon.updateOne({ _id: pokemonSave._id }, pokemonSave, { upsert: true });
-        }
-
-        console.log(`Serveur ${user.id} traité et sauvegardé.`);
-    } catch (error) {
-        console.error('Erreur lors du traitement des données expirées :', error);
-    }
-});
-
-
-export { getUser, updateUser };
-
- **/
+    const user = User.fromMongo(updated);
+    cache.set(userId, user);
+    return user;
+}
