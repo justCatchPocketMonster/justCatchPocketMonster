@@ -4,7 +4,7 @@ import {
     defaultValueGen,
     defaultValueType,
     formSpecialAllowed, maximumCount, minimumCount
-} from "../../defaultValue";
+} from "../../config/default/defaultValue";
 
 
 export default function defaultEventStat(): EventSpawnClass {

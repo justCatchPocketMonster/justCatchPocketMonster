@@ -1,5 +1,5 @@
 import PokemonClass from "../../core/types/PokemonType";
-import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../defaultValue"
+import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../config/default/defaultValue"
 import ServerType from "../../core/types/ServerType";
 import pokemonType from "../../core/types/PokemonType";
 import serverType from "../../core/types/ServerType";

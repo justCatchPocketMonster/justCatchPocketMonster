@@ -2,7 +2,7 @@ import {AttachmentBuilder, ColorResolvable, EmbedBuilder} from "discord.js";
 import {getServer, updateServer} from "../../cache/ServerCache";
 import ServerType from "../../core/types/ServerType";
 import serverType from "../../core/types/ServerType";
-import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../defaultValue";
+import {valeurMaxChoiceEvent, valeurMaxEvent} from "../../config/default/defaultValue";
 import EventClass from "../../core/types/EventType";
 import PokemonClass from "../../core/types/PokemonType";
 import pokemonType from "../../core/types/PokemonType";

@@ -1,5 +1,5 @@
 import activeCode from "./activeCode";
-import {codeConfig} from "../../defaultValue";
+import {codeConfig} from "../../config/default/defaultValue";
 import codeType from "./codeType";
 let code: { [key: string]: string[] } = {
     "shiny": []

@@ -1,6 +1,6 @@
 
 import {Client, ActivityType} from 'discord.js';
-import {version } from "../../defaultValue"
+import {version } from "../../config/default/defaultValue"
 import {getStat} from "../../cache/StatCache";
 import logger from "../../middlewares/error";
 import {getCode} from "../code/code";

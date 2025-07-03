@@ -7,7 +7,7 @@ import {
     tauxMaxShiny,
     maximumCount,
     minimumCount
-} from '../../defaultValue';
+} from '../../config/default/defaultValue';
 
 
 
