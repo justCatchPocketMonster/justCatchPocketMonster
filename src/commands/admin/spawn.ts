@@ -1,7 +1,7 @@
 import {SlashCommandBuilder, SlashCommandBooleanOption, SlashCommandChannelOption} from "@discordjs/builders";
 import {PermissionFlagsBits, CategoryChannel,GuildTextBasedChannel,ChannelType,  ChatInputCommandInteraction } from "discord.js";
 import logger from "../../middlewares/error"
-import {getServer, updateServer} from "../../cache/ServerCache";
+import {getServerById, updateServer} from "../../cache/ServerCache";
 import language from "../../lang/language";
 
 export default {
@@ -45,7 +45,7 @@ export default {
         try{
             let guildId = interaction.guildId;
             if (!guildId) { return; }
-            let server = await getServer(guildId);
+            let server = await getServerById(guildId);
             if(interaction.channel == null){
                 throw new Error("Channel not found");
             }

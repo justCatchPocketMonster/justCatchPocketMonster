@@ -1,7 +1,7 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
 import {PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
 import logger from "../../middlewares/error"
-import { getServer, updateServer} from "../../cache/ServerCache"
+import { getServerById, updateServer} from "../../cache/ServerCache"
 import language from "../../lang/language";
 
 export default {
@@ -38,7 +38,7 @@ export default {
     async execute(interaction: ChatInputCommandInteraction){
         try{
             if(!interaction.guildId){ return; }
-            let server = await getServer(interaction.guildId);
+            let server = await getServerById(interaction.guildId);
 
             // @ts-ignore
             server.language = interaction.options.getString(language("langNameOptionString","eng")).toLowerCase() ?? "eng";

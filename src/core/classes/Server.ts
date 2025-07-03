@@ -77,4 +77,21 @@ export class Server implements ServerType {
             pokemonPresent
         );
     }
+
+    static createDefault(id: string): Server {
+        return new Server(
+            id,
+            [],
+            false,
+            'fr',
+            {},
+            EventSpawn.createDefault(),
+            10,
+            1,
+            100,
+            0,
+            {}
+        );
+    }
+
 }

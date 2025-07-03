@@ -1,11 +1,9 @@
 
 // minimum et max du random pour le compteur du spawn de pokemon
-// Fichier: spawnCount.js
-
 export const minimumCount = 4+1;
 export const maximumCount = 20;
 
-//pour modifier des stats d'apparition celon le type du pokemon
+//pour modifier des stats d'apparition celon la rareté du pokemon
 //valeur maximum pour tombé sur le pokemon
 export const defaultRarity = {
     "ordinaire": 990,
@@ -33,46 +31,46 @@ export const version = "1.4.0"
 //taux de shiny
 export const tauxMaxShiny = 4096;
 
-//pour modifier des stats d'apparition par génération
-//nombre de génération (multiplier par 100)
-export const nbGeneration = 6
-//valeur max par gen
-export const defaultValueGen = {
-    "1": 100,
-    "2": 100,
-    "3": 100,
-    "4": 100,
-    "5": 100,
-    "6": 100,
-    "7": 100,
-    "8": 100,
-    "9": 100
+const defaultStatSpawn = {
+    "gen" :{
+        nbGeneration: 6,
+        valuePerGen:{
+            "1": 100,
+            "2": 100,
+            "3": 100,
+            "4": 100,
+            "5": 100,
+            "6": 100,
+            "7": 100,
+            "8": 100,
+            "9": 100
+        }
+    },
+    "type":{
+        nbType: 18,
+        valuePerType: {
+            "Steel": 100,
+            "Dragon": 100,
+            "Electric": 100,
+            "Fire": 100,
+            "Bug": 100,
+            "Grass": 100,
+            "Psychic": 100,
+            "Ground": 100,
+            "Dark": 100,
+            "Fighting": 100,
+            "Water": 100,
+            "Fairy": 100,
+            "Ice": 100,
+            "Normal": 100,
+            "Poison": 100,
+            "Rock": 100,
+            "Ghost": 100,
+            "Flying": 100
+        }
+    }
 }
 
-//pour modifier des stats d'apparition par type
-//nombre de type (multiplier par 100)
-export const nbType = 18
-//valeur max par type
-export const defaultValueType = {
-    "Steel": 100,
-    "Dragon": 100,
-    "Electric": 100,
-    "Fire": 100,
-    "Bug": 100,
-    "Grass": 100,
-    "Psychic": 100,
-    "Ground": 100,
-    "Dark": 100,
-    "Fighting": 100,
-    "Water": 100,
-    "Fairy": 100,
-    "Ice": 100,
-    "Normal": 100,
-    "Poison": 100,
-    "Rock": 100,
-    "Ghost": 100,
-    "Flying": 100
-}
 
 
 //TODO: a voir la gestion des forms
