@@ -10,8 +10,6 @@ export interface ServerType {
     language: string;
     savePokemon: Record<string, SaveOnePokemonType>;
     eventSpawn: EventSpawnType;
-    maxMessageForRandom: number;
-    minMessageForRandom: number;
 
     maxCountMessage: number;
     countMessage: number;

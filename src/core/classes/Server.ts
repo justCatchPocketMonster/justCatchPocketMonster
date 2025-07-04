@@ -2,6 +2,8 @@ import { SaveOnePokemon } from './SaveOnePokemon';
 import { EventSpawn } from './EventSpawn';
 import { Pokemon } from './Pokemon';
 import {ServerType} from '../types/ServerType';
+import {defaultLanguage} from "../../config/default/server";
+import {maximumCount, minimumCount} from "../../config/default/spawn";
 
 export class Server implements ServerType {
     constructor(
@@ -11,8 +13,6 @@ export class Server implements ServerType {
         public language: string,
         public savePokemon: Record<string, SaveOnePokemon>,
         public eventSpawn: EventSpawn,
-        public maxMessageForRandom: number,
-        public minMessageForRandom: number,
         public maxCountMessage: number,
         public countMessage: number,
         public pokemonPresent: Record<string, Pokemon>
@@ -70,8 +70,6 @@ export class Server implements ServerType {
             data.language,
             savePokemon,
             eventSpawn,
-            data.maxMessageForRandom,
-            data.minMessageForRandom,
             data.maxCountMessage,
             data.countMessage,
             pokemonPresent
@@ -83,12 +81,10 @@ export class Server implements ServerType {
             id,
             [],
             false,
-            'fr',
-            {},
+            defaultLanguage,
+            {}, // savePokemon
             EventSpawn.createDefault(),
             10,
-            1,
-            100,
             0,
             {}
         );
