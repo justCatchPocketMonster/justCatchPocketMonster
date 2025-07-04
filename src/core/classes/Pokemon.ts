@@ -15,7 +15,5 @@ export class Pokemon implements PokemonType {
         public versionForm: number,
         public isShiny: boolean | undefined,
         public hint: string,
-        public idChannel: string | null,
-        public idServer: string | null
     ) {}
 }

@@ -13,31 +13,31 @@ export interface genStat {
 }
 
 export interface typeStat {
-    "Steel": number;
-    "Dragon": number;
-    "Electric": number;
-    "Fire": number;
-    "Bug": number;
-    "Grass": number;
-    "Psychic": number;
-    "Ground": number;
-    "Dark": number;
-    "Fighting": number;
-    "Water": number;
-    "Fairy": number;
-    "Ice": number;
-    "Normal": number;
-    "Poison": number;
-    "Rock": number;
-    "Ghost": number;
-    "Flying": number
+    "steel": number;
+    "dragon": number;
+    "electric": number;
+    "fire": number;
+    "bug": number;
+    "grass": number;
+    "psychic": number;
+    "ground": number;
+    "dark": number;
+    "fighting": number;
+    "water": number;
+    "fairy": number;
+    "ice": number;
+    "normal": number;
+    "poison": number;
+    "rock": number;
+    "ghost": number;
+    "flying": number
 
 }
 
 export interface rarityStat {
-    "ordinaire": number;
-    "legendaire": number;
-    "fabuleux": number;
+    "ordinary": number;
+    "legendary": number;
+    "mythical": number;
 
 }
 

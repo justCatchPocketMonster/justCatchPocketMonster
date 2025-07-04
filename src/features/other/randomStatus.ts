@@ -1,16 +1,16 @@
 
 import {Client, ActivityType} from 'discord.js';
-import {version } from "../../config/default/defaultValue"
-import {getStat} from "../../cache/StatCache";
+import {getStatById} from "../../cache/StatCache";
 import logger from "../../middlewares/error";
 import {getCode} from "../code/code";
+import {version} from "../../config/default/misc";
 
 
 const randomStatus = async (Client : Client) => {
     try{
         if(Client == null || Client.user == null) return;
 
-        const statGlobal = await getStat("all");
+        const statGlobal = await getStatById("all");
 
         let arrayStatus = [
             "Je suis en "+ version +" :D",

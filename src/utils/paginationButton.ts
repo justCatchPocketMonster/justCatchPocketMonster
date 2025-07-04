@@ -2,7 +2,7 @@ import { ButtonInteraction, Interaction, APIEmbed, CommandInteraction, ActionRow
 const MAX_PAGES_PER_USER = 5;
 const userPages = new Map();
 import logger from "../middlewares/error"
-import PagePagination from "../core/types/PagePagination";
+import {PagePagination} from "../core/types/PagePagination";
 
 const plusOne = (idUser: string) => {
     if(userPages.get(idUser) < MAX_PAGES_PER_USER){

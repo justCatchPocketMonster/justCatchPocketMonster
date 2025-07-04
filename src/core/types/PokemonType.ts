@@ -13,9 +13,6 @@ export interface PokemonType {
     versionForm: number;
     isShiny: boolean|undefined;
     hint: string;
-
-    idChannel: null|string;
-    idServer: null|string;
 }
 
     

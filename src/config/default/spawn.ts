@@ -1,5 +1,6 @@
 // minimum and max random for pokemon spawn counter
 import {defaultRarity} from "./defaultValue";
+import {genStat, rarityStat, typeStat} from "../../core/types/EventSpawnType";
 
 export const minimumCount = 4+1;
 export const maximumCount = 20;
@@ -9,7 +10,7 @@ export const pokemonEvent = [132, 570, 571];
 
 
 export const nbGeneration= 6;
-export const valuePerGen={
+export const valuePerGen:genStat={
     "1": 100,
         "2": 100,
         "3": 100,
@@ -22,31 +23,31 @@ export const valuePerGen={
 }
 
 export const nbType= 18;
-export const valuePerType= {
-    "Steel": 100,
-        "Dragon": 100,
-        "Electric": 100,
-        "Fire": 100,
-        "Bug": 100,
-        "Grass": 100,
-        "Psychic": 100,
-        "Ground": 100,
-        "Dark": 100,
-        "Fighting": 100,
-        "Water": 100,
-        "Fairy": 100,
-        "Ice": 100,
-        "Normal": 100,
-        "Poison": 100,
-        "Rock": 100,
-        "Ghost": 100,
-        "Flying": 100
+export const valuePerType: typeStat= {
+    "steel": 100,
+        "dragon": 100,
+        "electric": 100,
+        "fire": 100,
+        "bug": 100,
+        "grass": 100,
+        "psychic": 100,
+        "ground": 100,
+        "dark": 100,
+        "fighting": 100,
+        "water": 100,
+        "fairy": 100,
+        "ice": 100,
+        "normal": 100,
+        "poison": 100,
+        "rock": 100,
+        "ghost": 100,
+        "flying": 100
 }
 
-export const valuePerRarity = {
+export const valuePerRarity: rarityStat = {
     "ordinary": 990,
     "legendary": 9,
-    "Mythical": 1
+    "mythical": 1
 }
 export const maxValueRarity = defaultRarity.ordinaire+defaultRarity.legendaire+defaultRarity.fabuleux;
 

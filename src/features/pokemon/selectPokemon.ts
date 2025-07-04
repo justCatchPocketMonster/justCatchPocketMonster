@@ -1,8 +1,6 @@
-import PokemonClass from "../../core/types/PokemonType";
-import {defaultRarity, defaultValueType, hidePokemon, nbGeneration} from "../../config/default/defaultValue"
-import ServerType from "../../core/types/ServerType";
-import pokemonType from "../../core/types/PokemonType";
-import serverType from "../../core/types/ServerType";
+import {Pokemon} from "../../core/classes/Pokemon";
+import {PokemonType} from "../../core/types/PokemonType";
+import {ServerType} from "../../core/types/ServerType";
 import allPokemon from '../../data/pokemon.json';
 import checkTimeForResetEventStat from "../event/checkTimeForResetEventStat";
 
@@ -10,9 +8,9 @@ import checkTimeForResetEventStat from "../event/checkTimeForResetEventStat";
 
 const selectPokemon  = (server: ServerType , idPokemon : number = 0, isEgg: boolean = false) : PokemonClass => {
     checkTimeForResetEventStat(server.id)
-    let pokemonChoiced: PokemonClass;
+    let pokemonChoiced: Pokemon;
 
-    const allowedPokemon : pokemonType[] = megaIsAllowed(server, allPokemon as pokemonType[]);
+    const allowedPokemon : PokemonType[] = megaIsAllowed(server, allPokemon);
     if(idPokemon === 0){
         pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
         pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
@@ -27,7 +25,7 @@ const selectPokemon  = (server: ServerType , idPokemon : number = 0, isEgg: bool
 
 export default selectPokemon;
 
-function shinySelect(idPokemon: number, server:serverType, isEgg: boolean): boolean{
+function shinySelect(idPokemon: String, server:ServerType, isEgg: boolean): boolean{
     let tauxShiny = 4096;
     let saveServer = server.savePokemon.find(save => save.idPokemon === idPokemon)?.catch;
 

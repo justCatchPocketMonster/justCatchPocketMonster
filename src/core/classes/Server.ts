@@ -3,7 +3,7 @@ import { EventSpawn } from './EventSpawn';
 import { Pokemon } from './Pokemon';
 import {ServerType} from '../types/ServerType';
 import {defaultLanguage} from "../../config/default/server";
-import {maximumCount, minimumCount} from "../../config/default/spawn";
+import allPokemon from '../../data/pokemon.json';
 
 export class Server implements ServerType {
     constructor(
@@ -22,7 +22,6 @@ export class Server implements ServerType {
         const savePokemon: Record<string, SaveOnePokemon> = {};
         for (const [key, value] of Object.entries(data.savePokemon ?? {})) {
             savePokemon[key] = new SaveOnePokemon(
-                value.id,
                 value.idPokemon,
                 value.form,
                 value.versionForm,
@@ -43,9 +42,7 @@ export class Server implements ServerType {
                 value.form,
                 value.versionForm,
                 value.isShiny,
-                value.hint,
-                value.idChannel ?? null,
-                value.idServer ?? null
+                value.hint
             );
         }
 
@@ -77,17 +74,33 @@ export class Server implements ServerType {
     }
 
     static createDefault(id: string): Server {
-        return new Server(
+        const defaultServer = new Server(
             id,
-            [],
+            [], // channelAllowed
             false,
             defaultLanguage,
             {}, // savePokemon
             EventSpawn.createDefault(),
             10,
             0,
-            {}
+            {} // pokemonPresent
         );
+        defaultServer.updateMissSavePokemon();
+        return defaultServer;
+    }
+
+    updateMissSavePokemon(): void {
+        allPokemon.forEach(pokemon => {
+            if (!this.savePokemon[pokemon.id+"-"+pokemon.form+"-"+pokemon.versionForm] && pokemon.id !== 0) {
+                this.savePokemon[pokemon.id+"-"+pokemon.form+"-"+pokemon.versionForm] = new SaveOnePokemon(
+                    pokemon.id,
+                    pokemon.form,
+                    pokemon.versionForm,
+                    0,
+                    0
+                );
+            }
+        })
     }
 
 }

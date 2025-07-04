@@ -1,11 +1,11 @@
 import defaultEventStat from "./defaultEventStat";
-import {updateServer, getServer} from "../../cache/ServerCache";
+import {updateServer, getServerById} from "../../cache/ServerCache";
 import {CacheType, CacheTypeReducer} from "discord.js";
 
 
 export default function checkTimeForResetEventStat(serverId: string): void {
     // @ts-ignore
-    const server = getServer(serverId) as ServerType;
+    const server = await getServerById(serverId);
     console.log(server.eventSpawn)
     console.log(server.eventSpawn.endTime)
     console.log(server.eventSpawn)

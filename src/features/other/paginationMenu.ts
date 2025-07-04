@@ -4,8 +4,8 @@ import {
     StringSelectMenuOptionBuilder
 } from "discord.js";
 import fs from "fs";
-import UserClass from "../../core/types/UserType";
-import {getUser, updateUser} from "../../cache/UserCache";
+import {User} from "../../core/classes/User";
+import {getUserById, updateUser} from "../../cache/UserCache";
 
 interface MenuPage {
     page: Embed;
@@ -19,7 +19,7 @@ async function paginationMenu(interactionSlash: ChatInputCommandInteraction, def
         const interaction = validateInteraction(interactionSlash, defaultText, pages, pageParDefaut, time);
 
         const idUser: string = (interactionSlash.member as GuildMember | APIInteractionGuildMember).user.id;
-        const user: UserClass = await getUser(idUser);
+        const user = await getUserById(idUser);
 
         const menuOptions = createMenuOptions(pages);
         const menu = createSelectMenu(defaultText, menuOptions);

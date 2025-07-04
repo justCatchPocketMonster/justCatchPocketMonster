@@ -17,8 +17,6 @@ export const PokemonSchema = new mongoose.Schema<PokemonType>({
     versionForm: { type: Number, required: true },
     isShiny: { type: Boolean, required: true },
     hint: { type: String, required: true },
-    idChannel: { type: String, required: true },
-    idServer: { type: String, required: true },
 }, {
     _id: false,
     timestamps: false

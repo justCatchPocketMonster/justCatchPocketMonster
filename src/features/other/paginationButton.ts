@@ -18,10 +18,10 @@ import {
     MessageComponentType,
     MessageCreateOptions
 } from "discord.js";
-import {getUser, updateUser} from "../../cache/UserCache";
+import {getUserById, updateUser} from "../../cache/UserCache";
 const fs = require('fs');
 import {exceptions} from "winston";
-import UserClass from "../../core/types/UserType";
+import User from "../../core/classes/User";
 
 interface pageType {
     page: Embed,
@@ -32,7 +32,7 @@ const paginationButton = async (interactionSlash: ChatInputCommandInteraction, p
     try {
 
         const idUser: string = (interactionSlash.member as GuildMember | APIInteractionGuildMember).user.id;
-        const user: UserClass = await getUser(idUser);
+        const user = await getUserById(idUser);
 
         if (user.countPagination >= 10) {
             interactionSlash.channel?.send("Trop de page");
@@ -58,7 +58,7 @@ const sendInitialPage = async (
     interactionSlash: ChatInputCommandInteraction,
     pages: pageType[],
     index: number,
-    user: UserClass,
+    user: User,
     row: ActionRowBuilder<ButtonBuilder>,
     time: number
 ) => {

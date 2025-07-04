@@ -1,6 +1,5 @@
 import { createLogger, format, transports } from 'winston';
 const { combine, timestamp, printf } = format;
-import Log from '../core/schemas/Log';
 
 interface LogEntry {
     level: string; 
@@ -30,13 +29,5 @@ const logger = createLogger({
     ]
 });
 
-logger.on('data', (log : LogEntry) => {
-    const logEntry = new Log({
-        level: log.level,
-        message: log.message,
-        timestamp: new Date(log.timestamp)
-    });
-    logEntry.save().catch(err => console.error('Error saving log to MongoDB', err));
-});
 
 export default logger;

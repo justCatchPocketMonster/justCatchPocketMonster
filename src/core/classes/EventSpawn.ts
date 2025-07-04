@@ -1,5 +1,7 @@
 import { Event } from './Event';
 import {EventSpawnType, genStat, rarityStat, typeStat} from '../types/EventSpawnType';
+import {defaultLanguage} from "../../config/default/server";
+import {maximumCount, minimumCount, valuePerGen, valuePerRarity, valuePerType} from "../../config/default/spawn";
 
 export class EventSpawn implements EventSpawnType {
     constructor(
@@ -20,4 +22,23 @@ export class EventSpawn implements EventSpawnType {
         public nightMode: boolean,
         public valeurMaxChoiceEgg: number
     ) {}
+
+    static createDefault(): EventSpawn {
+        const defaultEventSpawn = new EventSpawn(
+            valuePerGen,
+            valuePerType,
+            valuePerRarity,
+            0,
+            null,
+            null,
+            { mega: false, giga: false },
+            {
+                min: minimumCount,
+                max: maximumCount
+            },
+            false,
+            1
+        );
+        return defaultEventSpawn;
+    }
 }
