@@ -28,10 +28,7 @@ export const formSpecialAllowed = {
     "giga": false
 }
 
-export const hidePokemon = {
-    "idPokemon": [132, 570, 571],
-    "maxValue": 100
-}
+
 
 
 export const languagePossibility = ["fr","eng"];

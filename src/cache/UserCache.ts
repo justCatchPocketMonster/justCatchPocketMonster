@@ -6,7 +6,7 @@ import { type UserType } from '../core/types/UserType';
 const cache = new NodeCache({ stdTTL: 600 });
 
 
-export async function getUserById(userId: string): Promise<User | null> {
+export async function getUserById(userId: string): Promise<User> {
     const cached = cache.get<User>(userId);
     if (cached) return cached;
 

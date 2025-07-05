@@ -97,7 +97,7 @@ async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embe
 }
 
 function generateEmbedPokemon(pokemon: Pokemon, server : ServerType): { embed: EmbedBuilder, image: AttachmentBuilder } {
-    try {
+
         const basePath = server.eventSpawn.nightMode
             ? "./src/assets/pokeHomeShadow/"
             : "./src/assets/pokeHome/";
@@ -119,9 +119,7 @@ function generateEmbedPokemon(pokemon: Pokemon, server : ServerType): { embed: E
             embed: pokeEmbed,
             image: new AttachmentBuilder(adressImage)
         };
-    } catch (e) {
-        logger.error(e);
-    }
+
 }
 
 function generateEmbedEvent(event: EventClass, server: ServerType): { embed: EmbedBuilder, image: AttachmentBuilder } {

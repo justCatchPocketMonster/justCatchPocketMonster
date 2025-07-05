@@ -1,5 +1,4 @@
-// minimum and max random for pokemon spawn counter
-import {defaultRarity} from "./defaultValue";
+
 import {genStat, rarityStat, typeStat} from "../../core/types/EventSpawnType";
 
 export const minimumCount = 4+1;
@@ -49,11 +48,16 @@ export const valuePerRarity: rarityStat = {
     "legendary": 9,
     "mythical": 1
 }
-export const maxValueRarity = defaultRarity.ordinaire+defaultRarity.legendaire+defaultRarity.fabuleux;
+export const maxValueRarity = valuePerRarity.ordinary+valuePerRarity.legendary+valuePerRarity.mythical;
 
 
 export const rateMaxShiny = 4096;
 
 export const valueMaxChoiceEgg = 300;
+
+export const hidePokemon = {
+    "idPokemon": [132, 570, 571],
+    "maxValue": 100
+}
 
 export const valueMaxChoiceEvent = 100;

@@ -1,8 +1,8 @@
 import EventClass from "../../core/types/EventType";
-import ServerType from "../../core/types/ServerType";
-import { defaultValueType, nbGeneration, nbType } from "../../config/default/defaultValue";
+import {ServerType} from "../../core/types/ServerType";
 import getText from "../../lang/language";
 import {updateServer} from "../../cache/ServerCache";
+import {nbGeneration, valuePerType} from "../../config/default/spawn";
 
 interface ProbabilityType {
     [key: number]: number;
@@ -117,14 +117,14 @@ const effectEvent = (event: EventClass, server: ServerType): EventClass | null =
     }
 
     function getRandomType() {
-        const types = Object.keys(defaultValueType);
+        const types = Object.keys(valuePerType);
         return types[Math.floor(Math.random() * types.length)];
     }
 
     function updateRarity(type: string, probability: number) {
         // @ts-ignore
         server.eventSpawn.rarity[type] = probability;
-        server.eventSpawn.rarity["ordinaire"] -= probability;
+        server.eventSpawn.rarity["ordinary"] -= probability;
     }
 
     function adjustSpawnGen(probability: number, generation: number) {

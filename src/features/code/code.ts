@@ -1,6 +1,6 @@
 import activeCode from "./activeCode";
-import {codeConfig} from "../../config/default/defaultValue";
 import codeType from "./codeType";
+import {eventCode, landings} from "../../config/default/code";
 let code: { [key: string]: string[] } = {
     "shiny": []
 };
@@ -16,7 +16,7 @@ export function setCode(newCode: typeof code){
 
 export function updateArrayCode(){
     let code = getCode();
-    for(let key in codeConfig.eventCode){
+    for(let key in eventCode){
         // @ts-ignore
         code[key] = JSON.parse(JSON.stringify(codeConfig.eventCode[key]));
     }
@@ -25,15 +25,15 @@ export function updateArrayCode(){
 
     let palierChoiceSpawn = null;
     let palierChoiceCatch = null;
-    codeConfig.paliers.forEach(palier => {
-        if (statSpawn >= palier) {
-            palierChoiceSpawn = palier;
+    landings.forEach(landing => {
+        if (statSpawn >= landing) {
+            palierChoiceSpawn = landing;
         }
     });
 
-    codeConfig.paliers.forEach(palier => {
-        if (statCatch >= palier) {
-            palierChoiceCatch = palier;
+    landings.forEach(landing => {
+        if (statCatch >= landing) {
+            palierChoiceCatch = landing;
         }
     });
 
