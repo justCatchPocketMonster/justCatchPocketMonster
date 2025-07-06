@@ -1,9 +1,9 @@
-import {SaveOnePokemonType} from './SaveOnePokemonType';
+import {SaveAllPokemonType} from "./SaveAllPokemonType";
 
 export interface StatType {
     version: string;
     pokemonSpawned: number;
     pokemonCaught: number;
-    savePokemon: Record<string, SaveOnePokemonType>;
+    savePokemon: SaveAllPokemonType;
 
 }

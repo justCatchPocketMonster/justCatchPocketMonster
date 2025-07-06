@@ -1,5 +1,5 @@
 export interface SaveOnePokemonType {
-    idPokemon: number;
+    idPokemon: string;
     form: string;
     versionForm: number;
     catchCount: number;

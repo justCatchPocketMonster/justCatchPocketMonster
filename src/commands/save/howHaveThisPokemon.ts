@@ -41,7 +41,7 @@ export default {
     "actif": true,
     async execute(interaction: Interaction){
         try{
-            
+            // TODO: a faire de 0
         } catch (e) {
             logger.error(e)
         }

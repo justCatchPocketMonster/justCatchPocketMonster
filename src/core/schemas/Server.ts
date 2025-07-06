@@ -3,6 +3,7 @@ import {ServerType} from '../types/ServerType';
 import {SaveOnePokemonSchema} from "./SaveOnePokemon";
 import {PokemonSchema} from "./Pokemon";
 import {EventSpawnSchema} from "./EventSpawn";
+import {SaveAllPokemonSchema} from "./SaveAllPokemon";
 
 
 
@@ -47,8 +48,7 @@ const ServerSchema = new mongoose.Schema<ServerType>({
             default: 0,
         },
         pokemonPresent: {
-            type: mongoose.Schema.Types.Map,
-            of: PokemonSchema,
+            type: SaveAllPokemonSchema,
             required: true,
         },
 }, {

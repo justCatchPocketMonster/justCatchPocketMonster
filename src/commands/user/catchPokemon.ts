@@ -27,7 +27,7 @@ export default {
     "actif": true,
     async execute(interaction: ChatInputCommandInteraction){
         try{
-            
+            // TODO: a faire de 0
         } catch (e) {
             logger.error(e)
         }

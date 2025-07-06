@@ -2,7 +2,7 @@ import {SlashCommandBuilder, SlashCommandChannelOption} from "@discordjs/builder
 import {ChannelType, ChatInputCommandInteraction} from "discord.js";
 import logger from "../../middlewares/error"
 import language from "../../lang/language";
-import {getServer, updateServer} from "../../cache/ServerCache";
+import {getServerById, updateServer} from "../../cache/ServerCache";
 import createHint from "../../features/hint/createHint";
 
 export default {
@@ -35,22 +35,18 @@ export default {
             if (!interaction.guildId) {
                 return;
             }
-            let server = await getServer(interaction.guildId);
+            let server = await getServerById(interaction.guildId);
             let channelOption = interaction.options.getChannel("channel");
 
             let channel = channelOption ? channelOption : interaction.channel;
             if (!channel) {
                 return;
             }
-            server.pokemonPresent.forEach(pokemon => {
-                if (pokemon.idChannel == channel.id) {
-                    console.log(pokemon);
-                    pokemon.hint = createHint(pokemon.hint, pokemon.name.nameEng[0]);
-                    updateServer(server.id, server);
-                    return
-
-                }
-            })
+            if(server.pokemonPresent[channel.id] && server.pokemonPresent[channel.id].hint) {
+                server.pokemonPresent[channel.id].hint = createHint(server.pokemonPresent[channel.id].hint, server.pokemonPresent[channel.id].name.nameEng[0]);
+                updateServer(server.id,server);
+                return;
+            }
 
             interaction.reply({content: language(interaction.guildId, "noHint"), ephemeral: true});
             return;

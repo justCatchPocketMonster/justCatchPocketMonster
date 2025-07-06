@@ -1,9 +1,8 @@
-import { SaveOnePokemon } from './SaveOnePokemon';
-import { EventSpawn } from './EventSpawn';
-import { Pokemon } from './Pokemon';
+import {EventSpawn} from './EventSpawn';
+import {Pokemon} from './Pokemon';
 import {ServerType} from '../types/ServerType';
 import {defaultLanguage} from "../../config/default/server";
-import allPokemon from '../../data/pokemon.json';
+import {SaveAllPokemon} from './SaveAllPokemon';
 
 export class Server implements ServerType {
     constructor(
@@ -11,7 +10,7 @@ export class Server implements ServerType {
         public channelAllowed: string[],
         public charmeChroma: boolean,
         public language: string,
-        public savePokemon: Record<string, SaveOnePokemon>,
+        public savePokemon: SaveAllPokemon,
         public eventSpawn: EventSpawn,
         public maxCountMessage: number,
         public countMessage: number,
@@ -19,16 +18,8 @@ export class Server implements ServerType {
     ) {}
 
     static fromMongo(data: ServerType): Server {
-        const savePokemon: Record<string, SaveOnePokemon> = {};
-        for (const [key, value] of Object.entries(data.savePokemon ?? {})) {
-            savePokemon[key] = new SaveOnePokemon(
-                value.idPokemon,
-                value.form,
-                value.versionForm,
-                value.shinyCount,
-                value.catchCount
-            );
-        }
+        const savePokemon = SaveAllPokemon.fromMongo(data.savePokemon ?? {});
+
 
         const pokemonPresent: Record<string, Pokemon> = {};
         for (const [key, value] of Object.entries(data.pokemonPresent ?? {})) {
@@ -74,33 +65,19 @@ export class Server implements ServerType {
     }
 
     static createDefault(id: string): Server {
-        const defaultServer = new Server(
+        return new Server(
             id,
             [], // channelAllowed
             false,
             defaultLanguage,
-            {}, // savePokemon
+            (new SaveAllPokemon()).updateMissSavePokemon(), // savePokemon
             EventSpawn.createDefault(),
             10,
             0,
             {} // pokemonPresent
         );
-        defaultServer.updateMissSavePokemon();
-        return defaultServer;
     }
 
-    updateMissSavePokemon(): void {
-        allPokemon.forEach(pokemon => {
-            if (!this.savePokemon[pokemon.id+"-"+pokemon.form+"-"+pokemon.versionForm] && pokemon.id !== 0) {
-                this.savePokemon[pokemon.id+"-"+pokemon.form+"-"+pokemon.versionForm] = new SaveOnePokemon(
-                    pokemon.id,
-                    pokemon.form,
-                    pokemon.versionForm,
-                    0,
-                    0
-                );
-            }
-        })
-    }
+
 
 }

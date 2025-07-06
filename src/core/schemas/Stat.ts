@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import {StatType} from '../types/StatType';
 import {SaveOnePokemonSchema} from "./SaveOnePokemon";
+import {SaveAllPokemonSchema} from "./SaveAllPokemon";
 
 const StatSchema = new mongoose.Schema<StatType>({
     version: {
@@ -17,8 +18,7 @@ const StatSchema = new mongoose.Schema<StatType>({
         required: true
     },
     savePokemon: {
-        type: mongoose.Schema.Types.Map,
-        of: SaveOnePokemonSchema,
+        type: SaveAllPokemonSchema,
         required: true,
     },
 }, {

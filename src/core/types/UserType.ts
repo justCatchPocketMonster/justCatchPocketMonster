@@ -1,8 +1,8 @@
-import {SaveOnePokemonType} from './SaveOnePokemonType';
+import {SaveAllPokemonType} from "./SaveAllPokemonType";
 
 export interface UserType {
     id: string;
     enteredCode: string[];
-    savePokemon: Record<string, SaveOnePokemonType>;
+    savePokemon: SaveAllPokemonType;
     countPagination: number;
 }

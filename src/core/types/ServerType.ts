@@ -1,14 +1,14 @@
 
 import {EventSpawnType} from './EventSpawnType';
 import {PokemonType} from './PokemonType';
-import {SaveOnePokemonType} from "./SaveOnePokemonType";
+import {SaveAllPokemonType} from "./SaveAllPokemonType";
 
 export interface ServerType {
     id: string;
     channelAllowed: string[];
     charmeChroma: boolean;
     language: string;
-    savePokemon: Record<string, SaveOnePokemonType>;
+    savePokemon: SaveAllPokemonType;
     eventSpawn: EventSpawnType;
 
     maxCountMessage: number;

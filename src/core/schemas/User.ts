@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import {UserType} from '../types/UserType';
 import {SaveOnePokemonSchema} from "./SaveOnePokemon";
+import {SaveAllPokemonType} from "../types/SaveAllPokemonType";
+import {SaveAllPokemonSchema} from "./SaveAllPokemon";
 
 
 
@@ -17,8 +19,7 @@ const UserSchema = new mongoose.Schema<UserType>({
                 }
             ],
             savePokemon: {
-                type: mongoose.Schema.Types.Map,
-                of: SaveOnePokemonSchema,
+                type: SaveAllPokemonSchema,
                 required: true,
             },
             countPagination: {

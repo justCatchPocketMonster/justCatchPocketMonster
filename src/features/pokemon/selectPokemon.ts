@@ -10,8 +10,14 @@ import {hidePokemon, nbGeneration, valuePerRarity, valuePerType} from "../../con
 const selectPokemon  = (server: ServerType , idPokemon : number = 0, isEgg: boolean = false) : Pokemon => {
     checkTimeForResetEventStat(server.id)
     let pokemonChoiced: Pokemon;
+    const pokemons: Pokemon[] = allPokemon.map(p => ({
+        ...p,
+        id: p.id.toString(),
+        isShiny: false,
+        hint: '',
+    }));
 
-    const allowedPokemon : PokemonType[] = megaIsAllowed(server, allPokemon);
+    const allowedPokemon : PokemonType[] = megaIsAllowed(server, pokemons);
     if(idPokemon === 0){
         pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
         pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
@@ -28,7 +34,7 @@ export default selectPokemon;
 
 function shinySelect(idPokemon: String, server:ServerType, isEgg: boolean): boolean{
     let tauxShiny = 4096;
-    let saveServer = server.savePokemon.find(save => save.idPokemon === idPokemon)?.catch;
+    let saveServer = server.savePokemon.getCatchByOnlyId(idPokemon);
 
     if(saveServer === undefined){
         saveServer = 0;
