@@ -1,6 +1,10 @@
 import activeCode from "./activeCode";
 import codeType from "./codeType";
 import {eventCode, landings} from "../../config/default/code";
+import {UserType} from "../../core/types/UserType";
+import {ServerType} from "../../core/types/ServerType";
+import {EmbedBuilder} from "discord.js";
+import language from "../../lang/language";
 let code: { [key: string]: string[] } = {
     "shiny": []
 };
@@ -45,6 +49,34 @@ export function updateArrayCode(){
     }
     console.log(code)
     setCode(code);
+}
+export function codeListEmbed(user : UserType, server:ServerType){
+    const embed = new EmbedBuilder()
+    embed.setTitle(language("codeListEmbedTitle",server.language))
+    embed.setDescription(language("codeListEmbedDescription",server.language))
+
+    for(const [key, value] of Object.entries(code)){
+        value.forEach(code => {
+            if(user.enteredCode.includes(code)){
+                embed.addFields(
+                    {
+                        name: code ,
+                        value: ":white_check_mark:",
+                        inline: true
+                    },
+                )
+            }else {
+                embed.addFields(
+                    {
+                        name: code,
+                        value: ":x:",
+                        inline: true
+                    }
+                )
+            }
+        })
+    }
+    return embed
 }
 
 export {
