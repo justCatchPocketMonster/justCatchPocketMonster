@@ -46,7 +46,6 @@ export interface EventSpawnType {
     type: typeStat;
     rarity: rarityStat;
     "shiny": number;
-    "endTime": Date|null;
     "whatEvent": EventType|null;
     "allowedForm": {
         "mega": boolean,

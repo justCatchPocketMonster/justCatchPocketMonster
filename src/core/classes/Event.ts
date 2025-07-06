@@ -8,6 +8,7 @@ export class Event implements EventType {
         public type: string,
         public color: string,
         public image: string,
-        public effectDescription: string
+        public effectDescription: string,
+        public endTime: Date,
     ) {}
 }

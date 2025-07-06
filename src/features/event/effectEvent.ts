@@ -50,48 +50,55 @@ const effectEvent = (event: EventClass, server: ServerType): EventClass | null =
     }
 
     function handleRarityEvent(type: string, probabilities: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         updateRarity(type, probabilities[level]);
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
         setEventTextEffect("aura" + capitalize(type), level, getText("pendantTrenteMinute",server.language));
     }
 
     function handleGenerationEvent(probabilities: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         const generation = getRandomGen();
         adjustSpawnGen(probabilities[level], generation);
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
         setEventTextEffect("auraGeneration", level, `${getText("ofThisGeneration",server.language)}${generation}. ${getText("pendantTrenteMinute",server.language)}`);
     }
 
     function handleTypeEvent(probabilities: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         const typeChoice = getRandomType();
         adjustSpawnType(probabilities[level], typeChoice);
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
         setEventTextEffect("auraType", level, `${getText("ofThisType",server.language)}${getText(typeChoice,server.language)}. ${getText("pendantTrenteMinute",server.language)}`);
     }
 
     function handleShinyEvent(probabilities: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         server.eventSpawn.shiny /= probabilities[level];
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
         setEventTextEffect("auraChroma", level, getText("pendantTrenteMinute",server.language));
     }
 
     function handleTimeBasedEvent(action: string, eventKey: string, durations: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         // @ts-ignore
         server.eventSpawn[action] = !server.eventSpawn[action];
-        server.eventSpawn.endTime = addDuration(durations[level]);
+        server.eventSpawn.whatEvent.endTime = addDuration(durations[level]);
         setEventTextEffect(eventKey, level, getDurationText(level));
     }
 
     function handleMaxMinMessageEvent(minProb: ProbabilityType, maxProb: ProbabilityType, eventKey: string) {
+        if (!server.eventSpawn.whatEvent) return
         server.eventSpawn.messageSpawn = { min: minProb[level], max: maxProb[level] };
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
 
         setEventTextEffect(eventKey, level, getText("pendantTrenteMinute",server.language));
     }
 
     function handleEggEvent(probabilities: ProbabilityType) {
+        if (!server.eventSpawn.whatEvent) return
         server.eventSpawn.valeurMaxChoiceEgg = probabilities[level];
-        server.eventSpawn.endTime = addDuration(DURATIONS.halfHour);
+        server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
         setEventTextEffect("auraOvale", level, getText("pendantTrenteMinute",server.language));
     }
 

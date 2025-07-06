@@ -7,6 +7,7 @@ export interface EventType {
     "color": string;
     "image": string;
     "effectDescription": string;
+    "endTime": Date;
 
 }
 

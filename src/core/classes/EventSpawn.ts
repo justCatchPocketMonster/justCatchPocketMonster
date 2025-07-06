@@ -9,7 +9,6 @@ export class EventSpawn implements EventSpawnType {
         public type: typeStat,
         public rarity: rarityStat,
         public shiny: number,
-        public endTime: Date | null,
         public whatEvent: Event | null,
         public allowedForm: {
             mega: boolean;
@@ -29,7 +28,6 @@ export class EventSpawn implements EventSpawnType {
             valuePerType,
             valuePerRarity,
             0,
-            null,
             null,
             { mega: false, giga: false },
             {

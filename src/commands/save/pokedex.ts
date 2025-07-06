@@ -1,5 +1,5 @@
 import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders";
-import { Interaction } from "discord.js";
+import {ChatInputCommandInteraction, Interaction} from "discord.js";
 import logger from "../../middlewares/error"
 import language from "../../lang/language";
 
@@ -24,7 +24,7 @@ export default {
                     .setRequired(false)
     ),
     "actif": true,
-    async execute(interaction: Interaction){
+    async execute(interaction: ChatInputCommandInteraction){
         try{
             // TODO: a faire de 0
         } catch (e) {

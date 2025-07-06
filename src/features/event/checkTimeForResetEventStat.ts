@@ -5,10 +5,10 @@ import {EventSpawn} from "../../core/classes/EventSpawn";
 export default function checkTimeForResetEventStat(serverId: string): void {
     // @ts-ignore
     const server = await getServerById(serverId);
-    if (!server.eventSpawn || !server.eventSpawn.endTime) return;
+    if (!server.eventSpawn || !server.eventSpawn.whatEvent || !server.eventSpawn.whatEvent.endTime) return;
 
     const dateNow = new Date();
-    const dateEnd = new Date(server.eventSpawn.endTime);
+    const dateEnd = new Date(server.eventSpawn.whatEvent.endTime);
     console.log(dateEnd, dateEnd, dateNow > dateEnd);
     if (dateNow > dateEnd) {
         server.eventSpawn = EventSpawn.createDefault()

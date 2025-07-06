@@ -7,7 +7,8 @@ const selectEvent = (): EventClass => {
     return {
         ...randomEvent,
         id: randomEvent.id.toString(),
-        effectDescription: ""
+        effectDescription: "",
+        endTime: new Date(Date.now() +  60 * 1000)
     };
 }
 
