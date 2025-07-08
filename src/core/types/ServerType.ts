@@ -2,6 +2,7 @@
 import {EventSpawnType} from './EventSpawnType';
 import {PokemonType} from './PokemonType';
 import {SaveAllPokemonType} from "./SaveAllPokemonType";
+import {Pokemon} from "../classes/Pokemon";
 
 export interface ServerType {
     id: string;
@@ -15,4 +16,5 @@ export interface ServerType {
     countMessage: number;
     pokemonPresent: Record<string, PokemonType>;
 
+    getPokemonById(idChannel: string): Pokemon | null
 }

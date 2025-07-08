@@ -3,7 +3,7 @@ import {ChatInputCommandInteraction, EmbedBuilder, Interaction} from "discord.js
 import logger from "../../middlewares/error"
 import language from "../../lang/language";
 import {getServerById} from "../../cache/ServerCache";
-import {createPageForMenu, paginationMenu} from "../../utils/paginationMenu";
+import {createPageForMenu, paginationMenu} from "../../features/other/paginationMenu";
 import {codeListEmbed} from "../../features/code/code";
 import {getUserById} from "../../cache/UserCache";
 import {embedRequiredinformation} from "../../utils/embedRequiredinformation";

@@ -17,6 +17,14 @@ export class Server implements ServerType {
         public pokemonPresent: Record<string, Pokemon>
     ) {}
 
+    getPokemonById(idChannel: string): Pokemon | null {
+        const key = idChannel;
+        if (this.pokemonPresent[key]) {
+            return this.pokemonPresent[key];
+        }
+        return null;
+    }
+
     static fromMongo(data: ServerType): Server {
         const savePokemon = SaveAllPokemon.fromMongo(data.savePokemon ?? {});
 
@@ -43,7 +51,6 @@ export class Server implements ServerType {
             e.type,
             e.rarity,
             e.shiny,
-            e.endTime ? new Date(e.endTime) : null,
             e.whatEvent ?? null,
             e.allowedForm,
             e.messageSpawn,

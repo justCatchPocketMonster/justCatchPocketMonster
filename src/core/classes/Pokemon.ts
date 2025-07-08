@@ -16,4 +16,11 @@ export class Pokemon implements PokemonType {
         public isShiny: boolean | undefined,
         public hint: string,
     ) {}
+
+    nameIsSame(name: string): boolean {
+        const lowerName = name.toLowerCase();
+        return this.name.nameEng.some(n => n.toLowerCase().includes(lowerName)) ||
+            this.name.nameFr.some(n => n.toLowerCase().includes(lowerName));
+    }
+
 }

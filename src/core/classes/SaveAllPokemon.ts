@@ -1,6 +1,7 @@
 import { SaveAllPokemonType } from "../types/SaveAllPokemonType";
 import {SaveOnePokemon} from "./SaveOnePokemon";
 import allPokemon from "../../data/pokemon.json";
+import {Pokemon} from "./Pokemon";
 
 export class SaveAllPokemon implements SaveAllPokemonType{
 
@@ -18,6 +19,17 @@ export class SaveAllPokemon implements SaveAllPokemonType{
             }
         }
         return count;
+    }
+
+    addOneCatch(pokemon: Pokemon): void {
+        const key = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
+        if (!this.data[key]) {
+            this.updateMissSavePokemon();
+        }
+        this.data[key].catchCount++;
+        if (pokemon.isShiny) {
+            this.data[key].shinyCount++;
+        }
     }
 
     static fromMongo(data: SaveAllPokemonType): SaveAllPokemon {

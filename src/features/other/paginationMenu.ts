@@ -1,107 +1,125 @@
 import {
-    ActionRowBuilder, APIInteractionGuildMember, ButtonInteraction, ChatInputCommandInteraction, Embed, GuildMember,
-    Message, MessageCreateOptions, StringSelectMenuBuilder, StringSelectMenuInteraction,
-    StringSelectMenuOptionBuilder
-} from "discord.js";
-import fs from "fs";
-import {User} from "../../core/classes/User";
-import {getUserById, updateUser} from "../../cache/UserCache";
+    Interaction,
+    StringSelectMenuOptionBuilder,
+    StringSelectMenuBuilder,
+    ActionRowBuilder,
+    APISelectMenuOption,
+    Message,
+    MessageComponentInteraction,
+    EmbedBuilder,
+    AttachmentBuilder, StringSelectMenuInteraction
+} from 'discord.js';
 
-interface MenuPage {
-    page: Embed;
-    imagePage?: string;
+interface PageInformation {
     nameSelection: string;
-    descriptionSelection: string;
+    descriptionSelection?: string;
 }
 
-async function paginationMenu(interactionSlash: ChatInputCommandInteraction, defaultText: string, pages: MenuPage[], pageParDefaut: number = 1, time: number = 60000) {
+interface PageData {
+    page: EmbedBuilder;
+    imagePage?: AttachmentBuilder;
+    information: PageInformation;
+}
+export function createPageForMenu(
+    page: EmbedBuilder,
+    image: AttachmentBuilder | null = null,
+    nameSelection: string,
+    descriptionSelection?: string
+): PageData {
+    const info: PageInformation = {
+        nameSelection,
+        descriptionSelection,
+    };
+
+    if (image !== null) {
+        return {
+            page,
+            imagePage: image,
+            information: info,
+        };
+    } else {
+        return {
+            page,
+            information: info,
+        };
+    }
+}
+
+export async function paginationMenu(
+    interaction: Interaction,
+    defaultText: string,
+    pages: PageData[],
+    pageParDefaut: number = 1,
+    time: number = 60000
+): Promise<void> {
     try {
-        const interaction = validateInteraction(interactionSlash, defaultText, pages, pageParDefaut, time);
+        const components: StringSelectMenuOptionBuilder[] = [];
+        let count = 0;
 
-        const idUser: string = (interactionSlash.member as GuildMember | APIInteractionGuildMember).user.id;
-        const user = await getUserById(idUser);
+        for (const element of pages) {
+            const selectMenuCreation = new StringSelectMenuOptionBuilder()
+                .setLabel(element.information.nameSelection)
+                .setValue(count.toString());
 
-        const menuOptions = createMenuOptions(pages);
-        const menu = createSelectMenu(defaultText, menuOptions);
+            if (element.information.descriptionSelection) {
+                selectMenuCreation.setDescription(element.information.descriptionSelection);
+            }
 
-        let msg: Message | undefined;
-        msg = await interaction.channel?.send(getMessageData(pages, pageParDefaut - 1, menu));
-        if (!msg) return;
+            components.push(selectMenuCreation);
+            count++;
+        }
 
-        user.countPagination++;
-        updateUser(user.id, user);
+        const menuSelect = new StringSelectMenuBuilder()
+            .setCustomId('menu')
+            .setPlaceholder(defaultText)
+            .addOptions(components.map((e) => e as unknown as APISelectMenuOption)); // cast pour compenser le typage parfois strict
+
+        const menu = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuSelect);
+
+        const data: any = {
+            fetchReply: true,
+            components: [menu],
+            embeds: [pages[pageParDefaut - 1].page]
+        };
+
+        if (pages[pageParDefaut - 1].imagePage) {
+            data.files = [pages[pageParDefaut - 1].imagePage];
+        }
+
+        const msg = await (interaction.channel as any).send(data) as Message;
 
         const col = msg.createMessageComponentCollector({
-            filter: (i) => i.user.id === interaction.user.id,
-            time: time
+            filter: (i: MessageComponentInteraction) => i.user.id === (interaction as any).user.id,
+            time
         });
 
-        col.on('collect', async (i: StringSelectMenuInteraction) => {
-            let selectedOption = Number(i.values[0]);
-            if (isNaN(selectedOption)) return;
+        col.on('collect', async (i) => {
+            let selectedOption = parseInt((i as StringSelectMenuInteraction).values[0]);
 
-            (menu.components[0] as StringSelectMenuBuilder).setPlaceholder(pages[selectedOption].nameSelection);
+            while (!pages[selectedOption]?.page) {
+                selectedOption++;
+            }
 
-            // @ts-ignore
-            await i.update(getMessageData(pages, selectedOption, menu));
-            col.resetTimer({ time: time });
+            menu.components[0].setPlaceholder(pages[selectedOption].information.nameSelection);
+
+            const updateData: any = {
+                embeds: [pages[selectedOption].page],
+                components: [menu]
+            };
+
+            if (pages[selectedOption].imagePage) {
+                updateData.files = [pages[selectedOption].imagePage];
+            }
+
+            await i.update(updateData);
+            col.resetTimer({ time });
         });
 
         col.on('end', async () => {
             await msg.edit({ components: [] });
-            user.countPagination--;
-            updateUser(user.id, user);
         });
 
     } catch (error) {
         console.error(error);
     }
 }
-
-function validateInteraction(interactionSlash: ChatInputCommandInteraction, defaultText: string, pages: MenuPage[], pageParDefaut: number, time: number): ButtonInteraction {
-    if (pageParDefaut < 1 || pageParDefaut > pages.length) pageParDefaut = 1;
-    if (!interactionSlash.channel) throw new Error("Invalid channel");
-    if (!pages.length || time <= 10000) throw new Error("Invalid parameters");
-    if (!defaultText) throw new Error("Invalid default text");
-
-    return interactionSlash as unknown as ButtonInteraction;
-}
-
-function createMenuOptions(pages: MenuPage[]): StringSelectMenuOptionBuilder[] {
-    return pages.map((element, index) => {
-        const option = new StringSelectMenuOptionBuilder()
-            .setLabel(element.nameSelection)
-            .setValue(index.toString());
-
-        if (element.descriptionSelection) {
-            option.setDescription(element.descriptionSelection);
-        }
-
-        return option;
-    });
-}
-
-function createSelectMenu(defaultText: string, options: StringSelectMenuOptionBuilder[]): ActionRowBuilder<StringSelectMenuBuilder> {
-    const menuSelect = new StringSelectMenuBuilder()
-        .setCustomId('menu')
-        .setPlaceholder(defaultText)
-        .addOptions(options.map((e) => e.toJSON()));
-
-    return new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuSelect);
-}
-
-function getMessageData(pages: MenuPage[], index: number, menu: ActionRowBuilder<StringSelectMenuBuilder>): MessageCreateOptions {
-    const data: MessageCreateOptions = {
-        embeds: [pages[index].page],
-        components: [menu]
-    };
-
-    if (pages[index].imagePage) {
-        const imageBuffer = fs.readFileSync(pages[index].imagePage);
-        data.files = [imageBuffer];
-    }
-
-    return data;
-}
-
-export default paginationMenu;
