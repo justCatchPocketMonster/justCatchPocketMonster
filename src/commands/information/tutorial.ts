@@ -1,7 +1,9 @@
 import {SlashCommandBuilder} from "@discordjs/builders";
-import {ChatInputCommandInteraction, Interaction} from "discord.js";
+import {ChatInputCommandInteraction, EmbedBuilder, Interaction} from "discord.js";
 import logger from "../../middlewares/error"
 import language from "../../lang/language";
+import {createPageForMenu, paginationMenu} from "../../features/other/paginationMenu";
+import {getServerById} from "../../cache/ServerCache";
 
 export default {
     "name": "tutorial",
@@ -17,47 +19,48 @@ export default {
     "actif": true,
     async execute(interaction: ChatInputCommandInteraction){
         try{
-            pages = []
+            if(interaction.guildId === null) return;
+            let server = await getServerById(interaction.guildId);
+            const pages = []
 
-            mainPage =
                 pages.push(
-                    pagination.createPageForMenu(
-                        new Discord.EmbedBuilder()
+                    createPageForMenu(
+                        new EmbedBuilder()
                             .setColor('#0099ff')
-                            .setTitle(language.getText(interaction.guild.id, "tutorialTitle"))
-                            .setDescription(language.getText(interaction.guild.id, "tutorialDescription"))
+                            .setTitle(language("tutorialTitle",server.language))
+                            .setDescription(language("tutorialDescription",server.language))
                             .addFields(
-                                {name: language.getText(interaction.guild.id, "tutorialField1Title"), value: language.getText(interaction.guild.id, "tutorialField1Desc"), inline: false},
-                                {name: language.getText(interaction.guild.id, "tutorialField2Title"), value: language.getText(interaction.guild.id, "tutorialField2Desc"), inline: false},
-                                {name: language.getText(interaction.guild.id, "tutorialField3Title"), value: language.getText(interaction.guild.id, "tutorialField3Desc"), inline: false},
+                                {name: language("tutorialField1Title",server.language), value: language("tutorialField1Desc",server.language), inline: false},
+                                {name: language("tutorialField2Title",server.language), value: language("tutorialField2Desc",server.language), inline: false},
+                                {name: language("tutorialField3Title",server.language), value: language("tutorialField3Desc",server.language), inline: false},
                             )
                             .setImage("https://cdn.discordapp.com/attachments/1150766647905366086/1150767117206036510/botGifTuto.gif")
                         ,
                         null,
-                        language.getText(interaction.guild.id, "baseTutorialTitle"),
+                        language("baseTutorialTitle",server.language),
                         ""
                     )
                 )
 
             pages.push(
-                pagination.createPageForMenu(
-                    new Discord.EmbedBuilder()
+                createPageForMenu(
+                    new EmbedBuilder()
                         .setColor('#7B68EE')
-                        .setTitle(language.getText(interaction.guild.id, "tutorialAdminTitle"))
-                        .setDescription(language.getText(interaction.guild.id, "tutorialAdminDescription"))
+                        .setTitle(language("tutorialAdminTitle",server.language),)
+                        .setDescription(language("tutorialAdminDescription",server.language),)
                         .addFields(
-                            {name: language.getText(interaction.guild.id, "tutorialAdminField1Title"), value: language.getText(interaction.guild.id, "tutorialAdminField1Desc"), inline: false},
-                            {name: language.getText(interaction.guild.id, "tutorialAdminField2Title"), value: language.getText(interaction.guild.id, "tutorialAdminField2Desc"), inline: false},
+                            {name: language("tutorialAdminField1Title",server.language), value: language("tutorialAdminField1Desc",server.language), inline: false},
+                            {name: language("tutorialAdminField2Title",server.language), value: language("tutorialAdminField2Desc",server.language), inline: false},
                         )
                     ,
                     null,
-                    language.getText(interaction.guild.id, "tutorialAdminTitle"),
+                    language("tutorialAdminTitle",server.language),
                     ""
                 )
             )
 
 
-            pagination.paginationMenu(interaction, language.getText(interaction.guild.id, "selectAPage"), pages)
+            paginationMenu(interaction, language("selectAPage",server.language), pages)
         } catch (e) {
             logger.error(e)
         }
