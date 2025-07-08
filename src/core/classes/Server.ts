@@ -17,12 +17,19 @@ export class Server implements ServerType {
         public pokemonPresent: Record<string, Pokemon>
     ) {}
 
-    getPokemonById(idChannel: string): Pokemon | null {
+    getPokemonByIdChannel(idChannel: string): Pokemon | null {
         const key = idChannel;
         if (this.pokemonPresent[key]) {
             return this.pokemonPresent[key];
         }
         return null;
+    }
+
+    removePokemonByIdChannel(idChannel: string): void {
+        const key = idChannel;
+        if (this.pokemonPresent[key]) {
+            delete this.pokemonPresent[key];
+        }
     }
 
     static fromMongo(data: ServerType): Server {

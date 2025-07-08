@@ -16,5 +16,6 @@ export interface ServerType {
     countMessage: number;
     pokemonPresent: Record<string, PokemonType>;
 
-    getPokemonById(idChannel: string): Pokemon | null
+    getPokemonByIdChannel(idChannel: string): Pokemon | null
+    removePokemonByIdChannel(idChannel: string): void
 }

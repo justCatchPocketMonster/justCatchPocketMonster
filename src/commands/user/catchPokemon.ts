@@ -2,6 +2,9 @@ import {SlashCommandBuilder, SlashCommandStringOption} from "@discordjs/builders
 import {ChatInputCommandInteraction} from "discord.js";
 import logger from "../../middlewares/error"
 import language from "../../lang/language";
+import {catchPokemon} from "../../features/catch/catch";
+import {getUserById} from "../../cache/UserCache";
+import {getServerById} from "../../cache/ServerCache";
 
 export default {
     "name": "catch",
@@ -27,7 +30,11 @@ export default {
     "actif": true,
     async execute(interaction: ChatInputCommandInteraction){
         try{
-            // TODO: a faire de 0
+            if(!interaction.guild){ return; }
+
+            const user = await getUserById(interaction.user.id);
+            const server = await getServerById(interaction.guild.id);
+            catchPokemon(user, server, interaction.channelId, interaction.options.getString(language("commandCatchOptionName","eng")) ?? "", interaction);
         } catch (e) {
             logger.error(e)
         }
