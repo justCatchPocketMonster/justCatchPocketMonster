@@ -61,25 +61,25 @@ export default {
 
             if(server.channelAllowed.includes(channel.id)){
                 if(interaction.options.getBoolean(language("spawnNameOptionBool","eng"))){
-                    await interaction.channel.send({
+                    await interaction.reply({
                         content: language("spawnPokemonAlreadyActivate", server.language)
                     });
                 }
                 else{
-                    await interaction.channel.send({
+                    await interaction.reply({
                         content: language("spawnPokemonDesactivate", server.language)
                     });
                     server.channelAllowed = server.channelAllowed.filter(item => item !== channel.id)
                 }
             } else {
                 if(interaction.options.getBoolean(language("spawnNameOptionBool","eng"))){
-                    await interaction.channel.send({
+                    await interaction.reply({
                         content: language("spawnPokemonActivate", server.language)
                     });
                     server.channelAllowed.push(channel.id)
                 }
                 else{
-                    await interaction.channel.send({
+                    await interaction.reply({
                         content: language("spawnPokemonAlreadyDesactivate", server.language)
                     });
                 }
