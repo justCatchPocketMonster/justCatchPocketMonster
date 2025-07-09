@@ -45,26 +45,6 @@ export class SaveAllPokemon implements SaveAllPokemonType{
         }
     }
 
-    getSaveWithoutForm(): Record<string, SaveOnePokemon>{
-        const result: Record<string, SaveOnePokemon> = {};
-        for (const key in this.data) {
-            const [id, form, versionForm] = key.split("-");
-            if (!result[id]) {
-                result[id] = new SaveOnePokemon(
-                    id,
-                    this.data[key].rarity,
-                    "",
-                    0,
-                    0,
-                    0
-                );
-            }
-            result[id].normalCount += this.data[key].normalCount;
-            result[id].shinyCount += this.data[key].shinyCount;
-        }
-        return result;
-    }
-
     static fromMongo(data: SaveAllPokemonType): SaveAllPokemon {
         const saveAllPokemon = new SaveAllPokemon();
         for (const [key, value] of Object.entries(data.data ?? {})) {
@@ -99,15 +79,8 @@ export class SaveAllPokemon implements SaveAllPokemonType{
     sortPokemonsByCount(options: SortOptions): SortedResult[] {
         const { rarity, form, useShiny, ascending } = options;
 
-        let saveData : Record<string, SaveOnePokemon>
 
-        if(options.form === null || options.form === undefined) {
-            saveData = this.getSaveWithoutForm();
-        } else {
-            saveData = this.data;
-        }
-
-        const filtered = Object.values(saveData).filter(pokemon => {
+        const filtered = Object.values(this.data).filter(pokemon => {
             const matchRarity = rarity == null || pokemon.rarity === rarity;
             const matchForm = form == null || pokemon.form === form;
             return matchRarity && matchForm;
