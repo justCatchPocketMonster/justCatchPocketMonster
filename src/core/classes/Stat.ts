@@ -34,6 +34,7 @@ export class Stat implements StatType {
         this.savePokemonSpawn.addOneCatch(pokemon);
     }
 
+
     static createDefault(id: string): Stat {
         return new Stat(
             id,
