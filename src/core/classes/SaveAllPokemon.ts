@@ -15,7 +15,7 @@ export class SaveAllPokemon implements SaveAllPokemonType{
         for (const key in this.data) {
             const pokemon = this.data[key];
             if (pokemon.idPokemon === id) {
-                count += pokemon.catchCount;
+                count += pokemon.normalCount;
             }
         }
         return count;
@@ -26,7 +26,7 @@ export class SaveAllPokemon implements SaveAllPokemonType{
         if (!this.data[key]) {
             this.updateMissSavePokemon();
         }
-        this.data[key].catchCount++;
+        this.data[key].normalCount++;
         if (pokemon.isShiny) {
             this.data[key].shinyCount++;
         }
@@ -40,7 +40,7 @@ export class SaveAllPokemon implements SaveAllPokemonType{
                 value.form,
                 value.versionForm,
                 value.shinyCount,
-                value.catchCount
+                value.normalCount
             );
         }
         return saveAllPokemon;

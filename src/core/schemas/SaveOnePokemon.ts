@@ -6,7 +6,7 @@ import {SaveOnePokemonType} from '../types/SaveOnePokemonType';
 export const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
     
     idPokemon: {
-        type: Number,
+        type: String,
         required: true,
     },
     form: {
@@ -17,7 +17,7 @@ export const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>({
         type: Number,
         required: true,
     },
-    catchCount: {
+    normalCount: {
         type: Number,
         required: true,
     },

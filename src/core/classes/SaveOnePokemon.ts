@@ -6,7 +6,7 @@ export class SaveOnePokemon implements SaveOnePokemonType {
         public form: string,
         public versionForm: number,
         public shinyCount: number,
-        public catchCount: number,
+        public normalCount: number,
     ) {}
 }
 

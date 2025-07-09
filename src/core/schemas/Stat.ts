@@ -17,7 +17,11 @@ const StatSchema = new mongoose.Schema<StatType>({
         type: Number,
         required: true
     },
-    savePokemon: {
+    savePokemonSpawn: {
+        type: SaveAllPokemonSchema,
+        required: true,
+    },
+    savePokemonCatch: {
         type: SaveAllPokemonSchema,
         required: true,
     },

@@ -3,9 +3,11 @@ import {ServerType} from "../../core/types/ServerType";
 import {ChatInputCommandInteraction, GuildMember} from "discord.js";
 import {eventShinyAfterCatch} from "../event/eventShinyAfterCatch";
 import language from "../../lang/language";
+import {getStatById, updateStat} from "../../cache/StatCache";
+import {version} from "../../config/default/misc";
 
 
-export function catchPokemon(user: UserType, server: ServerType, idChannel: string, pokemonInput:string, interaction: ChatInputCommandInteraction) {
+export async function catchPokemon(user: UserType, server: ServerType, idChannel: string, pokemonInput:string, interaction: ChatInputCommandInteraction) {
 
     const pokemon = server.getPokemonByIdChannel(idChannel);
 
@@ -32,6 +34,14 @@ export function catchPokemon(user: UserType, server: ServerType, idChannel: stri
     const shinyAfterEvent = eventShinyAfterCatch(interaction, pokemon.isShiny ?? (() => { throw new Error("isShiny est undefined"); })(), server);
     pokemon.isShiny = shinyAfterEvent;
 
+    const statVersion = await getStatById(version)
+    const statAll = await getStatById("global")
+
+    statVersion.addCatch(pokemon)
+    statAll.addCatch(pokemon)
+
+    updateStat(version, statVersion);
+    updateStat("global", statAll);
     user.savePokemon.addOneCatch(pokemon)
     server.savePokemon.addOneCatch(pokemon)
 

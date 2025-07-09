@@ -2,7 +2,7 @@ export interface SaveOnePokemonType {
     idPokemon: string;
     form: string;
     versionForm: number;
-    catchCount: number;
+    normalCount: number;
     shinyCount: number;
 
 }

@@ -4,6 +4,7 @@ export interface StatType {
     version: string;
     pokemonSpawned: number;
     pokemonCaught: number;
-    savePokemon: SaveAllPokemonType;
+    savePokemonSpawn: SaveAllPokemonType;
+    savePokemonCatch: SaveAllPokemonType;
 
 }

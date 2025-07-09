@@ -12,6 +12,8 @@ import {getServerById, updateServer} from "../../cache/ServerCache";
 import {valueMaxChoiceEvent} from "../../config/default/spawn";
 import {PokemonType} from "../../core/types/PokemonType";
 import {Pokemon} from "../../core/classes/Pokemon";
+import {getStatById, updateStat} from "../../cache/StatCache";
+import {version} from "../../config/default/misc";
 
 interface spawnData {
     embed: EmbedBuilder,
@@ -90,13 +92,22 @@ async function choiceTypeOfSpawn(server: ServerType, idChannel: string) : { embe
             pokemonChoice.imgName = eggObject.imgName;
         }
         server.pokemonPresent[idChannel] = pokemonChoice;
+        const statVersion = await getStatById(version)
+        const statAll = await getStatById("global")
+
+        statVersion.addSpawn(pokemonChoice as Pokemon)
+        statAll.addSpawn(pokemonChoice as Pokemon)
+
+        updateStat(version, statVersion);
+        updateStat("global", statAll);
+
         return generateEmbedPokemon(pokemonChoice, server);
     } catch (e) {
         logger.error(e);
     }
 }
 
-function generateEmbedPokemon(pokemon: Pokemon, server : ServerType): { embed: EmbedBuilder, image: AttachmentBuilder } {
+function generateEmbedPokemon(pokemon: PokemonType, server : ServerType): { embed: EmbedBuilder, image: AttachmentBuilder } {
 
         const basePath = server.eventSpawn.nightMode
             ? "./src/assets/pokeHomeShadow/"
