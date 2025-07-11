@@ -1,5 +1,5 @@
 import {StatType} from '../types/StatType';
-import {SaveAllPokemon} from "./SaveAllPokemon";
+import {SaveAllPokemon, SortedResult} from "./SaveAllPokemon";
 import {Pokemon} from "./Pokemon";
 
 export class Stat implements StatType {
@@ -32,6 +32,46 @@ export class Stat implements StatType {
     addSpawn(pokemon: Pokemon): void {
         this.pokemonSpawned++;
         this.savePokemonSpawn.addOneCatch(pokemon);
+    }
+
+    getTopSpawnedPokemonByRarity(rarity: string, useShiny: boolean,  ascending: boolean): SortedResult[] {
+        return this.savePokemonSpawn.sortPokemonsByCount(
+            {
+                rarity,
+                useShiny,
+                ascending
+            }
+        )
+    }
+
+    getTopSpawnedPokemonByForm(form: string, useShiny: boolean,  ascending: boolean): SortedResult[] {
+        return this.savePokemonSpawn.sortPokemonsByCount(
+            {
+                form,
+                useShiny,
+                ascending
+            }
+        )
+    }
+
+    getTopCatchedPokemonByRarity(rarity: string, useShiny: boolean,  ascending: boolean): SortedResult[] {
+        return this.savePokemonCatch.sortPokemonsByCount(
+            {
+                rarity,
+                useShiny,
+                ascending
+            }
+        )
+    }
+
+    getTopCatchedPokemonByForm(form: string, useShiny: boolean,  ascending: boolean): SortedResult[] {
+        return this.savePokemonCatch.sortPokemonsByCount(
+            {
+                form,
+                useShiny,
+                ascending
+            }
+        )
     }
 
 
