@@ -1,48 +1,46 @@
-import { TextChannel } from "discord.js";
+import {ColorResolvable, TextChannel} from "discord.js";
 import logger from "../middlewares/error"
 
 
-const colorByType = (type: string) : string =>{
+export const colorByType = (type: string) : ColorResolvable =>{
         switch (type) {
             case "Steel" :
-                return "B7B7CE";
+                return "B7B7CE" as ColorResolvable;
             case "Fighting" :
-                return "C22E28";
+                return "C22E28" as ColorResolvable;
             case "Dragon" :
-                return "6F35FC";
+                return "6F35FC" as ColorResolvable;
             case "Water" :
-                return "6390F0";
+                return "6390F0" as ColorResolvable;
             case "Fire" :
-                return "EE8130";
+                return "EE8130" as ColorResolvable;
             case "Fairy" :
-                return "D685AD";
+                return "D685AD" as ColorResolvable;
             case "Ice" :
-                return "96D9D6";
+                return "96D9D6" as ColorResolvable;
             case "Bug" :
-                return "A6B91A";
+                return "A6B91A" as ColorResolvable;
             case "Normal" :
-                return "A8A77A";
+                return "A8A77A" as ColorResolvable;
             case "Grass" :
-                return "7AC74C";
+                return "7AC74C" as ColorResolvable;
             case "Poison" :
-                return "A33EA1";
+                return "A33EA1" as ColorResolvable;
             case "Psychic" :
-                return "F95587";
+                return "F95587" as ColorResolvable;
             case "Rock" :
-                return "B6A136";
+                return "B6A136" as ColorResolvable;
             case "Ground" :
-                return "E2BF65";
+                return "E2BF65" as ColorResolvable;
             case "Ghost" :
-                return "735797";
+                return "735797" as ColorResolvable;
             case "Flying" :
-                return "A98FF3";
+                return "A98FF3" as ColorResolvable;
             case "Electric" :
-                return "F7D02C";
+                return "F7D02C" as ColorResolvable;
             case "Dark" :
-                return "705746";
+                return "705746" as ColorResolvable;
             default:
-                return "FFFFFF";
+                return "FFFFFF" as ColorResolvable;
         }
     }
-
-    export {colorByType};

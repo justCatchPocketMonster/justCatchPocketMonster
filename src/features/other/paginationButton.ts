@@ -9,9 +9,9 @@ import {
     ChatInputCommandInteraction,
     Collection,
     CollectorFilter,
-    Embed,
-    GuildMember,
-    InteractionCollector,
+    Embed, EmbedBuilder,
+    GuildMember, InteractionCallback,
+    InteractionCollector, InteractionReplyOptions,
     InteractionUpdateOptions,
     MappedInteractionTypes,
     Message,
@@ -23,19 +23,19 @@ const fs = require('fs');
 import {exceptions} from "winston";
 import {User} from "../../core/classes/User";
 
-interface pageType {
-    page: Embed,
+export interface pageType {
+    page: EmbedBuilder,
     imagePage?: String
 }
 
 const paginationButton = async (interactionSlash: ChatInputCommandInteraction, pages: pageType[], pageParDefaut:number = 1, time:number = 60000) => {
     try {
 
-        const idUser: string = (interactionSlash.member as GuildMember | APIInteractionGuildMember).user.id;
+        const idUser: string = interactionSlash.user.id;
         const user = await getUserById(idUser);
 
         if (user.countPagination >= 10) {
-            interactionSlash.channel?.send("Trop de page");
+            await interactionSlash.reply("Trop de page");
             return;
         }
 
@@ -62,8 +62,8 @@ const sendInitialPage = async (
     row: ActionRowBuilder<ButtonBuilder>,
     time: number
 ) => {
-    await interactionSlash.channel?.send(getData(pages, index))
-        .then(messageSendBot => {
+    await interactionSlash.reply(getData(pages, index))
+        .then((response) => {
             user.countPagination++;
             updateUser(user.id, user);
             const col = createCollector(messageSendBot, interactionSlash, pages, row, time);
@@ -123,7 +123,7 @@ const validateInteraction = (
 };
 
 const createCollector = (
-    messageSendBot: Message,
+    messageSendBot: InteractionCallback,
     interactionSlash: ChatInputCommandInteraction,
     pages: pageType[],
     row: ActionRowBuilder<ButtonBuilder>,
@@ -169,8 +169,8 @@ function getButton(pages: pageType[] = []) : ButtonBuilder[] {
     return arrayButton;
 }
 
-const getData = (pages: pageType[], index:number) : MessageCreateOptions => {
-    let data:MessageCreateOptions;
+const getData = (pages: pageType[], index:number) : InteractionReplyOptions => {
+    let data:InteractionReplyOptions;
 
     if(pages[index].imagePage !== undefined){
         const imageBuffer = fs.readFileSync(pages[index].imagePage);

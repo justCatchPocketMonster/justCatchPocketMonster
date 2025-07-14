@@ -6,7 +6,9 @@ export class Stat implements StatType {
     constructor(
         public version: string,
         public pokemonSpawned: number,
+        public pokemonSpawnedShiny: number,
         public pokemonCaught: number,
+        public pokemonCaughtShiny: number,
         public savePokemonSpawn: SaveAllPokemon,
         public savePokemonCatch: SaveAllPokemon
     ) {}
@@ -18,7 +20,9 @@ export class Stat implements StatType {
         return new Stat(
             data.version,
             data.pokemonSpawned,
+            data.pokemonSpawnedShiny,
             data.pokemonCaught,
+            data.pokemonCaughtShiny,
             savePokemonSpawn,
             savePokemonCatch
         );
@@ -79,7 +83,9 @@ export class Stat implements StatType {
         return new Stat(
             id,
             0, // pokemonSpawned
+            0, // pokemonSpawnedShiny
             0, // pokemonCaught
+            0, // pokemonCaughtShiny
             (new SaveAllPokemon()).updateMissSavePokemon(),
             (new SaveAllPokemon()).updateMissSavePokemon()
         );

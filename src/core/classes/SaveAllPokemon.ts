@@ -45,6 +45,10 @@ export class SaveAllPokemon implements SaveAllPokemonType{
         }
     }
 
+    getSavesById(id: string): SaveOnePokemon[] {
+        return Object.values(this.data).filter(pokemon => pokemon.idPokemon === id);
+    }
+
     static fromMongo(data: SaveAllPokemonType): SaveAllPokemon {
         const saveAllPokemon = new SaveAllPokemon();
         for (const [key, value] of Object.entries(data.data ?? {})) {

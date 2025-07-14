@@ -541,6 +541,10 @@
         "fr": ["Captures"],
         "eng": ["Caught"]
     },
+    "nombreCaptureVariant": {
+        "fr": ["Captures de cette variante"],
+        "eng": ["Caught of this variant"]
+    },
     "nombreDeCaptureTotaly": {
         "fr": ["Capturés : "],
         "eng": ["Caught : "]

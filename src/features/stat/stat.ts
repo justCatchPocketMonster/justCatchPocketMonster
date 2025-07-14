@@ -63,7 +63,7 @@ export default function createPaginationStat(interaction: ChatInputCommandIntera
     };
 
     const arrayEmbed = [
-        createEntry(getLang("statMainPageName"), principalEmbedStat(interaction)),
+        createEntry(getLang("statMainPageName"), principalEmbedStat(actualVersionStat, generalVersionStat, server)),
 
         createSectionHeader(getLang("statCategoryOrdinary")),
         ...createStatEntries("ordinary", "statCategoryOrdinary", "rarity"),
@@ -95,14 +95,7 @@ function embedClassement(
     const langKey = `name${server.language}` as "nameEng" | "nameFr";
 
     arraySortPokemon.slice(0, 21).forEach((statPokemon, index) => {
-        const displayedPokemons = statPokemon.who
-            .slice(0, 3)
-            .map(id => {
-                const pokemon = allPokemon.find(p => p.id.toString() === id);
-                return pokemon ? pokemon.name[langKey].join(" ") : null;
-            })
-            .filter(Boolean)
-            .join(" ");
+        const displayedPokemons = getPokemonNameByStatId(statPokemon);
 
         const remainingCount = statPokemon.who.length - 3;
         const suffix = remainingCount > 0 ? `... (+ ${remainingCount} autres)` : "";
@@ -117,45 +110,62 @@ function embedClassement(
     return embed;
 }
 
+function getPokemonNameByStatId(statId: SortedResult){
+    const langKey = "nameEng" as "nameEng" | "nameFr";
+    return statId.who.map(id => {
+        const pokemon = allPokemon.find(p => p.id.toString() === id);
+        return pokemon ? pokemon.name[langKey].join(" ") : null;
+    }).filter(Boolean).join(", ");
+}
 
 
+function principalEmbedStat(actualVersionStat: Stat, generalVersionStat: Stat, server: ServerType) {
+    const t = (key: string) => language(key, server.language);
 
-function principalEmbedStat(interaction){
-        mostLeastCatch = stringObjectPokemonMostAndLeastCatch(interaction);
-        mostLeastSpawn = stringObjectPokemonMostAndLeastSpawn(interaction);
+    const embed = new EmbedBuilder()
+        .setTitle("stats")
+        .setColor("Purple");
 
+    const addStatFields = (fields: { name: string; value: string | number }[]) => {
+        for (let i = 0; i < fields.length; i += 2) {
+            embed.addFields(
+                { name: fields[i].name, value: String(fields[i].value), inline: true },
+                { name: fields[i + 1].name, value: String(fields[i + 1].value), inline: true }
+            );
+        }
+    };
 
+    addStatFields([
+        { name: t("nombreDeCaptureTotaly"), value: generalVersionStat.pokemonSpawned },
+        { name: t("nombreDeCaptureShinyTotaly"), value: generalVersionStat.pokemonSpawnedShiny },
+        { name: t("nombreDeSpawnTotaly"), value: generalVersionStat.pokemonCaught },
+        { name: t("nombreDeSpawnShinyTotaly"), value: generalVersionStat.pokemonCaughtShiny }
+    ]);
 
-        let statEmbed = new Discord.EmbedBuilder()
-            .setTitle("stats")
-            .setColor("Purple")
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureTotaly"), value: getCount(false, false, false)+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyTotaly"), value: getCount(false, false, true)+"", inline:true}
-            )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnTotaly"), value: getCount(false, true, false)+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyTotaly"), value:getCount(false, true, true)+"", inline:true}
-            )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureVersion"), value: getCount(false, false, false, "version")+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeCaptureShinyVersion"), value: getCount(false, false, true, "version")+"", inline:true}
-            )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnVersion"), value: getCount(false, true, false, "version")+"", inline:true},
-                {name: language.getText(interaction.guild.id, "nombreDeSpawnShinyVersion"), value: getCount(false, true, true, "version")+"", inline:true}
-            )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastCaught"), value: mostLeastCatch["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostCaught"), value: mostLeastCatch["most"], inline:true}
-            )
-            .addFields(
-                {name: language.getText(interaction.guild.id, "pokemonLeastSpawn"), value: mostLeastSpawn["least"], inline:true},
-                {name: language.getText(interaction.guild.id, "pokemonMostSpawn"), value: mostLeastSpawn["most"], inline:true}
-            )
+    addStatFields([
+        { name: t("nombreDeCaptureVersion"), value: actualVersionStat.pokemonSpawned },
+        { name: t("nombreDeCaptureShinyVersion"), value: actualVersionStat.pokemonSpawnedShiny },
+        { name: t("nombreDeSpawnVersion"), value: actualVersionStat.pokemonCaught },
+        { name: t("nombreDeSpawnShinyVersion"), value: actualVersionStat.pokemonCaughtShiny }
+    ]);
 
-        return statEmbed;
-    }
+    const leastCaught = generalVersionStat.savePokemonCatch.sortPokemonsByCount({ ascending: true, useShiny: false })[0];
+    const mostCaught = generalVersionStat.savePokemonCatch.sortPokemonsByCount({ ascending: false, useShiny: false })[0];
+    addStatFields([
+        { name: t("pokemonLeastCaught"), value: getPokemonNameByStatId(leastCaught) },
+        { name: t("pokemonMostCaught"), value: getPokemonNameByStatId(mostCaught) }
+    ]);
+
+    const leastSpawned = generalVersionStat.savePokemonSpawn.sortPokemonsByCount({ ascending: true, useShiny: false })[0];
+    const mostSpawned = generalVersionStat.savePokemonSpawn.sortPokemonsByCount({ ascending: false, useShiny: false })[0];
+    addStatFields([
+        { name: t("pokemonLeastSpawn"), value: getPokemonNameByStatId(leastSpawned) },
+        { name: t("pokemonMostSpawn"), value: getPokemonNameByStatId(mostSpawned) }
+    ]);
+
+    return embed;
+}
+
 
 
 

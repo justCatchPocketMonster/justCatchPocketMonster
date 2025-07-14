@@ -5,7 +5,7 @@ import hintPokemon from "../commands/information/hintPokemon";
 import information from "../commands/information/information";
 import stat from "../commands/information/stat";
 import tutorial from "../commands/information/tutorial";
-import howHaveThisPokemon from "../commands/save/howHaveThisPokemon";
+import howHaveThisPokemon from "../commands/save/howMuchThisPokemon";
 import pokedex from "../commands/save/pokedex";
 import effect from "../commands/server/effect";
 import code from "../commands/user/code";
