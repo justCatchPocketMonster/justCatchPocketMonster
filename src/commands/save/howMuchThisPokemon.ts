@@ -5,6 +5,10 @@ import language from "../../lang/language";
 import {getServerById} from "../../cache/ServerCache";
 import {getUserById} from "../../cache/UserCache";
 import allPokemon from "../../data/pokemon.json";
+import {howMuchThisPokemon} from "../../features/howMuchThisPokemon/howMuchThisPokemon";
+import {getStatById} from "../../cache/StatCache";
+import {version} from "../../config/default/misc";
+import {ServerType} from "../../core/types/ServerType";
 
 export default {
     "name": "howmuch",
@@ -44,46 +48,54 @@ export default {
     "actif": true,
     async execute(interaction: ChatInputCommandInteraction){
         try{
-            // TODO: a faire de 0
             if (!interaction.guildId) return;
 
             const server = await getServerById(interaction.guildId);
             const user = await getUserById(interaction.user.id);
+            const stat = await getStatById(version);
 
             const pokemonNameInput = interaction.options.getString(language("commandHowOptionNameStringPokemonName", "eng"));
-            let pokemonId = interaction.options.getString(language("commandHowOptionNameStringNumber", "eng"));
+            const pokemonIdInput = interaction.options.getString(language("commandHowOptionNameStringNumber", "eng"));
 
-            if (pokemonNameInput) {
-                const matchedPokemon = allPokemon.find(pokemon =>
-                    pokemon.id !== 0 &&
-                    (
-                        pokemon.name.nameEng[0].toLowerCase() === pokemonNameInput.toLowerCase() ||
-                        pokemon.name.nameFr[0].toLowerCase() === pokemonNameInput.toLowerCase()
-                    )
-                );
+            const resolvedPokemonId = resolvePokemonId(pokemonNameInput, pokemonIdInput, server);
 
-                if (matchedPokemon) {
-                    pokemonId = matchedPokemon.id.toString();
-                } else {
-                    await interaction.reply(language("notExist", server.language));
-                    return;
-                }
-
-            } else if (pokemonId) {
-                const valid = allPokemon.some(pokemon =>
-                    pokemon.id !== 0 && pokemon.id.toString() === pokemonId
-                );
-
-                if (!valid) {
-                    await interaction.reply(language("notExist", server.language));
-                    return;
-                }
-
-            } else {
-                await interaction.reply(language("noArgument", server.language));
+            if (!resolvedPokemonId) {
                 return;
             }
 
+            howMuchThisPokemon(interaction, user, server, stat, resolvedPokemonId);
+
+
+            function resolvePokemonId(pokemonNameInput: string | null, pokemonIdInput: string | null, server: ServerType): string | null {
+                if (pokemonNameInput) {
+                    const matched = allPokemon.find(p =>
+                            p.id !== 0 && (
+                                p.name.nameEng[0].toLowerCase() === pokemonNameInput.toLowerCase() ||
+                                p.name.nameFr[0].toLowerCase() === pokemonNameInput.toLowerCase()
+                            )
+                    );
+
+                    if (!matched) {
+                        interaction.reply(language("notExist", server.language));
+                        return null;
+                    }
+
+                    return matched.id.toString();
+                }
+
+                if (pokemonIdInput) {
+                    const isValid = allPokemon.some(p => p.id !== 0 && p.id.toString() === pokemonIdInput);
+                    if (!isValid) {
+                        interaction.reply(language("notExist", server.language));
+                        return null;
+                    }
+
+                    return pokemonIdInput;
+                }
+
+                interaction.reply(language("noArgument", server.language));
+                return null;
+            }
 
         } catch (e) {
             logger.error(e)

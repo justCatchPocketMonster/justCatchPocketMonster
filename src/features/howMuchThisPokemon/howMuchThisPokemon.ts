@@ -1,27 +1,74 @@
 import {ServerType} from "../../core/types/ServerType";
 import {UserType} from "../../core/types/UserType";
 import {StatType} from "../../core/types/StatType";
-import {EmbedBuilder} from "discord.js";
+import {ChatInputCommandInteraction, EmbedBuilder} from "discord.js";
 import language from "../../lang/language";
 import {SaveOnePokemon} from "../../core/classes/SaveOnePokemon";
 import {colorByType} from "../../utils/helperFunction";
-import {pageType} from "../other/paginationButton";
+import {pageType, paginationButton} from "../other/paginationButton";
+import allPokemon from '../../data/pokemon.json';
 
 
-export function howMuchThisPokemon(user: UserType, server: ServerType, stat:StatType, pokemonId: string){
+export function howMuchThisPokemon(interaction: ChatInputCommandInteraction, user: UserType, server: ServerType, stat:StatType, pokemonId: string){
     const saveOnePokemonUser = user.savePokemon.getSavesById(pokemonId);
     const saveOnePokemonServer = server.savePokemon.getSavesById(pokemonId);
     const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
     const saveOnePokemonStatCatch = stat.savePokemonCatch.getSavesById(pokemonId);
+    const paginationPage : pageType[] = []
 
-    saveOnePokemonStatSpawn.forEach(save => {
+    for (const save of saveOnePokemonStatSpawn) {
+        const saveSpecifiqueFormUser = getSpecifiqueFormSaveData(save, saveOnePokemonUser);
+        if(saveSpecifiqueFormUser.versionForm === 0) {
+            continue;
+        }
 
-    })
+        const saveField: saveFieldData = {
+            saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
+            saveSpecifiqueFormUser: saveSpecifiqueFormUser,
+            saveServer: getSpecifiqueFormSaveData(save,saveOnePokemonServer),
+            saveStatSpawn: save,
+            saveStatCatch: getSpecifiqueFormSaveData(save,saveOnePokemonStatCatch),
+        }
+
+        const pokemonData = getPokemonDataBySave(save);
+        if(pokemonData === null) return;
+        const avatar = interaction.user.avatar ? interaction.user.avatar : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+        paginationPage.push(generateEmbedData(pokemonData, server, avatar, saveField, false));
+        if(saveSpecifiqueFormUser.shinyCount > 0) {
+            paginationPage.push(generateEmbedData(pokemonData, server, avatar, saveField, true));
+        }
 
 
+    }
+    paginationButton(interaction, paginationPage);
 }
 
-function generateEmbedData(pokemon: pokemonData, server: ServerType, avatarUser: string, allSaveData: saveFieldData): pageType{
+function getSpecifiqueFormSaveData(exampleSave: SaveOnePokemon, saveList: SaveOnePokemon[]): SaveOnePokemon {
+    return saveList.find(save =>
+        save.idPokemon === exampleSave.idPokemon &&
+        save.form === exampleSave.form &&
+        save.versionForm === exampleSave.versionForm
+    ) ?? new SaveOnePokemon(exampleSave.idPokemon, "empty", "empty", 0, 0, 0);
+}
+
+function getFusionSaveData(saveList: SaveOnePokemon[]): SaveOnePokemon {
+    return saveList.reduce((acc, save) => {
+        acc.normalCount += save.normalCount;
+        acc.shinyCount += save.shinyCount;
+        return acc;
+    }, new SaveOnePokemon(saveList[0].idPokemon, "fusion", "fusion", 0, 0, 0));
+}
+
+function getPokemonDataBySave(saveOnePokemon: SaveOnePokemon): pokemonData | null {
+    return allPokemon.find(pokemon =>
+        pokemon.id.toString() === saveOnePokemon.idPokemon &&
+        pokemon.form === saveOnePokemon.form &&
+        pokemon.versionForm === saveOnePokemon.versionForm
+    ) ?? null;
+}
+
+function generateEmbedData(pokemon: pokemonData, server: ServerType, avatarUser: string, allSaveData: saveFieldData, isShiny: boolean): pageType{
 
     const embed = new EmbedBuilder()
         .setTitle(pokemon["name"]['name'+server.language][0])
@@ -40,13 +87,12 @@ function generateEmbedData(pokemon: pokemonData, server: ServerType, avatarUser:
         )
         .setColor(colorByType(pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)]))
 
-    let adressImage
-    if(server.eventSpawn.nightMode){
-        adressImage = "./src/image/pokeHomeShadow/"+JSON.parse(JSON.stringify(pokemon.imgName))+".png";
-    } else {
-        adressImage = "./src/image/pokeHome/"+JSON.parse(JSON.stringify(pokemon.imgName))+".png";
-    }
-    return {page: embed, imagePage: adressImage}
+    const imageName = pokemon.imgName;
+    const imagePath = server.eventSpawn.nightMode
+        ? `./src/image/pokeHomeShadow/${imageName}.png`
+        : `./src/image/pokeHome/${imageName}${isShiny ? '-shiny' : ''}.png`;
+
+    return {page: embed, imagePage: imagePath}
 
 }
 
