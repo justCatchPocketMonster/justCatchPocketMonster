@@ -7,13 +7,10 @@ import {
     Message,
     MessageComponentInteraction,
     EmbedBuilder,
-    AttachmentBuilder, StringSelectMenuInteraction
+    AttachmentBuilder, StringSelectMenuInteraction, ChatInputCommandInteraction, ComponentType
 } from 'discord.js';
 
-interface PageInformation {
-    nameSelection: string;
-    descriptionSelection?: string;
-}
+
 
 interface PageData {
     page: EmbedBuilder;
@@ -45,81 +42,77 @@ export function createPageForMenu(
     }
 }
 
+interface PageInformation {
+    nameSelection: string;
+    descriptionSelection?: string;
+}
+interface PageData {
+    page: EmbedBuilder;
+    imagePage?: AttachmentBuilder;
+    information: PageInformation;
+}
 export async function paginationMenu(
-    interaction: Interaction,
+    interaction: ChatInputCommandInteraction,
     defaultText: string,
     pages: PageData[],
     pageParDefaut: number = 1,
     time: number = 60000
 ): Promise<void> {
-    try {
-        const components: StringSelectMenuOptionBuilder[] = [];
-        let count = 0;
+    if (pages.length === 0) return;
+    let currentPage = pageParDefaut - 1;
 
-        for (const element of pages) {
-            const selectMenuCreation = new StringSelectMenuOptionBuilder()
-                .setLabel(element.information.nameSelection)
-                .setValue(count.toString());
+    const menu = new StringSelectMenuBuilder()
+        .setCustomId("pagination_menu")
+        .setPlaceholder(defaultText)
+        .addOptions(
+            pages.map((p, index) => ({
+                label: p.information.nameSelection,
+                description: p.information.descriptionSelection ?? undefined,
+                value: index.toString()
+            }))
+        );
 
-            if (element.information.descriptionSelection) {
-                selectMenuCreation.setDescription(element.information.descriptionSelection);
-            }
+    const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menu);
 
-            components.push(selectMenuCreation);
-            count++;
+    const replyPayload: Parameters<typeof interaction.reply>[0] = {
+        embeds: [pages[currentPage].page],
+        components: [row],
+        fetchReply: true
+    };
+
+    if (pages[currentPage].imagePage) {
+        replyPayload.files = [pages[currentPage].imagePage!];
+    }
+
+    const message = await interaction.reply(replyPayload);
+
+    const collector = message.createMessageComponentCollector({
+        componentType: ComponentType.StringSelect,
+        time
+    });
+
+    collector.on("collect", async (selectInteraction: StringSelectMenuInteraction) => {
+        if (selectInteraction.user.id !== interaction.user.id) {
+            return;
         }
 
-        const menuSelect = new StringSelectMenuBuilder()
-            .setCustomId('menu')
-            .setPlaceholder(defaultText)
-            .addOptions(components.map((e) => e as unknown as APISelectMenuOption)); // cast pour compenser le typage parfois strict
+        await selectInteraction.deferUpdate();
+        currentPage = parseInt(selectInteraction.values[0]);
 
-        const menu = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuSelect);
-
-        const data: any = {
-            fetchReply: true,
-            components: [menu],
-            embeds: [pages[pageParDefaut - 1].page]
+        const newPayload: Parameters<typeof selectInteraction.editReply>[0] = {
+            embeds: [pages[currentPage].page]
         };
 
-        if (pages[pageParDefaut - 1].imagePage) {
-            data.files = [pages[pageParDefaut - 1].imagePage];
+        if (pages[currentPage].imagePage) {
+            newPayload.files = [pages[currentPage].imagePage!];
         }
 
-        const msg = await (interaction.channel as any).send(data) as Message;
+        await selectInteraction.editReply(newPayload);
+    });
 
-        const col = msg.createMessageComponentCollector({
-            filter: (i: MessageComponentInteraction) => i.user.id === (interaction as any).user.id,
-            time
+    collector.on("end", async () => {
+        await interaction.editReply({
+            components: []
         });
-
-        col.on('collect', async (i) => {
-            let selectedOption = parseInt((i as StringSelectMenuInteraction).values[0]);
-
-            while (!pages[selectedOption]?.page) {
-                selectedOption++;
-            }
-
-            menu.components[0].setPlaceholder(pages[selectedOption].information.nameSelection);
-
-            const updateData: any = {
-                embeds: [pages[selectedOption].page],
-                components: [menu]
-            };
-
-            if (pages[selectedOption].imagePage) {
-                updateData.files = [pages[selectedOption].imagePage];
-            }
-
-            await i.update(updateData);
-            col.resetTimer({ time });
-        });
-
-        col.on('end', async () => {
-            await msg.edit({ components: [] });
-        });
-
-    } catch (error) {
-        console.error(error);
-    }
+    });
 }
