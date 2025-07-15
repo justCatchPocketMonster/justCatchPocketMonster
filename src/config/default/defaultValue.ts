@@ -1,6 +1,5 @@
 // TODO: delete all when I will be sure that all is working
 
-
 /**
 export const valeurMaxRandom = defaultRarity.ordinaire+defaultRarity.legendaire+defaultRarity.fabuleux;
 

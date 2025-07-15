@@ -1,911 +1,956 @@
 {
-    "spawnPokemonActivate": {
-        "fr": ["Les Pokémons sont en route."],
-        "eng": ["Pokemons are on the way."]
-    },
-    "spawnPokemonAlreadyActivate": {
-        "fr": ["Ce salon a déjà la possibilité d'accueillir des Pokémons."],
-        "eng": ["This channel has already the possibility to have Pokémon."]
-    },
-    "spawnPokemonDesactivate": {
-        "fr": ["Oh non, les Pokémons ont disparu."],
-        "eng": ["Oh no the pokemons are gone."]
-    },
-    "spawnPokemonAlreadyDesactivate": {
-        "fr": ["Mais il n'y a aucun Pokémons ici."],
-        "eng": ["But there are no Pokémon here."]
-    },
+  "spawnPokemonActivate": {
+    "fr": ["Les Pokémons sont en route."],
+    "eng": ["Pokemons are on the way."]
+  },
+  "spawnPokemonAlreadyActivate": {
+    "fr": ["Ce salon a déjà la possibilité d'accueillir des Pokémons."],
+    "eng": ["This channel has already the possibility to have Pokémon."]
+  },
+  "spawnPokemonDesactivate": {
+    "fr": ["Oh non, les Pokémons ont disparu."],
+    "eng": ["Oh no the pokemons are gone."]
+  },
+  "spawnPokemonAlreadyDesactivate": {
+    "fr": ["Mais il n'y a aucun Pokémons ici."],
+    "eng": ["But there are no Pokémon here."]
+  },
 
+  "commandSpawnExplication": {
+    "fr": ["Autoriser le spawn dans un salon."],
+    "eng": ["Allow spawning in a channel"]
+  },
+  "spawnNameOptionBool": {
+    "fr": ["autorisation"],
+    "eng": ["permission"]
+  },
+  "spawnDescOptionBool": {
+    "fr": ["Pour autoriser le salon ou non."],
+    "eng": ["To authorize the channel or not."]
+  },
+  "spawnNameOptionChannel": {
+    "fr": ["salon"],
+    "eng": ["channel"]
+  },
+  "spawnDescOptionChannel": {
+    "fr": [
+      "Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"
+    ],
+    "eng": [
+      "You can specify a channel. (The channel where the message is sent is selected if it is empty.)"
+    ]
+  },
+  "commandCodeExplication": {
+    "fr": ["Permet de rentrer un code afin d'avoir des effets en cadeau"],
+    "eng": ["Allows you to enter a code in order to have effects as a gift"]
+  },
+  "codeNameOptionString": {
+    "fr": ["code"],
+    "eng": ["code"]
+  },
+  "codeDescOptionString": {
+    "fr": ["Le code a rentrer."],
+    "eng": ["The code to enter."]
+  },
+  "commandLangName": {
+    "fr": ["langue"],
+    "eng": ["language"]
+  },
+  "commandLangExplication": {
+    "fr": ["Permet de changer la langue de réponse du bot"],
+    "eng": ["Allows you to change the bot's response language"]
+  },
+  "langNameOptionString": {
+    "fr": ["quellangue"],
+    "eng": ["whichlanguage"]
+  },
+  "langDescOptionString": {
+    "fr": ["La langue voulue."],
+    "eng": ["The desired language."]
+  },
 
+  "commandPokedexExplication": {
+    "fr": ["Permet de voir le pokedex afin de suivre son avancement."],
+    "eng": ["Allows you to see the pokedex for to follow its progress."]
+  },
+  "pokedexNameOptionStringPage": {
+    "fr": ["page"],
+    "eng": ["page"]
+  },
+  "pokedexDescOptionStringPage": {
+    "fr": ["La page voulu."],
+    "eng": ["The desired page."]
+  },
 
+  "commandUnspawnExplication": {
+    "fr": [
+      "Supprimé une autorisation le spawn dans un salon (modo seulement)."
+    ],
+    "eng": ["Removed a permission to spawn in a room (modo only)."]
+  },
+  "commandCatchExplication": {
+    "fr": ["Permet d'attraper le Pokémons présent."],
+    "eng": ["Allows you to catch the Pokémon present."]
+  },
 
+  "nothing": {
+    "fr": ["rien"],
+    "eng": ["nothing"]
+  },
+  "commandCatchOptionName": {
+    "fr": ["pokemon"],
+    "eng": ["pokemon"]
+  },
+  "commandCatchOptionDesc": {
+    "fr": [
+      "Le nom du Pokémon. Il faut le bon nom du Pokémon pour l'attraper sinon raté."
+    ],
+    "eng": [
+      "The name of the Pokémon. You need the correct name of the Pokémon to catch it if not missed."
+    ]
+  },
 
+  "commandHowExplication": {
+    "fr": [
+      "Voir combien de fois un Pokémon a été attrapé. Seulement 1 option ne sera acceptée."
+    ],
+    "eng": [
+      "See how many times a Pokémon has been caught. Only 1 option will be accepted."
+    ]
+  },
+  "commandHowOptionNameStringNumber": {
+    "fr": ["idpokemon"],
+    "eng": ["pokemonid"]
+  },
+  "commandHowOptionDescStringNumber": {
+    "fr": ["l'identifiant du Pokémon."],
+    "eng": ["Pokémon id."]
+  },
+  "commandHowOptionNameStringPokemonName": {
+    "fr": ["nompokemon"],
+    "eng": ["pokemonname"]
+  },
+  "commandHowOptionDescStringPokemonName": {
+    "fr": ["Le nom du Pokémon"],
+    "eng": ["Pokémon's name"]
+  },
+  "commandStatExplication": {
+    "fr": ["Permet de voir des statistiques plus ou moins utiles."],
+    "eng": ["Allows you to see more or less useful statistics."]
+  },
+  "commandEffectEvent": {
+    "fr": ["Permet de voir les effets actuels d'un événement actif"],
+    "eng": ["Allows you to see the current effects of an active event"]
+  },
 
-    "commandSpawnExplication": {
-        "fr": ["Autoriser le spawn dans un salon."],
-        "eng": ["Allow spawning in a channel"]
-    },
-    "spawnNameOptionBool": {
-        "fr": ["autorisation"],
-        "eng": ["permission"]
-    },
-    "spawnDescOptionBool": {
-        "fr": ["Pour autoriser le salon ou non."],
-        "eng": ["To authorize the channel or not."]
-    },
-    "spawnNameOptionChannel": {
-        "fr": ["salon"],
-        "eng": ["channel"]
-    },
-    "spawnDescOptionChannel": {
-        "fr": ["Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"],
-        "eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
-    },
-    "commandCodeExplication": {
-        "fr": ["Permet de rentrer un code afin d'avoir des effets en cadeau"],
-        "eng": ["Allows you to enter a code in order to have effects as a gift"]
-    },
-    "codeNameOptionString": {
-        "fr": ["code"],
-        "eng": ["code"]
-    },
-    "codeDescOptionString": {
-        "fr": ["Le code a rentrer."],
-        "eng": ["The code to enter."]
-    },
-    "commandLangName": {
-        "fr": ["langue"],
-        "eng": ["language"]
-    },
-    "commandLangExplication": {
-        "fr": ["Permet de changer la langue de réponse du bot"],
-        "eng": ["Allows you to change the bot's response language"]
-    },
-    "langNameOptionString": {
-        "fr": ["quellangue"],
-        "eng": ["whichlanguage"]
-    },
-    "langDescOptionString": {
-        "fr": ["La langue voulue."],
-        "eng": ["The desired language."]
-    },
+  "tooMuchPagination": {
+    "fr": [
+      "Il y a trop d'embed avec des pages. Veuillez fermé les précédents pour en créer pouvoir de nouveau."
+    ],
+    "eng": [
+      "There are too many embeds with pages. Please close the previous ones to create new ones."
+    ]
+  },
+  "noArgument": {
+    "fr": ["Il faut au minimum 1 option."],
+    "eng": ["You need at least 1 option."]
+  },
+  "notExist": {
+    "fr": ["Pokémon inexistant."],
+    "eng": ["Non-existent Pokémon."]
+  },
+  "finallyHesShiny": {
+    "fr": ["Attends... Mais le Pokémon est peint ! Il est shiny !!!"],
+    "eng": ["Wait... But the Pokémon is painted! It is shiny!!!"]
+  },
+  "finallyHesNotShiny": {
+    "fr": [
+      "Attends... Mais le Pokémon est peint ! Il n'est pas shiny ! Quelle déception..."
+    ],
+    "eng": [
+      "Wait... But the Pokémon is painted! It is not shiny! What a desappointment..."
+    ]
+  },
 
-    "commandPokedexExplication": {
-        "fr": ["Permet de voir le pokedex afin de suivre son avancement."],
-        "eng": ["Allows you to see the pokedex for to follow its progress."]
-    },
-    "pokedexNameOptionStringPage": {
-        "fr": ["page"],
-        "eng": ["page"]
-    },
-    "pokedexDescOptionStringPage": {
-        "fr": ["La page voulu."],
-        "eng": ["The desired page."]
-    },
-    
-    "commandUnspawnExplication": {
-        "fr": ["Supprimé une autorisation le spawn dans un salon (modo seulement)."],
-        "eng": ["Removed a permission to spawn in a room (modo only)."]
-    },
-    "commandCatchExplication": {
-        "fr": ["Permet d'attraper le Pokémons présent."],
-        "eng": ["Allows you to catch the Pokémon present."]
-    },
+  "embedPokemonTitle": {
+    "fr": ["Un Pokémon sauvage apparaît !"],
+    "eng": ["Wild Pokémon appeared!"]
+  },
+  "embedPokemonDescription": {
+    "fr": ["Pour l'attraper faites \"/catch [nom du Pokémon]\"."],
+    "eng": ["To catch it, do \"/catch [Pokémon's name]\"."]
+  },
 
-    "nothing": {
-        "fr": ["rien"],
-        "eng": ["nothing"]
-    },
-    "commandCatchOptionName": {
-        "fr": ["pokemon"],
-        "eng": ["pokemon"]
-    },
-    "commandCatchOptionDesc": {
-        "fr": ["Le nom du Pokémon. Il faut le bon nom du Pokémon pour l'attraper sinon raté."],
-        "eng": ["The name of the Pokémon. You need the correct name of the Pokémon to catch it if not missed."]
-    },
+  "congratYouCatchPart1": {
+    "fr": ["Félicitations "],
+    "eng": ["Congratulations "]
+  },
+  "congratYouCatchPart2": {
+    "fr": [", vous avez attrapé un "],
+    "eng": [", you caught one "]
+  },
+  "newAtPokedex": {
+    "fr": ["Les données du Pokémon ont été ajoutées au Pokédex."],
+    "eng": ["Pokémon's data has been added to the Pokedex."]
+  },
+  "failCatchGoodPokemonPart2": {
+    "fr": [". Le Pokémon actuel n'est pas"],
+    "eng": [". The current Pokémon is not"]
+  },
+  "failCatchGoodPokemonPart1": {
+    "fr": ["Désolé"],
+    "eng": ["Sorry"]
+  },
+  "noPokemonDisponible": {
+    "fr": ["Aucun Pokémon n'est présent actuellement."],
+    "eng": ["No Pokémon is currently present."]
+  },
 
-    "commandHowExplication": {
-        "fr": ["Voir combien de fois un Pokémon a été attrapé. Seulement 1 option ne sera acceptée."],
-        "eng": ["See how many times a Pokémon has been caught. Only 1 option will be accepted."]
-    },
-    "commandHowOptionNameStringNumber": {
-        "fr": ["idpokemon"],
-        "eng": ["pokemonid"]
-    },
-    "commandHowOptionDescStringNumber": {
-        "fr": ["l'identifiant du Pokémon."],
-        "eng": ["Pokémon id."]
-    },
-    "commandHowOptionNameStringPokemonName": {
-        "fr": ["nompokemon"],
-        "eng": ["pokemonname"]
-    },
-    "commandHowOptionDescStringPokemonName": {
-        "fr": ["Le nom du Pokémon"],
-        "eng": ["Pokémon's name"]
-    },
-    "commandStatExplication": {
-        "fr": ["Permet de voir des statistiques plus ou moins utiles."],
-        "eng": ["Allows you to see more or less useful statistics."]
-    },
-    "commandEffectEvent": {
-        "fr": ["Permet de voir les effets actuels d'un événement actif"],
-        "eng": ["Allows you to see the current effects of an active event"]
-    },
+  "noCatch": {
+    "fr": ["Non capturés"],
+    "eng": ["Not captured"]
+  },
+  "catched": {
+    "fr": ["Capturés: "],
+    "eng": ["Captured: "]
+  },
 
+  "noPage": {
+    "fr": ["Page indisponible."],
+    "eng": ["Page unavailable"]
+  },
+  "pokedexOf": {
+    "fr": ["Pokédex de "],
+    "eng": ["Pokedex from "]
+  },
+  "nationalDex": {
+    "fr": ["Pokédex national"],
+    "eng": ["National pokedex"]
+  },
+  "nationalDexServer": {
+    "fr": ["Pokédex national du serveur"],
+    "eng": ["Server's National pokedex"]
+  },
+  "shinyDex": {
+    "fr": ["Shinydex national"],
+    "eng": ["National shinydex"]
+  },
 
-    "tooMuchPagination": {
-        "fr": ["Il y a trop d'embed avec des pages. Veuillez fermé les précédents pour en créer pouvoir de nouveau."],
-        "eng": ["There are too many embeds with pages. Please close the previous ones to create new ones."]
-    },
-    "noArgument": {
-        "fr": ["Il faut au minimum 1 option."],
-        "eng": ["You need at least 1 option."]
-    },
-    "notExist": {
-        "fr": ["Pokémon inexistant."],
-        "eng": ["Non-existent Pokémon."]
-    },
-    "finallyHesShiny": {
-        "fr": ["Attends... Mais le Pokémon est peint ! Il est shiny !!!"],
-        "eng": ["Wait... But the Pokémon is painted! It is shiny!!!"]
-    },
-    "finallyHesNotShiny": {
-        "fr": ["Attends... Mais le Pokémon est peint ! Il n'est pas shiny ! Quelle déception..."],
-        "eng": ["Wait... But the Pokémon is painted! It is not shiny! What a desappointment..."]
-    },
+  "noAutorisation": {
+    "fr": ["Vous n'avez pas les droits."],
+    "eng": ["You don't have the rights."]
+  },
+  "errorLanguageChoose": {
+    "fr": ["Je n'ai pas cette langue."],
+    "eng": ["I don't have this language."]
+  },
 
+  "rightTitle": {
+    "fr": ["Droit"],
+    "eng": ["Right"]
+  },
+  "stopTitle": {
+    "fr": ["Stop"],
+    "eng": ["Stop"]
+  },
+  "rightText": {
+    "fr": [
+      "Je ne possède pas les droits de la licence Pokémon. Nintendo/Creatures Inc./GAME FREAK inc."
+    ],
+    "eng": [
+      "I do not own the Pokémon license rights. Nintendo/Creatures Inc./GAME FREAK inc."
+    ]
+  },
+  "stopText": {
+    "fr": [
+      "Je peux stopper ce service avec ou sans préavis intentionnellement ou à la demande des ayant droit."
+    ],
+    "eng": [
+      "I can stop this service with or without notice intentionally or at the request of the rights holders."
+    ]
+  },
 
+  "codeAlreadyUsed": {
+    "fr": ["Le code saisie a déjà été utilisé."],
+    "eng": ["The code entered has already been used."]
+  },
+  "codeDontExist": {
+    "fr": ["Le code n'existe pas."],
+    "eng": ["The code does not exist."]
+  },
 
-    "embedPokemonTitle": {
-        "fr": ["Un Pokémon sauvage apparaît !"],
-        "eng": ["Wild Pokémon appeared!"]
-    },
-    "embedPokemonDescription": {
-        "fr": ["Pour l'attraper faites \"/catch [nom du Pokémon]\"."],
-        "eng": ["To catch it, do \"/catch [Pokémon's name]\"."]
-    },
+  "charmeChromaWin": {
+    "fr": ["Bravo vous avec débloquez le charme chroma."],
+    "eng": ["Well done you with unlock chroma charm."]
+  },
+  "charmeChromaLose": {
+    "fr": ["Aie, vous avez perdu le charme chroma."],
+    "eng": ["Ouch, you lost the chroma charm"]
+  },
 
-    "congratYouCatchPart1": {
-        "fr": ["Félicitations "],
-        "eng": ["Congratulations "]
-    },
-    "congratYouCatchPart2": {
-        "fr": [", vous avez attrapé un "],
-        "eng": [", you caught one "]
-    },
-    "newAtPokedex": {
-        "fr": ["Les données du Pokémon ont été ajoutées au Pokédex."],
-        "eng": ["Pokémon's data has been added to the Pokedex."]
-    },
-    "failCatchGoodPokemonPart2": {
-        "fr": [". Le Pokémon actuel n'est pas"],
-        "eng": [". The current Pokémon is not"]
-    },
-    "failCatchGoodPokemonPart1": {
-        "fr": ["Désolé"],
-        "eng": ["Sorry"]
-    },
-    "noPokemonDisponible": {
-        "fr": ["Aucun Pokémon n'est présent actuellement."],
-        "eng": ["No Pokémon is currently present."]
-    },
+  "eventMontagnardTitre": {
+    "fr": ["Un Montagnard passe par là."],
+    "eng": ["A Mountaineer passes by here"]
+  },
+  "eventMontagnardDesc": {
+    "fr": ["Il vous donne une drôle de pierre."],
+    "eng": ["He gives you a funny stone."]
+  },
+  "auraLegendary": {
+    "fr": ["Aura légendaire de niveau "],
+    "eng": ["Level of Legendary Aura "]
+  },
+  "auraFabuleux": {
+    "fr": ["Aura fabuleux de niveau "],
+    "eng": ["Level of Mythical Aura "]
+  },
+  "auraType": {
+    "fr": ["Aura de type de niveau "],
+    "eng": ["Level of type Aura "]
+  },
+  "auraGeneration": {
+    "fr": ["Aura de génération de niveau "],
+    "eng": ["Level of Generation Aura "]
+  },
+  "auraChroma": {
+    "fr": ["Aura de chromatique de niveau "],
+    "eng": ["Level of shiny Aura "]
+  },
+  "auraMega": {
+    "fr": ["Aura de méga-évolution de niveau "],
+    "eng": ["Level of Mega evolution Aura "]
+  },
+  "auraEncen": {
+    "fr": ["Aura d'encens de niveau "],
+    "eng": ["Level of Incense Aura "]
+  },
+  "auraRepousse": {
+    "fr": ["Aura de repousse de niveau "],
+    "eng": ["Level of Repel Aura "]
+  },
+  "auraOvale": {
+    "fr": ["Aura de charme ovale de niveau "],
+    "eng": ["Level of Oval Charm Aura "]
+  },
+  "auraNuit": {
+    "fr": [
+      "Il n'y a pas d'aura vu qu'il fait juste nuit mais la panne est de niveau "
+    ],
+    "eng": [
+      "There is no aura since it is just night but the breakdown is level "
+    ]
+  },
 
-    "noCatch": {
-        "fr": ["Non capturés"],
-        "eng": ["Not captured"]
-    },
-    "catched": {
-        "fr": ["Capturés: "],
-        "eng": ["Captured: "]
-    },
+  "ofThisGeneration": {
+    "fr": ["Pour la génération "],
+    "eng": ["For the generation "]
+  },
+  "ofThisType": {
+    "fr": ["Pour le type "],
+    "eng": ["For the type "]
+  },
+  "pendantTrenteMinute": {
+    "fr": ["Pendant 30 minutes."],
+    "eng": ["During 30 minutes."]
+  },
+  "pendantUneHeure": {
+    "fr": ["Pendant 1 heure."],
+    "eng": ["During 1 hour."]
+  },
+  "pendantQuinzeMinute": {
+    "fr": ["Pendant 15 minutes."],
+    "eng": ["During 15 minutes."]
+  },
+  "eventCuisineTitre": {
+    "fr": ["Un cuisinier sauvage apparait."],
+    "eng": ["A wild cook appears"]
+  },
+  "eventCuisineDesc": {
+    "fr": ["...pourquoi il cuisine une pokeball ?"],
+    "eng": ["...Why is he cooking a pokeball?"]
+  },
+  "eventScientifiqueTitre": {
+    "fr": ["Un scientifique un peu bizarre"],
+    "eng": ["A weird scientist"]
+  },
+  "eventScientifiqueDesc": {
+    "fr": ["Il utilise une machine qui fait des \"bip boup\""],
+    "eng": ["He uses a machine that makes noises"]
+  },
+  "eventSandwichTitre": {
+    "fr": ["Un magnifique sandwich"],
+    "eng": ["A wonderful sandwich"]
+  },
+  "eventSandwichDesc": {
+    "fr": ["Il a l'air délicieux"],
+    "eng": ["It looks delicious"]
+  },
+  "eventHackertitre": {
+    "fr": ["Un Hacker"],
+    "eng": ["a Hacker"]
+  },
+  "eventHackerDesc": {
+    "fr": ["Un hacker qui... augmente le taux de shinies ? Sale tricheur !!!"],
+    "eng": ["A hacker who... increases the shiny rate? Dirty cheater !!!"]
+  },
+  "eventSandwichVideSmolTitre": {
+    "fr": ["Un sandwich vide"],
+    "eng": ["An empty sandwich"]
+  },
+  "eventSandwichVideSmolDesc": {
+    "fr": ["Probablement le repas d'un étudiant"],
+    "eng": ["Probably a student's meal"]
+  },
+  "eventMegaTitre": {
+    "fr": ["Une pluit de méga gemme"],
+    "eng": ["A rain of mega gem"]
+  },
+  "eventMegaDesc": {
+    "fr": ["Elle tombe du ciel"],
+    "eng": ["It falls from the sky"]
+  },
+  "eventTrollOnePokemonTitre": {
+    "fr": ["Mais ? Qu'est-ce qu'il fait là ?"],
+    "eng": ["But ? What is he doing here ?"]
+  },
+  "eventTrollOnePokemonDesc": {
+    "fr": ["MAIS IL N'Y A QUE LUI !!!"],
+    "eng": ["BUT THERE IS ONLY HIM !!!"]
+  },
 
-    "noPage": {
-        "fr": ["Page indisponible."],
-        "eng": ["Page unavailable"]
-    },
-    "pokedexOf": {
-        "fr": ["Pokédex de "],
-        "eng": ["Pokedex from "]
-    },
-    "nationalDex": {
-        "fr": ["Pokédex national"],
-        "eng": ["National pokedex"]
-    },
-    "nationalDexServer": {
-        "fr": ["Pokédex national du serveur"],
-        "eng": ["Server's National pokedex"]
-    },
-    "shinyDex": {
-        "fr": ["Shinydex national"],
-        "eng": ["National shinydex"]
-    },
+  "eventMostPokemonTitre": {
+    "fr": ["Un Encens"],
+    "eng": ["An Incense"]
+  },
+  "eventMostPokemonDesc": {
+    "fr": ["Il attire plus de Pokémons trop bien !"],
+    "eng": ["It attracts more Pokémon too good!"]
+  },
+  "eventLeastPokemonTitre": {
+    "fr": ["Un Repousse"],
+    "eng": ["A Repel"]
+  },
+  "eventLeastPokemonDesc": {
+    "fr": [
+      "Oh non il y a moins de Pokémons ! (Une occasion de faire une pause.)"
+    ],
+    "eng": ["Oh no there are fewer Pokémon! (An opportunity to take a break.)"]
+  },
+  "eventDarkTitre": {
+    "fr": ["Oh non il n'y a plus de lumière !"],
+    "eng": ["Oh no there is no more light!"]
+  },
+  "eventDarkDesc": {
+    "fr": ["Il va falloir attendre les réparations de l'électricien."],
+    "eng": ["We will have to wait for the electrician's repairs."]
+  },
+  "eventEggTitre": {
+    "fr": ["Une fermière fort sympathique"],
+    "eng": ["A very nice farmer"]
+  },
+  "eventEggDesc": {
+    "fr": ["Elle vous montre le fameux charme ovale."],
+    "eng": ["She shows you the famous oval charm."]
+  },
 
+  "pokedexDeKanto": {
+    "fr": ["Pokedex Kanto"],
+    "eng": ["Kanto's Pokedex"]
+  },
+  "pokedexDeJohto": {
+    "fr": ["Pokedex Johto"],
+    "eng": ["Johto's Pokedex"]
+  },
+  "pokedexDeHoenn": {
+    "fr": ["Pokedex Hoenn"],
+    "eng": ["Hoenn's Pokedex"]
+  },
+  "pokedexDeSinnoh": {
+    "fr": ["Pokedex Sinnoh"],
+    "eng": ["Sinnoh's Pokedex"]
+  },
+  "pokedexDeUnys": {
+    "fr": ["Pokedex Unys"],
+    "eng": ["Unova's Pokedex"]
+  },
+  "pokedexDeKalos": {
+    "fr": ["Pokedex Kalos"],
+    "eng": ["Kalos's Pokedex"]
+  },
+  "pokedexDeAlola": {
+    "fr": ["Pokedex Alola"],
+    "eng": ["Alola's Pokedex"]
+  },
+  "pokedexDeGalar": {
+    "fr": ["Pokedex Galar"],
+    "eng": ["Galar's Pokedex"]
+  },
+  "pokedexDePaldea": {
+    "fr": ["Pokedex Paldea"],
+    "eng": ["Paldea's Pokedex"]
+  },
 
+  "shinydexDeKanto": {
+    "fr": ["Shinydex Kanto"],
+    "eng": ["Kanto's Shinydex"]
+  },
+  "shinydexDeJohto": {
+    "fr": ["Shinydex Johto"],
+    "eng": ["Johto's Shinydex"]
+  },
+  "shinydexDeHoenn": {
+    "fr": ["Shinydex Hoenn"],
+    "eng": ["Hoenn's Shinydex"]
+  },
+  "shinydexDeSinnoh": {
+    "fr": ["Shinydex Sinnoh"],
+    "eng": ["Sinnoh's Shinydex"]
+  },
+  "shinydexDeUnys": {
+    "fr": ["Shinydex Unys"],
+    "eng": ["Unova's Shinydex"]
+  },
+  "shinydexDeKalos": {
+    "fr": ["Shinydex Kalos"],
+    "eng": ["Kalos's Shinydex"]
+  },
+  "shinydexDeAlola": {
+    "fr": ["Shinydex Alola"],
+    "eng": ["Alola's Shinydex"]
+  },
+  "shinydexDeGalar": {
+    "fr": ["Shinydex Galar"],
+    "eng": ["Galar's Shinydex"]
+  },
+  "shinydexDePaldea": {
+    "fr": ["Shinydex Paldea"],
+    "eng": ["Paldea's Shinydex"]
+  },
 
+  "pokemonManquant": {
+    "fr": ["Pokémon manquant"],
+    "eng": ["Pokémon missing"]
+  },
+  "pokemonManquantShiny": {
+    "fr": ["Pokémon shiny manquant"],
+    "eng": ["Shiny Pokémon missing"]
+  },
+  "noEvent": {
+    "fr": ["Aucun évènement actuellement."],
+    "eng": ["No event currently."]
+  },
 
+  "felicitation": {
+    "fr": ["Félicitations"],
+    "eng": ["Congratulation"]
+  },
+  "vousLesAvezTous": {
+    "fr": ["Vous avez attrapé tous les Pokémon."],
+    "eng": ["You have caught all Pokémon."]
+  },
 
-    "noAutorisation": {
-        "fr": ["Vous n'avez pas les droits."],
-        "eng": ["You don't have the rights."]
-    },
-    "errorLanguageChoose": {
-        "fr": ["Je n'ai pas cette langue."],
-        "eng": ["I don't have this language."]
-    },
+  "nombreDeCapture": {
+    "fr": ["Captures"],
+    "eng": ["Caught"]
+  },
+  "nombreCaptureVariant": {
+    "fr": ["Captures de cette variante"],
+    "eng": ["Caught of this variant"]
+  },
+  "nombreDeCaptureTotaly": {
+    "fr": ["Capturés : "],
+    "eng": ["Caught : "]
+  },
+  "nombreDeSpawnTotaly": {
+    "fr": ["Apparitions au total : "],
+    "eng": ["Spawned in total : "]
+  },
+  "nombreDeCaptureShinyTotaly": {
+    "fr": ["Shinies capturés : "],
+    "eng": ["Shiny captured : "]
+  },
+  "nombreDeSpawnShinyTotaly": {
+    "fr": ["Apparitions shinies au total : "],
+    "eng": ["Shiny spotted in total : "]
+  },
+  "nombreDeCaptureVersion": {
+    "fr": ["Captures dans cette version du bot : "],
+    "eng": ["Caught in this bot's version : "]
+  },
+  "nombreDeSpawnVersion": {
+    "fr": ["Apparitions dans cette version du bot : "],
+    "eng": ["Spawned in this bot's version :"]
+  },
+  "nombreDeCaptureShinyVersion": {
+    "fr": ["Shinies capturés dans cette version du bot : "],
+    "eng": ["Shiny caught in this bot's version :"]
+  },
+  "nombreDeSpawnShinyVersion": {
+    "fr": ["Shinies apparus dans cette version du bot : "],
+    "eng": ["Shiny Spotted in this bot's version : "]
+  },
+  "pokemonLeastCaught": {
+    "fr": ["Le moins capturé : "],
+    "eng": ["Least caught : "]
+  },
+  "pokemonMostCaught": {
+    "fr": ["Le plus capturé : "],
+    "eng": ["Most caught Pokémon : "]
+  },
+  "pokemonLeastSpawn": {
+    "fr": ["Le moins apparu : "],
+    "eng": ["Least spawn : "]
+  },
+  "pokemonMostSpawn": {
+    "fr": ["Le plus apparu : "],
+    "eng": ["Most spawn : "]
+  },
+  "tooMuchPokemon": {
+    "fr": ["Trop de Pokémon"],
+    "eng": ["Too much Pokémon"]
+  },
 
+  "nombreDeCaptureDuServer": {
+    "fr": ["Nombre de capture du serveur : "],
+    "eng": ["Server catch count : "]
+  },
+  "nombreDeCaptureShiny": {
+    "fr": ["Nombre de capture en chromatique : "],
+    "eng": ["Number caught in shiny : "]
+  },
+  "ilFautUnNombre": {
+    "fr": ["Il fallait une valeur numérique de saisie."],
+    "eng": ["It required a numeric input value."]
+  },
+  "valeurTropHaute": {
+    "fr": ["Valeur saisie trop haute."],
+    "eng": ["Entered value too high."]
+  },
 
-    "rightTitle": {
-        "fr": ["Droit"],
-        "eng": ["Right"]
-    },
-    "stopTitle": {
-        "fr": ["Stop"],
-        "eng": ["Stop"]
-    },
-    "rightText": {
-        "fr": ["Je ne possède pas les droits de la licence Pokémon. Nintendo/Creatures Inc./GAME FREAK inc."],
-        "eng": ["I do not own the Pokémon license rights. Nintendo/Creatures Inc./GAME FREAK inc."]
-    },
-    "stopText": {
-        "fr": ["Je peux stopper ce service avec ou sans préavis intentionnellement ou à la demande des ayant droit."],
-        "eng": ["I can stop this service with or without notice intentionally or at the request of the rights holders."]
-    },
+  "effect": {
+    "fr": ["Effet :"],
+    "eng": ["Effect :"]
+  },
 
+  "timeLeft": {
+    "fr": ["Temps restant :"],
+    "eng": ["Remaining time :"]
+  },
 
-    "codeAlreadyUsed": {
-        "fr": ["Le code saisie a déjà été utilisé."],
-        "eng": ["The code entered has already been used."]
-    },
-    "codeDontExist": {
-        "fr": ["Le code n'existe pas."],
-        "eng": ["The code does not exist."]
-    },
+  "actualEvent": {
+    "fr": ["Événement actuellement actif"],
+    "eng": ["Currently active event"]
+  },
 
-    "charmeChromaWin" : {
-        "fr": ["Bravo vous avec débloquez le charme chroma."],
-        "eng": ["Well done you with unlock chroma charm."]
-    },
-    "charmeChromaLose" : {
-        "fr": ["Aie, vous avez perdu le charme chroma."],
-        "eng": ["Ouch, you lost the chroma charm"]
-    },
+  "secondes": {
+    "fr": ["secondes"],
+    "eng": ["second"]
+  },
 
+  "dragon": {
+    "fr": ["dragon"],
+    "eng": ["dragon"]
+  },
+  "electric": {
+    "fr": ["electrik"],
+    "eng": ["electric"]
+  },
+  "fire": {
+    "fr": ["feu"],
+    "eng": ["fire"]
+  },
+  "bug": {
+    "fr": ["insecte"],
+    "eng": ["bug"]
+  },
+  "grass": {
+    "fr": ["plante"],
+    "eng": ["grass"]
+  },
+  "psychic": {
+    "fr": ["psy"],
+    "eng": ["psychic"]
+  },
+  "ground": {
+    "fr": ["sol"],
+    "eng": ["ground"]
+  },
+  "dark": {
+    "fr": ["tenebres"],
+    "eng": ["dark"]
+  },
 
-    "eventMontagnardTitre" : {
-        "fr": ["Un Montagnard passe par là."],
-        "eng": ["A Mountaineer passes by here"]
-    },
-    "eventMontagnardDesc" : {
-        "fr": ["Il vous donne une drôle de pierre."],
-        "eng": ["He gives you a funny stone."]
-    },
-    "auraLegendary" : {
-        "fr": ["Aura légendaire de niveau "],
-        "eng": ["Level of Legendary Aura "]
-    },
-    "auraFabuleux" : {
-        "fr": ["Aura fabuleux de niveau "],
-        "eng": ["Level of Mythical Aura "]
-    },
-    "auraType" : {
-        "fr": ["Aura de type de niveau "],
-        "eng": ["Level of type Aura "]
-    },
-    "auraGeneration" : {
-        "fr": ["Aura de génération de niveau "],
-        "eng": ["Level of Generation Aura "]
-    },
-    "auraChroma" : {
-        "fr": ["Aura de chromatique de niveau "],
-        "eng": ["Level of shiny Aura "]
-    },
-    "auraMega": {
-        "fr": ["Aura de méga-évolution de niveau "],
-        "eng": ["Level of Mega evolution Aura "]
-    },
-    "auraEncen": {
-        "fr": ["Aura d'encens de niveau "],
-        "eng": ["Level of Incense Aura "]
-    },
-    "auraRepousse": {
-        "fr": ["Aura de repousse de niveau "],
-        "eng": ["Level of Repel Aura "]
-    },
-    "auraOvale": {
-        "fr": ["Aura de charme ovale de niveau "],
-        "eng": ["Level of Oval Charm Aura "]
-    },
-    "auraNuit": {
-        "fr": ["Il n'y a pas d'aura vu qu'il fait juste nuit mais la panne est de niveau "],
-        "eng": ["There is no aura since it is just night but the breakdown is level "]
-    },
+  "fighting": {
+    "fr": ["combat"],
+    "eng": ["fighting"]
+  },
 
+  "water": {
+    "fr": ["eau"],
+    "eng": ["water"]
+  },
 
+  "fairy": {
+    "fr": ["fee"],
+    "eng": ["fairy"]
+  },
 
-    "ofThisGeneration" : {
-        "fr": ["Pour la génération "],
-        "eng": ["For the generation "]
-    },
-    "ofThisType" : {
-        "fr": ["Pour le type "],
-        "eng": ["For the type "]
-    },
-    "pendantTrenteMinute" : {
-        "fr" : ["Pendant 30 minutes."],
-        "eng": ["During 30 minutes."]
-    },
-    "pendantUneHeure" : {
-        "fr" : ["Pendant 1 heure."],
-        "eng": ["During 1 hour."]
-    },
-    "pendantQuinzeMinute" : {
-        "fr" : ["Pendant 15 minutes."],
-        "eng": ["During 15 minutes."]
-    },
-    "eventCuisineTitre" : {
-        "fr": ["Un cuisinier sauvage apparait."],
-        "eng": ["A wild cook appears"]
-    },
-    "eventCuisineDesc" : {
-        "fr": ["...pourquoi il cuisine une pokeball ?"],
-        "eng": ["...Why is he cooking a pokeball?"]
-    },
-    "eventScientifiqueTitre" : {
-        "fr": ["Un scientifique un peu bizarre"],
-        "eng": ["A weird scientist"]
-    },
-    "eventScientifiqueDesc" : {
-        "fr": ["Il utilise une machine qui fait des \"bip boup\""],
-        "eng": ["He uses a machine that makes noises"]
-    },
-    "eventSandwichTitre" : {
-        "fr": ["Un magnifique sandwich"],
-        "eng": ["A wonderful sandwich"]
-    },
-    "eventSandwichDesc" : {
-        "fr": ["Il a l'air délicieux"],
-        "eng": ["It looks delicious"]
-    },
-    "eventHackertitre" : {
-        "fr": ["Un Hacker"],
-        "eng": ["a Hacker"]
-    },
-    "eventHackerDesc" : {
-        "fr": ["Un hacker qui... augmente le taux de shinies ? Sale tricheur !!!"],
-        "eng": ["A hacker who... increases the shiny rate? Dirty cheater !!!"]
-    },
-    "eventSandwichVideSmolTitre" : {
-        "fr": ["Un sandwich vide"],
-        "eng": ["An empty sandwich"]
-    },
-    "eventSandwichVideSmolDesc" : {
-        "fr": ["Probablement le repas d'un étudiant"],
-        "eng": ["Probably a student's meal"]
-    },
-    "eventMegaTitre" : {
-        "fr": ["Une pluit de méga gemme"],
-        "eng": ["A rain of mega gem"]
-    },
-    "eventMegaDesc" : {
-        "fr": ["Elle tombe du ciel"],
-        "eng": ["It falls from the sky"]
-    },
-    "eventTrollOnePokemonTitre" : {
-        "fr": ["Mais ? Qu'est-ce qu'il fait là ?"],
-        "eng": ["But ? What is he doing here ?"]
-    },
-    "eventTrollOnePokemonDesc" : {
-        "fr": ["MAIS IL N'Y A QUE LUI !!!"],
-        "eng": ["BUT THERE IS ONLY HIM !!!"]
-    },
+  "glace": {
+    "fr": ["glace"],
+    "eng": ["ice"]
+  },
 
-    "eventMostPokemonTitre" : {
-        "fr": ["Un Encens"],
-        "eng": ["An Incense"]
-    },
-    "eventMostPokemonDesc" : {
-        "fr": ["Il attire plus de Pokémons trop bien !"],
-        "eng": ["It attracts more Pokémon too good!"]
-    },
-    "eventLeastPokemonTitre" : {
-        "fr": ["Un Repousse"],
-        "eng": ["A Repel"]
-    },
-    "eventLeastPokemonDesc" : {
-        "fr": ["Oh non il y a moins de Pokémons ! (Une occasion de faire une pause.)"],
-        "eng": ["Oh no there are fewer Pokémon! (An opportunity to take a break.)"]
-    },
-    "eventDarkTitre" : {
-        "fr": ["Oh non il n'y a plus de lumière !"],
-        "eng": ["Oh no there is no more light!"]
-    },
-    "eventDarkDesc" : {
-        "fr": ["Il va falloir attendre les réparations de l'électricien."],
-        "eng": ["We will have to wait for the electrician's repairs."]
-    },
-    "eventEggTitre" : {
-        "fr": ["Une fermière fort sympathique"],
-        "eng": ["A very nice farmer"]
-    },
-    "eventEggDesc" : {
-        "fr": ["Elle vous montre le fameux charme ovale."],
-        "eng": ["She shows you the famous oval charm."]
-    },
+  "normal": {
+    "fr": ["normal"],
+    "eng": ["normal"]
+  },
 
+  "poison": {
+    "fr": ["poison"],
+    "eng": ["poison"]
+  },
 
+  "rock": {
+    "fr": ["roche"],
+    "eng": ["rock"]
+  },
 
+  "ghost": {
+    "fr": ["spectre"],
+    "eng": ["ghost"]
+  },
 
+  "flying": {
+    "fr": ["vol"],
+    "eng": ["flying"]
+  },
 
+  "steel": {
+    "fr": ["acier"],
+    "eng": ["steel"]
+  },
 
+  "statMainPageName": {
+    "fr": ["Page principale"],
+    "eng": ["Main page"]
+  },
+  "statMainPageDesc": {
+    "fr": ["Page principale des statistiques générals."],
+    "eng": ["Main page of general statistics."]
+  },
+  "statCategoryOrdinary": {
+    "fr": ["Ordinaire"],
+    "eng": ["Ordinary"]
+  },
+  "statCategoryLegendary": {
+    "fr": ["Légendaire"],
+    "eng": ["Legendary"]
+  },
+  "statCategoryMythical": {
+    "fr": ["Fabuleux"],
+    "eng": ["Mythical"]
+  },
+  "statCategoryMega": {
+    "fr": ["Méga-évolution"],
+    "eng": ["Mega evolution"]
+  },
+  "statTopSpawns": {
+    "fr": ["Top des apparitions"],
+    "eng": ["Top spawns"]
+  },
+  "statTopCatches": {
+    "fr": ["Top des captures"],
+    "eng": ["Top catches"]
+  },
 
-    "pokedexDeKanto": {
-        "fr": ["Pokedex Kanto"],
-        "eng": ["Kanto's Pokedex"]
-    },
-    "pokedexDeJohto": {
-        "fr": ["Pokedex Johto"],
-        "eng": ["Johto's Pokedex"]
-    },
-    "pokedexDeHoenn": {
-        "fr": ["Pokedex Hoenn"],
-        "eng": ["Hoenn's Pokedex"]
-    },
-    "pokedexDeSinnoh": {
-        "fr": ["Pokedex Sinnoh"],
-        "eng": ["Sinnoh's Pokedex"]
-    },
-    "pokedexDeUnys": {
-        "fr": ["Pokedex Unys"],
-        "eng": ["Unova's Pokedex"]
-    },
-    "pokedexDeKalos": {
-        "fr": ["Pokedex Kalos"],
-        "eng": ["Kalos's Pokedex"]
-    },
-    "pokedexDeAlola": {
-        "fr": ["Pokedex Alola"],
-        "eng": ["Alola's Pokedex"]
-    },
-    "pokedexDeGalar": {
-        "fr": ["Pokedex Galar"],
-        "eng": ["Galar's Pokedex"]
-    },
-    "pokedexDePaldea": {
-        "fr": ["Pokedex Paldea"],
-        "eng": ["Paldea's Pokedex"]
-    },
+  "commandHintExplication": {
+    "fr": [
+      "Permet de voir le nom du Pokémon incomplet. (debloque une nouvelle lettre toutes les 3 minutes)"
+    ],
+    "eng": [
+      "Allows you to see the name of the incomplete Pokemon. (unlock a new letter every 3 minutes)"
+    ]
+  },
+  "commandHintOptionDescChannel": {
+    "fr": [
+      "Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"
+    ],
+    "eng": [
+      "You can specify a channel. (The channel where the message is sent is selected if it is empty.)"
+    ]
+  },
+  "commandInformationExplication": {
+    "fr": [
+      "Permet de voir les informations diverses que je ne sais pas où mettre"
+    ],
+    "eng": [
+      "Allows you to see the various information that I don't know where to put"
+    ]
+  },
 
-    "shinydexDeKanto": {
-        "fr": ["Shinydex Kanto"],
-        "eng": ["Kanto's Shinydex"]
-    },
-    "shinydexDeJohto": {
-        "fr": ["Shinydex Johto"],
-        "eng": ["Johto's Shinydex"]
-    },
-    "shinydexDeHoenn": {
-        "fr": ["Shinydex Hoenn"],
-        "eng": ["Hoenn's Shinydex"]
-    },
-    "shinydexDeSinnoh": {
-        "fr": ["Shinydex Sinnoh"],
-        "eng": ["Sinnoh's Shinydex"]
-    },
-    "shinydexDeUnys": {
-        "fr": ["Shinydex Unys"],
-        "eng": ["Unova's Shinydex"]
-    },
-    "shinydexDeKalos": {
-        "fr": ["Shinydex Kalos"],
-        "eng": ["Kalos's Shinydex"]
-    },
-    "shinydexDeAlola": {
-        "fr": ["Shinydex Alola"],
-        "eng": ["Alola's Shinydex"]
-    },
-    "shinydexDeGalar": {
-        "fr": ["Shinydex Galar"],
-        "eng": ["Galar's Shinydex"]
-    },
-    "shinydexDePaldea": {
-        "fr": ["Shinydex Paldea"],
-        "eng": ["Paldea's Shinydex"]
-    },
+  "codeListEmbedTitle": {
+    "fr": ["Liste des codes"],
+    "eng": ["Code list"]
+  },
+  "codeListEmbedDescription": {
+    "fr": ["Voici la liste des codes disponibles."],
+    "eng": ["Here is the list of available codes."]
+  },
 
+  "mentionObligatoireTitle": {
+    "fr": ["Mention obligatoire"],
+    "eng": ["Mandatory mention"]
+  },
+  "mentionObligatoireDesc": {
+    "fr": ["Information obligatoire sinon on me déglingue"],
+    "eng": ["Mandatory information otherwise i get beat up"]
+  },
+  "mentionObligatoireFooter": {
+    "fr": [
+      "Merci de votre compréhension (de toute façon personne ne lit ces mentions)"
+    ],
+    "eng": [
+      "Thank you for your understanding (anyway no one reads these mentions)"
+    ]
+  },
 
-    "pokemonManquant": {
-        "fr": ["Pokémon manquant"],
-        "eng": ["Pokémon missing"]
-    },
-    "pokemonManquantShiny": {
-        "fr": ["Pokémon shiny manquant"],
-        "eng": ["Shiny Pokémon missing"]
-    },
-    "noEvent": {
-        "fr": ["Aucun évènement actuellement."],
-        "eng": ["No event currently."]
-    },
+  "mentionObligatoireFieldNonAffiliationTitle": {
+    "fr": ["Non affiliation"],
+    "eng": ["Non affiliation"]
+  },
+  "mentionObligatoireFieldNonAffiliationDesc": {
+    "fr": [
+      "Je ne suis pas affilié, associé, autorisé, approuvé par, ou autrement lié à Nintendo ou à The Pokémon Company. Les marques Pokémon et Nintendo sont des marques commerciales de Nintendo. Les autres marques commerciales et images sont la propriété de leurs propriétaires respectifs."
+    ],
+    "eng": [
+      "I am not affiliated, associated, authorized, endorsed by, or in any way officially connected with Nintendo or The Pokémon Company. Pokémon and Nintendo trademarks are trademarks of Nintendo. Other trademarks and pictures are the property of their respective owners."
+    ]
+  },
 
-    "felicitation": {
-        "fr": ["Félicitations"],
-        "eng": ["Congratulation"]
-    },
-    "vousLesAvezTous": {
-        "fr": ["Vous avez attrapé tous les Pokémon."],
-        "eng": ["You have caught all Pokémon."]
-    },
+  "hintIs": {
+    "fr": ["L'indice est : "],
+    "eng": ["The hint is : "]
+  },
+  "forChannel": {
+    "fr": ["pour le salon "],
+    "eng": ["for the channel "]
+  },
+  "noHint": {
+    "fr": ["Aucun Pokémon disponible pour ce salon."],
+    "eng": ["No Pokémon available for this channel."]
+  },
 
-    "nombreDeCapture": {
-        "fr": ["Captures"],
-        "eng": ["Caught"]
-    },
-    "nombreCaptureVariant": {
-        "fr": ["Captures de cette variante"],
-        "eng": ["Caught of this variant"]
-    },
-    "nombreDeCaptureTotaly": {
-        "fr": ["Capturés : "],
-        "eng": ["Caught : "]
-    },
-    "nombreDeSpawnTotaly": {
-        "fr": ["Apparitions au total : "],
-        "eng": ["Spawned in total : "]
-    },
-    "nombreDeCaptureShinyTotaly": {
-        "fr": ["Shinies capturés : "],
-        "eng": ["Shiny captured : "]
-    },
-    "nombreDeSpawnShinyTotaly": {
-        "fr": ["Apparitions shinies au total : "],
-        "eng": ["Shiny spotted in total : "]
-    },
-    "nombreDeCaptureVersion": {
-        "fr": ["Captures dans cette version du bot : "],
-        "eng": ["Caught in this bot's version : "]
-    },
-    "nombreDeSpawnVersion": {
-        "fr": ["Apparitions dans cette version du bot : "],
-        "eng": ["Spawned in this bot's version :"]
-    },
-    "nombreDeCaptureShinyVersion": {
-        "fr": ["Shinies capturés dans cette version du bot : "],
-        "eng": ["Shiny caught in this bot's version :"]
-    },
-    "nombreDeSpawnShinyVersion": {
-        "fr": ["Shinies apparus dans cette version du bot : "],
-        "eng": ["Shiny Spotted in this bot's version : "]
-    },
-    "pokemonLeastCaught": {
-        "fr": ["Le moins capturé : "],
-        "eng": ["Least caught : "]
-    },
-    "pokemonMostCaught": {
-        "fr": ["Le plus capturé : "],
-        "eng": ["Most caught Pokémon : "]
-    },
-    "pokemonLeastSpawn": {
-        "fr": ["Le moins apparu : "],
-        "eng": ["Least spawn : "]
-    },
-    "pokemonMostSpawn": {
-        "fr": ["Le plus apparu : "],
-        "eng": ["Most spawn : "]
-    },
-    "tooMuchPokemon": {
-        "fr": ["Trop de Pokémon"],
-        "eng": ["Too much Pokémon"]
-    },
+  "informationDescription": {
+    "fr": ["informations disponibles qui ont leur place nul part ailleurs."],
+    "eng": ["available information that have their place nowhere else."]
+  },
+  "principalPage": {
+    "fr": ["Page principale"],
+    "eng": ["Main page"]
+  },
+  "selectAPage": {
+    "fr": ["Sélectionnez une page"],
+    "eng": ["Select a page"]
+  },
+  "botNoPermission": {
+    "fr": ["Je n'ai pas les permissions pour parlé ici"],
+    "eng": ["I don't have the permissions to speak here"]
+  },
 
+  "commandHowIDoExplication": {
+    "fr": [
+      "Permet de savoir comment faire une action. Aussi appelé \"tutoriel\"."
+    ],
+    "eng": ["Allows you to know how to do an action. Also called \"tutorial\"."]
+  },
+  "tutorialTitle": {
+    "fr": ["Fonctionnement de base"],
+    "eng": ["Basic operation"]
+  },
+  "tutorialDescription": {
+    "fr": ["Voici le fonctionnement de base du bot."],
+    "eng": ["Here is the basic operation of the bot."]
+  },
 
-    "nombreDeCaptureDuServer": {
-        "fr": ["Nombre de capture du serveur : "],
-        "eng": ["Server catch count : "]
-    },
-    "nombreDeCaptureShiny": {
-        "fr": ["Nombre de capture en chromatique : "],
-        "eng": ["Number caught in shiny : "]
-    },
-    "ilFautUnNombre": {
-        "fr": ["Il fallait une valeur numérique de saisie."],
-        "eng": ["It required a numeric input value."]
-    },
-    "valeurTropHaute": {
-        "fr": ["Valeur saisie trop haute."],
-        "eng": ["Entered value too high."]
-    },
-    
-    "effect": {
-        "fr": ["Effet :"],
-        "eng": ["Effect :"]
-    },
-    
-    "timeLeft": {
-        "fr": ["Temps restant :"],
-        "eng": ["Remaining time :"]
-    },
-    
-    "actualEvent": {
-        "fr": ["Événement actuellement actif"],
-        "eng": ["Currently active event"]
-    },
-    
-    "secondes": {
-        "fr": ["secondes"],
-        "eng": ["second"]
-    },
-    
-    
-    "dragon": {
-        "fr": ["dragon"],
-        "eng": ["dragon"]
-    },
-    "electric": {
-        "fr": ["electrik"],
-        "eng": ["electric"]
-    },
-    "fire": {
-        "fr": ["feu"],
-        "eng": ["fire"]
-    },
-    "bug": {
-        "fr": ["insecte"],
-        "eng": ["bug"]
-    },
-    "grass": {
-        "fr": ["plante"],
-        "eng": ["grass"]
-    },
-    "psychic": {
-        "fr": ["psy"],
-        "eng": ["psychic"]
-    },
-    "ground": {
-        "fr": ["sol"],
-        "eng": ["ground"]
-    },
-    "dark": {
-        "fr": ["tenebres"],
-        "eng": ["dark"]
-    },
-    
-    "fighting": {
-        "fr": ["combat"],
-        "eng": ["fighting"]
-    },
-    
-    "water": {
-        "fr": ["eau"],
-        "eng": ["water"]
-    },
-    
-    "fairy": {
-        "fr": ["fee"],
-        "eng": ["fairy"]
-    },
-    
-    "glace": {
-        "fr": ["glace"],
-        "eng": ["ice"]
-    },
-    
-    "normal": {
-        "fr": ["normal"],
-        "eng": ["normal"]
-    },
-    
-    "poison": {
-        "fr": ["poison"],
-        "eng": ["poison"]
-    },
-    
-    "rock": {
-        "fr": ["roche"],
-        "eng": ["rock"]
-    },
-    
-    "ghost": {
-        "fr": ["spectre"],
-        "eng": ["ghost"]
-    },
-    
-    "flying": {
-        "fr": ["vol"],
-        "eng": ["flying"]
-    },
-    
-    
-    "steel": {
-        "fr": ["acier"],
-        "eng": ["steel"]
-    },
+  "tutorialField1Title": {
+    "fr": ["1 - Apparition des Pokémon"],
+    "eng": ["1 - Pokémon spawn"]
+  },
+  "tutorialField1Desc": {
+    "fr": [
+      "Simplement parler et ils arriveront de manière aléatoire dans les salons choisis par les administrateurs. Des évènements peuvent venir faire des effets différents comme augmenter le nombre de Pokémon Feu."
+    ],
+    "eng": [
+      "Simply talk and it will arrive randomly in the channels chosen by the administrators. Events can appear randomly as well and have different effects, such as increasing the number of fire Pokémon, ect... "
+    ]
+  },
+  "tutorialField2Title": {
+    "fr": ["2 - Capturer des Pokémons"],
+    "eng": ["2 - Pokémon catch"]
+  },
+  "tutorialField2Desc": {
+    "fr": [
+      "Pour capturer un Pokémon il faut faire la commande \"/catch [nom du Pokémon]\". Si le nom est correct, vous le saisirez avec succès ; sinon, vous le laisserez échapper. Le nom français/anglais compte. (Attention seulement le premier pourra l'attraper)"
+    ],
+    "eng": [
+      "Pokemon To catch a Pokémon you have to do the command \"/catch [Pokémon's name]\". If the name of the pokemon is correct you caught it ! Only French/English name counts. (Only one person per pokemon.)"
+    ]
+  },
+  "tutorialField3Title": {
+    "fr": ["3 - S'amuser"],
+    "eng": ["3 - Have fun"]
+  },
+  "tutorialField3Desc": {
+    "fr": [
+      "C'est tout. Simplement s'amuser de collectionner. Tu peux regarder ton avancement avec /pokedex. Il existe d'autres commandes bien sûr."
+    ],
+    "eng": [
+      "That's all. Just have fun collecting. You can watch your progress with /pokedex. There are other commands of course."
+    ]
+  },
+  "baseTutorialTitle": {
+    "fr": ["Fonctionnement de base"],
+    "eng": ["Basic operation"]
+  },
+  "tutorialAdmin": {
+    "fr": ["Truc d'admin"],
+    "eng": ["Admin stuff"]
+  },
 
-
-
-    "statMainPageName": {
-        "fr": ["Page principale"],
-        "eng": ["Main page"]
-    },
-    "statMainPageDesc": {
-        "fr": ["Page principale des statistiques générals."],
-        "eng": ["Main page of general statistics."]
-    },
-    "statCategoryOrdinary": {
-        "fr": ["Ordinaire"],
-        "eng": ["Ordinary"]
-    },
-    "statCategoryLegendary": {
-        "fr": ["Légendaire"],
-        "eng": ["Legendary"]
-    },
-    "statCategoryMythical": {
-        "fr": ["Fabuleux"],
-        "eng": ["Mythical"]
-    },
-    "statCategoryMega": {
-        "fr": ["Méga-évolution"],
-        "eng": ["Mega evolution"]
-    },
-    "statTopSpawns": {
-        "fr": ["Top des apparitions"],
-        "eng": ["Top spawns"]
-    },
-    "statTopCatches": {
-        "fr": ["Top des captures"],
-        "eng": ["Top catches"]
-    },
-
-    "commandHintExplication": {
-        "fr": ["Permet de voir le nom du Pokémon incomplet. (debloque une nouvelle lettre toutes les 3 minutes)"],
-        "eng": ["Allows you to see the name of the incomplete Pokemon. (unlock a new letter every 3 minutes)"]
-    },
-    "commandHintOptionDescChannel": {
-        "fr": ["Vous pouvez spécifier un salon. (Le salon où est envoyé le message est sélectionné si c'est vide.)"],
-        "eng": ["You can specify a channel. (The channel where the message is sent is selected if it is empty.)"]
-    },
-    "commandInformationExplication": {
-        "fr": ["Permet de voir les informations diverses que je ne sais pas où mettre"],
-        "eng": ["Allows you to see the various information that I don't know where to put"]
-    },
-
-    "codeListEmbedTitle": {
-        "fr": ["Liste des codes"],
-        "eng": ["Code list"]
-    },
-    "codeListEmbedDescription": {
-        "fr": ["Voici la liste des codes disponibles."],
-        "eng": ["Here is the list of available codes."]
-    },
-
-    "mentionObligatoireTitle": {
-        "fr": ["Mention obligatoire"],
-        "eng": ["Mandatory mention"]
-    },
-    "mentionObligatoireDesc": {
-        "fr": ["Information obligatoire sinon on me déglingue"],
-        "eng": ["Mandatory information otherwise i get beat up"]
-    },
-    "mentionObligatoireFooter": {
-        "fr": ["Merci de votre compréhension (de toute façon personne ne lit ces mentions)"],
-        "eng": ["Thank you for your understanding (anyway no one reads these mentions)"]
-    },
-
-    "mentionObligatoireFieldNonAffiliationTitle": {
-        "fr": ["Non affiliation"],
-        "eng": ["Non affiliation"]
-    },
-    "mentionObligatoireFieldNonAffiliationDesc": {
-        "fr": ["Je ne suis pas affilié, associé, autorisé, approuvé par, ou autrement lié à Nintendo ou à The Pokémon Company. Les marques Pokémon et Nintendo sont des marques commerciales de Nintendo. Les autres marques commerciales et images sont la propriété de leurs propriétaires respectifs."],
-        "eng": ["I am not affiliated, associated, authorized, endorsed by, or in any way officially connected with Nintendo or The Pokémon Company. Pokémon and Nintendo trademarks are trademarks of Nintendo. Other trademarks and pictures are the property of their respective owners."]
-    },
-
-
-
-    "hintIs":{
-        "fr" : ["L'indice est : "],
-        "eng" : ["The hint is : "]
-    },
-    "forChannel":{
-        "fr" : ["pour le salon "],
-        "eng" : ["for the channel "]
-    },
-    "noHint": {
-        "fr" : ["Aucun Pokémon disponible pour ce salon."],
-        "eng" : ["No Pokémon available for this channel."]
-    },
-
-    "informationDescription": {
-        "fr" : ["informations disponibles qui ont leur place nul part ailleurs."],
-        "eng" : ["available information that have their place nowhere else."]
-    },
-    "principalPage": {
-        "fr" : ["Page principale"],
-        "eng" : ["Main page"]
-    },
-    "selectAPage": {
-        "fr" : ["Sélectionnez une page"],
-        "eng" : ["Select a page"]
-    },
-    "botNoPermission": {
-        "fr" : ["Je n'ai pas les permissions pour parlé ici"],
-        "eng" : ["I don't have the permissions to speak here"]
-    },
-
-    "commandHowIDoExplication": {
-        "fr": ["Permet de savoir comment faire une action. Aussi appelé \"tutoriel\"."],
-        "eng": ["Allows you to know how to do an action. Also called \"tutorial\"."]
-    },
-    "tutorialTitle": {
-        "fr": ["Fonctionnement de base"],
-        "eng": ["Basic operation"]
-    
-    },
-    "tutorialDescription": {
-        "fr": ["Voici le fonctionnement de base du bot."],
-        "eng": ["Here is the basic operation of the bot."]
-    },
-
-    "tutorialField1Title": {
-        "fr": ["1 - Apparition des Pokémon"],
-        "eng": ["1 - Pokémon spawn"]
-    },
-    "tutorialField1Desc": {
-        "fr": ["Simplement parler et ils arriveront de manière aléatoire dans les salons choisis par les administrateurs. Des évènements peuvent venir faire des effets différents comme augmenter le nombre de Pokémon Feu."],
-        "eng": ["Simply talk and it will arrive randomly in the channels chosen by the administrators. Events can appear randomly as well and have different effects, such as increasing the number of fire Pokémon, ect... "]
-    },
-    "tutorialField2Title": {
-        "fr": ["2 - Capturer des Pokémons"],
-        "eng": ["2 - Pokémon catch"]
-    },
-    "tutorialField2Desc": {
-        "fr": ["Pour capturer un Pokémon il faut faire la commande \"/catch [nom du Pokémon]\". Si le nom est correct, vous le saisirez avec succès ; sinon, vous le laisserez échapper. Le nom français/anglais compte. (Attention seulement le premier pourra l'attraper)"],
-        "eng": ["Pokemon To catch a Pokémon you have to do the command \"/catch [Pokémon's name]\". If the name of the pokemon is correct you caught it ! Only French/English name counts. (Only one person per pokemon.)"]
-    },
-    "tutorialField3Title": {
-        "fr": ["3 - S'amuser"],
-        "eng": ["3 - Have fun"]
-    },
-    "tutorialField3Desc": {
-        "fr": ["C'est tout. Simplement s'amuser de collectionner. Tu peux regarder ton avancement avec /pokedex. Il existe d'autres commandes bien sûr."],
-        "eng": ["That's all. Just have fun collecting. You can watch your progress with /pokedex. There are other commands of course."]
-    },
-    "baseTutorialTitle": {
-        "fr": ["Fonctionnement de base"],
-        "eng": ["Basic operation"]
-    },
-    "tutorialAdmin": {
-        "fr": ["Truc d'admin"],
-        "eng": ["Admin stuff"]
-    },
-
-    "tutorialAdminTitle": {
-        "fr": ["Truc d'admin"],
-        "eng": ["Admin stuff"]
-    },
-    "tutorialAdminDescription": {
-        "fr": ["Voici ce que les administrateurs peuvent faire avec le bot pour une meilleure expérience."],
-        "eng": ["Here's what administrators can do with the bot for a better experience."]
-    },
-    "tutorialAdminField1Title": {
-        "fr": ["1 - Changé la langue"],
-        "eng": ["1 - Change the language"]
-    },
-    "tutorialAdminField1Desc": {
-        "fr": ["Pour changer la langue du bot il faut faire la commande \"/langue [langue]\". Seulement 2 langues sont disponibles pour le moment : Français et Anglais. (Par défaut anglais)"],
-        "eng": ["To change the language of the bot you have to do the command \"/language [language]\". Only 2 languages are available at the moment: French and English. (Default English)"]
-    },
-    "tutorialAdminField2Title": {
-        "fr": ["2 - Autorisation de spawn"],
-        "eng": ["2 - Spawn authorization"]
-    },
-    "tutorialAdminField2Desc": {
-        "fr": ["Pour autoriser le spawn dans un salon il faut faire la commande \"/spawn [true/false]\". Attention les Pokémon peuvent spawn avec des messages d'autres salons. (Sauf si le bot ne voit pas les autres salons)"],
-        "eng": ["To authorize the spawn in a room you have to do the command \"/spawn [true/false]\". Be careful the Pokémon can spawn with messages from other channels. (unless the bot doesn't see the other channels)"]
-    }
-
-    
-    
-    
-
+  "tutorialAdminTitle": {
+    "fr": ["Truc d'admin"],
+    "eng": ["Admin stuff"]
+  },
+  "tutorialAdminDescription": {
+    "fr": [
+      "Voici ce que les administrateurs peuvent faire avec le bot pour une meilleure expérience."
+    ],
+    "eng": [
+      "Here's what administrators can do with the bot for a better experience."
+    ]
+  },
+  "tutorialAdminField1Title": {
+    "fr": ["1 - Changé la langue"],
+    "eng": ["1 - Change the language"]
+  },
+  "tutorialAdminField1Desc": {
+    "fr": [
+      "Pour changer la langue du bot il faut faire la commande \"/langue [langue]\". Seulement 2 langues sont disponibles pour le moment : Français et Anglais. (Par défaut anglais)"
+    ],
+    "eng": [
+      "To change the language of the bot you have to do the command \"/language [language]\". Only 2 languages are available at the moment: French and English. (Default English)"
+    ]
+  },
+  "tutorialAdminField2Title": {
+    "fr": ["2 - Autorisation de spawn"],
+    "eng": ["2 - Spawn authorization"]
+  },
+  "tutorialAdminField2Desc": {
+    "fr": [
+      "Pour autoriser le spawn dans un salon il faut faire la commande \"/spawn [true/false]\". Attention les Pokémon peuvent spawn avec des messages d'autres salons. (Sauf si le bot ne voit pas les autres salons)"
+    ],
+    "eng": [
+      "To authorize the spawn in a room you have to do the command \"/spawn [true/false]\". Be careful the Pokémon can spawn with messages from other channels. (unless the bot doesn't see the other channels)"
+    ]
+  }
 }

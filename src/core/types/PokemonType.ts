@@ -1,18 +1,15 @@
-
 export interface PokemonType {
-    id: string;
-    name: {
-        "nameEng": string[];
-        "nameFr": string[];
-    };
-    arrayType: string[];
-    rarity: string;
-    imgName: string;
-    gen: number;
-    form: string;
-    versionForm: number;
-    isShiny: boolean|undefined;
-    hint: string;
+  id: string;
+  name: {
+    nameEng: string[];
+    nameFr: string[];
+  };
+  arrayType: string[];
+  rarity: string;
+  imgName: string;
+  gen: number;
+  form: string;
+  versionForm: number;
+  isShiny: boolean | undefined;
+  hint: string;
 }
-
-    

@@ -1,88 +1,77 @@
 import activeCode from "./activeCode";
 import codeType from "./codeType";
-import {eventCode, landings} from "../../config/default/code";
-import {UserType} from "../../core/types/UserType";
-import {ServerType} from "../../core/types/ServerType";
-import {EmbedBuilder} from "discord.js";
+import { eventCode, landings } from "../../config/default/code";
+import { UserType } from "../../core/types/UserType";
+import { ServerType } from "../../core/types/ServerType";
+import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 let code: { [key: string]: string[] } = {
-    "shiny": []
+  shiny: [],
 };
 
-
-export function getCode(){
-    return code;
+export function getCode() {
+  return code;
 }
 
-export function setCode(newCode: typeof code){
-    code = newCode;
+export function setCode(newCode: typeof code) {
+  code = newCode;
 }
 
-export function updateArrayCode(){
-    let code = getCode();
-    for(let key in eventCode){
-        // @ts-ignore
-        code[key] = JSON.parse(JSON.stringify(codeConfig.eventCode[key]));
+export function updateArrayCode() {
+  let code = getCode();
+  for (let key in eventCode) {
+    // @ts-ignore
+    code[key] = JSON.parse(JSON.stringify(codeConfig.eventCode[key]));
+  }
+  const statCatch = 0;
+  const statSpawn = 0;
+
+  let palierChoiceSpawn = null;
+  let palierChoiceCatch = null;
+  landings.forEach((landing) => {
+    if (statSpawn >= landing) {
+      palierChoiceSpawn = landing;
     }
-    const statCatch = 0;
-    const statSpawn = 0;
+  });
 
-    let palierChoiceSpawn = null;
-    let palierChoiceCatch = null;
-    landings.forEach(landing => {
-        if (statSpawn >= landing) {
-            palierChoiceSpawn = landing;
-        }
+  landings.forEach((landing) => {
+    if (statCatch >= landing) {
+      palierChoiceCatch = landing;
+    }
+  });
+
+  if (palierChoiceSpawn) {
+    code.shiny.push("SPAWNS" + palierChoiceSpawn);
+  }
+  if (palierChoiceCatch) {
+    code.shiny.push("CATCHS" + palierChoiceCatch);
+  }
+  console.log(code);
+  setCode(code);
+}
+export function codeListEmbed(user: UserType, server: ServerType) {
+  const embed = new EmbedBuilder();
+  embed.setTitle(language("codeListEmbedTitle", server.language));
+  embed.setDescription(language("codeListEmbedDescription", server.language));
+
+  for (const [key, value] of Object.entries(code)) {
+    value.forEach((code) => {
+      if (user.enteredCode.includes(code)) {
+        embed.addFields({
+          name: code,
+          value: ":white_check_mark:",
+          inline: true,
+        });
+      } else {
+        embed.addFields({
+          name: code,
+          value: ":x:",
+          inline: true,
+        });
+      }
     });
-
-    landings.forEach(landing => {
-        if (statCatch >= landing) {
-            palierChoiceCatch = landing;
-        }
-    });
-
-    if (palierChoiceSpawn) {
-        code.shiny.push("SPAWNS"+palierChoiceSpawn);
-    }
-    if (palierChoiceCatch) {
-        code.shiny.push("CATCHS"+palierChoiceCatch);
-    }
-    console.log(code)
-    setCode(code);
-}
-export function codeListEmbed(user : UserType, server:ServerType){
-    const embed = new EmbedBuilder()
-    embed.setTitle(language("codeListEmbedTitle",server.language))
-    embed.setDescription(language("codeListEmbedDescription",server.language))
-
-    for(const [key, value] of Object.entries(code)){
-        value.forEach(code => {
-            if(user.enteredCode.includes(code)){
-                embed.addFields(
-                    {
-                        name: code ,
-                        value: ":white_check_mark:",
-                        inline: true
-                    },
-                )
-            }else {
-                embed.addFields(
-                    {
-                        name: code,
-                        value: ":x:",
-                        inline: true
-                    }
-                )
-            }
-        })
-    }
-    return embed
+  }
+  return embed;
 }
 
-export {
-    activeCode,
-    code,
-    codeType
-}
-
-
+export { activeCode, code, codeType };
