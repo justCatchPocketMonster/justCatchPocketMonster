@@ -1,8 +1,10 @@
 import { UserType } from "../../core/types/UserType";
 import {
+  APIEmbedField,
   ChatInputCommandInteraction,
   EmbedBuilder,
   GuildMember,
+  RestOrArray,
 } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import { paginationButton } from "../other/paginationButton";
@@ -109,7 +111,7 @@ function pokedex(
       { name: "\u200B", value: "\u200B", inline: false },
     )
     .addFields(
-      generateFieldRegionStat(interaction.member.id, interaction.guild.id),
+      generateFieldRegionStat(user, server)
     )
     .addFields({ name: "\u200B", value: "\u200B", inline: false })
     .addFields(
@@ -235,11 +237,11 @@ function pokedex(
 }
 
 
-static generateFieldRegionStat(idUser, idGuild){
+function generateFieldRegionStat(user: UserType, server: ServerType){
   try {
-    field = [];
-    valueMax = 151;
-    valueMin = 0;
+    let field: RestOrArray<APIEmbedField> = [];
+    let valueMax = 151;
+    let valueMin = 0;
     if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
       if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
         field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})

@@ -52,6 +52,34 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     return new SaveAllPokemon(uniqueData);
   }
 
+  getThisSaveUniqueIdWithByIdRange(
+    minId: number = 1,
+    maxId: number = allPokemon[allPokemon.length - 1]["id"],
+  ): SaveAllPokemon {
+    const uniqueData: Record<string, SaveOnePokemon> = {};
+    for (const key in this.data) {
+      const pokemon = this.data[key];
+      if (
+        Number(pokemon.idPokemon) < minId ||
+        Number(pokemon.idPokemon) > maxId
+      )
+        continue;
+      if (!uniqueData[pokemon.idPokemon]) {
+        uniqueData[pokemon.idPokemon] = new SaveOnePokemon(
+          pokemon.idPokemon,
+          pokemon.rarity,
+          "form",
+          0,
+          0,
+          0,
+        );
+      }
+      uniqueData[pokemon.idPokemon].normalCount += pokemon.normalCount;
+      uniqueData[pokemon.idPokemon].shinyCount += pokemon.shinyCount;
+    }
+    return new SaveAllPokemon(uniqueData);
+  }
+
   addOneCatch(pokemon: Pokemon): void {
     const key = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
     if (!this.data[key]) {
