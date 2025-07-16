@@ -1,49 +1,196 @@
 import { UserType } from "../../core/types/UserType";
+import {
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+  GuildMember,
+} from "discord.js";
+import { ServerType } from "../../core/types/ServerType";
+import { paginationButton } from "../other/paginationButton";
+import language from "../../lang/language";
+import allPokemon from "../../data/pokemon.json";
 
-function pokedex(user: UserType) {
-  try {
-    const maxPokemonParPage = 21;
-    var listPokemon = [];
-    var arrayEmbed = [];
-    var savePokemon = user.savePokemon.getThisSaveUniqueId();
-    const emotePokeballDark = "<:pokeballDark:981974919212572682>";
-    const emotePokeballLight = "<:pokeballLight:981974905568522331>";
-    const emotePokeballShiny = "<:pokeballShinyStar:1005992732541603960>";
-    const emoteMegaDark = "<:MegaVide:1141440546032853062> ";
-    const emoteMega = "<:MEGA:1139228792989155359>";
-    const emoteMegaShiny = "<:shinyMega:1141440293409923123>";
-    var pageDeBase;
+function pokedex(
+  interaction: ChatInputCommandInteraction,
+  user: UserType,
+  server: ServerType,
+  pageChoice: number,
+) {
+  const maxPokemonParPage = 21;
+  var listPokemon = [];
+  var arrayEmbed = [];
+  const savePokemon = user.savePokemon.getThisSaveUniqueId();
+  const emotePokeballDark = "<:pokeballDark:981974919212572682>";
+  const emotePokeballLight = "<:pokeballLight:981974905568522331>";
+  const emotePokeballShiny = "<:pokeballShinyStar:1005992732541603960>";
+  const emoteMegaDark = "<:MegaVide:1141440546032853062> ";
+  const emoteMega = "<:MEGA:1139228792989155359>";
+  const emoteMegaShiny = "<:shinyMega:1141440293409923123>";
+  let pageSelectedDefault;
 
-    let pokeSave;
-    nbPage = 1;
-    nbPageMax = 1;
-    while (
-      pokemonObject.getNamePokemon(
-        1 + maxPokemonParPage * nbPageMax,
-        interaction.guild.id,
-      ) !== null
-    ) {
-      nbPageMax++;
-    }
-
+  let pokeSave;
+  let nbPage = 1;
+  let nbPageMax = 1;
+  while (
+    pokemonObject.getNamePokemon(
+      1 + maxPokemonParPage * nbPageMax,
+      interaction.guild.id,
+    ) !== null
+  ) {
     nbPageMax++;
+  }
 
-    if (isNaN(Number(pageChoice))) {
-      interaction.channel.send(
-        language.getText(interaction.guild.id, "ilFautUnNombre"),
-      );
-      pageDeBase = 1;
-    } else if (pageChoice > nbPageMax) {
-      interaction.channel.send(
-        language.getText(interaction.guild.id, "valeurTropHaute"),
-      );
-      pageDeBase = 1;
-    } else {
-      pageDeBase = pageChoice;
+  nbPageMax++;
+
+  if (isNaN(Number(pageChoice))) {
+    interaction.reply(language("ilFautUnNombre", server.language));
+    pageSelectedDefault = 1;
+  } else if (pageChoice > nbPageMax) {
+    interaction.reply(language("valeurTropHaute", server.language));
+    pageSelectedDefault = 1;
+  } else {
+    pageSelectedDefault = pageChoice;
+  }
+
+  const avatar = interaction.user.avatar
+    ? interaction.user.avatar
+    : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+  let memberDisplayName = "";
+  const member = interaction.member as GuildMember;
+
+  if (member.nickname != null) {
+    memberDisplayName = member.nickname;
+  } else {
+    memberDisplayName = member.displayName;
+  }
+
+  const mainPage = new EmbedBuilder()
+    .setThumbnail(avatar)
+    .setColor("#0099FF")
+    .setDescription("\u200B")
+    .setTitle(language("pokedexOf", server.language) + memberDisplayName)
+    .addFields(
+      {
+        name: language("nationalDex", server.language),
+        value:
+          user.savePokemon.countUniquePokemonsCaught() +
+          "/" +
+          allPokemon[allPokemon.length - 1]["id"] +
+          " - " +
+          (100 * allPokemon[allPokemon.length - 1].id) /
+            user.savePokemon.countUniquePokemonsCaught() +
+          "%",
+        inline: true,
+      },
+      {
+        name: language("shinyDex", server.language),
+        value:
+          user.savePokemon.countUniquePokemonsShinyCaught() +
+          "/" +
+          allPokemon[allPokemon.length - 1]["id"] +
+          " - " +
+          (100 * allPokemon[allPokemon.length - 1].id) /
+            user.savePokemon.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      },
+      {
+        name: language("nationalDexServer", server.language),
+        value:
+          server.savePokemon.countUniquePokemonsShinyCaught() +
+          "/" +
+          allPokemon[allPokemon.length - 1]["id"] +
+          " - " +
+          (100 * allPokemon[allPokemon.length - 1].id) /
+            server.savePokemon.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      },
+      { name: "\u200B", value: "\u200B", inline: false },
+    )
+    .addFields(
+      generateFieldRegionStat(interaction.member.id, interaction.guild.id),
+    )
+    .addFields({ name: "\u200B", value: "\u200B", inline: false })
+    .addFields(
+      generateFiledRandomStat(interaction.member.id, interaction.guild.id),
+    )
+    .setFooter({ text: "Pages:  " + nbPage + "/" + nbPageMax + "." });
+
+  arrayEmbed.push({ page: mainPage });
+
+  nbPage++;
+  while (
+    pokemonObject.getNamePokemon(
+      1 + maxPokemonParPage * (nbPage - 2),
+      interaction.guild.id,
+    ) !== null
+  ) {
+    pokeSave = new EmbedBuilder();
+
+    for (
+      let i = 1 + maxPokemonParPage * (nbPage - 2);
+      i <= maxPokemonParPage * (nbPage - 1);
+      i++
+    ) {
+      pokeFields = {};
+      if (pokemonObject.getNamePokemon(i, interaction.guild.id) != null) {
+        if (saveShiny[i] === 0) {
+          if (savePokemon[i] === 0) {
+            pokeFields = {
+              name: i + " ?????  " + emotePokeballDark,
+              value: language.getText(interaction.guild.id, "noCatch"),
+              inline: true,
+            };
+          } else {
+            pokeFields = {
+              name:
+                i +
+                " " +
+                pokemonObject.getNamePokemon(i, interaction.guild.id) +
+                "  " +
+                emotePokeballLight,
+              value:
+                language.getText(interaction.guild.id, "catched") +
+                savePokemon[i],
+              inline: true,
+            };
+          }
+        } else {
+          pokeFields = {
+            name:
+              i +
+              " " +
+              pokemonObject.getNamePokemon(i, interaction.guild.id) +
+              "  " +
+              emotePokeballShiny,
+            value:
+              language.getText(interaction.guild.id, "catched") +
+              savePokemon[i],
+            inline: true,
+          };
+        }
+
+        saveMega = pokemonForm.getSaveByForm(interaction.member.id, "mega");
+        if (saveMega.hasOwnProperty(i + "")) {
+          if (saveMega[i]["normal"] === 0) {
+            pokeFields.name += emoteMegaDark;
+          } else {
+            if (saveMega[i]["shiny"] === 0) {
+              pokeFields.name += emoteMega;
+            } else {
+              pokeFields.name += emoteMegaShiny;
+            }
+          }
+        }
+
+        listPokemon.push(pokeFields);
+      }
     }
 
-    mainPage = new Discord.EmbedBuilder();
-    mainPage
+    var sautLigne = [{ name: "\u200B", value: "\u200B" }];
+
+    pokeSave
       .setThumbnail(interaction.member.avatarURL())
       .setColor("#0099FF")
       .setDescription("\u200B")
@@ -74,151 +221,15 @@ function pokedex(user: UserType) {
             "%",
           inline: true,
         },
-        {
-          name: language.getText(interaction.guild.id, "nationalDexServer"),
-          value:
-            savePokemonServer.getCountNational(interaction.guild.id) +
-            "/" +
-            pokeDataAll[pokeDataAll.length - 1]["id"] +
-            " - " +
-            savePokemonServer.getPercentageNational(interaction.guild.id) +
-            "%",
-          inline: true,
-        },
         { name: "\u200B", value: "\u200B", inline: false },
       )
-      .addFields(
-        generateFieldRegionStat(interaction.member.id, interaction.guild.id),
-      )
-      .addFields({ name: "\u200B", value: "\u200B", inline: false })
-      .addFields(
-        generateFiledRandomStat(interaction.member.id, interaction.guild.id),
-      )
+      .addFields(listPokemon)
       .setFooter({ text: "Pages:  " + nbPage + "/" + nbPageMax + "." });
 
-    arrayEmbed.push({ page: mainPage });
-
+    listPokemon = [];
     nbPage++;
-    while (
-      pokemonObject.getNamePokemon(
-        1 + maxPokemonParPage * (nbPage - 2),
-        interaction.guild.id,
-      ) !== null
-    ) {
-      pokeSave = new Discord.EmbedBuilder();
-
-      for (
-        let i = 1 + maxPokemonParPage * (nbPage - 2);
-        i <= maxPokemonParPage * (nbPage - 1);
-        i++
-      ) {
-        pokeFields = {};
-        if (pokemonObject.getNamePokemon(i, interaction.guild.id) != null) {
-          if (saveShiny[i] === 0) {
-            if (savePokemon[i] === 0) {
-              pokeFields = {
-                name: i + " ?????  " + emotePokeballDark,
-                value: language.getText(interaction.guild.id, "noCatch"),
-                inline: true,
-              };
-            } else {
-              pokeFields = {
-                name:
-                  i +
-                  " " +
-                  pokemonObject.getNamePokemon(i, interaction.guild.id) +
-                  "  " +
-                  emotePokeballLight,
-                value:
-                  language.getText(interaction.guild.id, "catched") +
-                  savePokemon[i],
-                inline: true,
-              };
-            }
-          } else {
-            pokeFields = {
-              name:
-                i +
-                " " +
-                pokemonObject.getNamePokemon(i, interaction.guild.id) +
-                "  " +
-                emotePokeballShiny,
-              value:
-                language.getText(interaction.guild.id, "catched") +
-                savePokemon[i],
-              inline: true,
-            };
-          }
-
-          saveMega = pokemonForm.getSaveByForm(interaction.member.id, "mega");
-          if (saveMega.hasOwnProperty(i + "")) {
-            if (saveMega[i]["normal"] === 0) {
-              pokeFields.name += emoteMegaDark;
-            } else {
-              if (saveMega[i]["shiny"] === 0) {
-                pokeFields.name += emoteMega;
-              } else {
-                pokeFields.name += emoteMegaShiny;
-              }
-            }
-          }
-
-          listPokemon.push(pokeFields);
-        }
-      }
-
-      var sautLigne = [{ name: "\u200B", value: "\u200B" }];
-
-      pokeSave
-        .setThumbnail(interaction.member.avatarURL())
-        .setColor("#0099FF")
-        .setDescription("\u200B")
-        .setTitle(
-          language.getText(interaction.guild.id, "pokedexOf") +
-            interaction.member.user.username,
-        )
-        .addFields(
-          {
-            name: language.getText(interaction.guild.id, "nationalDex"),
-            value:
-              savePokemonUser.getCountNational(interaction.member.id) +
-              "/" +
-              pokeDataAll[pokeDataAll.length - 1]["id"] +
-              " - " +
-              savePokemonUser.getPercentageNational(interaction.member.id) +
-              "%",
-            inline: true,
-          },
-          {
-            name: language.getText(interaction.guild.id, "shinyDex"),
-            value:
-              saveShinyUser.getCountNational(interaction.member.id) +
-              "/" +
-              pokeDataAll[pokeDataAll.length - 1]["id"] +
-              " - " +
-              saveShinyUser.getPercentageNational(interaction.member.id) +
-              "%",
-            inline: true,
-          },
-          { name: "\u200B", value: "\u200B", inline: false },
-        )
-        .addFields(listPokemon)
-        .setFooter({ text: "Pages:  " + nbPage + "/" + nbPageMax + "." });
-
-      listPokemon = [];
-      nbPage++;
-      arrayEmbed.push({ page: pokeSave });
-    }
-
-    pagination.paginationButton(interaction, arrayEmbed);
-  } catch (error) {
-    catchError.saveError(
-      interaction.guild.id,
-      interaction.channel.id,
-      "pokemonController.js",
-      "embedPokemonSaveUser",
-      error,
-    );
-    console.error(error);
+    arrayEmbed.push({ page: pokeSave });
   }
+
+  paginationButton(interaction, arrayEmbed);
 }

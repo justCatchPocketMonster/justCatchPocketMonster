@@ -72,6 +72,28 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     );
   }
 
+  countUniquePokemonsCaught(): number {
+    const uniquePokemons = new Set<string>();
+    for (const key in this.data) {
+      const pokemon = this.data[key];
+      if (pokemon.normalCount > 0 || !uniquePokemons.has(pokemon.idPokemon)) {
+        uniquePokemons.add(pokemon.idPokemon);
+      }
+    }
+    return uniquePokemons.size;
+  }
+
+  countUniquePokemonsShinyCaught(): number {
+    const uniquePokemons = new Set<string>();
+    for (const key in this.data) {
+      const pokemon = this.data[key];
+      if (pokemon.shinyCount > 0 || !uniquePokemons.has(pokemon.idPokemon)) {
+        uniquePokemons.add(pokemon.idPokemon);
+      }
+    }
+    return uniquePokemons.size;
+  }
+
   static fromMongo(data: SaveAllPokemonType): SaveAllPokemon {
     const saveAllPokemon = new SaveAllPokemon();
     for (const [key, value] of Object.entries(data.data ?? {})) {
