@@ -6,4 +6,5 @@ export interface SaveAllPokemonType {
   getCatchByOnlyId(id: String): number;
   addOneCatch(pokemon: PokemonType): void;
   getSavesById(id: string): SaveOnePokemon[];
+  getThisSaveUniqueId(): SaveAllPokemonType;
 }

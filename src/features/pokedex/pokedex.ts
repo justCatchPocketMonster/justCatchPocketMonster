@@ -5,8 +5,7 @@ function pokedex(user: UserType) {
     const maxPokemonParPage = 21;
     var listPokemon = [];
     var arrayEmbed = [];
-    var savePokemon = savePokemonUser.getSave(interaction.member.id);
-    var saveShiny = saveShinyUser.getSave(interaction.member.id);
+    var savePokemon = user.savePokemon.getThisSaveUniqueId();
     const emotePokeballDark = "<:pokeballDark:981974919212572682>";
     const emotePokeballLight = "<:pokeballLight:981974905568522331>";
     const emotePokeballShiny = "<:pokeballShinyStar:1005992732541603960>";
@@ -15,11 +14,6 @@ function pokedex(user: UserType) {
     const emoteMegaShiny = "<:shinyMega:1141440293409923123>";
     var pageDeBase;
 
-    if (savePokemon === undefined) {
-      savePokemonUser.createSaveUser(interaction.member.id);
-      savePokemonUser.updateNumberPossibilitySave(interaction.member.id);
-      savePokemon = savePokemonUser.getSave(interaction.member.id);
-    }
     let pokeSave;
     nbPage = 1;
     nbPageMax = 1;
