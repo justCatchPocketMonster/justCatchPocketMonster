@@ -233,3 +233,135 @@ function pokedex(
 
   paginationButton(interaction, arrayEmbed);
 }
+
+
+static generateFieldRegionStat(idUser, idGuild){
+  try {
+    field = [];
+    valueMax = 151;
+    valueMin = 0;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeKanto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+
+    valueMax = 251;
+    valueMin = 151;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeJohto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+
+    valueMax = 386;
+    valueMin = 251;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeHoenn"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+    valueMax = 493;
+    valueMin = 386;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeSinnoh"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeSinnoh"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeSinnoh"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+    valueMax = 649;
+    valueMin = 493;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeUnys"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+    valueMax = 721;
+    valueMin = 649;
+    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKalos"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      } else {
+        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKalos"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      }
+    } else {
+      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeKalos"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    }
+
+
+
+
+    return field
+  } catch(error) {
+
+    catchError.saveError(idGuild, null, "pokemonController.js", "generateFieldRegionStat", error)
+    console.error(error)
+  }
+}
+
+static generateFiledRandomStat(idUser, idGuild){
+  try {
+    field = [];
+
+    listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser)
+    listPokemonShinyUncatch = saveShinyUser.getAllPokemonWithZeroCapture(idUser)
+
+    let pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
+    let pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+
+    while (pokemonRandomUncatch === undefined && listPokemonUncatch.length > 0){
+      pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
+    }
+    while (pokemonShinyRandomUncatch === undefined && listPokemonShinyUncatch.length > 0){
+      pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+    }
+
+    if(listPokemonUncatch.length <= 0 ){
+      field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    } else {
+      field.push({ name: language.getText(idGuild,"pokemonManquant"),
+        value: pokemonRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] ,
+        inline: true})
+    }
+
+    if(listPokemonShinyUncatch.length <= 0){
+      field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    } else {
+      field.push({ name: language.getText(idGuild,"pokemonManquantShiny"),
+        value: pokemonShinyRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] ,
+        inline: true})
+    }
+
+    field.push({ name: language.getText(idGuild,"nombreDeCapture"), value: ""+savePokemonUser.getCountAllPokemon(idUser) , inline: true})
+
+    return field
+  } catch(error) {
+
+    catchError.saveError(idGuild, null, "pokemonController.js", "generateFiledRandomStat", error)
+    console.error(error)
+  }
+}
