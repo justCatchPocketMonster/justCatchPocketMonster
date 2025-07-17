@@ -11,6 +11,12 @@ import { paginationButton } from "../other/paginationButton";
 import language from "../../lang/language";
 import allPokemon from "../../data/pokemon.json";
 
+interface oneFieldEmbed {
+  name: string;
+  value: string;
+  inline: boolean;
+}
+
 function pokedex(
   interaction: ChatInputCommandInteraction,
   user: UserType,
@@ -110,11 +116,8 @@ function pokedex(
       },
       { name: "\u200B", value: "\u200B", inline: false },
     )
-    .addFields(generateFieldRegionStat(user, server))
+    .addFields(...generateFieldRegionStat(user, server))
     .addFields({ name: "\u200B", value: "\u200B", inline: false })
-    .addFields(
-      generateFiledRandomStat(interaction.member.id, interaction.guild.id),
-    )
     .setFooter({ text: "Pages:  " + nbPage + "/" + nbPageMax + "." });
 
   arrayEmbed.push({ page: mainPage });
@@ -237,8 +240,8 @@ function pokedex(
 function generateFieldRegionStat(
   user: UserType,
   server: ServerType,
-): RestOrArray<APIEmbedField> {
-  let field: RestOrArray<APIEmbedField> = [];
+): oneFieldEmbed[] {
+  let field: oneFieldEmbed[] = [];
   let valueMax = 151;
   let valueMin = 0;
   let saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
@@ -588,99 +591,4 @@ function generateFieldRegionStat(
   }
 
   return field;
-}
-
-function generateFiledRandomStat(idUser, idGuild) {
-  try {
-    field = [];
-
-    listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser);
-    listPokemonShinyUncatch =
-      saveShinyUser.getAllPokemonWithZeroCapture(idUser);
-
-    let pokemonRandomUncatch = pokeDataAll.find(
-      (pokemon) =>
-        pokemon.id ==
-        listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)],
-    );
-    let pokemonShinyRandomUncatch = pokeDataAll.find(
-      (pokemon) =>
-        pokemon.id ==
-        listPokemonShinyUncatch[
-          fonction.getRandomInt(listPokemonShinyUncatch.length)
-        ],
-    );
-
-    while (
-      pokemonRandomUncatch === undefined &&
-      listPokemonUncatch.length > 0
-    ) {
-      pokemonRandomUncatch = pokeDataAll.find(
-        (pokemon) =>
-          pokemon.id ==
-          listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)],
-      );
-    }
-    while (
-      pokemonShinyRandomUncatch === undefined &&
-      listPokemonShinyUncatch.length > 0
-    ) {
-      pokemonShinyRandomUncatch = pokeDataAll.find(
-        (pokemon) =>
-          pokemon.id ==
-          listPokemonShinyUncatch[
-            fonction.getRandomInt(listPokemonShinyUncatch.length)
-          ],
-      );
-    }
-
-    if (listPokemonUncatch.length <= 0) {
-      field.push({
-        name: language.getText(idGuild, "felicitation"),
-        value: language.getText(idGuild, "vousLesAvezTous"),
-        inline: true,
-      });
-    } else {
-      field.push({
-        name: language.getText(idGuild, "pokemonManquant"),
-        value:
-          pokemonRandomUncatch["name"]["name" + language.getLanguage(idGuild)],
-        inline: true,
-      });
-    }
-
-    if (listPokemonShinyUncatch.length <= 0) {
-      field.push({
-        name: language.getText(idGuild, "felicitation"),
-        value: language.getText(idGuild, "vousLesAvezTous"),
-        inline: true,
-      });
-    } else {
-      field.push({
-        name: language.getText(idGuild, "pokemonManquantShiny"),
-        value:
-          pokemonShinyRandomUncatch["name"][
-            "name" + language.getLanguage(idGuild)
-          ],
-        inline: true,
-      });
-    }
-
-    field.push({
-      name: language.getText(idGuild, "nombreDeCapture"),
-      value: "" + savePokemonUser.getCountAllPokemon(idUser),
-      inline: true,
-    });
-
-    return field;
-  } catch (error) {
-    catchError.saveError(
-      idGuild,
-      null,
-      "pokemonController.js",
-      "generateFiledRandomStat",
-      error,
-    );
-    console.error(error);
-  }
 }
