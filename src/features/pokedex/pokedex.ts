@@ -242,8 +242,9 @@ function generateFieldRegionStat(user: UserType, server: ServerType){
     let field: RestOrArray<APIEmbedField> = [];
     let valueMax = 151;
     let valueMin = 0;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
+    let saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
         field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
       } else {
         field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
