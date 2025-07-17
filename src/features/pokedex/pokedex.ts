@@ -110,9 +110,7 @@ function pokedex(
       },
       { name: "\u200B", value: "\u200B", inline: false },
     )
-    .addFields(
-      generateFieldRegionStat(user, server)
-    )
+    .addFields(generateFieldRegionStat(user, server))
     .addFields({ name: "\u200B", value: "\u200B", inline: false })
     .addFields(
       generateFiledRandomStat(interaction.member.id, interaction.guild.id),
@@ -236,133 +234,453 @@ function pokedex(
   paginationButton(interaction, arrayEmbed);
 }
 
-
-function generateFieldRegionStat(user: UserType, server: ServerType):RestOrArray<APIEmbedField> {
-
-    let field: RestOrArray<APIEmbedField> = [];
-    let valueMax = 151;
-    let valueMin = 0;
-    let saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinyDex", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeKanto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+function generateFieldRegionStat(
+  user: UserType,
+  server: ServerType,
+): RestOrArray<APIEmbedField> {
+  let field: RestOrArray<APIEmbedField> = [];
+  let valueMax = 151;
+  let valueMin = 0;
+  let saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinyDex", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeKanto", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeKanto", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeKanto", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-    valueMax = 251;
-    valueMin = 151;
-    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+  valueMax = 251;
+  valueMin = 151;
+  saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinydexDeJohto", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeJohto", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeJohto", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-    valueMax = 386;
-    valueMin = 251;
-    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+  valueMax = 386;
+  valueMin = 251;
+  saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinydexDeHoenn", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeHoenn", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeHoenn", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-    valueMax = 493;
-    valueMin = 386;
-    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+  valueMax = 493;
+  valueMin = 386;
+  saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinydexDeSinnoh", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeSinnoh", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeSinnoh", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-    valueMax = 649;
-    valueMin = 493;
-    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+  valueMax = 649;
+  valueMin = 493;
+  saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinydexDeUnys", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeUnys", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeUnys", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-    valueMax = 721;
-    valueMin = 649;
-    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
-    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
-      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      } else {
-        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
-      }
+  valueMax = 721;
+  valueMin = 649;
+  saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
+  if (saveUserWithIdRange.countUniquePokemonsCaught() == valueMax - valueMin) {
+    if (
+      saveUserWithIdRange.countUniquePokemonsShinyCaught() ==
+      valueMax - valueMin
+    ) {
+      field.push({
+        name:
+          "<:pokeballShinyStar:1005992732541603960> " +
+          language("shinydexDeKalos", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
+      field.push({
+        name:
+          "<:pokeballLight:981974905568522331> " +
+          language("shinydexDeKalos", server.language),
+        value:
+          saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "/ " +
+          (valueMax - valueMin) +
+          " - " +
+          (100 * (valueMax - valueMin)) /
+            saveUserWithIdRange.countUniquePokemonsShinyCaught() +
+          "%",
+        inline: true,
+      });
     }
+  } else {
+    field.push({
+      name:
+        "<:pokeballDark:981974919212572682> " +
+        language("pokedexDeKalos", server.language),
+      value:
+        saveUserWithIdRange.countUniquePokemonsCaught() +
+        "/ " +
+        (valueMax - valueMin) +
+        " - " +
+        (100 * (valueMax - valueMin)) /
+          saveUserWithIdRange.countUniquePokemonsCaught() +
+        "%",
+      inline: true,
+    });
+  }
 
-
-
-    return field
-
+  return field;
 }
 
-static generateFiledRandomStat(idUser, idGuild){
+function generateFiledRandomStat(idUser, idGuild) {
   try {
     field = [];
 
-    listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser)
-    listPokemonShinyUncatch = saveShinyUser.getAllPokemonWithZeroCapture(idUser)
+    listPokemonUncatch = savePokemonUser.getAllPokemonWithZeroCapture(idUser);
+    listPokemonShinyUncatch =
+      saveShinyUser.getAllPokemonWithZeroCapture(idUser);
 
-    let pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
-    let pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+    let pokemonRandomUncatch = pokeDataAll.find(
+      (pokemon) =>
+        pokemon.id ==
+        listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)],
+    );
+    let pokemonShinyRandomUncatch = pokeDataAll.find(
+      (pokemon) =>
+        pokemon.id ==
+        listPokemonShinyUncatch[
+          fonction.getRandomInt(listPokemonShinyUncatch.length)
+        ],
+    );
 
-    while (pokemonRandomUncatch === undefined && listPokemonUncatch.length > 0){
-      pokemonRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)]);
+    while (
+      pokemonRandomUncatch === undefined &&
+      listPokemonUncatch.length > 0
+    ) {
+      pokemonRandomUncatch = pokeDataAll.find(
+        (pokemon) =>
+          pokemon.id ==
+          listPokemonUncatch[fonction.getRandomInt(listPokemonUncatch.length)],
+      );
     }
-    while (pokemonShinyRandomUncatch === undefined && listPokemonShinyUncatch.length > 0){
-      pokemonShinyRandomUncatch = pokeDataAll.find(pokemon => pokemon.id == listPokemonShinyUncatch[fonction.getRandomInt(listPokemonShinyUncatch.length)]);
+    while (
+      pokemonShinyRandomUncatch === undefined &&
+      listPokemonShinyUncatch.length > 0
+    ) {
+      pokemonShinyRandomUncatch = pokeDataAll.find(
+        (pokemon) =>
+          pokemon.id ==
+          listPokemonShinyUncatch[
+            fonction.getRandomInt(listPokemonShinyUncatch.length)
+          ],
+      );
     }
 
-    if(listPokemonUncatch.length <= 0 ){
-      field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    if (listPokemonUncatch.length <= 0) {
+      field.push({
+        name: language.getText(idGuild, "felicitation"),
+        value: language.getText(idGuild, "vousLesAvezTous"),
+        inline: true,
+      });
     } else {
-      field.push({ name: language.getText(idGuild,"pokemonManquant"),
-        value: pokemonRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] ,
-        inline: true})
+      field.push({
+        name: language.getText(idGuild, "pokemonManquant"),
+        value:
+          pokemonRandomUncatch["name"]["name" + language.getLanguage(idGuild)],
+        inline: true,
+      });
     }
 
-    if(listPokemonShinyUncatch.length <= 0){
-      field.push({ name: language.getText(idGuild,"felicitation"), value: language.getText(idGuild,"vousLesAvezTous") , inline: true})
+    if (listPokemonShinyUncatch.length <= 0) {
+      field.push({
+        name: language.getText(idGuild, "felicitation"),
+        value: language.getText(idGuild, "vousLesAvezTous"),
+        inline: true,
+      });
     } else {
-      field.push({ name: language.getText(idGuild,"pokemonManquantShiny"),
-        value: pokemonShinyRandomUncatch["name"]["name"+ language.getLanguage(idGuild)] ,
-        inline: true})
+      field.push({
+        name: language.getText(idGuild, "pokemonManquantShiny"),
+        value:
+          pokemonShinyRandomUncatch["name"][
+            "name" + language.getLanguage(idGuild)
+          ],
+        inline: true,
+      });
     }
 
-    field.push({ name: language.getText(idGuild,"nombreDeCapture"), value: ""+savePokemonUser.getCountAllPokemon(idUser) , inline: true})
+    field.push({
+      name: language.getText(idGuild, "nombreDeCapture"),
+      value: "" + savePokemonUser.getCountAllPokemon(idUser),
+      inline: true,
+    });
 
-    return field
-  } catch(error) {
-
-    catchError.saveError(idGuild, null, "pokemonController.js", "generateFiledRandomStat", error)
-    console.error(error)
+    return field;
+  } catch (error) {
+    catchError.saveError(
+      idGuild,
+      null,
+      "pokemonController.js",
+      "generateFiledRandomStat",
+      error,
+    );
+    console.error(error);
   }
 }
