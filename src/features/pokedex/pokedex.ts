@@ -245,12 +245,12 @@ function generateFieldRegionStat(user: UserType, server: ServerType){
     let saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
     if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
       if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinyDex", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKanto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeKanto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeKanto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeKanto", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
 
