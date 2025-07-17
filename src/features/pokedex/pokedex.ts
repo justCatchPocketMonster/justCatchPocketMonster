@@ -237,8 +237,8 @@ function pokedex(
 }
 
 
-function generateFieldRegionStat(user: UserType, server: ServerType){
-  try {
+function generateFieldRegionStat(user: UserType, server: ServerType):RestOrArray<APIEmbedField> {
+
     let field: RestOrArray<APIEmbedField> = [];
     let valueMax = 151;
     let valueMin = 0;
@@ -253,77 +253,75 @@ function generateFieldRegionStat(user: UserType, server: ServerType){
       field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeKanto", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
-
     valueMax = 251;
     valueMin = 151;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeJohto"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeJohto"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeJohto", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
-
 
     valueMax = 386;
     valueMin = 251;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeHoenn"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeHoenn"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeHoenn", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
     valueMax = 493;
     valueMin = 386;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeSinnoh"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeSinnoh"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeSinnoh"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeSinnoh", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
     valueMax = 649;
     valueMin = 493;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeUnys"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeUnys"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeUnys", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
     valueMax = 721;
     valueMin = 649;
-    if(savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-      if(saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) == (valueMax-valueMin)){
-        field.push({ name: "<:pokeballShinyStar:1005992732541603960>"+language.getText(idGuild,"shinydexDeKalos"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+    saveUserWithIdRange = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin+1, valueMax);
+    if(saveUserWithIdRange.countUniquePokemonsCaught() == (valueMax-valueMin)){
+      if(saveUserWithIdRange.countUniquePokemonsShinyCaught() == (valueMax-valueMin)){
+        field.push({ name: "<:pokeballShinyStar:1005992732541603960> "+language("shinydexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       } else {
-        field.push({ name: "<:pokeballLight:981974905568522331>"+language.getText(idGuild,"shinydexDeKalos"), value: saveShinyUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ saveShinyUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+        field.push({ name: "<:pokeballLight:981974905568522331> "+language("shinydexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsShinyCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsShinyCaught()+"%" , inline: true})
       }
     } else {
-      field.push({ name: "<:pokeballDark:981974919212572682>"+language.getText(idGuild,"pokedexDeKalos"), value: savePokemonUser.getCountMaxMin(idUser, valueMax, valueMin) +"/ "+ (valueMax-valueMin) +" - "+ savePokemonUser.getPercentageMaxMin(idUser, valueMax, valueMin)+"%" , inline: true})
+      field.push({ name: "<:pokeballDark:981974919212572682> "+language("pokedexDeKalos", server.language), value: saveUserWithIdRange.countUniquePokemonsCaught() +"/ "+ (valueMax-valueMin) +" - "+ (100 * (valueMax-valueMin)) /saveUserWithIdRange.countUniquePokemonsCaught()+"%" , inline: true})
     }
 
 
 
-
     return field
-  } catch(error) {
 
-    catchError.saveError(idGuild, null, "pokemonController.js", "generateFieldRegionStat", error)
-    console.error(error)
-  }
 }
 
 static generateFiledRandomStat(idUser, idGuild){
