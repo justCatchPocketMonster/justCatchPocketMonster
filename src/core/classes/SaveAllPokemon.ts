@@ -52,6 +52,29 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     return new SaveAllPokemon(uniqueData);
   }
 
+  getSaveOnePokemonFusedForm(idPokemon: string,): SaveOnePokemon {
+    let pokemonSave = new SaveOnePokemon(idPokemon, "fused", "fused", 0, 0, 0);
+    for(const key in this.data) {
+        const pokemon = this.data[key];
+        if (pokemon.idPokemon === idPokemon) {
+            pokemonSave.normalCount += pokemon.normalCount;
+            pokemonSave.shinyCount += pokemon.shinyCount;
+        }
+    }
+    return pokemonSave;
+  }
+
+  getAllSaveOfOnePokemon(idPokemon: string): SaveOnePokemon[] {
+    const saves: SaveOnePokemon[] = [];
+    for (const key in this.data) {
+      const pokemon = this.data[key];
+      if (pokemon.idPokemon === idPokemon) {
+        saves.push(pokemon);
+      }
+    }
+    return saves;
+  }
+
   getThisSaveUniqueIdWithByIdRange(
     minId: number = 1,
     maxId: number = allPokemon[allPokemon.length - 1]["id"],
@@ -60,8 +83,8 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     for (const key in this.data) {
       const pokemon = this.data[key];
       if (
-        Number(pokemon.idPokemon) < minId ||
-        Number(pokemon.idPokemon) > maxId
+        Number(pokemon.idPokemon) <= minId ||
+        Number(pokemon.idPokemon) >= maxId
       )
         continue;
       if (!uniqueData[pokemon.idPokemon]) {
@@ -82,12 +105,11 @@ export class SaveAllPokemon implements SaveAllPokemonType {
 
   addOneCatch(pokemon: Pokemon): void {
     const key = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
+
     if (!this.data[key]) {
-      this.initMissingPokemons();
-      if (!this.data[key]) {
-        throw new Error(`Pokemon non référencé : ${key}`);
-      }
+      throw new Error(`Pokemon non référencé : ${key}`);
     }
+
     this.data[key].normalCount++;
     if (pokemon.isShiny) {
       this.data[key].shinyCount++;
