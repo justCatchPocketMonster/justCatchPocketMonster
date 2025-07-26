@@ -2,13 +2,13 @@ import { Client, ActivityType } from "discord.js";
 import { getStatById } from "../../cache/StatCache";
 import logger from "../../middlewares/error";
 import { getCode } from "../code/code";
-import { version } from "../../config/default/misc";
+import {nameStatGeneral, version} from "../../config/default/misc";
 
 const randomStatus = async (Client: Client) => {
   try {
     if (Client == null || Client.user == null) return;
 
-    const statGlobal = await getStatById("all");
+    const statGlobal = await getStatById(nameStatGeneral);
 
     let arrayStatus = [
       "Je suis en " + version + " :D",
@@ -30,14 +30,7 @@ const randomStatus = async (Client: Client) => {
     Client.user.setActivity(arrayStatus[randomStatus], {
       type: ActivityType.Watching,
     });
-    /*
-        les types
-        COMPETING - participe a une compétition
-        LISTENING - écoute musique
-        PLAYING - joue a un jeu
-        STREAMING - bas c'est marqué
-        WATCHING - regarde
-        */
+
   } catch (e) {
     logger.error(e);
   }

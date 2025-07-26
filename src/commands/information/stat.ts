@@ -2,9 +2,9 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, Interaction } from "discord.js";
 import logger from "../../middlewares/error";
 import language from "../../lang/language";
-import createPaginationStat from "../../features/stat/stat";
+import {createPaginationStat} from "../../features/stat/stat";
 import { getStatById } from "../../cache/StatCache";
-import { version } from "../../config/default/misc";
+import {nameStatGeneral, version} from "../../config/default/misc";
 import { getServerById } from "../../cache/ServerCache";
 
 export default {
@@ -20,7 +20,7 @@ export default {
     try {
       if (interaction.guildId === null) return;
       const statVersion = await getStatById(version);
-      const statGeneral = await getStatById("general");
+      const statGeneral = await getStatById(nameStatGeneral);
       const server = await getServerById(interaction.guildId);
 
       createPaginationStat(interaction, statVersion, statGeneral, server);

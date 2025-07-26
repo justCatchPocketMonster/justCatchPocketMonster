@@ -8,10 +8,9 @@ import { paginationMenu } from "../other/paginationMenu";
 import { SortedResult } from "../../core/classes/SaveAllPokemon";
 import allPokemon from "../../data/pokemon.json";
 import { ServerType } from "../../core/types/ServerType";
-import langue from "../../commands/admin/langue";
 import language from "../../lang/language";
 
-export default function createPaginationStat(
+export function createPaginationStat(
   interaction: ChatInputCommandInteraction,
   actualVersionStat: Stat,
   generalVersionStat: Stat,
@@ -27,7 +26,6 @@ export default function createPaginationStat(
     image: null,
     information: {
       nameSelection: `------${title}------`,
-      descriptionSelection: "",
     },
   });
 
@@ -36,7 +34,6 @@ export default function createPaginationStat(
     image: null,
     information: {
       nameSelection: title,
-      descriptionSelection: "",
     },
   });
 
@@ -145,13 +142,13 @@ function embedClassement(
 ) {
   const embed = new EmbedBuilder().setTitle(title).setColor(color);
 
-  const langKey = `name${server.language}` as "nameEng" | "nameFr";
+
 
   arraySortPokemon.slice(0, 21).forEach((statPokemon, index) => {
-    const displayedPokemons = getPokemonNameByStatId(statPokemon);
+    const displayedPokemons = getPokemonNameByStatId(statPokemon, server);
 
     const remainingCount = statPokemon.who.length - 3;
-    const suffix = remainingCount > 0 ? `... (+ ${remainingCount} autres)` : "";
+    const suffix = remainingCount > 0 ? `(+ ${remainingCount} autres)` : "";
 
     embed.addFields({
       name: `${index + 1}. ${statPokemon.maxCount}`,
@@ -159,20 +156,24 @@ function embedClassement(
       inline: true,
     });
   });
-
   return embed;
 }
 
-function getPokemonNameByStatId(statId: SortedResult) {
-  const langKey = "nameEng" as "nameEng" | "nameFr";
-  return statId.who
-    .map((id) => {
-      const pokemon = allPokemon.find((p) => p.id.toString() === id);
-      return pokemon ? pokemon.name[langKey].join(" ") : null;
-    })
-    .filter(Boolean)
-    .join(", ");
+function getPokemonNameByStatId(statId: SortedResult, server:ServerType): string {
+  const langKey = `name${server.language[0].toUpperCase() + server.language.slice(1)}` as "nameEng" | "nameFr";
+  const names = statId.who
+      .map((id) => {
+        const pokemon = allPokemon.find((p) => p.id.toString() === id);
+        return pokemon ? pokemon.name[langKey].join(" ") : null;
+      })
+      .filter(Boolean);
+
+  const displayedNames = names.slice(0, 3);
+  return names.length > 3
+      ? `${displayedNames.join(", ")}...`
+      : displayedNames.join(", ");
 }
+
 
 function principalEmbedStat(
   actualVersionStat: Stat,
@@ -241,9 +242,9 @@ function principalEmbedStat(
   addStatFields([
     {
       name: t("pokemonLeastCaught"),
-      value: getPokemonNameByStatId(leastCaught),
+      value: getPokemonNameByStatId(leastCaught, server),
     },
-    { name: t("pokemonMostCaught"), value: getPokemonNameByStatId(mostCaught) },
+    { name: t("pokemonMostCaught"), value: getPokemonNameByStatId(mostCaught, server) },
   ]);
 
   const leastSpawned = generalVersionStat.savePokemonSpawn.sortPokemonsByCount({
@@ -257,9 +258,9 @@ function principalEmbedStat(
   addStatFields([
     {
       name: t("pokemonLeastSpawn"),
-      value: getPokemonNameByStatId(leastSpawned),
+      value: getPokemonNameByStatId(leastSpawned, server),
     },
-    { name: t("pokemonMostSpawn"), value: getPokemonNameByStatId(mostSpawned) },
+    { name: t("pokemonMostSpawn"), value: getPokemonNameByStatId(mostSpawned, server) },
   ]);
 
   return embed;

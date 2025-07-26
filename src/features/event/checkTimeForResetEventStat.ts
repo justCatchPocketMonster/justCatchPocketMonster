@@ -1,7 +1,7 @@
 import { updateServer, getServerById } from "../../cache/ServerCache";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 
-export default function checkTimeForResetEventStat(serverId: string): void {
+export async function checkTimeForResetEventStat(serverId: string): Promise<void> {
   // @ts-ignore
   const server = await getServerById(serverId);
   if (

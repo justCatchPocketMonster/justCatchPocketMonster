@@ -126,7 +126,7 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     const uniquePokemons = new Set<string>();
     for (const key in this.data) {
       const pokemon = this.data[key];
-      if (pokemon.normalCount > 0 || !uniquePokemons.has(pokemon.idPokemon)) {
+      if (pokemon.normalCount > 0 && !uniquePokemons.has(pokemon.idPokemon)) {
         uniquePokemons.add(pokemon.idPokemon);
       }
     }
@@ -137,7 +137,7 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     const uniquePokemons = new Set<string>();
     for (const key in this.data) {
       const pokemon = this.data[key];
-      if (pokemon.shinyCount > 0 || !uniquePokemons.has(pokemon.idPokemon)) {
+      if (pokemon.shinyCount > 0 && !uniquePokemons.has(pokemon.idPokemon)) {
         uniquePokemons.add(pokemon.idPokemon);
       }
     }
@@ -146,6 +146,7 @@ export class SaveAllPokemon implements SaveAllPokemonType {
 
   static fromMongo(data: SaveAllPokemonType): SaveAllPokemon {
     const saveAllPokemon = new SaveAllPokemon();
+    saveAllPokemon.initMissingPokemons();
     for (const [key, value] of Object.entries(data.data ?? {})) {
       saveAllPokemon.data[key] = new SaveOnePokemon(
         value.idPokemon,
@@ -159,7 +160,7 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     return saveAllPokemon;
   }
 
-  initMissingPokemons(): this {
+  initMissingPokemons() {
     allPokemon.forEach((pokemon) => {
       if (
         !this.data[
@@ -178,17 +179,18 @@ export class SaveAllPokemon implements SaveAllPokemonType {
           );
       }
     });
-    return this;
   }
 
   sortPokemonsByCount(options: SortOptions): SortedResult[] {
+    console.log(options);
     const { rarity, form, useShiny, ascending } = options;
 
     const filtered = Object.values(this.data).filter((pokemon) => {
-      const matchRarity = rarity == null || pokemon.rarity === rarity;
-      const matchForm = form == null || pokemon.form === form;
+      const matchRarity = rarity == undefined || pokemon.rarity === rarity;
+      const matchForm = form == undefined || pokemon.form === form;
       return matchRarity && matchForm;
     });
+    console.log(filtered.length);
 
     const aggregated = new Map<string, number>();
 

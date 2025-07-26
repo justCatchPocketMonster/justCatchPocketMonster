@@ -43,7 +43,7 @@ function formatHintWithSlashes(hintArray: string[]): string {
   return finalHint.join("");
 }
 
-export default function createHint(
+export function createHint(
   namePokemonHinted: string,
   realNameCompleted: string,
 ): string {

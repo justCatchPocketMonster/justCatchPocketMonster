@@ -7,6 +7,10 @@ export const SaveOnePokemonSchema = new mongoose.Schema<SaveOnePokemonType>(
       type: String,
       required: true,
     },
+    rarity: {
+      type: String,
+      required: true,
+    },
     form: {
       type: String,
       required: true,

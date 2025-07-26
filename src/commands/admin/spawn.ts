@@ -52,63 +52,50 @@ export default {
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
-      let guildId = interaction.guildId;
-      if (!guildId) {
+      const guildId = interaction.guildId;
+      if (!guildId) return;
+
+      const server = await getServerById(guildId);
+      if (!interaction.channel) throw new Error("Channel not found");
+
+      const lang = server.language;
+      const boolOption = interaction.options.getBoolean(language("spawnNameOptionBool", "eng"));
+      const channelOption = interaction.options.getChannel(language("spawnNameOptionChannel", "eng"));
+      const channel = channelOption ?? interaction.channel;
+
+      const isAllowed = server.channelAllowed.includes(channel.id);
+
+      if (isAllowed) {
+        if (boolOption) {
+          await interaction.reply({
+            content: language("spawnPokemonAlreadyActivate", lang),
+          });
+        } else {
+          server.channelAllowed = server.channelAllowed.filter(id => id !== channel.id);
+          await updateServer(server.discordId, server);
+
+          await interaction.reply({
+            content: language("spawnPokemonDesactivate", lang),
+          });
+        }
         return;
       }
-      let server = await getServerById(guildId);
-      if (interaction.channel == null) {
-        throw new Error("Channel not found");
+
+      if (boolOption) {
+        server.channelAllowed.push(channel.id);
+        await updateServer(server.discordId, server);
+
+        await interaction.reply({
+          content: language("spawnPokemonActivate", lang),
+        });
+      } else {
+        await interaction.reply({
+          content: language("spawnPokemonAlreadyDesactivate", lang),
+        });
       }
 
-      let channel: CategoryChannel | GuildTextBasedChannel | any;
-      if (
-        interaction.options.getChannel(
-          language("spawnNameOptionChannel", "eng"),
-        ) != null
-      ) {
-        channel = interaction.options.getChannel(
-          language("spawnNameOptionChannel", "eng"),
-        );
-      } else {
-        channel = interaction.channel;
-      }
-
-      if (server.channelAllowed.includes(channel.id)) {
-        if (
-          interaction.options.getBoolean(language("spawnNameOptionBool", "eng"))
-        ) {
-          await interaction.reply({
-            content: language("spawnPokemonAlreadyActivate", server.language),
-          });
-        } else {
-          await interaction.reply({
-            content: language("spawnPokemonDesactivate", server.language),
-          });
-          server.channelAllowed = server.channelAllowed.filter(
-            (item) => item !== channel.id,
-          );
-        }
-      } else {
-        if (
-          interaction.options.getBoolean(language("spawnNameOptionBool", "eng"))
-        ) {
-          await interaction.reply({
-            content: language("spawnPokemonActivate", server.language),
-          });
-          server.channelAllowed.push(channel.id);
-        } else {
-          await interaction.reply({
-            content: language(
-              "spawnPokemonAlreadyDesactivate",
-              server.language,
-            ),
-          });
-        }
-      }
-      updateServer(server.id, server);
     } catch (e) {
       logger.error(e);
     }
-  },
+  }
 };

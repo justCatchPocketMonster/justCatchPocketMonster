@@ -1,5 +1,5 @@
 import activeCode from "./activeCode";
-import codeType from "./codeType";
+import {codeType} from "./codeType";
 import { eventCode, landings } from "../../config/default/code";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
@@ -16,7 +16,6 @@ export function getCode() {
 export function setCode(newCode: typeof code) {
   code = newCode;
 }
-
 export function updateArrayCode() {
   let code = getCode();
   for (let key in eventCode) {
@@ -50,11 +49,12 @@ export function updateArrayCode() {
   setCode(code);
 }
 export function codeListEmbed(user: UserType, server: ServerType) {
+  updateArrayCode()
   const embed = new EmbedBuilder();
   embed.setTitle(language("codeListEmbedTitle", server.language));
   embed.setDescription(language("codeListEmbedDescription", server.language));
 
-  for (const [key, value] of Object.entries(code)) {
+  for (const [key, value] of Object.entries(getCode())) {
     value.forEach((code) => {
       if (user.enteredCode.includes(code)) {
         embed.addFields({

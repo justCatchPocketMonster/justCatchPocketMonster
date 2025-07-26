@@ -10,6 +10,6 @@ export default async () => {
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     logger.error(error);
-    process.exit(1); // Exit process with failure
+    process.exit(1);
   }
 };

@@ -1,12 +1,13 @@
 import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
-import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import {AttachmentBuilder, ChatInputCommandInteraction, EmbedBuilder} from "discord.js";
 import language from "../../lang/language";
 import { SaveOnePokemon } from "../../core/classes/SaveOnePokemon";
-import { colorByType } from "../../utils/helperFunction";
+import {capitalizeFirstLetter, colorByType} from "../../utils/helperFunction";
 import { pageType, paginationButton } from "../other/paginationButton";
 import allPokemon from "../../data/pokemon.json";
+import {pokemonDb} from "../../core/types/pokemonDb";
 
 export function howMuchThisPokemon(
   interaction: ChatInputCommandInteraction,
@@ -20,6 +21,7 @@ export function howMuchThisPokemon(
   const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
   const saveOnePokemonStatCatch = stat.savePokemonCatch.getSavesById(pokemonId);
   const paginationPage: pageType[] = [];
+  const avatar= interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
 
   for (const save of saveOnePokemonStatSpawn) {
     const saveSpecifiqueFormUser = getSpecifiqueFormSaveData(
@@ -40,18 +42,33 @@ export function howMuchThisPokemon(
 
     const pokemonData = getPokemonDataBySave(save);
     if (pokemonData === null) return;
-    const avatar = interaction.user.avatar
-      ? interaction.user.avatar
-      : "https://cdn.discordapp.com/embed/avatars/0.png";
 
-    paginationPage.push(
-      generateEmbedData(pokemonData, server, avatar, saveField, false),
-    );
-    if (saveSpecifiqueFormUser.shinyCount > 0) {
+
+    if(saveSpecifiqueFormUser.normalCount > 0){
       paginationPage.push(
-        generateEmbedData(pokemonData, server, avatar, saveField, true),
+          generateEmbedData(pokemonData, server, avatar, saveField, false),
       );
+      if (saveSpecifiqueFormUser.shinyCount > 0) {
+        paginationPage.push(
+            generateEmbedData(pokemonData, server, avatar, saveField, true),
+        );
+      }
     }
+  }
+  if(paginationPage.length === 0){
+    const pokemonDataOriginal = getPokemonDataBySave(saveOnePokemonStatSpawn[0]);
+    if (pokemonDataOriginal === null) return;
+    pokemonDataOriginal.imgName = "0000-001";
+    const saveField: saveFieldData = {
+      saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
+      saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
+      saveServer: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonServer),
+      saveStatSpawn: saveOnePokemonStatSpawn[0],
+      saveStatCatch: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonStatCatch),
+    }
+    paginationPage.push(
+        generateEmbedData(pokemonDataOriginal, server, avatar, saveField, false),
+    );
   }
   paginationButton(interaction, paginationPage);
 }
@@ -83,7 +100,7 @@ function getFusionSaveData(saveList: SaveOnePokemon[]): SaveOnePokemon {
 
 function getPokemonDataBySave(
   saveOnePokemon: SaveOnePokemon,
-): pokemonData | null {
+): pokemonDb | null {
   return (
     allPokemon.find(
       (pokemon) =>
@@ -95,15 +112,17 @@ function getPokemonDataBySave(
 }
 
 function generateEmbedData(
-  pokemon: pokemonData,
+  pokemon: pokemonDb,
   server: ServerType,
   avatarUser: string,
   allSaveData: saveFieldData,
   isShiny: boolean,
 ): pageType {
+  const imageName = pokemon.imgName+(isShiny ? "-shiny" : "")+".png";
+
   const embed = new EmbedBuilder()
-    .setTitle(pokemon["name"]["name" + server.language][0])
-    .setImage("attachment://" + pokemon.imgName + ".png")
+    .setTitle(pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0])
+    .setImage("attachment://" + imageName)
     .setThumbnail(avatarUser)
     .addFields(
       {
@@ -153,12 +172,11 @@ function generateEmbedData(
       ),
     );
 
-  const imageName = pokemon.imgName;
-  const imagePath = server.eventSpawn.nightMode
-    ? `./src/image/pokeHomeShadow/${imageName}.png`
-    : `./src/image/pokeHome/${imageName}${isShiny ? "-shiny" : ""}.png`;
 
-  return { page: embed, imagePage: imagePath };
+  const imagePath = server.eventSpawn.nightMode
+    ? `./src/assets/pokeHomeShadow/${imageName}`
+    : `./src/assets/pokeHome/${imageName}`;
+  return { page: embed, imagePage: new AttachmentBuilder(imagePath) };
 }
 
 interface saveFieldData {
@@ -169,15 +187,3 @@ interface saveFieldData {
   saveStatCatch: SaveOnePokemon;
 }
 
-interface pokemonData {
-  id: number;
-  name: {
-    [key: string]: string[];
-  };
-  arrayType: string[];
-  rarity: string;
-  gen: number;
-  imgName: string;
-  form: string;
-  versionForm: number;
-}

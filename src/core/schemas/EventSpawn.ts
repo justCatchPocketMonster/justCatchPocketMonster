@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 import { EventSpawnType } from "../types/EventSpawnType";
 import {
-  defaultValueGen,
-  defaultValueType,
-  defaultRarity,
-  tauxMaxShiny,
   maximumCount,
   minimumCount,
-} from "../../config/default/defaultValue";
+  rateMaxShiny,
+  valuePerGen,
+  valuePerRarity,
+  valuePerType
+} from "../../config/default/spawn";
+import {EventSchema} from "./Event";
 
 export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
   {
@@ -15,204 +16,167 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
       "1": {
         type: Number,
         required: true,
-        default: defaultValueGen[1],
+        default: valuePerGen[1],
       },
       "2": {
         type: Number,
         required: true,
-        default: defaultValueGen[2],
+        default: valuePerGen[2],
       },
       "3": {
         type: Number,
         required: true,
-        default: defaultValueGen[3],
+        default: valuePerGen[3],
       },
       "4": {
         type: Number,
         required: true,
-        default: defaultValueGen[4],
+        default: valuePerGen[4],
       },
       "5": {
         type: Number,
         required: true,
-        default: defaultValueGen[5],
+        default: valuePerGen[5],
       },
       "6": {
         type: Number,
         required: true,
-        default: defaultValueGen[6],
+        default: valuePerGen[6],
       },
       "7": {
         type: Number,
         required: true,
-        default: defaultValueGen[7],
+        default: valuePerGen[7],
       },
       "8": {
         type: Number,
         required: true,
-        default: defaultValueGen[8],
+        default: valuePerGen[8],
       },
       "9": {
         type: Number,
         required: true,
-        default: defaultValueGen[9],
+        default: valuePerGen[9],
       },
     },
     type: {
-      Steel: {
+      steel: {
         type: Number,
         required: true,
-        default: defaultValueType.Steel,
+        default: valuePerType.steel,
       },
-      Dragon: {
+      dragon: {
         type: Number,
         required: true,
-        default: defaultValueType.Dragon,
+        default: valuePerType.dragon,
       },
-      Electric: {
+      electric: {
         type: Number,
         required: true,
-        default: defaultValueType.Electric,
+        default: valuePerType.electric,
       },
-      Fire: {
+      fire: {
         type: Number,
         required: true,
-        default: defaultValueType.Fire,
+        default: valuePerType.fire,
       },
-      Bug: {
+      bug: {
         type: Number,
         required: true,
-        default: defaultValueType.Bug,
+        default: valuePerType.bug,
       },
-      Grass: {
+      grass: {
         type: Number,
         required: true,
-        default: defaultValueType.Grass,
+        default: valuePerType.grass,
       },
-      Psychic: {
+      psychic: {
         type: Number,
         required: true,
-        default: defaultValueType.Psychic,
+        default: valuePerType.psychic,
       },
-      Ground: {
+      ground: {
         type: Number,
         required: true,
-        default: defaultValueType.Ground,
+        default: valuePerType.ground,
       },
-      Dark: {
+      dark: {
         type: Number,
         required: true,
-        default: defaultValueType.Dark,
+        default: valuePerType.dark,
       },
-      Fighting: {
+      fighting: {
         type: Number,
         required: true,
-        default: defaultValueType.Fighting,
+        default: valuePerType.fighting,
       },
-      Water: {
+      water: {
         type: Number,
         required: true,
-        default: defaultValueType.Water,
+        default: valuePerType.water,
       },
-      Fairy: {
+      fairy: {
         type: Number,
         required: true,
-        default: defaultValueType.Fairy,
+        default: valuePerType.fairy,
       },
-      Ice: {
+      ice: {
         type: Number,
         required: true,
-        default: defaultValueType.Ice,
+        default: valuePerType.ice,
       },
-      Normal: {
+      normal: {
         type: Number,
         required: true,
-        default: defaultValueType.Normal,
+        default: valuePerType.normal,
       },
-      Poison: {
+      poison: {
         type: Number,
         required: true,
-        default: defaultValueType.Poison,
+        default: valuePerType.poison,
       },
-      Rock: {
+      rock: {
         type: Number,
         required: true,
-        default: defaultValueType.Rock,
+        default: valuePerType.rock,
       },
-      Ghost: {
+      ghost: {
         type: Number,
         required: true,
-        default: defaultValueType.Ghost,
+        default: valuePerType.ghost,
       },
-      Flying: {
+      flying: {
         type: Number,
         required: true,
-        default: defaultValueType.Flying,
+        default: valuePerType.flying,
       },
     },
     rarity: {
-      ordinaire: {
+      ordinary: {
         type: Number,
         required: true,
-        default: defaultRarity.ordinaire,
+        default: valuePerRarity.ordinary,
       },
-      legendaire: {
+      legendary: {
         type: Number,
         required: true,
-        default: defaultRarity.legendaire,
+        default: valuePerRarity.legendary,
       },
-      fabuleux: {
+      mythical: {
         type: Number,
         required: true,
-        default: defaultRarity.fabuleux,
+        default: valuePerRarity.mythical,
       },
     },
     shiny: {
       type: Number,
       required: true,
-      default: tauxMaxShiny,
-    },
-    endTime: {
-      type: Date,
-      required: true,
-      default: Date.now,
+      default: rateMaxShiny,
     },
     whatEvent: {
-      id: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      name: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      description: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      type: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      color: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      image: {
-        type: String,
-        required: true,
-        default: "",
-      },
-      effectDescription: {
-        type: String,
-        required: true,
-        default: "",
-      },
+        type: EventSchema,
+        required: false,
+        default: null,
     },
     allowedForm: {
       mega: {

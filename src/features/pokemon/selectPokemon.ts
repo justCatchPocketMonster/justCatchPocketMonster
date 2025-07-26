@@ -2,29 +2,30 @@ import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
 import allPokemon from "../../data/pokemon.json";
-import checkTimeForResetEventStat from "../event/checkTimeForResetEventStat";
+import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 import {
   hidePokemon,
   nbGeneration,
   valuePerRarity,
   valuePerType,
 } from "../../config/default/spawn";
+import {pokemonDb} from "../../core/types/pokemonDb";
 
-const selectPokemon = (
+export const selectPokemon = (
   server: ServerType,
   idPokemon: number = 0,
   isEgg: boolean = false,
-): Pokemon => {
-  checkTimeForResetEventStat(server.id);
-  let pokemonChoiced: Pokemon;
-  const pokemons: Pokemon[] = allPokemon.map((p) => ({
+): PokemonType => {
+  checkTimeForResetEventStat(server.discordId);
+  let pokemonChoiced: PokemonType;
+  const pokemons: pokemonDb[] = allPokemon.map((p) => ({
     ...p,
-    id: p.id.toString(),
+    id: p.id,
     isShiny: false,
     hint: "",
   }));
 
-  const allowedPokemon: PokemonType[] = megaIsAllowed(server, pokemons);
+  const allowedPokemon: pokemonDb[] = megaIsAllowed(server, pokemons);
   if (idPokemon === 0) {
     pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
     pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
@@ -33,11 +34,10 @@ const selectPokemon = (
   }
 
   pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, isEgg);
-
+  console.log(pokemonChoiced);
   return pokemonChoiced;
 };
 
-export default selectPokemon;
 
 function shinySelect(
   idPokemon: String,
@@ -77,7 +77,7 @@ function shinySelect(
   return nbRandomShiny === 1;
 }
 
-function isHiddenPokemon(server: ServerType, pokemon: Pokemon): Pokemon {
+function isHiddenPokemon(server: ServerType, pokemon: PokemonType): PokemonType {
   let randomNumber: number = Math.floor(Math.random() * hidePokemon.maxValue);
 
   if (randomNumber == 1) {
@@ -96,8 +96,8 @@ function isHiddenPokemon(server: ServerType, pokemon: Pokemon): Pokemon {
 
 function megaIsAllowed(
   server: ServerType,
-  allowedPokemon: Pokemon[],
-): Pokemon[] {
+  allowedPokemon: pokemonDb[],
+): pokemonDb[] {
   if (server.eventSpawn.allowedForm.mega) {
     return allowedPokemon;
   } else {
@@ -124,9 +124,9 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
 }
 function selectRandomPokemon(
   server: ServerType,
-  allowedPokemon: Pokemon[],
-): Pokemon {
-  let pokemonPassGen: Pokemon[];
+  allowedPokemon: pokemonDb[],
+): PokemonType {
+  let pokemonPassGen: pokemonDb[];
   let generation: string;
   do {
     generation = generationSelect(server);
@@ -134,8 +134,7 @@ function selectRandomPokemon(
       (pokemon) => pokemon.gen === Number(generation),
     );
   } while (pokemonPassGen[0] === undefined);
-
-  let pokemonPassRarity: Pokemon[];
+  let pokemonPassRarity: pokemonDb[];
   let rarity: string;
   do {
     rarity = raritySelect(server);
@@ -143,8 +142,7 @@ function selectRandomPokemon(
       (pokemon) => pokemon.rarity === rarity,
     );
   } while (pokemonPassRarity[0] === undefined);
-
-  let pokemonPassType: Pokemon[];
+  let pokemonPassType: pokemonDb[];
   let type: string;
   do {
     type = typeSelect(server);
@@ -152,9 +150,19 @@ function selectRandomPokemon(
       pokemon.arrayType.includes(type),
     );
   } while (pokemonPassType[0] === undefined);
-
+  const randomPokemon = pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)]
   return {
-    ...pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)],
+    id: randomPokemon.id.toString(),
+    name: {
+      nameEng: randomPokemon.name["nameEng"],
+      nameFr:  randomPokemon.name["nameFr"],
+    },
+    arrayType: randomPokemon.arrayType,
+    rarity: randomPokemon.rarity,
+    imgName: randomPokemon.imgName,
+    gen: randomPokemon.gen,
+    form: randomPokemon.form,
+    versionForm: randomPokemon.versionForm,
     isShiny: false,
     hint: "",
   };
@@ -171,13 +179,12 @@ function generationSelect(server: ServerType): string {
       return gen.toString();
     }
   }
-  return "";
+  return "errorGen";
 }
 
 function raritySelect(server: ServerType): string {
-  const randomNumber = Math.floor(Math.random() * 100);
+  const randomNumber = Math.floor(Math.random() * 1000);
   let somStatByRarity = 0;
-
   let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (let i = 0; i < arrayRarity.length; i++) {
     // @ts-ignore
@@ -187,7 +194,7 @@ function raritySelect(server: ServerType): string {
     }
   }
 
-  return "";
+  return "errorRarity";
 }
 
 function typeSelect(server: ServerType): string {
@@ -195,7 +202,6 @@ function typeSelect(server: ServerType): string {
     Math.random() * Object.values(valuePerType).reduce((a, b) => a + b, 0),
   );
   let somStatByType = 0;
-
   let arrayType: string[] = Object.keys(valuePerType);
 
   for (let i = 0; i < arrayType.length; i++) {
@@ -206,5 +212,5 @@ function typeSelect(server: ServerType): string {
     }
   }
 
-  return "";
+  return "errorType";
 }

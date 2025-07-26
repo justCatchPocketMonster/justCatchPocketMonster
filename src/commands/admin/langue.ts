@@ -44,13 +44,22 @@ export default {
       }
       let server = await getServerById(interaction.guildId);
 
-      // @ts-ignore
-      server.language =
-        interaction.options
-          .getString(language("langNameOptionString", "eng"))
-          .toLowerCase() ?? "eng";
+      const langOption = interaction.options.getString(
+        language("langNameOptionString", "eng"),
+      );
 
-      updateServer(server.id, server);
+      if(!langOption) {
+        interaction.reply({
+          content: language("langErrorNoOption", server.language),
+        });
+        return;
+      }
+
+      server.language = langOption.toLowerCase() ?? "eng";
+      interaction.reply({
+        content: language("langIsChanged", server.language),
+      });
+      updateServer(server.discordId, server);
     } catch (e) {
       logger.error(e);
     }

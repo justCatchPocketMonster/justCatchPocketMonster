@@ -68,6 +68,10 @@
     "fr": ["La langue voulue."],
     "eng": ["The desired language."]
   },
+  "langIsChanged": {
+    "fr": ["La langue a été changée."],
+    "eng": ["The language has been changed."]
+  },
 
   "commandPokedexExplication": {
     "fr": ["Permet de voir le pokedex afin de suivre son avancement."],

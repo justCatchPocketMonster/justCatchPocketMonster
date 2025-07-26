@@ -1,7 +1,7 @@
-import EventClass from "../../core/types/EventType";
+import {EventType} from "../../core/types/EventType";
 import eventData from "../../data/eventData.json";
 
-const selectEvent = (): EventClass => {
+export const selectEvent = (): EventType => {
   let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
   return {
     ...randomEvent,
@@ -11,4 +11,3 @@ const selectEvent = (): EventClass => {
   };
 };
 
-export default selectEvent;

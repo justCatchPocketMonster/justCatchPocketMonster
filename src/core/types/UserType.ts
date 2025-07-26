@@ -1,7 +1,7 @@
 import { SaveAllPokemonType } from "./SaveAllPokemonType";
 
 export interface UserType {
-  id: string;
+  discordId: string;
   enteredCode: string[];
   savePokemon: SaveAllPokemonType;
   countPagination: number;

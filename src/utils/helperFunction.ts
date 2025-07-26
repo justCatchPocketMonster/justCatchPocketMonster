@@ -1,5 +1,4 @@
-import { ColorResolvable, TextChannel } from "discord.js";
-import logger from "../middlewares/error";
+import { ColorResolvable } from "discord.js";
 
 export const colorByType = (type: string): ColorResolvable => {
   switch (type) {
@@ -43,3 +42,12 @@ export const colorByType = (type: string): ColorResolvable => {
       return "FFFFFF" as ColorResolvable;
   }
 };
+
+
+export function getPercentage(partialValue: number, totalValue: number): number {
+  return (partialValue / totalValue) * 100;
+}
+
+export function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

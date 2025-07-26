@@ -4,7 +4,7 @@ import { SaveAllPokemonType } from "./SaveAllPokemonType";
 import { Pokemon } from "../classes/Pokemon";
 
 export interface ServerType {
-  id: string;
+  discordId: string;
   channelAllowed: string[];
   charmeChroma: boolean;
   language: string;

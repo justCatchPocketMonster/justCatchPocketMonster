@@ -4,10 +4,11 @@ import { SaveOnePokemonSchema } from "./SaveOnePokemon";
 import { PokemonSchema } from "./Pokemon";
 import { EventSpawnSchema } from "./EventSpawn";
 import { SaveAllPokemonSchema } from "./SaveAllPokemon";
+import {Pokemon} from "../classes/Pokemon";
 
 const ServerSchema = new mongoose.Schema<ServerType>(
   {
-    id: {
+  discordId: {
       type: String,
       required: true,
     },
@@ -27,8 +28,7 @@ const ServerSchema = new mongoose.Schema<ServerType>(
       default: "eng",
     },
     savePokemon: {
-      type: mongoose.Schema.Types.Map,
-      of: SaveOnePokemonSchema,
+      type: SaveAllPokemonSchema,
       required: true,
     },
     eventSpawn: {
@@ -46,7 +46,8 @@ const ServerSchema = new mongoose.Schema<ServerType>(
       default: 0,
     },
     pokemonPresent: {
-      type: SaveAllPokemonSchema,
+      type: Map,
+      of: PokemonSchema,
       required: true,
     },
   },

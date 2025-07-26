@@ -4,7 +4,9 @@ import { ChatInputCommandInteraction, GuildMember } from "discord.js";
 import { eventShinyAfterCatch } from "../event/eventShinyAfterCatch";
 import language from "../../lang/language";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import { version } from "../../config/default/misc";
+import {nameStatGeneral, version} from "../../config/default/misc";
+import {updateUser} from "../../cache/UserCache";
+import {updateServer} from "../../cache/ServerCache";
 
 export async function catchPokemon(
   user: UserType,
@@ -53,13 +55,12 @@ export async function catchPokemon(
   pokemon.isShiny = shinyAfterEvent;
 
   const statVersion = await getStatById(version);
-  const statAll = await getStatById("global");
+  const statAll = await getStatById(nameStatGeneral);
 
   statVersion.addCatch(pokemon);
   statAll.addCatch(pokemon);
 
-  updateStat(version, statVersion);
-  updateStat("global", statAll);
+
   user.savePokemon.addOneCatch(pokemon);
   server.savePokemon.addOneCatch(pokemon);
 
@@ -87,4 +88,8 @@ export async function catchPokemon(
   interaction.reply(messageCongratSend);
 
   server.removePokemonByIdChannel(idChannel);
+  updateStat(version, statVersion);
+  updateStat(nameStatGeneral, statAll);
+  updateUser(user.discordId, user);
+  updateServer(server.discordId, server);
 }

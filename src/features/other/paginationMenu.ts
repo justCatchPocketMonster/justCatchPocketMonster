@@ -24,6 +24,10 @@ export function createPageForMenu(
   nameSelection: string,
   descriptionSelection?: string,
 ): PageData {
+  if(descriptionSelection === ""){
+    descriptionSelection = undefined;
+  }
+
   const info: PageInformation = {
     nameSelection,
     descriptionSelection,
@@ -47,11 +51,6 @@ interface PageInformation {
   nameSelection: string;
   descriptionSelection?: string;
 }
-interface PageData {
-  page: EmbedBuilder;
-  imagePage?: AttachmentBuilder;
-  information: PageInformation;
-}
 export async function paginationMenu(
   interaction: ChatInputCommandInteraction,
   defaultText: string,
@@ -62,16 +61,15 @@ export async function paginationMenu(
   if (pages.length === 0) return;
   let currentPage = pageParDefaut - 1;
 
+  const menuOptions: APISelectMenuOption[] = pages.map((p, index) => ({
+    label: p.information.nameSelection,
+    description: p.information.descriptionSelection ?? undefined,
+    value: index.toString(),
+  }));
   const menu = new StringSelectMenuBuilder()
     .setCustomId("pagination_menu")
     .setPlaceholder(defaultText)
-    .addOptions(
-      pages.map((p, index) => ({
-        label: p.information.nameSelection,
-        description: p.information.descriptionSelection ?? undefined,
-        value: index.toString(),
-      })),
-    );
+    .addOptions(menuOptions);
 
   const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
     menu,
@@ -102,7 +100,24 @@ export async function paginationMenu(
       }
 
       await selectInteraction.deferUpdate();
-      currentPage = parseInt(selectInteraction.values[0]);
+      let pageSelection = Number(selectInteraction.values[0]);
+      let nbLoop = 0;
+      while (!pages[pageSelection].page){
+        nbLoop++;
+        if (nbLoop >= 1000) {
+          await interaction.editReply({
+            components: [],
+          });
+          return
+        }
+        pageSelection++
+        if( pageSelection >= pages.length) {
+            pageSelection = 0;
+            break;
+        }
+      }
+
+      currentPage = pageSelection;
 
       const newPayload: Parameters<typeof selectInteraction.editReply>[0] = {
         embeds: [pages[currentPage].page],

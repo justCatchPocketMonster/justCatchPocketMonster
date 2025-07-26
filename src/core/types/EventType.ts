@@ -9,4 +9,3 @@ export interface EventType {
   endTime: Date;
 }
 
-export default EventType;

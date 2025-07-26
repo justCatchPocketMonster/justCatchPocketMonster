@@ -6,7 +6,7 @@ import { ChatInputCommandInteraction } from "discord.js";
 import logger from "../../middlewares/error";
 
 import { getUserById, updateUser } from "../../cache/UserCache";
-import { codeType, activeCode } from "../../features/code/code";
+import {codeType, activeCode, updateArrayCode} from "../../features/code/code";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 
@@ -33,6 +33,7 @@ export default {
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
+      updateArrayCode()
       // @ts-ignore
       let codeEntered = interaction.options
         .getString(language("codeNameOptionString", "eng"))
@@ -58,7 +59,7 @@ export default {
       activeCode(typeCode);
 
       user.enteredCode.push(codeEntered);
-      updateUser(user.id, user);
+      updateUser(user.discordId, user);
     } catch (e) {
       logger.error(e);
     }

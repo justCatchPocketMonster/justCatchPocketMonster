@@ -87,14 +87,18 @@ export class Stat implements StatType {
   }
 
   static createDefault(id: string): Stat {
+    const saveAllPokemonSpawn: SaveAllPokemon = new SaveAllPokemon();
+    const saveAllPokemonCatch: SaveAllPokemon = new SaveAllPokemon();
+    saveAllPokemonSpawn.initMissingPokemons();
+    saveAllPokemonCatch.initMissingPokemons();
     return new Stat(
       id,
       0, // pokemonSpawned
       0, // pokemonSpawnedShiny
       0, // pokemonCaught
       0, // pokemonCaughtShiny
-      new SaveAllPokemon().initMissingPokemons(),
-      new SaveAllPokemon().initMissingPokemons(),
+      saveAllPokemonSpawn,
+      saveAllPokemonCatch,
     );
   }
 }

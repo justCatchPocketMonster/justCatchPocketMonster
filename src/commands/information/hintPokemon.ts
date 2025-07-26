@@ -6,7 +6,7 @@ import { ChannelType, ChatInputCommandInteraction } from "discord.js";
 import logger from "../../middlewares/error";
 import language from "../../lang/language";
 import { getServerById, updateServer } from "../../cache/ServerCache";
-import createHint from "../../features/hint/createHint";
+import {createHint} from "../../features/hint/createHint";
 
 export default {
   name: "hint",
@@ -53,7 +53,7 @@ export default {
           server.pokemonPresent[channel.id].hint,
           server.pokemonPresent[channel.id].name.nameEng[0],
         );
-        updateServer(server.id, server);
+        updateServer(server.discordId, server);
         return;
       }
 

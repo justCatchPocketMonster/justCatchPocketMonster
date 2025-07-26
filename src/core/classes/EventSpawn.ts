@@ -8,7 +8,7 @@ import {
 import { defaultLanguage } from "../../config/default/server";
 import {
   maximumCount,
-  minimumCount,
+  minimumCount, valueMaxChoiceEgg,
   valuePerGen,
   valuePerRarity,
   valuePerType,
@@ -46,7 +46,7 @@ export class EventSpawn implements EventSpawnType {
         max: maximumCount,
       },
       false,
-      1,
+      valueMaxChoiceEgg,
     );
     return defaultEventSpawn;
   }

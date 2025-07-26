@@ -1,4 +1,4 @@
-import EventType from "./EventType";
+import {EventType} from "./EventType";
 
 export interface genStat {
   "1": number;

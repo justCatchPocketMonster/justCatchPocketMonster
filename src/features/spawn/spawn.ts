@@ -1,11 +1,11 @@
 import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
-import EventClass from "../../core/types/EventType";
-import selectPokemon from "../pokemon/selectPokemon";
-import selectEvent from "../event/selectEvent";
+import {EventType} from "../../core/types/EventType";
+import {selectPokemon} from "../pokemon/selectPokemon";
+import {selectEvent} from "../event/selectEvent";
 import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
-import effectEvent from "../event/effectEvent";
+import {effectEvent} from "../event/effectEvent";
 import allPokemon from "../../data/pokemon.json";
 import logger from "../../middlewares/error";
 import { getServerById, updateServer } from "../../cache/ServerCache";
@@ -13,7 +13,7 @@ import { valueMaxChoiceEvent } from "../../config/default/spawn";
 import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import { version } from "../../config/default/misc";
+import {nameStatGeneral, version} from "../../config/default/misc";
 
 interface spawnData {
   embed: EmbedBuilder;
@@ -21,7 +21,7 @@ interface spawnData {
   channelId: string;
 }
 
-const spawn = async (
+export const spawn = async (
   idServer: string,
   idChannel: string,
 ): Promise<spawnData | null | undefined> => {
@@ -50,12 +50,11 @@ const spawn = async (
   }
 };
 
-export default spawn;
 
 function hasReachedSpawnLimit(server: ServerType): boolean {
   server.countMessage = server.countMessage + 1;
   initMaxCount(server);
-  updateServer(server.id, server);
+  updateServer(server.discordId, server);
   return server.countMessage == 0;
 }
 
@@ -84,18 +83,16 @@ function choiceChannel(server: ServerType, idChannel: string): string {
   ];
 }
 
-// @ts-ignore
 async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
-): { embed: EmbedBuilder; image: AttachmentBuilder } {
-  try {
+): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
+
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
 
     if (randomCategorySpawn <= 1) {
-      let event: EventClass | null = selectEvent();
+      let event: EventType | null = selectEvent();
       event = effectEvent(event, server);
-      if (event === null) throw new Error("Event not found");
 
       return generateEmbedEvent(event, server);
     }
@@ -110,18 +107,17 @@ async function choiceTypeOfSpawn(
     }
     server.pokemonPresent[idChannel] = pokemonChoice;
     const statVersion = await getStatById(version);
-    const statAll = await getStatById("global");
+    const statAll = await getStatById(nameStatGeneral);
 
     statVersion.addSpawn(pokemonChoice as Pokemon);
     statAll.addSpawn(pokemonChoice as Pokemon);
 
+    updateServer(server.discordId, server);
     updateStat(version, statVersion);
-    updateStat("global", statAll);
+    updateStat(nameStatGeneral, statAll);
 
     return generateEmbedPokemon(pokemonChoice, server);
-  } catch (e) {
-    logger.error(e);
-  }
+
 }
 
 function generateEmbedPokemon(
@@ -154,7 +150,7 @@ function generateEmbedPokemon(
 }
 
 function generateEmbedEvent(
-  event: EventClass,
+  event: EventType,
   server: ServerType,
 ): { embed: EmbedBuilder; image: AttachmentBuilder } {
   const basePath = "./src/assets/eventImage/";
@@ -169,7 +165,6 @@ function generateEmbedEvent(
     .setTitle(getText(event.name, server.language))
     .setDescription(getText(event.description, server.language))
     .addFields({
-      // @ts-ignore
       name: getText("effect", server.language),
       value: event.effectDescription,
       inline: false,

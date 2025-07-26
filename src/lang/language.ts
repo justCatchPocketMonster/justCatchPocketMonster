@@ -14,7 +14,7 @@ export default function getText(key: string, lang: string): string {
     const languageData: languageStructure = language;
     const langTextArray = languageData[key]?.[lang] ?? [];
     if (langTextArray.length === 0) {
-      throw new Error("Key not found :" + key);
+      langTextArray.push("Error: Key not found");
     }
 
     const randomTextIndex = Math.floor(Math.random() * langTextArray.length);

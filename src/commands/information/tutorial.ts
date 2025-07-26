@@ -58,7 +58,6 @@ export default {
             ),
           null,
           language("baseTutorialTitle", server.language),
-          "",
         ),
       );
 
@@ -84,7 +83,6 @@ export default {
             ),
           null,
           language("tutorialAdminTitle", server.language),
-          "",
         ),
       );
 

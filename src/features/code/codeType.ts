@@ -1,6 +1,6 @@
 import { code } from "./code";
 
-const codeType = (codeEntered: string): string | null => {
+export const codeType = (codeEntered: string): string | null => {
   for (let key in code) {
     if (code[key].includes(codeEntered)) {
       return key;
@@ -9,4 +9,3 @@ const codeType = (codeEntered: string): string | null => {
   return null;
 };
 
-export default codeType;

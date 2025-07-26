@@ -17,7 +17,7 @@ import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 
 import logger from "../middlewares/error";
-import checkTimeForResetEventStat from "../features/event/checkTimeForResetEventStat";
+import {checkTimeForResetEventStat} from "../features/event/checkTimeForResetEventStat";
 
 export default async (client: Client, interaction: Interaction) => {
   try {
@@ -65,13 +65,6 @@ export default async (client: Client, interaction: Interaction) => {
           await catchPokemon.execute(interaction);
           break;
       }
-
-      interaction.reply({
-        content: `.`,
-      });
-      setTimeout(() => {
-        interaction.deleteReply();
-      }, 1000);
     }
   } catch (e) {
     logger.error(e);

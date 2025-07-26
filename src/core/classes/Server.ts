@@ -6,7 +6,7 @@ import { SaveAllPokemon } from "./SaveAllPokemon";
 
 export class Server implements ServerType {
   constructor(
-    public id: string,
+    public discordId: string,
     public channelAllowed: string[],
     public charmeChroma: boolean,
     public language: string,
@@ -65,7 +65,7 @@ export class Server implements ServerType {
     );
 
     return new Server(
-      data.id,
+      data.discordId,
       data.channelAllowed,
       data.charmeChroma,
       data.language,
@@ -78,12 +78,14 @@ export class Server implements ServerType {
   }
 
   static createDefault(id: string): Server {
+    const saveAllPokemon: SaveAllPokemon = new SaveAllPokemon();
+    saveAllPokemon.initMissingPokemons();
     return new Server(
       id,
       [], // channelAllowed
       false,
       defaultLanguage,
-      new SaveAllPokemon().initMissingPokemons(), // savePokemon
+      saveAllPokemon, // savePokemon
       EventSpawn.createDefault(),
       10,
       0,

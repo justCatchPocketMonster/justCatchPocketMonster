@@ -1,8 +1,10 @@
-import EventClass from "../../core/types/EventType";
+import {EventType} from "../../core/types/EventType";
 import { ServerType } from "../../core/types/ServerType";
 import getText from "../../lang/language";
 import { updateServer } from "../../cache/ServerCache";
-import { nbGeneration, valuePerType } from "../../config/default/spawn";
+import {nbGeneration, nbType, valuePerType} from "../../config/default/spawn";
+import {genStat, typeStat} from "../../core/types/EventSpawnType";
+import {capitalizeFirstLetter} from "../../utils/helperFunction";
 
 interface ProbabilityType {
   [key: number]: number;
@@ -14,19 +16,18 @@ const DURATIONS = {
   oneHour: 60 * 60 * 1000,
 };
 const imagePerLvl = ["0012-000", "0012-001", "0012-002"];
-const effectEvent = (
-  event: EventClass,
+export const effectEvent = (
+  event: EventType,
   server: ServerType,
-): EventClass | null => {
+): EventType => {
   const date = new Date();
   const level = getLevel();
 
-  console.log(event.id);
   const eventHandlers: { [key: string]: () => void } = {
-    "1": () => handleRarityEvent("Legendary", { 1: 10, 2: 25, 3: 50 }),
+    "1": () => handleRarityEvent("legendary", { 1: 10, 2: 25, 3: 50 }),
     "2": () => setEventTextEffect("nothing", 0),
     "3": () => handleGenerationEvent({ 1: 5, 2: 10, 3: 20 }),
-    "4": () => handleRarityEvent("fabuleux", { 1: 2, 2: 5, 3: 10 }),
+    "4": () => handleRarityEvent("mythical", { 1: 2, 2: 5, 3: 10 }),
     "5": () => handleTypeEvent({ 1: 5, 2: 10, 3: 20 }),
     "6": () => handleShinyEvent({ 1: 1.25, 2: 1.5, 3: 2 }),
     "7": () =>
@@ -57,7 +58,6 @@ const effectEvent = (
   };
 
   const handler = eventHandlers[event.id];
-  if (!handler) return null;
 
   handler();
   server.eventSpawn.whatEvent = event;
@@ -65,19 +65,19 @@ const effectEvent = (
   if (server.eventSpawn.whatEvent.id === "9") {
     server.eventSpawn.whatEvent.image = imagePerLvl[level - 1];
   }
-  updateServer(server.id, server);
+  updateServer(server.discordId, server);
   return event;
 
   function setEventTextEffect(eventKey: string, level: number, extraText = "") {
     event.effectDescription = `${getText(eventKey, server.language)}${level > 0 ? level : ""}. ${extraText}`;
   }
 
-  function handleRarityEvent(type: string, probabilities: ProbabilityType) {
+  function handleRarityEvent(type: "ordinary"|"legendary"|"mythical", probabilities: ProbabilityType) {
     if (!server.eventSpawn.whatEvent) return;
     updateRarity(type, probabilities[level]);
     server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
     setEventTextEffect(
-      "aura" + capitalize(type),
+      "aura" + capitalizeFirstLetter(type),
       level,
       getText("pendantTrenteMinute", server.language),
     );
@@ -86,7 +86,7 @@ const effectEvent = (
   function handleGenerationEvent(probabilities: ProbabilityType) {
     if (!server.eventSpawn.whatEvent) return;
     const generation = getRandomGen();
-    adjustSpawnGen(probabilities[level], generation);
+    adjustSpawnGen(probabilities[level], generation.toString());
     server.eventSpawn.whatEvent.endTime = addDuration(DURATIONS.halfHour);
     setEventTextEffect(
       "auraGeneration",
@@ -169,9 +169,7 @@ const effectEvent = (
     return rand >= 99 ? 3 : rand >= 70 ? 2 : 1;
   }
 
-  function capitalize(str: string) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+
 
   function getDurationText(level: number) {
     return getText(
@@ -193,29 +191,23 @@ const effectEvent = (
     return types[Math.floor(Math.random() * types.length)];
   }
 
-  function updateRarity(type: string, probability: number) {
-    // @ts-ignore
+  function updateRarity(type: "ordinary"|"legendary"|"mythical", probability: number) {
     server.eventSpawn.rarity[type] = probability;
     server.eventSpawn.rarity["ordinary"] -= probability;
   }
 
-  function adjustSpawnGen(probability: number, generation: number) {
-    // @ts-ignore
-    Object.keys(server.eventSpawn.gen).forEach(
-      (key) => (server.eventSpawn.gen[key] -= probability),
+  function adjustSpawnGen(probability: number, generation: string) {
+    Object.keys(server.eventSpawn.gen).forEach((key) =>
+            (server.eventSpawn.gen[key as keyof genStat] -= probability),
     );
-    // @ts-ignore
-    server.eventSpawn.gen[generation] += probability * nbGeneration;
+    server.eventSpawn.gen[generation as keyof genStat] += probability * nbGeneration;
   }
 
   function adjustSpawnType(probability: number, type: string) {
-    // @ts-ignore
     Object.keys(server.eventSpawn.type).forEach(
-      (t) => (server.eventSpawn.type[t] -= probability),
+      (t) => (server.eventSpawn.type[t as keyof typeStat] -= probability),
     );
-    // @ts-ignore
-    server.eventSpawn.type[type] += probability * nbType;
+    server.eventSpawn.type[type as keyof typeStat] += probability * nbType;
   }
 };
 
-export default effectEvent;

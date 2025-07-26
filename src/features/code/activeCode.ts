@@ -1,4 +1,9 @@
-const activeCode = (typeCode: string): boolean => {
+import {UserType} from "../../core/types/UserType";
+import {selectPokemon} from "../pokemon/selectPokemon";
+import {Pokemon} from "../../core/classes/Pokemon";
+import {Server} from "../../core/classes/Server";
+
+const activeCode = (typeCode: string, user: UserType): boolean => {
   switch (typeCode) {
     case "shiny":
       console.log("shiny");
@@ -11,3 +16,8 @@ const activeCode = (typeCode: string): boolean => {
 };
 
 export default activeCode;
+
+const activeCodeShiny = (user: UserType): boolean => {
+  const pokemonChoiced = selectPokemon(Server.createDefault("id"))
+  pokemonChoiced.isShiny = true;
+}

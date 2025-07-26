@@ -40,7 +40,6 @@ export default {
           mainPage,
           null,
           language("principalPage", server.language),
-          "",
         ),
       );
 
