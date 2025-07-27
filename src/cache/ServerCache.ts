@@ -31,6 +31,7 @@ export async function updateServer(
       { $set: { ...update, discordId: serverId } },
       { upsert: true, new: true }
   ).lean<ServerType>();
+
   const server = Server.fromMongo(updated);
   cache.set(serverId, server);
   return server;

@@ -32,6 +32,7 @@ export default {
       let server = await getServerById(interaction.guildId);
       let user = await getUserById(interaction.user.id);
       const stat = await getStatById(nameStatGeneral)
+
       const pages = [];
 
       const mainPage = new EmbedBuilder()

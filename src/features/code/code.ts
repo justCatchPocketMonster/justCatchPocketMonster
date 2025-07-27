@@ -6,6 +6,7 @@ import { ServerType } from "../../core/types/ServerType";
 import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import {StatType} from "../../core/types/StatType";
+
 let code: { [key: string]: string[] } = {
   shiny: [],
 };

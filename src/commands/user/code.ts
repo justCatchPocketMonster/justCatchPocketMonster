@@ -51,7 +51,6 @@ export default {
           ephemeral: true,
         });
       }
-
       let user = await getUserById(interaction.user.id);
       if (user.enteredCode.includes(codeEntered)) {
         return interaction.reply({

@@ -129,6 +129,7 @@ export function pokedex(
   }
 
   paginationButton(interaction, arrayEmbed, pageSelectedDefault);
+
 }
 
 
@@ -156,6 +157,7 @@ function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: Serve
 
   let field = {
     name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name"+capitalizeFirstLetter(server.language)] : "?????"}  ${emote}`,
+
     value: value,
     inline: true,
   };

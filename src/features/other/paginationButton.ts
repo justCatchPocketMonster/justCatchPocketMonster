@@ -78,7 +78,6 @@ export const paginationButton = async (
       components: [row],
       files : image ? [image] : [],
     });
-
   });
 
   collector.on("end", async () => {
