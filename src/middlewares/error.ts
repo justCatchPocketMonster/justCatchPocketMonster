@@ -13,7 +13,6 @@ interface TransformableInfo {
 }
 
 const logFormat = printf((info: TransformableInfo) => {
-  console.log(info);
   const { level, message, timestamp } = info as LogEntry;
   return `${timestamp} ${level}: ${message}`;
 });

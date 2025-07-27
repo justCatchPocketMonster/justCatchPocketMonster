@@ -64,32 +64,37 @@ export async function catchPokemon(
   user.savePokemon.addOneCatch(pokemon);
   server.savePokemon.addOneCatch(pokemon);
 
-  const nameFr = pokemon.name.nameFr[0];
-  const nameEng = pokemon.name.nameEng[0];
-
-  let messageCongratSend =
-    language("congratYouCatchPart1", server.language) +
-    memberDisplayName +
-    language("congratYouCatchPart2", server.language) +
-    (nameFr !== nameEng ? `${nameFr}/${nameEng}` : nameFr);
-
-  if (pokemon.form === "mega") {
-    messageCongratSend += " <:MEGA:1139228792989155359>";
-  }
-
-  messageCongratSend += shinyAfterEvent ? ":star:. " : ". ";
-
-  const isFirstCapture = user.savePokemon.getCatchByOnlyId(pokemon.id) === 1;
-
-  if (isFirstCapture) {
-    messageCongratSend += language("newAtPokedex", server.language);
-  }
-
-  interaction.reply(messageCongratSend);
-
   server.removePokemonByIdChannel(idChannel);
   updateStat(version, statVersion);
   updateStat(nameStatGeneral, statAll);
   updateUser(user.discordId, user);
   updateServer(server.discordId, server);
+
+  interaction.reply(generateCatchMessage(
+      pokemon,
+      memberDisplayName,
+      server,
+  ));
 }
+
+export function generateCatchMessage(
+  pokemon: { name: { nameFr: string[]; nameEng: string[] }; isShiny?: boolean },
+  memberDisplayName: string,
+  server: ServerType,
+): string {
+  let message = language("congratYouCatchPart1", server.language) +
+    memberDisplayName +
+    language("congratYouCatchPart2", server.language) +
+    (pokemon.name.nameFr[0] !== pokemon.name.nameEng[0]
+      ? `${pokemon.name.nameFr[0]}/${pokemon.name.nameEng[0]}`
+      : pokemon.name.nameFr[0]);
+
+  if (pokemon.isShiny) {
+    message += ":star:. ";
+  } else {
+    message += ". ";
+  }
+
+  return message;
+}
+

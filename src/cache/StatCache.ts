@@ -2,7 +2,6 @@ import NodeCache from "node-cache";
 import { Stat as StatModel } from "../core/schemas/Stat";
 import { Stat } from "../core/classes/Stat";
 import { type StatType } from "../core/types/StatType";
-import type {ServerType} from "../core/types/ServerType";
 
 const cache = new NodeCache({ stdTTL: 600 });
 

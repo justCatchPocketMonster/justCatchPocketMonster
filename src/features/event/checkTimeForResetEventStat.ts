@@ -13,7 +13,6 @@ export async function checkTimeForResetEventStat(serverId: string): Promise<void
 
   const dateNow = new Date();
   const dateEnd = new Date(server.eventSpawn.whatEvent.endTime);
-  console.log(dateEnd, dateEnd, dateNow > dateEnd);
   if (dateNow > dateEnd) {
     server.eventSpawn = EventSpawn.createDefault();
     updateServer(serverId, server);

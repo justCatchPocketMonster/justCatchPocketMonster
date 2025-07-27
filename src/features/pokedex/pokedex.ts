@@ -11,7 +11,7 @@ import { paginationButton } from "../other/paginationButton";
 import language from "../../lang/language";
 import allPokemon from "../../data/pokemon.json";
 import {pokemonDb} from "../../core/types/pokemonDb";
-import {getPercentage} from "../../utils/helperFunction";
+import {capitalizeFirstLetter, getPercentage} from "../../utils/helperFunction";
 
 interface oneFieldEmbed {
   name: string;
@@ -34,10 +34,9 @@ export function pokedex(
 
   let pageSelectedDefault;
 
-  let pokeSave;
   let nbPage = 1;
   let nbPageMax = 2;
-  nbPageMax += Math.trunc(allPokemon.length/21) +1;
+  nbPageMax += Math.trunc(allPokemon[allPokemon.length-1].id/21);
 
   if (isNaN(Number(pageChoice))) {
     interaction.reply(language("ilFautUnNombre", server.language));
@@ -107,7 +106,7 @@ export function pokedex(
 
   arrayEmbed.push({ page: mainPage });
   nbPage++;
-  for (let y = 0; y <= (allPokemon[allPokemon.length-1].id+maxPokemonParPage); y++) {
+  for (let y = 0; y <= (allPokemon[allPokemon.length-1].id); y+=maxPokemonParPage) {
 
     const pokeSave = buildPokedexEmbed(interaction, user, server);
     const start = 1 + maxPokemonParPage * (nbPage - 2);
@@ -128,7 +127,9 @@ export function pokedex(
     nbPage++;
     arrayEmbed.push({ page: pokeSave });
   }
-  paginationButton(interaction, arrayEmbed, pageChoice);
+
+  paginationButton(interaction, arrayEmbed, pageSelectedDefault);
+
 }
 
 
@@ -155,7 +156,8 @@ function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: Serve
   }
 
   let field = {
-    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name"+server.language] : "?????"}  ${emote}`,
+    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name"+capitalizeFirstLetter(server.language)] : "?????"}  ${emote}`,
+
     value: value,
     inline: true,
   };

@@ -14,6 +14,8 @@ import {
 import { codeListEmbed } from "../../features/code/code";
 import { getUserById } from "../../cache/UserCache";
 import { embedRequiredinformation } from "../../utils/embedRequiredinformation";
+import {getStatById} from "../../cache/StatCache";
+import {nameStatGeneral} from "../../config/default/misc";
 
 export default {
   name: "information",
@@ -29,6 +31,8 @@ export default {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       let user = await getUserById(interaction.user.id);
+      const stat = await getStatById(nameStatGeneral)
+
       const pages = [];
 
       const mainPage = new EmbedBuilder()
@@ -53,7 +57,7 @@ export default {
       );
       pages.push(
         createPageForMenu(
-          codeListEmbed(user, server),
+          codeListEmbed(user, server, stat),
           null,
           language("codeListEmbedTitle", server.language),
           language("codeListEmbedDescription", server.language),

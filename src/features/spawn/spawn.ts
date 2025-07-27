@@ -28,9 +28,7 @@ export const spawn = async (
   try {
     const server = await getServerById(idServer);
     const channelId = choiceChannel(server, idChannel);
-    console.log(server.countMessage + "/" + server.maxCountMessage);
     if (!channelId || !hasReachedSpawnLimit(server)) return null;
-    console.log("ok");
 
     let spawnData: spawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),

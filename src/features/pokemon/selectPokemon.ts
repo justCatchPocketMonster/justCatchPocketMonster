@@ -34,7 +34,6 @@ export const selectPokemon = (
   }
 
   pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, isEgg);
-  console.log(pokemonChoiced);
   return pokemonChoiced;
 };
 

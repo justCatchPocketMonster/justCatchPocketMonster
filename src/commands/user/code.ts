@@ -9,6 +9,9 @@ import { getUserById, updateUser } from "../../cache/UserCache";
 import {codeType, activeCode, updateArrayCode} from "../../features/code/code";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
+import {StatType} from "../../core/types/StatType";
+import {getStatById} from "../../cache/StatCache";
+import {nameStatGeneral} from "../../config/default/misc";
 
 export default {
   name: "code",
@@ -33,21 +36,21 @@ export default {
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
-      updateArrayCode()
+      const stat = await getStatById(nameStatGeneral)
+
+      updateArrayCode(stat)
       // @ts-ignore
       let codeEntered = interaction.options
-        .getString(language("codeNameOptionString", "eng"))
-        .toLowerCase();
+        .getString(language("codeNameOptionString", "eng"))!
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       let typeCode = codeType(codeEntered);
       if (typeCode === null) {
         return interaction.reply({
-          content: language("codeNotExist", server.language),
+          content: language("codeDontExist", server.language),
           ephemeral: true,
         });
       }
-
       let user = await getUserById(interaction.user.id);
       if (user.enteredCode.includes(codeEntered)) {
         return interaction.reply({
@@ -56,7 +59,12 @@ export default {
         });
       }
 
-      activeCode(typeCode);
+      activeCode(
+        interaction,
+        typeCode,
+        user,
+        server,
+      );
 
       user.enteredCode.push(codeEntered);
       updateUser(user.discordId, user);

@@ -45,7 +45,8 @@ export const colorByType = (type: string): ColorResolvable => {
 
 
 export function getPercentage(partialValue: number, totalValue: number): number {
-  return (partialValue / totalValue) * 100;
+  const percentage = (partialValue / totalValue) * 100;
+  return parseFloat(percentage.toFixed(1));
 }
 
 export function capitalizeFirstLetter(str: string) {
