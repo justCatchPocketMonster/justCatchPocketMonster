@@ -73,6 +73,7 @@ export async function catchPokemon(
   interaction.reply(generateCatchMessage(
       pokemon,
       memberDisplayName,
+      user,
       server,
   ));
 }
