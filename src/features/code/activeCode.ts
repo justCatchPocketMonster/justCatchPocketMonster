@@ -1,19 +1,18 @@
 import {UserType} from "../../core/types/UserType";
 import {selectPokemon} from "../pokemon/selectPokemon";
-import {Pokemon} from "../../core/classes/Pokemon";
 import {Server} from "../../core/classes/Server";
 import {updateUser} from "../../cache/UserCache";
 import {generateCatchMessage} from "../catch/catch";
 import {ChatInputCommandInteraction, GuildMember} from "discord.js";
 import {ServerType} from "../../core/types/ServerType";
 
-export function activeCode(interaction: ChatInputCommandInteraction, typeOfCode: string, user: UserType, server: ServerType): boolean {
+export async function activeCode(interaction: ChatInputCommandInteraction, typeOfCode: string, user: UserType, server: ServerType): Promise<boolean> {
   switch (typeOfCode) {
     case "shiny":
       activeCodeShiny(interaction, user, server);
       break;
   }
-  updateUser(user.discordId, user);
+  await updateUser(user.discordId, user);
   return true;
 };
 

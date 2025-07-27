@@ -59,7 +59,7 @@ export default {
       interaction.reply({
         content: language("langIsChanged", server.language),
       });
-      updateServer(server.discordId, server);
+      await updateServer(server.discordId, server);
     } catch (e) {
       logger.error(e);
     }

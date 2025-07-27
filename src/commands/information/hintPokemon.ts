@@ -53,7 +53,7 @@ export default {
           server.pokemonPresent[channel.id].hint,
           server.pokemonPresent[channel.id].name.nameEng[0],
         );
-        updateServer(server.discordId, server);
+        await updateServer(server.discordId, server);
         return;
       }
 

@@ -16,10 +16,10 @@ const DURATIONS = {
   oneHour: 60 * 60 * 1000,
 };
 const imagePerLvl = ["0012-000", "0012-001", "0012-002"];
-export const effectEvent = (
+export const effectEvent = async (
   event: EventType,
   server: ServerType,
-): EventType => {
+): Promise<EventType> => {
   const date = new Date();
   const level = getLevel();
 
@@ -65,7 +65,7 @@ export const effectEvent = (
   if (server.eventSpawn.whatEvent.id === "9") {
     server.eventSpawn.whatEvent.image = imagePerLvl[level - 1];
   }
-  updateServer(server.discordId, server);
+  await updateServer(server.discordId, server);
   return event;
 
   function setEventTextEffect(eventKey: string, level: number, extraText = "") {

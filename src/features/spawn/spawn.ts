@@ -20,7 +20,6 @@ interface spawnData {
   image: AttachmentBuilder;
   channelId: string;
 }
-
 export const spawn = async (
   idServer: string,
   idChannel: string,
@@ -28,20 +27,15 @@ export const spawn = async (
   try {
     const server = await getServerById(idServer);
     const channelId = choiceChannel(server, idChannel);
-    if (!channelId || !hasReachedSpawnLimit(server)) return null;
+    if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
 
     let spawnData: spawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
     };
 
-    if (
-      spawnData.embed === null ||
-      spawnData.image === null ||
-      spawnData.channelId === null
-    )
+      if (!spawnData?.embed || !spawnData?.image || !spawnData?.channelId)
       spawnData = null;
-
     return spawnData;
   } catch (e) {
     logger.error(e);
@@ -49,12 +43,17 @@ export const spawn = async (
 };
 
 
-function hasReachedSpawnLimit(server: ServerType): boolean {
-  server.countMessage = server.countMessage + 1;
-  initMaxCount(server);
-  updateServer(server.discordId, server);
-  return server.countMessage == 0;
+async function hasReachedSpawnLimit(server: ServerType): Promise<boolean> {
+    initMaxCount(server);
+    server.countMessage++;
+
+    const reached = server.countMessage >= server.maxCountMessage;
+    if (reached) server.countMessage = 0;
+
+    await updateServer(server.discordId, server);
+    return reached;
 }
+
 
 function initMaxCount(server: ServerType): void {
   if (
@@ -90,7 +89,7 @@ async function choiceTypeOfSpawn(
 
     if (randomCategorySpawn <= 1) {
       let event: EventType | null = selectEvent();
-      event = effectEvent(event, server);
+      event = await effectEvent(event, server);
 
       return generateEmbedEvent(event, server);
     }
@@ -110,10 +109,10 @@ async function choiceTypeOfSpawn(
     statVersion.addSpawn(pokemonChoice as Pokemon);
     statAll.addSpawn(pokemonChoice as Pokemon);
 
-    updateServer(server.discordId, server);
-    updateStat(version, statVersion);
-    updateStat(nameStatGeneral, statAll);
-
+    await updateServer(server.discordId, server);
+    await updateStat(version, statVersion);
+    await updateStat(nameStatGeneral, statAll);
+    console.log(pokemonChoice);
     return generateEmbedPokemon(pokemonChoice, server);
 
 }

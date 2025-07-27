@@ -9,7 +9,6 @@ import { getUserById, updateUser } from "../../cache/UserCache";
 import {codeType, activeCode, updateArrayCode} from "../../features/code/code";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
-import {StatType} from "../../core/types/StatType";
 import {getStatById} from "../../cache/StatCache";
 import {nameStatGeneral} from "../../config/default/misc";
 
@@ -38,7 +37,7 @@ export default {
     try {
       const stat = await getStatById(nameStatGeneral)
 
-      updateArrayCode(stat)
+      await updateArrayCode(stat)
       // @ts-ignore
       let codeEntered = interaction.options
         .getString(language("codeNameOptionString", "eng"))!
@@ -59,7 +58,7 @@ export default {
         });
       }
 
-      activeCode(
+      await activeCode(
         interaction,
         typeCode,
         user,
@@ -67,7 +66,7 @@ export default {
       );
 
       user.enteredCode.push(codeEntered);
-      updateUser(user.discordId, user);
+      await updateUser(user.discordId, user);
     } catch (e) {
       logger.error(e);
     }

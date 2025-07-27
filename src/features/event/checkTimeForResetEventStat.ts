@@ -15,6 +15,6 @@ export async function checkTimeForResetEventStat(serverId: string): Promise<void
   const dateEnd = new Date(server.eventSpawn.whatEvent.endTime);
   if (dateNow > dateEnd) {
     server.eventSpawn = EventSpawn.createDefault();
-    updateServer(serverId, server);
+    await updateServer(serverId, server);
   }
 }

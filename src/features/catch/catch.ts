@@ -65,10 +65,10 @@ export async function catchPokemon(
   server.savePokemon.addOneCatch(pokemon);
 
   server.removePokemonByIdChannel(idChannel);
-  updateStat(version, statVersion);
-  updateStat(nameStatGeneral, statAll);
-  updateUser(user.discordId, user);
-  updateServer(server.discordId, server);
+  await updateStat(version, statVersion);
+  await updateStat(nameStatGeneral, statAll);
+  await updateUser(user.discordId, user);
+  await updateServer(server.discordId, server);
 
   interaction.reply(generateCatchMessage(
       pokemon,
@@ -80,6 +80,7 @@ export async function catchPokemon(
 export function generateCatchMessage(
   pokemon: { name: { nameFr: string[]; nameEng: string[] }; isShiny?: boolean },
   memberDisplayName: string,
+  user: UserType,
   server: ServerType,
 ): string {
   let message = language("congratYouCatchPart1", server.language) +
