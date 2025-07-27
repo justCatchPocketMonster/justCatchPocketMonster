@@ -2,22 +2,41 @@ import {UserType} from "../../core/types/UserType";
 import {selectPokemon} from "../pokemon/selectPokemon";
 import {Pokemon} from "../../core/classes/Pokemon";
 import {Server} from "../../core/classes/Server";
+import {updateUser} from "../../cache/UserCache";
+import {generateCatchMessage} from "../catch/catch";
+import {ChatInputCommandInteraction, GuildMember} from "discord.js";
+import {ServerType} from "../../core/types/ServerType";
 
-const activeCode = (typeCode: string, user: UserType): boolean => {
-  switch (typeCode) {
+export function activeCode(interaction: ChatInputCommandInteraction, typeOfCode: string, user: UserType, server: ServerType): boolean {
+  switch (typeOfCode) {
     case "shiny":
-      console.log("shiny");
-      return true;
-      // TODO: when function is implemented
+      activeCodeShiny(interaction, user, server);
       break;
-    default:
-      throw new Error("Code not found :" + typeCode);
   }
+  updateUser(user.discordId, user);
+  return true;
 };
 
-export default activeCode;
 
-const activeCodeShiny = (user: UserType): boolean => {
+function activeCodeShiny(interaction: ChatInputCommandInteraction, user: UserType, server: ServerType): boolean {
   const pokemonChoiced = selectPokemon(Server.createDefault("id"))
   pokemonChoiced.isShiny = true;
+
+  let memberDisplayName = "";
+  const member = interaction.member as GuildMember;
+
+  if (member.nickname != null) {
+    memberDisplayName = member.nickname;
+  } else {
+    memberDisplayName = member.displayName;
+  }
+
+  user.savePokemon.addOneCatch(pokemonChoiced)
+  interaction.reply(generateCatchMessage(
+    pokemonChoiced,
+    memberDisplayName,
+    server
+  ))
+
+  return true;
 }

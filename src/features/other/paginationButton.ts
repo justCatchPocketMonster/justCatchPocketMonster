@@ -52,7 +52,6 @@ export const paginationButton = async (
     fetchReply: true,
     files : image ? [image] : [],
   });
-
   const collector = message.createMessageComponentCollector({
     componentType: ComponentType.Button,
     time,
@@ -73,9 +72,13 @@ export const paginationButton = async (
       return collector.stop();
     }
 
+    const image = pages[currentPage].imagePage;
     await interaction.editReply({
       embeds: [pages[currentPage].page],
+      components: [row],
+      files : image ? [image] : [],
     });
+
   });
 
   collector.on("end", async () => {
