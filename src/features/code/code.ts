@@ -43,7 +43,6 @@ export function updateArrayCode(stat : StatType) {
   if (palierChoiceCatch) {
     code.shiny.push("CATCHS" + palierChoiceCatch);
   }
-  console.log(code);
   setCode(code);
 }
 export function codeListEmbed(user: UserType, server: ServerType, stat: StatType) {

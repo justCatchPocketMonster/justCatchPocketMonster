@@ -182,7 +182,6 @@ export class SaveAllPokemon implements SaveAllPokemonType {
   }
 
   sortPokemonsByCount(options: SortOptions): SortedResult[] {
-    console.log(options);
     const { rarity, form, useShiny, ascending } = options;
 
     const filtered = Object.values(this.data).filter((pokemon) => {
@@ -190,7 +189,6 @@ export class SaveAllPokemon implements SaveAllPokemonType {
       const matchForm = form == undefined || pokemon.form === form;
       return matchRarity && matchForm;
     });
-    console.log(filtered.length);
 
     const aggregated = new Map<string, number>();
 
