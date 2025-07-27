@@ -1,11 +1,10 @@
-import { GuildMember } from 'discord.js';
-import logger from "../middlewares/error"
+import { GuildMember } from "discord.js";
+import logger from "../middlewares/error";
 
 export default (Member: GuildMember) => {
-    try{
-
-        
-    } catch(e) {
-        logger.error(e)
-    }
-}
+  try {
+    // to remove if it's not use
+  } catch (e) {
+    logger.error(e);
+  }
+};

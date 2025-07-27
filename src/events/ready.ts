@@ -1,36 +1,53 @@
-import {Client, ActivityType} from 'discord.js';
-import {readdirSync} from 'fs';
+import { Client, ActivityType } from "discord.js";
+import { readdirSync } from "fs";
 
 import logger from "../middlewares/error";
 import randomStatus from "../features/other/randomStatus";
 
-export default (ClientDiscord: Client) => {
-    try{
-    if(!ClientDiscord || !ClientDiscord.user) {
-        return console.error("Bot is not ready")
-    }
-    randomStatus(ClientDiscord);
-    ClientDiscord.user.setStatus("online");
-    console.log("Bot is ready")
+export default (client: Client) => {
+  if (!client?.user) {
+    return console.error("Bot is not ready");
+  }
 
-    for (const folder of readdirSync('./src/commands')) {
-        for (const file of readdirSync(`./src/commands/${folder}`)) {
-            import(`../commands/${folder}/${file}`).then(async command => {
-                if(ClientDiscord.application){
-                    if (command.actif){
-                        await ClientDiscord.application.commands.create(command.name, command.command);
-                    }else {
-                        if (ClientDiscord.application.commands.cache.find(c => c.name === command.name)){
-                            await ClientDiscord.application.commands.delete(command.name);
-                        }
-                    }
-                }
-            });
+  try {
+    initializeBot(client);
+    loadCommands(client);
+  } catch (error) {
+    console.error("Bot is not ready");
+    logger.error(error);
+  }
+};
+
+function initializeBot(client: Client) {
+  randomStatus(client);
+  client.user!.setStatus("online");
+  console.log("Bot is ready");
+}
+
+function loadCommands(client: Client) {
+  const commandFolders = readdirSync("./src/commands");
+
+  for (const folder of commandFolders) {
+    const commandFiles = readdirSync(`./src/commands/${folder}`);
+
+    for (const file of commandFiles) {
+      import(`../commands/${folder}/${file}`).then(async (commandModule) => {
+        const { default: command } = commandModule;
+        if (!client.application) return;
+
+        const exists = client.application.commands.cache.find(
+            (c) => c.name === command.name
+        );
+
+        if (command.actif) {
+          //await client.application.commands.create(command.command);
+        } else if (exists) {
+          await client.application.commands.delete(command.name);
         }
+
+        console.log(`Command ${command.name} loaded and is active :${command.actif}`);
+      });
     }
-
-} catch (e) {
-    logger.error(e)
+  }
 }
 
-}

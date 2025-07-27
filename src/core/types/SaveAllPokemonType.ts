@@ -1,0 +1,19 @@
+import { SaveOnePokemon } from "../classes/SaveOnePokemon";
+import { PokemonType } from "./PokemonType";
+import allPokemon from "../../data/pokemon.json";
+
+export interface SaveAllPokemonType {
+  data: Record<string, SaveOnePokemon>;
+  getCatchByOnlyId(id: String): number;
+  addOneCatch(pokemon: PokemonType): void;
+  getSavesById(id: string): SaveOnePokemon[];
+  getThisSaveUniqueId(): SaveAllPokemonType;
+  getThisSaveUniqueIdWithByIdRange(
+    minId: number,
+    maxId: number,
+  ): SaveAllPokemonType;
+  countUniquePokemonsCaught(): number;
+  countUniquePokemonsShinyCaught(): number;
+  getAllSaveOfOnePokemon(idPokemon: string): SaveOnePokemon[]
+  getSaveOnePokemonFusedForm(idPokemon: string,): SaveOnePokemon
+}
