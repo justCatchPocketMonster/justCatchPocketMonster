@@ -26,13 +26,12 @@ export async function updateUser(
     userId: string,
     update: Partial<UserType>,
 ): Promise<User> {
-  const updated = await UserModel.findOneAndUpdate(
+  cache.set(userId, update);
+  await UserModel.findOneAndUpdate(
       { discordId: userId },
       { $set: { ...update, discordId: userId } },
       { upsert: true, new: true }
   ).lean<UserType>();
 
-  const user = User.fromMongo(updated);
-  cache.set(userId, user);
-  return user;
+  return update as User;
 }

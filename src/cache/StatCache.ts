@@ -27,13 +27,12 @@ export async function updateStat(
     statVersion: string,
     update: Partial<StatType>,
 ): Promise<Stat> {
-  const updated = await StatModel.findOneAndUpdate(
+  cache.set(statVersion, update);
+  await StatModel.findOneAndUpdate(
       { version: statVersion },
       { $set: { ...update, version: statVersion } },
       { upsert: true, new: true }
   ).lean<StatType>();
 
-  const server = Stat.fromMongo(updated);
-  cache.set(statVersion, server);
-  return server;
+  return update as Stat;
 }

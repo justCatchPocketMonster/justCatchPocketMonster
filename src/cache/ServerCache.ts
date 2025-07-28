@@ -24,15 +24,14 @@ export async function getServerById(serverId: string): Promise<Server> {
 
 export async function updateServer(
   serverId: string,
-  update: Partial<ServerType>,
+  update: ServerType,
 ): Promise<Server> {
-  const updated = await ServerModel.findOneAndUpdate(
+  cache.set(serverId, update);
+  await ServerModel.findOneAndUpdate(
       { discordId: serverId },
       { $set: { ...update, discordId: serverId } },
       { upsert: true, new: true }
   ).lean<ServerType>();
 
-  const server = Server.fromMongo(updated);
-  cache.set(serverId, server);
-  return server;
+  return update as Server;
 }
