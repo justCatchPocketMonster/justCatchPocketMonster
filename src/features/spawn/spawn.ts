@@ -20,14 +20,21 @@ interface spawnData {
   image: AttachmentBuilder;
   channelId: string;
 }
+
+const spawnLocks = new Set<string>();
+
 export const spawn = async (
   idServer: string,
   idChannel: string,
 ): Promise<spawnData | null | undefined> => {
+    if (spawnLocks.has(idServer)) return null;
+    spawnLocks.add(idServer);
   try {
     const server = await getServerById(idServer);
     const channelId = choiceChannel(server, idChannel);
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
+
+
 
     let spawnData: spawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
@@ -39,6 +46,8 @@ export const spawn = async (
     return spawnData;
   } catch (e) {
     logger.error(e);
+  } finally {
+      spawnLocks.delete(idServer);
   }
 };
 
