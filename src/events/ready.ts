@@ -1,7 +1,7 @@
 import { Client, ActivityType } from "discord.js";
 import { readdirSync } from "fs";
 
-import logger from "../middlewares/error";
+import logger, {newLogger} from "../middlewares/logger";
 import randomStatus from "../features/other/randomStatus";
 
 export default (client: Client) => {
@@ -14,7 +14,11 @@ export default (client: Client) => {
     loadCommands(client);
   } catch (error) {
     console.error("Bot is not ready");
-    logger.error(error);
+    newLogger(
+        'error',
+        error as string,
+        `Error in ready event for bot ${client.user.id}`,
+    );
   }
 };
 

@@ -1,5 +1,5 @@
 import {BaseGuildTextChannel, Client, Message} from "discord.js";
-import logger from "../middlewares/error";
+import logger, {newLogger} from "../middlewares/logger";
 import {spawn} from "../features/spawn/spawn";
 import {checkTimeForResetEventStat} from "../features/event/checkTimeForResetEventStat";
 
@@ -21,6 +21,10 @@ export default async (client: Client, message: Message<boolean>) => {
       }
     });
   } catch (e) {
-    logger.error(e);
+    newLogger(
+        'error',
+        e as string,
+        `Error in messageCreate event for server ${message!.guild!.id} and channel ${message.channel.id}`,
+    );
   }
 };

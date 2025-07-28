@@ -1,5 +1,5 @@
 import language from "../data/language.json";
-import logger from "../middlewares/error";
+import logger, {newLogger} from "../middlewares/logger";
 
 interface Translation {
   [key: string]: string[];
@@ -21,7 +21,11 @@ export default function getText(key: string, lang: string): string {
 
     return langTextArray[randomTextIndex];
   } catch (e) {
-    logger.error(e);
+    newLogger(
+        'error',
+        e as string,
+        `Error in getText function for key: ${key} language: ${lang}`
+    );
     return "Error: Key not found";
   }
 }

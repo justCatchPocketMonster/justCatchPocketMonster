@@ -16,7 +16,7 @@ import effect from "../commands/server/effect";
 import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 
-import logger from "../middlewares/error";
+import logger, {newLogger} from "../middlewares/logger";
 import {checkTimeForResetEventStat} from "../features/event/checkTimeForResetEventStat";
 
 export default async (client: Client, interaction: Interaction) => {
@@ -67,7 +67,11 @@ export default async (client: Client, interaction: Interaction) => {
       }
     }
   } catch (e) {
-    logger.error(e);
+    newLogger(
+        'error',
+        e as string,
+        `Error in interactionCreate event for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+    );
   }
 };
 

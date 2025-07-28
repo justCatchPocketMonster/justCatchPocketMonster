@@ -7,7 +7,7 @@ import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
 import {effectEvent} from "../event/effectEvent";
 import allPokemon from "../../data/pokemon.json";
-import logger from "../../middlewares/error";
+import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { valueMaxChoiceEvent } from "../../config/default/spawn";
 import { PokemonType } from "../../core/types/PokemonType";

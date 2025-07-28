@@ -25,4 +25,16 @@ const logger = createLogger({
   ],
 });
 
+export function newLogger(
+  level: string,
+  message: string,
+  ...args: any[]
+): void {
+  if (args.length > 0) {
+    logger.log(level, message, ...args);
+  } else {
+    logger.log(level, message);
+  }
+}
+
 export default logger;

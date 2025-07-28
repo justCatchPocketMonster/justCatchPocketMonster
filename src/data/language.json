@@ -282,6 +282,10 @@
     "fr": ["Le code n'existe pas."],
     "eng": ["The code does not exist."]
   },
+  "errorCatch": {
+    "fr": ["Une erreur est survenue"],
+    "eng": ["An error occurred"]
+  },
 
   "charmeChromaWin": {
     "fr": ["Bravo vous avec débloquez le charme chroma."],

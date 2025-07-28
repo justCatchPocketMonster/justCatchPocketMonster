@@ -4,7 +4,7 @@ import {
   EmbedBuilder,
   Interaction,
 } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import {
@@ -70,7 +70,12 @@ export default {
         pages,
       );
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in information command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

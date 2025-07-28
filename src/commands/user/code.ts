@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { ChatInputCommandInteraction } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 
 import { getUserById, updateUser } from "../../cache/UserCache";
 import {codeType, activeCode, updateArrayCode} from "../../features/code/code";
@@ -68,7 +68,12 @@ export default {
       user.enteredCode.push(codeEntered);
       await updateUser(user.discordId, user);
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in code command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

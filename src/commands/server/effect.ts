@@ -5,7 +5,7 @@ import {
   ColorResolvable,
   Interaction,
 } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { EmbedBuilder } from "discord.js";
@@ -74,7 +74,12 @@ export default {
         });
       }
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in effect command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

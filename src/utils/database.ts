@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import logger from "../middlewares/error";
+import logger, {newLogger} from "../middlewares/logger";
+import language from "../lang/language";
 
 export default async () => {
   try {
@@ -9,7 +10,11 @@ export default async () => {
     console.log("MongoDB connected successfully.");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-    logger.error(error);
+    newLogger(
+        'error',
+        error as string,
+        `Error in database connection: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    );
     process.exit(1);
   }
 };

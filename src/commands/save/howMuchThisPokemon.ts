@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { ChatInputCommandInteraction, Interaction } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { getUserById } from "../../cache/UserCache";
@@ -117,7 +117,12 @@ export default {
         return null;
       }
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in howMuch command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

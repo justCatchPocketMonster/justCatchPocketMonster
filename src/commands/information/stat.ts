@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, Interaction } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import {createPaginationStat} from "../../features/stat/stat";
 import { getStatById } from "../../cache/StatCache";
@@ -25,7 +25,12 @@ export default {
 
       createPaginationStat(interaction, statVersion, statGeneral, server);
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in stat command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

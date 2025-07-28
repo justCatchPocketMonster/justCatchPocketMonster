@@ -10,7 +10,7 @@ import {
   ChannelType,
   ChatInputCommandInteraction,
 } from "discord.js";
-import logger from "../../middlewares/error";
+import logger, {newLogger} from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
@@ -95,7 +95,12 @@ export default {
       }
 
     } catch (e) {
-      logger.error(e);
+      newLogger(
+          'error',
+          e as string,
+          `Error in spawn command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   }
 };
