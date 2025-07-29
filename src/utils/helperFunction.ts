@@ -1,6 +1,6 @@
 import {ColorResolvable, HexColorString} from "discord.js";
 
-export const colorByType = (type: string): HexColorString => {
+export const colorByType = (type: string): ColorResolvable => {
   switch (type) {
     case "steel":
       return "B7B7CE" as ColorResolvable;

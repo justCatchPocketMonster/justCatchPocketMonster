@@ -30,7 +30,7 @@ export async function catchPokemon(
     interaction.reply(language("noPokemonDisponible", server.language));
     return;
   }
-  console.log(pokemon.toString());
+  console.log(JSON.stringify(pokemon, null, 2));
   console.log(typeof pokemon);
   console.log(pokemonInput);
 
