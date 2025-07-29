@@ -31,10 +31,6 @@ export async function catchPokemon(
     interaction.reply(language("noPokemonDisponible", server.language));
     return;
   }
-  console.log("pokemon type:", typeof pokemon);
-  console.log("pokemon instanceof:", pokemon instanceof Pokemon); // false = warning
-  console.log("pokemon keys:", Object.keys(pokemon));
-  console.log("pokemon.nameIsSame:", pokemon.nameIsSame); // undefined ?
   if (!pokemon.nameIsSame(pokemonInput)) {
     interaction.reply(
       language("failCatchGoodPokemonPart1", server.language) +

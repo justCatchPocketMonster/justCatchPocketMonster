@@ -24,4 +24,19 @@ export class Pokemon implements PokemonType {
       this.name.nameFr.some((n) => n.toLowerCase().includes(lowerName))
     );
   }
+  static from(raw: Partial<PokemonType>): Pokemon {
+    return new Pokemon(
+        raw.id ?? "",
+        raw.name ?? { nameEng: [], nameFr: [] },
+        raw.arrayType ?? [],
+        raw.rarity ?? "",
+        raw.imgName ?? "",
+        raw.gen ?? 0,
+        raw.form ?? "",
+        raw.versionForm ?? 0,
+        raw.isShiny ?? false,
+        raw.hint ?? ""
+    );
+  }
+
 }
