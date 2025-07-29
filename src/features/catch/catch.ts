@@ -7,6 +7,7 @@ import { getStatById, updateStat } from "../../cache/StatCache";
 import {nameStatGeneral, version} from "../../config/default/misc";
 import {updateUser} from "../../cache/UserCache";
 import {updateServer} from "../../cache/ServerCache";
+import {Pokemon} from "../../core/classes/Pokemon";
 
 export async function catchPokemon(
   user: UserType,
