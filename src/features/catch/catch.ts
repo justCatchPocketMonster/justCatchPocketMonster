@@ -31,6 +31,7 @@ export async function catchPokemon(
     return;
   }
   console.log(JSON.stringify(pokemon, null, 2));
+  console.dir(pokemon, { depth: null });
   console.log(typeof pokemon);
   console.log(pokemonInput);
 
