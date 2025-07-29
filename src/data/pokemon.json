@@ -759,7 +759,7 @@
       "nameEng": ["Clefairy"],
       "nameFr": ["Mélofée"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0035-000",
@@ -772,7 +772,7 @@
       "nameEng": ["Clefable"],
       "nameFr": ["Mélodelfe"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0036-000",
@@ -824,7 +824,7 @@
       "nameEng": ["Ninetales"],
       "nameFr": ["Feunard"]
     },
-    "arrayType": ["ice", "Fairy"],
+    "arrayType": ["ice", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0038-000-alola",
@@ -837,7 +837,7 @@
       "nameEng": ["Jigglypuff"],
       "nameFr": ["Rondoudou"]
     },
-    "arrayType": ["normal", "Fairy"],
+    "arrayType": ["normal", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0039-000",
@@ -850,7 +850,7 @@
       "nameEng": ["Wigglytuff"],
       "nameFr": ["Grodoudou"]
     },
-    "arrayType": ["normal", "Fairy"],
+    "arrayType": ["normal", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0040-000",
@@ -1591,7 +1591,7 @@
       "nameEng": ["Rapidash"],
       "nameFr": ["Galopa"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0078-000-galar",
@@ -2228,7 +2228,7 @@
       "nameEng": ["Weezing"],
       "nameFr": ["Smogogo"]
     },
-    "arrayType": ["poison", "Fairy"],
+    "arrayType": ["poison", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0110-000-galar",
@@ -2449,7 +2449,7 @@
       "nameEng": ["Mr. Mime"],
       "nameFr": ["M. Mime"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0122-000",
@@ -3398,7 +3398,7 @@
       "nameEng": ["Cleffa"],
       "nameFr": ["Mélo"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0173-000",
@@ -3411,7 +3411,7 @@
       "nameEng": ["Igglybuff"],
       "nameFr": ["Toudoudou"]
     },
-    "arrayType": ["normal", "Fairy"],
+    "arrayType": ["normal", "fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0174-000",
@@ -3424,7 +3424,7 @@
       "nameEng": ["Togepi"],
       "nameFr": ["Togepi"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0175-000",
@@ -3437,7 +3437,7 @@
       "nameEng": ["Togetic"],
       "nameFr": ["Togetic"]
     },
-    "arrayType": ["Fairy", "flying"],
+    "arrayType": ["fairy", "flying"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0176-000",
@@ -3554,7 +3554,7 @@
       "nameEng": ["Marill"],
       "nameFr": ["Marill"]
     },
-    "arrayType": ["Water", "Fairy"],
+    "arrayType": ["Water", "fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0183-000",
@@ -3567,7 +3567,7 @@
       "nameEng": ["Azumarill"],
       "nameFr": ["Azumarill"]
     },
-    "arrayType": ["Water", "Fairy"],
+    "arrayType": ["Water", "fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0184-000",
@@ -4412,7 +4412,7 @@
       "nameEng": ["Snubbull"],
       "nameFr": ["Snubbull"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0209-000",
@@ -4425,7 +4425,7 @@
       "nameEng": ["Granbull"],
       "nameFr": ["Granbull"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0210-000",
@@ -5686,7 +5686,7 @@
       "nameEng": ["Ralts"],
       "nameFr": ["Tarsal"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0280-000",
@@ -5699,7 +5699,7 @@
       "nameEng": ["Kirlia"],
       "nameFr": ["Kirlia"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0281-000",
@@ -5712,7 +5712,7 @@
       "nameEng": ["Gardevoir"],
       "nameFr": ["Gardevoir"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0282-000",
@@ -5725,7 +5725,7 @@
       "nameEng": ["Gardevoir"],
       "nameFr": ["Gardevoir"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0282-000-mega",
@@ -5933,7 +5933,7 @@
       "nameEng": ["Azurill"],
       "nameFr": ["Azurill"]
     },
-    "arrayType": ["normal", "Fairy"],
+    "arrayType": ["normal", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0298-000",
@@ -6011,7 +6011,7 @@
       "nameEng": ["Mawile"],
       "nameFr": ["Mysdibule"]
     },
-    "arrayType": ["steel", "Fairy"],
+    "arrayType": ["steel", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0303-000",
@@ -6024,7 +6024,7 @@
       "nameEng": ["Mawile"],
       "nameFr": ["Mysdibule"]
     },
-    "arrayType": ["steel", "Fairy"],
+    "arrayType": ["steel", "fairy"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0303-000-mega",
@@ -8494,7 +8494,7 @@
       "nameEng": ["Mime Jr."],
       "nameFr": ["Mime Jr"]
     },
-    "arrayType": ["psychic", "Fairy"],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 4,
     "imgName": "0439-000",
@@ -9092,7 +9092,7 @@
       "nameEng": ["Togekiss"],
       "nameFr": ["Togekiss"]
     },
-    "arrayType": ["Fairy", "flying"],
+    "arrayType": ["fairy", "flying"],
     "rarity": "ordinary",
     "gen": 4,
     "imgName": "0468-000",
@@ -10288,7 +10288,7 @@
       "nameEng": ["Audino"],
       "nameFr": ["Nanméouïe"]
     },
-    "arrayType": ["normal", "Fairy"],
+    "arrayType": ["normal", "fairy"],
     "rarity": "ordinary",
     "gen": 5,
     "imgName": "0531-000-mega",
@@ -10483,7 +10483,7 @@
       "nameEng": ["Cottonee"],
       "nameFr": ["Doudouvet"]
     },
-    "arrayType": ["grass", "Fairy"],
+    "arrayType": ["grass", "fairy"],
     "rarity": "ordinary",
     "gen": 5,
     "imgName": "0546-000",
@@ -10496,7 +10496,7 @@
       "nameEng": ["Whimsicott"],
       "nameFr": ["Farfaduvet"]
     },
-    "arrayType": ["grass", "Fairy"],
+    "arrayType": ["grass", "fairy"],
     "rarity": "ordinary",
     "gen": 5,
     "imgName": "0547-000",
@@ -12732,7 +12732,7 @@
       "nameEng": ["Flabébé"],
       "nameFr": ["Flabébé"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0669-000",
@@ -12745,7 +12745,7 @@
       "nameEng": ["Flabébé"],
       "nameFr": ["Flabébé"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0669-001",
@@ -12758,7 +12758,7 @@
       "nameEng": ["Flabébé"],
       "nameFr": ["Flabébé"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0669-002",
@@ -12771,7 +12771,7 @@
       "nameEng": ["Flabébé"],
       "nameFr": ["Flabébé"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0669-003",
@@ -12784,7 +12784,7 @@
       "nameEng": ["Flabébé"],
       "nameFr": ["Flabébé"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0669-004",
@@ -12797,7 +12797,7 @@
       "nameEng": ["Floette"],
       "nameFr": ["Floette"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0670-000",
@@ -12810,7 +12810,7 @@
       "nameEng": ["Floette"],
       "nameFr": ["Floette"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0670-001",
@@ -12823,7 +12823,7 @@
       "nameEng": ["Floette"],
       "nameFr": ["Floette"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0670-002",
@@ -12836,7 +12836,7 @@
       "nameEng": ["Floette"],
       "nameFr": ["Floette"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0670-003",
@@ -12849,7 +12849,7 @@
       "nameEng": ["Floette"],
       "nameFr": ["Floette"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0670-004",
@@ -12862,7 +12862,7 @@
       "nameEng": ["Florges"],
       "nameFr": ["Florges"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0671-000",
@@ -12875,7 +12875,7 @@
       "nameEng": ["Florges"],
       "nameFr": ["Florges"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0671-001",
@@ -12888,7 +12888,7 @@
       "nameEng": ["Florges"],
       "nameFr": ["Florges"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0671-002",
@@ -12901,7 +12901,7 @@
       "nameEng": ["Florges"],
       "nameFr": ["Florges"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0671-003",
@@ -12914,7 +12914,7 @@
       "nameEng": ["Florges"],
       "nameFr": ["Florges"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0671-004",
@@ -13187,7 +13187,7 @@
       "nameEng": ["Spritzee"],
       "nameFr": ["Fluvetin"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0682-000",
@@ -13200,7 +13200,7 @@
       "nameEng": ["Aromatisse"],
       "nameFr": ["Cocotine"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0683-000",
@@ -13213,7 +13213,7 @@
       "nameEng": ["Swirlix"],
       "nameFr": ["Sucroquin"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0684-000",
@@ -13226,7 +13226,7 @@
       "nameEng": ["Slurpuff"],
       "nameFr": ["Cupcanaille"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0685-000",
@@ -13421,7 +13421,7 @@
       "nameEng": ["Sylveon"],
       "nameFr": ["Nymphali"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0700-000",
@@ -13447,7 +13447,7 @@
       "nameEng": ["Dedenne"],
       "nameFr": ["Dedenne"]
     },
-    "arrayType": ["electric", "Fairy"],
+    "arrayType": ["electric", "fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0702-000",
@@ -13460,7 +13460,7 @@
       "nameEng": ["Carbink"],
       "nameFr": ["Strassie"]
     },
-    "arrayType": ["rock", "Fairy"],
+    "arrayType": ["rock", "fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0703-000",
@@ -13538,7 +13538,7 @@
       "nameEng": ["Klefki"],
       "nameFr": ["Trousselin"]
     },
-    "arrayType": ["steel", "Fairy"],
+    "arrayType": ["steel", "fairy"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0707-000",
@@ -13668,7 +13668,7 @@
       "nameEng": ["Xerneas"],
       "nameFr": ["Xerneas"]
     },
-    "arrayType": ["Fairy"],
+    "arrayType": ["fairy"],
     "rarity": "legendary",
     "gen": 6,
     "imgName": "0716-000",
@@ -13707,7 +13707,7 @@
       "nameEng": ["Diancie"],
       "nameFr": ["Diancie"]
     },
-    "arrayType": ["rock", "Fairy"],
+    "arrayType": ["rock", "fairy"],
     "rarity": "mythical",
     "gen": 6,
     "imgName": "0719-000",
@@ -13720,7 +13720,7 @@
       "nameEng": ["Diancie"],
       "nameFr": ["Diancie"]
     },
-    "arrayType": ["rock", "Fairy"],
+    "arrayType": ["rock", "fairy"],
     "rarity": "mythical",
     "gen": 6,
     "imgName": "0719-000-mega",

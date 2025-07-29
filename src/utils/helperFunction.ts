@@ -1,42 +1,42 @@
-import { ColorResolvable } from "discord.js";
+import {ColorResolvable, HexColorString} from "discord.js";
 
-export const colorByType = (type: string): ColorResolvable => {
+export const colorByType = (type: string): HexColorString => {
   switch (type) {
-    case "Steel":
+    case "steel":
       return "B7B7CE" as ColorResolvable;
-    case "Fighting":
+    case "fighting":
       return "C22E28" as ColorResolvable;
-    case "Dragon":
+    case "dragon":
       return "6F35FC" as ColorResolvable;
-    case "Water":
+    case "water":
       return "6390F0" as ColorResolvable;
-    case "Fire":
+    case "fire":
       return "EE8130" as ColorResolvable;
-    case "Fairy":
+    case "fairy":
       return "D685AD" as ColorResolvable;
-    case "Ice":
+    case "ice":
       return "96D9D6" as ColorResolvable;
-    case "Bug":
+    case "bug":
       return "A6B91A" as ColorResolvable;
-    case "Normal":
+    case "normal":
       return "A8A77A" as ColorResolvable;
-    case "Grass":
+    case "grass":
       return "7AC74C" as ColorResolvable;
-    case "Poison":
+    case "poison":
       return "A33EA1" as ColorResolvable;
-    case "Psychic":
+    case "psychic":
       return "F95587" as ColorResolvable;
-    case "Rock":
+    case "rock":
       return "B6A136" as ColorResolvable;
-    case "Ground":
+    case "ground":
       return "E2BF65" as ColorResolvable;
-    case "Ghost":
+    case "ghost":
       return "735797" as ColorResolvable;
-    case "Flying":
+    case "flying":
       return "A98FF3" as ColorResolvable;
-    case "Electric":
+    case "electric":
       return "F7D02C" as ColorResolvable;
-    case "Dark":
+    case "dark":
       return "705746" as ColorResolvable;
     default:
       return "FFFFFF" as ColorResolvable;
