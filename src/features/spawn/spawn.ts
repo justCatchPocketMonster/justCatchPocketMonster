@@ -95,8 +95,8 @@ async function choiceTypeOfSpawn(
 ): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
 
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
-
-    if (randomCategorySpawn <= 1) {
+    //TODO: inverse randomCategorySpawn (its for test actually)
+    if (randomCategorySpawn >= 1 && server.eventSpawn.whatEvent === null) {
       let event: EventType | null = selectEvent();
       event = await effectEvent(event, server);
 

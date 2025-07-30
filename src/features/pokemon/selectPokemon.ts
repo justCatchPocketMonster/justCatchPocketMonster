@@ -145,7 +145,7 @@ function selectRandomPokemon(
   let type: string;
   do {
     type = typeSelect(server);
-    pokemonPassType = pokemonPassGen.filter((pokemon) =>
+    pokemonPassType = pokemonPassRarity.filter((pokemon) =>
       pokemon.arrayType.includes(type),
     );
   } while (pokemonPassType[0] === undefined);

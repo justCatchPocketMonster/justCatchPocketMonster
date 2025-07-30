@@ -27,7 +27,7 @@ export default {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       let event = server.eventSpawn;
-
+      console.log(event.whatEvent);
       if (event.whatEvent) {
         let dateEnd = new Date(event.whatEvent.endTime);
         const actualDate = new Date();
@@ -37,7 +37,7 @@ export default {
         const seconds = totalSeconds % 60;
 
         var adressImage =
-          "./src/image/eventImage/" + event.whatEvent.image + ".png";
+          "./src/assets/eventImage/" + event.whatEvent.image + ".png";
         var nameImage = event.whatEvent.image + ".png";
 
         let pokeImg = new AttachmentBuilder(adressImage);
@@ -61,16 +61,15 @@ export default {
             inline: false,
           })
           .setImage("attachment://" + nameImage);
-
+        console.log(eventEmbed.data);
+        console.log(pokeImg);
         return interaction.reply({
           embeds: [eventEmbed],
           files: [pokeImg],
-          ephemeral: false,
         });
       } else {
         return interaction.reply({
           content: language("noEvent", server.language),
-          ephemeral: true,
         });
       }
     } catch (e) {
