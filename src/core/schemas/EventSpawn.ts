@@ -212,7 +212,8 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
       required: true,
     },
   },
-  {
-    timestamps: true,
-  },
+    {
+      _id: false,
+      timestamps: false,
+    },
 );

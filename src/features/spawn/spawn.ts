@@ -14,6 +14,7 @@ import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
 import {nameStatGeneral, version} from "../../config/default/misc";
+import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 
 interface spawnData {
   embed: EmbedBuilder;
@@ -93,7 +94,7 @@ async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
 ): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
-
+    await checkTimeForResetEventStat(server)
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
     //TODO: inverse randomCategorySpawn (its for test actually)
     if (randomCategorySpawn >= 1 && server.eventSpawn.whatEvent === null) {
@@ -164,7 +165,7 @@ function generateEmbedEvent(
   const adressImage: string = basePath + event.image + ".png";
   const nameImage: string = event.image + ".png";
 
-  const color: ColorResolvable = colorByType(event.color) as ColorResolvable;
+  const color: ColorResolvable = event.color as ColorResolvable;
 
   let eventEmbed = new EmbedBuilder()
     .setColor(color)

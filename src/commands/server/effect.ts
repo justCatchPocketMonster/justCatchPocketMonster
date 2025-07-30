@@ -9,6 +9,7 @@ import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { EmbedBuilder } from "discord.js";
+import {checkTimeForResetEventStat} from "../../features/event/checkTimeForResetEventStat";
 
 export default {
   name: "currentminievent",
@@ -26,8 +27,8 @@ export default {
     try {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
+      await checkTimeForResetEventStat(server);
       let event = server.eventSpawn;
-      console.log(event.whatEvent);
       if (event.whatEvent) {
         let dateEnd = new Date(event.whatEvent.endTime);
         const actualDate = new Date();
@@ -35,7 +36,6 @@ export default {
         const totalSeconds = Math.floor(dateDiffValue / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
-
         var adressImage =
           "./src/assets/eventImage/" + event.whatEvent.image + ".png";
         var nameImage = event.whatEvent.image + ".png";
@@ -61,8 +61,6 @@ export default {
             inline: false,
           })
           .setImage("attachment://" + nameImage);
-        console.log(eventEmbed.data);
-        console.log(pokeImg);
         return interaction.reply({
           embeds: [eventEmbed],
           files: [pokeImg],

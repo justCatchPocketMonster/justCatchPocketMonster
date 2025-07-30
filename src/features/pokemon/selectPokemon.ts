@@ -16,7 +16,6 @@ export const selectPokemon = (
   idPokemon: number = 0,
   isEgg: boolean = false,
 ): PokemonType => {
-  checkTimeForResetEventStat(server.discordId);
   let pokemonChoiced: PokemonType;
   const pokemons: pokemonDb[] = allPokemon.map((p) => ({
     ...p,

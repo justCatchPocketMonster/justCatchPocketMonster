@@ -29,7 +29,6 @@ export default async (client: Client, interaction: Interaction) => {
       interaction instanceof ChatInputCommandInteraction &&
       interaction.isCommand()
     ) {
-      checkTimeForResetEventStat(interaction.guildId as string);
       switch (interaction.commandName) {
         case langue.name:
           await langue.execute(interaction);
