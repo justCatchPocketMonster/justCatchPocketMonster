@@ -23,10 +23,10 @@ export const selectPokemon = (
     isShiny: false,
     hint: "",
   }));
-
-  const allowedPokemon: pokemonDb[] = megaIsAllowed(server, pokemons);
+  const isOnlyGigaOrNone = gigaIsAllowed(server,pokemons);
+  const isMegaFilter: pokemonDb[] = megaIsAllowed(server, isOnlyGigaOrNone);
   if (idPokemon === 0) {
-    pokemonChoiced = selectRandomPokemon(server, allowedPokemon);
+    pokemonChoiced = selectRandomPokemon(server, isMegaFilter);
     pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
   } else {
     pokemonChoiced = selectPokemonWithId(idPokemon);
@@ -100,6 +100,16 @@ function megaIsAllowed(
     return allowedPokemon;
   } else {
     return allowedPokemon.filter((pokemon) => pokemon.form !== "mega");
+  }
+}
+function gigaIsAllowed(
+  server: ServerType,
+  allowedPokemon: pokemonDb[],
+): pokemonDb[] {
+  if (server.eventSpawn.allowedForm.giga) {
+    return allowedPokemon;
+  } else {
+    return allowedPokemon.filter((pokemon) => pokemon.form !== "giga");
   }
 }
 
