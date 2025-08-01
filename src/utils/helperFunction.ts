@@ -52,3 +52,7 @@ export function getPercentage(partialValue: number, totalValue: number): number 
 export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function deepCloneObject<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
+}

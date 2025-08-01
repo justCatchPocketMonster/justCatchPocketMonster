@@ -207,7 +207,7 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
       required: true,
       default: false,
     },
-    valeurMaxChoiceEgg: {
+    valueMaxChoiceEgg: {
       type: Number,
       required: true,
     },

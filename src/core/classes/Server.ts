@@ -61,7 +61,7 @@ export class Server implements ServerType {
       e.allowedForm,
       e.messageSpawn,
       e.nightMode,
-      e.valeurMaxChoiceEgg,
+      e.valueMaxChoiceEgg,
     );
 
     return new Server(
