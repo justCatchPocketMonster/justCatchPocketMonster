@@ -7,6 +7,7 @@ import { getStatById, updateStat } from "../../cache/StatCache";
 import {nameStatGeneral, version} from "../../config/default/misc";
 import {updateUser} from "../../cache/UserCache";
 import {updateServer} from "../../cache/ServerCache";
+import allPokemon from "../../data/pokemon.json";
 
 export async function catchPokemon(
   user: UserType,
@@ -70,8 +71,19 @@ export async function catchPokemon(
   await updateUser(user.discordId, user);
   await updateServer(server.discordId, server);
 
+  const getPokemonData = allPokemon.filter(
+    (poke) => poke.id.toString() === pokemon.id && poke.form === pokemon.form && poke.versionForm === pokemon.versionForm,
+  )
+    .map((poke) => ({
+      name: {
+        nameFr: poke.name.nameFr,
+        nameEng: poke.name.nameEng,
+      },
+      isShiny: pokemon.isShiny,
+    }))[0];
+
   interaction.reply(generateCatchMessage(
-      pokemon,
+      getPokemonData,
       memberDisplayName,
       user,
       server,

@@ -14,7 +14,6 @@ import {pokemonDb} from "../../core/types/pokemonDb";
 export const selectPokemon = (
   server: ServerType,
   idPokemon: number = 0,
-  isEgg: boolean = false,
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
   const pokemons: pokemonDb[] = allPokemon.map((p) => ({
@@ -32,9 +31,28 @@ export const selectPokemon = (
     pokemonChoiced = selectPokemonWithId(idPokemon);
   }
 
-  pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, isEgg);
+  pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, false);
   return pokemonChoiced;
 };
+
+export const selectEggPokemon = (
+    server: ServerType,
+    idPokemon: number = 0,
+): PokemonType => {
+  let pokemonChoiced: PokemonType;
+  if( idPokemon === 0) {
+    const randomIdPokemon = Math.floor(Math.random() * allPokemon[allPokemon.length].id);
+    pokemonChoiced = selectPokemonWithId(randomIdPokemon);
+  } else {
+    pokemonChoiced = selectPokemonWithId(idPokemon);
+  }
+    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
+    const eggObject = allPokemon[0];
+
+    pokemonChoiced.name = eggObject.name;
+    pokemonChoiced.imgName = eggObject.imgName;
+    return pokemonChoiced;
+}
 
 
 function shinySelect(
@@ -117,15 +135,17 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
   const allPokemonWithId = allPokemon.filter(
     (pokemon) => pokemon.id === idPokemon,
   );
+  const randomPokemon = allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+
   return new Pokemon(
-    allPokemonWithId[0].id.toString(),
-    allPokemonWithId[0].name,
-    allPokemonWithId[0].arrayType,
-    allPokemonWithId[0].rarity,
-    allPokemonWithId[0].imgName,
-    allPokemonWithId[0].gen,
-    allPokemonWithId[0].form,
-    allPokemonWithId[0].versionForm,
+    randomPokemon.id.toString(),
+    randomPokemon.name,
+    randomPokemon.arrayType,
+    randomPokemon.rarity,
+    randomPokemon.imgName,
+    randomPokemon.gen,
+    randomPokemon.form,
+    randomPokemon.versionForm,
     false,
     "",
   );

@@ -1,7 +1,7 @@
 import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import {EventType} from "../../core/types/EventType";
-import {selectPokemon} from "../pokemon/selectPokemon";
+import {selectEggPokemon, selectPokemon} from "../pokemon/selectPokemon";
 import {selectEvent} from "../event/selectEvent";
 import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
@@ -105,12 +105,11 @@ async function choiceTypeOfSpawn(
     }
     const isEgg =
       0 == Math.floor(Math.random() * server.eventSpawn.valeurMaxChoiceEgg);
-    const pokemonChoice: PokemonType = selectPokemon(server, 0, isEgg);
+    let pokemonChoice: PokemonType
     if (isEgg) {
-      const eggObject = allPokemon[0];
-
-      pokemonChoice.name = eggObject.name;
-      pokemonChoice.imgName = eggObject.imgName;
+        pokemonChoice = selectEggPokemon(server, 0);
+    } else {
+        pokemonChoice = selectPokemon(server, 0);
     }
     server.pokemonPresent[idChannel] = pokemonChoice;
     const statVersion = await getStatById(version);
