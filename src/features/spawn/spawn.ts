@@ -1,12 +1,10 @@
 import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import {EventType} from "../../core/types/EventType";
-import {selectPokemon} from "../pokemon/selectPokemon";
+import {selectEggPokemon, selectPokemon} from "../pokemon/selectPokemon";
 import {selectEvent} from "../event/selectEvent";
 import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
-import {effectEvent} from "../event/effectEvent";
-import allPokemon from "../../data/pokemon.json";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { valueMaxChoiceEvent } from "../../config/default/spawn";
@@ -14,6 +12,7 @@ import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
 import {nameStatGeneral, version} from "../../config/default/misc";
+import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 
 interface spawnData {
   embed: EmbedBuilder;
@@ -57,7 +56,6 @@ async function hasReachedSpawnLimit(server: ServerType): Promise<boolean> {
     server.countMessage++;
 
     const reached = server.countMessage >= server.maxCountMessage;
-    if (reached) server.countMessage = 0;
 
     await updateServer(server.discordId, server);
     return reached;
@@ -93,23 +91,23 @@ async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
 ): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
-
+    await checkTimeForResetEventStat(server)
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
-
-    if (randomCategorySpawn <= 1) {
-      let event: EventType | null = selectEvent();
-      event = await effectEvent(event, server);
-
-      return generateEmbedEvent(event, server);
+    //if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
+    if (randomCategorySpawn >= 1) {
+      await selectEvent(server);
+      console.log(server.eventSpawn.whatEvent);
+        if(server.eventSpawn.whatEvent) {
+            return generateEmbedEvent(server.eventSpawn.whatEvent, server);
+        }
     }
     const isEgg =
-      0 == Math.floor(Math.random() * server.eventSpawn.valeurMaxChoiceEgg);
-    const pokemonChoice: PokemonType = selectPokemon(server, 0, isEgg);
+      0 == Math.floor(Math.random() * server.eventSpawn.valueMaxChoiceEgg);
+    let pokemonChoice: PokemonType
     if (isEgg) {
-      const eggObject = allPokemon[0];
-
-      pokemonChoice.name = eggObject.name;
-      pokemonChoice.imgName = eggObject.imgName;
+        pokemonChoice = selectEggPokemon(server, 0);
+    } else {
+        pokemonChoice = selectPokemon(server, 0);
     }
     server.pokemonPresent[idChannel] = pokemonChoice;
     const statVersion = await getStatById(version);
@@ -164,7 +162,7 @@ function generateEmbedEvent(
   const adressImage: string = basePath + event.image + ".png";
   const nameImage: string = event.image + ".png";
 
-  const color: ColorResolvable = colorByType(event.color) as ColorResolvable;
+  const color: ColorResolvable = event.color as ColorResolvable;
 
   let eventEmbed = new EmbedBuilder()
     .setColor(color)

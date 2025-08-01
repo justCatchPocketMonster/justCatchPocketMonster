@@ -38,6 +38,11 @@ export const EventSchema = new mongoose.Schema<EventType>(
             required: true,
             default: "",
         },
+        endTime: {
+            type: Date,
+            required: true,
+            default: new Date(),
+        }
     },
     {
         _id: false,

@@ -10,7 +10,6 @@ export default async (client: Client, message: Message<boolean>) => {
     }
     if (!message.guild) return;
 
-    checkTimeForResetEventStat(message.guild.id);
     spawn(message.guild.id, message.channel.id).then((result) => {
       if (result) {
         const channel = client.channels.cache.get(result.channelId);

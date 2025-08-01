@@ -9,6 +9,7 @@ import logger, {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { EmbedBuilder } from "discord.js";
+import {checkTimeForResetEventStat} from "../../features/event/checkTimeForResetEventStat";
 
 export default {
   name: "currentminievent",
@@ -26,8 +27,8 @@ export default {
     try {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
+      await checkTimeForResetEventStat(server);
       let event = server.eventSpawn;
-
       if (event.whatEvent) {
         let dateEnd = new Date(event.whatEvent.endTime);
         const actualDate = new Date();
@@ -35,9 +36,8 @@ export default {
         const totalSeconds = Math.floor(dateDiffValue / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
-
         var adressImage =
-          "./src/image/eventImage/" + event.whatEvent.image + ".png";
+          "./src/assets/eventImage/" + event.whatEvent.image + ".png";
         var nameImage = event.whatEvent.image + ".png";
 
         let pokeImg = new AttachmentBuilder(adressImage);
@@ -61,16 +61,13 @@ export default {
             inline: false,
           })
           .setImage("attachment://" + nameImage);
-
         return interaction.reply({
           embeds: [eventEmbed],
           files: [pokeImg],
-          ephemeral: false,
         });
       } else {
         return interaction.reply({
           content: language("noEvent", server.language),
-          ephemeral: true,
         });
       }
     } catch (e) {
