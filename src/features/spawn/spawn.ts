@@ -93,10 +93,8 @@ async function choiceTypeOfSpawn(
 ): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
     await checkTimeForResetEventStat(server)
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
-    //if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
-    if (randomCategorySpawn >= 1) {
+    if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
       await selectEvent(server);
-      console.log(server.eventSpawn.whatEvent);
         if(server.eventSpawn.whatEvent) {
             return generateEmbedEvent(server.eventSpawn.whatEvent, server);
         }
