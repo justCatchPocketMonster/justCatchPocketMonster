@@ -34,6 +34,7 @@ function activeCodeShiny(interaction: ChatInputCommandInteraction, user: UserTyp
   interaction.reply(generateCatchMessage(
     pokemonChoiced,
     memberDisplayName,
+    user,
     server
   ))
 

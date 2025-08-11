@@ -1,12 +1,10 @@
 // src/__tests__/integration/commands/save.test.ts
-import { Client } from 'discord.js';
+import spawn from "../../../../src/commands/admin/spawn";
 import {createMockInteraction} from "../../../utils/test-utils";
-import howMuchThisPokemon from "../../../../src/commands/save/howMuchThisPokemon";
 import mongoose from "mongoose";
-import language from "../../../../src/lang/language";
 
-describe('how much command', () => {
 
+describe('spawn command', () => {
     let interaction: any;
     beforeEach(async () => {
         const collections = mongoose.connection.collections;
@@ -15,7 +13,7 @@ describe('how much command', () => {
         }
 
         interaction = createMockInteraction();
-        (interaction.options.getSubcommand as jest.Mock).mockReturnValue('how-much');
+        (interaction.options.getSubcommand as jest.Mock).mockReturnValue('spawn');
     });
 
     afterAll(async () => {
@@ -23,14 +21,9 @@ describe('how much command', () => {
 
     test('Should reply a message because it\'s a success', async () => {
         // given
-        (interaction.options.getString as jest.Mock).mockImplementation((name: string) => {
-            if (name === language("commandHowOptionNameStringPokemonName", "eng")) return 'pikachu';
-            if (name === language("commandHowOptionNameStringNumber", "eng")) return '25';
-            return null;
-        });
 
         // when
-        await howMuchThisPokemon.execute(interaction);
+        await spawn.execute(interaction);
 
         // then
         const replyMock = interaction.reply as jest.Mock;

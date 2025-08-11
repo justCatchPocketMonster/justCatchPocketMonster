@@ -3,4 +3,6 @@ module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     testMatch: ['**/*.test.ts'],
+    setupFilesAfterEnv: ['<rootDir>/__test__/utils/mongo.setup.ts'],
+    testTimeout: 60000,
 };
