@@ -1,5 +1,4 @@
-// src/__tests__/integration/commands/save.test.ts
-import {createMockInteraction} from "../../../utils/test-utils";
+import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 import mongoose from "mongoose";
 import langue from "../../../../src/commands/admin/langue";
 

@@ -1,7 +1,5 @@
-// src/__tests__/integration/commands/save.test.ts
-import {createMockInteraction} from "../../../utils/test-utils";
 import mongoose from "mongoose";
-import hintPokemon from "../../../../src/commands/information/hintPokemon";
+import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 import information from "../../../../src/commands/information/information";
 
 describe('information command', () => {
