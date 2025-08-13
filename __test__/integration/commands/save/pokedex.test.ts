@@ -1,9 +1,5 @@
-// src/__tests__/integration/commands/save.test.ts
-import { Client } from 'discord.js';
-import {createMockInteraction} from "../../../utils/test-utils";
-import howMuchThisPokemon from "../../../../src/commands/save/howMuchThisPokemon";
+import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 import mongoose from "mongoose";
-import language from "../../../../src/lang/language";
 import pokedex from "../../../../src/commands/save/pokedex";
 
 describe('Pokedex command', () => {

@@ -1,6 +1,4 @@
-// src/__tests__/integration/commands/save.test.ts
-import { Client } from 'discord.js';
-import {createMockInteraction} from "../../../utils/test-utils";
+import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 import howMuchThisPokemon from "../../../../src/commands/save/howMuchThisPokemon";
 import mongoose from "mongoose";
 import language from "../../../../src/lang/language";

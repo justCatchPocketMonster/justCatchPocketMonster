@@ -1,11 +1,6 @@
-// src/__tests__/integration/commands/save.test.ts
-import {createMockInteraction} from "../../../utils/test-utils";
 import mongoose from "mongoose";
-import hintPokemon from "../../../../src/commands/information/hintPokemon";
-import information from "../../../../src/commands/information/information";
-import stat from "../../../../src/commands/information/stat";
-import tutorial from "../../../../src/commands/information/tutorial";
 import effect from "../../../../src/commands/server/effect";
+import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 
 describe('effect command', () => {
     let interaction: any;
