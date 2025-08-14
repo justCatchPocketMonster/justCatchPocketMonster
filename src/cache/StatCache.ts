@@ -2,8 +2,9 @@ import NodeCache from "node-cache";
 import { Stat as StatModel } from "../core/schemas/Stat";
 import { Stat } from "../core/classes/Stat";
 import { type StatType } from "../core/types/StatType";
+import {ttlCache} from "../config/default/misc";
 
-const cache = new NodeCache({ stdTTL: 600 });
+const cache = new NodeCache({ stdTTL: ttlCache });
 
 export async function getStatById(statVersion: string): Promise<Stat> {
   const cached = cache.get<Stat>(statVersion);

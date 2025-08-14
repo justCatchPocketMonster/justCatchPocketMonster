@@ -1,11 +1,7 @@
 import {
-  Interaction,
-  StringSelectMenuOptionBuilder,
   StringSelectMenuBuilder,
   ActionRowBuilder,
   APISelectMenuOption,
-  Message,
-  MessageComponentInteraction,
   EmbedBuilder,
   AttachmentBuilder,
   StringSelectMenuInteraction,
@@ -20,7 +16,7 @@ interface PageData {
 }
 export function createPageForMenu(
   page: EmbedBuilder,
-  image: AttachmentBuilder | null = null,
+  image: AttachmentBuilder | null,
   nameSelection: string,
   descriptionSelection?: string,
 ): PageData {

@@ -1,7 +1,7 @@
-import { Client, ActivityType } from "discord.js";
+import { Client } from "discord.js";
 import { readdirSync } from "fs";
 
-import logger, {newLogger} from "../middlewares/logger";
+import {newLogger} from "../middlewares/logger";
 import randomStatus from "../features/other/randomStatus";
 
 export default (client: Client) => {
@@ -44,7 +44,7 @@ function loadCommands(client: Client) {
         );
 
         if (command.actif) {
-          //await client.application.commands.create(command.command);
+          await client.application.commands.create(command.command);
         } else if (exists) {
           await client.application.commands.delete(command.name);
         }

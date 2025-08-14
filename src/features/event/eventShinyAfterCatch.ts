@@ -3,31 +3,21 @@ import language from "../../lang/language";
 import { ServerType } from "../../core/types/ServerType";
 
 export function eventShinyAfterCatch(
-  interaction: ChatInputCommandInteraction,
-  isShiny: boolean,
-  server: ServerType,
+    interaction: ChatInputCommandInteraction,
+    isShiny: boolean,
+    server: ServerType,
 ) {
-  let shinyEvent;
-  let randomNumber;
+  let shinyEvent = isShiny;
 
   if (isShiny) {
-    randomNumber = Math.floor(Math.random() * 10000);
-
-    if (randomNumber == 1) {
-      shinyEvent = !isShiny;
+    if (Math.random() < 1 / 10000) {
+      shinyEvent = false;
       interaction.reply(language("finallyHesNotShiny", server.language));
-    } else {
-      shinyEvent = isShiny;
     }
-  } else {
-    randomNumber = Math.floor(Math.random() * 4096);
-
-    if (randomNumber == 1) {
-      shinyEvent = !isShiny;
+  } else if (Math.random() < 1 / 4096) {
+      shinyEvent = true;
       interaction.reply(language("finallyHesShiny", server.language));
-    } else {
-      shinyEvent = isShiny;
-    }
+
   }
 
   return shinyEvent;

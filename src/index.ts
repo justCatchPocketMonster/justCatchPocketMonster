@@ -11,7 +11,7 @@ config();
 async function main() {
   await database();
 
-  var ClientDiscord: Client = new Client({
+  const ClientDiscord: Client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,

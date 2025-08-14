@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { ChatInputCommandInteraction } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { catchPokemon } from "../../features/catch/catch";
 import { getUserById } from "../../cache/UserCache";

@@ -1,6 +1,6 @@
 import {EventType} from "./EventType";
 
-export interface genStat {
+export interface GenStat {
   "1": number;
   "2": number;
   "3": number;
@@ -12,7 +12,7 @@ export interface genStat {
   "9": number;
 }
 
-export interface typeStat {
+export interface TypeStat {
   steel: number;
   dragon: number;
   electric: number;
@@ -33,16 +33,16 @@ export interface typeStat {
   flying: number;
 }
 
-export interface rarityStat {
+export interface RarityStat {
   ordinary: number;
   legendary: number;
   mythical: number;
 }
 
 export interface EventSpawnType {
-  gen: genStat;
-  type: typeStat;
-  rarity: rarityStat;
+  gen: GenStat;
+  type: TypeStat;
+  rarity: RarityStat;
   shiny: number;
   whatEvent: EventType | null;
   allowedForm: {

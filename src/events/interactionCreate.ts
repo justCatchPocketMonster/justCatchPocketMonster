@@ -16,8 +16,7 @@ import effect from "../commands/server/effect";
 import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 
-import logger, {newLogger} from "../middlewares/logger";
-import {checkTimeForResetEventStat} from "../features/event/checkTimeForResetEventStat";
+import {newLogger} from "../middlewares/logger";
 
 export default async (client: Client, interaction: Interaction) => {
   try {

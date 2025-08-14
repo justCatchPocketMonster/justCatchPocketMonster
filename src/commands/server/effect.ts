@@ -3,12 +3,11 @@ import {
   AttachmentBuilder,
   ChatInputCommandInteraction,
   ColorResolvable,
-  Interaction,
+  EmbedBuilder
 } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
-import { EmbedBuilder } from "discord.js";
 import {checkTimeForResetEventStat} from "../../features/event/checkTimeForResetEventStat";
 
 export default {
@@ -36,9 +35,9 @@ export default {
         const totalSeconds = Math.floor(dateDiffValue / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
-        var adressImage =
+        let adressImage =
           "./src/assets/eventImage/" + event.whatEvent.image + ".png";
-        var nameImage = event.whatEvent.image + ".png";
+        let nameImage = event.whatEvent.image + ".png";
 
         let pokeImg = new AttachmentBuilder(adressImage);
 

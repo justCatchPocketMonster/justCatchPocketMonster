@@ -1,9 +1,8 @@
 import { Event } from "./Event";
 import {
   EventSpawnType,
-  genStat,
-  rarityStat,
-  typeStat,
+  GenStat, RarityStat,
+  TypeStat,
 } from "../types/EventSpawnType";
 import { defaultLanguage } from "../../config/default/server";
 import {
@@ -17,9 +16,9 @@ import {deepCloneObject} from "../../utils/helperFunction";
 
 export class EventSpawn implements EventSpawnType {
   constructor(
-    public gen: genStat,
-    public type: typeStat,
-    public rarity: rarityStat,
+    public gen: GenStat,
+    public type: TypeStat,
+    public rarity: RarityStat,
     public shiny: number,
     public whatEvent: Event | null,
     public allowedForm: {

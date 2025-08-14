@@ -1,4 +1,4 @@
-import { updateServer, getServerById } from "../../cache/ServerCache";
+import { updateServer } from "../../cache/ServerCache";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 import {ServerType} from "../../core/types/ServerType";
 
@@ -6,9 +6,7 @@ import {ServerType} from "../../core/types/ServerType";
 export async function checkTimeForResetEventStat(server: ServerType): Promise<void> {
 
   if (
-    !server.eventSpawn ||
-    !server.eventSpawn.whatEvent ||
-    !server.eventSpawn.whatEvent.endTime
+    !server.eventSpawn.whatEvent?.endTime
   )
     return;
 

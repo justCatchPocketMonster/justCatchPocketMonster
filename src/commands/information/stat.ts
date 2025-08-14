@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { ChatInputCommandInteraction, Interaction } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import { ChatInputCommandInteraction } from "discord.js";
+import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import {createPaginationStat} from "../../features/stat/stat";
 import { getStatById } from "../../cache/StatCache";

@@ -32,7 +32,7 @@ export function howMuchThisPokemon(
       continue;
     }
 
-    const saveField: saveFieldData = {
+    const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveSpecifiqueFormUser,
       saveServer: getSpecifiqueFormSaveData(save, saveOnePokemonServer),
@@ -59,7 +59,7 @@ export function howMuchThisPokemon(
     const pokemonDataOriginal = getPokemonDataBySave(saveOnePokemonStatSpawn[0]);
     if (pokemonDataOriginal === null) return;
     pokemonDataOriginal.imgName = "0000-001";
-    const saveField: saveFieldData = {
+    const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
       saveServer: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonServer),
@@ -115,7 +115,7 @@ function generateEmbedData(
   pokemon: pokemonDb,
   server: ServerType,
   avatarUser: string,
-  allSaveData: saveFieldData,
+  allSaveData: SaveFieldData,
   isShiny: boolean,
 ): pageType {
   const imageName = pokemon.imgName+(isShiny ? "-shiny" : "")+".png";
@@ -179,7 +179,7 @@ function generateEmbedData(
   return { page: embed, imagePage: new AttachmentBuilder(imagePath) };
 }
 
-interface saveFieldData {
+interface SaveFieldData {
   saveGlobalUser: SaveOnePokemon;
   saveSpecifiqueFormUser: SaveOnePokemon;
   saveServer: SaveOnePokemon;
