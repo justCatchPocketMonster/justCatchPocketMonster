@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import logger, {newLogger} from "../middlewares/logger";
-import language from "../lang/language";
+import {newLogger} from "../middlewares/logger";
 
 export default async () => {
   try {

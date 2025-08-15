@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import {createMockInteraction} from "../../../utils/mock/mockInteraction";
 import catchPokemon from "../../../../src/commands/user/catchPokemon";
+import code from "../../../../src/commands/user/code";
 
 describe('code command', () => {
     let interaction: any;
@@ -22,7 +23,7 @@ describe('code command', () => {
 
 
         // when
-        await catchPokemon.execute(interaction);
+        await code.execute(interaction);
 
         // then
         const replyMock = interaction.reply as jest.Mock;

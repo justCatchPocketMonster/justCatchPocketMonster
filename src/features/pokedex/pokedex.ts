@@ -1,10 +1,8 @@
 import { UserType } from "../../core/types/UserType";
 import {
-  APIEmbedField,
   ChatInputCommandInteraction,
   EmbedBuilder,
   GuildMember,
-  RestOrArray,
 } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import { paginationButton } from "../other/paginationButton";
@@ -13,7 +11,7 @@ import allPokemon from "../../data/pokemon.json";
 import {pokemonDb} from "../../core/types/pokemonDb";
 import {capitalizeFirstLetter, getPercentage} from "../../utils/helperFunction";
 
-interface oneFieldEmbed {
+interface OneFieldEmbed {
   name: string;
   value: string;
   inline: boolean;
@@ -26,11 +24,9 @@ export function pokedex(
   pageChoice: number|null
 ) {
   const maxPokemonParPage = 21;
-  var listPokemon = [];
-  var arrayEmbed = [];
-  if (pageChoice == null) {
-    pageChoice = 1;
-  }
+  const listPokemon = [];
+  const arrayEmbed = [];
+  pageChoice ??= 1;
 
   let pageSelectedDefault;
 
@@ -50,7 +46,7 @@ export function pokedex(
 
   const avatar = interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
 
-  let memberDisplayName = "";
+  let memberDisplayName: string;
   const member = interaction.member as GuildMember;
 
   if (member.nickname != null) {
@@ -123,7 +119,7 @@ export function pokedex(
     pokeSave.addFields(listPokemon);
     pokeSave.setFooter({ text: "Pages: " + nbPage + "/" + nbPageMax + "." });
 
-    listPokemon = [];
+    listPokemon.length = 0;
     nbPage++;
     arrayEmbed.push({ page: pokeSave });
   }
@@ -141,8 +137,6 @@ function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: Serve
   const emoteMega = "<:MEGA:1139228792989155359>";
   const emoteMegaShiny = "<:shinyMega:1141440293409923123>";
   const savePokemon = user.savePokemon.getSaveOnePokemonFusedForm(pokemonData.id.toString());
-  const allSavePokemonUser = user.savePokemon.getAllSaveOfOnePokemon(pokemonData.id.toString())
-
 
   let emote = emotePokeballDark;
   let value = language("noCatch", server.language);
@@ -221,7 +215,7 @@ function buildPokedexEmbed(interaction: ChatInputCommandInteraction, user:UserTy
 function generateFieldRegionStat(
     user: UserType,
     server: ServerType,
-): oneFieldEmbed[] {
+): OneFieldEmbed[] {
   const regions = [
     { name: "Kanto", min: 0, max: 151 },
     { name: "Johto", min: 151, max: 251 },
@@ -242,7 +236,7 @@ function processRegion(
     regionName: string,
     valueMin: number,
     valueMax: number,
-): oneFieldEmbed {
+): OneFieldEmbed {
   const rangeSize = valueMax - valueMin;
   const save = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin + 1, valueMax);
 
@@ -253,7 +247,7 @@ function processRegion(
   let value: string;
 
   if (caught === rangeSize) {
-    const shinyPercentage = getPercentage(shiny, rangeSize) + "%"; + "%";
+    const shinyPercentage = getPercentage(shiny, rangeSize) + "%";
     value = `${shiny}/ ${rangeSize} - ${shinyPercentage}`;
 
     if (shiny === rangeSize) {

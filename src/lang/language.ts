@@ -1,17 +1,17 @@
 import language from "../data/language.json";
-import logger, {newLogger} from "../middlewares/logger";
+import {newLogger} from "../middlewares/logger";
 
 interface Translation {
   [key: string]: string[];
 }
 
-interface languageStructure {
+interface LanguageStructure {
   [key: string]: Translation;
 }
 
 export default function getText(key: string, lang: string): string {
   try {
-    const languageData: languageStructure = language;
+    const languageData: LanguageStructure = language;
     const langTextArray = languageData[key]?.[lang] ?? [];
     if (langTextArray.length === 0) {
       langTextArray.push("Error: Key not found");

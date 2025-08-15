@@ -1,12 +1,12 @@
 import { Client, ActivityType } from "discord.js";
 import { getStatById } from "../../cache/StatCache";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import { getCode } from "../code/code";
 import {nameStatGeneral, version} from "../../config/default/misc";
 
 const randomStatus = async (Client: Client) => {
   try {
-    if (Client == null || Client.user == null) return;
+    if (!Client?.user) return;
 
     const statGlobal = await getStatById(nameStatGeneral);
 

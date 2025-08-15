@@ -1,13 +1,10 @@
-import { genStat, rarityStat, typeStat } from "../../core/types/EventSpawnType";
+import {GenStat, RarityStat, TypeStat} from "../../core/types/EventSpawnType";
 
 export const minimumCount = 4 + 1;
 export const maximumCount = 20;
 
-//The IDs of the Pokémon that will not be able to spawn except by transformation
-export const pokemonEvent = [132, 570, 571];
-
 export const nbGeneration = 6;
-export const valuePerGen: genStat = {
+export const valuePerGen: GenStat = {
   "1": 100,
   "2": 100,
   "3": 100,
@@ -20,7 +17,7 @@ export const valuePerGen: genStat = {
 };
 
 export const nbType = 18;
-export const valuePerType: typeStat = {
+export const valuePerType: TypeStat = {
   steel: 100,
   dragon: 100,
   electric: 100,
@@ -41,13 +38,11 @@ export const valuePerType: typeStat = {
   flying: 100,
 };
 
-export const valuePerRarity: rarityStat = {
+export const valuePerRarity: RarityStat = {
   ordinary: 990,
   legendary: 9,
   mythical: 1,
 };
-export const maxValueRarity =
-  valuePerRarity.ordinary + valuePerRarity.legendary + valuePerRarity.mythical;
 
 export const rateMaxShiny = 4096;
 

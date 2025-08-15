@@ -2,9 +2,8 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   ChatInputCommandInteraction,
   EmbedBuilder,
-  Interaction,
 } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import {

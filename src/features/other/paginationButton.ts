@@ -46,7 +46,6 @@ export const paginationButton = async (
   );
 
   const image = pages[currentPage].imagePage;
-  console.log("bjr")
   const message = await interactionSlash.reply({
     embeds: [pages[currentPage].page],
     components: [row],

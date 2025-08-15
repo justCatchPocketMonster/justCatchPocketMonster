@@ -2,8 +2,9 @@ import NodeCache from "node-cache";
 import { User as UserModel } from "../core/schemas/User";
 import { User } from "../core/classes/User";
 import { type UserType } from "../core/types/UserType";
+import {ttlCache} from "../config/default/misc";
 
-const cache = new NodeCache({ stdTTL: 600 });
+const cache = new NodeCache({ stdTTL: ttlCache });
 
 export async function getUserById(userId: string): Promise<User> {
   const cached = cache.get<User>(userId);

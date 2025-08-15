@@ -3,7 +3,7 @@ import {
   SlashCommandChannelOption,
 } from "@discordjs/builders";
 import { ChannelType, ChatInputCommandInteraction } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import {createHint} from "../../features/hint/createHint";
@@ -41,13 +41,12 @@ export default {
       let server = await getServerById(interaction.guildId);
       let channelOption = interaction.options.getChannel("channel");
 
-      let channel = channelOption ? channelOption : interaction.channel;
+      let channel = channelOption ?? interaction.channel;
       if (!channel) {
         return;
       }
       if (
-        server.pokemonPresent[channel.id] &&
-        server.pokemonPresent[channel.id].hint
+        server.pokemonPresent[channel.id]?.hint
       ) {
         server.pokemonPresent[channel.id].hint = createHint(
           server.pokemonPresent[channel.id].hint,

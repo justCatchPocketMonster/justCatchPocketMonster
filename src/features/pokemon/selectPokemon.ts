@@ -2,7 +2,6 @@ import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
 import allPokemon from "../../data/pokemon.json";
-import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 import {
   hidePokemon,
   nbGeneration,
@@ -56,16 +55,14 @@ export const selectEggPokemon = (
 
 
 function shinySelect(
-  idPokemon: String,
+  idPokemon: string,
   server: ServerType,
   isEgg: boolean,
 ): boolean {
   let tauxShiny = 4096;
   let saveServer = server.savePokemon.getCatchByOnlyId(idPokemon);
 
-  if (saveServer === undefined) {
-    saveServer = 0;
-  }
+  saveServer ??= 0;
 
   if (isEgg) {
     tauxShiny /= 2;
@@ -214,11 +211,11 @@ function raritySelect(server: ServerType): string {
   const randomNumber = Math.floor(Math.random() * 1000);
   let somStatByRarity = 0;
   let arrayRarity: string[] = Object.keys(valuePerRarity);
-  for (let i = 0; i < arrayRarity.length; i++) {
+  for (const element of arrayRarity) {
     // @ts-ignore
-    somStatByRarity += server.eventSpawn.rarity[arrayRarity[i]];
+    somStatByRarity += server.eventSpawn.rarity[element];
     if (randomNumber <= somStatByRarity) {
-      return arrayRarity[i];
+      return element;
     }
   }
 
@@ -232,11 +229,11 @@ function typeSelect(server: ServerType): string {
   let somStatByType = 0;
   let arrayType: string[] = Object.keys(valuePerType);
 
-  for (let i = 0; i < arrayType.length; i++) {
+  for (const element of arrayType) {
     // @ts-ignore
-    somStatByType += server.eventSpawn.type[arrayType[i]];
+    somStatByType += server.eventSpawn.type[element];
     if (randomNumber <= somStatByType) {
-      return arrayType[i];
+      return element;
     }
   }
 

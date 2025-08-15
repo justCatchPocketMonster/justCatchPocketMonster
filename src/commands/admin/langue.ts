@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
-import logger, {newLogger} from "../../middlewares/logger";
+import {newLogger} from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 

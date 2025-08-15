@@ -7,7 +7,7 @@ import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import {StatType} from "../../core/types/StatType";
 
-let code: { [key: string]: string[] } = {
+const code: { [key: string]: string[] } = {
   shiny: [],
 };
 
@@ -16,7 +16,10 @@ export function getCode() {
 }
 
 export function setCode(newCode: typeof code) {
-  code = newCode;
+  Object.keys(code).forEach(key => delete code[key]);
+  Object.entries(newCode).forEach(([key, value]) => {
+    code[key] = [...value];
+  });
 }
 export function updateArrayCode(stat : StatType) {
   let code = getCode();
@@ -51,7 +54,7 @@ export function codeListEmbed(user: UserType, server: ServerType, stat: StatType
   embed.setTitle(language("codeListEmbedTitle", server.language));
   embed.setDescription(language("codeListEmbedDescription", server.language));
 
-  for (const [key, value] of Object.entries(getCode())) {
+  for (const value of Object.values(getCode())) {
     value.forEach((code) => {
       if (user.enteredCode.includes(code)) {
         embed.addFields({

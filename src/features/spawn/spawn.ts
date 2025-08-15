@@ -14,7 +14,7 @@ import { getStatById, updateStat } from "../../cache/StatCache";
 import {nameStatGeneral, version} from "../../config/default/misc";
 import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 
-interface spawnData {
+interface SpawnData {
   embed: EmbedBuilder;
   image: AttachmentBuilder;
   channelId: string;
@@ -25,7 +25,7 @@ const spawnLocks = new Set<string>();
 export const spawn = async (
   idServer: string,
   idChannel: string,
-): Promise<spawnData | null | undefined> => {
+): Promise<SpawnData | null | undefined> => {
     if (spawnLocks.has(idServer)) return null;
     spawnLocks.add(idServer);
   try {
@@ -35,14 +35,14 @@ export const spawn = async (
 
 
 
-    let spawnData: spawnData | null = {
+    let SpawnData: SpawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
     };
 
-      if (!spawnData?.embed || !spawnData?.image || !spawnData?.channelId)
-      spawnData = null;
-    return spawnData;
+      if (!SpawnData?.embed || !SpawnData?.image || !SpawnData?.channelId)
+      SpawnData = null;
+    return SpawnData;
   } catch (e) {
     logger.error(e);
   } finally {
@@ -137,7 +137,7 @@ function generateEmbedPokemon(
 
   const color: ColorResolvable = colorByType(
     pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
-  ) as ColorResolvable;
+  );
 
   let pokeEmbed = new EmbedBuilder()
     .setColor(color)

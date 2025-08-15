@@ -5,18 +5,16 @@ import {updateServer} from "../../cache/ServerCache";
 import {capitalizeFirstLetter, deepCloneObject} from "../../utils/helperFunction";
 import getText from "../../lang/language";
 import {nbGeneration, nbType, valuePerType} from "../../config/default/spawn";
-import {genStat, typeStat} from "../../core/types/EventSpawnType";
+import {GenStat, TypeStat} from "../../core/types/EventSpawnType";
 import {EventSpawn} from "../../core/classes/EventSpawn";
 
 export const selectEvent =async (server: ServerType) => {
-  //let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
-  let randomEvent = eventData[10];
+  let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
   const event : EventType = {
     ...randomEvent,
     id: randomEvent.id.toString(),
     effectDescription: "",
     endTime: new Date(Date.now() + 30 * 1000),
-    // TODO: change endTime to a more appropriate value
   }
 
   const eventSpawn = EventSpawn.createDefault()
@@ -26,7 +24,6 @@ export const selectEvent =async (server: ServerType) => {
   effectEvent(eventSpawn, server);
     server.eventSpawn = deepCloneObject(eventSpawn);
   await updateServer(server.discordId, server);
-  return;
 };
 
 
@@ -129,14 +126,27 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
 
   function getLevel() {
     const rand = Math.floor(Math.random() * 100);
-    return rand >= 99 ? 3 : rand >= 70 ? 2 : 1;
+    let level: number;
+    if (rand >= 99) {
+      level = 3;
+    } else if (rand >= 70) {
+      level = 2;
+    } else {
+      level = 1;
+    }
+    return level;
   }
 
   function getDurationText(lvl: number) {
-    return getText(
-        lvl === 3 ? "pendantUneHeure" : lvl === 2 ? "pendantTrenteMinute" : "pendantQuinzeMinute",
-        server.language
-    );
+    let key: string;
+    if (lvl === 3) {
+      key = "pendantUneHeure";
+    } else if (lvl === 2) {
+      key = "pendantTrenteMinute";
+    } else {
+      key = "pendantQuinzeMinute";
+    }
+    return getText(key, server.language);
   }
 
   function getRandomGen() {
@@ -155,16 +165,16 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
 
   function adjustSpawnGen(prob: number, gen: string) {
     Object.keys(eventSpawn.gen).forEach((key) => {
-      eventSpawn.gen[key as keyof genStat] -= prob;
+      eventSpawn.gen[key as keyof GenStat] -= prob;
     });
-    eventSpawn.gen[gen as keyof genStat] += prob * nbGeneration;
+    eventSpawn.gen[gen as keyof GenStat] += prob * nbGeneration;
   }
 
   function adjustSpawnType(prob: number, type: string) {
     Object.keys(eventSpawn.type).forEach((key) => {
-      eventSpawn.type[key as keyof typeStat] -= prob;
+      eventSpawn.type[key as keyof TypeStat] -= prob;
     });
-    eventSpawn.type[type as keyof typeStat] += prob * nbType;
+    eventSpawn.type[type as keyof TypeStat] += prob * nbType;
   }
 
   function addDuration(ms: number) {
