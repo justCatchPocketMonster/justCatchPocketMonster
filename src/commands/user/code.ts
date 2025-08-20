@@ -37,7 +37,7 @@ export default {
     try {
       const stat = await getStatById(nameStatGeneral)
 
-      await updateArrayCode(stat)
+      updateArrayCode(stat)
       // @ts-ignore
       let codeEntered = interaction.options
         .getString(language("codeNameOptionString", "eng"))!

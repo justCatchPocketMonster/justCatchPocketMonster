@@ -10,7 +10,7 @@ export function eventShinyAfterCatch(
   let shinyEvent = isShiny;
 
   if (isShiny) {
-    if (Math.random() < 1 / 10000) {
+    if ( Math.random() < 1 / 10000) {
       shinyEvent = false;
       interaction.reply(language("finallyHesNotShiny", server.language));
     }

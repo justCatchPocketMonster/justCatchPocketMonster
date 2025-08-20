@@ -1,14 +1,14 @@
 import {createMockInteraction} from "../../../utils/mock/mockInteraction";
-import mongoose from "mongoose";
 import langue from "../../../../src/commands/admin/langue";
+import language from "../../../../src/lang/language";
+import {resetTestEnv} from "../../../utils/resetTestEnv";
+import {getServerById} from "../../../../src/cache/ServerCache";
 
 describe('language command', () => {
     let interaction: any;
     beforeEach(async () => {
-        const collections = mongoose.connection.collections;
-        for (const name of Object.keys(collections)) {
-            await collections[name].deleteMany({});
-        }
+        await resetTestEnv();
+
         interaction = createMockInteraction();
         (interaction.options.getSubcommand as jest.Mock).mockReturnValue('language');
     });
@@ -16,7 +16,28 @@ describe('language command', () => {
     afterAll(async () => {
     });
 
-    test('Should reply a message because it\'s a success', async () => {
+    test('Change language', async () => {
+        // given
+        (interaction.options.getString as jest.Mock).mockImplementation((name: string) => {
+            if (name === language("langNameOptionString", "eng")) return "fr";
+            return null;
+        });
+
+        // when
+        await langue.execute(interaction);
+
+        // then
+        const replyMock = interaction.reply as jest.Mock;
+        const serverThen = await getServerById(interaction.guild.id);
+
+        expect(replyMock).toHaveBeenCalledTimes(1);
+        expect(replyMock).toHaveBeenCalledWith({
+            content: language("langIsChanged", "fr"),
+        });
+        expect(serverThen.language).toBe("fr");
+    });
+
+    test('Failed to change language because no option', async () => {
         // given
 
         // when
@@ -24,7 +45,12 @@ describe('language command', () => {
 
         // then
         const replyMock = interaction.reply as jest.Mock;
+        const serverThen = await getServerById(interaction.guild.id);
 
         expect(replyMock).toHaveBeenCalledTimes(1);
+        expect(replyMock).toHaveBeenCalledWith({
+            content: language("langErrorNoOption", "fr"),
+        });
+        expect(serverThen.language).toBe("eng");
     });
 });

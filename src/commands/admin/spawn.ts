@@ -62,7 +62,6 @@ export default {
       const channel = channelOption ?? interaction.channel;
 
       const isAllowed = server.channelAllowed.includes(channel.id);
-
       if (isAllowed) {
         if (boolOption) {
           await interaction.reply({

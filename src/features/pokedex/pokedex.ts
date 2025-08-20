@@ -34,10 +34,7 @@ export function pokedex(
   let nbPageMax = 2;
   nbPageMax += Math.trunc(allPokemon[allPokemon.length-1].id/21);
 
-  if (isNaN(Number(pageChoice))) {
-    interaction.reply(language("ilFautUnNombre", server.language));
-    pageSelectedDefault = 1;
-  } else if (pageChoice > nbPageMax) {
+  if (pageChoice > nbPageMax) {
     interaction.reply(language("valeurTropHaute", server.language));
     pageSelectedDefault = 1;
   } else {

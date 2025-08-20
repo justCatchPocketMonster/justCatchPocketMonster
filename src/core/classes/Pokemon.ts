@@ -4,8 +4,7 @@ export class Pokemon implements PokemonType {
   constructor(
     public id: string,
     public name: {
-      nameEng: string[];
-      nameFr: string[];
+      [key: string]: string[];
     },
     public arrayType: string[],
     public rarity: string,

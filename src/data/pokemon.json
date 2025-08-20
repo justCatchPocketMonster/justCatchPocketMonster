@@ -2579,36 +2579,10 @@
       "nameEng": ["Tauros"],
       "nameFr": ["Tauros"]
     },
-    "arrayType": ["fighting"],
+    "arrayType": ["fighting", "fire", "Water"],
     "rarity": "ordinary",
     "gen": 1,
     "imgName": "0128-000-paldea",
-    "form": "paldea",
-    "versionForm": 1
-  },
-  {
-    "id": 128,
-    "name": {
-      "nameEng": ["Tauros"],
-      "nameFr": ["Tauros"]
-    },
-    "arrayType": ["fighting", "fire"],
-    "rarity": "ordinary",
-    "gen": 1,
-    "imgName": "0128-001-paldea",
-    "form": "paldea",
-    "versionForm": 1
-  },
-  {
-    "id": 128,
-    "name": {
-      "nameEng": ["Tauros"],
-      "nameFr": ["Tauros"]
-    },
-    "arrayType": ["fighting", "Water"],
-    "rarity": "ordinary",
-    "gen": 1,
-    "imgName": "0128-002-paldea",
     "form": "paldea",
     "versionForm": 1
   },
@@ -6830,7 +6804,7 @@
       "nameEng": ["Castform"],
       "nameFr": ["Morphéo"]
     },
-    "arrayType": ["normal"],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0351-001",
@@ -6843,7 +6817,7 @@
       "nameEng": ["Castform"],
       "nameFr": ["Morphéo"]
     },
-    "arrayType": ["normal"],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0351-002",
@@ -6856,51 +6830,12 @@
       "nameEng": ["Castform"],
       "nameFr": ["Morphéo"]
     },
-    "arrayType": ["normal"],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0351-003",
     "form": "ordinary",
     "versionForm": 4
-  },
-  {
-    "id": 351,
-    "name": {
-      "nameEng": ["Castform"],
-      "nameFr": ["Morphéo"]
-    },
-    "arrayType": ["normal", "fire"],
-    "rarity": "ordinary",
-    "gen": 3,
-    "imgName": "0351-001",
-    "form": "ordinary",
-    "versionForm": 1
-  },
-  {
-    "id": 351,
-    "name": {
-      "nameEng": ["Castform"],
-      "nameFr": ["Morphéo"]
-    },
-    "arrayType": ["normal", "Water"],
-    "rarity": "ordinary",
-    "gen": 3,
-    "imgName": "0351-002",
-    "form": "ordinary",
-    "versionForm": 1
-  },
-  {
-    "id": 351,
-    "name": {
-      "nameEng": ["Castform"],
-      "nameFr": ["Morphéo"]
-    },
-    "arrayType": ["normal", "ice"],
-    "rarity": "ordinary",
-    "gen": 3,
-    "imgName": "0351-003",
-    "form": "ordinary",
-    "versionForm": 1
   },
   {
     "id": 352,
@@ -8057,7 +7992,7 @@
     "gen": 4,
     "imgName": "0413-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 413,
@@ -8070,7 +8005,7 @@
     "gen": 4,
     "imgName": "0413-002",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 3
   },
   {
     "id": 414,
@@ -9279,7 +9214,7 @@
     "gen": 4,
     "imgName": "0479-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 479,
@@ -9292,7 +9227,7 @@
     "gen": 4,
     "imgName": "0479-002",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 3
   },
   {
     "id": 479,
@@ -9305,7 +9240,7 @@
     "gen": 4,
     "imgName": "0479-003",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 4
   },
   {
     "id": 479,
@@ -9318,7 +9253,7 @@
     "gen": 4,
     "imgName": "0479-004",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 5
   },
   {
     "id": 479,
@@ -9331,7 +9266,7 @@
     "gen": 4,
     "imgName": "0479-005",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 6
   },
   {
     "id": 480,
@@ -9526,7 +9461,7 @@
     "gen": 4,
     "imgName": "0492-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 493,
@@ -10670,7 +10605,7 @@
     "gen": 5,
     "imgName": "0555-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 555,
@@ -10683,7 +10618,7 @@
     "gen": 5,
     "imgName": "0555-001-galar",
     "form": "galar",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 556,
@@ -12152,7 +12087,7 @@
     "gen": 5,
     "imgName": "0648-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 649,
@@ -13751,7 +13686,7 @@
     "gen": 6,
     "imgName": "0720-001",
     "form": "ordinary",
-    "versionForm": 1
+    "versionForm": 2
   },
   {
     "id": 721,

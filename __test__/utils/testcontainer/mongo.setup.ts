@@ -4,7 +4,7 @@ import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 let container: StartedTestContainer;
 
 beforeAll(async () => {
-    container = await new GenericContainer('mongo:7')
+    container = await new GenericContainer('mongo:latest')
         .withExposedPorts(27017)
         .withWaitStrategy(Wait.forLogMessage('Waiting for connections'))
         .start();

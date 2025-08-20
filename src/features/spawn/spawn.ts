@@ -31,6 +31,7 @@ export const spawn = async (
   try {
     const server = await getServerById(idServer);
     const channelId = choiceChannel(server, idChannel);
+
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
 
 
@@ -117,7 +118,6 @@ async function choiceTypeOfSpawn(
     await updateServer(server.discordId, server);
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
-    console.log(pokemonChoice);
     return generateEmbedPokemon(pokemonChoice, server);
 
 }

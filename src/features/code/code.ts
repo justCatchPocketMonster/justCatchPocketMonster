@@ -15,38 +15,42 @@ export function getCode() {
   return code;
 }
 
-export function setCode(newCode: typeof code) {
-  Object.keys(code).forEach(key => delete code[key]);
-  Object.entries(newCode).forEach(([key, value]) => {
-    code[key] = [...value];
-  });
+export function setCode(newCode: Record<string, string[]>) {
+  const snapshot: Record<string, string[]> = {};
+  for (const [k, v] of Object.entries(newCode)) {
+    snapshot[k] = Array.from(v);
+  }
+  for (const k of Object.keys(code)) {
+    delete code[k];
+  }
+  for (const [k, v] of Object.entries(snapshot)) {
+    code[k] = v;
+  }
 }
-export function updateArrayCode(stat : StatType) {
-  let code = getCode();
-  for (let key in eventCode) {
-    code[key] = JSON.parse(JSON.stringify(eventCode[key]));
-  }
-  let palierChoiceSpawn = null;
-  let palierChoiceCatch = null;
-  landings.forEach((landing) => {
-    if (stat.pokemonSpawned >= landing) {
-      palierChoiceSpawn = landing;
-    }
-  });
+export function updateArrayCode(stat: StatType) {
+  const current = getCode();
 
-  landings.forEach((landing) => {
-    if (stat.pokemonCaught >= landing) {
-      palierChoiceCatch = landing;
-    }
-  });
+  const next: Record<string, string[]> = {};
+  for (const [k, v] of Object.entries(current)) next[k] = [...v];
 
-  if (palierChoiceSpawn) {
-    code.shiny.push("SPAWNS" + palierChoiceSpawn);
+  for (const [k, v] of Object.entries(eventCode)) {
+    const existing = next[k] ?? [];
+    next[k] = Array.from(new Set([...existing, ...v]));
   }
-  if (palierChoiceCatch) {
-    code.shiny.push("CATCHS" + palierChoiceCatch);
+
+  let palierChoiceSpawn: number | null = null;
+  let palierChoiceCatch: number | null = null;
+
+  for (const landing of landings) {
+    if (stat.pokemonSpawned >= landing) palierChoiceSpawn = landing;
+    if (stat.pokemonCaught  >= landing) palierChoiceCatch = landing;
   }
-  setCode(code);
+
+  next.shiny ??= [];
+  if (palierChoiceSpawn) next.shiny.push(`SPAWNS${palierChoiceSpawn}`);
+  if (palierChoiceCatch) next.shiny.push(`CATCHS${palierChoiceCatch}`);
+
+  setCode(next);
 }
 export function codeListEmbed(user: UserType, server: ServerType, stat: StatType) {
   updateArrayCode(stat)
@@ -74,4 +78,4 @@ export function codeListEmbed(user: UserType, server: ServerType, stat: StatType
   return embed;
 }
 
-export { activeCode, code, codeType };
+export { activeCode, codeType };

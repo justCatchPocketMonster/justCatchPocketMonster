@@ -4,7 +4,7 @@ import { Server } from "../core/classes/Server";
 import { type ServerType } from "../core/types/ServerType";
 import {ttlCache} from "../config/default/misc";
 
-const cache = new NodeCache({ stdTTL: ttlCache });
+export const cache = new NodeCache({ stdTTL: ttlCache });
 
 export async function getServerById(serverId: string): Promise<Server> {
   const cached = cache.get<Server>(serverId);

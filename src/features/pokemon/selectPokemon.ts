@@ -9,6 +9,14 @@ import {
   valuePerType,
 } from "../../config/default/spawn";
 import {pokemonDb} from "../../core/types/pokemonDb";
+import {initHint} from "../hint/initHint";
+import {capitalizeFirstLetter} from "../../utils/helperFunction";
+export const __deps = {
+  generationSelect,
+  raritySelect,
+  typeSelect,
+};
+
 
 export const selectPokemon = (
   server: ServerType,
@@ -154,7 +162,7 @@ function selectRandomPokemon(
   let pokemonPassGen: pokemonDb[];
   let generation: string;
   do {
-    generation = generationSelect(server);
+    generation = __deps.generationSelect(server);
     pokemonPassGen = allowedPokemon.filter(
       (pokemon) => pokemon.gen === Number(generation),
     );
@@ -162,7 +170,7 @@ function selectRandomPokemon(
   let pokemonPassRarity: pokemonDb[];
   let rarity: string;
   do {
-    rarity = raritySelect(server);
+    rarity = __deps.raritySelect(server);
     pokemonPassRarity = pokemonPassGen.filter(
       (pokemon) => pokemon.rarity === rarity,
     );
@@ -170,7 +178,7 @@ function selectRandomPokemon(
   let pokemonPassType: pokemonDb[];
   let type: string;
   do {
-    type = typeSelect(server);
+    type = __deps.typeSelect(server);
     pokemonPassType = pokemonPassRarity.filter((pokemon) =>
       pokemon.arrayType.includes(type),
     );
@@ -189,7 +197,7 @@ function selectRandomPokemon(
     form: randomPokemon.form,
     versionForm: randomPokemon.versionForm,
     isShiny: false,
-    hint: "",
+    hint: initHint(randomPokemon.name["name" + capitalizeFirstLetter(server.language)][0]),
   };
 }
 
@@ -237,5 +245,7 @@ function typeSelect(server: ServerType): string {
     }
   }
 
+
   return "errorType";
 }
+

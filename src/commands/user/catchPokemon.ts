@@ -38,7 +38,7 @@ export default {
 
       const user = await getUserById(interaction.user.id);
       const server = await getServerById(interaction.guild.id);
-      catchPokemon(
+      await catchPokemon(
         user,
         server,
         interaction.channelId,

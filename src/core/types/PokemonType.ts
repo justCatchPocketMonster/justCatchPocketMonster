@@ -1,8 +1,7 @@
 export interface PokemonType {
   id: string;
   name: {
-    nameEng: string[];
-    nameFr: string[];
+    [key: string]: string[];
   };
   arrayType: string[];
   rarity: string;

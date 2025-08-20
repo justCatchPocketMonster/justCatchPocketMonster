@@ -54,22 +54,24 @@ export async function catchPokemon(
     server,
   );
   pokemon.isShiny = shinyAfterEvent;
-
   const statVersion = await getStatById(version);
   const statAll = await getStatById(nameStatGeneral);
 
-  statVersion.addCatch(pokemon);
-  statAll.addCatch(pokemon);
-
-
+  statVersion.savePokemonCatch.addOneCatch(pokemon);
+  statAll.savePokemonCatch.addOneCatch(pokemon);
   user.savePokemon.addOneCatch(pokemon);
   server.savePokemon.addOneCatch(pokemon);
 
   server.removePokemonByIdChannel(idChannel);
-  await updateStat(version, statVersion);
-  await updateStat(nameStatGeneral, statAll);
+  try{
   await updateUser(user.discordId, user);
   await updateServer(server.discordId, server);
+  await updateStat(version, statVersion);
+  await updateStat(nameStatGeneral, statAll);
+
+    } catch (e){
+    console.error("Error updating caches after catching a Pokémon:", e);
+  }
 
   const getPokemonData = allPokemon.filter(
     (poke) => poke.id.toString() === pokemon.id && poke.form === pokemon.form && poke.versionForm === pokemon.versionForm,
@@ -91,7 +93,7 @@ export async function catchPokemon(
 }
 
 export function generateCatchMessage(
-  pokemon: { name: { nameFr: string[]; nameEng: string[] }; isShiny?: boolean },
+  pokemon: { name: { [key: string]: string[] }; isShiny?: boolean },
   memberDisplayName: string,
   user: UserType,
   server: ServerType,

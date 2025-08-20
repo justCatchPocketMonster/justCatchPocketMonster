@@ -27,8 +27,12 @@ export function createMockInteraction(): ChatInputCommandInteraction {
         channel: {
             id: "1234567890",
         },
-        member: {} as GuildMember,
+        member: {
+            displayName: "Test Member",
+            nickname: "TestNick",
+        } as GuildMember,
         guildId: "654321",
+        channelId: "1234567890",
         options: {
             getString: jest.fn(),
             getNumber: jest.fn(),

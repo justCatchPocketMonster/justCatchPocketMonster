@@ -2,7 +2,7 @@ import {BaseGuildTextChannel, Client, Message} from "discord.js";
 import {newLogger} from "../middlewares/logger";
 import {spawn} from "../features/spawn/spawn";
 
-export default async (client: Client, message: Message<boolean>) => {
+export default async (client: Client, message: Message) => {
   try {
     if (message.author.bot) {
       return;

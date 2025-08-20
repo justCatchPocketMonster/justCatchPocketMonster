@@ -7,6 +7,7 @@ import {newLogger} from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import {createHint} from "../../features/hint/createHint";
+import {capitalizeFirstLetter} from "../../utils/helperFunction";
 
 export default {
   name: "hint",
@@ -50,14 +51,17 @@ export default {
       ) {
         server.pokemonPresent[channel.id].hint = createHint(
           server.pokemonPresent[channel.id].hint,
-          server.pokemonPresent[channel.id].name.nameEng[0],
+          server.pokemonPresent[channel.id].name["name"+capitalizeFirstLetter(server.language)][0],
         );
         await updateServer(server.discordId, server);
+        interaction.reply({
+          content: language("hintIs", server.language)+server.pokemonPresent[channel.id].hint+" "+language("forChannel", server.language)+channel.toString()
+        });
         return;
       }
 
       interaction.reply({
-        content: language(interaction.guildId, "noHint"),
+        content: language("noHint", server.language),
         ephemeral: true,
       });
       return;
