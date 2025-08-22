@@ -47,7 +47,7 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     "6": () => handleShinyEvent([1.25, 1.5, 2]),
     "7": () => handleFormEvent("mega", "auraMega", [DURATIONS.fifteenMin, DURATIONS.halfHour, DURATIONS.oneHour]),
     "8": () => handleMaxMinMessageEvent([3, 2, 1], [15, 10, 5], "auraEncen"),
-    "9": () => handleMaxMinMessageEvent([5, 7, 10], [20, 30, 40], "auraRepousse"),
+    "9": () => handleMaxMinMessageEvent([6, 8, 10], [22, 30, 40], "auraRepousse"),
     "10": () => handleTimeBasedEvent("nightMode", "auraNuit", [DURATIONS.fifteenMin, DURATIONS.halfHour, DURATIONS.oneHour]),
     "11": () => handleEggEvent([200, 100, 50]),
   };
