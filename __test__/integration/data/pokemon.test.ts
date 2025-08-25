@@ -1,7 +1,6 @@
 import allPokemon from "../../../src/data/pokemon.json";
 import {pokemonDb} from "../../../src/core/types/pokemonDb";
-import path from "node:path";
-import * as fs from "node:fs";
+
 import {urlImageRepo} from "../../../src/config/default/misc";
 describe('test all data pokemon', () => {
     for (const pokemon of allPokemon) {
@@ -33,5 +32,8 @@ describe('test all data pokemon', () => {
 
 async function imageExists(url: string): Promise<boolean> {
     const response = await fetch(url, { method: 'HEAD' });
+    if(!response.ok){
+        console.log(`Image not found: ${url}`);
+    }
     return response.ok;
 }
