@@ -2,10 +2,11 @@ import allPokemon from "../../../src/data/pokemon.json";
 import {pokemonDb} from "../../../src/core/types/pokemonDb";
 import path from "node:path";
 import * as fs from "node:fs";
+import {urlImageRepo} from "../../../src/config/default/misc";
 describe('test all data pokemon', () => {
     for (const pokemon of allPokemon) {
         if (pokemon.id === 0) {continue}
-        test(`Check pokemon ${pokemon.name.nameEng[0]}`, () => {
+        test(`Check pokemon ${pokemon.name.nameEng[0]}`, async () => {
             expect(pokemon.id).toBeDefined();
             expect(pokemon.name).toBeDefined();
             expect(pokemon.name.nameEng).toBeDefined();
@@ -22,13 +23,15 @@ describe('test all data pokemon', () => {
             );
 
             expect(pokemonWithSameData.length).toBe(1);
-
-            const imagePath = path.join(__dirname, "../../../src/assets/pokeHome", pokemon.imgName+".png");
-            const imageExists = fs.existsSync(imagePath);
-            expect(imageExists).toBe(true);
-            const imagePathShiny = path.join(__dirname, "../../../src/assets/pokeHome", pokemon.imgName+"-shiny.png");
-            const imageExistsShiny = fs.existsSync(imagePathShiny);
-            expect(imageExistsShiny).toBe(true);
+            expect(await imageExists(urlImageRepo+"/pokeHome/"+pokemon.imgName+".png")).toBe(true);
+            expect(await imageExists(urlImageRepo+"/pokeHome/"+pokemon.imgName+"-shiny.png")).toBe(true);
+            expect(await imageExists(urlImageRepo+"/pokeHomeShadow/"+pokemon.imgName+".png")).toBe(true);
+            expect(await imageExists(urlImageRepo+"/pokeHomeShadow/"+pokemon.imgName+"-shiny.png")).toBe(true);
         });
     }
 });
+
+async function imageExists(url: string): Promise<boolean> {
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
+}
