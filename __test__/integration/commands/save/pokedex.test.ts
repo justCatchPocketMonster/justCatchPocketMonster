@@ -1,5 +1,4 @@
 import { createMockInteraction } from "../../../utils/mock/mockInteraction";
-import mongoose from "mongoose";
 import pokedex from "../../../../src/commands/save/pokedex";
 import language from "../../../../src/lang/language";
 import { getUserById, updateUser } from "../../../../src/cache/UserCache";

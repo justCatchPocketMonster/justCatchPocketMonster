@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import effect from "../../../../src/commands/server/effect";
 import { createMockInteraction } from "../../../utils/mock/mockInteraction";
 import { Event } from "../../../../src/core/classes/Event";

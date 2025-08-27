@@ -1,6 +1,5 @@
 import { createMockInteraction } from "../../../utils/mock/mockInteraction";
 import howMuchThisPokemon from "../../../../src/commands/save/howMuchThisPokemon";
-import mongoose from "mongoose";
 import language from "../../../../src/lang/language";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 

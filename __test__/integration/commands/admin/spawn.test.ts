@@ -1,9 +1,7 @@
 import { createMockInteraction } from "../../../utils/mock/mockInteraction";
 import spawn from "../../../../src/commands/admin/spawn";
-import mongoose from "mongoose";
 import language from "../../../../src/lang/language";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
-import { cache as serverCache } from "../../../../src/cache/ServerCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 
 describe("spawn command", () => {

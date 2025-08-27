@@ -1,11 +1,7 @@
 import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
-import {
-  AttachmentBuilder,
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { SaveOnePokemon } from "../../core/classes/SaveOnePokemon";
 import { capitalizeFirstLetter, colorByType } from "../../utils/helperFunction";
