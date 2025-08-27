@@ -1,11 +1,11 @@
-import {activeCode} from "./activeCode";
-import {codeType} from "./codeType";
+import { activeCode } from "./activeCode";
+import { codeType } from "./codeType";
 import { eventCode, landings } from "../../config/default/code";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
 import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
-import {StatType} from "../../core/types/StatType";
+import { StatType } from "../../core/types/StatType";
 
 const code: { [key: string]: string[] } = {
   shiny: [],
@@ -43,7 +43,7 @@ export function updateArrayCode(stat: StatType) {
 
   for (const landing of landings) {
     if (stat.pokemonSpawned >= landing) palierChoiceSpawn = landing;
-    if (stat.pokemonCaught  >= landing) palierChoiceCatch = landing;
+    if (stat.pokemonCaught >= landing) palierChoiceCatch = landing;
   }
 
   next.shiny ??= [];
@@ -52,8 +52,12 @@ export function updateArrayCode(stat: StatType) {
 
   setCode(next);
 }
-export function codeListEmbed(user: UserType, server: ServerType, stat: StatType) {
-  updateArrayCode(stat)
+export function codeListEmbed(
+  user: UserType,
+  server: ServerType,
+  stat: StatType,
+) {
+  updateArrayCode(stat);
   const embed = new EmbedBuilder();
   embed.setTitle(language("codeListEmbedTitle", server.language));
   embed.setDescription(language("codeListEmbedDescription", server.language));

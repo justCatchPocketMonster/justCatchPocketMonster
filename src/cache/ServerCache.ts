@@ -2,7 +2,7 @@ import NodeCache from "node-cache";
 import { Server as ServerModel } from "../core/schemas/Server";
 import { Server } from "../core/classes/Server";
 import { type ServerType } from "../core/types/ServerType";
-import {ttlCache} from "../config/default/misc";
+import { ttlCache } from "../config/default/misc";
 
 export const cache = new NodeCache({ stdTTL: ttlCache });
 
@@ -10,11 +10,13 @@ export async function getServerById(serverId: string): Promise<Server> {
   const cached = cache.get<Server>(serverId);
   if (cached) return cached;
 
-  const data = await ServerModel.findOne({ discordId: serverId }).lean<ServerType>();
+  const data = await ServerModel.findOne({
+    discordId: serverId,
+  }).lean<ServerType>();
   if (!data) {
     const defaultServer = Server.createDefault(serverId);
     cache.set(serverId, defaultServer);
-    await updateServer(serverId, defaultServer)
+    await updateServer(serverId, defaultServer);
     return defaultServer;
   }
 
@@ -29,9 +31,9 @@ export async function updateServer(
 ): Promise<Server> {
   cache.set(serverId, update);
   await ServerModel.findOneAndUpdate(
-      { discordId: serverId },
-      { $set: { ...update, discordId: serverId } },
-      { upsert: true, new: true }
+    { discordId: serverId },
+    { $set: { ...update, discordId: serverId } },
+    { upsert: true, new: true },
   ).lean<ServerType>();
 
   return update as Server;

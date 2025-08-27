@@ -1,8 +1,8 @@
 import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
-import {EventType} from "../../core/types/EventType";
-import {selectEggPokemon, selectPokemon} from "../pokemon/selectPokemon";
-import {selectEvent} from "../event/selectEvent";
+import { EventType } from "../../core/types/EventType";
+import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
+import { selectEvent } from "../event/selectEvent";
 import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
@@ -11,8 +11,12 @@ import { valueMaxChoiceEvent } from "../../config/default/spawn";
 import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import {nameStatGeneral, urlImageRepo, version} from "../../config/default/misc";
-import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
+import {
+  nameStatGeneral,
+  urlImageRepo,
+  version,
+} from "../../config/default/misc";
+import { checkTimeForResetEventStat } from "../event/checkTimeForResetEventStat";
 
 interface SpawnData {
   embed: EmbedBuilder;
@@ -26,42 +30,37 @@ export const spawn = async (
   idServer: string,
   idChannel: string,
 ): Promise<SpawnData | null | undefined> => {
-    if (spawnLocks.has(idServer)) return null;
-    spawnLocks.add(idServer);
+  if (spawnLocks.has(idServer)) return null;
+  spawnLocks.add(idServer);
   try {
     const server = await getServerById(idServer);
     const channelId = choiceChannel(server, idChannel);
 
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
 
-
-
     let SpawnData: SpawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
     };
 
-      if (!SpawnData?.embed || !SpawnData?.channelId)
-      SpawnData = null;
+    if (!SpawnData?.embed || !SpawnData?.channelId) SpawnData = null;
     return SpawnData;
   } catch (e) {
     logger.error(e);
   } finally {
-      spawnLocks.delete(idServer);
+    spawnLocks.delete(idServer);
   }
 };
 
-
 async function hasReachedSpawnLimit(server: ServerType): Promise<boolean> {
-    initMaxCount(server);
-    server.countMessage++;
+  initMaxCount(server);
+  server.countMessage++;
 
-    const reached = server.countMessage >= server.maxCountMessage;
+  const reached = server.countMessage >= server.maxCountMessage;
 
-    await updateServer(server.discordId, server);
-    return reached;
+  await updateServer(server.discordId, server);
+  return reached;
 }
-
 
 function initMaxCount(server: ServerType): void {
   if (
@@ -91,35 +90,34 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
-): Promise<{ embed: EmbedBuilder}> {
-    await checkTimeForResetEventStat(server)
-    const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
-    if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
-      await selectEvent(server);
-        if(server.eventSpawn.whatEvent) {
-            return generateEmbedEvent(server.eventSpawn.whatEvent, server);
-        }
+): Promise<{ embed: EmbedBuilder }> {
+  await checkTimeForResetEventStat(server);
+  const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
+  if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
+    await selectEvent(server);
+    if (server.eventSpawn.whatEvent) {
+      return generateEmbedEvent(server.eventSpawn.whatEvent, server);
     }
-    const isEgg =
-      0 == Math.floor(Math.random() * server.eventSpawn.valueMaxChoiceEgg);
-    let pokemonChoice: PokemonType
-    if (isEgg) {
-        pokemonChoice = selectEggPokemon(server, 0);
-    } else {
-        pokemonChoice = selectPokemon(server, 0);
-    }
-    server.pokemonPresent[idChannel] = pokemonChoice;
-    const statVersion = await getStatById(version);
-    const statAll = await getStatById(nameStatGeneral);
+  }
+  const isEgg =
+    0 == Math.floor(Math.random() * server.eventSpawn.valueMaxChoiceEgg);
+  let pokemonChoice: PokemonType;
+  if (isEgg) {
+    pokemonChoice = selectEggPokemon(server, 0);
+  } else {
+    pokemonChoice = selectPokemon(server, 0);
+  }
+  server.pokemonPresent[idChannel] = pokemonChoice;
+  const statVersion = await getStatById(version);
+  const statAll = await getStatById(nameStatGeneral);
 
-    statVersion.addSpawn(pokemonChoice as Pokemon);
-    statAll.addSpawn(pokemonChoice as Pokemon);
+  statVersion.addSpawn(pokemonChoice as Pokemon);
+  statAll.addSpawn(pokemonChoice as Pokemon);
 
-    await updateServer(server.discordId, server);
-    await updateStat(version, statVersion);
-    await updateStat(nameStatGeneral, statAll);
-    return generateEmbedPokemon(pokemonChoice, server);
-
+  await updateServer(server.discordId, server);
+  await updateStat(version, statVersion);
+  await updateStat(nameStatGeneral, statAll);
+  return generateEmbedPokemon(pokemonChoice, server);
 }
 
 function generateEmbedPokemon(
@@ -129,9 +127,9 @@ function generateEmbedPokemon(
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
 
   const imageName: string = pokemon.imgName + suffix;
-    const imageUrl = server.eventSpawn.nightMode
-        ? urlImageRepo+"/pokeHomeShadow/"+imageName
-        : urlImageRepo+"/pokeHome/"+imageName;
+  const imageUrl = server.eventSpawn.nightMode
+    ? urlImageRepo + "/pokeHomeShadow/" + imageName
+    : urlImageRepo + "/pokeHome/" + imageName;
 
   const color: ColorResolvable = colorByType(
     pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
@@ -144,7 +142,7 @@ function generateEmbedPokemon(
     .setImage(imageUrl);
 
   return {
-    embed: pokeEmbed
+    embed: pokeEmbed,
   };
 }
 

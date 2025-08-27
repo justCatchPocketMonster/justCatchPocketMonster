@@ -25,17 +25,16 @@ export class Pokemon implements PokemonType {
   }
   static from(raw: Partial<PokemonType>): Pokemon {
     return new Pokemon(
-        raw.id ?? "",
-        raw.name ?? { nameEng: [], nameFr: [] },
-        raw.arrayType ?? [],
-        raw.rarity ?? "",
-        raw.imgName ?? "",
-        raw.gen ?? 0,
-        raw.form ?? "",
-        raw.versionForm ?? 0,
-        raw.isShiny ?? false,
-        raw.hint ?? ""
+      raw.id ?? "",
+      raw.name ?? { nameEng: [], nameFr: [] },
+      raw.arrayType ?? [],
+      raw.rarity ?? "",
+      raw.imgName ?? "",
+      raw.gen ?? 0,
+      raw.form ?? "",
+      raw.versionForm ?? 0,
+      raw.isShiny ?? false,
+      raw.hint ?? "",
     );
   }
-
 }

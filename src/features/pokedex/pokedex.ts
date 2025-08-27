@@ -8,8 +8,11 @@ import { ServerType } from "../../core/types/ServerType";
 import { paginationButton } from "../other/paginationButton";
 import language from "../../lang/language";
 import allPokemon from "../../data/pokemon.json";
-import {pokemonDb} from "../../core/types/pokemonDb";
-import {capitalizeFirstLetter, getPercentage} from "../../utils/helperFunction";
+import { pokemonDb } from "../../core/types/pokemonDb";
+import {
+  capitalizeFirstLetter,
+  getPercentage,
+} from "../../utils/helperFunction";
 
 interface OneFieldEmbed {
   name: string;
@@ -21,7 +24,7 @@ export function pokedex(
   interaction: ChatInputCommandInteraction,
   user: UserType,
   server: ServerType,
-  pageChoice: number|null
+  pageChoice: number | null,
 ) {
   const maxPokemonParPage = 21;
   const listPokemon = [];
@@ -32,7 +35,7 @@ export function pokedex(
 
   let nbPage = 1;
   let nbPageMax = 2;
-  nbPageMax += Math.trunc(allPokemon[allPokemon.length-1].id/21);
+  nbPageMax += Math.trunc(allPokemon[allPokemon.length - 1].id / 21);
 
   if (pageChoice > nbPageMax) {
     interaction.reply(language("valeurTropHaute", server.language));
@@ -41,7 +44,9 @@ export function pokedex(
     pageSelectedDefault = pageChoice;
   }
 
-  const avatar = interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
+  const avatar =
+    interaction.user.avatarURL() ??
+    "https://cdn.discordapp.com/embed/avatars/0.png";
 
   let memberDisplayName: string;
   const member = interaction.member as GuildMember;
@@ -65,7 +70,10 @@ export function pokedex(
           "/" +
           allPokemon[allPokemon.length - 1]["id"] +
           " - " +
-          getPercentage(user.savePokemon.countUniquePokemonsCaught(), allPokemon[allPokemon.length - 1]["id"]) +
+          getPercentage(
+            user.savePokemon.countUniquePokemonsCaught(),
+            allPokemon[allPokemon.length - 1]["id"],
+          ) +
           "%",
         inline: true,
       },
@@ -76,7 +84,10 @@ export function pokedex(
           "/" +
           allPokemon[allPokemon.length - 1]["id"] +
           " - " +
-            getPercentage(user.savePokemon.countUniquePokemonsShinyCaught(), allPokemon[allPokemon.length - 1]["id"]) +
+          getPercentage(
+            user.savePokemon.countUniquePokemonsShinyCaught(),
+            allPokemon[allPokemon.length - 1]["id"],
+          ) +
           "%",
         inline: true,
       },
@@ -87,7 +98,10 @@ export function pokedex(
           "/" +
           allPokemon[allPokemon.length - 1]["id"] +
           " - " +
-            getPercentage(server.savePokemon.countUniquePokemonsCaught(), allPokemon[allPokemon.length - 1]["id"]) +
+          getPercentage(
+            server.savePokemon.countUniquePokemonsCaught(),
+            allPokemon[allPokemon.length - 1]["id"],
+          ) +
           "%",
         inline: true,
       },
@@ -99,17 +113,22 @@ export function pokedex(
 
   arrayEmbed.push({ page: mainPage });
   nbPage++;
-  for (let y = 0; y <= (allPokemon[allPokemon.length-1].id); y+=maxPokemonParPage) {
-
+  for (
+    let y = 0;
+    y <= allPokemon[allPokemon.length - 1].id;
+    y += maxPokemonParPage
+  ) {
     const pokeSave = buildPokedexEmbed(interaction, user, server);
     const start = 1 + maxPokemonParPage * (nbPage - 2);
     const end = maxPokemonParPage * (nbPage - 1);
 
     for (let i = start; i <= end; i++) {
-      const pokemonData: pokemonDb|undefined = allPokemon.find((pokemon) => pokemon.id === i,);
+      const pokemonData: pokemonDb | undefined = allPokemon.find(
+        (pokemon) => pokemon.id === i,
+      );
       if (!pokemonData) continue;
 
-      const field = buildPokemonField(pokemonData,user, server, interaction);
+      const field = buildPokemonField(pokemonData, user, server, interaction);
       listPokemon.push(field);
     }
 
@@ -122,18 +141,23 @@ export function pokedex(
   }
 
   paginationButton(interaction, arrayEmbed, pageSelectedDefault);
-
 }
 
-
-function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: ServerType, interaction: ChatInputCommandInteraction) {
+function buildPokemonField(
+  pokemonData: pokemonDb,
+  user: UserType,
+  server: ServerType,
+  interaction: ChatInputCommandInteraction,
+) {
   const emotePokeballDark = "<:pokeballDark:981974919212572682>";
   const emotePokeballLight = "<:pokeballLight:981974905568522331>";
   const emotePokeballShiny = "<:pokeballShinyStar:1005992732541603960>";
   const emoteMegaDark = "<:MegaVide:1141440546032853062> ";
   const emoteMega = "<:MEGA:1139228792989155359>";
   const emoteMegaShiny = "<:shinyMega:1141440293409923123>";
-  const savePokemon = user.savePokemon.getSaveOnePokemonFusedForm(pokemonData.id.toString());
+  const savePokemon = user.savePokemon.getSaveOnePokemonFusedForm(
+    pokemonData.id.toString(),
+  );
 
   let emote = emotePokeballDark;
   let value = language("noCatch", server.language);
@@ -147,12 +171,12 @@ function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: Serve
   }
 
   let field = {
-    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name"+capitalizeFirstLetter(server.language)] : "?????"}  ${emote}`,
+    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name" + capitalizeFirstLetter(server.language)] : "?????"}  ${emote}`,
 
     value: value,
     inline: true,
   };
-/** TOTO: form after
+  /** TOTO: form after
   const saveMega = pokemonForm.getSaveByForm(interaction.member.id, "mega");
   if (saveMega.hasOwnProperty(index + "")) {
     const megaData = saveMega[index];
@@ -169,49 +193,58 @@ function buildPokemonField(pokemonData: pokemonDb, user: UserType, server: Serve
   return field;
 }
 
-function buildPokedexEmbed(interaction: ChatInputCommandInteraction, user:UserType, server: ServerType) {
-
-  const avatar = interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
+function buildPokedexEmbed(
+  interaction: ChatInputCommandInteraction,
+  user: UserType,
+  server: ServerType,
+) {
+  const avatar =
+    interaction.user.avatarURL() ??
+    "https://cdn.discordapp.com/embed/avatars/0.png";
 
   return new EmbedBuilder()
-      .setThumbnail(avatar)
-      .setColor("#0099FF")
-      .setDescription("\u200B")
-      .setTitle(
-          language("pokedexOf", server.language) +
-          interaction.user.username,
-      )
-      .addFields(
-          {
-            name: language("nationalDex", server.language),
-            value:
-                user.savePokemon.countUniquePokemonsCaught() +
-                "/" +
-                allPokemon[allPokemon.length - 1]["id"] +
-                " - " +
-                getPercentage(server.savePokemon.countUniquePokemonsCaught(), allPokemon[allPokemon.length - 1]["id"]) +
-                "%",
-            inline: true,
-          },
-          {
-            name: language("shinyDex", server.language),
-            value:
-                user.savePokemon.countUniquePokemonsShinyCaught() +
-                "/" +
-                allPokemon[allPokemon.length - 1]["id"] +
-                " - " +
-                getPercentage(server.savePokemon.countUniquePokemonsShinyCaught(), allPokemon[allPokemon.length - 1]["id"]) +
-                "%",
-            inline: true,
-          },
-          { name: "\u200B", value: "\u200B", inline: false },
-      );
+    .setThumbnail(avatar)
+    .setColor("#0099FF")
+    .setDescription("\u200B")
+    .setTitle(
+      language("pokedexOf", server.language) + interaction.user.username,
+    )
+    .addFields(
+      {
+        name: language("nationalDex", server.language),
+        value:
+          user.savePokemon.countUniquePokemonsCaught() +
+          "/" +
+          allPokemon[allPokemon.length - 1]["id"] +
+          " - " +
+          getPercentage(
+            server.savePokemon.countUniquePokemonsCaught(),
+            allPokemon[allPokemon.length - 1]["id"],
+          ) +
+          "%",
+        inline: true,
+      },
+      {
+        name: language("shinyDex", server.language),
+        value:
+          user.savePokemon.countUniquePokemonsShinyCaught() +
+          "/" +
+          allPokemon[allPokemon.length - 1]["id"] +
+          " - " +
+          getPercentage(
+            server.savePokemon.countUniquePokemonsShinyCaught(),
+            allPokemon[allPokemon.length - 1]["id"],
+          ) +
+          "%",
+        inline: true,
+      },
+      { name: "\u200B", value: "\u200B", inline: false },
+    );
 }
 
-
 function generateFieldRegionStat(
-    user: UserType,
-    server: ServerType,
+  user: UserType,
+  server: ServerType,
 ): OneFieldEmbed[] {
   const regions = [
     { name: "Kanto", min: 0, max: 151 },
@@ -223,19 +256,22 @@ function generateFieldRegionStat(
   ];
 
   return regions.map(({ name, min, max }) =>
-      processRegion(user, server, name, min, max)
+    processRegion(user, server, name, min, max),
   );
 }
 
 function processRegion(
-    user: UserType,
-    server: ServerType,
-    regionName: string,
-    valueMin: number,
-    valueMax: number,
+  user: UserType,
+  server: ServerType,
+  regionName: string,
+  valueMin: number,
+  valueMax: number,
 ): OneFieldEmbed {
   const rangeSize = valueMax - valueMin;
-  const save = user.savePokemon.getThisSaveUniqueIdWithByIdRange(valueMin + 1, valueMax);
+  const save = user.savePokemon.getThisSaveUniqueIdWithByIdRange(
+    valueMin + 1,
+    valueMax,
+  );
 
   const caught = save.countUniquePokemonsCaught();
   const shiny = save.countUniquePokemonsShinyCaught();
@@ -264,4 +300,3 @@ function processRegion(
     inline: true,
   };
 }
-

@@ -20,7 +20,7 @@ export class Server implements ServerType {
   getPokemonByIdChannel(idChannel: string): Pokemon | null {
     const key = idChannel;
     if (this.pokemonPresent[key]) {
-      return Pokemon.from(this.pokemonPresent[key])
+      return Pokemon.from(this.pokemonPresent[key]);
     }
     return null;
   }

@@ -1,9 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import {
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import {
@@ -13,8 +10,8 @@ import {
 import { codeListEmbed } from "../../features/code/code";
 import { getUserById } from "../../cache/UserCache";
 import { embedRequiredinformation } from "../../utils/embedRequiredinformation";
-import {getStatById} from "../../cache/StatCache";
-import {nameStatGeneral} from "../../config/default/misc";
+import { getStatById } from "../../cache/StatCache";
+import { nameStatGeneral } from "../../config/default/misc";
 
 export default {
   name: "information",
@@ -30,7 +27,7 @@ export default {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       let user = await getUserById(interaction.user.id);
-      const stat = await getStatById(nameStatGeneral)
+      const stat = await getStatById(nameStatGeneral);
 
       const pages = [];
 
@@ -70,9 +67,9 @@ export default {
       );
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in information command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in information command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

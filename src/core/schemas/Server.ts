@@ -4,11 +4,11 @@ import { SaveOnePokemonSchema } from "./SaveOnePokemon";
 import { PokemonSchema } from "./Pokemon";
 import { EventSpawnSchema } from "./EventSpawn";
 import { SaveAllPokemonSchema } from "./SaveAllPokemon";
-import {Pokemon} from "../classes/Pokemon";
+import { Pokemon } from "../classes/Pokemon";
 
 const ServerSchema = new mongoose.Schema<ServerType>(
   {
-  discordId: {
+    discordId: {
       type: String,
       required: true,
     },

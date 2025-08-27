@@ -1,4 +1,4 @@
-import {GenStat, RarityStat, TypeStat} from "../../core/types/EventSpawnType";
+import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 
 export const minimumCount = 4 + 1;
 export const maximumCount = 20;

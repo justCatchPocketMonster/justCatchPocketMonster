@@ -1,31 +1,32 @@
-import {EventType} from "../../core/types/EventType";
+import { EventType } from "../../core/types/EventType";
 import eventData from "../../data/eventData.json";
-import {ServerType} from "../../core/types/ServerType";
-import {updateServer} from "../../cache/ServerCache";
-import {capitalizeFirstLetter, deepCloneObject} from "../../utils/helperFunction";
+import { ServerType } from "../../core/types/ServerType";
+import { updateServer } from "../../cache/ServerCache";
+import {
+  capitalizeFirstLetter,
+  deepCloneObject,
+} from "../../utils/helperFunction";
 import getText from "../../lang/language";
-import {nbGeneration, nbType, valuePerType} from "../../config/default/spawn";
-import {GenStat, TypeStat} from "../../core/types/EventSpawnType";
-import {EventSpawn} from "../../core/classes/EventSpawn";
+import { nbGeneration, nbType, valuePerType } from "../../config/default/spawn";
+import { GenStat, TypeStat } from "../../core/types/EventSpawnType";
+import { EventSpawn } from "../../core/classes/EventSpawn";
 
-export const selectEvent =async (server: ServerType) => {
+export const selectEvent = async (server: ServerType) => {
   let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
-  const event : EventType = {
+  const event: EventType = {
     ...randomEvent,
     id: randomEvent.id.toString(),
     effectDescription: "",
     endTime: new Date(Date.now() + 30 * 1000),
-  }
+  };
 
-  const eventSpawn = EventSpawn.createDefault()
+  const eventSpawn = EventSpawn.createDefault();
   eventSpawn.whatEvent = event;
 
-
   effectEvent(eventSpawn, server);
-    server.eventSpawn = deepCloneObject(eventSpawn);
+  server.eventSpawn = deepCloneObject(eventSpawn);
   await updateServer(server.discordId, server);
 };
-
 
 const DURATIONS = {
   fifteenMin: 15 * 60 * 1000,
@@ -45,10 +46,21 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     "4": () => handleRarityEvent("mythical", [2, 5, 10]),
     "5": () => handleTypeEvent([5, 10, 20]),
     "6": () => handleShinyEvent([1.25, 1.5, 2]),
-    "7": () => handleFormEvent("mega", "auraMega", [DURATIONS.fifteenMin, DURATIONS.halfHour, DURATIONS.oneHour]),
+    "7": () =>
+      handleFormEvent("mega", "auraMega", [
+        DURATIONS.fifteenMin,
+        DURATIONS.halfHour,
+        DURATIONS.oneHour,
+      ]),
     "8": () => handleMaxMinMessageEvent([3, 2, 1], [15, 10, 5], "auraEncen"),
-    "9": () => handleMaxMinMessageEvent([6, 8, 10], [22, 30, 40], "auraRepousse"),
-    "10": () => handleTimeBasedEvent("nightMode", "auraNuit", [DURATIONS.fifteenMin, DURATIONS.halfHour, DURATIONS.oneHour]),
+    "9": () =>
+      handleMaxMinMessageEvent([6, 8, 10], [22, 30, 40], "auraRepousse"),
+    "10": () =>
+      handleTimeBasedEvent("nightMode", "auraNuit", [
+        DURATIONS.fifteenMin,
+        DURATIONS.halfHour,
+        DURATIONS.oneHour,
+      ]),
     "11": () => handleEggEvent([200, 100, 50]),
   };
 
@@ -58,19 +70,24 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     eventSpawn.whatEvent!.image = imagePerLvl[level - 1];
   }
 
-
-  function handleRarityEvent(type: "ordinary" | "legendary" | "mythical", values: number[]) {
+  function handleRarityEvent(
+    type: "ordinary" | "legendary" | "mythical",
+    values: number[],
+  ) {
     updateRarity(type, values[level - 1]);
-    applyCommonDuration("aura" + capitalizeFirstLetter(type), DURATIONS.halfHour);
+    applyCommonDuration(
+      "aura" + capitalizeFirstLetter(type),
+      DURATIONS.halfHour,
+    );
   }
 
   function handleGenerationEvent(values: number[]) {
     const gen = getRandomGen();
     adjustSpawnGen(values[level - 1], gen.toString());
     applyCommonDuration(
-        "auraGeneration",
-        DURATIONS.halfHour,
-        `${getText("ofThisGeneration", server.language)}${gen}. `
+      "auraGeneration",
+      DURATIONS.halfHour,
+      `${getText("ofThisGeneration", server.language)}${gen}. `,
     );
   }
 
@@ -78,9 +95,9 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     const type = getRandomType();
     adjustSpawnType(values[level - 1], type);
     applyCommonDuration(
-        "auraType",
-        DURATIONS.halfHour,
-        `${getText("ofThisType", server.language)}${getText(type, server.language)}. `
+      "auraType",
+      DURATIONS.halfHour,
+      `${getText("ofThisType", server.language)}${getText(type, server.language)}. `,
     );
   }
 
@@ -89,14 +106,22 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     applyCommonDuration("auraChroma", DURATIONS.halfHour);
   }
 
-  function handleTimeBasedEvent(flag: string, eventKey: string, durations: number[]) {
+  function handleTimeBasedEvent(
+    flag: string,
+    eventKey: string,
+    durations: number[],
+  ) {
     // @ts-ignore
     eventSpawn[flag] = !server.eventSpawn[flag];
     eventSpawn.whatEvent!.endTime = addDuration(durations[level - 1]);
     setEventTextEffect(eventKey, level, getDurationText(level));
   }
 
-  function handleFormEvent(flag: string, eventKey: string, durations: number[]) {
+  function handleFormEvent(
+    flag: string,
+    eventKey: string,
+    durations: number[],
+  ) {
     // @ts-ignore
     eventSpawn.allowedForm[flag] = !eventSpawn.allowedForm[flag];
     eventSpawn.whatEvent!.endTime = addDuration(durations[level - 1]);
@@ -115,9 +140,17 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
 
   // --- Helpers ---
 
-  function applyCommonDuration(key: string, duration: number, extra: string = "") {
+  function applyCommonDuration(
+    key: string,
+    duration: number,
+    extra: string = "",
+  ) {
     eventSpawn.whatEvent!.endTime = addDuration(duration);
-    setEventTextEffect(key, level, extra + getText("pendantTrenteMinute", server.language));
+    setEventTextEffect(
+      key,
+      level,
+      extra + getText("pendantTrenteMinute", server.language),
+    );
   }
 
   function setEventTextEffect(key: string, lvl: number, extra: string = "") {
@@ -158,7 +191,10 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     return types[Math.floor(Math.random() * types.length)];
   }
 
-  function updateRarity(type: "ordinary" | "legendary" | "mythical", value: number) {
+  function updateRarity(
+    type: "ordinary" | "legendary" | "mythical",
+    value: number,
+  ) {
     eventSpawn.rarity[type] = value;
     eventSpawn.rarity["ordinary"] -= value;
   }

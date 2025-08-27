@@ -1,18 +1,21 @@
 import { Event } from "./Event";
 import {
   EventSpawnType,
-  GenStat, RarityStat,
+  GenStat,
+  RarityStat,
   TypeStat,
 } from "../types/EventSpawnType";
 import { defaultLanguage } from "../../config/default/server";
 import {
   maximumCount,
-  minimumCount, rateMaxShiny, valueMaxChoiceEgg,
+  minimumCount,
+  rateMaxShiny,
+  valueMaxChoiceEgg,
   valuePerGen,
   valuePerRarity,
   valuePerType,
 } from "../../config/default/spawn";
-import {deepCloneObject} from "../../utils/helperFunction";
+import { deepCloneObject } from "../../utils/helperFunction";
 
 export class EventSpawn implements EventSpawnType {
   constructor(
@@ -35,9 +38,9 @@ export class EventSpawn implements EventSpawnType {
 
   static createDefault(): EventSpawn {
     const defaultEventSpawn = new EventSpawn(
-        deepCloneObject(valuePerGen),
-        deepCloneObject(valuePerType),
-        deepCloneObject(valuePerRarity),
+      deepCloneObject(valuePerGen),
+      deepCloneObject(valuePerType),
+      deepCloneObject(valuePerRarity),
       rateMaxShiny,
       null,
       { mega: false, giga: false },

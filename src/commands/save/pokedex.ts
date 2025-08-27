@@ -1,12 +1,10 @@
-import {
-  SlashCommandBuilder,
-} from "@discordjs/builders";
-import {ChatInputCommandInteraction} from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { ChatInputCommandInteraction } from "discord.js";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { getUserById } from "../../cache/UserCache";
-import {pokedex} from "../../features/pokedex/pokedex";
+import { pokedex } from "../../features/pokedex/pokedex";
 
 export default {
   name: "pokedex",
@@ -16,8 +14,8 @@ export default {
     .setDescriptionLocalizations({
       fr: language("commandPokedexExplication", "fr"),
     })
-    .addNumberOption(option =>
-        option
+    .addNumberOption((option) =>
+      option
         .setName(language("pokedexNameOptionStringPage", "eng"))
         .setNameLocalizations({
           fr: language("pokedexNameOptionStringPage", "fr"),
@@ -39,12 +37,12 @@ export default {
         language("pokedexNameOptionStringPage", "eng"),
       );
 
-      pokedex(interaction, user, server,numberPage )
+      pokedex(interaction, user, server, numberPage);
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in pokedex command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in pokedex command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

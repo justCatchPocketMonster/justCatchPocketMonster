@@ -4,9 +4,9 @@ import { ChatInputCommandInteraction, GuildMember } from "discord.js";
 import { eventShinyAfterCatch } from "../event/eventShinyAfterCatch";
 import language from "../../lang/language";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import {nameStatGeneral, version} from "../../config/default/misc";
-import {updateUser} from "../../cache/UserCache";
-import {updateServer} from "../../cache/ServerCache";
+import { nameStatGeneral, version } from "../../config/default/misc";
+import { updateUser } from "../../cache/UserCache";
+import { updateServer } from "../../cache/ServerCache";
 import allPokemon from "../../data/pokemon.json";
 
 export async function catchPokemon(
@@ -63,19 +63,22 @@ export async function catchPokemon(
   server.savePokemon.addOneCatch(pokemon);
 
   server.removePokemonByIdChannel(idChannel);
-  try{
-  await updateUser(user.discordId, user);
-  await updateServer(server.discordId, server);
-  await updateStat(version, statVersion);
-  await updateStat(nameStatGeneral, statAll);
-
-    } catch (e){
+  try {
+    await updateUser(user.discordId, user);
+    await updateServer(server.discordId, server);
+    await updateStat(version, statVersion);
+    await updateStat(nameStatGeneral, statAll);
+  } catch (e) {
     console.error("Error updating caches after catching a Pokémon:", e);
   }
 
-  const getPokemonData = allPokemon.filter(
-    (poke) => poke.id.toString() === pokemon.id && poke.form === pokemon.form && poke.versionForm === pokemon.versionForm,
-  )
+  const getPokemonData = allPokemon
+    .filter(
+      (poke) =>
+        poke.id.toString() === pokemon.id &&
+        poke.form === pokemon.form &&
+        poke.versionForm === pokemon.versionForm,
+    )
     .map((poke) => ({
       name: {
         nameFr: poke.name.nameFr,
@@ -84,12 +87,9 @@ export async function catchPokemon(
       isShiny: pokemon.isShiny,
     }))[0];
 
-  interaction.reply(generateCatchMessage(
-      getPokemonData,
-      memberDisplayName,
-      user,
-      server,
-  ));
+  interaction.reply(
+    generateCatchMessage(getPokemonData, memberDisplayName, user, server),
+  );
 }
 
 export function generateCatchMessage(
@@ -98,7 +98,8 @@ export function generateCatchMessage(
   user: UserType,
   server: ServerType,
 ): string {
-  let message = language("congratYouCatchPart1", server.language) +
+  let message =
+    language("congratYouCatchPart1", server.language) +
     memberDisplayName +
     language("congratYouCatchPart2", server.language) +
     (pokemon.name.nameFr[0] !== pokemon.name.nameEng[0]
@@ -113,4 +114,3 @@ export function generateCatchMessage(
 
   return message;
 }
-

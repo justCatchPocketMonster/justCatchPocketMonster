@@ -2,7 +2,7 @@ import NodeCache from "node-cache";
 import { User as UserModel } from "../core/schemas/User";
 import { User } from "../core/classes/User";
 import { type UserType } from "../core/types/UserType";
-import {ttlCache} from "../config/default/misc";
+import { ttlCache } from "../config/default/misc";
 
 export const cache = new NodeCache({ stdTTL: ttlCache });
 
@@ -14,7 +14,7 @@ export async function getUserById(userId: string): Promise<User> {
   if (!data) {
     const defaultUser = User.createDefault(userId);
     cache.set(userId, defaultUser);
-    await updateUser(userId, defaultUser)
+    await updateUser(userId, defaultUser);
     return defaultUser;
   }
 
@@ -24,14 +24,14 @@ export async function getUserById(userId: string): Promise<User> {
 }
 
 export async function updateUser(
-    userId: string,
-    update: Partial<UserType>,
+  userId: string,
+  update: Partial<UserType>,
 ): Promise<User> {
   cache.set(userId, update);
   await UserModel.findOneAndUpdate(
-      { discordId: userId },
-      { $set: { ...update, discordId: userId } },
-      { upsert: true, new: true }
+    { discordId: userId },
+    { $set: { ...update, discordId: userId } },
+    { upsert: true, new: true },
   ).lean<UserType>();
 
   return update as User;

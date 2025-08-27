@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import { readdirSync } from "fs";
 
-import {newLogger} from "../middlewares/logger";
+import { newLogger } from "../middlewares/logger";
 import randomStatus from "../features/other/randomStatus";
 
 export default (client: Client) => {
@@ -15,9 +15,9 @@ export default (client: Client) => {
   } catch (error) {
     console.error("Bot is not ready");
     newLogger(
-        'error',
-        error as string,
-        `Error in ready event for bot ${client.user.id}`,
+      "error",
+      error as string,
+      `Error in ready event for bot ${client.user.id}`,
     );
   }
 };
@@ -40,7 +40,7 @@ function loadCommands(client: Client) {
         if (!client.application) return;
 
         const exists = client.application.commands.cache.find(
-            (c) => c.name === command.name
+          (c) => c.name === command.name,
         );
 
         if (command.actif) {
@@ -49,9 +49,10 @@ function loadCommands(client: Client) {
           await client.application.commands.delete(command.name);
         }
 
-        console.log(`Command ${command.name} loaded and is active :${command.actif}`);
+        console.log(
+          `Command ${command.name} loaded and is active :${command.actif}`,
+        );
       });
     }
   }
 }
-

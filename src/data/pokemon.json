@@ -13731,17 +13731,10 @@
   {
     "id": 722,
     "name": {
-      "nameFr": [
-        "Brindibou"
-      ],
-      "nameEng": [
-        "Rowlet"
-      ]
+      "nameFr": ["Brindibou"],
+      "nameEng": ["Rowlet"]
     },
-    "arrayType": [
-      "grass",
-      "flying"
-    ],
+    "arrayType": ["grass", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0722-000",
@@ -13751,17 +13744,10 @@
   {
     "id": 723,
     "name": {
-      "nameFr": [
-        "Efflèche"
-      ],
-      "nameEng": [
-        "Dartrix"
-      ]
+      "nameFr": ["Efflèche"],
+      "nameEng": ["Dartrix"]
     },
-    "arrayType": [
-      "grass",
-      "flying"
-    ],
+    "arrayType": ["grass", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0723-000",
@@ -13771,17 +13757,10 @@
   {
     "id": 724,
     "name": {
-      "nameFr": [
-        "Archéduc"
-      ],
-      "nameEng": [
-        "Decidueye"
-      ]
+      "nameFr": ["Archéduc"],
+      "nameEng": ["Decidueye"]
     },
-    "arrayType": [
-      "grass",
-      "ghost"
-    ],
+    "arrayType": ["grass", "ghost"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0724-000",
@@ -13791,16 +13770,10 @@
   {
     "id": 725,
     "name": {
-      "nameFr": [
-        "Flamiaou"
-      ],
-      "nameEng": [
-        "Litten"
-      ]
+      "nameFr": ["Flamiaou"],
+      "nameEng": ["Litten"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0725-000",
@@ -13810,16 +13783,10 @@
   {
     "id": 726,
     "name": {
-      "nameFr": [
-        "Matoufeu"
-      ],
-      "nameEng": [
-        "Torracat"
-      ]
+      "nameFr": ["Matoufeu"],
+      "nameEng": ["Torracat"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0726-000",
@@ -13829,17 +13796,10 @@
   {
     "id": 727,
     "name": {
-      "nameFr": [
-        "Félinferno"
-      ],
-      "nameEng": [
-        "Incineroar"
-      ]
+      "nameFr": ["Félinferno"],
+      "nameEng": ["Incineroar"]
     },
-    "arrayType": [
-      "fire",
-      "dark"
-    ],
+    "arrayType": ["fire", "dark"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0727-000",
@@ -13849,16 +13809,10 @@
   {
     "id": 728,
     "name": {
-      "nameFr": [
-        "Otaquin"
-      ],
-      "nameEng": [
-        "Popplio"
-      ]
+      "nameFr": ["Otaquin"],
+      "nameEng": ["Popplio"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0728-000",
@@ -13868,16 +13822,10 @@
   {
     "id": 729,
     "name": {
-      "nameFr": [
-        "Otarlette"
-      ],
-      "nameEng": [
-        "Brionne"
-      ]
+      "nameFr": ["Otarlette"],
+      "nameEng": ["Brionne"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0729-000",
@@ -13887,17 +13835,10 @@
   {
     "id": 730,
     "name": {
-      "nameFr": [
-        "Oratoria"
-      ],
-      "nameEng": [
-        "Primarina"
-      ]
+      "nameFr": ["Oratoria"],
+      "nameEng": ["Primarina"]
     },
-    "arrayType": [
-      "water",
-      "fairy"
-    ],
+    "arrayType": ["water", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0730-000",
@@ -13907,17 +13848,10 @@
   {
     "id": 731,
     "name": {
-      "nameFr": [
-        "Picassaut"
-      ],
-      "nameEng": [
-        "Pikipek"
-      ]
+      "nameFr": ["Picassaut"],
+      "nameEng": ["Pikipek"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0731-000",
@@ -13927,17 +13861,10 @@
   {
     "id": 732,
     "name": {
-      "nameFr": [
-        "Piclairon"
-      ],
-      "nameEng": [
-        "Trumbeak"
-      ]
+      "nameFr": ["Piclairon"],
+      "nameEng": ["Trumbeak"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0732-000",
@@ -13947,17 +13874,10 @@
   {
     "id": 733,
     "name": {
-      "nameFr": [
-        "Bazoucan"
-      ],
-      "nameEng": [
-        "Toucannon"
-      ]
+      "nameFr": ["Bazoucan"],
+      "nameEng": ["Toucannon"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0733-000",
@@ -13967,16 +13887,10 @@
   {
     "id": 734,
     "name": {
-      "nameFr": [
-        "Manglouton"
-      ],
-      "nameEng": [
-        "Yungoos"
-      ]
+      "nameFr": ["Manglouton"],
+      "nameEng": ["Yungoos"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0734-000",
@@ -13986,16 +13900,10 @@
   {
     "id": 735,
     "name": {
-      "nameFr": [
-        "Argouste"
-      ],
-      "nameEng": [
-        "Gumshoos"
-      ]
+      "nameFr": ["Argouste"],
+      "nameEng": ["Gumshoos"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0735-000",
@@ -14005,16 +13913,10 @@
   {
     "id": 736,
     "name": {
-      "nameFr": [
-        "Larvibule"
-      ],
-      "nameEng": [
-        "Grubbin"
-      ]
+      "nameFr": ["Larvibule"],
+      "nameEng": ["Grubbin"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0736-000",
@@ -14024,17 +13926,10 @@
   {
     "id": 737,
     "name": {
-      "nameFr": [
-        "Chrysapile"
-      ],
-      "nameEng": [
-        "Charjabug"
-      ]
+      "nameFr": ["Chrysapile"],
+      "nameEng": ["Charjabug"]
     },
-    "arrayType": [
-      "bug",
-      "electric"
-    ],
+    "arrayType": ["bug", "electric"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0737-000",
@@ -14044,17 +13939,10 @@
   {
     "id": 738,
     "name": {
-      "nameFr": [
-        "Lucanon"
-      ],
-      "nameEng": [
-        "Vikavolt"
-      ]
+      "nameFr": ["Lucanon"],
+      "nameEng": ["Vikavolt"]
     },
-    "arrayType": [
-      "bug",
-      "electric"
-    ],
+    "arrayType": ["bug", "electric"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0738-000",
@@ -14064,16 +13952,10 @@
   {
     "id": 739,
     "name": {
-      "nameFr": [
-        "Crabagarre"
-      ],
-      "nameEng": [
-        "Crabrawler"
-      ]
+      "nameFr": ["Crabagarre"],
+      "nameEng": ["Crabrawler"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0739-000",
@@ -14083,17 +13965,10 @@
   {
     "id": 740,
     "name": {
-      "nameFr": [
-        "Crabominable"
-      ],
-      "nameEng": [
-        "Crabominable"
-      ]
+      "nameFr": ["Crabominable"],
+      "nameEng": ["Crabominable"]
     },
-    "arrayType": [
-      "fighting",
-      "ice"
-    ],
+    "arrayType": ["fighting", "ice"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0740-000",
@@ -14103,17 +13978,10 @@
   {
     "id": 741,
     "name": {
-      "nameFr": [
-        "Plumeline"
-      ],
-      "nameEng": [
-        "Oricorio-baile"
-      ]
+      "nameFr": ["Plumeline"],
+      "nameEng": ["Oricorio-baile"]
     },
-    "arrayType": [
-      "fire",
-      "flying"
-    ],
+    "arrayType": ["fire", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0741-000",
@@ -14123,17 +13991,10 @@
   {
     "id": 742,
     "name": {
-      "nameFr": [
-        "Bombydou"
-      ],
-      "nameEng": [
-        "Cutiefly"
-      ]
+      "nameFr": ["Bombydou"],
+      "nameEng": ["Cutiefly"]
     },
-    "arrayType": [
-      "bug",
-      "fairy"
-    ],
+    "arrayType": ["bug", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0742-000",
@@ -14143,17 +14004,10 @@
   {
     "id": 743,
     "name": {
-      "nameFr": [
-        "Rubombelle"
-      ],
-      "nameEng": [
-        "Ribombee"
-      ]
+      "nameFr": ["Rubombelle"],
+      "nameEng": ["Ribombee"]
     },
-    "arrayType": [
-      "bug",
-      "fairy"
-    ],
+    "arrayType": ["bug", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0743-000",
@@ -14163,16 +14017,10 @@
   {
     "id": 744,
     "name": {
-      "nameFr": [
-        "Rocabot"
-      ],
-      "nameEng": [
-        "Rockruff"
-      ]
+      "nameFr": ["Rocabot"],
+      "nameEng": ["Rockruff"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0744-000",
@@ -14182,16 +14030,10 @@
   {
     "id": 745,
     "name": {
-      "nameFr": [
-        "Lougaroc"
-      ],
-      "nameEng": [
-        "Lycanroc-midday"
-      ]
+      "nameFr": ["Lougaroc"],
+      "nameEng": ["Lycanroc-midday"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0745-000",
@@ -14201,16 +14043,10 @@
   {
     "id": 746,
     "name": {
-      "nameFr": [
-        "Froussardine"
-      ],
-      "nameEng": [
-        "Wishiwashi-solo"
-      ]
+      "nameFr": ["Froussardine"],
+      "nameEng": ["Wishiwashi-solo"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0746-000",
@@ -14220,17 +14056,10 @@
   {
     "id": 747,
     "name": {
-      "nameFr": [
-        "Vorastérie"
-      ],
-      "nameEng": [
-        "Mareanie"
-      ]
+      "nameFr": ["Vorastérie"],
+      "nameEng": ["Mareanie"]
     },
-    "arrayType": [
-      "poison",
-      "water"
-    ],
+    "arrayType": ["poison", "water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0747-000",
@@ -14240,17 +14069,10 @@
   {
     "id": 748,
     "name": {
-      "nameFr": [
-        "Prédastérie"
-      ],
-      "nameEng": [
-        "Toxapex"
-      ]
+      "nameFr": ["Prédastérie"],
+      "nameEng": ["Toxapex"]
     },
-    "arrayType": [
-      "poison",
-      "water"
-    ],
+    "arrayType": ["poison", "water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0748-000",
@@ -14260,16 +14082,10 @@
   {
     "id": 749,
     "name": {
-      "nameFr": [
-        "Tiboudet"
-      ],
-      "nameEng": [
-        "Mudbray"
-      ]
+      "nameFr": ["Tiboudet"],
+      "nameEng": ["Mudbray"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0749-000",
@@ -14279,16 +14095,10 @@
   {
     "id": 750,
     "name": {
-      "nameFr": [
-        "Bourrinos"
-      ],
-      "nameEng": [
-        "Mudsdale"
-      ]
+      "nameFr": ["Bourrinos"],
+      "nameEng": ["Mudsdale"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0750-000",
@@ -14298,17 +14108,10 @@
   {
     "id": 751,
     "name": {
-      "nameFr": [
-        "Araqua"
-      ],
-      "nameEng": [
-        "Dewpider"
-      ]
+      "nameFr": ["Araqua"],
+      "nameEng": ["Dewpider"]
     },
-    "arrayType": [
-      "water",
-      "bug"
-    ],
+    "arrayType": ["water", "bug"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0751-000",
@@ -14318,17 +14121,10 @@
   {
     "id": 752,
     "name": {
-      "nameFr": [
-        "Tarenbulle"
-      ],
-      "nameEng": [
-        "Araquanid"
-      ]
+      "nameFr": ["Tarenbulle"],
+      "nameEng": ["Araquanid"]
     },
-    "arrayType": [
-      "water",
-      "bug"
-    ],
+    "arrayType": ["water", "bug"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0752-000",
@@ -14338,16 +14134,10 @@
   {
     "id": 753,
     "name": {
-      "nameFr": [
-        "Mimantis"
-      ],
-      "nameEng": [
-        "Fomantis"
-      ]
+      "nameFr": ["Mimantis"],
+      "nameEng": ["Fomantis"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0753-000",
@@ -14357,16 +14147,10 @@
   {
     "id": 754,
     "name": {
-      "nameFr": [
-        "Floramantis"
-      ],
-      "nameEng": [
-        "Lurantis"
-      ]
+      "nameFr": ["Floramantis"],
+      "nameEng": ["Lurantis"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0754-000",
@@ -14376,17 +14160,10 @@
   {
     "id": 755,
     "name": {
-      "nameFr": [
-        "Spododo"
-      ],
-      "nameEng": [
-        "Morelull"
-      ]
+      "nameFr": ["Spododo"],
+      "nameEng": ["Morelull"]
     },
-    "arrayType": [
-      "grass",
-      "fairy"
-    ],
+    "arrayType": ["grass", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0755-000",
@@ -14396,17 +14173,10 @@
   {
     "id": 756,
     "name": {
-      "nameFr": [
-        "Lampignon"
-      ],
-      "nameEng": [
-        "Shiinotic"
-      ]
+      "nameFr": ["Lampignon"],
+      "nameEng": ["Shiinotic"]
     },
-    "arrayType": [
-      "grass",
-      "fairy"
-    ],
+    "arrayType": ["grass", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0756-000",
@@ -14416,17 +14186,10 @@
   {
     "id": 757,
     "name": {
-      "nameFr": [
-        "Tritox"
-      ],
-      "nameEng": [
-        "Salandit"
-      ]
+      "nameFr": ["Tritox"],
+      "nameEng": ["Salandit"]
     },
-    "arrayType": [
-      "poison",
-      "fire"
-    ],
+    "arrayType": ["poison", "fire"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0757-000",
@@ -14436,17 +14199,10 @@
   {
     "id": 758,
     "name": {
-      "nameFr": [
-        "Malamandre"
-      ],
-      "nameEng": [
-        "Salazzle"
-      ]
+      "nameFr": ["Malamandre"],
+      "nameEng": ["Salazzle"]
     },
-    "arrayType": [
-      "poison",
-      "fire"
-    ],
+    "arrayType": ["poison", "fire"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0758-000",
@@ -14456,17 +14212,10 @@
   {
     "id": 759,
     "name": {
-      "nameFr": [
-        "Nounourson"
-      ],
-      "nameEng": [
-        "Stufful"
-      ]
+      "nameFr": ["Nounourson"],
+      "nameEng": ["Stufful"]
     },
-    "arrayType": [
-      "normal",
-      "fighting"
-    ],
+    "arrayType": ["normal", "fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0759-000",
@@ -14476,17 +14225,10 @@
   {
     "id": 760,
     "name": {
-      "nameFr": [
-        "Chelours"
-      ],
-      "nameEng": [
-        "Bewear"
-      ]
+      "nameFr": ["Chelours"],
+      "nameEng": ["Bewear"]
     },
-    "arrayType": [
-      "normal",
-      "fighting"
-    ],
+    "arrayType": ["normal", "fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0760-000",
@@ -14496,16 +14238,10 @@
   {
     "id": 761,
     "name": {
-      "nameFr": [
-        "Croquine"
-      ],
-      "nameEng": [
-        "Bounsweet"
-      ]
+      "nameFr": ["Croquine"],
+      "nameEng": ["Bounsweet"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0761-000",
@@ -14515,16 +14251,10 @@
   {
     "id": 762,
     "name": {
-      "nameFr": [
-        "Candine"
-      ],
-      "nameEng": [
-        "Steenee"
-      ]
+      "nameFr": ["Candine"],
+      "nameEng": ["Steenee"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0762-000",
@@ -14534,16 +14264,10 @@
   {
     "id": 763,
     "name": {
-      "nameFr": [
-        "Sucreine"
-      ],
-      "nameEng": [
-        "Tsareena"
-      ]
+      "nameFr": ["Sucreine"],
+      "nameEng": ["Tsareena"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0763-000",
@@ -14553,16 +14277,10 @@
   {
     "id": 764,
     "name": {
-      "nameFr": [
-        "Guérilande"
-      ],
-      "nameEng": [
-        "Comfey"
-      ]
+      "nameFr": ["Guérilande"],
+      "nameEng": ["Comfey"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0764-000",
@@ -14572,17 +14290,10 @@
   {
     "id": 765,
     "name": {
-      "nameFr": [
-        "Gouroutan"
-      ],
-      "nameEng": [
-        "Oranguru"
-      ]
+      "nameFr": ["Gouroutan"],
+      "nameEng": ["Oranguru"]
     },
-    "arrayType": [
-      "normal",
-      "psychic"
-    ],
+    "arrayType": ["normal", "psychic"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0765-000",
@@ -14592,16 +14303,10 @@
   {
     "id": 766,
     "name": {
-      "nameFr": [
-        "Quartermac"
-      ],
-      "nameEng": [
-        "Passimian"
-      ]
+      "nameFr": ["Quartermac"],
+      "nameEng": ["Passimian"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0766-000",
@@ -14611,17 +14316,10 @@
   {
     "id": 767,
     "name": {
-      "nameFr": [
-        "Sovkipou"
-      ],
-      "nameEng": [
-        "Wimpod"
-      ]
+      "nameFr": ["Sovkipou"],
+      "nameEng": ["Wimpod"]
     },
-    "arrayType": [
-      "bug",
-      "water"
-    ],
+    "arrayType": ["bug", "water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0767-000",
@@ -14631,17 +14329,10 @@
   {
     "id": 768,
     "name": {
-      "nameFr": [
-        "Sarmuraï"
-      ],
-      "nameEng": [
-        "Golisopod"
-      ]
+      "nameFr": ["Sarmuraï"],
+      "nameEng": ["Golisopod"]
     },
-    "arrayType": [
-      "bug",
-      "water"
-    ],
+    "arrayType": ["bug", "water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0768-000",
@@ -14651,17 +14342,10 @@
   {
     "id": 769,
     "name": {
-      "nameFr": [
-        "Bacabouh"
-      ],
-      "nameEng": [
-        "Sandygast"
-      ]
+      "nameFr": ["Bacabouh"],
+      "nameEng": ["Sandygast"]
     },
-    "arrayType": [
-      "ghost",
-      "ground"
-    ],
+    "arrayType": ["ghost", "ground"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0769-000",
@@ -14671,17 +14355,10 @@
   {
     "id": 770,
     "name": {
-      "nameFr": [
-        "Trépassable"
-      ],
-      "nameEng": [
-        "Palossand"
-      ]
+      "nameFr": ["Trépassable"],
+      "nameEng": ["Palossand"]
     },
-    "arrayType": [
-      "ghost",
-      "ground"
-    ],
+    "arrayType": ["ghost", "ground"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0770-000",
@@ -14691,16 +14368,10 @@
   {
     "id": 771,
     "name": {
-      "nameFr": [
-        "Concombaffe"
-      ],
-      "nameEng": [
-        "Pyukumuku"
-      ]
+      "nameFr": ["Concombaffe"],
+      "nameEng": ["Pyukumuku"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0771-000",
@@ -14710,16 +14381,10 @@
   {
     "id": 772,
     "name": {
-      "nameFr": [
-        "Type:0"
-      ],
-      "nameEng": [
-        "Type-null"
-      ]
+      "nameFr": ["Type:0"],
+      "nameEng": ["Type-null"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0772-000",
@@ -14729,16 +14394,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-000",
@@ -14748,16 +14407,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-001",
@@ -14767,16 +14420,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "flying"
-    ],
+    "arrayType": ["flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-002",
@@ -14786,16 +14433,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "poison"
-    ],
+    "arrayType": ["poison"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-003",
@@ -14805,16 +14446,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-004",
@@ -14824,16 +14459,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-005",
@@ -14843,16 +14472,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-006",
@@ -14862,16 +14485,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-007",
@@ -14881,16 +14498,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-008",
@@ -14900,16 +14511,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-009",
@@ -14919,16 +14524,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-010",
@@ -14938,16 +14537,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-011",
@@ -14957,16 +14550,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-012",
@@ -14976,16 +14563,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-013",
@@ -14995,16 +14576,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-014",
@@ -15014,16 +14589,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "dragon"
-    ],
+    "arrayType": ["dragon"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-015",
@@ -15033,16 +14602,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "dark"
-    ],
+    "arrayType": ["dark"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-016",
@@ -15052,16 +14615,10 @@
   {
     "id": 773,
     "name": {
-      "nameFr": [
-        "Silvallié"
-      ],
-      "nameEng": [
-        "Silvally"
-      ]
+      "nameFr": ["Silvallié"],
+      "nameEng": ["Silvally"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0773-017",
@@ -15071,17 +14628,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-000",
@@ -15091,17 +14641,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-001",
@@ -15111,17 +14654,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-002",
@@ -15131,17 +14667,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-003",
@@ -15151,17 +14680,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-004",
@@ -15171,17 +14693,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-005",
@@ -15191,17 +14706,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-006",
@@ -15211,17 +14719,10 @@
   {
     "id": 774,
     "name": {
-      "nameFr": [
-        "Météno"
-      ],
-      "nameEng": [
-        "Minior"
-      ]
+      "nameFr": ["Météno"],
+      "nameEng": ["Minior"]
     },
-    "arrayType": [
-      "rock",
-      "flying"
-    ],
+    "arrayType": ["rock", "flying"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0774-007",
@@ -15231,16 +14732,10 @@
   {
     "id": 775,
     "name": {
-      "nameFr": [
-        "Dodoala"
-      ],
-      "nameEng": [
-        "Komala"
-      ]
+      "nameFr": ["Dodoala"],
+      "nameEng": ["Komala"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0775-000",
@@ -15250,17 +14745,10 @@
   {
     "id": 776,
     "name": {
-      "nameFr": [
-        "Boumata"
-      ],
-      "nameEng": [
-        "Turtonator"
-      ]
+      "nameFr": ["Boumata"],
+      "nameEng": ["Turtonator"]
     },
-    "arrayType": [
-      "fire",
-      "dragon"
-    ],
+    "arrayType": ["fire", "dragon"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0776-000",
@@ -15270,17 +14758,10 @@
   {
     "id": 777,
     "name": {
-      "nameFr": [
-        "Togedemaru"
-      ],
-      "nameEng": [
-        "Togedemaru"
-      ]
+      "nameFr": ["Togedemaru"],
+      "nameEng": ["Togedemaru"]
     },
-    "arrayType": [
-      "electric",
-      "steel"
-    ],
+    "arrayType": ["electric", "steel"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0777-000",
@@ -15290,17 +14771,10 @@
   {
     "id": 777,
     "name": {
-      "nameFr": [
-        "Togedemaru"
-      ],
-      "nameEng": [
-        "Togedemaru"
-      ]
+      "nameFr": ["Togedemaru"],
+      "nameEng": ["Togedemaru"]
     },
-    "arrayType": [
-      "electric",
-      "steel"
-    ],
+    "arrayType": ["electric", "steel"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0777-001",
@@ -15310,17 +14784,10 @@
   {
     "id": 778,
     "name": {
-      "nameFr": [
-        "Mimiqui"
-      ],
-      "nameEng": [
-        "Mimikyu"
-      ]
+      "nameFr": ["Mimiqui"],
+      "nameEng": ["Mimikyu"]
     },
-    "arrayType": [
-      "ghost",
-      "fairy"
-    ],
+    "arrayType": ["ghost", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0778-000",
@@ -15330,17 +14797,10 @@
   {
     "id": 778,
     "name": {
-      "nameFr": [
-        "Mimiqui"
-      ],
-      "nameEng": [
-        "Mimikyu"
-      ]
+      "nameFr": ["Mimiqui"],
+      "nameEng": ["Mimikyu"]
     },
-    "arrayType": [
-      "ghost",
-      "fairy"
-    ],
+    "arrayType": ["ghost", "fairy"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0778-001",
@@ -15350,17 +14810,10 @@
   {
     "id": 779,
     "name": {
-      "nameFr": [
-        "Denticrisse"
-      ],
-      "nameEng": [
-        "Bruxish"
-      ]
+      "nameFr": ["Denticrisse"],
+      "nameEng": ["Bruxish"]
     },
-    "arrayType": [
-      "water",
-      "psychic"
-    ],
+    "arrayType": ["water", "psychic"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0779-000",
@@ -15370,17 +14823,10 @@
   {
     "id": 780,
     "name": {
-      "nameFr": [
-        "Draïeul"
-      ],
-      "nameEng": [
-        "Drampa"
-      ]
+      "nameFr": ["Draïeul"],
+      "nameEng": ["Drampa"]
     },
-    "arrayType": [
-      "normal",
-      "dragon"
-    ],
+    "arrayType": ["normal", "dragon"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0780-000",
@@ -15390,17 +14836,10 @@
   {
     "id": 781,
     "name": {
-      "nameFr": [
-        "Sinistrail"
-      ],
-      "nameEng": [
-        "Dhelmise"
-      ]
+      "nameFr": ["Sinistrail"],
+      "nameEng": ["Dhelmise"]
     },
-    "arrayType": [
-      "ghost",
-      "grass"
-    ],
+    "arrayType": ["ghost", "grass"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0781-000",
@@ -15410,16 +14849,10 @@
   {
     "id": 782,
     "name": {
-      "nameFr": [
-        "Bébécaille"
-      ],
-      "nameEng": [
-        "Jangmo-o"
-      ]
+      "nameFr": ["Bébécaille"],
+      "nameEng": ["Jangmo-o"]
     },
-    "arrayType": [
-      "dragon"
-    ],
+    "arrayType": ["dragon"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0782-000",
@@ -15429,17 +14862,10 @@
   {
     "id": 783,
     "name": {
-      "nameFr": [
-        "Écaïd"
-      ],
-      "nameEng": [
-        "Hakamo-o"
-      ]
+      "nameFr": ["Écaïd"],
+      "nameEng": ["Hakamo-o"]
     },
-    "arrayType": [
-      "dragon",
-      "fighting"
-    ],
+    "arrayType": ["dragon", "fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0783-000",
@@ -15449,17 +14875,10 @@
   {
     "id": 784,
     "name": {
-      "nameFr": [
-        "Ékaïser"
-      ],
-      "nameEng": [
-        "Kommo-o"
-      ]
+      "nameFr": ["Ékaïser"],
+      "nameEng": ["Kommo-o"]
     },
-    "arrayType": [
-      "dragon",
-      "fighting"
-    ],
+    "arrayType": ["dragon", "fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0784-000",
@@ -15469,17 +14888,10 @@
   {
     "id": 784,
     "name": {
-      "nameFr": [
-        "Ékaïser"
-      ],
-      "nameEng": [
-        "Kommo-o"
-      ]
+      "nameFr": ["Ékaïser"],
+      "nameEng": ["Kommo-o"]
     },
-    "arrayType": [
-      "dragon",
-      "fighting"
-    ],
+    "arrayType": ["dragon", "fighting"],
     "rarity": "ordinary",
     "gen": 7,
     "imgName": "0784-001",
@@ -15489,17 +14901,10 @@
   {
     "id": 785,
     "name": {
-      "nameFr": [
-        "Tokorico"
-      ],
-      "nameEng": [
-        "Tapu-koko"
-      ]
+      "nameFr": ["Tokorico"],
+      "nameEng": ["Tapu-koko"]
     },
-    "arrayType": [
-      "electric",
-      "fairy"
-    ],
+    "arrayType": ["electric", "fairy"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0785-000",
@@ -15509,17 +14914,10 @@
   {
     "id": 786,
     "name": {
-      "nameFr": [
-        "Tokopiyon"
-      ],
-      "nameEng": [
-        "Tapu-lele"
-      ]
+      "nameFr": ["Tokopiyon"],
+      "nameEng": ["Tapu-lele"]
     },
-    "arrayType": [
-      "psychic",
-      "fairy"
-    ],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0786-000",
@@ -15529,17 +14927,10 @@
   {
     "id": 787,
     "name": {
-      "nameFr": [
-        "Tokotoro"
-      ],
-      "nameEng": [
-        "Tapu-bulu"
-      ]
+      "nameFr": ["Tokotoro"],
+      "nameEng": ["Tapu-bulu"]
     },
-    "arrayType": [
-      "grass",
-      "fairy"
-    ],
+    "arrayType": ["grass", "fairy"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0787-000",
@@ -15549,17 +14940,10 @@
   {
     "id": 788,
     "name": {
-      "nameFr": [
-        "Tokopisco"
-      ],
-      "nameEng": [
-        "Tapu-fini"
-      ]
+      "nameFr": ["Tokopisco"],
+      "nameEng": ["Tapu-fini"]
     },
-    "arrayType": [
-      "water",
-      "fairy"
-    ],
+    "arrayType": ["water", "fairy"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0788-000",
@@ -15569,16 +14953,10 @@
   {
     "id": 789,
     "name": {
-      "nameFr": [
-        "Cosmog"
-      ],
-      "nameEng": [
-        "Cosmog"
-      ]
+      "nameFr": ["Cosmog"],
+      "nameEng": ["Cosmog"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0789-000",
@@ -15588,16 +14966,10 @@
   {
     "id": 790,
     "name": {
-      "nameFr": [
-        "Cosmovum"
-      ],
-      "nameEng": [
-        "Cosmoem"
-      ]
+      "nameFr": ["Cosmovum"],
+      "nameEng": ["Cosmoem"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "legendary",
     "gen": 7,
     "imgName": "0790-000",
@@ -15607,17 +14979,10 @@
   {
     "id": 791,
     "name": {
-      "nameFr": [
-        "Solgaleo"
-      ],
-      "nameEng": [
-        "Solgaleo"
-      ]
+      "nameFr": ["Solgaleo"],
+      "nameEng": ["Solgaleo"]
     },
-    "arrayType": [
-      "psychic",
-      "steel"
-    ],
+    "arrayType": ["psychic", "steel"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0791-000",
@@ -15627,17 +14992,10 @@
   {
     "id": 792,
     "name": {
-      "nameFr": [
-        "Lunala"
-      ],
-      "nameEng": [
-        "Lunala"
-      ]
+      "nameFr": ["Lunala"],
+      "nameEng": ["Lunala"]
     },
-    "arrayType": [
-      "psychic",
-      "ghost"
-    ],
+    "arrayType": ["psychic", "ghost"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0792-000",
@@ -15647,17 +15005,10 @@
   {
     "id": 793,
     "name": {
-      "nameFr": [
-        "Zéroïd"
-      ],
-      "nameEng": [
-        "Nihilego"
-      ]
+      "nameFr": ["Zéroïd"],
+      "nameEng": ["Nihilego"]
     },
-    "arrayType": [
-      "rock",
-      "poison"
-    ],
+    "arrayType": ["rock", "poison"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0793-000",
@@ -15667,17 +15018,10 @@
   {
     "id": 794,
     "name": {
-      "nameFr": [
-        "Mouscoto"
-      ],
-      "nameEng": [
-        "Buzzwole"
-      ]
+      "nameFr": ["Mouscoto"],
+      "nameEng": ["Buzzwole"]
     },
-    "arrayType": [
-      "bug",
-      "fighting"
-    ],
+    "arrayType": ["bug", "fighting"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0794-000",
@@ -15687,17 +15031,10 @@
   {
     "id": 795,
     "name": {
-      "nameFr": [
-        "Cancrelove"
-      ],
-      "nameEng": [
-        "Pheromosa"
-      ]
+      "nameFr": ["Cancrelove"],
+      "nameEng": ["Pheromosa"]
     },
-    "arrayType": [
-      "bug",
-      "fighting"
-    ],
+    "arrayType": ["bug", "fighting"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0795-000",
@@ -15707,16 +15044,10 @@
   {
     "id": 796,
     "name": {
-      "nameFr": [
-        "Câblifère"
-      ],
-      "nameEng": [
-        "Xurkitree"
-      ]
+      "nameFr": ["Câblifère"],
+      "nameEng": ["Xurkitree"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0796-000",
@@ -15726,17 +15057,10 @@
   {
     "id": 797,
     "name": {
-      "nameFr": [
-        "Bamboiselle"
-      ],
-      "nameEng": [
-        "Celesteela"
-      ]
+      "nameFr": ["Bamboiselle"],
+      "nameEng": ["Celesteela"]
     },
-    "arrayType": [
-      "steel",
-      "flying"
-    ],
+    "arrayType": ["steel", "flying"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0797-000",
@@ -15746,17 +15070,10 @@
   {
     "id": 798,
     "name": {
-      "nameFr": [
-        "Katagami"
-      ],
-      "nameEng": [
-        "Kartana"
-      ]
+      "nameFr": ["Katagami"],
+      "nameEng": ["Kartana"]
     },
-    "arrayType": [
-      "grass",
-      "steel"
-    ],
+    "arrayType": ["grass", "steel"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0798-000",
@@ -15766,17 +15083,10 @@
   {
     "id": 799,
     "name": {
-      "nameFr": [
-        "Engloutyran"
-      ],
-      "nameEng": [
-        "Guzzlord"
-      ]
+      "nameFr": ["Engloutyran"],
+      "nameEng": ["Guzzlord"]
     },
-    "arrayType": [
-      "dark",
-      "dragon"
-    ],
+    "arrayType": ["dark", "dragon"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0799-000",
@@ -15786,16 +15096,10 @@
   {
     "id": 800,
     "name": {
-      "nameFr": [
-        "Necrozma"
-      ],
-      "nameEng": [
-        "Necrozma"
-      ]
+      "nameFr": ["Necrozma"],
+      "nameEng": ["Necrozma"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0800-000",
@@ -15805,17 +15109,10 @@
   {
     "id": 800,
     "name": {
-      "nameFr": [
-        "Necrozma"
-      ],
-      "nameEng": [
-        "Necrozma"
-      ]
+      "nameFr": ["Necrozma"],
+      "nameEng": ["Necrozma"]
     },
-    "arrayType": [
-      "psychic",
-      "steel"
-    ],
+    "arrayType": ["psychic", "steel"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0800-001",
@@ -15825,17 +15122,10 @@
   {
     "id": 800,
     "name": {
-      "nameFr": [
-        "Necrozma"
-      ],
-      "nameEng": [
-        "Necrozma"
-      ]
+      "nameFr": ["Necrozma"],
+      "nameEng": ["Necrozma"]
     },
-    "arrayType": [
-      "psychic",
-        "ghost"
-    ],
+    "arrayType": ["psychic", "ghost"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0800-002",
@@ -15845,17 +15135,10 @@
   {
     "id": 800,
     "name": {
-      "nameFr": [
-        "Necrozma"
-      ],
-      "nameEng": [
-        "Necrozma"
-      ]
+      "nameFr": ["Necrozma"],
+      "nameEng": ["Necrozma"]
     },
-    "arrayType": [
-      "psychic",
-        "dragon"
-    ],
+    "arrayType": ["psychic", "dragon"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0800-003",
@@ -15865,17 +15148,10 @@
   {
     "id": 801,
     "name": {
-      "nameFr": [
-        "Magearna"
-      ],
-      "nameEng": [
-        "Magearna"
-      ]
+      "nameFr": ["Magearna"],
+      "nameEng": ["Magearna"]
     },
-    "arrayType": [
-      "steel",
-      "fairy"
-    ],
+    "arrayType": ["steel", "fairy"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0801-000",
@@ -15885,17 +15161,10 @@
   {
     "id": 801,
     "name": {
-      "nameFr": [
-        "Magearna"
-      ],
-      "nameEng": [
-        "Magearna"
-      ]
+      "nameFr": ["Magearna"],
+      "nameEng": ["Magearna"]
     },
-    "arrayType": [
-      "steel",
-      "fairy"
-    ],
+    "arrayType": ["steel", "fairy"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0801-001",
@@ -15905,17 +15174,10 @@
   {
     "id": 802,
     "name": {
-      "nameFr": [
-        "Marshadow"
-      ],
-      "nameEng": [
-        "Marshadow"
-      ]
+      "nameFr": ["Marshadow"],
+      "nameEng": ["Marshadow"]
     },
-    "arrayType": [
-      "fighting",
-      "ghost"
-    ],
+    "arrayType": ["fighting", "ghost"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0802-000",
@@ -15925,16 +15187,10 @@
   {
     "id": 803,
     "name": {
-      "nameFr": [
-        "Vémini"
-      ],
-      "nameEng": [
-        "Poipole"
-      ]
+      "nameFr": ["Vémini"],
+      "nameEng": ["Poipole"]
     },
-    "arrayType": [
-      "poison"
-    ],
+    "arrayType": ["poison"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0803-000",
@@ -15944,17 +15200,10 @@
   {
     "id": 804,
     "name": {
-      "nameFr": [
-        "Mandrillon"
-      ],
-      "nameEng": [
-        "Naganadel"
-      ]
+      "nameFr": ["Mandrillon"],
+      "nameEng": ["Naganadel"]
     },
-    "arrayType": [
-      "poison",
-      "dragon"
-    ],
+    "arrayType": ["poison", "dragon"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0804-000",
@@ -15964,17 +15213,10 @@
   {
     "id": 805,
     "name": {
-      "nameFr": [
-        "Ama-Ama"
-      ],
-      "nameEng": [
-        "Stakataka"
-      ]
+      "nameFr": ["Ama-Ama"],
+      "nameEng": ["Stakataka"]
     },
-    "arrayType": [
-      "rock",
-      "steel"
-    ],
+    "arrayType": ["rock", "steel"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0805-000",
@@ -15984,17 +15226,10 @@
   {
     "id": 806,
     "name": {
-      "nameFr": [
-        "Pierroteknik"
-      ],
-      "nameEng": [
-        "Blacephalon"
-      ]
+      "nameFr": ["Pierroteknik"],
+      "nameEng": ["Blacephalon"]
     },
-    "arrayType": [
-      "fire",
-      "ghost"
-    ],
+    "arrayType": ["fire", "ghost"],
     "rarity": "ultraBeast",
     "gen": 7,
     "imgName": "0806-000",
@@ -16004,16 +15239,10 @@
   {
     "id": 807,
     "name": {
-      "nameFr": [
-        "Zeraora"
-      ],
-      "nameEng": [
-        "Zeraora"
-      ]
+      "nameFr": ["Zeraora"],
+      "nameEng": ["Zeraora"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0807-000",
@@ -16023,16 +15252,10 @@
   {
     "id": 808,
     "name": {
-      "nameFr": [
-        "Meltan"
-      ],
-      "nameEng": [
-        "Meltan"
-      ]
+      "nameFr": ["Meltan"],
+      "nameEng": ["Meltan"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0808-000",
@@ -16042,16 +15265,10 @@
   {
     "id": 809,
     "name": {
-      "nameFr": [
-        "Melmetal"
-      ],
-      "nameEng": [
-        "Melmetal"
-      ]
+      "nameFr": ["Melmetal"],
+      "nameEng": ["Melmetal"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0809-000",
@@ -16061,16 +15278,10 @@
   {
     "id": 809,
     "name": {
-      "nameFr": [
-        "Melmetal"
-      ],
-      "nameEng": [
-        "Melmetal"
-      ]
+      "nameFr": ["Melmetal"],
+      "nameEng": ["Melmetal"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "mythical",
     "gen": 7,
     "imgName": "0809-000-giga",
@@ -16080,16 +15291,10 @@
   {
     "id": 810,
     "name": {
-      "nameFr": [
-        "Ouistempo"
-      ],
-      "nameEng": [
-        "Grookey"
-      ]
+      "nameFr": ["Ouistempo"],
+      "nameEng": ["Grookey"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0810-000",
@@ -16099,16 +15304,10 @@
   {
     "id": 811,
     "name": {
-      "nameFr": [
-        "Badabouin"
-      ],
-      "nameEng": [
-        "Thwackey"
-      ]
+      "nameFr": ["Badabouin"],
+      "nameEng": ["Thwackey"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0811-000",
@@ -16118,16 +15317,10 @@
   {
     "id": 812,
     "name": {
-      "nameFr": [
-        "Gorythmic"
-      ],
-      "nameEng": [
-        "Rillaboom"
-      ]
+      "nameFr": ["Gorythmic"],
+      "nameEng": ["Rillaboom"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0812-000",
@@ -16137,16 +15330,10 @@
   {
     "id": 812,
     "name": {
-      "nameFr": [
-        "Gorythmic"
-      ],
-      "nameEng": [
-        "Rillaboom"
-      ]
+      "nameFr": ["Gorythmic"],
+      "nameEng": ["Rillaboom"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0812-000-giga",
@@ -16156,16 +15343,10 @@
   {
     "id": 813,
     "name": {
-      "nameFr": [
-        "Flambino"
-      ],
-      "nameEng": [
-        "Scorbunny"
-      ]
+      "nameFr": ["Flambino"],
+      "nameEng": ["Scorbunny"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0813-000",
@@ -16175,16 +15356,10 @@
   {
     "id": 814,
     "name": {
-      "nameFr": [
-        "Lapyro"
-      ],
-      "nameEng": [
-        "Raboot"
-      ]
+      "nameFr": ["Lapyro"],
+      "nameEng": ["Raboot"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0814-000",
@@ -16194,16 +15369,10 @@
   {
     "id": 815,
     "name": {
-      "nameFr": [
-        "Pyrobut"
-      ],
-      "nameEng": [
-        "Cinderace"
-      ]
+      "nameFr": ["Pyrobut"],
+      "nameEng": ["Cinderace"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0815-000",
@@ -16213,16 +15382,10 @@
   {
     "id": 815,
     "name": {
-      "nameFr": [
-        "Pyrobut"
-      ],
-      "nameEng": [
-        "Cinderace"
-      ]
+      "nameFr": ["Pyrobut"],
+      "nameEng": ["Cinderace"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0815-000-giga",
@@ -16232,16 +15395,10 @@
   {
     "id": 816,
     "name": {
-      "nameFr": [
-        "Larméléon"
-      ],
-      "nameEng": [
-        "Sobble"
-      ]
+      "nameFr": ["Larméléon"],
+      "nameEng": ["Sobble"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0816-000",
@@ -16251,16 +15408,10 @@
   {
     "id": 817,
     "name": {
-      "nameFr": [
-        "Arrozard"
-      ],
-      "nameEng": [
-        "Drizzile"
-      ]
+      "nameFr": ["Arrozard"],
+      "nameEng": ["Drizzile"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0817-000",
@@ -16270,16 +15421,10 @@
   {
     "id": 818,
     "name": {
-      "nameFr": [
-        "Lézargus"
-      ],
-      "nameEng": [
-        "Inteleon"
-      ]
+      "nameFr": ["Lézargus"],
+      "nameEng": ["Inteleon"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0818-000",
@@ -16289,16 +15434,10 @@
   {
     "id": 818,
     "name": {
-      "nameFr": [
-        "Lézargus"
-      ],
-      "nameEng": [
-        "Inteleon"
-      ]
+      "nameFr": ["Lézargus"],
+      "nameEng": ["Inteleon"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0818-000-giga",
@@ -16308,16 +15447,10 @@
   {
     "id": 819,
     "name": {
-      "nameFr": [
-        "Rongourmand"
-      ],
-      "nameEng": [
-        "Skwovet"
-      ]
+      "nameFr": ["Rongourmand"],
+      "nameEng": ["Skwovet"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0819-000",
@@ -16327,16 +15460,10 @@
   {
     "id": 820,
     "name": {
-      "nameFr": [
-        "Rongrigou"
-      ],
-      "nameEng": [
-        "Greedent"
-      ]
+      "nameFr": ["Rongrigou"],
+      "nameEng": ["Greedent"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0820-000",
@@ -16346,16 +15473,10 @@
   {
     "id": 821,
     "name": {
-      "nameFr": [
-        "Minisange"
-      ],
-      "nameEng": [
-        "Rookidee"
-      ]
+      "nameFr": ["Minisange"],
+      "nameEng": ["Rookidee"]
     },
-    "arrayType": [
-      "flying"
-    ],
+    "arrayType": ["flying"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0821-000",
@@ -16365,16 +15486,10 @@
   {
     "id": 822,
     "name": {
-      "nameFr": [
-        "Bleuseille"
-      ],
-      "nameEng": [
-        "Corvisquire"
-      ]
+      "nameFr": ["Bleuseille"],
+      "nameEng": ["Corvisquire"]
     },
-    "arrayType": [
-      "flying"
-    ],
+    "arrayType": ["flying"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0822-000",
@@ -16384,17 +15499,10 @@
   {
     "id": 823,
     "name": {
-      "nameFr": [
-        "Corvaillus"
-      ],
-      "nameEng": [
-        "Corviknight"
-      ]
+      "nameFr": ["Corvaillus"],
+      "nameEng": ["Corviknight"]
     },
-    "arrayType": [
-      "flying",
-      "steel"
-    ],
+    "arrayType": ["flying", "steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0823-000",
@@ -16404,17 +15512,10 @@
   {
     "id": 823,
     "name": {
-      "nameFr": [
-        "Corvaillus"
-      ],
-      "nameEng": [
-        "Corviknight"
-      ]
+      "nameFr": ["Corvaillus"],
+      "nameEng": ["Corviknight"]
     },
-    "arrayType": [
-      "flying",
-      "steel"
-    ],
+    "arrayType": ["flying", "steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0823-000-giga",
@@ -16424,16 +15525,10 @@
   {
     "id": 824,
     "name": {
-      "nameFr": [
-        "Larvadar"
-      ],
-      "nameEng": [
-        "Blipbug"
-      ]
+      "nameFr": ["Larvadar"],
+      "nameEng": ["Blipbug"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0824-000",
@@ -16443,17 +15538,10 @@
   {
     "id": 825,
     "name": {
-      "nameFr": [
-        "Coléodôme"
-      ],
-      "nameEng": [
-        "Dottler"
-      ]
+      "nameFr": ["Coléodôme"],
+      "nameEng": ["Dottler"]
     },
-    "arrayType": [
-      "bug",
-      "psychic"
-    ],
+    "arrayType": ["bug", "psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0825-000",
@@ -16463,17 +15551,10 @@
   {
     "id": 826,
     "name": {
-      "nameFr": [
-        "Astronelle"
-      ],
-      "nameEng": [
-        "Orbeetle"
-      ]
+      "nameFr": ["Astronelle"],
+      "nameEng": ["Orbeetle"]
     },
-    "arrayType": [
-      "bug",
-      "psychic"
-    ],
+    "arrayType": ["bug", "psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0826-000",
@@ -16483,17 +15564,10 @@
   {
     "id": 826,
     "name": {
-      "nameFr": [
-        "Astronelle"
-      ],
-      "nameEng": [
-        "Orbeetle"
-      ]
+      "nameFr": ["Astronelle"],
+      "nameEng": ["Orbeetle"]
     },
-    "arrayType": [
-      "bug",
-      "psychic"
-    ],
+    "arrayType": ["bug", "psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0826-000-giga",
@@ -16503,16 +15577,10 @@
   {
     "id": 827,
     "name": {
-      "nameFr": [
-        "Goupilou"
-      ],
-      "nameEng": [
-        "Nickit"
-      ]
+      "nameFr": ["Goupilou"],
+      "nameEng": ["Nickit"]
     },
-    "arrayType": [
-      "dark"
-    ],
+    "arrayType": ["dark"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0827-000",
@@ -16522,16 +15590,10 @@
   {
     "id": 828,
     "name": {
-      "nameFr": [
-        "Roublenard"
-      ],
-      "nameEng": [
-        "Thievul"
-      ]
+      "nameFr": ["Roublenard"],
+      "nameEng": ["Thievul"]
     },
-    "arrayType": [
-      "dark"
-    ],
+    "arrayType": ["dark"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0828-000",
@@ -16541,16 +15603,10 @@
   {
     "id": 829,
     "name": {
-      "nameFr": [
-        "Tournicoton"
-      ],
-      "nameEng": [
-        "Gossifleur"
-      ]
+      "nameFr": ["Tournicoton"],
+      "nameEng": ["Gossifleur"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0829-000",
@@ -16560,16 +15616,10 @@
   {
     "id": 830,
     "name": {
-      "nameFr": [
-        "Blancoton"
-      ],
-      "nameEng": [
-        "Eldegoss"
-      ]
+      "nameFr": ["Blancoton"],
+      "nameEng": ["Eldegoss"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0830-000",
@@ -16579,16 +15629,10 @@
   {
     "id": 831,
     "name": {
-      "nameFr": [
-        "Moumouton"
-      ],
-      "nameEng": [
-        "Wooloo"
-      ]
+      "nameFr": ["Moumouton"],
+      "nameEng": ["Wooloo"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0831-000",
@@ -16598,16 +15642,10 @@
   {
     "id": 832,
     "name": {
-      "nameFr": [
-        "Moumouflon"
-      ],
-      "nameEng": [
-        "Dubwool"
-      ]
+      "nameFr": ["Moumouflon"],
+      "nameEng": ["Dubwool"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0832-000",
@@ -16617,16 +15655,10 @@
   {
     "id": 833,
     "name": {
-      "nameFr": [
-        "Khélocrok"
-      ],
-      "nameEng": [
-        "Chewtle"
-      ]
+      "nameFr": ["Khélocrok"],
+      "nameEng": ["Chewtle"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0833-000",
@@ -16636,17 +15668,10 @@
   {
     "id": 834,
     "name": {
-      "nameFr": [
-        "Torgamord"
-      ],
-      "nameEng": [
-        "Drednaw"
-      ]
+      "nameFr": ["Torgamord"],
+      "nameEng": ["Drednaw"]
     },
-    "arrayType": [
-      "water",
-      "rock"
-    ],
+    "arrayType": ["water", "rock"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0834-000",
@@ -16656,17 +15681,10 @@
   {
     "id": 834,
     "name": {
-      "nameFr": [
-        "Torgamord"
-      ],
-      "nameEng": [
-        "Drednaw"
-      ]
+      "nameFr": ["Torgamord"],
+      "nameEng": ["Drednaw"]
     },
-    "arrayType": [
-      "water",
-      "rock"
-    ],
+    "arrayType": ["water", "rock"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0834-000-giga",
@@ -16676,16 +15694,10 @@
   {
     "id": 835,
     "name": {
-      "nameFr": [
-        "Voltoutou"
-      ],
-      "nameEng": [
-        "Yamper"
-      ]
+      "nameFr": ["Voltoutou"],
+      "nameEng": ["Yamper"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0835-000",
@@ -16695,16 +15707,10 @@
   {
     "id": 836,
     "name": {
-      "nameFr": [
-        "Fulgudog"
-      ],
-      "nameEng": [
-        "Boltund"
-      ]
+      "nameFr": ["Fulgudog"],
+      "nameEng": ["Boltund"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0836-000",
@@ -16714,16 +15720,10 @@
   {
     "id": 837,
     "name": {
-      "nameFr": [
-        "Charbi"
-      ],
-      "nameEng": [
-        "Rolycoly"
-      ]
+      "nameFr": ["Charbi"],
+      "nameEng": ["Rolycoly"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0837-000",
@@ -16733,17 +15733,10 @@
   {
     "id": 838,
     "name": {
-      "nameFr": [
-        "Wagomine"
-      ],
-      "nameEng": [
-        "Carkol"
-      ]
+      "nameFr": ["Wagomine"],
+      "nameEng": ["Carkol"]
     },
-    "arrayType": [
-      "rock",
-      "fire"
-    ],
+    "arrayType": ["rock", "fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0838-000",
@@ -16753,17 +15746,10 @@
   {
     "id": 839,
     "name": {
-      "nameFr": [
-        "Monthracite"
-      ],
-      "nameEng": [
-        "Coalossal"
-      ]
+      "nameFr": ["Monthracite"],
+      "nameEng": ["Coalossal"]
     },
-    "arrayType": [
-      "rock",
-      "fire"
-    ],
+    "arrayType": ["rock", "fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0839-000",
@@ -16773,17 +15759,10 @@
   {
     "id": 839,
     "name": {
-      "nameFr": [
-        "Monthracite"
-      ],
-      "nameEng": [
-        "Coalossal"
-      ]
+      "nameFr": ["Monthracite"],
+      "nameEng": ["Coalossal"]
     },
-    "arrayType": [
-      "rock",
-      "fire"
-    ],
+    "arrayType": ["rock", "fire"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0839-000-giga",
@@ -16793,17 +15772,10 @@
   {
     "id": 840,
     "name": {
-      "nameFr": [
-        "Verpom"
-      ],
-      "nameEng": [
-        "Applin"
-      ]
+      "nameFr": ["Verpom"],
+      "nameEng": ["Applin"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0840-000",
@@ -16813,17 +15785,10 @@
   {
     "id": 841,
     "name": {
-      "nameFr": [
-        "Pomdrapi"
-      ],
-      "nameEng": [
-        "Flapple"
-      ]
+      "nameFr": ["Pomdrapi"],
+      "nameEng": ["Flapple"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0841-000",
@@ -16833,17 +15798,10 @@
   {
     "id": 841,
     "name": {
-      "nameFr": [
-        "Pomdrapi"
-      ],
-      "nameEng": [
-        "Flapple"
-      ]
+      "nameFr": ["Pomdrapi"],
+      "nameEng": ["Flapple"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0841-000-giga",
@@ -16853,17 +15811,10 @@
   {
     "id": 842,
     "name": {
-      "nameFr": [
-        "Dratatin"
-      ],
-      "nameEng": [
-        "Appletun"
-      ]
+      "nameFr": ["Dratatin"],
+      "nameEng": ["Appletun"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0842-000",
@@ -16873,17 +15824,10 @@
   {
     "id": 842,
     "name": {
-      "nameFr": [
-        "Dratatin"
-      ],
-      "nameEng": [
-        "Appletun"
-      ]
+      "nameFr": ["Dratatin"],
+      "nameEng": ["Appletun"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0842-000-giga",
@@ -16893,16 +15837,10 @@
   {
     "id": 843,
     "name": {
-      "nameFr": [
-        "Dunaja"
-      ],
-      "nameEng": [
-        "Silicobra"
-      ]
+      "nameFr": ["Dunaja"],
+      "nameEng": ["Silicobra"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0843-000",
@@ -16912,16 +15850,10 @@
   {
     "id": 844,
     "name": {
-      "nameFr": [
-        "Dunaconda"
-      ],
-      "nameEng": [
-        "Sandaconda"
-      ]
+      "nameFr": ["Dunaconda"],
+      "nameEng": ["Sandaconda"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0844-000",
@@ -16931,16 +15863,10 @@
   {
     "id": 844,
     "name": {
-      "nameFr": [
-        "Dunaconda"
-      ],
-      "nameEng": [
-        "Sandaconda"
-      ]
+      "nameFr": ["Dunaconda"],
+      "nameEng": ["Sandaconda"]
     },
-    "arrayType": [
-      "ground"
-    ],
+    "arrayType": ["ground"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0844-000-giga",
@@ -16950,17 +15876,10 @@
   {
     "id": 845,
     "name": {
-      "nameFr": [
-        "Nigosier"
-      ],
-      "nameEng": [
-        "Cramorant"
-      ]
+      "nameFr": ["Nigosier"],
+      "nameEng": ["Cramorant"]
     },
-    "arrayType": [
-      "flying",
-      "water"
-    ],
+    "arrayType": ["flying", "water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0845-000",
@@ -16970,16 +15889,10 @@
   {
     "id": 846,
     "name": {
-      "nameFr": [
-        "Embrochet"
-      ],
-      "nameEng": [
-        "Arrokuda"
-      ]
+      "nameFr": ["Embrochet"],
+      "nameEng": ["Arrokuda"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0846-000",
@@ -16989,16 +15902,10 @@
   {
     "id": 847,
     "name": {
-      "nameFr": [
-        "Hastacuda"
-      ],
-      "nameEng": [
-        "Barraskewda"
-      ]
+      "nameFr": ["Hastacuda"],
+      "nameEng": ["Barraskewda"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0847-000",
@@ -17008,17 +15915,10 @@
   {
     "id": 848,
     "name": {
-      "nameFr": [
-        "Toxizap"
-      ],
-      "nameEng": [
-        "Toxel"
-      ]
+      "nameFr": ["Toxizap"],
+      "nameEng": ["Toxel"]
     },
-    "arrayType": [
-      "electric",
-      "poison"
-    ],
+    "arrayType": ["electric", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0848-000",
@@ -17028,17 +15928,10 @@
   {
     "id": 849,
     "name": {
-      "nameFr": [
-        "Salarsen"
-      ],
-      "nameEng": [
-        "Toxtricity-amped"
-      ]
+      "nameFr": ["Salarsen"],
+      "nameEng": ["Toxtricity-amped"]
     },
-    "arrayType": [
-      "electric",
-      "poison"
-    ],
+    "arrayType": ["electric", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0849-000",
@@ -17048,17 +15941,10 @@
   {
     "id": 849,
     "name": {
-      "nameFr": [
-        "Salarsen"
-      ],
-      "nameEng": [
-        "Toxtricity-amped"
-      ]
+      "nameFr": ["Salarsen"],
+      "nameEng": ["Toxtricity-amped"]
     },
-    "arrayType": [
-      "electric",
-      "poison"
-    ],
+    "arrayType": ["electric", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0849-000-giga",
@@ -17068,17 +15954,10 @@
   {
     "id": 849,
     "name": {
-      "nameFr": [
-        "Salarsen"
-      ],
-      "nameEng": [
-        "Toxtricity-amped"
-      ]
+      "nameFr": ["Salarsen"],
+      "nameEng": ["Toxtricity-amped"]
     },
-    "arrayType": [
-      "electric",
-      "poison"
-    ],
+    "arrayType": ["electric", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0849-001",
@@ -17088,17 +15967,10 @@
   {
     "id": 849,
     "name": {
-      "nameFr": [
-        "Salarsen"
-      ],
-      "nameEng": [
-        "Toxtricity-amped"
-      ]
+      "nameFr": ["Salarsen"],
+      "nameEng": ["Toxtricity-amped"]
     },
-    "arrayType": [
-      "electric",
-      "poison"
-    ],
+    "arrayType": ["electric", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0849-001-giga",
@@ -17108,17 +15980,10 @@
   {
     "id": 850,
     "name": {
-      "nameFr": [
-        "Grillepattes"
-      ],
-      "nameEng": [
-        "Sizzlipede"
-      ]
+      "nameFr": ["Grillepattes"],
+      "nameEng": ["Sizzlipede"]
     },
-    "arrayType": [
-      "fire",
-      "bug"
-    ],
+    "arrayType": ["fire", "bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0850-000",
@@ -17128,17 +15993,10 @@
   {
     "id": 851,
     "name": {
-      "nameFr": [
-        "Scolocendre"
-      ],
-      "nameEng": [
-        "Centiskorch"
-      ]
+      "nameFr": ["Scolocendre"],
+      "nameEng": ["Centiskorch"]
     },
-    "arrayType": [
-      "fire",
-      "bug"
-    ],
+    "arrayType": ["fire", "bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0851-000",
@@ -17148,17 +16006,10 @@
   {
     "id": 851,
     "name": {
-      "nameFr": [
-        "Scolocendre"
-      ],
-      "nameEng": [
-        "Centiskorch"
-      ]
+      "nameFr": ["Scolocendre"],
+      "nameEng": ["Centiskorch"]
     },
-    "arrayType": [
-      "fire",
-      "bug"
-    ],
+    "arrayType": ["fire", "bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0851-000-giga",
@@ -17168,16 +16019,10 @@
   {
     "id": 852,
     "name": {
-      "nameFr": [
-        "Poulpaf"
-      ],
-      "nameEng": [
-        "Clobbopus"
-      ]
+      "nameFr": ["Poulpaf"],
+      "nameEng": ["Clobbopus"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0852-000",
@@ -17187,16 +16032,10 @@
   {
     "id": 853,
     "name": {
-      "nameFr": [
-        "Krakos"
-      ],
-      "nameEng": [
-        "Grapploct"
-      ]
+      "nameFr": ["Krakos"],
+      "nameEng": ["Grapploct"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0853-000",
@@ -17206,16 +16045,10 @@
   {
     "id": 854,
     "name": {
-      "nameFr": [
-        "Théffroi"
-      ],
-      "nameEng": [
-        "Sinistea"
-      ]
+      "nameFr": ["Théffroi"],
+      "nameEng": ["Sinistea"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0854-000",
@@ -17225,16 +16058,10 @@
   {
     "id": 854,
     "name": {
-      "nameFr": [
-        "Théffroi"
-      ],
-      "nameEng": [
-        "Sinistea"
-      ]
+      "nameFr": ["Théffroi"],
+      "nameEng": ["Sinistea"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0854-001",
@@ -17244,16 +16071,10 @@
   {
     "id": 855,
     "name": {
-      "nameFr": [
-        "Polthégeist"
-      ],
-      "nameEng": [
-        "Polteageist"
-      ]
+      "nameFr": ["Polthégeist"],
+      "nameEng": ["Polteageist"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0855-000",
@@ -17263,16 +16084,10 @@
   {
     "id": 855,
     "name": {
-      "nameFr": [
-        "Polthégeist"
-      ],
-      "nameEng": [
-        "Polteageist"
-      ]
+      "nameFr": ["Polthégeist"],
+      "nameEng": ["Polteageist"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0855-001",
@@ -17282,16 +16097,10 @@
   {
     "id": 856,
     "name": {
-      "nameFr": [
-        "Bibichut"
-      ],
-      "nameEng": [
-        "Hatenna"
-      ]
+      "nameFr": ["Bibichut"],
+      "nameEng": ["Hatenna"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0856-000",
@@ -17301,16 +16110,10 @@
   {
     "id": 857,
     "name": {
-      "nameFr": [
-        "Chapotus"
-      ],
-      "nameEng": [
-        "Hattrem"
-      ]
+      "nameFr": ["Chapotus"],
+      "nameEng": ["Hattrem"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0857-000",
@@ -17320,17 +16123,10 @@
   {
     "id": 858,
     "name": {
-      "nameFr": [
-        "Sorcilence"
-      ],
-      "nameEng": [
-        "Hatterene"
-      ]
+      "nameFr": ["Sorcilence"],
+      "nameEng": ["Hatterene"]
     },
-    "arrayType": [
-      "psychic",
-      "fairy"
-    ],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0858-000",
@@ -17340,17 +16136,10 @@
   {
     "id": 858,
     "name": {
-      "nameFr": [
-        "Sorcilence"
-      ],
-      "nameEng": [
-        "Hatterene"
-      ]
+      "nameFr": ["Sorcilence"],
+      "nameEng": ["Hatterene"]
     },
-    "arrayType": [
-      "psychic",
-      "fairy"
-    ],
+    "arrayType": ["psychic", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0858-000-giga",
@@ -17360,17 +16149,10 @@
   {
     "id": 859,
     "name": {
-      "nameFr": [
-        "Grimalin"
-      ],
-      "nameEng": [
-        "Impidimp"
-      ]
+      "nameFr": ["Grimalin"],
+      "nameEng": ["Impidimp"]
     },
-    "arrayType": [
-      "dark",
-      "fairy"
-    ],
+    "arrayType": ["dark", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0859-000",
@@ -17380,17 +16162,10 @@
   {
     "id": 860,
     "name": {
-      "nameFr": [
-        "Fourbelin"
-      ],
-      "nameEng": [
-        "Morgrem"
-      ]
+      "nameFr": ["Fourbelin"],
+      "nameEng": ["Morgrem"]
     },
-    "arrayType": [
-      "dark",
-      "fairy"
-    ],
+    "arrayType": ["dark", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0860-000",
@@ -17400,17 +16175,10 @@
   {
     "id": 861,
     "name": {
-      "nameFr": [
-        "Angoliath"
-      ],
-      "nameEng": [
-        "Grimmsnarl"
-      ]
+      "nameFr": ["Angoliath"],
+      "nameEng": ["Grimmsnarl"]
     },
-    "arrayType": [
-      "dark",
-      "fairy"
-    ],
+    "arrayType": ["dark", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0861-000",
@@ -17420,17 +16188,10 @@
   {
     "id": 861,
     "name": {
-      "nameFr": [
-        "Angoliath"
-      ],
-      "nameEng": [
-        "Grimmsnarl"
-      ]
+      "nameFr": ["Angoliath"],
+      "nameEng": ["Grimmsnarl"]
     },
-    "arrayType": [
-      "dark",
-      "fairy"
-    ],
+    "arrayType": ["dark", "fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0861-000-giga",
@@ -17440,17 +16201,10 @@
   {
     "id": 862,
     "name": {
-      "nameFr": [
-        "Ixon"
-      ],
-      "nameEng": [
-        "Obstagoon"
-      ]
+      "nameFr": ["Ixon"],
+      "nameEng": ["Obstagoon"]
     },
-    "arrayType": [
-      "dark",
-      "normal"
-    ],
+    "arrayType": ["dark", "normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0862-000",
@@ -17460,16 +16214,10 @@
   {
     "id": 863,
     "name": {
-      "nameFr": [
-        "Berserkatt"
-      ],
-      "nameEng": [
-        "Perrserker"
-      ]
+      "nameFr": ["Berserkatt"],
+      "nameEng": ["Perrserker"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0863-000",
@@ -17479,16 +16227,10 @@
   {
     "id": 864,
     "name": {
-      "nameFr": [
-        "Corayôme"
-      ],
-      "nameEng": [
-        "Cursola"
-      ]
+      "nameFr": ["Corayôme"],
+      "nameEng": ["Cursola"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0864-000",
@@ -17498,16 +16240,10 @@
   {
     "id": 865,
     "name": {
-      "nameFr": [
-        "Palarticho"
-      ],
-      "nameEng": [
-        "Sirfetchd"
-      ]
+      "nameFr": ["Palarticho"],
+      "nameEng": ["Sirfetchd"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0865-000",
@@ -17517,17 +16253,10 @@
   {
     "id": 866,
     "name": {
-      "nameFr": [
-        "M. Glaquette"
-      ],
-      "nameEng": [
-        "Mr-rime"
-      ]
+      "nameFr": ["M. Glaquette"],
+      "nameEng": ["Mr-rime"]
     },
-    "arrayType": [
-      "ice",
-      "psychic"
-    ],
+    "arrayType": ["ice", "psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0866-000",
@@ -17537,17 +16266,10 @@
   {
     "id": 867,
     "name": {
-      "nameFr": [
-        "Tutétékri"
-      ],
-      "nameEng": [
-        "Runerigus"
-      ]
+      "nameFr": ["Tutétékri"],
+      "nameEng": ["Runerigus"]
     },
-    "arrayType": [
-      "ground",
-      "ghost"
-    ],
+    "arrayType": ["ground", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0867-000",
@@ -17557,16 +16279,10 @@
   {
     "id": 868,
     "name": {
-      "nameFr": [
-        "Crèmy"
-      ],
-      "nameEng": [
-        "Milcery"
-      ]
+      "nameFr": ["Crèmy"],
+      "nameEng": ["Milcery"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0868-000",
@@ -17576,16 +16292,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-000",
@@ -17595,16 +16305,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-001",
@@ -17614,16 +16318,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-002",
@@ -17633,16 +16331,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-003",
@@ -17652,16 +16344,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-004",
@@ -17671,16 +16357,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-005",
@@ -17690,16 +16370,10 @@
   {
     "id": 869,
     "name": {
-      "nameFr": [
-        "Charmilly"
-      ],
-      "nameEng": [
-        "Alcremie"
-      ]
+      "nameFr": ["Charmilly"],
+      "nameEng": ["Alcremie"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0869-006",
@@ -17709,16 +16383,10 @@
   {
     "id": 870,
     "name": {
-      "nameFr": [
-        "Hexadron"
-      ],
-      "nameEng": [
-        "Falinks"
-      ]
+      "nameFr": ["Hexadron"],
+      "nameEng": ["Falinks"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0870-000",
@@ -17728,16 +16396,10 @@
   {
     "id": 871,
     "name": {
-      "nameFr": [
-        "Wattapik"
-      ],
-      "nameEng": [
-        "Pincurchin"
-      ]
+      "nameFr": ["Wattapik"],
+      "nameEng": ["Pincurchin"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0871-000",
@@ -17747,17 +16409,10 @@
   {
     "id": 872,
     "name": {
-      "nameFr": [
-        "Frissonille"
-      ],
-      "nameEng": [
-        "Snom"
-      ]
+      "nameFr": ["Frissonille"],
+      "nameEng": ["Snom"]
     },
-    "arrayType": [
-      "ice",
-      "bug"
-    ],
+    "arrayType": ["ice", "bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0872-000",
@@ -17767,17 +16422,10 @@
   {
     "id": 873,
     "name": {
-      "nameFr": [
-        "Beldeneige"
-      ],
-      "nameEng": [
-        "Frosmoth"
-      ]
+      "nameFr": ["Beldeneige"],
+      "nameEng": ["Frosmoth"]
     },
-    "arrayType": [
-      "ice",
-      "bug"
-    ],
+    "arrayType": ["ice", "bug"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0873-000",
@@ -17787,16 +16435,10 @@
   {
     "id": 874,
     "name": {
-      "nameFr": [
-        "Dolman"
-      ],
-      "nameEng": [
-        "Stonjourner"
-      ]
+      "nameFr": ["Dolman"],
+      "nameEng": ["Stonjourner"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0874-000",
@@ -17806,16 +16448,10 @@
   {
     "id": 875,
     "name": {
-      "nameFr": [
-        "Bekaglaçon"
-      ],
-      "nameEng": [
-        "Eiscue-ice"
-      ]
+      "nameFr": ["Bekaglaçon"],
+      "nameEng": ["Eiscue-ice"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0875-000",
@@ -17825,16 +16461,10 @@
   {
     "id": 875,
     "name": {
-      "nameFr": [
-        "Bekaglaçon"
-      ],
-      "nameEng": [
-        "Eiscue-ice"
-      ]
+      "nameFr": ["Bekaglaçon"],
+      "nameEng": ["Eiscue-ice"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0875-001",
@@ -17844,17 +16474,10 @@
   {
     "id": 876,
     "name": {
-      "nameFr": [
-        "Wimessir"
-      ],
-      "nameEng": [
-        "Indeedee-male"
-      ]
+      "nameFr": ["Wimessir"],
+      "nameEng": ["Indeedee-male"]
     },
-    "arrayType": [
-      "psychic",
-      "normal"
-    ],
+    "arrayType": ["psychic", "normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0876-000",
@@ -17864,17 +16487,10 @@
   {
     "id": 877,
     "name": {
-      "nameFr": [
-        "Morpeko"
-      ],
-      "nameEng": [
-        "Morpeko-full-belly"
-      ]
+      "nameFr": ["Morpeko"],
+      "nameEng": ["Morpeko-full-belly"]
     },
-    "arrayType": [
-      "electric",
-      "dark"
-    ],
+    "arrayType": ["electric", "dark"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0877-000",
@@ -17884,16 +16500,10 @@
   {
     "id": 878,
     "name": {
-      "nameFr": [
-        "Charibari"
-      ],
-      "nameEng": [
-        "Cufant"
-      ]
+      "nameFr": ["Charibari"],
+      "nameEng": ["Cufant"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0878-000",
@@ -17903,16 +16513,10 @@
   {
     "id": 879,
     "name": {
-      "nameFr": [
-        "Pachyradjah"
-      ],
-      "nameEng": [
-        "Copperajah"
-      ]
+      "nameFr": ["Pachyradjah"],
+      "nameEng": ["Copperajah"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0879-000",
@@ -17922,16 +16526,10 @@
   {
     "id": 879,
     "name": {
-      "nameFr": [
-        "Pachyradjah"
-      ],
-      "nameEng": [
-        "Copperajah"
-      ]
+      "nameFr": ["Pachyradjah"],
+      "nameEng": ["Copperajah"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0879-000-giga",
@@ -17941,17 +16539,10 @@
   {
     "id": 880,
     "name": {
-      "nameFr": [
-        "Galvagon"
-      ],
-      "nameEng": [
-        "Dracozolt"
-      ]
+      "nameFr": ["Galvagon"],
+      "nameEng": ["Dracozolt"]
     },
-    "arrayType": [
-      "electric",
-      "dragon"
-    ],
+    "arrayType": ["electric", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0880-000",
@@ -17961,17 +16552,10 @@
   {
     "id": 881,
     "name": {
-      "nameFr": [
-        "Galvagla"
-      ],
-      "nameEng": [
-        "Arctozolt"
-      ]
+      "nameFr": ["Galvagla"],
+      "nameEng": ["Arctozolt"]
     },
-    "arrayType": [
-      "electric",
-      "ice"
-    ],
+    "arrayType": ["electric", "ice"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0881-000",
@@ -17981,17 +16565,10 @@
   {
     "id": 882,
     "name": {
-      "nameFr": [
-        "Hydragon"
-      ],
-      "nameEng": [
-        "Dracovish"
-      ]
+      "nameFr": ["Hydragon"],
+      "nameEng": ["Dracovish"]
     },
-    "arrayType": [
-      "water",
-      "dragon"
-    ],
+    "arrayType": ["water", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0882-000",
@@ -18001,17 +16578,10 @@
   {
     "id": 883,
     "name": {
-      "nameFr": [
-        "Hydragla"
-      ],
-      "nameEng": [
-        "Arctovish"
-      ]
+      "nameFr": ["Hydragla"],
+      "nameEng": ["Arctovish"]
     },
-    "arrayType": [
-      "water",
-      "ice"
-    ],
+    "arrayType": ["water", "ice"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0883-000",
@@ -18021,17 +16591,10 @@
   {
     "id": 884,
     "name": {
-      "nameFr": [
-        "Duralugon"
-      ],
-      "nameEng": [
-        "Duraludon"
-      ]
+      "nameFr": ["Duralugon"],
+      "nameEng": ["Duraludon"]
     },
-    "arrayType": [
-      "steel",
-      "dragon"
-    ],
+    "arrayType": ["steel", "dragon"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0884-000",
@@ -18041,17 +16604,10 @@
   {
     "id": 885,
     "name": {
-      "nameFr": [
-        "Fantyrm"
-      ],
-      "nameEng": [
-        "Dreepy"
-      ]
+      "nameFr": ["Fantyrm"],
+      "nameEng": ["Dreepy"]
     },
-    "arrayType": [
-      "dragon",
-      "ghost"
-    ],
+    "arrayType": ["dragon", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0885-000",
@@ -18061,17 +16617,10 @@
   {
     "id": 886,
     "name": {
-      "nameFr": [
-        "Dispareptil"
-      ],
-      "nameEng": [
-        "Drakloak"
-      ]
+      "nameFr": ["Dispareptil"],
+      "nameEng": ["Drakloak"]
     },
-    "arrayType": [
-      "dragon",
-      "ghost"
-    ],
+    "arrayType": ["dragon", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0886-000",
@@ -18081,17 +16630,10 @@
   {
     "id": 887,
     "name": {
-      "nameFr": [
-        "Lanssorien"
-      ],
-      "nameEng": [
-        "Dragapult"
-      ]
+      "nameFr": ["Lanssorien"],
+      "nameEng": ["Dragapult"]
     },
-    "arrayType": [
-      "dragon",
-      "ghost"
-    ],
+    "arrayType": ["dragon", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0887-000",
@@ -18101,16 +16643,10 @@
   {
     "id": 888,
     "name": {
-      "nameFr": [
-        "Zacian"
-      ],
-      "nameEng": [
-        "Zacian"
-      ]
+      "nameFr": ["Zacian"],
+      "nameEng": ["Zacian"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0888-000",
@@ -18120,17 +16656,10 @@
   {
     "id": 888,
     "name": {
-      "nameFr": [
-        "Zacian"
-      ],
-      "nameEng": [
-        "Zacian"
-      ]
+      "nameFr": ["Zacian"],
+      "nameEng": ["Zacian"]
     },
-    "arrayType": [
-      "fairy",
-        "steel"
-    ],
+    "arrayType": ["fairy", "steel"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0888-001",
@@ -18140,16 +16669,10 @@
   {
     "id": 889,
     "name": {
-      "nameFr": [
-        "Zamazenta"
-      ],
-      "nameEng": [
-        "Zamazenta"
-      ]
+      "nameFr": ["Zamazenta"],
+      "nameEng": ["Zamazenta"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0889-000",
@@ -18159,17 +16682,10 @@
   {
     "id": 889,
     "name": {
-      "nameFr": [
-        "Zamazenta"
-      ],
-      "nameEng": [
-        "Zamazenta"
-      ]
+      "nameFr": ["Zamazenta"],
+      "nameEng": ["Zamazenta"]
     },
-    "arrayType": [
-      "fighting",
-        "steel"
-    ],
+    "arrayType": ["fighting", "steel"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0889-001",
@@ -18179,17 +16695,10 @@
   {
     "id": 890,
     "name": {
-      "nameFr": [
-        "Éthernatos"
-      ],
-      "nameEng": [
-        "Eternatus"
-      ]
+      "nameFr": ["Éthernatos"],
+      "nameEng": ["Eternatus"]
     },
-    "arrayType": [
-      "poison",
-      "dragon"
-    ],
+    "arrayType": ["poison", "dragon"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0890-000",
@@ -18199,17 +16708,10 @@
   {
     "id": 890,
     "name": {
-      "nameFr": [
-        "Éthernatos"
-      ],
-      "nameEng": [
-        "Eternatus"
-      ]
+      "nameFr": ["Éthernatos"],
+      "nameEng": ["Eternatus"]
     },
-    "arrayType": [
-      "poison",
-      "dragon"
-    ],
+    "arrayType": ["poison", "dragon"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0890-000-giga",
@@ -18219,16 +16721,10 @@
   {
     "id": 891,
     "name": {
-      "nameFr": [
-        "Wushours"
-      ],
-      "nameEng": [
-        "Kubfu"
-      ]
+      "nameFr": ["Wushours"],
+      "nameEng": ["Kubfu"]
     },
-    "arrayType": [
-      "fighting"
-    ],
+    "arrayType": ["fighting"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0891-000",
@@ -18238,17 +16734,10 @@
   {
     "id": 892,
     "name": {
-      "nameFr": [
-        "Shifours"
-      ],
-      "nameEng": [
-        "Urshifu"
-      ]
+      "nameFr": ["Shifours"],
+      "nameEng": ["Urshifu"]
     },
-    "arrayType": [
-      "fighting",
-      "dark"
-    ],
+    "arrayType": ["fighting", "dark"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0892-000",
@@ -18258,17 +16747,10 @@
   {
     "id": 892,
     "name": {
-      "nameFr": [
-        "Shifours"
-      ],
-      "nameEng": [
-        "Urshifu"
-      ]
+      "nameFr": ["Shifours"],
+      "nameEng": ["Urshifu"]
     },
-    "arrayType": [
-      "fighting",
-      "dark"
-    ],
+    "arrayType": ["fighting", "dark"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0892-000-giga",
@@ -18278,17 +16760,10 @@
   {
     "id": 892,
     "name": {
-      "nameFr": [
-        "Shifours"
-      ],
-      "nameEng": [
-        "Urshifu"
-      ]
+      "nameFr": ["Shifours"],
+      "nameEng": ["Urshifu"]
     },
-    "arrayType": [
-      "fighting",
-        "water"
-    ],
+    "arrayType": ["fighting", "water"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0892-001",
@@ -18298,17 +16773,10 @@
   {
     "id": 892,
     "name": {
-      "nameFr": [
-        "Shifours"
-      ],
-      "nameEng": [
-        "Urshifu"
-      ]
+      "nameFr": ["Shifours"],
+      "nameEng": ["Urshifu"]
     },
-    "arrayType": [
-      "fighting",
-      "water"
-    ],
+    "arrayType": ["fighting", "water"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0892-001-giga",
@@ -18318,17 +16786,10 @@
   {
     "id": 893,
     "name": {
-      "nameFr": [
-        "Zarude"
-      ],
-      "nameEng": [
-        "Zarude"
-      ]
+      "nameFr": ["Zarude"],
+      "nameEng": ["Zarude"]
     },
-    "arrayType": [
-      "dark",
-      "grass"
-    ],
+    "arrayType": ["dark", "grass"],
     "rarity": "mythical",
     "gen": 8,
     "imgName": "0893-000",
@@ -18338,17 +16799,10 @@
   {
     "id": 893,
     "name": {
-      "nameFr": [
-        "Zarude"
-      ],
-      "nameEng": [
-        "Zarude"
-      ]
+      "nameFr": ["Zarude"],
+      "nameEng": ["Zarude"]
     },
-    "arrayType": [
-      "dark",
-      "grass"
-    ],
+    "arrayType": ["dark", "grass"],
     "rarity": "mythical",
     "gen": 8,
     "imgName": "0893-001",
@@ -18358,16 +16812,10 @@
   {
     "id": 894,
     "name": {
-      "nameFr": [
-        "Regieleki"
-      ],
-      "nameEng": [
-        "Regieleki"
-      ]
+      "nameFr": ["Regieleki"],
+      "nameEng": ["Regieleki"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0894-000",
@@ -18377,16 +16825,10 @@
   {
     "id": 895,
     "name": {
-      "nameFr": [
-        "Regidrago"
-      ],
-      "nameEng": [
-        "Regidrago"
-      ]
+      "nameFr": ["Regidrago"],
+      "nameEng": ["Regidrago"]
     },
-    "arrayType": [
-      "dragon"
-    ],
+    "arrayType": ["dragon"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0895-000",
@@ -18396,16 +16838,10 @@
   {
     "id": 896,
     "name": {
-      "nameFr": [
-        "Blizzeval"
-      ],
-      "nameEng": [
-        "Glastrier"
-      ]
+      "nameFr": ["Blizzeval"],
+      "nameEng": ["Glastrier"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0896-000",
@@ -18415,16 +16851,10 @@
   {
     "id": 897,
     "name": {
-      "nameFr": [
-        "Spectreval"
-      ],
-      "nameEng": [
-        "Spectrier"
-      ]
+      "nameFr": ["Spectreval"],
+      "nameEng": ["Spectrier"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0897-000",
@@ -18434,17 +16864,10 @@
   {
     "id": 898,
     "name": {
-      "nameFr": [
-        "Sylveroy"
-      ],
-      "nameEng": [
-        "Calyrex"
-      ]
+      "nameFr": ["Sylveroy"],
+      "nameEng": ["Calyrex"]
     },
-    "arrayType": [
-      "psychic",
-      "grass"
-    ],
+    "arrayType": ["psychic", "grass"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0898-000",
@@ -18454,17 +16877,10 @@
   {
     "id": 898,
     "name": {
-      "nameFr": [
-        "Sylveroy"
-      ],
-      "nameEng": [
-        "Calyrex"
-      ]
+      "nameFr": ["Sylveroy"],
+      "nameEng": ["Calyrex"]
     },
-    "arrayType": [
-      "psychic",
-      "grass"
-    ],
+    "arrayType": ["psychic", "grass"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0898-001",
@@ -18474,17 +16890,10 @@
   {
     "id": 898,
     "name": {
-      "nameFr": [
-        "Sylveroy"
-      ],
-      "nameEng": [
-        "Calyrex"
-      ]
+      "nameFr": ["Sylveroy"],
+      "nameEng": ["Calyrex"]
     },
-    "arrayType": [
-      "psychic",
-      "grass"
-    ],
+    "arrayType": ["psychic", "grass"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0898-002",
@@ -18494,17 +16903,10 @@
   {
     "id": 899,
     "name": {
-      "nameFr": [
-        "Cerbyllin"
-      ],
-      "nameEng": [
-        "Wyrdeer"
-      ]
+      "nameFr": ["Cerbyllin"],
+      "nameEng": ["Wyrdeer"]
     },
-    "arrayType": [
-      "normal",
-      "psychic"
-    ],
+    "arrayType": ["normal", "psychic"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0899-000",
@@ -18514,17 +16916,10 @@
   {
     "id": 900,
     "name": {
-      "nameFr": [
-        "Hachécateur"
-      ],
-      "nameEng": [
-        "Kleavor"
-      ]
+      "nameFr": ["Hachécateur"],
+      "nameEng": ["Kleavor"]
     },
-    "arrayType": [
-      "bug",
-      "rock"
-    ],
+    "arrayType": ["bug", "rock"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0900-000",
@@ -18534,17 +16929,10 @@
   {
     "id": 901,
     "name": {
-      "nameFr": [
-        "Ursaking"
-      ],
-      "nameEng": [
-        "Ursaluna"
-      ]
+      "nameFr": ["Ursaking"],
+      "nameEng": ["Ursaluna"]
     },
-    "arrayType": [
-      "ground",
-      "normal"
-    ],
+    "arrayType": ["ground", "normal"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0901-000",
@@ -18554,17 +16942,10 @@
   {
     "id": 902,
     "name": {
-      "nameFr": [
-        "Paragruel"
-      ],
-      "nameEng": [
-        "Basculegion-male"
-      ]
+      "nameFr": ["Paragruel"],
+      "nameEng": ["Basculegion-male"]
     },
-    "arrayType": [
-      "water",
-      "ghost"
-    ],
+    "arrayType": ["water", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0902-000",
@@ -18574,17 +16955,10 @@
   {
     "id": 902,
     "name": {
-      "nameFr": [
-        "Paragruel"
-      ],
-      "nameEng": [
-        "Basculegion-male"
-      ]
+      "nameFr": ["Paragruel"],
+      "nameEng": ["Basculegion-male"]
     },
-    "arrayType": [
-      "water",
-      "ghost"
-    ],
+    "arrayType": ["water", "ghost"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0902-001",
@@ -18594,17 +16968,10 @@
   {
     "id": 903,
     "name": {
-      "nameFr": [
-        "Farfurex"
-      ],
-      "nameEng": [
-        "Sneasler"
-      ]
+      "nameFr": ["Farfurex"],
+      "nameEng": ["Sneasler"]
     },
-    "arrayType": [
-      "fighting",
-      "poison"
-    ],
+    "arrayType": ["fighting", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0903-000",
@@ -18614,17 +16981,10 @@
   {
     "id": 904,
     "name": {
-      "nameFr": [
-        "Qwilpik"
-      ],
-      "nameEng": [
-        "Overqwil"
-      ]
+      "nameFr": ["Qwilpik"],
+      "nameEng": ["Overqwil"]
     },
-    "arrayType": [
-      "dark",
-      "poison"
-    ],
+    "arrayType": ["dark", "poison"],
     "rarity": "ordinary",
     "gen": 8,
     "imgName": "0904-000",
@@ -18634,17 +16994,10 @@
   {
     "id": 905,
     "name": {
-      "nameFr": [
-        "Amovénus"
-      ],
-      "nameEng": [
-        "Enamorus"
-      ]
+      "nameFr": ["Amovénus"],
+      "nameEng": ["Enamorus"]
     },
-    "arrayType": [
-      "fairy",
-      "flying"
-    ],
+    "arrayType": ["fairy", "flying"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0905-000",
@@ -18654,17 +17007,10 @@
   {
     "id": 905,
     "name": {
-      "nameFr": [
-        "Amovénus"
-      ],
-      "nameEng": [
-        "Enamorus"
-      ]
+      "nameFr": ["Amovénus"],
+      "nameEng": ["Enamorus"]
     },
-    "arrayType": [
-      "fairy",
-      "flying"
-    ],
+    "arrayType": ["fairy", "flying"],
     "rarity": "legendary",
     "gen": 8,
     "imgName": "0905-001",
@@ -18674,16 +17020,10 @@
   {
     "id": 906,
     "name": {
-      "nameFr": [
-        "Poussacha"
-      ],
-      "nameEng": [
-        "Sprigatito"
-      ]
+      "nameFr": ["Poussacha"],
+      "nameEng": ["Sprigatito"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0906-000",
@@ -18693,16 +17033,10 @@
   {
     "id": 907,
     "name": {
-      "nameFr": [
-        "Matourgeon"
-      ],
-      "nameEng": [
-        "Floragato"
-      ]
+      "nameFr": ["Matourgeon"],
+      "nameEng": ["Floragato"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0907-000",
@@ -18712,17 +17046,10 @@
   {
     "id": 908,
     "name": {
-      "nameFr": [
-        "Miascarade"
-      ],
-      "nameEng": [
-        "Meowscarada"
-      ]
+      "nameFr": ["Miascarade"],
+      "nameEng": ["Meowscarada"]
     },
-    "arrayType": [
-      "grass",
-      "dark"
-    ],
+    "arrayType": ["grass", "dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0908-000",
@@ -18732,16 +17059,10 @@
   {
     "id": 909,
     "name": {
-      "nameFr": [
-        "Chochodile"
-      ],
-      "nameEng": [
-        "Fuecoco"
-      ]
+      "nameFr": ["Chochodile"],
+      "nameEng": ["Fuecoco"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0909-000",
@@ -18751,16 +17072,10 @@
   {
     "id": 910,
     "name": {
-      "nameFr": [
-        "Crocogril"
-      ],
-      "nameEng": [
-        "Crocalor"
-      ]
+      "nameFr": ["Crocogril"],
+      "nameEng": ["Crocalor"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0910-000",
@@ -18770,17 +17085,10 @@
   {
     "id": 911,
     "name": {
-      "nameFr": [
-        "Flâmigator"
-      ],
-      "nameEng": [
-        "Skeledirge"
-      ]
+      "nameFr": ["Flâmigator"],
+      "nameEng": ["Skeledirge"]
     },
-    "arrayType": [
-      "fire",
-      "ghost"
-    ],
+    "arrayType": ["fire", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0911-000",
@@ -18790,16 +17098,10 @@
   {
     "id": 912,
     "name": {
-      "nameFr": [
-        "Coiffeton"
-      ],
-      "nameEng": [
-        "Quaxly"
-      ]
+      "nameFr": ["Coiffeton"],
+      "nameEng": ["Quaxly"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0912-000",
@@ -18809,16 +17111,10 @@
   {
     "id": 913,
     "name": {
-      "nameFr": [
-        "Canarbello"
-      ],
-      "nameEng": [
-        "Quaxwell"
-      ]
+      "nameFr": ["Canarbello"],
+      "nameEng": ["Quaxwell"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0913-000",
@@ -18828,17 +17124,10 @@
   {
     "id": 914,
     "name": {
-      "nameFr": [
-        "Palmaval"
-      ],
-      "nameEng": [
-        "Quaquaval"
-      ]
+      "nameFr": ["Palmaval"],
+      "nameEng": ["Quaquaval"]
     },
-    "arrayType": [
-      "water",
-      "fighting"
-    ],
+    "arrayType": ["water", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0914-000",
@@ -18848,16 +17137,10 @@
   {
     "id": 915,
     "name": {
-      "nameFr": [
-        "Gourmelet"
-      ],
-      "nameEng": [
-        "Lechonk"
-      ]
+      "nameFr": ["Gourmelet"],
+      "nameEng": ["Lechonk"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0915-000",
@@ -18867,16 +17150,10 @@
   {
     "id": 916,
     "name": {
-      "nameFr": [
-        "Fragroin"
-      ],
-      "nameEng": [
-        "Oinkologne-male"
-      ]
+      "nameFr": ["Fragroin"],
+      "nameEng": ["Oinkologne-male"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0916-000",
@@ -18886,16 +17163,10 @@
   {
     "id": 916,
     "name": {
-      "nameFr": [
-        "Fragroin"
-      ],
-      "nameEng": [
-        "Oinkologne-male"
-      ]
+      "nameFr": ["Fragroin"],
+      "nameEng": ["Oinkologne-male"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0916-001",
@@ -18905,16 +17176,10 @@
   {
     "id": 917,
     "name": {
-      "nameFr": [
-        "Tissenboule"
-      ],
-      "nameEng": [
-        "Tarountula"
-      ]
+      "nameFr": ["Tissenboule"],
+      "nameEng": ["Tarountula"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0917-000",
@@ -18924,16 +17189,10 @@
   {
     "id": 918,
     "name": {
-      "nameFr": [
-        "Filentrappe"
-      ],
-      "nameEng": [
-        "Spidops"
-      ]
+      "nameFr": ["Filentrappe"],
+      "nameEng": ["Spidops"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0918-000",
@@ -18943,16 +17202,10 @@
   {
     "id": 919,
     "name": {
-      "nameFr": [
-        "Lilliterelle"
-      ],
-      "nameEng": [
-        "Nymble"
-      ]
+      "nameFr": ["Lilliterelle"],
+      "nameEng": ["Nymble"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0919-000",
@@ -18962,17 +17215,10 @@
   {
     "id": 920,
     "name": {
-      "nameFr": [
-        "Gambex"
-      ],
-      "nameEng": [
-        "Lokix"
-      ]
+      "nameFr": ["Gambex"],
+      "nameEng": ["Lokix"]
     },
-    "arrayType": [
-      "bug",
-      "dark"
-    ],
+    "arrayType": ["bug", "dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0920-000",
@@ -18982,16 +17228,10 @@
   {
     "id": 921,
     "name": {
-      "nameFr": [
-        "Pohm"
-      ],
-      "nameEng": [
-        "Pawmi"
-      ]
+      "nameFr": ["Pohm"],
+      "nameEng": ["Pawmi"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0921-000",
@@ -19001,17 +17241,10 @@
   {
     "id": 922,
     "name": {
-      "nameFr": [
-        "Pohmotte"
-      ],
-      "nameEng": [
-        "Pawmo"
-      ]
+      "nameFr": ["Pohmotte"],
+      "nameEng": ["Pawmo"]
     },
-    "arrayType": [
-      "electric",
-      "fighting"
-    ],
+    "arrayType": ["electric", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0922-000",
@@ -19021,17 +17254,10 @@
   {
     "id": 923,
     "name": {
-      "nameFr": [
-        "Pohmarmotte"
-      ],
-      "nameEng": [
-        "Pawmot"
-      ]
+      "nameFr": ["Pohmarmotte"],
+      "nameEng": ["Pawmot"]
     },
-    "arrayType": [
-      "electric",
-      "fighting"
-    ],
+    "arrayType": ["electric", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0923-000",
@@ -19041,16 +17267,10 @@
   {
     "id": 924,
     "name": {
-      "nameFr": [
-        "Compagnol"
-      ],
-      "nameEng": [
-        "Tandemaus"
-      ]
+      "nameFr": ["Compagnol"],
+      "nameEng": ["Tandemaus"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0924-000",
@@ -19060,16 +17280,10 @@
   {
     "id": 925,
     "name": {
-      "nameFr": [
-        "Famignol"
-      ],
-      "nameEng": [
-        "Maushold-family-of-four"
-      ]
+      "nameFr": ["Famignol"],
+      "nameEng": ["Maushold-family-of-four"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0925-000",
@@ -19079,16 +17293,10 @@
   {
     "id": 925,
     "name": {
-      "nameFr": [
-        "Famignol"
-      ],
-      "nameEng": [
-        "Maushold-family-of-four"
-      ]
+      "nameFr": ["Famignol"],
+      "nameEng": ["Maushold-family-of-four"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0925-001",
@@ -19098,16 +17306,10 @@
   {
     "id": 926,
     "name": {
-      "nameFr": [
-        "Pâtachiot"
-      ],
-      "nameEng": [
-        "Fidough"
-      ]
+      "nameFr": ["Pâtachiot"],
+      "nameEng": ["Fidough"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0926-000",
@@ -19117,16 +17319,10 @@
   {
     "id": 927,
     "name": {
-      "nameFr": [
-        "Briochien"
-      ],
-      "nameEng": [
-        "Dachsbun"
-      ]
+      "nameFr": ["Briochien"],
+      "nameEng": ["Dachsbun"]
     },
-    "arrayType": [
-      "fairy"
-    ],
+    "arrayType": ["fairy"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0927-000",
@@ -19136,17 +17332,10 @@
   {
     "id": 928,
     "name": {
-      "nameFr": [
-        "Olivini"
-      ],
-      "nameEng": [
-        "Smoliv"
-      ]
+      "nameFr": ["Olivini"],
+      "nameEng": ["Smoliv"]
     },
-    "arrayType": [
-      "grass",
-      "normal"
-    ],
+    "arrayType": ["grass", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0928-000",
@@ -19156,17 +17345,10 @@
   {
     "id": 929,
     "name": {
-      "nameFr": [
-        "Olivado"
-      ],
-      "nameEng": [
-        "Dolliv"
-      ]
+      "nameFr": ["Olivado"],
+      "nameEng": ["Dolliv"]
     },
-    "arrayType": [
-      "grass",
-      "normal"
-    ],
+    "arrayType": ["grass", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0929-000",
@@ -19176,17 +17358,10 @@
   {
     "id": 930,
     "name": {
-      "nameFr": [
-        "Arboliva"
-      ],
-      "nameEng": [
-        "Arboliva"
-      ]
+      "nameFr": ["Arboliva"],
+      "nameEng": ["Arboliva"]
     },
-    "arrayType": [
-      "grass",
-      "normal"
-    ],
+    "arrayType": ["grass", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0930-000",
@@ -19196,17 +17371,10 @@
   {
     "id": 931,
     "name": {
-      "nameFr": [
-        "Tapatoès"
-      ],
-      "nameEng": [
-        "Squawkabilly"
-      ]
+      "nameFr": ["Tapatoès"],
+      "nameEng": ["Squawkabilly"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0931-000",
@@ -19216,17 +17384,10 @@
   {
     "id": 931,
     "name": {
-      "nameFr": [
-        "Tapatoès"
-      ],
-      "nameEng": [
-        "Squawkabilly"
-      ]
+      "nameFr": ["Tapatoès"],
+      "nameEng": ["Squawkabilly"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0931-001",
@@ -19236,17 +17397,10 @@
   {
     "id": 931,
     "name": {
-      "nameFr": [
-        "Tapatoès"
-      ],
-      "nameEng": [
-        "Squawkabilly"
-      ]
+      "nameFr": ["Tapatoès"],
+      "nameEng": ["Squawkabilly"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0931-002",
@@ -19256,17 +17410,10 @@
   {
     "id": 931,
     "name": {
-      "nameFr": [
-        "Tapatoès"
-      ],
-      "nameEng": [
-        "Squawkabilly"
-      ]
+      "nameFr": ["Tapatoès"],
+      "nameEng": ["Squawkabilly"]
     },
-    "arrayType": [
-      "normal",
-      "flying"
-    ],
+    "arrayType": ["normal", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0931-003",
@@ -19276,16 +17423,10 @@
   {
     "id": 932,
     "name": {
-      "nameFr": [
-        "Selutin"
-      ],
-      "nameEng": [
-        "Nacli"
-      ]
+      "nameFr": ["Selutin"],
+      "nameEng": ["Nacli"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0932-000",
@@ -19295,16 +17436,10 @@
   {
     "id": 933,
     "name": {
-      "nameFr": [
-        "Amassel"
-      ],
-      "nameEng": [
-        "Naclstack"
-      ]
+      "nameFr": ["Amassel"],
+      "nameEng": ["Naclstack"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0933-000",
@@ -19314,16 +17449,10 @@
   {
     "id": 934,
     "name": {
-      "nameFr": [
-        "Gigansel"
-      ],
-      "nameEng": [
-        "Garganacl"
-      ]
+      "nameFr": ["Gigansel"],
+      "nameEng": ["Garganacl"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0934-000",
@@ -19333,16 +17462,10 @@
   {
     "id": 935,
     "name": {
-      "nameFr": [
-        "Charbambin"
-      ],
-      "nameEng": [
-        "Charcadet"
-      ]
+      "nameFr": ["Charbambin"],
+      "nameEng": ["Charcadet"]
     },
-    "arrayType": [
-      "fire"
-    ],
+    "arrayType": ["fire"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0935-000",
@@ -19352,17 +17475,10 @@
   {
     "id": 936,
     "name": {
-      "nameFr": [
-        "Carmadura"
-      ],
-      "nameEng": [
-        "Armarouge"
-      ]
+      "nameFr": ["Carmadura"],
+      "nameEng": ["Armarouge"]
     },
-    "arrayType": [
-      "fire",
-      "psychic"
-    ],
+    "arrayType": ["fire", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0936-000",
@@ -19372,17 +17488,10 @@
   {
     "id": 937,
     "name": {
-      "nameFr": [
-        "Malvalame"
-      ],
-      "nameEng": [
-        "Ceruledge"
-      ]
+      "nameFr": ["Malvalame"],
+      "nameEng": ["Ceruledge"]
     },
-    "arrayType": [
-      "fire",
-      "ghost"
-    ],
+    "arrayType": ["fire", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0937-000",
@@ -19392,16 +17501,10 @@
   {
     "id": 938,
     "name": {
-      "nameFr": [
-        "Têtampoule"
-      ],
-      "nameEng": [
-        "Tadbulb"
-      ]
+      "nameFr": ["Têtampoule"],
+      "nameEng": ["Tadbulb"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0938-000",
@@ -19411,16 +17514,10 @@
   {
     "id": 939,
     "name": {
-      "nameFr": [
-        "Ampibidou"
-      ],
-      "nameEng": [
-        "Bellibolt"
-      ]
+      "nameFr": ["Ampibidou"],
+      "nameEng": ["Bellibolt"]
     },
-    "arrayType": [
-      "electric"
-    ],
+    "arrayType": ["electric"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0939-000",
@@ -19430,17 +17527,10 @@
   {
     "id": 940,
     "name": {
-      "nameFr": [
-        "Zapétrel"
-      ],
-      "nameEng": [
-        "Wattrel"
-      ]
+      "nameFr": ["Zapétrel"],
+      "nameEng": ["Wattrel"]
     },
-    "arrayType": [
-      "electric",
-      "flying"
-    ],
+    "arrayType": ["electric", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0940-000",
@@ -19450,17 +17540,10 @@
   {
     "id": 941,
     "name": {
-      "nameFr": [
-        "Fulgulairo"
-      ],
-      "nameEng": [
-        "Kilowattrel"
-      ]
+      "nameFr": ["Fulgulairo"],
+      "nameEng": ["Kilowattrel"]
     },
-    "arrayType": [
-      "electric",
-      "flying"
-    ],
+    "arrayType": ["electric", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0941-000",
@@ -19470,16 +17553,10 @@
   {
     "id": 942,
     "name": {
-      "nameFr": [
-        "Grondogue"
-      ],
-      "nameEng": [
-        "Maschiff"
-      ]
+      "nameFr": ["Grondogue"],
+      "nameEng": ["Maschiff"]
     },
-    "arrayType": [
-      "dark"
-    ],
+    "arrayType": ["dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0942-000",
@@ -19489,16 +17566,10 @@
   {
     "id": 943,
     "name": {
-      "nameFr": [
-        "Dogrino"
-      ],
-      "nameEng": [
-        "Mabosstiff"
-      ]
+      "nameFr": ["Dogrino"],
+      "nameEng": ["Mabosstiff"]
     },
-    "arrayType": [
-      "dark"
-    ],
+    "arrayType": ["dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0943-000",
@@ -19508,17 +17579,10 @@
   {
     "id": 944,
     "name": {
-      "nameFr": [
-        "Gribouraigne"
-      ],
-      "nameEng": [
-        "Shroodle"
-      ]
+      "nameFr": ["Gribouraigne"],
+      "nameEng": ["Shroodle"]
     },
-    "arrayType": [
-      "poison",
-      "normal"
-    ],
+    "arrayType": ["poison", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0944-000",
@@ -19528,17 +17592,10 @@
   {
     "id": 945,
     "name": {
-      "nameFr": [
-        "Tag-Tag"
-      ],
-      "nameEng": [
-        "Grafaiai"
-      ]
+      "nameFr": ["Tag-Tag"],
+      "nameEng": ["Grafaiai"]
     },
-    "arrayType": [
-      "poison",
-      "normal"
-    ],
+    "arrayType": ["poison", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0945-000",
@@ -19548,17 +17605,10 @@
   {
     "id": 946,
     "name": {
-      "nameFr": [
-        "Virovent"
-      ],
-      "nameEng": [
-        "Bramblin"
-      ]
+      "nameFr": ["Virovent"],
+      "nameEng": ["Bramblin"]
     },
-    "arrayType": [
-      "grass",
-      "ghost"
-    ],
+    "arrayType": ["grass", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0946-000",
@@ -19568,17 +17618,10 @@
   {
     "id": 947,
     "name": {
-      "nameFr": [
-        "Virevorreur"
-      ],
-      "nameEng": [
-        "Brambleghast"
-      ]
+      "nameFr": ["Virevorreur"],
+      "nameEng": ["Brambleghast"]
     },
-    "arrayType": [
-      "grass",
-      "ghost"
-    ],
+    "arrayType": ["grass", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0947-000",
@@ -19588,17 +17631,10 @@
   {
     "id": 948,
     "name": {
-      "nameFr": [
-        "Terracool"
-      ],
-      "nameEng": [
-        "Toedscool"
-      ]
+      "nameFr": ["Terracool"],
+      "nameEng": ["Toedscool"]
     },
-    "arrayType": [
-      "ground",
-      "grass"
-    ],
+    "arrayType": ["ground", "grass"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0948-000",
@@ -19608,17 +17644,10 @@
   {
     "id": 949,
     "name": {
-      "nameFr": [
-        "Terracruel"
-      ],
-      "nameEng": [
-        "Toedscruel"
-      ]
+      "nameFr": ["Terracruel"],
+      "nameEng": ["Toedscruel"]
     },
-    "arrayType": [
-      "ground",
-      "grass"
-    ],
+    "arrayType": ["ground", "grass"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0949-000",
@@ -19628,16 +17657,10 @@
   {
     "id": 950,
     "name": {
-      "nameFr": [
-        "Craparoi"
-      ],
-      "nameEng": [
-        "Klawf"
-      ]
+      "nameFr": ["Craparoi"],
+      "nameEng": ["Klawf"]
     },
-    "arrayType": [
-      "rock"
-    ],
+    "arrayType": ["rock"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0950-000",
@@ -19647,16 +17670,10 @@
   {
     "id": 951,
     "name": {
-      "nameFr": [
-        "Pimito"
-      ],
-      "nameEng": [
-        "Capsakid"
-      ]
+      "nameFr": ["Pimito"],
+      "nameEng": ["Capsakid"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0951-000",
@@ -19666,17 +17683,10 @@
   {
     "id": 952,
     "name": {
-      "nameFr": [
-        "Scovilain"
-      ],
-      "nameEng": [
-        "Scovillain"
-      ]
+      "nameFr": ["Scovilain"],
+      "nameEng": ["Scovillain"]
     },
-    "arrayType": [
-      "grass",
-      "fire"
-    ],
+    "arrayType": ["grass", "fire"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0952-000",
@@ -19686,16 +17696,10 @@
   {
     "id": 953,
     "name": {
-      "nameFr": [
-        "Léboulérou"
-      ],
-      "nameEng": [
-        "Rellor"
-      ]
+      "nameFr": ["Léboulérou"],
+      "nameEng": ["Rellor"]
     },
-    "arrayType": [
-      "bug"
-    ],
+    "arrayType": ["bug"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0953-000",
@@ -19705,17 +17709,10 @@
   {
     "id": 954,
     "name": {
-      "nameFr": [
-        "Bérasca"
-      ],
-      "nameEng": [
-        "Rabsca"
-      ]
+      "nameFr": ["Bérasca"],
+      "nameEng": ["Rabsca"]
     },
-    "arrayType": [
-      "bug",
-      "psychic"
-    ],
+    "arrayType": ["bug", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0954-000",
@@ -19725,16 +17722,10 @@
   {
     "id": 955,
     "name": {
-      "nameFr": [
-        "Flotillon"
-      ],
-      "nameEng": [
-        "Flittle"
-      ]
+      "nameFr": ["Flotillon"],
+      "nameEng": ["Flittle"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0955-000",
@@ -19744,16 +17735,10 @@
   {
     "id": 956,
     "name": {
-      "nameFr": [
-        "Cléopsytra"
-      ],
-      "nameEng": [
-        "Espathra"
-      ]
+      "nameFr": ["Cléopsytra"],
+      "nameEng": ["Espathra"]
     },
-    "arrayType": [
-      "psychic"
-    ],
+    "arrayType": ["psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0956-000",
@@ -19763,17 +17748,10 @@
   {
     "id": 957,
     "name": {
-      "nameFr": [
-        "Forgerette"
-      ],
-      "nameEng": [
-        "Tinkatink"
-      ]
+      "nameFr": ["Forgerette"],
+      "nameEng": ["Tinkatink"]
     },
-    "arrayType": [
-      "fairy",
-      "steel"
-    ],
+    "arrayType": ["fairy", "steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0957-000",
@@ -19783,17 +17761,10 @@
   {
     "id": 958,
     "name": {
-      "nameFr": [
-        "Forgella"
-      ],
-      "nameEng": [
-        "Tinkatuff"
-      ]
+      "nameFr": ["Forgella"],
+      "nameEng": ["Tinkatuff"]
     },
-    "arrayType": [
-      "fairy",
-      "steel"
-    ],
+    "arrayType": ["fairy", "steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0958-000",
@@ -19803,17 +17774,10 @@
   {
     "id": 959,
     "name": {
-      "nameFr": [
-        "Forgelina"
-      ],
-      "nameEng": [
-        "Tinkaton"
-      ]
+      "nameFr": ["Forgelina"],
+      "nameEng": ["Tinkaton"]
     },
-    "arrayType": [
-      "fairy",
-      "steel"
-    ],
+    "arrayType": ["fairy", "steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0959-000",
@@ -19823,16 +17787,10 @@
   {
     "id": 960,
     "name": {
-      "nameFr": [
-        "Taupikeau"
-      ],
-      "nameEng": [
-        "Wiglett"
-      ]
+      "nameFr": ["Taupikeau"],
+      "nameEng": ["Wiglett"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0960-000",
@@ -19842,16 +17800,10 @@
   {
     "id": 961,
     "name": {
-      "nameFr": [
-        "Triopikeau"
-      ],
-      "nameEng": [
-        "Wugtrio"
-      ]
+      "nameFr": ["Triopikeau"],
+      "nameEng": ["Wugtrio"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0961-000",
@@ -19861,17 +17813,10 @@
   {
     "id": 962,
     "name": {
-      "nameFr": [
-        "Lestombaile"
-      ],
-      "nameEng": [
-        "Bombirdier"
-      ]
+      "nameFr": ["Lestombaile"],
+      "nameEng": ["Bombirdier"]
     },
-    "arrayType": [
-      "flying",
-      "dark"
-    ],
+    "arrayType": ["flying", "dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0962-000",
@@ -19881,16 +17826,10 @@
   {
     "id": 963,
     "name": {
-      "nameFr": [
-        "Dofin"
-      ],
-      "nameEng": [
-        "Finizen"
-      ]
+      "nameFr": ["Dofin"],
+      "nameEng": ["Finizen"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0963-000",
@@ -19900,16 +17839,10 @@
   {
     "id": 964,
     "name": {
-      "nameFr": [
-        "Superdofin"
-      ],
-      "nameEng": [
-        "Palafin-zero"
-      ]
+      "nameFr": ["Superdofin"],
+      "nameEng": ["Palafin-zero"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0964-000",
@@ -19919,16 +17852,10 @@
   {
     "id": 964,
     "name": {
-      "nameFr": [
-        "Superdofin"
-      ],
-      "nameEng": [
-        "Palafin-zero"
-      ]
+      "nameFr": ["Superdofin"],
+      "nameEng": ["Palafin-zero"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0964-001",
@@ -19938,17 +17865,10 @@
   {
     "id": 965,
     "name": {
-      "nameFr": [
-        "Vrombi"
-      ],
-      "nameEng": [
-        "Varoom"
-      ]
+      "nameFr": ["Vrombi"],
+      "nameEng": ["Varoom"]
     },
-    "arrayType": [
-      "steel",
-      "poison"
-    ],
+    "arrayType": ["steel", "poison"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0965-000",
@@ -19958,17 +17878,10 @@
   {
     "id": 966,
     "name": {
-      "nameFr": [
-        "Vrombotor"
-      ],
-      "nameEng": [
-        "Revavroom"
-      ]
+      "nameFr": ["Vrombotor"],
+      "nameEng": ["Revavroom"]
     },
-    "arrayType": [
-      "steel",
-      "poison"
-    ],
+    "arrayType": ["steel", "poison"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0966-000",
@@ -19978,17 +17891,10 @@
   {
     "id": 967,
     "name": {
-      "nameFr": [
-        "Motorizard"
-      ],
-      "nameEng": [
-        "Cyclizar"
-      ]
+      "nameFr": ["Motorizard"],
+      "nameEng": ["Cyclizar"]
     },
-    "arrayType": [
-      "dragon",
-      "normal"
-    ],
+    "arrayType": ["dragon", "normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0967-000",
@@ -19998,16 +17904,10 @@
   {
     "id": 968,
     "name": {
-      "nameFr": [
-        "Ferdeter"
-      ],
-      "nameEng": [
-        "Orthworm"
-      ]
+      "nameFr": ["Ferdeter"],
+      "nameEng": ["Orthworm"]
     },
-    "arrayType": [
-      "steel"
-    ],
+    "arrayType": ["steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0968-000",
@@ -20017,17 +17917,10 @@
   {
     "id": 969,
     "name": {
-      "nameFr": [
-        "Germéclat"
-      ],
-      "nameEng": [
-        "Glimmet"
-      ]
+      "nameFr": ["Germéclat"],
+      "nameEng": ["Glimmet"]
     },
-    "arrayType": [
-      "rock",
-      "poison"
-    ],
+    "arrayType": ["rock", "poison"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0969-000",
@@ -20037,17 +17930,10 @@
   {
     "id": 970,
     "name": {
-      "nameFr": [
-        "Floréclat"
-      ],
-      "nameEng": [
-        "Glimmora"
-      ]
+      "nameFr": ["Floréclat"],
+      "nameEng": ["Glimmora"]
     },
-    "arrayType": [
-      "rock",
-      "poison"
-    ],
+    "arrayType": ["rock", "poison"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0970-000",
@@ -20057,16 +17943,10 @@
   {
     "id": 971,
     "name": {
-      "nameFr": [
-        "Toutombe"
-      ],
-      "nameEng": [
-        "Greavard"
-      ]
+      "nameFr": ["Toutombe"],
+      "nameEng": ["Greavard"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0971-000",
@@ -20076,16 +17956,10 @@
   {
     "id": 972,
     "name": {
-      "nameFr": [
-        "Tomberro"
-      ],
-      "nameEng": [
-        "Houndstone"
-      ]
+      "nameFr": ["Tomberro"],
+      "nameEng": ["Houndstone"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0972-000",
@@ -20095,17 +17969,10 @@
   {
     "id": 973,
     "name": {
-      "nameFr": [
-        "Flamenroule"
-      ],
-      "nameEng": [
-        "Flamigo"
-      ]
+      "nameFr": ["Flamenroule"],
+      "nameEng": ["Flamigo"]
     },
-    "arrayType": [
-      "flying",
-      "fighting"
-    ],
+    "arrayType": ["flying", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0973-000",
@@ -20115,16 +17982,10 @@
   {
     "id": 974,
     "name": {
-      "nameFr": [
-        "Piétacé"
-      ],
-      "nameEng": [
-        "Cetoddle"
-      ]
+      "nameFr": ["Piétacé"],
+      "nameEng": ["Cetoddle"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0974-000",
@@ -20134,16 +17995,10 @@
   {
     "id": 975,
     "name": {
-      "nameFr": [
-        "Balbalèze"
-      ],
-      "nameEng": [
-        "Cetitan"
-      ]
+      "nameFr": ["Balbalèze"],
+      "nameEng": ["Cetitan"]
     },
-    "arrayType": [
-      "ice"
-    ],
+    "arrayType": ["ice"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0975-000",
@@ -20153,17 +18008,10 @@
   {
     "id": 976,
     "name": {
-      "nameFr": [
-        "Délestin"
-      ],
-      "nameEng": [
-        "Veluza"
-      ]
+      "nameFr": ["Délestin"],
+      "nameEng": ["Veluza"]
     },
-    "arrayType": [
-      "water",
-      "psychic"
-    ],
+    "arrayType": ["water", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0976-000",
@@ -20173,16 +18021,10 @@
   {
     "id": 977,
     "name": {
-      "nameFr": [
-        "Oyacata"
-      ],
-      "nameEng": [
-        "Dondozo"
-      ]
+      "nameFr": ["Oyacata"],
+      "nameEng": ["Dondozo"]
     },
-    "arrayType": [
-      "water"
-    ],
+    "arrayType": ["water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0977-000",
@@ -20192,17 +18034,10 @@
   {
     "id": 978,
     "name": {
-      "nameFr": [
-        "Nigirigon"
-      ],
-      "nameEng": [
-        "Tatsugiri-curly"
-      ]
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri-curly"]
     },
-    "arrayType": [
-      "dragon",
-      "water"
-    ],
+    "arrayType": ["dragon", "water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0978-000",
@@ -20212,17 +18047,10 @@
   {
     "id": 978,
     "name": {
-      "nameFr": [
-        "Nigirigon"
-      ],
-      "nameEng": [
-        "Tatsugiri-curly"
-      ]
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri-curly"]
     },
-    "arrayType": [
-      "dragon",
-      "water"
-    ],
+    "arrayType": ["dragon", "water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0978-001",
@@ -20232,17 +18060,10 @@
   {
     "id": 978,
     "name": {
-      "nameFr": [
-        "Nigirigon"
-      ],
-      "nameEng": [
-        "Tatsugiri-curly"
-      ]
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri-curly"]
     },
-    "arrayType": [
-      "dragon",
-      "water"
-    ],
+    "arrayType": ["dragon", "water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0978-002",
@@ -20252,17 +18073,10 @@
   {
     "id": 979,
     "name": {
-      "nameFr": [
-        "Courrousinge"
-      ],
-      "nameEng": [
-        "Annihilape"
-      ]
+      "nameFr": ["Courrousinge"],
+      "nameEng": ["Annihilape"]
     },
-    "arrayType": [
-      "fighting",
-      "ghost"
-    ],
+    "arrayType": ["fighting", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0979-000",
@@ -20272,17 +18086,10 @@
   {
     "id": 980,
     "name": {
-      "nameFr": [
-        "Terraiste"
-      ],
-      "nameEng": [
-        "Clodsire"
-      ]
+      "nameFr": ["Terraiste"],
+      "nameEng": ["Clodsire"]
     },
-    "arrayType": [
-      "poison",
-      "ground"
-    ],
+    "arrayType": ["poison", "ground"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0980-000",
@@ -20292,17 +18099,10 @@
   {
     "id": 981,
     "name": {
-      "nameFr": [
-        "Farigiraf"
-      ],
-      "nameEng": [
-        "Farigiraf"
-      ]
+      "nameFr": ["Farigiraf"],
+      "nameEng": ["Farigiraf"]
     },
-    "arrayType": [
-      "normal",
-      "psychic"
-    ],
+    "arrayType": ["normal", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0981-000",
@@ -20312,16 +18112,10 @@
   {
     "id": 982,
     "name": {
-      "nameFr": [
-        "Deusolourdo"
-      ],
-      "nameEng": [
-        "Dudunsparce-two-segment"
-      ]
+      "nameFr": ["Deusolourdo"],
+      "nameEng": ["Dudunsparce-two-segment"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0982-000",
@@ -20331,16 +18125,10 @@
   {
     "id": 982,
     "name": {
-      "nameFr": [
-        "Deusolourdo"
-      ],
-      "nameEng": [
-        "Dudunsparce-two-segment"
-      ]
+      "nameFr": ["Deusolourdo"],
+      "nameEng": ["Dudunsparce-two-segment"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0982-001",
@@ -20350,17 +18138,10 @@
   {
     "id": 983,
     "name": {
-      "nameFr": [
-        "Scalpereur"
-      ],
-      "nameEng": [
-        "Kingambit"
-      ]
+      "nameFr": ["Scalpereur"],
+      "nameEng": ["Kingambit"]
     },
-    "arrayType": [
-      "dark",
-      "steel"
-    ],
+    "arrayType": ["dark", "steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0983-000",
@@ -20370,17 +18151,10 @@
   {
     "id": 984,
     "name": {
-      "nameFr": [
-        "Fort-Ivoire"
-      ],
-      "nameEng": [
-        "Great-tusk"
-      ]
+      "nameFr": ["Fort-Ivoire"],
+      "nameEng": ["Great-tusk"]
     },
-    "arrayType": [
-      "ground",
-      "fighting"
-    ],
+    "arrayType": ["ground", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0984-000",
@@ -20390,17 +18164,10 @@
   {
     "id": 985,
     "name": {
-      "nameFr": [
-        "Hurle-Queue"
-      ],
-      "nameEng": [
-        "Scream-tail"
-      ]
+      "nameFr": ["Hurle-Queue"],
+      "nameEng": ["Scream-tail"]
     },
-    "arrayType": [
-      "fairy",
-      "psychic"
-    ],
+    "arrayType": ["fairy", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0985-000",
@@ -20410,17 +18177,10 @@
   {
     "id": 986,
     "name": {
-      "nameFr": [
-        "Fongus-Furie"
-      ],
-      "nameEng": [
-        "Brute-bonnet"
-      ]
+      "nameFr": ["Fongus-Furie"],
+      "nameEng": ["Brute-bonnet"]
     },
-    "arrayType": [
-      "grass",
-      "dark"
-    ],
+    "arrayType": ["grass", "dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0986-000",
@@ -20430,17 +18190,10 @@
   {
     "id": 987,
     "name": {
-      "nameFr": [
-        "Flotte-Mèche"
-      ],
-      "nameEng": [
-        "Flutter-mane"
-      ]
+      "nameFr": ["Flotte-Mèche"],
+      "nameEng": ["Flutter-mane"]
     },
-    "arrayType": [
-      "ghost",
-      "fairy"
-    ],
+    "arrayType": ["ghost", "fairy"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0987-000",
@@ -20450,17 +18203,10 @@
   {
     "id": 988,
     "name": {
-      "nameFr": [
-        "Rampe-Ailes"
-      ],
-      "nameEng": [
-        "Slither-wing"
-      ]
+      "nameFr": ["Rampe-Ailes"],
+      "nameEng": ["Slither-wing"]
     },
-    "arrayType": [
-      "bug",
-      "fighting"
-    ],
+    "arrayType": ["bug", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0988-000",
@@ -20470,17 +18216,10 @@
   {
     "id": 989,
     "name": {
-      "nameFr": [
-        "Pelage-Sablé"
-      ],
-      "nameEng": [
-        "Sandy-shocks"
-      ]
+      "nameFr": ["Pelage-Sablé"],
+      "nameEng": ["Sandy-shocks"]
     },
-    "arrayType": [
-      "electric",
-      "ground"
-    ],
+    "arrayType": ["electric", "ground"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0989-000",
@@ -20490,17 +18229,10 @@
   {
     "id": 990,
     "name": {
-      "nameFr": [
-        "Roue-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-treads"
-      ]
+      "nameFr": ["Roue-de-Fer"],
+      "nameEng": ["Iron-treads"]
     },
-    "arrayType": [
-      "ground",
-      "steel"
-    ],
+    "arrayType": ["ground", "steel"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0990-000",
@@ -20510,17 +18242,10 @@
   {
     "id": 991,
     "name": {
-      "nameFr": [
-        "Hotte-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-bundle"
-      ]
+      "nameFr": ["Hotte-de-Fer"],
+      "nameEng": ["Iron-bundle"]
     },
-    "arrayType": [
-      "ice",
-      "water"
-    ],
+    "arrayType": ["ice", "water"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0991-000",
@@ -20530,17 +18255,10 @@
   {
     "id": 992,
     "name": {
-      "nameFr": [
-        "Paume-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-hands"
-      ]
+      "nameFr": ["Paume-de-Fer"],
+      "nameEng": ["Iron-hands"]
     },
-    "arrayType": [
-      "fighting",
-      "electric"
-    ],
+    "arrayType": ["fighting", "electric"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0992-000",
@@ -20550,17 +18268,10 @@
   {
     "id": 993,
     "name": {
-      "nameFr": [
-        "Têtes-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-jugulis"
-      ]
+      "nameFr": ["Têtes-de-Fer"],
+      "nameEng": ["Iron-jugulis"]
     },
-    "arrayType": [
-      "dark",
-      "flying"
-    ],
+    "arrayType": ["dark", "flying"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0993-000",
@@ -20570,17 +18281,10 @@
   {
     "id": 994,
     "name": {
-      "nameFr": [
-        "Mite-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-moth"
-      ]
+      "nameFr": ["Mite-de-Fer"],
+      "nameEng": ["Iron-moth"]
     },
-    "arrayType": [
-      "fire",
-      "poison"
-    ],
+    "arrayType": ["fire", "poison"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0994-000",
@@ -20590,17 +18294,10 @@
   {
     "id": 995,
     "name": {
-      "nameFr": [
-        "Épine-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-thorns"
-      ]
+      "nameFr": ["Épine-de-Fer"],
+      "nameEng": ["Iron-thorns"]
     },
-    "arrayType": [
-      "rock",
-      "electric"
-    ],
+    "arrayType": ["rock", "electric"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0995-000",
@@ -20610,17 +18307,10 @@
   {
     "id": 996,
     "name": {
-      "nameFr": [
-        "Frigodo"
-      ],
-      "nameEng": [
-        "Frigibax"
-      ]
+      "nameFr": ["Frigodo"],
+      "nameEng": ["Frigibax"]
     },
-    "arrayType": [
-      "dragon",
-      "ice"
-    ],
+    "arrayType": ["dragon", "ice"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0996-000",
@@ -20630,17 +18320,10 @@
   {
     "id": 997,
     "name": {
-      "nameFr": [
-        "Cryodo"
-      ],
-      "nameEng": [
-        "Arctibax"
-      ]
+      "nameFr": ["Cryodo"],
+      "nameEng": ["Arctibax"]
     },
-    "arrayType": [
-      "dragon",
-      "ice"
-    ],
+    "arrayType": ["dragon", "ice"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0997-000",
@@ -20650,17 +18333,10 @@
   {
     "id": 998,
     "name": {
-      "nameFr": [
-        "Glaivodo"
-      ],
-      "nameEng": [
-        "Baxcalibur"
-      ]
+      "nameFr": ["Glaivodo"],
+      "nameEng": ["Baxcalibur"]
     },
-    "arrayType": [
-      "dragon",
-      "ice"
-    ],
+    "arrayType": ["dragon", "ice"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0998-000",
@@ -20670,16 +18346,10 @@
   {
     "id": 999,
     "name": {
-      "nameFr": [
-        "Mordudor"
-      ],
-      "nameEng": [
-        "Gimmighoul"
-      ]
+      "nameFr": ["Mordudor"],
+      "nameEng": ["Gimmighoul"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0999-000",
@@ -20689,16 +18359,10 @@
   {
     "id": 999,
     "name": {
-      "nameFr": [
-        "Mordudor"
-      ],
-      "nameEng": [
-        "Gimmighoul"
-      ]
+      "nameFr": ["Mordudor"],
+      "nameEng": ["Gimmighoul"]
     },
-    "arrayType": [
-      "ghost"
-    ],
+    "arrayType": ["ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "0999-001",
@@ -20708,17 +18372,10 @@
   {
     "id": 1000,
     "name": {
-      "nameFr": [
-        "Gromago"
-      ],
-      "nameEng": [
-        "Gholdengo"
-      ]
+      "nameFr": ["Gromago"],
+      "nameEng": ["Gholdengo"]
     },
-    "arrayType": [
-      "steel",
-      "ghost"
-    ],
+    "arrayType": ["steel", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1000-000",
@@ -20728,17 +18385,10 @@
   {
     "id": 1001,
     "name": {
-      "nameFr": [
-        "Chongjian"
-      ],
-      "nameEng": [
-        "Wo-chien"
-      ]
+      "nameFr": ["Chongjian"],
+      "nameEng": ["Wo-chien"]
     },
-    "arrayType": [
-      "dark",
-      "grass"
-    ],
+    "arrayType": ["dark", "grass"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1001-000",
@@ -20748,17 +18398,10 @@
   {
     "id": 1002,
     "name": {
-      "nameFr": [
-        "Baojian"
-      ],
-      "nameEng": [
-        "Chien-pao"
-      ]
+      "nameFr": ["Baojian"],
+      "nameEng": ["Chien-pao"]
     },
-    "arrayType": [
-      "dark",
-      "ice"
-    ],
+    "arrayType": ["dark", "ice"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1002-000",
@@ -20768,17 +18411,10 @@
   {
     "id": 1003,
     "name": {
-      "nameFr": [
-        "Dinglu"
-      ],
-      "nameEng": [
-        "Ting-lu"
-      ]
+      "nameFr": ["Dinglu"],
+      "nameEng": ["Ting-lu"]
     },
-    "arrayType": [
-      "dark",
-      "ground"
-    ],
+    "arrayType": ["dark", "ground"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1003-000",
@@ -20788,17 +18424,10 @@
   {
     "id": 1004,
     "name": {
-      "nameFr": [
-        "Yuyu"
-      ],
-      "nameEng": [
-        "Chi-yu"
-      ]
+      "nameFr": ["Yuyu"],
+      "nameEng": ["Chi-yu"]
     },
-    "arrayType": [
-      "dark",
-      "fire"
-    ],
+    "arrayType": ["dark", "fire"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1004-000",
@@ -20808,17 +18437,10 @@
   {
     "id": 1005,
     "name": {
-      "nameFr": [
-        "Rugit-Lune"
-      ],
-      "nameEng": [
-        "Roaring-moon"
-      ]
+      "nameFr": ["Rugit-Lune"],
+      "nameEng": ["Roaring-moon"]
     },
-    "arrayType": [
-      "dragon",
-      "dark"
-    ],
+    "arrayType": ["dragon", "dark"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1005-000",
@@ -20828,17 +18450,10 @@
   {
     "id": 1006,
     "name": {
-      "nameFr": [
-        "Garde-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-valiant"
-      ]
+      "nameFr": ["Garde-de-Fer"],
+      "nameEng": ["Iron-valiant"]
     },
-    "arrayType": [
-      "fairy",
-      "fighting"
-    ],
+    "arrayType": ["fairy", "fighting"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1006-000",
@@ -20848,17 +18463,10 @@
   {
     "id": 1007,
     "name": {
-      "nameFr": [
-        "Koraidon"
-      ],
-      "nameEng": [
-        "Koraidon"
-      ]
+      "nameFr": ["Koraidon"],
+      "nameEng": ["Koraidon"]
     },
-    "arrayType": [
-      "fighting",
-      "dragon"
-    ],
+    "arrayType": ["fighting", "dragon"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1007-000",
@@ -20868,17 +18476,10 @@
   {
     "id": 1008,
     "name": {
-      "nameFr": [
-        "Miraidon"
-      ],
-      "nameEng": [
-        "Miraidon"
-      ]
+      "nameFr": ["Miraidon"],
+      "nameEng": ["Miraidon"]
     },
-    "arrayType": [
-      "electric",
-      "dragon"
-    ],
+    "arrayType": ["electric", "dragon"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1008-000",
@@ -20888,17 +18489,10 @@
   {
     "id": 1009,
     "name": {
-      "nameFr": [
-        "Serpente-Eau"
-      ],
-      "nameEng": [
-        "Walking-wake"
-      ]
+      "nameFr": ["Serpente-Eau"],
+      "nameEng": ["Walking-wake"]
     },
-    "arrayType": [
-      "water",
-      "dragon"
-    ],
+    "arrayType": ["water", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1009-000",
@@ -20908,17 +18502,10 @@
   {
     "id": 1010,
     "name": {
-      "nameFr": [
-        "Vert-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-leaves"
-      ]
+      "nameFr": ["Vert-de-Fer"],
+      "nameEng": ["Iron-leaves"]
     },
-    "arrayType": [
-      "grass",
-      "psychic"
-    ],
+    "arrayType": ["grass", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1010-000",
@@ -20928,17 +18515,10 @@
   {
     "id": 1011,
     "name": {
-      "nameFr": [
-        "Pomdramour"
-      ],
-      "nameEng": [
-        "Dipplin"
-      ]
+      "nameFr": ["Pomdramour"],
+      "nameEng": ["Dipplin"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1011-000",
@@ -20948,17 +18528,10 @@
   {
     "id": 1012,
     "name": {
-      "nameFr": [
-        "Poltchageist"
-      ],
-      "nameEng": [
-        "Poltchageist"
-      ]
+      "nameFr": ["Poltchageist"],
+      "nameEng": ["Poltchageist"]
     },
-    "arrayType": [
-      "grass",
-      "ghost"
-    ],
+    "arrayType": ["grass", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1012-000",
@@ -20968,17 +18541,10 @@
   {
     "id": 1013,
     "name": {
-      "nameFr": [
-        "Théffroyable"
-      ],
-      "nameEng": [
-        "Sinistcha"
-      ]
+      "nameFr": ["Théffroyable"],
+      "nameEng": ["Sinistcha"]
     },
-    "arrayType": [
-      "grass",
-      "ghost"
-    ],
+    "arrayType": ["grass", "ghost"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1013-000",
@@ -20988,17 +18554,10 @@
   {
     "id": 1014,
     "name": {
-      "nameFr": [
-        "Félicanis"
-      ],
-      "nameEng": [
-        "Okidogi"
-      ]
+      "nameFr": ["Félicanis"],
+      "nameEng": ["Okidogi"]
     },
-    "arrayType": [
-      "poison",
-      "fighting"
-    ],
+    "arrayType": ["poison", "fighting"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1014-000",
@@ -21008,17 +18567,10 @@
   {
     "id": 1015,
     "name": {
-      "nameFr": [
-        "Fortusimia"
-      ],
-      "nameEng": [
-        "Munkidori"
-      ]
+      "nameFr": ["Fortusimia"],
+      "nameEng": ["Munkidori"]
     },
-    "arrayType": [
-      "poison",
-      "psychic"
-    ],
+    "arrayType": ["poison", "psychic"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1015-000",
@@ -21028,17 +18580,10 @@
   {
     "id": 1016,
     "name": {
-      "nameFr": [
-        "Favianos"
-      ],
-      "nameEng": [
-        "Fezandipiti"
-      ]
+      "nameFr": ["Favianos"],
+      "nameEng": ["Fezandipiti"]
     },
-    "arrayType": [
-      "poison",
-      "fairy"
-    ],
+    "arrayType": ["poison", "fairy"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1016-000",
@@ -21048,16 +18593,10 @@
   {
     "id": 1017,
     "name": {
-      "nameFr": [
-        "Ogerpon"
-      ],
-      "nameEng": [
-        "Ogerpon"
-      ]
+      "nameFr": ["Ogerpon"],
+      "nameEng": ["Ogerpon"]
     },
-    "arrayType": [
-      "grass"
-    ],
+    "arrayType": ["grass"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1017-000",
@@ -21067,17 +18606,10 @@
   {
     "id": 1017,
     "name": {
-      "nameFr": [
-        "Ogerpon"
-      ],
-      "nameEng": [
-        "Ogerpon"
-      ]
+      "nameFr": ["Ogerpon"],
+      "nameEng": ["Ogerpon"]
     },
-    "arrayType": [
-      "grass",
-      "water"
-    ],
+    "arrayType": ["grass", "water"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1017-001",
@@ -21087,17 +18619,10 @@
   {
     "id": 1017,
     "name": {
-      "nameFr": [
-        "Ogerpon"
-      ],
-      "nameEng": [
-        "Ogerpon"
-      ]
+      "nameFr": ["Ogerpon"],
+      "nameEng": ["Ogerpon"]
     },
-    "arrayType": [
-      "grass",
-      "fire"
-    ],
+    "arrayType": ["grass", "fire"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1017-002",
@@ -21107,17 +18632,10 @@
   {
     "id": 1017,
     "name": {
-      "nameFr": [
-        "Ogerpon"
-      ],
-      "nameEng": [
-        "Ogerpon"
-      ]
+      "nameFr": ["Ogerpon"],
+      "nameEng": ["Ogerpon"]
     },
-    "arrayType": [
-      "grass",
-      "rock"
-    ],
+    "arrayType": ["grass", "rock"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1017-003",
@@ -21127,17 +18645,10 @@
   {
     "id": 1018,
     "name": {
-      "nameFr": [
-        "Pondralugon"
-      ],
-      "nameEng": [
-        "Archaludon"
-      ]
+      "nameFr": ["Pondralugon"],
+      "nameEng": ["Archaludon"]
     },
-    "arrayType": [
-      "steel",
-      "dragon"
-    ],
+    "arrayType": ["steel", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1018-000",
@@ -21147,17 +18658,10 @@
   {
     "id": 1019,
     "name": {
-      "nameFr": [
-        "Pomdorochi"
-      ],
-      "nameEng": [
-        "Hydrapple"
-      ]
+      "nameFr": ["Pomdorochi"],
+      "nameEng": ["Hydrapple"]
     },
-    "arrayType": [
-      "grass",
-      "dragon"
-    ],
+    "arrayType": ["grass", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1019-000",
@@ -21167,17 +18671,10 @@
   {
     "id": 1020,
     "name": {
-      "nameFr": [
-        "Feu-Perçant"
-      ],
-      "nameEng": [
-        "Gouging-fire"
-      ]
+      "nameFr": ["Feu-Perçant"],
+      "nameEng": ["Gouging-fire"]
     },
-    "arrayType": [
-      "fire",
-      "dragon"
-    ],
+    "arrayType": ["fire", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1020-000",
@@ -21187,17 +18684,10 @@
   {
     "id": 1021,
     "name": {
-      "nameFr": [
-        "Ire-Foudre"
-      ],
-      "nameEng": [
-        "Raging-bolt"
-      ]
+      "nameFr": ["Ire-Foudre"],
+      "nameEng": ["Raging-bolt"]
     },
-    "arrayType": [
-      "electric",
-      "dragon"
-    ],
+    "arrayType": ["electric", "dragon"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1021-000",
@@ -21207,17 +18697,10 @@
   {
     "id": 1022,
     "name": {
-      "nameFr": [
-        "Roc-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-boulder"
-      ]
+      "nameFr": ["Roc-de-Fer"],
+      "nameEng": ["Iron-boulder"]
     },
-    "arrayType": [
-      "rock",
-      "psychic"
-    ],
+    "arrayType": ["rock", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1022-000",
@@ -21227,17 +18710,10 @@
   {
     "id": 1023,
     "name": {
-      "nameFr": [
-        "Chef-de-Fer"
-      ],
-      "nameEng": [
-        "Iron-crown"
-      ]
+      "nameFr": ["Chef-de-Fer"],
+      "nameEng": ["Iron-crown"]
     },
-    "arrayType": [
-      "steel",
-      "psychic"
-    ],
+    "arrayType": ["steel", "psychic"],
     "rarity": "ordinary",
     "gen": 9,
     "imgName": "1023-000",
@@ -21247,16 +18723,10 @@
   {
     "id": 1024,
     "name": {
-      "nameFr": [
-        "Terapagos"
-      ],
-      "nameEng": [
-        "Terapagos"
-      ]
+      "nameFr": ["Terapagos"],
+      "nameEng": ["Terapagos"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1024-000",
@@ -21266,16 +18736,10 @@
   {
     "id": 1024,
     "name": {
-      "nameFr": [
-        "Terapagos"
-      ],
-      "nameEng": [
-        "Terapagos"
-      ]
+      "nameFr": ["Terapagos"],
+      "nameEng": ["Terapagos"]
     },
-    "arrayType": [
-      "normal"
-    ],
+    "arrayType": ["normal"],
     "rarity": "legendary",
     "gen": 9,
     "imgName": "1024-001",
@@ -21285,17 +18749,10 @@
   {
     "id": 1025,
     "name": {
-      "nameFr": [
-        "Pêchaminus"
-      ],
-      "nameEng": [
-        "Pecharunt"
-      ]
+      "nameFr": ["Pêchaminus"],
+      "nameEng": ["Pecharunt"]
     },
-    "arrayType": [
-      "poison",
-      "ghost"
-    ],
+    "arrayType": ["poison", "ghost"],
     "rarity": "mythical",
     "gen": 9,
     "imgName": "1025-000",

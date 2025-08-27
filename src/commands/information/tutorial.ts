@@ -1,9 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import {
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import {
   createPageForMenu,
@@ -91,12 +88,12 @@ export default {
         pages,
       );
     } catch (e) {
-        newLogger(
-            'error',
-            e as string,
-            `Error in tutorial command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
-        );
-        interaction.reply(language("errorCatch", "eng"));
+      newLogger(
+        "error",
+        e as string,
+        `Error in tutorial command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      );
+      interaction.reply(language("errorCatch", "eng"));
     }
   },
 };

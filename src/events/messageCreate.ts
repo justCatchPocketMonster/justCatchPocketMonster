@@ -1,6 +1,6 @@
-import {BaseGuildTextChannel, Client, Message} from "discord.js";
-import {newLogger} from "../middlewares/logger";
-import {spawn} from "../features/spawn/spawn";
+import { BaseGuildTextChannel, Client, Message } from "discord.js";
+import { newLogger } from "../middlewares/logger";
+import { spawn } from "../features/spawn/spawn";
 
 export default async (client: Client, message: Message) => {
   try {
@@ -12,20 +12,24 @@ export default async (client: Client, message: Message) => {
     await spawn(message.guild.id, message.channel.id).then((result) => {
       if (result) {
         const channel = client.channels.cache.get(result.channelId);
-        if (channel && channel.isTextBased() && channel instanceof BaseGuildTextChannel) {
-          if(result.image) {
-            channel.send({embeds: [result.embed], files: [result.image]});
+        if (
+          channel &&
+          channel.isTextBased() &&
+          channel instanceof BaseGuildTextChannel
+        ) {
+          if (result.image) {
+            channel.send({ embeds: [result.embed], files: [result.image] });
           } else {
-            channel.send({embeds: [result.embed]});
+            channel.send({ embeds: [result.embed] });
           }
         }
       }
     });
   } catch (e) {
     newLogger(
-        'error',
-        e as string,
-        `Error in messageCreate event for server ${message.guild!.id} and channel ${message.channel.id}`,
+      "error",
+      e as string,
+      `Error in messageCreate event for server ${message.guild!.id} and channel ${message.channel.id}`,
     );
   }
 };

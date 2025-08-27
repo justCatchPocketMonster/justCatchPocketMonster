@@ -8,15 +8,14 @@ import {
   valuePerRarity,
   valuePerType,
 } from "../../config/default/spawn";
-import {pokemonDb} from "../../core/types/pokemonDb";
-import {initHint} from "../hint/initHint";
-import {capitalizeFirstLetter} from "../../utils/helperFunction";
+import { pokemonDb } from "../../core/types/pokemonDb";
+import { initHint } from "../hint/initHint";
+import { capitalizeFirstLetter } from "../../utils/helperFunction";
 export const __deps = {
   generationSelect,
   raritySelect,
   typeSelect,
 };
-
 
 export const selectPokemon = (
   server: ServerType,
@@ -29,7 +28,7 @@ export const selectPokemon = (
     isShiny: false,
     hint: "",
   }));
-  const isOnlyGigaOrNone = gigaIsAllowed(server,pokemons);
+  const isOnlyGigaOrNone = gigaIsAllowed(server, pokemons);
   const isMegaFilter: pokemonDb[] = megaIsAllowed(server, isOnlyGigaOrNone);
   if (idPokemon === 0) {
     pokemonChoiced = selectRandomPokemon(server, isMegaFilter);
@@ -43,24 +42,25 @@ export const selectPokemon = (
 };
 
 export const selectEggPokemon = (
-    server: ServerType,
-    idPokemon: number = 0,
+  server: ServerType,
+  idPokemon: number = 0,
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
-  if( idPokemon === 0) {
-    const randomIdPokemon = Math.floor(Math.random() * allPokemon[allPokemon.length].id);
+  if (idPokemon === 0) {
+    const randomIdPokemon = Math.floor(
+      Math.random() * allPokemon[allPokemon.length].id,
+    );
     pokemonChoiced = selectPokemonWithId(randomIdPokemon);
   } else {
     pokemonChoiced = selectPokemonWithId(idPokemon);
   }
-    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
-    const eggObject = allPokemon[0];
+  pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
+  const eggObject = allPokemon[0];
 
-    pokemonChoiced.name = eggObject.name;
-    pokemonChoiced.imgName = eggObject.imgName;
-    return pokemonChoiced;
-}
-
+  pokemonChoiced.name = eggObject.name;
+  pokemonChoiced.imgName = eggObject.imgName;
+  return pokemonChoiced;
+};
 
 function shinySelect(
   idPokemon: string,
@@ -98,7 +98,10 @@ function shinySelect(
   return nbRandomShiny === 1;
 }
 
-function isHiddenPokemon(server: ServerType, pokemon: PokemonType): PokemonType {
+function isHiddenPokemon(
+  server: ServerType,
+  pokemon: PokemonType,
+): PokemonType {
   let randomNumber: number = Math.floor(Math.random() * hidePokemon.maxValue);
 
   if (randomNumber == 1) {
@@ -140,7 +143,8 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
   const allPokemonWithId = allPokemon.filter(
     (pokemon) => pokemon.id === idPokemon,
   );
-  const randomPokemon = allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+  const randomPokemon =
+    allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
 
   return new Pokemon(
     randomPokemon.id.toString(),
@@ -183,12 +187,13 @@ function selectRandomPokemon(
       pokemon.arrayType.includes(type),
     );
   } while (pokemonPassType[0] === undefined);
-  const randomPokemon = pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)]
+  const randomPokemon =
+    pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)];
   return {
     id: randomPokemon.id.toString(),
     name: {
       nameEng: randomPokemon.name["nameEng"],
-      nameFr:  randomPokemon.name["nameFr"],
+      nameFr: randomPokemon.name["nameFr"],
     },
     arrayType: randomPokemon.arrayType,
     rarity: randomPokemon.rarity,
@@ -197,7 +202,9 @@ function selectRandomPokemon(
     form: randomPokemon.form,
     versionForm: randomPokemon.versionForm,
     isShiny: false,
-    hint: initHint(randomPokemon.name["name" + capitalizeFirstLetter(server.language)][0]),
+    hint: initHint(
+      randomPokemon.name["name" + capitalizeFirstLetter(server.language)][0],
+    ),
   };
 }
 
@@ -245,7 +252,5 @@ function typeSelect(server: ServerType): string {
     }
   }
 
-
   return "errorType";
 }
-

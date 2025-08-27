@@ -20,7 +20,7 @@ export function createPageForMenu(
   nameSelection: string,
   descriptionSelection?: string,
 ): PageData {
-  if(descriptionSelection === ""){
+  if (descriptionSelection === "") {
     descriptionSelection = undefined;
   }
 
@@ -98,18 +98,18 @@ export async function paginationMenu(
       await selectInteraction.deferUpdate();
       let pageSelection = Number(selectInteraction.values[0]);
       let nbLoop = 0;
-      while (!pages[pageSelection].page){
+      while (!pages[pageSelection].page) {
         nbLoop++;
         if (nbLoop >= 1000) {
           await interaction.editReply({
             components: [],
           });
-          return
+          return;
         }
-        pageSelection++
-        if( pageSelection >= pages.length) {
-            pageSelection = 0;
-            break;
+        pageSelection++;
+        if (pageSelection >= pages.length) {
+          pageSelection = 0;
+          break;
         }
       }
 

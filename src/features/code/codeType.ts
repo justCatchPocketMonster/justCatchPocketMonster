@@ -8,4 +8,3 @@ export const codeType = (codeEntered: string): string | null => {
   }
   return null;
 };
-

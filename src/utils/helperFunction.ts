@@ -1,4 +1,4 @@
-import {ColorResolvable} from "discord.js";
+import { ColorResolvable } from "discord.js";
 
 export const colorByType = (type: string): ColorResolvable => {
   switch (type) {
@@ -43,8 +43,10 @@ export const colorByType = (type: string): ColorResolvable => {
   }
 };
 
-
-export function getPercentage(partialValue: number, totalValue: number): number {
+export function getPercentage(
+  partialValue: number,
+  totalValue: number,
+): number {
   const percentage = (partialValue / totalValue) * 100;
   return parseFloat(percentage.toFixed(1));
 }

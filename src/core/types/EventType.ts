@@ -8,4 +8,3 @@ export interface EventType {
   effectDescription: string;
   endTime: Date;
 }
-

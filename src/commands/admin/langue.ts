@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
@@ -48,7 +48,7 @@ export default {
         language("langNameOptionString", "eng"),
       );
 
-      if(!langOption) {
+      if (!langOption) {
         interaction.reply({
           content: language("langErrorNoOption", server.language),
         });
@@ -62,9 +62,9 @@ export default {
       await updateServer(server.discordId, server);
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in langue command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in langue command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

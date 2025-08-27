@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { ChatInputCommandInteraction } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { catchPokemon } from "../../features/catch/catch";
 import { getUserById } from "../../cache/UserCache";
@@ -49,9 +49,9 @@ export default {
       );
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-            `Error in catch command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in catch command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

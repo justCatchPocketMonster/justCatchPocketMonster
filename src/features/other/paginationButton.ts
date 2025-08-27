@@ -1,5 +1,6 @@
 import {
-  ActionRowBuilder, AttachmentBuilder,
+  ActionRowBuilder,
+  AttachmentBuilder,
   ButtonBuilder,
   ButtonStyle,
   ChatInputCommandInteraction,
@@ -22,22 +23,22 @@ export const paginationButton = async (
   let currentPage = pageParDefaut - 1;
 
   const backButton = new ButtonBuilder()
-      .setCustomId("previous")
-      .setLabel("<")
-      .setStyle(ButtonStyle.Primary)
-      .setDisabled(pages.length === 1)
+    .setCustomId("previous")
+    .setLabel("<")
+    .setStyle(ButtonStyle.Primary)
+    .setDisabled(pages.length === 1);
 
-  const stopButton =                 new ButtonBuilder()
-      .setCustomId("stop")
-      .setLabel("X")
-      .setStyle(ButtonStyle.Danger)
-      .setDisabled(pages.length === 1)
+  const stopButton = new ButtonBuilder()
+    .setCustomId("stop")
+    .setLabel("X")
+    .setStyle(ButtonStyle.Danger)
+    .setDisabled(pages.length === 1);
 
   const nextButton = new ButtonBuilder()
-      .setCustomId("next")
-      .setLabel(">")
-      .setStyle(ButtonStyle.Primary)
-      .setDisabled(pages.length === 1)
+    .setCustomId("next")
+    .setLabel(">")
+    .setStyle(ButtonStyle.Primary)
+    .setDisabled(pages.length === 1);
 
   const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
     backButton,
@@ -50,7 +51,7 @@ export const paginationButton = async (
     embeds: [pages[currentPage].page],
     components: [row],
     fetchReply: true,
-    files : image ? [image] : [],
+    files: image ? [image] : [],
   });
   const collector = message.createMessageComponentCollector({
     componentType: ComponentType.Button,
@@ -76,7 +77,7 @@ export const paginationButton = async (
     await interaction.editReply({
       embeds: [pages[currentPage].page],
       components: [row],
-      files : image ? [image] : [],
+      files: image ? [image] : [],
     });
   });
 

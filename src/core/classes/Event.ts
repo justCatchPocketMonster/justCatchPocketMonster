@@ -1,4 +1,4 @@
-import {EventType} from "../types/EventType";
+import { EventType } from "../types/EventType";
 
 export class Event implements EventType {
   constructor(

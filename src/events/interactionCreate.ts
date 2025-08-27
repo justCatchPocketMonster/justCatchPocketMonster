@@ -16,7 +16,7 @@ import effect from "../commands/server/effect";
 import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 
-import {newLogger} from "../middlewares/logger";
+import { newLogger } from "../middlewares/logger";
 
 export default async (client: Client, interaction: Interaction) => {
   try {
@@ -66,9 +66,9 @@ export default async (client: Client, interaction: Interaction) => {
     }
   } catch (e) {
     newLogger(
-        'error',
-        e as string,
-        `Error in interactionCreate event for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+      "error",
+      e as string,
+      `Error in interactionCreate event for user ${interaction.user.id} in server ${interaction.guild?.id}`,
     );
   }
 };

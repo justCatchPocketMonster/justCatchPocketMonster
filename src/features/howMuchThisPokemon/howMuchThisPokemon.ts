@@ -1,14 +1,18 @@
 import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
-import {AttachmentBuilder, ChatInputCommandInteraction, EmbedBuilder} from "discord.js";
+import {
+  AttachmentBuilder,
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+} from "discord.js";
 import language from "../../lang/language";
 import { SaveOnePokemon } from "../../core/classes/SaveOnePokemon";
-import {capitalizeFirstLetter, colorByType} from "../../utils/helperFunction";
+import { capitalizeFirstLetter, colorByType } from "../../utils/helperFunction";
 import { pageType, paginationButton } from "../other/paginationButton";
 import allPokemon from "../../data/pokemon.json";
-import {pokemonDb} from "../../core/types/pokemonDb";
-import {urlImageRepo} from "../../config/default/misc";
+import { pokemonDb } from "../../core/types/pokemonDb";
+import { urlImageRepo } from "../../config/default/misc";
 
 export function howMuchThisPokemon(
   interaction: ChatInputCommandInteraction,
@@ -22,7 +26,9 @@ export function howMuchThisPokemon(
   const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
   const saveOnePokemonStatCatch = stat.savePokemonCatch.getSavesById(pokemonId);
   const paginationPage: pageType[] = [];
-  const avatar= interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
+  const avatar =
+    interaction.user.avatarURL() ??
+    "https://cdn.discordapp.com/embed/avatars/0.png";
 
   for (const save of saveOnePokemonStatSpawn) {
     const saveSpecifiqueFormUser = getSpecifiqueFormSaveData(
@@ -44,31 +50,38 @@ export function howMuchThisPokemon(
     const pokemonData = getPokemonDataBySave(save);
     if (pokemonData === null) return;
 
-
-    if(saveSpecifiqueFormUser.normalCount > 0){
+    if (saveSpecifiqueFormUser.normalCount > 0) {
       paginationPage.push(
-          generateEmbedData(pokemonData, server, avatar, saveField, false),
+        generateEmbedData(pokemonData, server, avatar, saveField, false),
       );
       if (saveSpecifiqueFormUser.shinyCount > 0) {
         paginationPage.push(
-            generateEmbedData(pokemonData, server, avatar, saveField, true),
+          generateEmbedData(pokemonData, server, avatar, saveField, true),
         );
       }
     }
   }
-  if(paginationPage.length === 0){
-    const pokemonDataOriginal = getPokemonDataBySave(saveOnePokemonStatSpawn[0]);
+  if (paginationPage.length === 0) {
+    const pokemonDataOriginal = getPokemonDataBySave(
+      saveOnePokemonStatSpawn[0],
+    );
     if (pokemonDataOriginal === null) return;
     pokemonDataOriginal.imgName = "0000-001";
     const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
-      saveServer: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonServer),
+      saveServer: getSpecifiqueFormSaveData(
+        saveOnePokemonStatSpawn[0],
+        saveOnePokemonServer,
+      ),
       saveStatSpawn: saveOnePokemonStatSpawn[0],
-      saveStatCatch: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonStatCatch),
-    }
+      saveStatCatch: getSpecifiqueFormSaveData(
+        saveOnePokemonStatSpawn[0],
+        saveOnePokemonStatCatch,
+      ),
+    };
     paginationPage.push(
-        generateEmbedData(pokemonDataOriginal, server, avatar, saveField, false),
+      generateEmbedData(pokemonDataOriginal, server, avatar, saveField, false),
     );
   }
   paginationButton(interaction, paginationPage);
@@ -119,13 +132,15 @@ function generateEmbedData(
   allSaveData: SaveFieldData,
   isShiny: boolean,
 ): pageType {
-  const imageName = pokemon.imgName+(isShiny ? "-shiny" : "")+".png";
+  const imageName = pokemon.imgName + (isShiny ? "-shiny" : "") + ".png";
   const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo+"/pokeHomeShadow/"+imageName
-    : urlImageRepo+"/pokeHome/"+imageName;
+    ? urlImageRepo + "/pokeHomeShadow/" + imageName
+    : urlImageRepo + "/pokeHome/" + imageName;
 
   const embed = new EmbedBuilder()
-    .setTitle(pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0])
+    .setTitle(
+      pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0],
+    )
     .setImage(imageUrl)
     .setThumbnail(avatarUser)
     .addFields(
@@ -185,4 +200,3 @@ interface SaveFieldData {
   saveStatSpawn: SaveOnePokemon;
   saveStatCatch: SaveOnePokemon;
 }
-

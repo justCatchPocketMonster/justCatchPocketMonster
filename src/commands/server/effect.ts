@@ -3,12 +3,12 @@ import {
   AttachmentBuilder,
   ChatInputCommandInteraction,
   ColorResolvable,
-  EmbedBuilder
+  EmbedBuilder,
 } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
-import {checkTimeForResetEventStat} from "../../features/event/checkTimeForResetEventStat";
+import { checkTimeForResetEventStat } from "../../features/event/checkTimeForResetEventStat";
 
 export default {
   name: "currentminievent",
@@ -71,9 +71,9 @@ export default {
       }
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in effect command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in effect command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

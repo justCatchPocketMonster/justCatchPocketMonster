@@ -142,8 +142,6 @@ function embedClassement(
 ) {
   const embed = new EmbedBuilder().setTitle(title).setColor(color);
 
-
-
   arraySortPokemon.slice(0, 21).forEach((statPokemon, index) => {
     const displayedPokemons = getPokemonNameByStatId(statPokemon, server);
 
@@ -159,21 +157,26 @@ function embedClassement(
   return embed;
 }
 
-function getPokemonNameByStatId(statId: SortedResult, server:ServerType): string {
-  const langKey = `name${server.language[0].toUpperCase() + server.language.slice(1)}` as "nameEng" | "nameFr";
+function getPokemonNameByStatId(
+  statId: SortedResult,
+  server: ServerType,
+): string {
+  const langKey =
+    `name${server.language[0].toUpperCase() + server.language.slice(1)}` as
+      | "nameEng"
+      | "nameFr";
   const names = statId.who
-      .map((id) => {
-        const pokemon = allPokemon.find((p) => p.id.toString() === id);
-        return pokemon ? pokemon.name[langKey].join(" ") : null;
-      })
-      .filter(Boolean);
+    .map((id) => {
+      const pokemon = allPokemon.find((p) => p.id.toString() === id);
+      return pokemon ? pokemon.name[langKey].join(" ") : null;
+    })
+    .filter(Boolean);
 
   const displayedNames = names.slice(0, 3);
   return names.length > 3
-      ? `${displayedNames.join(", ")}...`
-      : displayedNames.join(", ");
+    ? `${displayedNames.join(", ")}...`
+    : displayedNames.join(", ");
 }
-
 
 function principalEmbedStat(
   actualVersionStat: Stat,
@@ -244,7 +247,10 @@ function principalEmbedStat(
       name: t("pokemonLeastCaught"),
       value: getPokemonNameByStatId(leastCaught, server),
     },
-    { name: t("pokemonMostCaught"), value: getPokemonNameByStatId(mostCaught, server) },
+    {
+      name: t("pokemonMostCaught"),
+      value: getPokemonNameByStatId(mostCaught, server),
+    },
   ]);
 
   const leastSpawned = generalVersionStat.savePokemonSpawn.sortPokemonsByCount({
@@ -260,9 +266,11 @@ function principalEmbedStat(
       name: t("pokemonLeastSpawn"),
       value: getPokemonNameByStatId(leastSpawned, server),
     },
-    { name: t("pokemonMostSpawn"), value: getPokemonNameByStatId(mostSpawned, server) },
+    {
+      name: t("pokemonMostSpawn"),
+      value: getPokemonNameByStatId(mostSpawned, server),
+    },
   ]);
 
   return embed;
 }
-

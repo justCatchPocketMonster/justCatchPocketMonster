@@ -52,14 +52,14 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     return new SaveAllPokemon(uniqueData);
   }
 
-  getSaveOnePokemonFusedForm(idPokemon: string,): SaveOnePokemon {
+  getSaveOnePokemonFusedForm(idPokemon: string): SaveOnePokemon {
     let pokemonSave = new SaveOnePokemon(idPokemon, "fused", "fused", 0, 0, 0);
-    for(const key in this.data) {
-        const pokemon = this.data[key];
-        if (pokemon.idPokemon === idPokemon) {
-            pokemonSave.normalCount += pokemon.normalCount;
-            pokemonSave.shinyCount += pokemon.shinyCount;
-        }
+    for (const key in this.data) {
+      const pokemon = this.data[key];
+      if (pokemon.idPokemon === idPokemon) {
+        pokemonSave.normalCount += pokemon.normalCount;
+        pokemonSave.shinyCount += pokemon.shinyCount;
+      }
     }
     return pokemonSave;
   }
