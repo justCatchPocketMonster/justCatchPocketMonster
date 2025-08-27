@@ -8,6 +8,7 @@ import {capitalizeFirstLetter, colorByType} from "../../utils/helperFunction";
 import { pageType, paginationButton } from "../other/paginationButton";
 import allPokemon from "../../data/pokemon.json";
 import {pokemonDb} from "../../core/types/pokemonDb";
+import {urlImageRepo} from "../../config/default/misc";
 
 export function howMuchThisPokemon(
   interaction: ChatInputCommandInteraction,
@@ -119,10 +120,13 @@ function generateEmbedData(
   isShiny: boolean,
 ): pageType {
   const imageName = pokemon.imgName+(isShiny ? "-shiny" : "")+".png";
+  const imageUrl = server.eventSpawn.nightMode
+    ? urlImageRepo+"/pokeHomeShadow/"+imageName
+    : urlImageRepo+"/pokeHome/"+imageName;
 
   const embed = new EmbedBuilder()
     .setTitle(pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0])
-    .setImage("attachment://" + imageName)
+    .setImage(imageUrl)
     .setThumbnail(avatarUser)
     .addFields(
       {
@@ -171,12 +175,7 @@ function generateEmbedData(
         pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
       ),
     );
-
-
-  const imagePath = server.eventSpawn.nightMode
-    ? `./src/assets/pokeHomeShadow/${imageName}`
-    : `./src/assets/pokeHome/${imageName}`;
-  return { page: embed, imagePage: new AttachmentBuilder(imagePath) };
+  return { page: embed };
 }
 
 interface SaveFieldData {

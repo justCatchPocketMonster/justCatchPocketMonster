@@ -11,12 +11,12 @@ import { valueMaxChoiceEvent } from "../../config/default/spawn";
 import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import {nameStatGeneral, version} from "../../config/default/misc";
+import {nameStatGeneral, urlImageRepo, version} from "../../config/default/misc";
 import {checkTimeForResetEventStat} from "../event/checkTimeForResetEventStat";
 
 interface SpawnData {
   embed: EmbedBuilder;
-  image: AttachmentBuilder;
+  image?: AttachmentBuilder;
   channelId: string;
 }
 
@@ -41,7 +41,7 @@ export const spawn = async (
       channelId,
     };
 
-      if (!SpawnData?.embed || !SpawnData?.image || !SpawnData?.channelId)
+      if (!SpawnData?.embed || !SpawnData?.channelId)
       SpawnData = null;
     return SpawnData;
   } catch (e) {
@@ -91,7 +91,7 @@ function choiceChannel(server: ServerType, idChannel: string): string {
 async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
-): Promise<{ embed: EmbedBuilder; image: AttachmentBuilder; }> {
+): Promise<{ embed: EmbedBuilder}> {
     await checkTimeForResetEventStat(server)
     const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
     if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
@@ -125,15 +125,13 @@ async function choiceTypeOfSpawn(
 function generateEmbedPokemon(
   pokemon: PokemonType,
   server: ServerType,
-): { embed: EmbedBuilder; image: AttachmentBuilder } {
-  const basePath = server.eventSpawn.nightMode
-    ? "./src/assets/pokeHomeShadow/"
-    : "./src/assets/pokeHome/";
-
+): { embed: EmbedBuilder } {
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
 
-  const adressImage: string = basePath + pokemon.imgName + suffix;
-  const nameImage: string = pokemon.imgName + suffix;
+  const imageName: string = pokemon.imgName + suffix;
+    const imageUrl = server.eventSpawn.nightMode
+        ? urlImageRepo+"/pokeHomeShadow/"+imageName
+        : urlImageRepo+"/pokeHome/"+imageName;
 
   const color: ColorResolvable = colorByType(
     pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
@@ -143,11 +141,10 @@ function generateEmbedPokemon(
     .setColor(color)
     .setTitle(getText("embedPokemonTitle", server.language))
     .setDescription(getText("embedPokemonDescription", server.language))
-    .setImage("attachment://" + nameImage);
+    .setImage(imageUrl);
 
   return {
-    embed: pokeEmbed,
-    image: new AttachmentBuilder(adressImage),
+    embed: pokeEmbed
   };
 }
 

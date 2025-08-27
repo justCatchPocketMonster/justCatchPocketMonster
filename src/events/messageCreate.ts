@@ -13,8 +13,11 @@ export default async (client: Client, message: Message) => {
       if (result) {
         const channel = client.channels.cache.get(result.channelId);
         if (channel && channel.isTextBased() && channel instanceof BaseGuildTextChannel) {
-          channel.send({embeds: [result.embed], files: [result.image]});
-
+          if(result.image) {
+            channel.send({embeds: [result.embed], files: [result.image]});
+          } else {
+            channel.send({embeds: [result.embed]});
+          }
         }
       }
     });
