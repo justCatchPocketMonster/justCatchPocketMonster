@@ -2,7 +2,7 @@ import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
-import { selectEvent } from "../event/selectEvent";
+import { selectEventStandard } from "../event/selectEventStandard";
 import getText from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
@@ -94,7 +94,7 @@ async function choiceTypeOfSpawn(
   await checkTimeForResetEventStat(server);
   const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
   if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
-    await selectEvent(server);
+    await selectEventStandard(server);
     if (server.eventSpawn.whatEvent) {
       return generateEmbedEvent(server.eventSpawn.whatEvent, server);
     }

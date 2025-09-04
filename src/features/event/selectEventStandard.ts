@@ -11,7 +11,7 @@ import { nbGeneration, nbType, valuePerType } from "../../config/default/spawn";
 import { GenStat, TypeStat } from "../../core/types/EventSpawnType";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 
-export const selectEvent = async (server: ServerType) => {
+export const selectEventStandard = async (server: ServerType) => {
   let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
   const event: EventType = {
     ...randomEvent,

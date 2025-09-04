@@ -1,0 +1,11 @@
+[
+  {
+    "id": 0,
+    "name": "No event",
+    "startDate": null,
+    "endDate": null,
+    "imageUrl": null,
+    "description": "No special event is currently active.",
+    "statMultipliers": {}
+  }
+]
