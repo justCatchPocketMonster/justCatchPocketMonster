@@ -1,11 +1,92 @@
 [
   {
     "id": 0,
-    "name": "No event",
+    "name": "noEvent",
     "startDate": null,
     "endDate": null,
-    "imageUrl": null,
-    "description": "No special event is currently active.",
+    "image": null,
+    "description": "Aucun événement particulier n'est en cours.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 1,
+    "name": "Saison des coquilles mystérieuses",
+    "startDate": "04-14",
+    "endDate": "04-20",
+    "image": null,
+    "description": "On raconte que certains Pokémon comme Togepi ou Exeggcute protègent soigneusement leurs coquilles à cette période, et que leurs coquilles brillent d'une étrange lueur au clair de lune.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 2,
+    "name": "Éveil des bourgeons",
+    "startDate": "05-10",
+    "endDate": "05-24",
+    "image": null,
+    "description": "Les forêts se remplissent de senteurs et de couleurs. Des Pokémon comme Roselia et Petilil sont souvent aperçus en train de répandre du pollen lumineux.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 3,
+    "name": "Festival du soleil ardent",
+    "startDate": "07-01",
+    "endDate": "07-21",
+    "image": null,
+    "description": "La chaleur estivale ravive la puissance de Pokémon comme Solrock et Darumaka. Certains dresseurs disent même que Volcarona est plus majestueux à cette période.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 4,
+    "name": "Temps des récoltes",
+    "startDate": "09-15",
+    "endDate": "09-29",
+    "image": null,
+    "description": "Les champs abondants attirent des Pokémon liés aux fruits et aux plantes, comme Tropius et Gogoat, qui se nourrissent des récoltes mûres.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 5,
+    "name": "Nuit des spectres",
+    "startDate": "10-28",
+    "endDate": "10-31",
+    "image": null,
+    "description": "Des légendes racontent que les murmures des Pokémon Spectre comme Mismagius ou Spiritomb résonnent dans le vent à cette époque.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 6,
+    "name": "Chute des flocons",
+    "startDate": "12-01",
+    "endDate": "12-15",
+    "image": null,
+    "description": "Les premiers flocons attirent des Pokémon de type Glace. Des familles de Snorunt et de Cubchoo se regroupent pour jouer dans la neige.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 7,
+    "name": "Clair de lune étincelant",
+    "startDate": "12-24",
+    "endDate": "12-30",
+    "image": null,
+    "description": "Certains Pokémon semblent plus brillants sous les lumières hivernales. Des récits parlent de Clefairy et de Jirachi dansant sous les étoiles.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 8,
+    "name": "Jour du Dresseur",
+    "startDate": "08-05",
+    "endDate": "08-06",
+    "image": null,
+    "description": "Une journée spéciale où les Pokémon renforcent leurs liens avec leur Dresseur. Certains Pokémon rares brilleraient d’un éclat particulier en signe de confiance.",
+    "statMultipliers": {}
+  },
+  {
+    "id": 9,
+    "name": "Festival des flammes jumelles",
+    "startDate": "02-12",
+    "endDate": "02-18",
+    "image": null,
+    "description": "Selon une vieille légende, des couples de Pokémon Feu et Fée comme Vulpix et Flabébé dansent ensemble, leurs flammes et pétales créant des motifs lumineux dans la nuit.",
     "statMultipliers": {}
   }
 ]

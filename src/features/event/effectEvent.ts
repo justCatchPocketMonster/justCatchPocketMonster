@@ -2,6 +2,8 @@ import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { ServerType } from "../../core/types/ServerType";
 import { createPageForMenu, PageData } from "../other/paginationMenu";
+import eventSeasonalData from "../../data/eventSeasonalData.json";
+import { EventSeasonnal } from "../../core/types/EventSeasonnal";
 
 export const effectEvent = () => {
   // Implementation for applying event effects
@@ -46,5 +48,12 @@ function selectEventStandard(server: ServerType): PageData {
 }
 
 function generateEmbedEventSeasonal(): PageData {
-  // Implementation for generating an embed for a major event
+  const eventSeasonal: EventSeasonnal[] = eventSeasonalData;
+  const now = new Date();
+
+  const selectEvent = eventSeasonal.find((event) => {
+    event.startDate = new Date(event.startDate);
+    event.endDate = new Date(event.endDate);
+    return now >= event.startDate && now <= event.endDate;
+  });
 }
