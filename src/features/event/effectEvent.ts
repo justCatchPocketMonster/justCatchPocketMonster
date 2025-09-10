@@ -8,7 +8,7 @@ import { EventSeasonnal } from "../../core/types/EventSeasonnal";
 export const effectEvent = (interaction: ChatInputCommandInteraction, server: ServerType) : void => {
   const pages: PageData[] = [];
   pages.push(selectEventStandard(server));
-  pages.push(generateEmbedEventSeasonal());
+  pages.push(generateEmbedEventSeasonal(server));
   paginationMenu(
     interaction,
     "Select an event",
@@ -56,7 +56,7 @@ function selectEventStandard(server: ServerType): PageData {
   );
 }
 
-function generateEmbedEventSeasonal(): PageData {
+function generateEmbedEventSeasonal(server: ServerType): PageData|undefined {
   const now = new Date();
   const currentYear = now.getFullYear();
 
@@ -75,10 +75,18 @@ function generateEmbedEventSeasonal(): PageData {
   });
 
   if (!selected) {
+    const nextEvent = eventSeasonal.find((event) => {
+      if (!event.startDate) return false;
+      return now < event.startDate && event.startDate !== null;
+    });
+    if (!nextEvent || !nextEvent.startDate) {
+      return undefined;
+    }
     return createPageForMenu(
       new EmbedBuilder()
         .setColor("#000000" as ColorResolvable)
-        .setTitle("No seasonal event"),
+        .setTitle(language("noEvent", server.language))
+        .setDescription(language("nextSeasonalEvent", server.language)+` <t:${Math.floor(nextEvent.startDate.getTime() / 1000)}:D>`),
       null,
       "Seasonal event",
       "None active",
