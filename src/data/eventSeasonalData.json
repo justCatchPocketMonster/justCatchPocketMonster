@@ -1,92 +1,92 @@
 [
   {
     "id": 0,
-    "name": "noEvent",
+    "name": "seasonal_noEvent_title",
     "startDate": null,
     "endDate": null,
     "image": null,
-    "description": "Aucun événement particulier n'est en cours.",
+    "description": "seasonal_noEvent_desc",
     "statMultipliers": {}
   },
   {
     "id": 1,
-    "name": "Saison des coquilles mystérieuses",
+    "name": "seasonal_shells_title",
     "startDate": "04-14",
     "endDate": "04-20",
     "image": null,
-    "description": "On raconte que certains Pokémon comme Togepi ou Exeggcute protègent soigneusement leurs coquilles à cette période, et que leurs coquilles brillent d'une étrange lueur au clair de lune.",
+    "description": "seasonal_shells_desc",
     "statMultipliers": {}
   },
   {
     "id": 2,
-    "name": "Éveil des bourgeons",
+    "name": "seasonal_buds_title",
     "startDate": "05-10",
     "endDate": "05-24",
     "image": null,
-    "description": "Les forêts se remplissent de senteurs et de couleurs. Des Pokémon comme Roselia et Petilil sont souvent aperçus en train de répandre du pollen lumineux.",
+    "description": "seasonal_buds_desc",
     "statMultipliers": {}
   },
   {
     "id": 3,
-    "name": "Festival du soleil ardent",
+    "name": "seasonal_sun_title",
     "startDate": "07-01",
     "endDate": "07-21",
     "image": null,
-    "description": "La chaleur estivale ravive la puissance de Pokémon comme Solrock et Darumaka. Certains dresseurs disent même que Volcarona est plus majestueux à cette période.",
+    "description": "seasonal_sun_desc",
     "statMultipliers": {}
   },
   {
     "id": 4,
-    "name": "Temps des récoltes",
+    "name": "seasonal_harvest_title",
     "startDate": "09-15",
     "endDate": "09-29",
     "image": null,
-    "description": "Les champs abondants attirent des Pokémon liés aux fruits et aux plantes, comme Tropius et Gogoat, qui se nourrissent des récoltes mûres.",
+    "description": "seasonal_harvest_desc",
     "statMultipliers": {}
   },
   {
     "id": 5,
-    "name": "Nuit des spectres",
+    "name": "seasonal_ghosts_title",
     "startDate": "10-28",
     "endDate": "10-31",
     "image": null,
-    "description": "Des légendes racontent que les murmures des Pokémon Spectre comme Mismagius ou Spiritomb résonnent dans le vent à cette époque.",
+    "description": "seasonal_ghosts_desc",
     "statMultipliers": {}
   },
   {
     "id": 6,
-    "name": "Chute des flocons",
+    "name": "seasonal_snow_title",
     "startDate": "12-01",
     "endDate": "12-15",
     "image": null,
-    "description": "Les premiers flocons attirent des Pokémon de type Glace. Des familles de Snorunt et de Cubchoo se regroupent pour jouer dans la neige.",
+    "description": "seasonal_snow_desc",
     "statMultipliers": {}
   },
   {
     "id": 7,
-    "name": "Clair de lune étincelant",
+    "name": "seasonal_moon_title",
     "startDate": "12-24",
     "endDate": "12-30",
     "image": null,
-    "description": "Certains Pokémon semblent plus brillants sous les lumières hivernales. Des récits parlent de Clefairy et de Jirachi dansant sous les étoiles.",
+    "description": "seasonal_moon_desc",
     "statMultipliers": {}
   },
   {
     "id": 8,
-    "name": "Jour du Dresseur",
+    "name": "seasonal_trainerday_title",
     "startDate": "08-05",
     "endDate": "08-06",
     "image": null,
-    "description": "Une journée spéciale où les Pokémon renforcent leurs liens avec leur Dresseur. Certains Pokémon rares brilleraient d’un éclat particulier en signe de confiance.",
+    "description": "seasonal_trainerday_desc",
     "statMultipliers": {}
   },
   {
     "id": 9,
-    "name": "Festival des flammes jumelles",
+    "name": "seasonal_twinflames_title",
     "startDate": "02-12",
     "endDate": "02-18",
     "image": null,
-    "description": "Selon une vieille légende, des couples de Pokémon Feu et Fée comme Vulpix et Flabébé dansent ensemble, leurs flammes et pétales créant des motifs lumineux dans la nuit.",
+    "description": "seasonal_twinflames_desc",
     "statMultipliers": {}
   }
 ]

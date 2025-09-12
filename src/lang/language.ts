@@ -9,7 +9,9 @@ interface LanguageStructure {
   [key: string]: Translation;
 }
 
-export default function getText(key: string, lang: string): string {
+type LanguageKey = keyof typeof language;
+
+export default function getText(key: LanguageKey, lang: string): string {
   try {
     const languageData: LanguageStructure = language;
     const langTextArray = languageData[key]?.[lang] ?? [];
@@ -29,3 +31,9 @@ export default function getText(key: string, lang: string): string {
     return "Error: Key not found";
   }
 }
+
+export function getAvailableKeys(): LanguageKey[] {
+  return Object.keys(language) as LanguageKey[];
+}
+
+export type { LanguageKey };
