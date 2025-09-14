@@ -1,6 +1,7 @@
 export interface EventSeasonnal {
   id: number;
   name: string;
+  description: string;
   startDate: Date | null;
   endDate: Date | null;
   image: string | null;

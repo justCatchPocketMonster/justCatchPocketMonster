@@ -35,7 +35,7 @@ export class EventSpawn implements EventSpawnType {
     public nightMode: boolean,
     public valueMaxChoiceEgg: number,
   ) {}
-  applyModifiersInPlace(modifiers: Partial<EventSpawnType>): boolean {
+  applyModifiersInPlace(modifiers: Record<string, any>): boolean {
     let changed = false;
 
     function apply(target: any, source: any) {
@@ -90,6 +90,4 @@ export class EventSpawn implements EventSpawnType {
     );
     return defaultEventSpawn;
   }
-
-
 }

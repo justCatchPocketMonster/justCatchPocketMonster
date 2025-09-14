@@ -3,7 +3,7 @@ import { ServerType } from "../../core/types/ServerType";
 import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
 import { selectEventStandard } from "../event/selectEventStandard";
-import getText from "../../lang/language";
+import getText, { LanguageKey } from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
@@ -160,7 +160,7 @@ function generateEmbedEvent(
   let eventEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText(event.name, server.language))
-    .setDescription(getText(event.description, server.language))
+    .setDescription(getText(event.description as LanguageKey, server.language))
     .addFields({
       name: getText("effect", server.language),
       value: event.effectDescription,

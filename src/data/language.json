@@ -1,4 +1,8 @@
 {
+  "null": {
+    "fr": ["null"],
+    "eng": ["null"]
+  },
   "spawnPokemonActivate": {
     "fr": ["Les Pokémons sont en route."],
     "eng": ["Pokemons are on the way."]
@@ -985,8 +989,12 @@
     "eng": ["Season of Mysterious Shells"]
   },
   "seasonal_shells_desc": {
-    "fr": ["On raconte que certains Pokémon comme Togepi ou Exeggcute protègent soigneusement leurs coquilles à cette période, et que leurs coquilles brillent d'une étrange lueur au clair de lune."],
-    "eng": ["Some say Pokémon like Togepi or Exeggcute carefully protect their shells at this time, and that their shells glow with a strange light in the moonlight."]
+    "fr": [
+      "On raconte que certains Pokémon comme Togepi ou Exeggcute protègent soigneusement leurs coquilles à cette période, et que leurs coquilles brillent d'une étrange lueur au clair de lune."
+    ],
+    "eng": [
+      "Some say Pokémon like Togepi or Exeggcute carefully protect their shells at this time, and that their shells glow with a strange light in the moonlight."
+    ]
   },
 
   "seasonal_buds_title": {
@@ -994,8 +1002,12 @@
     "eng": ["Buds Awakening"]
   },
   "seasonal_buds_desc": {
-    "fr": ["Les forêts se remplissent de senteurs et de couleurs. Des Pokémon comme Roselia et Petilil sont souvent aperçus en train de répandre du pollen lumineux."],
-    "eng": ["Forests fill with scents and colors. Pokémon like Roselia and Petilil are often seen spreading luminous pollen."]
+    "fr": [
+      "Les forêts se remplissent de senteurs et de couleurs. Des Pokémon comme Roselia et Petilil sont souvent aperçus en train de répandre du pollen lumineux."
+    ],
+    "eng": [
+      "Forests fill with scents and colors. Pokémon like Roselia and Petilil are often seen spreading luminous pollen."
+    ]
   },
 
   "seasonal_sun_title": {
@@ -1003,8 +1015,12 @@
     "eng": ["Festival of the Blazing Sun"]
   },
   "seasonal_sun_desc": {
-    "fr": ["La chaleur estivale ravive la puissance de Pokémon comme Solrock et Darumaka. Certains dresseurs disent même que Volcarona est plus majestueux à cette période."],
-    "eng": ["Summer heat revives the power of Pokémon like Solrock and Darumaka. Some trainers even say Volcarona is more majestic during this period."]
+    "fr": [
+      "La chaleur estivale ravive la puissance de Pokémon comme Solrock et Darumaka. Certains dresseurs disent même que Volcarona est plus majestueux à cette période."
+    ],
+    "eng": [
+      "Summer heat revives the power of Pokémon like Solrock and Darumaka. Some trainers even say Volcarona is more majestic during this period."
+    ]
   },
 
   "seasonal_harvest_title": {
@@ -1012,8 +1028,12 @@
     "eng": ["Harvest Time"]
   },
   "seasonal_harvest_desc": {
-    "fr": ["Les champs abondants attirent des Pokémon liés aux fruits et aux plantes, comme Tropius et Gogoat, qui se nourrissent des récoltes mûres."],
-    "eng": ["Abundant fields attract fruit- and plant-linked Pokémon like Tropius and Gogoat, who feed on the ripe harvests."]
+    "fr": [
+      "Les champs abondants attirent des Pokémon liés aux fruits et aux plantes, comme Tropius et Gogoat, qui se nourrissent des récoltes mûres."
+    ],
+    "eng": [
+      "Abundant fields attract fruit- and plant-linked Pokémon like Tropius and Gogoat, who feed on the ripe harvests."
+    ]
   },
 
   "seasonal_ghosts_title": {
@@ -1021,8 +1041,12 @@
     "eng": ["Night of Specters"]
   },
   "seasonal_ghosts_desc": {
-    "fr": ["Des légendes racontent que les murmures des Pokémon Spectre comme Mismagius ou Spiritomb résonnent dans le vent à cette époque."],
-    "eng": ["Legends say the whispers of Ghost-type Pokémon like Mismagius or Spiritomb echo in the wind at this time."]
+    "fr": [
+      "Des légendes racontent que les murmures des Pokémon Spectre comme Mismagius ou Spiritomb résonnent dans le vent à cette époque."
+    ],
+    "eng": [
+      "Legends say the whispers of Ghost-type Pokémon like Mismagius or Spiritomb echo in the wind at this time."
+    ]
   },
 
   "seasonal_snow_title": {
@@ -1030,8 +1054,12 @@
     "eng": ["Falling Flakes"]
   },
   "seasonal_snow_desc": {
-    "fr": ["Les premiers flocons attirent des Pokémon de type Glace. Des familles de Snorunt et de Cubchoo se regroupent pour jouer dans la neige."],
-    "eng": ["The first snowflakes attract Ice-type Pokémon. Families of Snorunt and Cubchoo gather to play in the snow."]
+    "fr": [
+      "Les premiers flocons attirent des Pokémon de type Glace. Des familles de Snorunt et de Cubchoo se regroupent pour jouer dans la neige."
+    ],
+    "eng": [
+      "The first snowflakes attract Ice-type Pokémon. Families of Snorunt and Cubchoo gather to play in the snow."
+    ]
   },
 
   "seasonal_moon_title": {
@@ -1039,8 +1067,12 @@
     "eng": ["Sparkling Moonlight"]
   },
   "seasonal_moon_desc": {
-    "fr": ["Certains Pokémon semblent plus brillants sous les lumières hivernales. Des récits parlent de Clefairy et de Jirachi dansant sous les étoiles."],
-    "eng": ["Some Pokémon seem brighter under winter lights. Tales speak of Clefairy and Jirachi dancing under the stars."]
+    "fr": [
+      "Certains Pokémon semblent plus brillants sous les lumières hivernales. Des récits parlent de Clefairy et de Jirachi dansant sous les étoiles."
+    ],
+    "eng": [
+      "Some Pokémon seem brighter under winter lights. Tales speak of Clefairy and Jirachi dancing under the stars."
+    ]
   },
 
   "seasonal_trainerday_title": {
@@ -1048,8 +1080,12 @@
     "eng": ["Trainer Day"]
   },
   "seasonal_trainerday_desc": {
-    "fr": ["Une journée spéciale où les Pokémon renforcent leurs liens avec leur Dresseur. Certains Pokémon rares brilleraient d’un éclat particulier en signe de confiance."],
-    "eng": ["A special day when Pokémon strengthen their bonds with their Trainer. Some rare Pokémon would shine with a special glow as a sign of trust."]
+    "fr": [
+      "Une journée spéciale où les Pokémon renforcent leurs liens avec leur Dresseur. Certains Pokémon rares brilleraient d’un éclat particulier en signe de confiance."
+    ],
+    "eng": [
+      "A special day when Pokémon strengthen their bonds with their Trainer. Some rare Pokémon would shine with a special glow as a sign of trust."
+    ]
   },
 
   "seasonal_twinflames_title": {
@@ -1057,7 +1093,11 @@
     "eng": ["Twin Flames Festival"]
   },
   "seasonal_twinflames_desc": {
-    "fr": ["Selon une vieille légende, des couples de Pokémon Feu et Fée comme Vulpix et Flabébé dansent ensemble, leurs flammes et pétales créant des motifs lumineux dans la nuit."],
-    "eng": ["According to an old legend, pairs of Fire and Fairy Pokémon like Vulpix and Flabébé dance together, their flames and petals creating luminous patterns in the night."]
+    "fr": [
+      "Selon une vieille légende, des couples de Pokémon Feu et Fée comme Vulpix et Flabébé dansent ensemble, leurs flammes et pétales créant des motifs lumineux dans la nuit."
+    ],
+    "eng": [
+      "According to an old legend, pairs of Fire and Fairy Pokémon like Vulpix and Flabébé dance together, their flames and petals creating luminous patterns in the night."
+    ]
   }
 }

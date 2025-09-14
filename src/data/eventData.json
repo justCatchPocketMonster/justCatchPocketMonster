@@ -5,7 +5,18 @@
     "description": "eventMontagnardDesc",
     "type": "justEmbed",
     "color": "734101",
-    "image": "0001-000"
+    "image": "0001-000",
+    "statMultipliers": {
+      "level1": {
+        "legendary": 25
+      },
+      "level2": {
+        "legendary": 50
+      },
+      "level3": {
+        "legendary": 100
+      }
+    }
   },
   {
     "id": 2,
@@ -13,7 +24,12 @@
     "description": "eventSandwichVideSmolDesc",
     "type": "justEmbed",
     "color": "13FF00",
-    "image": "0007-000"
+    "image": "0007-000",
+    "statMultipliers": {
+      "level1": {},
+      "level2": {},
+      "level3": {}
+    }
   },
   {
     "id": 3,
@@ -21,7 +37,18 @@
     "description": "eventCuisineDesc",
     "type": "justEmbed",
     "color": "FFFFFF",
-    "image": "0003-000"
+    "image": "0003-000",
+    "statMultipliers": {
+      "level1": {
+        "generation": 5
+      },
+      "level2": {
+        "generation": 10
+      },
+      "level3": {
+        "generation": 20
+      }
+    }
   },
   {
     "id": 4,
@@ -29,7 +56,18 @@
     "description": "eventScientifiqueDesc",
     "type": "justEmbed",
     "color": "FFFFFF",
-    "image": "0008-000"
+    "image": "0008-000",
+    "statMultipliers": {
+      "level1": {
+        "mythical": 2
+      },
+      "level2": {
+        "mythical": 5
+      },
+      "level3": {
+        "mythical": 10
+      }
+    }
   },
   {
     "id": 5,
@@ -37,7 +75,18 @@
     "description": "eventSandwichDesc",
     "type": "justEmbed",
     "color": "F6A760",
-    "image": "0005-000"
+    "image": "0005-000",
+    "statMultipliers": {
+      "level1": {
+        "type": 5
+      },
+      "level2": {
+        "type": 10
+      },
+      "level3": {
+        "type": 20
+      }
+    }
   },
   {
     "id": 6,
@@ -45,16 +94,37 @@
     "description": "eventHackerDesc",
     "type": "justEmbed",
     "color": "FDFD96",
-    "image": "0009-000"
+    "image": "0009-000",
+    "statMultipliers": {
+      "level1": {
+        "shiny": 1.25
+      },
+      "level2": {
+        "shiny": 1.5
+      },
+      "level3": {
+        "shiny": 2
+      }
+    }
   },
-
   {
     "id": 7,
     "name": "eventMegaTitre",
     "description": "eventMegaDesc",
     "type": "justEmbed",
     "color": "F8F8FF",
-    "image": "0010-000"
+    "image": "0010-000",
+    "statMultipliers": {
+      "level1": {
+        "mega": 15
+      },
+      "level2": {
+        "mega": 30
+      },
+      "level3": {
+        "mega": 60
+      }
+    }
   },
   {
     "id": 8,
@@ -62,7 +132,21 @@
     "description": "eventMostPokemonDesc",
     "type": "justEmbed",
     "color": "66CC00",
-    "image": "0011-000"
+    "image": "0011-000",
+    "statMultipliers": {
+      "level1": {
+        "messageMin": 3,
+        "messageMax": 15
+      },
+      "level2": {
+        "messageMin": 2,
+        "messageMax": 10
+      },
+      "level3": {
+        "messageMin": 1,
+        "messageMax": 5
+      }
+    }
   },
   {
     "id": 9,
@@ -70,7 +154,21 @@
     "description": "eventLeastPokemonDesc",
     "type": "justEmbed",
     "color": "660000",
-    "image": "0000-000"
+    "image": "0000-000",
+    "statMultipliers": {
+      "level1": {
+        "messageMin": 6,
+        "messageMax": 22
+      },
+      "level2": {
+        "messageMin": 8,
+        "messageMax": 30
+      },
+      "level3": {
+        "messageMin": 10,
+        "messageMax": 40
+      }
+    }
   },
   {
     "id": 10,
@@ -78,7 +176,18 @@
     "description": "eventDarkDesc",
     "type": "justEmbed",
     "color": "000000",
-    "image": "0013-000"
+    "image": "0013-000",
+    "statMultipliers": {
+      "level1": {
+        "nightMode": true
+      },
+      "level2": {
+        "nightMode": true
+      },
+      "level3": {
+        "nightMode": true
+      }
+    }
   },
   {
     "id": 11,
@@ -86,6 +195,17 @@
     "description": "eventEggDesc",
     "type": "justEmbed",
     "color": "FDE9E0",
-    "image": "0014-000"
+    "image": "0014-000",
+    "statMultipliers": {
+      "level1": {
+        "eggValue": 200
+      },
+      "level2": {
+        "eggValue": 100
+      },
+      "level3": {
+        "eggValue": 50
+      }
+    }
   }
 ]
