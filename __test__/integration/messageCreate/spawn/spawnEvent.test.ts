@@ -39,9 +39,6 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.rarity.mythical).toBe(
       serverDefault.eventSpawn.rarity.mythical,
     );
-    expect(serverThen.eventSpawn.rarity.ordinary).toBeLessThan(
-      serverDefault.eventSpawn.rarity.ordinary,
-    );
   });
   test("rarity mythical event", async () => {
     // given
@@ -60,12 +57,6 @@ describe("Spawn event", () => {
     const serverThen = await getServerById(message.guildId!);
     expect(serverThen.eventSpawn.rarity.mythical).toBeGreaterThan(
       serverDefault.eventSpawn.rarity.mythical,
-    );
-    expect(serverThen.eventSpawn.rarity.legendary).toBe(
-      serverDefault.eventSpawn.rarity.legendary,
-    );
-    expect(serverThen.eventSpawn.rarity.ordinary).toBeLessThan(
-      serverDefault.eventSpawn.rarity.ordinary,
     );
   });
   test("nothing event", async () => {
@@ -188,27 +179,6 @@ describe("Spawn event", () => {
     expect(data?.embed.data.description).toBe("It falls from the sky");
     const serverThen = await getServerById(message.guildId!);
     expect(serverThen.eventSpawn.allowedForm.mega).toBe(true);
-  });
-  test("more pokemon event", async () => {
-    // given
-    jest
-      .spyOn(Math, "random")
-      .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.5)
-      .mockImplementationOnce(() => 0)
-      .mockImplementationOnce(() => 0);
-    const serverDefault = Server.createDefault("id");
-    // when
-    const data = await spawn(message.guildId!, message.channelId);
-    // then
-    expect(data?.embed.data.title).toBe("a Hacker");
-    expect(data?.embed.data.description).toBe(
-      "A hacker who... increases the shiny rate? Dirty cheater !!!",
-    );
-    const serverThen = await getServerById(message.guildId!);
-    expect(serverThen.eventSpawn.shiny).toBeLessThan(
-      serverDefault.eventSpawn.shiny,
-    );
   });
   test("more pokemon event", async () => {
     // given

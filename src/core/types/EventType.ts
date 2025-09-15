@@ -1,4 +1,5 @@
 import { LanguageKey } from "../../lang/language";
+import { EventSpawnFlatModsStrict } from "./EventSpawnFlatModsLooseType";
 
 export interface EventType {
   id: string;
@@ -10,8 +11,8 @@ export interface EventType {
   effectDescription: string;
   endTime: Date;
   statMultipliers?: {
-    level1: Record<string, any>;
-    level2: Record<string, any>;
-    level3: Record<string, any>;
+    level1: EventSpawnFlatModsStrict;
+    level2: EventSpawnFlatModsStrict;
+    level3: EventSpawnFlatModsStrict;
   };
 }

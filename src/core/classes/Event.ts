@@ -1,5 +1,6 @@
 import { EventType } from "../types/EventType";
 import { LanguageKey } from "../../lang/language";
+import { EventSpawnFlatModsStrict } from "../types/EventSpawnFlatModsLooseType";
 
 export class Event implements EventType {
   constructor(
@@ -12,9 +13,9 @@ export class Event implements EventType {
     public effectDescription: string,
     public endTime: Date,
     public statMultipliers?: {
-      level1: Record<string, any>;
-      level2: Record<string, any>;
-      level3: Record<string, any>;
+      level1: EventSpawnFlatModsStrict;
+      level2: EventSpawnFlatModsStrict;
+      level3: EventSpawnFlatModsStrict;
     },
   ) {}
 }

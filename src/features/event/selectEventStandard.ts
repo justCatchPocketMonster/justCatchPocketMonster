@@ -8,22 +8,27 @@ import { nbGeneration, valuePerType } from "../../config/default/spawn";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 import { EventSpawnType } from "../../core/types/EventSpawnType";
 import language from "../../data/language.json";
+import { Event } from "../../core/classes/Event";
+import type { LanguageKey } from "../../lang/language";
 
 export const selectEventStandard = async (server: ServerType) => {
   let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
-  const event: EventType = {
-    ...randomEvent,
-    id: randomEvent.id.toString(),
-    name: "null",
-    description: "null",
-    endTime: new Date(Date.now() + 30 * 1000),
-  };
+  const event = new Event(
+    randomEvent.id.toString(),
+    randomEvent.name as LanguageKey,
+    randomEvent.description as LanguageKey,
+    randomEvent.type,
+    randomEvent.color,
+    randomEvent.image,
+    "",
+    new Date(Date.now() + 30 * 1000),
+    randomEvent.statMultipliers,
+  );
 
   const eventSpawn = EventSpawn.createDefault();
   eventSpawn.whatEvent = event;
 
   effectEvent(eventSpawn, server);
-  console.log(eventSpawn);
   server.eventSpawn = deepCloneObject(eventSpawn);
   await updateServer(server.discordId, server);
 };
@@ -90,9 +95,8 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     };
 
     const handler = eventHandlers[eventId];
-    console.log(handler());
     if (handler) {
-      eventSpawn.whatEvent!.description = handler();
+      eventSpawn.whatEvent!.effectDescription = handler();
     }
   }
 

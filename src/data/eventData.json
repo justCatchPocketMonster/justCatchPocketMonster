@@ -78,13 +78,13 @@
     "image": "0005-000",
     "statMultipliers": {
       "level1": {
-        "type": 5
+        "typeRandom": 10
       },
       "level2": {
-        "type": 10
+        "typeRandom": 20
       },
       "level3": {
-        "type": 20
+        "typeRandom": 50
       }
     }
   },
@@ -97,13 +97,13 @@
     "image": "0009-000",
     "statMultipliers": {
       "level1": {
-        "shiny": 1.25
+        "shiny": -10
       },
       "level2": {
-        "shiny": 1.5
+        "shiny": -25
       },
       "level3": {
-        "shiny": 2
+        "shiny": -50
       }
     }
   },
@@ -116,13 +116,13 @@
     "image": "0010-000",
     "statMultipliers": {
       "level1": {
-        "mega": 15
+        "mega": true
       },
       "level2": {
-        "mega": 30
+        "mega": true
       },
       "level3": {
-        "mega": 60
+        "mega": true
       }
     }
   },
@@ -135,16 +135,16 @@
     "image": "0011-000",
     "statMultipliers": {
       "level1": {
-        "messageMin": 3,
-        "messageMax": 15
+        "min": -10,
+        "max": -10
       },
       "level2": {
-        "messageMin": 2,
-        "messageMax": 10
+        "min": -25,
+        "max": -25
       },
       "level3": {
-        "messageMin": 1,
-        "messageMax": 5
+        "min": -50,
+        "max": -50
       }
     }
   },
@@ -157,16 +157,16 @@
     "image": "0000-000",
     "statMultipliers": {
       "level1": {
-        "messageMin": 6,
-        "messageMax": 22
+        "min": 25,
+        "max": 25
       },
       "level2": {
-        "messageMin": 8,
-        "messageMax": 30
+        "min": 50,
+        "max": 50
       },
       "level3": {
-        "messageMin": 10,
-        "messageMax": 40
+        "min": 100,
+        "max": 100
       }
     }
   },
@@ -198,13 +198,13 @@
     "image": "0014-000",
     "statMultipliers": {
       "level1": {
-        "eggValue": 200
+        "valueMaxChoiceEgg": -30
       },
       "level2": {
-        "eggValue": 100
+        "valueMaxChoiceEgg": -55
       },
       "level3": {
-        "eggValue": 50
+        "valueMaxChoiceEgg": -85
       }
     }
   }
