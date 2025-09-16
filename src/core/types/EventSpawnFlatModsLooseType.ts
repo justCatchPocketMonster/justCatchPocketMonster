@@ -10,6 +10,8 @@ export type EventSpawnFlatModsStrict = NumericMods<GenStat> &
   NumericMods<TypeStat> &
   NumericMods<RarityStat> &
   Partial<{
+    generationRandom: Percent;
+    typeRandom: Percent;
     shiny: Percent;
     valueMaxChoiceEgg: Percent;
     min: Percent;

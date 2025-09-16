@@ -52,8 +52,8 @@ describe("effect command", () => {
 function defaultEvent(): Event {
   return new Event(
     "1",
-    "Test Event",
-    "This is a test event",
+    "TestEvent",
+    "TestEventDesc",
     "test",
     "#FF0000",
     "https://example.com/image.png",

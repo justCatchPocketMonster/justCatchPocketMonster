@@ -966,6 +966,7 @@
     ]
   },
 
+
   "nextSeasonalEvent": {
     "fr": ["Prochain événement saisonnier :"],
     "eng": ["Next seasonal event:"]
@@ -995,6 +996,18 @@
     "eng": [
       "Some say Pokémon like Togepi or Exeggcute carefully protect their shells at this time, and that their shells glow with a strange light in the moonlight."
     ]
+  },
+  "langErrorNoOption":{
+    "fr": ["Il faut choisir une langue."],
+    "eng": ["You need to choose a language."]
+  },
+  "TestEvent":{
+    "fr": ["Test d'événement"],
+    "eng": ["Test event"]
+  },
+  "TestEventDesc":{
+    "fr": ["Test d'événement"],
+    "eng": ["Test event"]
   },
 
   "seasonal_buds_title": {

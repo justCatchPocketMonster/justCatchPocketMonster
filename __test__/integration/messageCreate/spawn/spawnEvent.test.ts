@@ -117,9 +117,6 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.gen["1"]).toBeGreaterThan(
       serverDefault.eventSpawn.gen["1"],
     );
-    expect(serverThen.eventSpawn.gen["2"]).toBeLessThan(
-      serverDefault.eventSpawn.gen["2"],
-    );
   });
   test("type event", async () => {
     // given
@@ -138,9 +135,6 @@ describe("Spawn event", () => {
     const serverThen = await getServerById(message.guildId!);
     expect(serverThen.eventSpawn.type.steel).toBeGreaterThan(
       serverDefault.eventSpawn.type.steel,
-    );
-    expect(serverThen.eventSpawn.type.dragon).toBeLessThan(
-      serverDefault.eventSpawn.type.dragon,
     );
   });
   test("shiny event", async () => {

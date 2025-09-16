@@ -4,12 +4,13 @@ import { ServerType } from "../../core/types/ServerType";
 import { updateServer } from "../../cache/ServerCache";
 import { deepCloneObject } from "../../utils/helperFunction";
 import getText from "../../lang/language";
-import { nbGeneration, valuePerType } from "../../config/default/spawn";
+import { nbGeneration, valuePerType, valuePerGen } from "../../config/default/spawn";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 import { EventSpawnType } from "../../core/types/EventSpawnType";
 import language from "../../data/language.json";
 import { Event } from "../../core/classes/Event";
 import type { LanguageKey } from "../../lang/language";
+import { TypeStat, GenStat } from "../../core/types/EventSpawnType";
 
 export const selectEventStandard = async (server: ServerType) => {
   let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
@@ -52,6 +53,14 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
   const levelKey = `level${level}` as keyof typeof statMultipliers;
   const multipliers = statMultipliers[levelKey];
 
+  if(multipliers.generationRandom) {
+    multipliers[getRandomGen()] = multipliers.generationRandom;
+  }
+
+  if(multipliers.typeRandom) {
+    multipliers[getRandomType()] = multipliers.typeRandom;
+  }
+
   eventSpawn.applyModifiersInPlace(multipliers);
 
   setEventTextEffect(eventId, level, server);
@@ -60,7 +69,6 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     eventSpawn.whatEvent!.image = imagePerLvl[level - 1];
   }
 
-  //time change
   if (eventId === "10" || eventId === "7") {
     eventSpawn.whatEvent!.endTime = addDuration(DURATIONS[levelKey]);
   }
@@ -125,14 +133,16 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     return getText(key, server.language);
   }
 
-  function getRandomGen() {
-    return Math.floor(Math.random() * nbGeneration) + 1;
+  function getRandomGen(): keyof GenStat {
+    const gen = Object.keys(valuePerGen) as (keyof GenStat)[];
+    return gen[Math.floor(Math.random() * gen.length)];
   }
 
-  function getRandomType() {
-    const types = Object.keys(valuePerType);
+  function getRandomType(): keyof TypeStat {
+    const types = Object.keys(valuePerType) as (keyof TypeStat)[];
     return types[Math.floor(Math.random() * types.length)];
   }
+  
 
   function addDuration(ms: number) {
     return new Date(date.getTime() + ms);

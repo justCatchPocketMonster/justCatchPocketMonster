@@ -40,13 +40,13 @@
     "image": "0003-000",
     "statMultipliers": {
       "level1": {
-        "generation": 5
+        "generationRandom": 5
       },
       "level2": {
-        "generation": 10
+        "generationRandom": 10
       },
       "level3": {
-        "generation": 20
+        "generationRandom": 20
       }
     }
   },
