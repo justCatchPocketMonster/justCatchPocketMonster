@@ -87,11 +87,13 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
   });
 
   if (!selected) {
-    const nextEvent = eventSeasonal.find((event) => {
-      if (!event.startDate) return false;
-      return now < event.startDate && event.startDate !== null;
-    });
-    if (!nextEvent || !nextEvent.startDate) {
+    const nextEvent = eventSeasonal
+      .filter((e) => e.startDate && e.startDate.getTime() > now.getTime())
+      .reduce<EventSeasonnal>(
+        (best, e) => (!best || e.startDate! < best.startDate! ? e : best),
+        eventSeasonal[0],
+      );
+    if (!nextEvent?.startDate) {
       return undefined;
     }
     return createPageForMenu(
