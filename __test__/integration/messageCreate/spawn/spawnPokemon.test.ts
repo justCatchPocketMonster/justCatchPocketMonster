@@ -70,6 +70,7 @@ describe("Spawn Pokemon", () => {
             p.arrayType.includes(type) &&
             p.rarity === rarity,
         );
+        console.log(pokemonWithSameData);
         if (pokemonWithSameData.length === 0) {
           return;
         }
