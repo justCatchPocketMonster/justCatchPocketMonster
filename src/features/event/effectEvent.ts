@@ -4,7 +4,7 @@ import {
   ColorResolvable,
   EmbedBuilder,
 } from "discord.js";
-import language from "../../lang/language";
+import language, { LanguageKey } from "../../lang/language";
 import { ServerType } from "../../core/types/ServerType";
 import {
   createPageForMenu,
@@ -69,14 +69,16 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
   const now = new Date();
   const currentYear = now.getFullYear();
 
-  const eventSeasonal: EventSeasonnal[] = eventSeasonalData.map((e) => ({
-    id: e.id,
-    name: e.name,
-    startDate: e.startDate ? new Date(`${currentYear}-${e.startDate}`) : null,
-    endDate: e.endDate ? new Date(`${currentYear}-${e.endDate}`) : null,
-    image: e.image ?? null,
-    statMultipliers: e.statMultipliers ?? {},
-    description: e.description ?? "",
+  const eventSeasonal: EventSeasonnal[] = eventSeasonalData.map((event) => ({
+    id: event.id,
+    name: event.name as LanguageKey,
+    startDate: event.startDate
+      ? new Date(`${currentYear}-${event.startDate}`)
+      : null,
+    endDate: event.endDate ? new Date(`${currentYear}-${event.endDate}`) : null,
+    image: event.image ?? null,
+    statMultipliers: event.statMultipliers ?? {},
+    description: event.description as LanguageKey,
   }));
 
   const selected = eventSeasonal.find((event) => {
@@ -101,15 +103,15 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
             ` <t:${Math.floor(nextEvent.startDate.getTime() / 1000)}:D>`,
         ),
       null,
-      "Seasonal event",
-      "None active",
+      language("seasonalEvent", server.language),
+      language("noEvent", server.language),
     );
   }
 
   const embed = new EmbedBuilder()
     .setColor("#00AAFF" as ColorResolvable)
-    .setTitle(selected.name)
-    .setDescription(selected.description)
+    .setTitle(language(selected.name, server.language))
+    .setDescription(language(selected.description, server.language))
     .addFields({
       name: "End",
       value: selected.endDate
@@ -118,5 +120,10 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
       inline: true,
     });
 
-  return createPageForMenu(embed, null, "Seasonal event", selected.name);
+  return createPageForMenu(
+    embed,
+    null,
+    language("seasonalEvent", server.language),
+    language(selected.name, server.language),
+  );
 }

@@ -966,7 +966,6 @@
     ]
   },
 
-
   "nextSeasonalEvent": {
     "fr": ["Prochain événement saisonnier :"],
     "eng": ["Next seasonal event:"]
@@ -997,15 +996,15 @@
       "Some say Pokémon like Togepi or Exeggcute carefully protect their shells at this time, and that their shells glow with a strange light in the moonlight."
     ]
   },
-  "langErrorNoOption":{
+  "langErrorNoOption": {
     "fr": ["Il faut choisir une langue."],
     "eng": ["You need to choose a language."]
   },
-  "TestEvent":{
+  "TestEvent": {
     "fr": ["Test d'événement"],
     "eng": ["Test event"]
   },
-  "TestEventDesc":{
+  "TestEventDesc": {
     "fr": ["Test d'événement"],
     "eng": ["Test event"]
   },
@@ -1112,5 +1111,7 @@
     "eng": [
       "According to an old legend, pairs of Fire and Fairy Pokémon like Vulpix and Flabébé dance together, their flames and petals creating luminous patterns in the night."
     ]
-  }
+  },
+
+  "seasonalEvent": {}
 }

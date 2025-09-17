@@ -4,7 +4,11 @@ import { ServerType } from "../../core/types/ServerType";
 import { updateServer } from "../../cache/ServerCache";
 import { deepCloneObject } from "../../utils/helperFunction";
 import getText from "../../lang/language";
-import { nbGeneration, valuePerType, valuePerGen } from "../../config/default/spawn";
+import {
+  nbGeneration,
+  valuePerType,
+  valuePerGen,
+} from "../../config/default/spawn";
 import { EventSpawn } from "../../core/classes/EventSpawn";
 import { EventSpawnType } from "../../core/types/EventSpawnType";
 import language from "../../data/language.json";
@@ -53,11 +57,11 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
   const levelKey = `level${level}` as keyof typeof statMultipliers;
   const multipliers = statMultipliers[levelKey];
 
-  if(multipliers.generationRandom) {
+  if (multipliers.generationRandom) {
     multipliers[getRandomGen()] = multipliers.generationRandom;
   }
 
-  if(multipliers.typeRandom) {
+  if (multipliers.typeRandom) {
     multipliers[getRandomType()] = multipliers.typeRandom;
   }
 
@@ -142,7 +146,6 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     const types = Object.keys(valuePerType) as (keyof TypeStat)[];
     return types[Math.floor(Math.random() * types.length)];
   }
-  
 
   function addDuration(ms: number) {
     return new Date(date.getTime() + ms);

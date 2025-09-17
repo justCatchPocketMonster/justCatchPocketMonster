@@ -52,7 +52,7 @@ describe("language command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("langErrorNoOption", "fr"),
+      content: language("langErrorNoOption", "eng"),
     });
     expect(serverThen.language).toBe("eng");
   });

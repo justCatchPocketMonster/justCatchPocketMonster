@@ -1,7 +1,9 @@
+import { LanguageKey } from "../../lang/language";
+
 export interface EventSeasonnal {
   id: number;
-  name: string;
-  description: string;
+  name: LanguageKey;
+  description: LanguageKey;
   startDate: Date | null;
   endDate: Date | null;
   image: string | null;

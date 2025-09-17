@@ -123,8 +123,8 @@ export class EventSpawn implements EventSpawnType {
 const computePercentage = (current: number, percentDelta: number): number =>
   Math.floor(current * (1 + percentDelta / 100) * 100) / 100;
 
-function keysOf<T extends object>(obj: T): Array<keyof T> {
-  return Object.keys(obj) as Array<keyof T>;
+function keysOf<T extends object>(obj: T): Array<Extract<keyof T, string>> {
+  return Object.keys(obj) as Array<Extract<keyof T, string>>;
 }
 
 type NumericKeys<T> = {

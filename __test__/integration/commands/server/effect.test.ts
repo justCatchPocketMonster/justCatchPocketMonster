@@ -32,21 +32,6 @@ describe("effect command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
   });
-
-  test("No event error", async () => {
-    // given
-
-    // when
-    await effect.execute(interaction);
-
-    // then
-    const replyMock = interaction.reply as jest.Mock;
-
-    expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock.mock.calls[0][0]).toEqual({
-      content: language("noEvent", "eng"),
-    });
-  });
 });
 
 function defaultEvent(): Event {

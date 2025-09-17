@@ -9,6 +9,7 @@ import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { checkTimeForResetEventStat } from "../../features/event/checkTimeForResetEventStat";
+import { effectEvent } from "../../features/event/effectEvent";
 
 export default {
   name: "currentminievent",
@@ -27,6 +28,8 @@ export default {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       await checkTimeForResetEventStat(server);
+
+      effectEvent(interaction, server);
     } catch (e) {
       newLogger(
         "error",

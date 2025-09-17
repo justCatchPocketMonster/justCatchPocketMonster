@@ -4,7 +4,7 @@ import { EventSpawnFlatModsStrict } from "./EventSpawnFlatModsLooseType";
 export interface EventType {
   id: string;
   name: LanguageKey;
-  description: LanguageKey | string;
+  description: LanguageKey;
   type: string;
   color: string;
   image: string;
