@@ -13,6 +13,10 @@ import {
 } from "../other/paginationMenu";
 import eventSeasonalData from "../../data/eventSeasonalData.json";
 import { EventSeasonnal } from "../../core/types/EventSeasonnal";
+import {
+  selectEventSeasonal,
+  selectNextEventSeasonal,
+} from "./selectEventSeasonal";
 
 export const effectEvent = (
   interaction: ChatInputCommandInteraction,
@@ -66,33 +70,10 @@ function selectEventStandard(server: ServerType): PageData {
 }
 
 function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
-  const now = new Date();
-  const currentYear = now.getFullYear();
-
-  const eventSeasonal: EventSeasonnal[] = eventSeasonalData.map((event) => ({
-    id: event.id,
-    name: event.name as LanguageKey,
-    startDate: event.startDate
-      ? new Date(`${currentYear}-${event.startDate}`)
-      : null,
-    endDate: event.endDate ? new Date(`${currentYear}-${event.endDate}`) : null,
-    image: event.image ?? null,
-    statMultipliers: event.statMultipliers ?? {},
-    description: event.description as LanguageKey,
-  }));
-
-  const selected = eventSeasonal.find((event) => {
-    if (!event.startDate || !event.endDate) return false;
-    return now >= event.startDate && now <= event.endDate;
-  });
+  const selected = selectEventSeasonal();
 
   if (!selected) {
-    const nextEvent = eventSeasonal
-      .filter((e) => e.startDate && e.startDate.getTime() > now.getTime())
-      .reduce<EventSeasonnal>(
-        (best, e) => (!best || e.startDate! < best.startDate! ? e : best),
-        eventSeasonal[0],
-      );
+    const nextEvent = selectNextEventSeasonal();
     if (!nextEvent?.startDate) {
       return undefined;
     }

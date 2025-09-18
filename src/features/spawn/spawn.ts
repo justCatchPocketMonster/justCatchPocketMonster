@@ -37,15 +37,18 @@ export const spawn = async (
     const channelId = choiceChannel(server, idChannel);
 
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
-
+    console.log("a atteint le limite de spawn");
     let SpawnData: SpawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
     };
-
+    console.log(
+      "a les données " + !SpawnData?.embed + " " + !SpawnData?.channelId,
+    );
     if (!SpawnData?.embed || !SpawnData?.channelId) SpawnData = null;
     return SpawnData;
   } catch (e) {
+    console.log(e);
     logger.error(e);
   } finally {
     spawnLocks.delete(idServer);

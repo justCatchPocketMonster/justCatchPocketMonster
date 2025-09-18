@@ -16,6 +16,7 @@ import {
 } from "../../config/default/spawn";
 import { deepCloneObject } from "../../utils/helperFunction";
 import { EventSpawnFlatModsStrict } from "../types/EventSpawnFlatModsLooseType";
+import { selectEventSeasonal } from "../../features/event/selectEventSeasonal";
 
 export class EventSpawn implements EventSpawnType {
   constructor(
@@ -116,6 +117,12 @@ export class EventSpawn implements EventSpawnType {
       false,
       valueMaxChoiceEgg,
     );
+
+    const eventSeason = selectEventSeasonal();
+    if (eventSeason) {
+      defaultEventSpawn.applyModifiersInPlace(eventSeason.statMultipliers);
+    }
+
     return defaultEventSpawn;
   }
 }
