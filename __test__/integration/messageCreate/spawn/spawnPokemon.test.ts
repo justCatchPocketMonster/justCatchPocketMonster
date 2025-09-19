@@ -70,7 +70,7 @@ describe("Spawn Pokemon", () => {
             p.arrayType.includes(type) &&
             p.rarity === rarity,
         );
-        console.log(pokemonWithSameData);
+
         if (pokemonWithSameData.length === 0) {
           return;
         }
@@ -84,9 +84,6 @@ describe("Spawn Pokemon", () => {
         );
 
         const serverThen = await getServerById(message.guildId!);
-        console.log(serverThen.pokemonPresent[message.channelId]);
-        console.log(data?.embed.data);
-        console.log(generation, rarity, type);
         expect(
           serverThen.pokemonPresent[message.channelId].gen.toString(),
         ).toBe(generation);
