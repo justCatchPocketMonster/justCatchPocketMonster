@@ -82,7 +82,11 @@ describe("Spawn Pokemon", () => {
         expect(data?.embed.data.description).toBe(
           'To catch it, do "/catch [Pokémon\'s name]".',
         );
+
         const serverThen = await getServerById(message.guildId!);
+        console.log(serverThen.pokemonPresent[message.channelId]);
+        console.log(data?.embed.data);
+        console.log(generation, rarity, type);
         expect(
           serverThen.pokemonPresent[message.channelId].gen.toString(),
         ).toBe(generation);
