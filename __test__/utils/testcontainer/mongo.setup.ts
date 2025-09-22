@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
 import { GenericContainer, StartedTestContainer, Wait } from "testcontainers";
 
-let container: StartedTestContainer;
+let container: StartedTestContainer | undefined;
 
 beforeAll(async () => {
+  if (process.env.SKIP_TESTCONTAINERS === "1") {
+    // Allow running lightweight unit tests without Docker.
+    return;
+  }
+
   container = await new GenericContainer("mongo:latest")
     .withExposedPorts(27017)
     .withWaitStrategy(Wait.forLogMessage("Waiting for connections"))
@@ -19,6 +24,11 @@ beforeAll(async () => {
 }, 60_000);
 
 afterAll(async () => {
+  if (process.env.SKIP_TESTCONTAINERS === "1") {
+    return;
+  }
   await mongoose.disconnect();
-  await container.stop();
+  if (container) {
+    await container.stop();
+  }
 });
