@@ -30,7 +30,17 @@ describe("pokedex", () => {
     user.savePokemon.initMissingPokemons();
 
     const eventSpawn: EventSpawnType = {
-      gen: { "1": 100, "2": 100, "3": 100, "4": 100, "5": 100, "6": 100, "7": 100, "8": 100, "9": 100 },
+      gen: {
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 100,
+        "7": 100,
+        "8": 100,
+        "9": 100,
+      },
       type: {
         steel: 100,
         dragon: 100,
@@ -85,4 +95,3 @@ describe("pokedex", () => {
     expect(defaultPage).toBe(1);
   });
 });
-

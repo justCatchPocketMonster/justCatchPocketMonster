@@ -1,4 +1,9 @@
-import { colorByType, getPercentage, capitalizeFirstLetter, deepCloneObject } from "../../../src/utils/helperFunction";
+import {
+  colorByType,
+  getPercentage,
+  capitalizeFirstLetter,
+  deepCloneObject,
+} from "../../../src/utils/helperFunction";
 
 describe("utils/helperFunction", () => {
   test("colorByType returns known colors and default", () => {
@@ -28,5 +33,3 @@ describe("utils/helperFunction", () => {
     expect(original.b.c).toBe(2);
   });
 });
-
-

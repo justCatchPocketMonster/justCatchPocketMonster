@@ -1,4 +1,7 @@
-import getText, { getAvailableKeys, type LanguageKey } from "../../../src/lang/language";
+import getText, {
+  getAvailableKeys,
+  type LanguageKey,
+} from "../../../src/lang/language";
 
 jest.mock("../../../src/middlewares/logger", () => ({
   newLogger: jest.fn(),
@@ -30,11 +33,11 @@ describe("lang/language", () => {
     // Force an error by temporarily monkey-patching Math.random to cause unexpected behavior is not sufficient.
     // Instead, simulate by mocking language import via jest.resetModules and providing a bad value.
     jest.resetModules();
-    jest.doMock("../../../src/data/language.json", () => (null), { virtual: true });
+    jest.doMock("../../../src/data/language.json", () => null, {
+      virtual: true,
+    });
     const faultyModule = require("../../../src/lang/language");
     const result = faultyModule.default("spawnPokemonActivate", "eng");
     expect(result).toBe("Error: Key not found");
   });
 });
-
-

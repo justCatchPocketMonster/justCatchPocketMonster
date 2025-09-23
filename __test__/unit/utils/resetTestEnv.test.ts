@@ -33,23 +33,18 @@ describe("resetTestEnv", () => {
     const { cache: serverCache } = await import(
       "../../../src/cache/ServerCache"
     );
-    const { cache: userCache } = await import(
-      "../../../src/cache/UserCache"
-    );
-    const { cache: statCache } = await import(
-      "../../../src/cache/StatCache"
-    );
+    const { cache: userCache } = await import("../../../src/cache/UserCache");
+    const { cache: statCache } = await import("../../../src/cache/StatCache");
 
     await resetTestEnv();
 
     expect(deleteManyA).toHaveBeenCalledWith({});
     expect(deleteManyB).toHaveBeenCalledWith({});
 
-    expect((serverCache.flushAll as jest.Mock)).toHaveBeenCalledTimes(1);
-    expect((userCache.flushAll as jest.Mock)).toHaveBeenCalledTimes(1);
-    expect((statCache.flushAll as jest.Mock)).toHaveBeenCalledTimes(1);
+    expect(serverCache.flushAll as jest.Mock).toHaveBeenCalledTimes(1);
+    expect(userCache.flushAll as jest.Mock).toHaveBeenCalledTimes(1);
+    expect(statCache.flushAll as jest.Mock).toHaveBeenCalledTimes(1);
 
     connectionGetSpy.mockRestore();
   });
 });
-

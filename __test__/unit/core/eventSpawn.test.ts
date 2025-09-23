@@ -1,5 +1,9 @@
 import { EventSpawn } from "../../../src/core/classes/EventSpawn";
-import { valuePerGen, valuePerType, valuePerRarity } from "../../../src/config/default/spawn";
+import {
+  valuePerGen,
+  valuePerType,
+  valuePerRarity,
+} from "../../../src/config/default/spawn";
 import type { LanguageKey } from "../../../src/lang/language";
 
 describe("EventSpawn.applyModifiersInPlace", () => {
