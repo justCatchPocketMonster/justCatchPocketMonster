@@ -3,7 +3,6 @@ import { createMockInteraction } from "../../utils/mock/mockInteraction";
 import { SaveAllPokemon } from "../../../src/core/classes/SaveAllPokemon";
 import { EventSpawnType } from "../../../src/core/types/EventSpawnType";
 
-// Mock language to return deterministic strings
 jest.mock("../../../src/lang/language", () => {
   return {
     __esModule: true,
@@ -11,7 +10,6 @@ jest.mock("../../../src/lang/language", () => {
   };
 });
 
-// Spy/mock paginationButton to avoid Discord logic and capture args
 const paginationButtonMock = jest.fn();
 jest.mock("../../../src/features/other/paginationButton", () => ({
   paginationButton: (...args: any[]) => paginationButtonMock(...args),
@@ -85,7 +83,6 @@ describe("pokedex", () => {
     };
     server.savePokemon.initMissingPokemons();
 
-    // Choose an unrealistically high page to trigger the reply branch
     pokedex(interaction as any, user as any, server as any, 9_999);
 
     expect(interaction.reply).toHaveBeenCalledTimes(1);

@@ -23,15 +23,10 @@ describe("lang/language", () => {
 
   test("getText falls back when lang not present", () => {
     const text = getText("spawnPokemonActivate", "xx");
-    // When language not present, it should push fallback and return it randomly
-    // Fallback message is exactly "Error: Key not found" in implementation
-    // Accept either original or fallback since randomness is involved, but ensure it's a string
     expect(typeof text).toBe("string");
   });
 
   test("getText handles try/catch path without throwing", () => {
-    // Force an error by temporarily monkey-patching Math.random to cause unexpected behavior is not sufficient.
-    // Instead, simulate by mocking language import via jest.resetModules and providing a bad value.
     jest.resetModules();
     jest.doMock("../../../src/data/language.json", () => null, {
       virtual: true,

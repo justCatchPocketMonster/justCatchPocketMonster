@@ -32,24 +32,19 @@ describe("EventSpawn.applyModifiersInPlace", () => {
     };
 
     spawn.applyModifiersInPlace({
-      // per-category numeric stats
-      "1": 100, // gen 1 doubled
-      fire: -50, // type fire halved
-      legendary: 100, // rarity legendary doubled
-      // scalar numeric fields
-      shiny: 10, // +10%
-      valueMaxChoiceEgg: -20, // -20%
-      min: 50, // +50%
-      max: -10, // -10%
-      // booleans
+      "1": 100,
+      fire: -50,
+      legendary: 100,
+      shiny: 10,
+      valueMaxChoiceEgg: -20,
+      min: 50,
+      max: -10,
       mega: true,
       giga: true,
       nightMode: true,
-      // tag
       whatEvent: dummyEvent,
     });
 
-    // Numeric updates (with floor to 2 decimals)
     expect(spawn.gen["1"]).toBe(Math.floor(100 * 2 * 100) / 100);
     expect(spawn.type.fire).toBe(Math.floor(100 * 0.5 * 100) / 100);
     expect(spawn.rarity.legendary).toBe(Math.floor(9 * 2 * 100) / 100);

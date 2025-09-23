@@ -28,7 +28,6 @@ describe("utils/helperFunction", () => {
     const clone = deepCloneObject(original);
     expect(clone).toEqual(original);
     expect(clone).not.toBe(original);
-    // mutate clone
     (clone as any).b.c = 3;
     expect(original.b.c).toBe(2);
   });

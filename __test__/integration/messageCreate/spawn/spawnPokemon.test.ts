@@ -77,7 +77,6 @@ describe("Spawn Pokemon", () => {
         // when
         const data = await spawn(message.guildId!, message.channelId);
         // then
-        // TODO: jsp pourquoi des fois undefined
         expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
         expect(data?.embed.data.description).toBe(
           'To catch it, do "/catch [Pokémon\'s name]".',
