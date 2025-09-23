@@ -11,12 +11,10 @@ export const EventSchema = new mongoose.Schema<EventType>(
     name: {
       type: String,
       required: true,
-      default: "",
     },
     description: {
       type: String,
       required: true,
-      default: "",
     },
     type: {
       type: String,

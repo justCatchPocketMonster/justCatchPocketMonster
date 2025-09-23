@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import { paginationButton } from "../other/paginationButton";
-import language from "../../lang/language";
+import language, { LanguageKey } from "../../lang/language";
 import allPokemon from "../../data/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import {
@@ -246,7 +246,7 @@ function generateFieldRegionStat(
   user: UserType,
   server: ServerType,
 ): OneFieldEmbed[] {
-  const regions = [
+  const regions: { name: RegionName; min: number; max: number }[] = [
     { name: "Kanto", min: 0, max: 151 },
     { name: "Johto", min: 151, max: 251 },
     { name: "Hoenn", min: 251, max: 386 },
@@ -260,10 +260,11 @@ function generateFieldRegionStat(
   );
 }
 
+type RegionName = "Kanto" | "Johto" | "Hoenn" | "Sinnoh" | "Unys" | "Kalos";
 function processRegion(
   user: UserType,
   server: ServerType,
-  regionName: string,
+  regionName: RegionName,
   valueMin: number,
   valueMax: number,
 ): OneFieldEmbed {
@@ -284,13 +285,13 @@ function processRegion(
     value = `${shiny}/ ${rangeSize} - ${shinyPercentage}`;
 
     if (shiny === rangeSize) {
-      name = `<:pokeballShinyStar:1005992732541603960> ${language("shinyDex", server.language)}`;
+      name = `<:pokeballShinyStar:1005992732541603960> ${language(("shinyDex" + regionName) as LanguageKey, server.language)}`;
     } else {
-      name = `<:pokeballLight:981974905568522331> ${language("shinydexDe" + regionName, server.language)}`;
+      name = `<:pokeballLight:981974905568522331> ${language(("shinydexDe" + regionName) as LanguageKey, server.language)}`;
     }
   } else {
     const caughtPercentage = getPercentage(caught, rangeSize) + "%";
-    name = `<:pokeballDark:981974919212572682> ${language("pokedexDe" + regionName, server.language)}`;
+    name = `<:pokeballDark:981974919212572682> ${language(("pokedexDe" + regionName) as LanguageKey, server.language)}`;
     value = `${caught}/ ${rangeSize} - ${caughtPercentage}`;
   }
 

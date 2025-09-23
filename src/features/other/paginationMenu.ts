@@ -9,7 +9,7 @@ import {
   ComponentType,
 } from "discord.js";
 
-interface PageData {
+export interface PageData {
   page: EmbedBuilder;
   imagePage?: AttachmentBuilder;
   information: PageInformation;

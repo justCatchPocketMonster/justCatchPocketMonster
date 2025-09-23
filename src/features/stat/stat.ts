@@ -8,7 +8,7 @@ import { paginationMenu } from "../other/paginationMenu";
 import { SortedResult } from "../../core/classes/SaveAllPokemon";
 import allPokemon from "../../data/pokemon.json";
 import { ServerType } from "../../core/types/ServerType";
-import language from "../../lang/language";
+import language, { LanguageKey } from "../../lang/language";
 
 export function createPaginationStat(
   interaction: ChatInputCommandInteraction,
@@ -19,7 +19,7 @@ export function createPaginationStat(
   const ascColor = "32CD32" as ColorResolvable;
   const descColor = "B22222" as ColorResolvable;
 
-  const getLang = (key: string) => language(key, server.language);
+  const getLang = (key: LanguageKey) => language(key, server.language);
 
   const createSectionHeader = (title: string) => ({
     page: null,
@@ -39,7 +39,7 @@ export function createPaginationStat(
 
   const createStatEntries = (
     rarityOrForm: string,
-    labelKey: string,
+    labelKey: LanguageKey,
     type: "rarity" | "form",
   ) => {
     const title = getLang(labelKey);
@@ -183,7 +183,7 @@ function principalEmbedStat(
   generalVersionStat: Stat,
   server: ServerType,
 ) {
-  const t = (key: string) => language(key, server.language);
+  const t = (key: LanguageKey) => language(key, server.language);
 
   const embed = new EmbedBuilder().setTitle("stats").setColor("Purple");
 

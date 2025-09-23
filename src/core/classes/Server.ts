@@ -3,6 +3,8 @@ import { Pokemon } from "./Pokemon";
 import { ServerType } from "../types/ServerType";
 import { defaultLanguage } from "../../config/default/server";
 import { SaveAllPokemon } from "./SaveAllPokemon";
+import { Event } from "./Event";
+import type { LanguageKey } from "../../lang/language";
 
 export class Server implements ServerType {
   constructor(
@@ -52,12 +54,25 @@ export class Server implements ServerType {
     }
 
     const e = data.eventSpawn;
+    const whatEvent = e.whatEvent
+      ? new Event(
+          e.whatEvent.id,
+          e.whatEvent.name as LanguageKey,
+          e.whatEvent.description as LanguageKey,
+          e.whatEvent.type,
+          e.whatEvent.color,
+          e.whatEvent.image,
+          e.whatEvent.effectDescription,
+          new Date(e.whatEvent.endTime),
+          e.whatEvent.statMultipliers,
+        )
+      : null;
     const eventSpawn = new EventSpawn(
       e.gen,
       e.type,
       e.rarity,
       e.shiny,
-      e.whatEvent ?? null,
+      whatEvent,
       e.allowedForm,
       e.messageSpawn,
       e.nightMode,

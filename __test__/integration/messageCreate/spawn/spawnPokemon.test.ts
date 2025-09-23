@@ -70,17 +70,18 @@ describe("Spawn Pokemon", () => {
             p.arrayType.includes(type) &&
             p.rarity === rarity,
         );
+
         if (pokemonWithSameData.length === 0) {
           return;
         }
         // when
         const data = await spawn(message.guildId!, message.channelId);
         // then
-
         expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
         expect(data?.embed.data.description).toBe(
           'To catch it, do "/catch [Pokémon\'s name]".',
         );
+
         const serverThen = await getServerById(message.guildId!);
         expect(
           serverThen.pokemonPresent[message.channelId].gen.toString(),

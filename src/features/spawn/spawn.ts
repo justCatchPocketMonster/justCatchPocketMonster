@@ -2,8 +2,8 @@ import { AttachmentBuilder, ColorResolvable, EmbedBuilder } from "discord.js";
 import { ServerType } from "../../core/types/ServerType";
 import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
-import { selectEvent } from "../event/selectEvent";
-import getText from "../../lang/language";
+import { selectEventStandard } from "../event/selectEventStandard";
+import getText, { LanguageKey } from "../../lang/language";
 import { colorByType } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
@@ -37,7 +37,6 @@ export const spawn = async (
     const channelId = choiceChannel(server, idChannel);
 
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
-
     let SpawnData: SpawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
@@ -94,7 +93,7 @@ async function choiceTypeOfSpawn(
   await checkTimeForResetEventStat(server);
   const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
   if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
-    await selectEvent(server);
+    await selectEventStandard(server);
     if (server.eventSpawn.whatEvent) {
       return generateEmbedEvent(server.eventSpawn.whatEvent, server);
     }
@@ -160,7 +159,7 @@ function generateEmbedEvent(
   let eventEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText(event.name, server.language))
-    .setDescription(getText(event.description, server.language))
+    .setDescription(getText(event.description as LanguageKey, server.language))
     .addFields({
       name: getText("effect", server.language),
       value: event.effectDescription,
