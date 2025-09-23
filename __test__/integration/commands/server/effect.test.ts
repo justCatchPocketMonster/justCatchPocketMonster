@@ -8,7 +8,7 @@ describe("effect command", () => {
   let interaction: any;
   const fixedDate = new Date("2025-12-14T00:00:00Z");
   const realNow = Date.now;
-  const RealDate = Date;
+
   beforeEach(async () => {
     await resetTestEnv();
     Date.now = () => fixedDate.getTime();
