@@ -1,7 +1,6 @@
-import { EventType } from "./EventType";
-import { GenStat, TypeStat, RarityStat } from "./EventSpawnType";
+import type { EventType } from "./EventType";
+import type { GenStat, TypeStat, RarityStat } from "./EventSpawnType";
 
-// Un pourcentage (ex: 20 = +20%, -30 = -30%)
 export type Percent = number;
 
 type NumericMods<T> = Partial<Record<keyof T, Percent>>;

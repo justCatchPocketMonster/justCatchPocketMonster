@@ -39,9 +39,8 @@ const DURATIONS = {
 };
 
 const imagePerLvl = ["0012-000", "0012-001", "0012-002"];
-
+const date = new Date();
 const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
-  const date = new Date();
   const level = getLevel();
   const eventId = eventSpawn.whatEvent!.id;
   const statMultipliers = eventSpawn.whatEvent?.statMultipliers;
@@ -106,18 +105,6 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     }
   }
 
-  function getLevel() {
-    const rand = Math.floor(Math.random() * 100);
-    let level: number;
-    if (rand >= 99) {
-      level = 3;
-    } else if (rand >= 70) {
-      level = 2;
-    } else {
-      level = 1;
-    }
-    return level;
-  }
   type LanguageKey = keyof typeof language;
   function getDurationText(lvl: number) {
     let key: LanguageKey;
@@ -130,18 +117,30 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     }
     return getText(key, server.language);
   }
-
-  function getRandomGen(): keyof GenStat {
-    const gen = Object.keys(valuePerGen) as (keyof GenStat)[];
-    return gen[Math.floor(Math.random() * gen.length)];
-  }
-
-  function getRandomType(): keyof TypeStat {
-    const types = Object.keys(valuePerType) as (keyof TypeStat)[];
-    return types[Math.floor(Math.random() * types.length)];
-  }
-
-  function addDuration(ms: number) {
-    return new Date(date.getTime() + ms);
-  }
 };
+function getRandomGen(): keyof GenStat {
+  const gen = Object.keys(valuePerGen) as (keyof GenStat)[];
+  return gen[Math.floor(Math.random() * gen.length)];
+}
+
+function getRandomType(): keyof TypeStat {
+  const types = Object.keys(valuePerType) as (keyof TypeStat)[];
+  return types[Math.floor(Math.random() * types.length)];
+}
+
+function addDuration(ms: number) {
+  return new Date(date.getTime() + ms);
+}
+
+function getLevel() {
+  const rand = Math.floor(Math.random() * 100);
+  let level: number;
+  if (rand >= 99) {
+    level = 3;
+  } else if (rand >= 70) {
+    level = 2;
+  } else {
+    level = 1;
+  }
+  return level;
+}

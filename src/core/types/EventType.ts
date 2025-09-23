@@ -1,5 +1,5 @@
-import { LanguageKey } from "../../lang/language";
-import { EventSpawnFlatModsStrict } from "./EventSpawnFlatModsLooseType";
+import type { LanguageKey } from "../../lang/language";
+import type { EventSpawnFlatModsStrict } from "./EventSpawnFlatModsLooseType";
 
 export interface EventType {
   id: string;

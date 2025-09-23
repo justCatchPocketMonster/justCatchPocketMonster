@@ -4,15 +4,13 @@ import {
   ColorResolvable,
   EmbedBuilder,
 } from "discord.js";
-import language, { LanguageKey } from "../../lang/language";
+import language from "../../lang/language";
 import { ServerType } from "../../core/types/ServerType";
 import {
   createPageForMenu,
   PageData,
   paginationMenu,
 } from "../other/paginationMenu";
-import eventSeasonalData from "../../data/eventSeasonalData.json";
-import { EventSeasonnal } from "../../core/types/EventSeasonnal";
 import {
   selectEventSeasonal,
   selectNextEventSeasonal,
