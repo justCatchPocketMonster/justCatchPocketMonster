@@ -19,7 +19,7 @@ export function createPaginationStat(
   const ascColor = "32CD32" as ColorResolvable;
   const descColor = "B22222" as ColorResolvable;
 
-  const getLang = (key: LanguageKey) => language(key, server.language);
+  const getLang = (key: LanguageKey) => language(key, server.settings.language);
 
   const createSectionHeader = (title: string) => ({
     page: null,
@@ -162,7 +162,7 @@ function getPokemonNameByStatId(
   server: ServerType,
 ): string {
   const langKey =
-    `name${server.language[0].toUpperCase() + server.language.slice(1)}` as
+    `name${server.settings.language[0].toUpperCase() + server.settings.language.slice(1)}` as
       | "nameEng"
       | "nameFr";
   const names = statId.who
@@ -183,7 +183,7 @@ function principalEmbedStat(
   generalVersionStat: Stat,
   server: ServerType,
 ) {
-  const t = (key: LanguageKey) => language(key, server.language);
+  const t = (key: LanguageKey) => language(key, server.settings.language);
 
   const embed = new EmbedBuilder().setTitle("stats").setColor("Purple");
 

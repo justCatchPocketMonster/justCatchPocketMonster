@@ -51,14 +51,14 @@ export default {
       let typeCode = codeType(codeEntered);
       if (typeCode === null) {
         return interaction.reply({
-          content: language("codeDontExist", server.language),
+          content: language("codeDontExist", server.settings.language),
           ephemeral: true,
         });
       }
       let user = await getUserById(interaction.user.id);
       if (user.enteredCode.includes(codeEntered)) {
         return interaction.reply({
-          content: language("codeAlreadyUsed", server.language),
+          content: language("codeAlreadyUsed", server.settings.language),
           ephemeral: true,
         });
       }

@@ -135,48 +135,48 @@ function generateEmbedData(
 
   const embed = new EmbedBuilder()
     .setTitle(
-      pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0],
+      pokemon["name"]["name" + capitalizeFirstLetter(server.settings.language)][0],
     )
     .setImage(imageUrl)
     .setThumbnail(avatarUser)
     .addFields(
       {
-        name: language("nombreDeCapture", server.language),
+        name: language("nombreDeCapture", server.settings.language),
         value: allSaveData.saveGlobalUser.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeCaptureShiny", server.language),
+        name: language("nombreDeCaptureShiny", server.settings.language),
         value: allSaveData.saveGlobalUser.shinyCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreCaptureVariant", server.language),
+        name: language("nombreCaptureVariant", server.settings.language),
         value: allSaveData.saveSpecifiqueFormUser.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeCaptureDuServer", server.language),
+        name: language("nombreDeCaptureDuServer", server.settings.language),
         value: allSaveData.saveServer.normalCount.toString(),
         inline: false,
       },
       {
-        name: language("nombreDeCaptureTotaly", server.language),
+        name: language("nombreDeCaptureTotaly", server.settings.language),
         value: allSaveData.saveStatCatch.normalCount.toString(),
         inline: false,
       },
       {
-        name: language("nombreDeCaptureShinyTotaly", server.language),
+        name: language("nombreDeCaptureShinyTotaly", server.settings.language),
         value: allSaveData.saveStatCatch.shinyCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeSpawnTotaly", server.language),
+        name: language("nombreDeSpawnTotaly", server.settings.language),
         value: allSaveData.saveStatSpawn.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeSpawnShinyTotaly", server.language),
+        name: language("nombreDeSpawnShinyTotaly", server.settings.language),
         value: allSaveData.saveStatSpawn.shinyCount.toString(),
         inline: true,
       },

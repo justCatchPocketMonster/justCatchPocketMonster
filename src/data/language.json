@@ -60,6 +60,14 @@
     "fr": ["langue"],
     "eng": ["language"]
   },
+  "commandAdminSettingsName": {
+    "fr": ["parametresadmin"],
+    "eng": ["adminsettings"]
+  },
+  "commandAdminSettingsExplication": {
+    "fr": ["Permet de configurer les paramètres d'administration du bot"],
+    "eng": ["Allows you to configure the bot's administration settings"]
+  },
   "commandLangExplication": {
     "fr": ["Permet de changer la langue de réponse du bot"],
     "eng": ["Allows you to change the bot's response language"]
@@ -1111,6 +1119,79 @@
     "eng": [
       "According to an old legend, pairs of Fire and Fairy Pokémon like Vulpix and Flabébé dance together, their flames and petals creating luminous patterns in the night."
     ]
+  },
+
+  "adminSettingsTitle": {
+    "fr": ["Paramètres Admin"],
+    "eng": ["Admin Settings"]
+  },
+  "adminSettingsSelectSubElement": {
+    "fr": ["Sélectionnez un sous-élément:"],
+    "eng": ["Select a sub-element:"]
+  },
+  "adminSettingsSelectSubElementPlaceholder": {
+    "fr": ["Sélectionnez un sous-élément"],
+    "eng": ["Select a sub-element"]
+  },
+  "adminSettingsClickButtonConfirm": {
+    "fr": ["Cliquez sur le bouton pour confirmer l'action."],
+    "eng": ["Click the button to confirm the action."]
+  },
+  "adminSettingsSelectMainOption": {
+    "fr": ["Sélectionnez une option dans le menu principal"],
+    "eng": ["Select an option from the main menu"]
+  },
+  "adminSettingsSelectMainMenuPlaceholder": {
+    "fr": ["Sélectionnez un menu principal"],
+    "eng": ["Select a main menu"]
+  },
+  "adminSettingsErrorInCommand": {
+    "fr": ["Erreur dans la commande adminSettings"],
+    "eng": ["Error in adminSettings command"]
+  },
+  "adminSettingsMinSpawnsLabel": {
+    "fr": ["Min Spawns"],
+    "eng": ["Min Spawns"]
+  },
+  "adminSettingsMinSpawnsDescription": {
+    "fr": ["Minimum de spawns"],
+    "eng": ["Minimum spawns"]
+  },
+  "adminSettingsMaxSpawnsLabel": {
+    "fr": ["Max Spawns"],
+    "eng": ["Max Spawns"]
+  },
+  "adminSettingsMaxSpawnsDescription": {
+    "fr": ["Maximum de spawns"],
+    "eng": ["Maximum spawns"]
+  },
+  "adminSettingsLanguageLabel": {
+    "fr": ["Langue"],
+    "eng": ["Language"]
+  },
+  "adminSettingsLanguageDescription": {
+    "fr": ["Choisissez la langue du bot"],
+    "eng": ["Choose the bot's language"]
+  },
+  "adminSettingsSpawnDescription": {
+    "fr": ["Spawn "],
+    "eng": ["Spawn "]
+  },
+  "adminSettingsShowValues": {
+    "fr": ["Afficher les valeurs"],
+    "eng": ["Show values"]
+  },
+  "adminSettingsShowValuesAlreadyShown": {
+    "fr": ["Afficher les valeurs (déjà affiché)"],
+    "eng": ["Show values (already shown)"]
+  },
+  "adminSettingsMainMenu": {
+    "fr": ["Menu principal: "],
+    "eng": ["Main menu: "]
+  },
+  "adminSettingsSubElement": {
+    "fr": ["Sous-élément: "],
+    "eng": ["Sub-element: "]
   },
 
   "seasonalEvent": {}

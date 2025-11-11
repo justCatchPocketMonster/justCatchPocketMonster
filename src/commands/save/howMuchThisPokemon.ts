@@ -94,7 +94,7 @@ export default {
           );
 
           if (!matched) {
-            interaction.reply(language("notExist", server.language));
+            interaction.reply(language("notExist", server.settings.language));
             return null;
           }
 
@@ -106,14 +106,14 @@ export default {
             (p) => p.id !== 0 && p.id.toString() === pokemonIdInput,
           );
           if (!isValid) {
-            interaction.reply(language("notExist", server.language));
+            interaction.reply(language("notExist", server.settings.language));
             return null;
           }
 
           return pokemonIdInput;
         }
 
-        interaction.reply(language("noArgument", server.language));
+        interaction.reply(language("noArgument", server.settings.language));
         return null;
       }
     } catch (e) {

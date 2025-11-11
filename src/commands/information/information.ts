@@ -34,12 +34,12 @@ export default {
       const mainPage = new EmbedBuilder()
         .setColor("#0099ff")
         .setTitle("Information")
-        .setDescription(language("informationDescription", server.language));
+        .setDescription(language("informationDescription", server.settings.language));
       pages.push(
         createPageForMenu(
           mainPage,
           null,
-          language("principalPage", server.language),
+          language("principalPage", server.settings.language),
         ),
       );
 
@@ -47,22 +47,22 @@ export default {
         createPageForMenu(
           embedRequiredinformation(server),
           null,
-          language("mentionObligatoireTitle", server.language),
-          language("mentionObligatoireDesc", server.language),
+          language("mentionObligatoireTitle", server.settings.language),
+          language("mentionObligatoireDesc", server.settings.language),
         ),
       );
       pages.push(
         createPageForMenu(
           codeListEmbed(user, server, stat),
           null,
-          language("codeListEmbedTitle", server.language),
-          language("codeListEmbedDescription", server.language),
+          language("codeListEmbedTitle", server.settings.language),
+          language("codeListEmbedDescription", server.settings.language),
         ),
       );
 
       paginationMenu(
         interaction,
-        language("selectAPage", server.language),
+        language("selectAPage", server.settings.language),
         pages,
       );
     } catch (e) {

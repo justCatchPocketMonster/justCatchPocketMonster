@@ -15,7 +15,7 @@ import pokedex from "../commands/save/pokedex";
 import effect from "../commands/server/effect";
 import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
-
+import adminSettings from "../commands/admin/adminSettings";
 import { newLogger } from "../middlewares/logger";
 
 export default async (client: Client, interaction: Interaction) => {
@@ -61,6 +61,9 @@ export default async (client: Client, interaction: Interaction) => {
           break;
         case catchPokemon.name:
           await catchPokemon.execute(interaction);
+          break;
+        case adminSettings.name:
+          await adminSettings.execute(interaction);
           break;
       }
     }

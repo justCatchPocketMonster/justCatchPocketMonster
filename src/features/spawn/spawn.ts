@@ -136,8 +136,8 @@ function generateEmbedPokemon(
 
   let pokeEmbed = new EmbedBuilder()
     .setColor(color)
-    .setTitle(getText("embedPokemonTitle", server.language))
-    .setDescription(getText("embedPokemonDescription", server.language))
+    .setTitle(getText("embedPokemonTitle", server.settings.language))
+    .setDescription(getText("embedPokemonDescription", server.settings.language))
     .setImage(imageUrl);
 
   return {
@@ -158,10 +158,10 @@ function generateEmbedEvent(
 
   let eventEmbed = new EmbedBuilder()
     .setColor(color)
-    .setTitle(getText(event.name, server.language))
-    .setDescription(getText(event.description as LanguageKey, server.language))
+    .setTitle(getText(event.name, server.settings.language))
+    .setDescription(getText(event.description as LanguageKey, server.settings.language))
     .addFields({
-      name: getText("effect", server.language),
+      name: getText("effect", server.settings.language),
       value: event.effectDescription,
       inline: false,
     })

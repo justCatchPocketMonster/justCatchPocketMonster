@@ -50,14 +50,14 @@ export default {
 
       if (!langOption) {
         interaction.reply({
-          content: language("langErrorNoOption", server.language),
+          content: language("langErrorNoOption", server.settings.language),
         });
         return;
       }
 
-      server.language = langOption.toLowerCase() ?? "eng";
+      server.settings.language = langOption.toLowerCase() ?? "eng";
       interaction.reply({
-        content: language("langIsChanged", server.language),
+        content: language("langIsChanged", server.settings.language),
       });
       await updateServer(server.discordId, server);
     } catch (e) {

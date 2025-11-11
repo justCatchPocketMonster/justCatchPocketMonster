@@ -1,17 +1,18 @@
 import { EventSpawn } from "./EventSpawn";
 import { Pokemon } from "./Pokemon";
-import { ServerType } from "../types/ServerType";
+import { ServerType, ServerSettings } from "../types/ServerType";
 import { defaultLanguage } from "../../config/default/server";
 import { SaveAllPokemon } from "./SaveAllPokemon";
 import { Event } from "./Event";
 import type { LanguageKey } from "../../lang/language";
+import { maximumCount, minimumCount } from "../../config/default/spawn";
 
 export class Server implements ServerType {
   constructor(
     public discordId: string,
     public channelAllowed: string[],
     public charmeChroma: boolean,
-    public language: string,
+    public settings: ServerSettings,
     public savePokemon: SaveAllPokemon,
     public eventSpawn: EventSpawn,
     public maxCountMessage: number,
@@ -79,11 +80,17 @@ export class Server implements ServerType {
       e.valueMaxChoiceEgg,
     );
 
+    const settings: ServerSettings = data.settings ?? {
+      language: (data as any).language ?? defaultLanguage,
+      spawnMax: maximumCount,
+      spawnMin: minimumCount,
+    };
+
     return new Server(
       data.discordId,
       data.channelAllowed,
       data.charmeChroma,
-      data.language,
+      settings,
       savePokemon,
       eventSpawn,
       data.maxCountMessage,
@@ -99,9 +106,17 @@ export class Server implements ServerType {
       id,
       [], // channelAllowed
       false,
-      defaultLanguage,
+      {
+        language: defaultLanguage,
+        spawnMax: maximumCount,
+        spawnMin: minimumCount,
+      },
       saveAllPokemon, // savePokemon
-      EventSpawn.createDefault(),
+      EventSpawn.createDefault({
+        language: defaultLanguage,
+        spawnMax: maximumCount,
+        spawnMin: minimumCount,
+      }),
       10,
       0,
       {}, // pokemonPresent

@@ -50,23 +50,23 @@ export default {
         server.pokemonPresent[channel.id].hint = createHint(
           server.pokemonPresent[channel.id].hint,
           server.pokemonPresent[channel.id].name[
-            "name" + capitalizeFirstLetter(server.language)
+            "name" + capitalizeFirstLetter(server.settings.language)
           ][0],
         );
         await updateServer(server.discordId, server);
         interaction.reply({
           content:
-            language("hintIs", server.language) +
+            language("hintIs", server.settings.language) +
             server.pokemonPresent[channel.id].hint +
             " " +
-            language("forChannel", server.language) +
+            language("forChannel", server.settings.language) +
             channel.toString(),
         });
         return;
       }
 
       interaction.reply({
-        content: language("noHint", server.language),
+        content: language("noHint", server.settings.language),
         ephemeral: true,
       });
       return;

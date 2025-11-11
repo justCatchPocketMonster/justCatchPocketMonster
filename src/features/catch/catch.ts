@@ -28,16 +28,16 @@ export async function catchPokemon(
   }
 
   if (!pokemon) {
-    interaction.reply(language("noPokemonDisponible", server.language));
+    interaction.reply(language("noPokemonDisponible", server.settings.language));
     return;
   }
   if (!pokemon.nameIsSame(pokemonInput)) {
     interaction.reply(
-      language("failCatchGoodPokemonPart1", server.language) +
+      language("failCatchGoodPokemonPart1", server.settings.language) +
         " " +
         memberDisplayName +
         "" +
-        language("failCatchGoodPokemonPart2", server.language) +
+        language("failCatchGoodPokemonPart2", server.settings.language) +
         " " +
         pokemonInput +
         ".",
@@ -99,9 +99,9 @@ export function generateCatchMessage(
   server: ServerType,
 ): string {
   let message =
-    language("congratYouCatchPart1", server.language) +
+    language("congratYouCatchPart1", server.settings.language) +
     memberDisplayName +
-    language("congratYouCatchPart2", server.language) +
+    language("congratYouCatchPart2", server.settings.language) +
     (pokemon.name.nameFr[0] !== pokemon.name.nameEng[0]
       ? `${pokemon.name.nameFr[0]}/${pokemon.name.nameEng[0]}`
       : pokemon.name.nameFr[0]);

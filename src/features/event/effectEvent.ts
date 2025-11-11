@@ -42,14 +42,14 @@ function selectEventStandard(server: ServerType): PageData {
 
     let eventEmbed = new EmbedBuilder()
       .setColor(event.whatEvent.color as ColorResolvable)
-      .setTitle(language("actualEvent", server.language))
+      .setTitle(language("actualEvent", server.settings.language))
       .addFields({
-        name: language("effect", server.language),
+        name: language("effect", server.settings.language),
         value: event.whatEvent.effectDescription,
         inline: false,
       })
       .addFields({
-        name: language("timeLeft", server.language),
+        name: language("timeLeft", server.settings.language),
         value: `<t:${dateEnd.getTime()}:R>`,
         inline: false,
       })
@@ -60,7 +60,7 @@ function selectEventStandard(server: ServerType): PageData {
   return createPageForMenu(
     new EmbedBuilder()
       .setColor("#000000" as ColorResolvable)
-      .setTitle(language("noEvent", server.language)),
+      .setTitle(language("noEvent", server.settings.language)),
     null,
     "name",
     "description",
@@ -78,21 +78,21 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
     return createPageForMenu(
       new EmbedBuilder()
         .setColor("#000000" as ColorResolvable)
-        .setTitle(language("noEvent", server.language))
+        .setTitle(language("noEvent", server.settings.language))
         .setDescription(
-          language("nextSeasonalEvent", server.language) +
+          language("nextSeasonalEvent", server.settings.language) +
             ` <t:${Math.floor(nextEvent.startDate.getTime() / 1000)}:D>`,
         ),
       null,
-      language("seasonalEvent", server.language),
-      language("noEvent", server.language),
+      language("seasonalEvent", server.settings.language),
+      language("noEvent", server.settings.language),
     );
   }
 
   const embed = new EmbedBuilder()
     .setColor("#00AAFF" as ColorResolvable)
-    .setTitle(language(selected.name, server.language))
-    .setDescription(language(selected.description, server.language))
+    .setTitle(language(selected.name, server.settings.language))
+    .setDescription(language(selected.description, server.settings.language))
     .addFields({
       name: "End",
       value: selected.endDate
@@ -104,7 +104,7 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
   return createPageForMenu(
     embed,
     null,
-    language("seasonalEvent", server.language),
-    language(selected.name, server.language),
+    language("seasonalEvent", server.settings.language),
+    language(selected.name, server.settings.language),
   );
 }

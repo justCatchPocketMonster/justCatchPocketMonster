@@ -5,17 +5,17 @@ import language from "../lang/language";
 export function embedRequiredinformation(server: ServerType) {
   return new EmbedBuilder()
     .setColor("Red")
-    .setTitle(language("mentionObligatoireTitle", server.language))
-    .setDescription(language("mentionObligatoireDesc", server.language))
-    .setFooter({ text: language("mentionObligatoireFooter", server.language) })
+    .setTitle(language("mentionObligatoireTitle", server.settings.language))
+    .setDescription(language("mentionObligatoireDesc", server.settings.language))
+    .setFooter({ text: language("mentionObligatoireFooter", server.settings.language) })
     .addFields({
       name: language(
         "mentionObligatoireFieldNonAffiliationTitle",
-        server.language,
+        server.settings.language,
       ),
       value: language(
         "mentionObligatoireFieldNonAffiliationDesc",
-        server.language,
+        server.settings.language,
       ),
       inline: false,
     });

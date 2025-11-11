@@ -56,7 +56,7 @@ export default {
       const server = await getServerById(guildId);
       if (!interaction.channel) throw new Error("Channel not found");
 
-      const lang = server.language;
+      const lang = server.settings.language;
       const boolOption = interaction.options.getBoolean(
         language("spawnNameOptionBool", "eng"),
       );
