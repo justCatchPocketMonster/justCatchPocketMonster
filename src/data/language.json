@@ -1173,9 +1173,65 @@
     "fr": ["Choisissez la langue du bot"],
     "eng": ["Choose the bot's language"]
   },
+  "adminSettingsSpawnLabel": {
+    "fr": ["Salons autorisés"],
+    "eng": ["Allowed channels"]
+  },
   "adminSettingsSpawnDescription": {
-    "fr": ["Spawn "],
-    "eng": ["Spawn "]
+    "fr": ["Gérer les salons autorisés pour les spawns"],
+    "eng": ["Manage allowed channels for spawns"]
+  },
+  "adminSettingsSpawnAdd": {
+    "fr": ["Ajouter"],
+    "eng": ["Add"]
+  },
+  "adminSettingsSpawnAddDescription": {
+    "fr": ["Ajouter un salon autorisé"],
+    "eng": ["Add an allowed channel"]
+  },
+  "adminSettingsSpawnRemove": {
+    "fr": ["Supprimer"],
+    "eng": ["Remove"]
+  },
+  "adminSettingsSpawnRemoveDescription": {
+    "fr": ["Supprimer un salon autorisé"],
+    "eng": ["Remove an allowed channel"]
+  },
+  "adminSettingsSpawnNoChannelsAvailable": {
+    "fr": ["Aucun salon disponible"],
+    "eng": ["No channels available"]
+  },
+  "adminSettingsSpawnNoChannelsAvailableDescription": {
+    "fr": ["Tous les salons sont déjà autorisés ou le bot n'a pas les permissions"],
+    "eng": ["All channels are already allowed or the bot doesn't have permissions"]
+  },
+  "adminSettingsSpawnNoChannelsAllowed": {
+    "fr": ["Aucun salon autorisé"],
+    "eng": ["No allowed channels"]
+  },
+  "adminSettingsSpawnNoChannelsAllowedDescription": {
+    "fr": ["Aucun salon n'est actuellement autorisé"],
+    "eng": ["No channels are currently allowed"]
+  },
+  "adminSettingsSpawnAddChannelDescription": {
+    "fr": ["Ajouter {channelName} aux salons autorisés"],
+    "eng": ["Add {channelName} to allowed channels"]
+  },
+  "adminSettingsSpawnRemoveChannelDescription": {
+    "fr": ["Supprimer {channelName} des salons autorisés"],
+    "eng": ["Remove {channelName} from allowed channels"]
+  },
+  "adminSettingsSpawnDeletedChannel": {
+    "fr": ["Salon supprimé ({channelId})"],
+    "eng": ["Deleted channel ({channelId})"]
+  },
+  "adminSettingsSpawnDeletedChannelDescription": {
+    "fr": ["Ce salon n'existe plus sur le serveur"],
+    "eng": ["This channel no longer exists on the server"]
+  },
+  "adminSettingsSpawnNoCategory": {
+    "fr": ["Sans catégorie"],
+    "eng": ["No category"]
   },
   "adminSettingsShowValues": {
     "fr": ["Afficher les valeurs"],
