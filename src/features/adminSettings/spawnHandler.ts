@@ -9,7 +9,7 @@ export class spawnHandler implements MenuHandler {
   interaction?: ChatInputCommandInteraction;
   guild?: Guild;
   
-  constructor(server: Server, interaction?: ChatInputCommandInteraction) {
+  constructor(server: Server, interaction: ChatInputCommandInteraction) {
     this.server = server;
     this.interaction = interaction;
     this.guild = interaction?.guild || undefined;
@@ -180,3 +180,11 @@ export class spawnHandler implements MenuHandler {
     }
   }
 }
+
+/**
+ * TODO:
+ * add message when channel is added or removed in the chosen channel
+ * add emote in remove channel for see if the bot as always the permission to send messages in the channel
+ * add an embed in main spawnHandler for see all allowed channels with a a emote if the bot has the permission to send messages in the channel
+ * in the embed main principal embed we need a count of the allowed channels with good permissions slash all allowed channels
+ */

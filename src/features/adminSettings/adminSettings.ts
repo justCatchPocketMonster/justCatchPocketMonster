@@ -8,15 +8,17 @@ import {
 import { minSpawnsHandler } from "./minSpawnsHandler";
 import { maxSpawnsHandler } from "./maxSpawnsHandler";
 import { languageHandler } from "./languageHandler";
+import { spawnHandler } from "./spawnHandler";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 
-function createMenuHandlers(server: Server): Map<string, MenuHandler> {
-  return new Map([
-    ["minSpawns", new minSpawnsHandler(server)],
-    ["maxSpawns", new maxSpawnsHandler(server)],
-    ["language", new languageHandler(server)],
-  ]);
+function createMenuHandlers(server: Server, interaction: ChatInputCommandInteraction): Map<string, MenuHandler> {
+  const handlers = new Map<string, MenuHandler>();
+  handlers.set("minSpawns", new minSpawnsHandler(server));
+  handlers.set("maxSpawns", new maxSpawnsHandler(server));
+  handlers.set("language", new languageHandler(server));
+  handlers.set("spawnPokemon", new spawnHandler(server, interaction));
+  return handlers;
 }
 
 function getMenuStructure(menuHandlers: Map<string, MenuHandler>): MenuOption[] {
@@ -31,7 +33,7 @@ export async function adminSettings(
   interaction: ChatInputCommandInteraction,
   server: Server,
 ) {
-  const menuHandlers = createMenuHandlers(server);
+  const menuHandlers = createMenuHandlers(server, interaction);
   const menuStructure = getMenuStructure(menuHandlers);
   const lang = server.settings.language;
 
