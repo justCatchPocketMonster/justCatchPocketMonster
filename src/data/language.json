@@ -1249,6 +1249,78 @@
     "fr": ["Sous-élément: "],
     "eng": ["Sub-element: "]
   },
+  "adminSettingsSpawnChannelAddedMessage": {
+    "fr": ["✅ Ce salon a été autorisé pour les spawns de Pokémon."],
+    "eng": ["✅ This channel has been authorized for Pokémon spawns."]
+  },
+  "adminSettingsSpawnChannelRemovedMessage": {
+    "fr": ["❌ Ce salon n'est plus autorisé pour les spawns de Pokémon."],
+    "eng": ["❌ This channel is no longer authorized for Pokémon spawns."]
+  },
+  "adminSettingsSpawnEmbedTitle": {
+    "fr": ["Salons autorisés pour les spawns"],
+    "eng": ["Channels authorized for spawns"]
+  },
+  "adminSettingsSpawnEmbedDescription": {
+    "fr": ["Liste des salons autorisés pour les spawns de Pokémon"],
+    "eng": ["List of channels authorized for Pokémon spawns"]
+  },
+  "adminSettingsSpawnEmbedNoChannels": {
+    "fr": ["Aucun salon autorisé"],
+    "eng": ["No authorized channels"]
+  },
+  "adminSettingsSpawnEmbedChannelWithPermission": {
+    "fr": ["✅ {channelName}"],
+    "eng": ["✅ {channelName}"]
+  },
+  "adminSettingsSpawnEmbedChannelWithoutPermission": {
+    "fr": ["❌ {channelName} (pas de permission)"],
+    "eng": ["❌ {channelName} (no permission)"]
+  },
+  "adminSettingsSpawnEmbedChannelDeleted": {
+    "fr": ["🗑️ Salon supprimé ({channelId})"],
+    "eng": ["🗑️ Deleted channel ({channelId})"]
+  },
+  "adminSettingsSpawnEmbedPermissionsCount": {
+    "fr": ["Permissions: {goodCount}/{totalCount}"],
+    "eng": ["Permissions: {goodCount}/{totalCount}"]
+  },
+  "adminSettingsSpawnPlaceholder": {
+    "fr": ["Sélectionnez une option de spawn"],
+    "eng": ["Select a spawn option"]
+  },
+  "adminSettingsSpawnAddPlaceholder": {
+    "fr": ["Choisissez un salon à ajouter"],
+    "eng": ["Choose a channel to add"]
+  },
+  "adminSettingsSpawnRemovePlaceholder": {
+    "fr": ["Choisissez un salon à supprimer"],
+    "eng": ["Choose a channel to remove"]
+  },
+  "adminSettingsLanguagePlaceholder": {
+    "fr": ["Choisissez une langue"],
+    "eng": ["Choose a language"]
+  },
+  "adminSettingsMinSpawnsPlaceholder": {
+    "fr": ["Choisissez le nombre minimum de spawns"],
+    "eng": ["Choose the minimum number of spawns"]
+  },
+  "adminSettingsMaxSpawnsPlaceholder": {
+    "fr": ["Choisissez le nombre maximum de spawns"],
+    "eng": ["Choose the maximum number of spawns"]
+  },
+  "adminSettingsSpawnEmbedTutorialTitle": {
+    "fr": ["📖 Légende"],
+    "eng": ["📖 Legend"]
+  },
+  "adminSettingsSpawnEmbedTutorialContent": {
+    "fr": ["✅ Salon avec permissions\n❌ Salon sans permissions\n🗑️ Salon supprimé"],
+    "eng": ["✅ Channel with permissions\n❌ Channel without permissions\n🗑️ Deleted channel"]
+  },
+  "adminSettingsAlreadyActive": {
+    "fr": ["❌ Un menu de paramètres d'administration est déjà actif sur ce serveur. Veuillez terminer la session en cours avant d'en ouvrir une nouvelle."],
+    "eng": ["❌ An admin settings menu is already active on this server. Please finish the current session before opening a new one."]
+  },
 
   "seasonalEvent": {}
 }

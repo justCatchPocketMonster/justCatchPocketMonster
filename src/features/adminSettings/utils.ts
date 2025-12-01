@@ -30,12 +30,6 @@ export function createDisabledButton(lang: string): ButtonBuilder {
 }
 
 export function logValues(selectionPath: SelectionPath[]) {
-  console.log("=== Valeurs des menus ===");
-  selectionPath.forEach((selection, index) => {
-    console.log(`Niveau ${index + 1} - Valeur:`, selection.value);
-    console.log(`Niveau ${index + 1} - Label:`, selection.label);
-  });
-  console.log("=========================");
 }
 
 export async function handleButtonClick(

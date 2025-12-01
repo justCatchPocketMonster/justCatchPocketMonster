@@ -28,12 +28,12 @@ export class languageHandler implements MenuHandler {
       label: language("adminSettingsLanguageLabel", this.server.settings.language),
       value: "language",
       description: language("adminSettingsLanguageDescription", this.server.settings.language),
+      placeholder: language("adminSettingsLanguagePlaceholder", this.server.settings.language),
       children: children,
     };
   }
 
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
-    console.log("handleAction language");
     const selectedValue = selectionPath[selectionPath.length - 1].value;
 
     this.server.settings.language = selectedValue;

@@ -26,13 +26,12 @@ export class maxSpawnsHandler implements MenuHandler {
       label: language("adminSettingsMaxSpawnsLabel", this.server.settings.language),
       value: "maxSpawns",
       description: language("adminSettingsMaxSpawnsDescription", this.server.settings.language),
+      placeholder: language("adminSettingsMaxSpawnsPlaceholder", this.server.settings.language),
       children: children,
     };
   }
 
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
-    console.log("handleAction maxSpawns");
-
     const selectedValue = selectionPath[selectionPath.length - 1].value;
 
     this.server.settings.spawnMax = parseInt(selectedValue);

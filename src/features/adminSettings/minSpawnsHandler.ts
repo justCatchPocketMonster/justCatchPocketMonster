@@ -26,13 +26,12 @@ export class minSpawnsHandler implements MenuHandler {
       label: language("adminSettingsMinSpawnsLabel", this.server.settings.language),
       value: "minSpawns",
       description: language("adminSettingsMinSpawnsDescription", this.server.settings.language),
+      placeholder: language("adminSettingsMinSpawnsPlaceholder", this.server.settings.language),
       children: children,
     };
   }
 
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
-    console.log("handleAction minSpawns");
-
     const selectedValue = selectionPath[selectionPath.length - 1].value;
 
     this.server.eventSpawn.messageSpawn.min = parseInt(selectedValue);

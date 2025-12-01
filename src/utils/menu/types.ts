@@ -14,6 +14,8 @@ export interface MenuOption {
   children?: MenuOption[];
   /** Optional function to create a custom embed for this menu/sub-menu */
   getEmbed?: () => EmbedBuilder;
+  /** Optional placeholder text for the select menu when this option is selected */
+  placeholder?: string;
 }
 
 /**

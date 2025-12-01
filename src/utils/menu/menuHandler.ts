@@ -54,7 +54,7 @@ export interface MenuHandlerConfig<T extends MenuHandler> {
   /** Array of menu options to display */
   menuOptions: MenuOption[];
   /** Map of menu handlers keyed by their value identifier */
-  menuHandlers: Map<string, T>;
+  menuHandlers: Map<string, MenuHandler>;
   /** Map storing current selection paths by message ID */
   currentSelectionPath: Map<string, SelectionPath[]>;
   /** Async function that creates the main embed (used as fallback) */

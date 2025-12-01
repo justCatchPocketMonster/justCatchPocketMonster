@@ -40,9 +40,11 @@ export function buildAllMenus(
     
     currentPath.push(pathItem);
     
+    const placeholder = option.placeholder || pathItem.label;
+    
     const menu = new StringSelectMenuBuilder()
       .setCustomId(`menu_${i}_${currentPath.map(p => p.value).join('_')}`)
-      .setPlaceholder(`${pathItem.label}`)
+      .setPlaceholder(placeholder)
       .addOptions(
         currentOptions.map((opt: MenuOption) => ({
           label: opt.label,
@@ -75,9 +77,12 @@ export function buildAllMenus(
     const lastOption = findMenuOption(lastParentOptions, selectionPath[selectionPath.length - 1].value);
     
     if (lastOption?.children && lastOption.children.length > 0) {
+      // Use custom placeholder from the last option if available, otherwise use default subElementPlaceholder
+      const placeholder = lastOption.placeholder || options.subElementPlaceholder;
+      
       const nextMenu = new StringSelectMenuBuilder()
         .setCustomId(`menu_${selectionPath.length}_${selectionPath.map(p => p.value).join('_')}`)
-        .setPlaceholder(options.subElementPlaceholder)
+        .setPlaceholder(placeholder)
         .addOptions(
           lastOption.children.map((child: MenuOption) => ({
             label: child.label,
