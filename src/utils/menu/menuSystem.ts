@@ -381,7 +381,9 @@ export class MenuSystem<T extends MenuHandler> {
           await interaction.editReply({
             components: [],
           });
-        } catch (e) {}
+        } catch (e) {
+          console.error("[ERROR] Error in mainCollector end:", e);
+        }
       }
       handleEnd();
     });
@@ -392,7 +394,9 @@ export class MenuSystem<T extends MenuHandler> {
           await interaction.editReply({
             components: [],
           });
-        } catch (e) {}
+        } catch (e) {
+          console.error("[ERROR] Error in buttonCollector end:", e);
+        }
       }
       handleEnd();
     });
