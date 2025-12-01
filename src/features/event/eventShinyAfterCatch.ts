@@ -12,7 +12,9 @@ export function eventShinyAfterCatch(
   if (isShiny) {
     if (Math.random() < 1 / 10000) {
       shinyEvent = false;
-      interaction.reply(language("finallyHesNotShiny", server.settings.language));
+      interaction.reply(
+        language("finallyHesNotShiny", server.settings.language),
+      );
     }
   } else if (Math.random() < 1 / 4096) {
     shinyEvent = true;

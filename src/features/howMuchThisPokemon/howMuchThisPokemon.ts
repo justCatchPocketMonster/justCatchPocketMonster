@@ -135,7 +135,9 @@ function generateEmbedData(
 
   const embed = new EmbedBuilder()
     .setTitle(
-      pokemon["name"]["name" + capitalizeFirstLetter(server.settings.language)][0],
+      pokemon["name"][
+        "name" + capitalizeFirstLetter(server.settings.language)
+      ][0],
     )
     .setImage(imageUrl)
     .setThumbnail(avatarUser)

@@ -61,7 +61,9 @@ export function pokedex(
     .setThumbnail(avatar)
     .setColor("#0099FF")
     .setDescription("\u200B")
-    .setTitle(language("pokedexOf", server.settings.language) + memberDisplayName)
+    .setTitle(
+      language("pokedexOf", server.settings.language) + memberDisplayName,
+    )
     .addFields(
       {
         name: language("nationalDex", server.settings.language),
@@ -164,10 +166,12 @@ function buildPokemonField(
 
   if (savePokemon.shinyCount > 0) {
     emote = emotePokeballShiny;
-    value = language("catched", server.settings.language) + savePokemon.shinyCount;
+    value =
+      language("catched", server.settings.language) + savePokemon.shinyCount;
   } else if (savePokemon.normalCount > 0) {
     emote = emotePokeballLight;
-    value = language("catched", server.settings.language) + savePokemon.normalCount;
+    value =
+      language("catched", server.settings.language) + savePokemon.normalCount;
   }
 
   let field = {
@@ -207,7 +211,8 @@ function buildPokedexEmbed(
     .setColor("#0099FF")
     .setDescription("\u200B")
     .setTitle(
-      language("pokedexOf", server.settings.language) + interaction.user.username,
+      language("pokedexOf", server.settings.language) +
+        interaction.user.username,
     )
     .addFields(
       {

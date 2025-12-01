@@ -27,23 +27,25 @@ export function buildAllMenus(
   menuOptions: MenuOption[],
   options: MenuBuilderOptions,
 ): ActionRowBuilder<StringSelectMenuBuilder | ButtonBuilder>[] {
-  const components: ActionRowBuilder<StringSelectMenuBuilder | ButtonBuilder>[] = [];
-  
+  const components: ActionRowBuilder<
+    StringSelectMenuBuilder | ButtonBuilder
+  >[] = [];
+
   let currentOptions = menuOptions;
   let currentPath: SelectionPath[] = [];
-  
+
   for (let i = 0; i < selectionPath.length; i++) {
     const pathItem = selectionPath[i];
     const option = findMenuOption(currentOptions, pathItem.value);
-    
+
     if (!option) break;
-    
+
     currentPath.push(pathItem);
-    
+
     const placeholder = option.placeholder || pathItem.label;
-    
+
     const menu = new StringSelectMenuBuilder()
-      .setCustomId(`menu_${i}_${currentPath.map(p => p.value).join('_')}`)
+      .setCustomId(`menu_${i}_${currentPath.map((p) => p.value).join("_")}`)
       .setPlaceholder(placeholder)
       .addOptions(
         currentOptions.map((opt: MenuOption) => ({
@@ -53,16 +55,18 @@ export function buildAllMenus(
           default: opt.value === pathItem.value,
         })),
       );
-    
-    components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menu));
-    
+
+    components.push(
+      new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menu),
+    );
+
     if (option.children && option.children.length > 0) {
       currentOptions = option.children;
     } else {
       break;
     }
   }
-  
+
   if (selectionPath.length > 0) {
     let lastParentOptions = menuOptions;
     for (let i = 0; i < selectionPath.length - 1; i++) {
@@ -73,15 +77,21 @@ export function buildAllMenus(
         break;
       }
     }
-    
-    const lastOption = findMenuOption(lastParentOptions, selectionPath[selectionPath.length - 1].value);
-    
+
+    const lastOption = findMenuOption(
+      lastParentOptions,
+      selectionPath[selectionPath.length - 1].value,
+    );
+
     if (lastOption?.children && lastOption.children.length > 0) {
       // Use custom placeholder from the last option if available, otherwise use default subElementPlaceholder
-      const placeholder = lastOption.placeholder || options.subElementPlaceholder;
-      
+      const placeholder =
+        lastOption.placeholder || options.subElementPlaceholder;
+
       const nextMenu = new StringSelectMenuBuilder()
-        .setCustomId(`menu_${selectionPath.length}_${selectionPath.map(p => p.value).join('_')}`)
+        .setCustomId(
+          `menu_${selectionPath.length}_${selectionPath.map((p) => p.value).join("_")}`,
+        )
         .setPlaceholder(placeholder)
         .addOptions(
           lastOption.children.map((child: MenuOption) => ({
@@ -90,10 +100,11 @@ export function buildAllMenus(
             description: child.description,
           })),
         );
-      components.push(new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(nextMenu));
+      components.push(
+        new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(nextMenu),
+      );
     }
   }
-  
+
   return components;
 }
-

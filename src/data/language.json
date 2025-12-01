@@ -1202,8 +1202,12 @@
     "eng": ["No channels available"]
   },
   "adminSettingsSpawnNoChannelsAvailableDescription": {
-    "fr": ["Tous les salons sont déjà autorisés ou le bot n'a pas les permissions"],
-    "eng": ["All channels are already allowed or the bot doesn't have permissions"]
+    "fr": [
+      "Tous les salons sont déjà autorisés ou le bot n'a pas les permissions"
+    ],
+    "eng": [
+      "All channels are already allowed or the bot doesn't have permissions"
+    ]
   },
   "adminSettingsSpawnNoChannelsAllowed": {
     "fr": ["Aucun salon autorisé"],
@@ -1314,12 +1318,20 @@
     "eng": ["📖 Legend"]
   },
   "adminSettingsSpawnEmbedTutorialContent": {
-    "fr": ["✅ Salon avec permissions\n❌ Salon sans permissions\n🗑️ Salon supprimé"],
-    "eng": ["✅ Channel with permissions\n❌ Channel without permissions\n🗑️ Deleted channel"]
+    "fr": [
+      "✅ Salon avec permissions\n❌ Salon sans permissions\n🗑️ Salon supprimé"
+    ],
+    "eng": [
+      "✅ Channel with permissions\n❌ Channel without permissions\n🗑️ Deleted channel"
+    ]
   },
   "adminSettingsAlreadyActive": {
-    "fr": ["❌ Un menu de paramètres d'administration est déjà actif sur ce serveur. Veuillez terminer la session en cours avant d'en ouvrir une nouvelle."],
-    "eng": ["❌ An admin settings menu is already active on this server. Please finish the current session before opening a new one."]
+    "fr": [
+      "❌ Un menu de paramètres d'administration est déjà actif sur ce serveur. Veuillez terminer la session en cours avant d'en ouvrir une nouvelle."
+    ],
+    "eng": [
+      "❌ An admin settings menu is already active on this server. Please finish the current session before opening a new one."
+    ]
   },
 
   "seasonalEvent": {}

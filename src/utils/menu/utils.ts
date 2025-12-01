@@ -6,7 +6,10 @@ import { MenuOption, SelectionPath } from "./types";
  * @param value - The value to search for
  * @returns The found menu option, or undefined if not found
  */
-export function findMenuOption(menuOptions: MenuOption[], value: string): MenuOption | undefined {
+export function findMenuOption(
+  menuOptions: MenuOption[],
+  value: string,
+): MenuOption | undefined {
   for (const option of menuOptions) {
     if (option.value === value) {
       return option;
@@ -43,4 +46,3 @@ export function buildEmbedDescription(
   });
   return description;
 }
-

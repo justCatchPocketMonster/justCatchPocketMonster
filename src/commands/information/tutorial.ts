@@ -31,7 +31,9 @@ export default {
           new EmbedBuilder()
             .setColor("#0099ff")
             .setTitle(language("tutorialTitle", server.settings.language))
-            .setDescription(language("tutorialDescription", server.settings.language))
+            .setDescription(
+              language("tutorialDescription", server.settings.language),
+            )
             .addFields(
               {
                 name: language("tutorialField1Title", server.settings.language),
@@ -67,13 +69,25 @@ export default {
             )
             .addFields(
               {
-                name: language("tutorialAdminField1Title", server.settings.language),
-                value: language("tutorialAdminField1Desc", server.settings.language),
+                name: language(
+                  "tutorialAdminField1Title",
+                  server.settings.language,
+                ),
+                value: language(
+                  "tutorialAdminField1Desc",
+                  server.settings.language,
+                ),
                 inline: false,
               },
               {
-                name: language("tutorialAdminField2Title", server.settings.language),
-                value: language("tutorialAdminField2Desc", server.settings.language),
+                name: language(
+                  "tutorialAdminField2Title",
+                  server.settings.language,
+                ),
+                value: language(
+                  "tutorialAdminField2Desc",
+                  server.settings.language,
+                ),
                 inline: false,
               },
             ),

@@ -4,12 +4,11 @@ import { updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
 export class languageHandler implements MenuHandler {
-
   server: Server;
   constructor(server: Server) {
     this.server = server;
   }
-  
+
   getMenuStructure() {
     const children = [
       {
@@ -25,10 +24,19 @@ export class languageHandler implements MenuHandler {
     ];
 
     return {
-      label: language("adminSettingsLanguageLabel", this.server.settings.language),
+      label: language(
+        "adminSettingsLanguageLabel",
+        this.server.settings.language,
+      ),
       value: "language",
-      description: language("adminSettingsLanguageDescription", this.server.settings.language),
-      placeholder: language("adminSettingsLanguagePlaceholder", this.server.settings.language),
+      description: language(
+        "adminSettingsLanguageDescription",
+        this.server.settings.language,
+      ),
+      placeholder: language(
+        "adminSettingsLanguagePlaceholder",
+        this.server.settings.language,
+      ),
       children: children,
     };
   }

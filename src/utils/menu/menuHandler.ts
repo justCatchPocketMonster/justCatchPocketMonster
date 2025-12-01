@@ -22,13 +22,13 @@ import { buildAllMenus, MenuBuilderOptions } from "./menuBuilder";
 async function findEmbedInPath(
   selectionPath: SelectionPath[],
   menuOptions: MenuOption[],
-  getDefaultEmbed: () => Promise<EmbedBuilder>
+  getDefaultEmbed: () => Promise<EmbedBuilder>,
 ): Promise<EmbedBuilder> {
   let embed: EmbedBuilder | null = null;
-  
+
   for (let i = selectionPath.length - 1; i >= 0; i--) {
     let currentOptions = menuOptions;
-    
+
     for (let j = 0; j <= i; j++) {
       const option = findMenuOption(currentOptions, selectionPath[j].value);
       if (option) {
@@ -43,7 +43,7 @@ async function findEmbedInPath(
     }
     if (embed !== null) break;
   }
-  
+
   return embed !== null ? embed : await getDefaultEmbed();
 }
 
@@ -106,23 +106,25 @@ export async function handleMenuSelection<T extends MenuHandler>(
 
   let menuLevel = 0;
   let pathValues: string[] = [];
-  
+
   if (customId === "main_menu") {
     menuLevel = 0;
   } else {
-    const customIdParts = customId.split('_');
+    const customIdParts = customId.split("_");
     menuLevel = parseInt(customIdParts[1]) || 0;
     pathValues = customIdParts.slice(2);
   }
-  
+
   let newSelectionPath: SelectionPath[] = [];
   let currentOptions = config.menuOptions;
-  
+
   if (menuLevel === 0) {
     const selectedValue = selectInteraction.values[0];
     const selectedOption = findMenuOption(currentOptions, selectedValue);
     if (selectedOption) {
-      newSelectionPath = [{ value: selectedOption.value, label: selectedOption.label }];
+      newSelectionPath = [
+        { value: selectedOption.value, label: selectedOption.label },
+      ];
     }
   } else {
     for (let i = 0; i < menuLevel && i < pathValues.length; i++) {
@@ -134,11 +136,14 @@ export async function handleMenuSelection<T extends MenuHandler>(
         break;
       }
     }
-    
+
     const selectedValue = selectInteraction.values[0];
     const selectedOption = findMenuOption(currentOptions, selectedValue);
     if (selectedOption) {
-      newSelectionPath.push({ value: selectedOption.value, label: selectedOption.label });
+      newSelectionPath.push({
+        value: selectedOption.value,
+        label: selectedOption.label,
+      });
     }
   }
 
@@ -146,23 +151,35 @@ export async function handleMenuSelection<T extends MenuHandler>(
     return;
   }
 
-  const lastOption = newSelectionPath.length > 0 
-    ? findMenuOption(
-        newSelectionPath.length > 1
-          ? findMenuOption(config.menuOptions, newSelectionPath[newSelectionPath.length - 2].value)?.children || []
-          : config.menuOptions,
-        newSelectionPath[newSelectionPath.length - 1].value
-      )
-    : null;
+  const lastOption =
+    newSelectionPath.length > 0
+      ? findMenuOption(
+          newSelectionPath.length > 1
+            ? findMenuOption(
+                config.menuOptions,
+                newSelectionPath[newSelectionPath.length - 2].value,
+              )?.children || []
+            : config.menuOptions,
+          newSelectionPath[newSelectionPath.length - 1].value,
+        )
+      : null;
 
   const builderOptions: MenuBuilderOptions = {
     subElementPlaceholder: config.subElementPlaceholder,
   };
 
   if (lastOption && lastOption.children && lastOption.children.length > 0) {
-    const components = buildAllMenus(newSelectionPath, config.menuOptions, builderOptions);
+    const components = buildAllMenus(
+      newSelectionPath,
+      config.menuOptions,
+      builderOptions,
+    );
 
-    const embed = await findEmbedInPath(newSelectionPath, config.menuOptions, config.getMainEmbed);
+    const embed = await findEmbedInPath(
+      newSelectionPath,
+      config.menuOptions,
+      config.getMainEmbed,
+    );
 
     try {
       await selectInteraction.editReply({
@@ -174,15 +191,25 @@ export async function handleMenuSelection<T extends MenuHandler>(
       return;
     }
   } else {
-    const components = buildAllMenus(newSelectionPath, config.menuOptions, builderOptions);
-    
+    const components = buildAllMenus(
+      newSelectionPath,
+      config.menuOptions,
+      builderOptions,
+    );
+
     if (config.createConfirmButton) {
       const button = config.createConfirmButton(config.lang);
-      const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
+      const buttonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+        button,
+      );
       components.push(buttonRow);
     }
 
-    const embed = await findEmbedInPath(newSelectionPath, config.menuOptions, config.getMainEmbed);
+    const embed = await findEmbedInPath(
+      newSelectionPath,
+      config.menuOptions,
+      config.getMainEmbed,
+    );
 
     try {
       await selectInteraction.editReply({
@@ -201,4 +228,3 @@ export async function handleMenuSelection<T extends MenuHandler>(
     }
   }
 }
-

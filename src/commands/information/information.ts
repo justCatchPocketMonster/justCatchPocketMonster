@@ -34,7 +34,9 @@ export default {
       const mainPage = new EmbedBuilder()
         .setColor("#0099ff")
         .setTitle("Information")
-        .setDescription(language("informationDescription", server.settings.language));
+        .setDescription(
+          language("informationDescription", server.settings.language),
+        );
       pages.push(
         createPageForMenu(
           mainPage,

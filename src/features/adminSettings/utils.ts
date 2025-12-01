@@ -10,11 +10,11 @@ import language from "../../lang/language";
 
 export function createShowValuesButton(lang: string): ButtonBuilder {
   const label = language("adminSettingsShowValues", lang);
-  
-  if (!label || typeof label !== 'string' || label.trim().length === 0) {
+
+  if (!label || typeof label !== "string" || label.trim().length === 0) {
     throw new Error(`Invalid label for adminSettingsShowValues: ${label}`);
   }
-  
+
   return new ButtonBuilder()
     .setCustomId("show_values")
     .setLabel(label)
@@ -29,8 +29,7 @@ export function createDisabledButton(lang: string): ButtonBuilder {
     .setDisabled(true);
 }
 
-export function logValues(selectionPath: SelectionPath[]) {
-}
+export function logValues(selectionPath: SelectionPath[]) {}
 
 export async function handleButtonClick(
   buttonInteraction: ButtonInteraction,
@@ -42,27 +41,38 @@ export async function handleButtonClick(
   logValues(selectionPath);
 
   const disabledButton = createDisabledButton(lang);
-  const disabledButtonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(disabledButton);
+  const disabledButtonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+    disabledButton,
+  );
 
   await buttonInteraction.editReply({
     components: [disabledButtonRow],
   });
 }
 
-export function buildEmbedDescription(selectionPath: SelectionPath[], lang: string): string {
+export function buildEmbedDescription(
+  selectionPath: SelectionPath[],
+  lang: string,
+): string {
   let description = "";
   selectionPath.forEach((selection, index) => {
     if (index === 0) {
-      description += language("adminSettingsMainMenu", lang) + `**${selection.label}**`;
+      description +=
+        language("adminSettingsMainMenu", lang) + `**${selection.label}**`;
     } else {
-      const subElementPrefix = language("adminSettingsSubElement", lang).repeat(index);
+      const subElementPrefix = language("adminSettingsSubElement", lang).repeat(
+        index,
+      );
       description += `\n${subElementPrefix}**${selection.label}**`;
     }
   });
   return description;
 }
 
-export function findMenuOption(menuOptions: MenuOption[], value: string): MenuOption | undefined {
+export function findMenuOption(
+  menuOptions: MenuOption[],
+  value: string,
+): MenuOption | undefined {
   for (const option of menuOptions) {
     if (option.value === value) {
       return option;
@@ -74,4 +84,3 @@ export function findMenuOption(menuOptions: MenuOption[], value: string): MenuOp
   }
   return undefined;
 }
-

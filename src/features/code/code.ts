@@ -60,7 +60,9 @@ export function codeListEmbed(
   updateArrayCode(stat);
   const embed = new EmbedBuilder();
   embed.setTitle(language("codeListEmbedTitle", server.settings.language));
-  embed.setDescription(language("codeListEmbedDescription", server.settings.language));
+  embed.setDescription(
+    language("codeListEmbedDescription", server.settings.language),
+  );
 
   for (const value of Object.values(getCode())) {
     value.forEach((code) => {

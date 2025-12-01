@@ -37,11 +37,10 @@ export interface MenuHandler<T = any> {
    * @returns The menu option structure with label, value, description, and optional children
    */
   getMenuStructure(): MenuOption;
-  
+
   /**
    * Handles the action when a leaf option is selected.
    * @param selectionPath - The complete path from root to the selected leaf option
    */
   handleAction(selectionPath: SelectionPath[]): Promise<void> | void;
 }
-

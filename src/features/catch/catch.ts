@@ -28,7 +28,9 @@ export async function catchPokemon(
   }
 
   if (!pokemon) {
-    interaction.reply(language("noPokemonDisponible", server.settings.language));
+    interaction.reply(
+      language("noPokemonDisponible", server.settings.language),
+    );
     return;
   }
   if (!pokemon.nameIsSame(pokemonInput)) {

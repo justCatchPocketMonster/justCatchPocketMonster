@@ -28,7 +28,7 @@ const ServerSettingsSchema = new mongoose.Schema<ServerSettings>(
   },
   {
     _id: false,
-  }
+  },
 );
 
 const ServerSchema = new mongoose.Schema<ServerType>(

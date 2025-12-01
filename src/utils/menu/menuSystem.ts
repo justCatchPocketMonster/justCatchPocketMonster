@@ -9,7 +9,13 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
 } from "discord.js";
-import { MenuOption, SelectionPath, MenuHandler, handleMenuSelection, MenuHandlerConfig } from "./index";
+import {
+  MenuOption,
+  SelectionPath,
+  MenuHandler,
+  handleMenuSelection,
+  MenuHandlerConfig,
+} from "./index";
 import { buildAllMenus } from "./menuBuilder";
 import { newLogger } from "../../middlewares/logger";
 
@@ -18,7 +24,9 @@ import { newLogger } from "../../middlewares/logger";
  */
 export interface MenuSystemConfig<T extends MenuHandler> {
   /** Function to generate/regenerate menu handlers (menuOptions will be generated automatically from handlers) */
-  regenerateMenu: () => Promise<Map<string, MenuHandler>> | Map<string, MenuHandler>;
+  regenerateMenu: () =>
+    | Promise<Map<string, MenuHandler>>
+    | Map<string, MenuHandler>;
   /** Async function that creates the main embed (called on each reset) */
   getMainEmbed: () => Promise<EmbedBuilder>;
   /** Placeholder text for the main menu select */
@@ -64,14 +72,18 @@ export class MenuSystem<T extends MenuHandler> {
   private mainCollector: any = null;
   private buttonCollector: any = null;
   private interaction: ChatInputCommandInteraction | null = null;
-  private regenerateMenu: () => Promise<Map<string, MenuHandler>> | Map<string, MenuHandler>;
+  private regenerateMenu: () =>
+    | Promise<Map<string, MenuHandler>>
+    | Map<string, MenuHandler>;
   private menuOptions: MenuOption[] = [];
   private menuHandlers: Map<string, MenuHandler> = new Map();
 
   /**
    * Helper function to generate menuOptions from menuHandlers
    */
-  private generateMenuOptions(handlers: Map<string, MenuHandler>): MenuOption[] {
+  private generateMenuOptions(
+    handlers: Map<string, MenuHandler>,
+  ): MenuOption[] {
     const structure: MenuOption[] = [];
     handlers.forEach((handler) => {
       structure.push(handler.getMenuStructure());
@@ -94,11 +106,11 @@ export class MenuSystem<T extends MenuHandler> {
    */
   async initialize(interaction: ChatInputCommandInteraction): Promise<void> {
     this.interaction = interaction;
-    
+
     // Initialize menuHandlers from regenerateMenu and generate menuOptions automatically
     this.menuHandlers = await Promise.resolve(this.regenerateMenu());
     this.menuOptions = this.generateMenuOptions(this.menuHandlers);
-    
+
     this.message = await interaction.reply({
       embeds: [await this.config.getMainEmbed()],
       fetchReply: true,
@@ -115,158 +127,245 @@ export class MenuSystem<T extends MenuHandler> {
 
     this.mainCollector = this.message.createMessageComponentCollector({
       componentType: ComponentType.StringSelect,
-      filter: (i) => (i.customId === "main_menu" || i.customId.startsWith('menu_')) && i.user.id === interaction.user.id,
+      filter: (i) =>
+        (i.customId === "main_menu" || i.customId.startsWith("menu_")) &&
+        i.user.id === interaction.user.id,
       time: timeout,
     });
 
     this.buttonCollector = this.message.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      filter: (i) => i.customId === "show_values" && i.user.id === interaction.user.id,
+      filter: (i) =>
+        i.customId === "show_values" && i.user.id === interaction.user.id,
       time: timeout,
     });
 
-    this.mainCollector.on("collect", async (selectInteraction: StringSelectMenuInteraction) => {
-      try {
-        const customId = selectInteraction.customId === "main_menu" ? "main_menu" : selectInteraction.customId;
-        
-        const handlerConfig: MenuHandlerConfig<MenuHandler> = {
-          menuOptions: this.menuOptions,
-          menuHandlers: this.menuHandlers,
-          currentSelectionPath: this.currentSelectionPath,
-          getMainEmbed: this.config.getMainEmbed,
-          mainMenuText: this.config.mainMenuText,
-          subElementText: this.config.subElementText,
-          selectSubElementText: this.config.selectSubElementText,
-          clickButtonConfirmText: this.config.clickButtonConfirmText,
-          subElementPlaceholder: this.config.subElementPlaceholder,
-          lang: this.config.lang,
-          createConfirmButton: this.config.createConfirmButton,
-        };
-        
-        await handleMenuSelection(selectInteraction, this.message!, customId, handlerConfig);
-      } catch (error) {
-        console.error("[ERROR] Error in mainCollector:", error);
-      }
-    });
+    this.mainCollector.on(
+      "collect",
+      async (selectInteraction: StringSelectMenuInteraction) => {
+        try {
+          const customId =
+            selectInteraction.customId === "main_menu"
+              ? "main_menu"
+              : selectInteraction.customId;
 
-    this.buttonCollector.on("collect", async (buttonInteraction: ButtonInteraction) => {
-      try {
-        console.log(`[MenuSystem] Button clicked: ${buttonInteraction.customId}`);
-        newLogger("info", `[MenuSystem] Button clicked: ${buttonInteraction.customId}`);
-        if (!this.message || !this.interaction) {
-          console.log(`[MenuSystem] Message or interaction is null`);
-          newLogger("warn", `[MenuSystem] Message or interaction is null`);
-          return;
+          const handlerConfig: MenuHandlerConfig<MenuHandler> = {
+            menuOptions: this.menuOptions,
+            menuHandlers: this.menuHandlers,
+            currentSelectionPath: this.currentSelectionPath,
+            getMainEmbed: this.config.getMainEmbed,
+            mainMenuText: this.config.mainMenuText,
+            subElementText: this.config.subElementText,
+            selectSubElementText: this.config.selectSubElementText,
+            clickButtonConfirmText: this.config.clickButtonConfirmText,
+            subElementPlaceholder: this.config.subElementPlaceholder,
+            lang: this.config.lang,
+            createConfirmButton: this.config.createConfirmButton,
+          };
+
+          await handleMenuSelection(
+            selectInteraction,
+            this.message!,
+            customId,
+            handlerConfig,
+          );
+        } catch (error) {
+          console.error("[ERROR] Error in mainCollector:", error);
         }
-        
-        const selectionPath = this.currentSelectionPath.get(this.message.id) || [];
-        console.log(`[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map(s => ({ value: s.value, label: s.label })))}`);
-        newLogger("info", `[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map(s => ({ value: s.value, label: s.label })))}`);
-        const mainMenuValue = selectionPath[0]?.value;
-        console.log(`[MenuSystem] MainMenuValue: ${mainMenuValue}`);
-        newLogger("info", `[MenuSystem] MainMenuValue: ${mainMenuValue}`);
-        
-        if (mainMenuValue) {
-          const handler = this.menuHandlers.get(mainMenuValue);
-          console.log(`[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`);
-          newLogger("info", `[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`);
-          if (handler) {
-            console.log(`[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`);
-            newLogger("info", `[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`);
-            try {
-              await handler.handleAction(selectionPath);
-              console.log(`[MenuSystem] handleAction completed for ${mainMenuValue}`);
-              newLogger("info", `[MenuSystem] handleAction completed for ${mainMenuValue}`);
-            } catch (error) {
-              console.error(`[MenuSystem] Error in handleAction:`, error);
-              newLogger("error", `[MenuSystem] Error in handleAction: ${error}`, `Error calling handleAction for ${mainMenuValue}: ${error instanceof Error ? error.message : String(error)}`);
-              if (error instanceof Error) {
-                console.error(`[MenuSystem] Error stack:`, error.stack);
-                newLogger("error", `[MenuSystem] Error stack: ${error.stack}`, error.stack || "");
+      },
+    );
+
+    this.buttonCollector.on(
+      "collect",
+      async (buttonInteraction: ButtonInteraction) => {
+        try {
+          console.log(
+            `[MenuSystem] Button clicked: ${buttonInteraction.customId}`,
+          );
+          newLogger(
+            "info",
+            `[MenuSystem] Button clicked: ${buttonInteraction.customId}`,
+          );
+          if (!this.message || !this.interaction) {
+            console.log(`[MenuSystem] Message or interaction is null`);
+            newLogger("warn", `[MenuSystem] Message or interaction is null`);
+            return;
+          }
+
+          const selectionPath =
+            this.currentSelectionPath.get(this.message.id) || [];
+          console.log(
+            `[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map((s) => ({ value: s.value, label: s.label })))}`,
+          );
+          newLogger(
+            "info",
+            `[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map((s) => ({ value: s.value, label: s.label })))}`,
+          );
+          const mainMenuValue = selectionPath[0]?.value;
+          console.log(`[MenuSystem] MainMenuValue: ${mainMenuValue}`);
+          newLogger("info", `[MenuSystem] MainMenuValue: ${mainMenuValue}`);
+
+          if (mainMenuValue) {
+            const handler = this.menuHandlers.get(mainMenuValue);
+            console.log(
+              `[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`,
+            );
+            newLogger(
+              "info",
+              `[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`,
+            );
+            if (handler) {
+              console.log(
+                `[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`,
+              );
+              newLogger(
+                "info",
+                `[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`,
+              );
+              try {
+                await handler.handleAction(selectionPath);
+                console.log(
+                  `[MenuSystem] handleAction completed for ${mainMenuValue}`,
+                );
+                newLogger(
+                  "info",
+                  `[MenuSystem] handleAction completed for ${mainMenuValue}`,
+                );
+              } catch (error) {
+                console.error(`[MenuSystem] Error in handleAction:`, error);
+                newLogger(
+                  "error",
+                  `[MenuSystem] Error in handleAction: ${error}`,
+                  `Error calling handleAction for ${mainMenuValue}: ${error instanceof Error ? error.message : String(error)}`,
+                );
+                if (error instanceof Error) {
+                  console.error(`[MenuSystem] Error stack:`, error.stack);
+                  newLogger(
+                    "error",
+                    `[MenuSystem] Error stack: ${error.stack}`,
+                    error.stack || "",
+                  );
+                }
               }
+            } else {
+              console.log(
+                `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`,
+              );
+              console.log(
+                `[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`,
+              );
+              newLogger(
+                "warn",
+                `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`,
+              );
+              newLogger(
+                "info",
+                `[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`,
+              );
             }
           } else {
-            console.log(`[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`);
-            console.log(`[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`);
-            newLogger("warn", `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`);
-            newLogger("info", `[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`);
-          }
-        } else {
-          console.log(`[MenuSystem] No mainMenuValue found in selectionPath`);
-          newLogger("warn", `[MenuSystem] No mainMenuValue found in selectionPath`);
-        }
-
-        if (this.config.onButtonClick) {
-          console.log(`[MenuSystem] Calling onButtonClick`);
-          await this.config.onButtonClick(buttonInteraction, this.message, selectionPath, this.config.lang);
-          console.log(`[MenuSystem] onButtonClick completed`);
-        }
-
-        const resetOnButtonClick = this.config.resetOnButtonClick ?? false;
-        
-        if (resetOnButtonClick) {
-          this.currentSelectionPath.delete(this.message.id);
-          
-          // Regenerate menu handlers and generate menuOptions automatically
-          this.menuHandlers = await Promise.resolve(this.regenerateMenu());
-          this.menuOptions = this.generateMenuOptions(this.menuHandlers);
-          console.log(`[MenuSystem] Menu options and handlers regenerated`);
-          
-          // Use placeholder from first menu option if available, otherwise use config default
-          const placeholder = this.menuOptions.length > 0 && this.menuOptions[0].placeholder 
-            ? this.menuOptions[0].placeholder 
-            : this.config.mainMenuPlaceholder;
-          
-          const mainMenu = new StringSelectMenuBuilder()
-            .setCustomId("main_menu")
-            .setPlaceholder(placeholder)
-            .addOptions(
-              this.menuOptions.map((option: MenuOption) => ({
-                label: option.label,
-                value: option.value,
-                description: option.description,
-              })),
+            console.log(`[MenuSystem] No mainMenuValue found in selectionPath`);
+            newLogger(
+              "warn",
+              `[MenuSystem] No mainMenuValue found in selectionPath`,
             );
-          
-          const mainRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(mainMenu);
-          
-          await buttonInteraction.editReply({
-            embeds: [await this.config.getMainEmbed()],
-            components: [mainRow],
-          });
-        } else {
-          const validationMessage = this.config.buttonValidationMessage || "Action confirmée !";
-          
-          const disabledButton = this.config.createConfirmButton 
-            ? this.config.createConfirmButton(this.config.lang).setDisabled(true)
-            : new ButtonBuilder()
-                .setCustomId("show_values")
-                .setLabel(validationMessage)
-                .setStyle(1)
-                .setDisabled(true);
-          
-          const disabledButtonRow = new ActionRowBuilder<ButtonBuilder>().addComponents(disabledButton);
-          
-          const components = buildAllMenus(selectionPath, this.menuOptions, {
-            subElementPlaceholder: this.config.subElementPlaceholder,
-          });
-          components.push(disabledButtonRow);
-          
-          await buttonInteraction.editReply({
-            components: components,
-          });
-          
-          this.buttonCollector?.stop();
+          }
+
+          if (this.config.onButtonClick) {
+            console.log(`[MenuSystem] Calling onButtonClick`);
+            await this.config.onButtonClick(
+              buttonInteraction,
+              this.message,
+              selectionPath,
+              this.config.lang,
+            );
+            console.log(`[MenuSystem] onButtonClick completed`);
+          }
+
+          const resetOnButtonClick = this.config.resetOnButtonClick ?? false;
+
+          if (resetOnButtonClick) {
+            this.currentSelectionPath.delete(this.message.id);
+
+            // Regenerate menu handlers and generate menuOptions automatically
+            this.menuHandlers = await Promise.resolve(this.regenerateMenu());
+            this.menuOptions = this.generateMenuOptions(this.menuHandlers);
+            console.log(`[MenuSystem] Menu options and handlers regenerated`);
+
+            // Use placeholder from first menu option if available, otherwise use config default
+            const placeholder =
+              this.menuOptions.length > 0 && this.menuOptions[0].placeholder
+                ? this.menuOptions[0].placeholder
+                : this.config.mainMenuPlaceholder;
+
+            const mainMenu = new StringSelectMenuBuilder()
+              .setCustomId("main_menu")
+              .setPlaceholder(placeholder)
+              .addOptions(
+                this.menuOptions.map((option: MenuOption) => ({
+                  label: option.label,
+                  value: option.value,
+                  description: option.description,
+                })),
+              );
+
+            const mainRow =
+              new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+                mainMenu,
+              );
+
+            await buttonInteraction.editReply({
+              embeds: [await this.config.getMainEmbed()],
+              components: [mainRow],
+            });
+          } else {
+            const validationMessage =
+              this.config.buttonValidationMessage || "Action confirmée !";
+
+            const disabledButton = this.config.createConfirmButton
+              ? this.config
+                  .createConfirmButton(this.config.lang)
+                  .setDisabled(true)
+              : new ButtonBuilder()
+                  .setCustomId("show_values")
+                  .setLabel(validationMessage)
+                  .setStyle(1)
+                  .setDisabled(true);
+
+            const disabledButtonRow =
+              new ActionRowBuilder<ButtonBuilder>().addComponents(
+                disabledButton,
+              );
+
+            const components = buildAllMenus(selectionPath, this.menuOptions, {
+              subElementPlaceholder: this.config.subElementPlaceholder,
+            });
+            components.push(disabledButtonRow);
+
+            await buttonInteraction.editReply({
+              components: components,
+            });
+
+            this.buttonCollector?.stop();
+          }
+        } catch (error) {
+          console.error("[ERROR] Error in buttonCollector:", error);
+          newLogger(
+            "error",
+            `[MenuSystem] Error in buttonCollector: ${error}`,
+            `Error in buttonCollector: ${error instanceof Error ? error.message : String(error)}`,
+          );
+          if (error instanceof Error) {
+            console.error("[ERROR] Error stack:", error.stack);
+            newLogger(
+              "error",
+              `[MenuSystem] Error stack: ${error.stack}`,
+              error.stack || "",
+            );
+          }
         }
-      } catch (error) {
-        console.error("[ERROR] Error in buttonCollector:", error);
-        newLogger("error", `[MenuSystem] Error in buttonCollector: ${error}`, `Error in buttonCollector: ${error instanceof Error ? error.message : String(error)}`);
-        if (error instanceof Error) {
-          console.error("[ERROR] Error stack:", error.stack);
-          newLogger("error", `[MenuSystem] Error stack: ${error.stack}`, error.stack || "");
-        }
-      }
-    });
+      },
+    );
 
     let ended = false;
     const handleEnd = () => {
@@ -282,8 +381,7 @@ export class MenuSystem<T extends MenuHandler> {
           await interaction.editReply({
             components: [],
           });
-        } catch (e) {
-        }
+        } catch (e) {}
       }
       handleEnd();
     });
@@ -294,20 +392,22 @@ export class MenuSystem<T extends MenuHandler> {
           await interaction.editReply({
             components: [],
           });
-        } catch (e) {
-        }
+        } catch (e) {}
       }
       handleEnd();
     });
   }
 
-  private async setupMainMenu(interaction: ChatInputCommandInteraction): Promise<void> {
+  private async setupMainMenu(
+    interaction: ChatInputCommandInteraction,
+  ): Promise<void> {
     if (!this.message) return;
 
     // Use placeholder from first menu option if available, otherwise use config default
-    const placeholder = this.menuOptions.length > 0 && this.menuOptions[0].placeholder 
-      ? this.menuOptions[0].placeholder 
-      : this.config.mainMenuPlaceholder;
+    const placeholder =
+      this.menuOptions.length > 0 && this.menuOptions[0].placeholder
+        ? this.menuOptions[0].placeholder
+        : this.config.mainMenuPlaceholder;
 
     const mainMenu = new StringSelectMenuBuilder()
       .setCustomId("main_menu")
@@ -320,7 +420,8 @@ export class MenuSystem<T extends MenuHandler> {
         })),
       );
 
-    const mainRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(mainMenu);
+    const mainRow =
+      new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(mainMenu);
 
     await interaction.editReply({
       embeds: [await this.config.getMainEmbed()],
@@ -339,4 +440,3 @@ export class MenuSystem<T extends MenuHandler> {
     }
   }
 }
-
