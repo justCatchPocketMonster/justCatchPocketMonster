@@ -313,6 +313,72 @@ export class spawnHandler implements MenuHandler {
     return allowedChannels.sort((a, b) => a.label.localeCompare(b.label));
   }
 
+  private async reloadServer(): Promise<void> {
+    try {
+      const freshServer = await getServerById(this.server.discordId);
+      this.server = freshServer;
+    } catch (error) {
+      newLogger(
+        "error",
+        `[spawnHandler] Error reloading server: ${error}`,
+        `Failed to reload server ${this.server.discordId}`,
+      );
+    }
+  }
+
+  private async updateServerData(): Promise<void> {
+    try {
+      await updateServer(this.server.discordId, this.server);
+    } catch (error) {
+      newLogger(
+        "error",
+        `[spawnHandler] Error updating server: ${error}`,
+        `Failed to update server ${this.server.discordId}`,
+      );
+    }
+  }
+
+  private async sendChannelMessage(
+    channelId: string,
+    message: string,
+  ): Promise<void> {
+    if (!this.guild) return;
+
+    const channel = this.guild.channels.cache.get(channelId);
+    if (
+      channel &&
+      channel.isTextBased() &&
+      channel instanceof BaseGuildTextChannel
+    ) {
+      try {
+        await channel.send(message);
+      } catch (error) {
+        newLogger(
+          "error",
+          `[spawnHandler] Error sending message to channel: ${error}`,
+          `Failed to send message to channel ${channelId}`,
+        );
+      }
+    }
+  }
+
+  private async sendFollowUp(content: string): Promise<void> {
+    if (!this.interaction) return;
+
+    try {
+      await this.interaction.followUp({
+        content: content,
+        ephemeral: true,
+      });
+    } catch (error) {
+      newLogger(
+        "error",
+        `[spawnHandler] Error sending followUp: ${error}`,
+        `Failed to send followUp for interaction ${this.interaction.id}`,
+      );
+    }
+  }
+
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
     if (selectionPath.length < 3) {
       return;
@@ -326,132 +392,31 @@ export class spawnHandler implements MenuHandler {
     }
 
     const lang = this.server.settings.language;
+    await this.reloadServer();
 
     if (action === "add") {
-      try {
-        const freshServer = await getServerById(this.server.discordId);
-        this.server = freshServer;
-      } catch (error) {
-        newLogger(
-          "error",
-          `[spawnHandler] Error reloading server: ${error}`,
-          `Failed to reload server ${this.server.discordId}`,
-        );
-      }
-
       if (this.server.channelAllowed.includes(channelId)) {
         return;
       }
 
       this.server.channelAllowed.push(channelId);
-
-      try {
-        await updateServer(this.server.discordId, this.server);
-      } catch (error) {
-        newLogger(
-          "error",
-          `[spawnHandler] Error updating server: ${error}`,
-          `Failed to update server ${this.server.discordId}`,
-        );
-      }
-
-      if (this.guild) {
-        const channel = this.guild.channels.cache.get(channelId);
-        if (
-          channel &&
-          channel.isTextBased() &&
-          channel instanceof BaseGuildTextChannel
-        ) {
-          try {
-            await channel.send(
-              language("adminSettingsSpawnChannelAddedMessage", lang),
-            );
-          } catch (error) {
-            newLogger(
-              "error",
-              `[spawnHandler] Error sending message to channel: ${error}`,
-              `Failed to send message to channel ${channelId}`,
-            );
-          }
-        }
-      }
-
-      if (this.interaction) {
-        try {
-          await this.interaction.followUp({
-            content: language("spawnPokemonActivate", lang),
-            ephemeral: true,
-          });
-        } catch (error) {
-          newLogger(
-            "error",
-            `[spawnHandler] Error sending followUp: ${error}`,
-            `Failed to send followUp for interaction ${this.interaction.id}`,
-          );
-        }
-      }
+      await this.updateServerData();
+      await this.sendChannelMessage(
+        channelId,
+        language("adminSettingsSpawnChannelAddedMessage", lang),
+      );
+      await this.sendFollowUp(language("spawnPokemonActivate", lang));
     } else if (action === "remove") {
-      try {
-        const freshServer = await getServerById(this.server.discordId);
-        this.server = freshServer;
-      } catch (error) {
-        newLogger(
-          "error",
-          `[spawnHandler] Error reloading server: ${error}`,
-          `Failed to reload server ${this.server.discordId}`,
-        );
-      }
-
       const index = this.server.channelAllowed.indexOf(channelId);
 
       if (index > -1) {
         this.server.channelAllowed.splice(index, 1);
-
-        try {
-          await updateServer(this.server.discordId, this.server);
-        } catch (error) {
-          newLogger(
-            "error",
-            `[spawnHandler] Error updating server: ${error}`,
-            `Failed to update server ${this.server.discordId}`,
-          );
-        }
-
-        if (this.guild) {
-          const channel = this.guild.channels.cache.get(channelId);
-          if (
-            channel &&
-            channel.isTextBased() &&
-            channel instanceof BaseGuildTextChannel
-          ) {
-            try {
-              await channel.send(
-                language("adminSettingsSpawnChannelRemovedMessage", lang),
-              );
-            } catch (error) {
-              newLogger(
-                "error",
-                `[spawnHandler] Error sending message to channel: ${error}`,
-                `Failed to send message to channel ${channelId}`,
-              );
-            }
-          }
-        }
-
-        if (this.interaction) {
-          try {
-            await this.interaction.followUp({
-              content: language("spawnPokemonDesactivate", lang),
-              ephemeral: true,
-            });
-          } catch (error) {
-            newLogger(
-              "error",
-              `[spawnHandler] Error sending followUp: ${error}`,
-              `Failed to send followUp for interaction ${this.interaction.id}`,
-            );
-          }
-        }
+        await this.updateServerData();
+        await this.sendChannelMessage(
+          channelId,
+          language("adminSettingsSpawnChannelRemovedMessage", lang),
+        );
+        await this.sendFollowUp(language("spawnPokemonDesactivate", lang));
       }
     }
   }

@@ -226,27 +226,7 @@ export class MenuSystem<T extends MenuHandler> {
             this.menuHandlers = await Promise.resolve(this.regenerateMenu());
             this.menuOptions = this.generateMenuOptions(this.menuHandlers);
 
-            // Use placeholder from first menu option if available, otherwise use config default
-            const placeholder =
-              this.menuOptions.length > 0 && this.menuOptions[0].placeholder
-                ? this.menuOptions[0].placeholder
-                : this.config.mainMenuPlaceholder;
-
-            const mainMenu = new StringSelectMenuBuilder()
-              .setCustomId("main_menu")
-              .setPlaceholder(placeholder)
-              .addOptions(
-                this.menuOptions.map((option: MenuOption) => ({
-                  label: option.label,
-                  value: option.value,
-                  description: option.description,
-                })),
-              );
-
-            const mainRow =
-              new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-                mainMenu,
-              );
+            const mainRow = this.buildMainMenuRow();
 
             await buttonInteraction.editReply({
               embeds: [await this.config.getMainEmbed()],
@@ -300,39 +280,29 @@ export class MenuSystem<T extends MenuHandler> {
       }
     };
 
-    this.mainCollector.on("end", async (collected: any, reason: string) => {
-      if (reason === "time" && collected.size === 0) {
-        try {
-          await interaction.editReply({
-            components: [],
-          });
-        } catch (e) {
-          newLogger("error", `[MenuSystem] Error in mainCollector end: ${e}`);
+    const createEndHandler = (collectorName: string) => {
+      return async (collected: any, reason: string) => {
+        if (reason === "time" && collected.size === 0) {
+          try {
+            await interaction.editReply({
+              components: [],
+            });
+          } catch (e) {
+            newLogger(
+              "error",
+              `[MenuSystem] Error in ${collectorName} end: ${e}`,
+            );
+          }
         }
-      }
-      handleEnd();
-    });
+        handleEnd();
+      };
+    };
 
-    this.buttonCollector.on("end", async (collected: any, reason: string) => {
-      if (reason === "time" && collected.size === 0) {
-        try {
-          await interaction.editReply({
-            components: [],
-          });
-        } catch (e) {
-          newLogger("error", `[MenuSystem] Error in buttonCollector end: ${e}`);
-        }
-      }
-      handleEnd();
-    });
+    this.mainCollector.on("end", createEndHandler("mainCollector"));
+    this.buttonCollector.on("end", createEndHandler("buttonCollector"));
   }
 
-  private async setupMainMenu(
-    interaction: ChatInputCommandInteraction,
-  ): Promise<void> {
-    if (!this.message) return;
-
-    // Use placeholder from first menu option if available, otherwise use config default
+  private buildMainMenuRow(): ActionRowBuilder<StringSelectMenuBuilder> {
     const placeholder =
       this.menuOptions.length > 0 && this.menuOptions[0].placeholder
         ? this.menuOptions[0].placeholder
@@ -349,8 +319,17 @@ export class MenuSystem<T extends MenuHandler> {
         })),
       );
 
-    const mainRow =
-      new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(mainMenu);
+    return new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+      mainMenu,
+    );
+  }
+
+  private async setupMainMenu(
+    interaction: ChatInputCommandInteraction,
+  ): Promise<void> {
+    if (!this.message) return;
+
+    const mainRow = this.buildMainMenuRow();
 
     await interaction.editReply({
       embeds: [await this.config.getMainEmbed()],

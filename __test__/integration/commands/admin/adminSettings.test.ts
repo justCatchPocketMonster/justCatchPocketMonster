@@ -71,4 +71,33 @@ describe("adminSettings command", () => {
     expect(replyCall).toBeDefined();
     expect(replyCall.embeds || replyCall.content).toBeDefined();
   });
+
+  test("should handle adminSettings without guild", async () => {
+    const server = await getServerById(interaction.guildId!);
+    interaction.guild = null;
+
+    await adminSettings(interaction, server);
+
+    expect(interaction.reply).toHaveBeenCalled();
+  });
+
+  test("should cleanup on error", async () => {
+    const server = await getServerById(interaction.guildId!);
+    (interaction.reply as jest.Mock).mockRejectedValueOnce(
+      new Error("Test error"),
+    );
+
+    await expect(adminSettings(interaction, server)).rejects.toThrow(
+      "Test error",
+    );
+
+    // Should be able to create a new instance after cleanup
+    const interaction2 = {
+      ...createMockInteraction(),
+      guildId: interaction.guildId,
+      guild: interaction.guild,
+    } as any;
+    await adminSettings(interaction2, server);
+    expect(interaction2.reply).toHaveBeenCalled();
+  });
 });

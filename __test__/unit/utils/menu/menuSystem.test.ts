@@ -397,4 +397,128 @@ describe("MenuSystem", () => {
     // The error should be caught and logged, not thrown
     expect(editReplyMock).toHaveBeenCalled();
   });
+
+  test("should handle button click without createConfirmButton", async () => {
+    delete config.createConfirmButton;
+    config.resetOnButtonClick = false;
+    menuSystem = new MenuSystem(config);
+    await menuSystem.initialize(interaction);
+
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => {
+              callback({
+                customId: "show_values",
+                user: { id: interaction.user.id },
+                editReply: jest.fn().mockResolvedValue(undefined),
+                deferUpdate: jest.fn().mockResolvedValue(undefined),
+              });
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    await menuSystem.initialize(interaction);
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
+
+  test("should handle button click with buttonValidationMessage", async () => {
+    config.resetOnButtonClick = false;
+    config.buttonValidationMessage = "Custom validation message";
+    menuSystem = new MenuSystem(config);
+    await menuSystem.initialize(interaction);
+
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => {
+              callback({
+                customId: "show_values",
+                user: { id: interaction.user.id },
+                editReply: jest.fn().mockResolvedValue(undefined),
+                deferUpdate: jest.fn().mockResolvedValue(undefined),
+              });
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    await menuSystem.initialize(interaction);
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
+
+  test("should handle collector end with non-timeout reason", async () => {
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "end") {
+            setTimeout(() => {
+              callback(new Map(), "user");
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    (interaction.editReply as jest.Mock).mockResolvedValue(undefined);
+
+    await menuSystem.initialize(interaction);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
+
+  test("should handle collector end with collected items", async () => {
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "end") {
+            setTimeout(() => {
+              const collected = new Map();
+              collected.set("item1", {});
+              callback(collected, "time");
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    (interaction.editReply as jest.Mock).mockResolvedValue(undefined);
+
+    await menuSystem.initialize(interaction);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
 });
