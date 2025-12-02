@@ -72,7 +72,11 @@ describe("pokedex", () => {
       discordId: "s1",
       channelAllowed: [],
       charmeChroma: false,
-      language: "fr",
+      settings: {
+        language: "fr",
+        spawnMin: 5,
+        spawnMax: 20,
+      },
       savePokemon: new SaveAllPokemon(),
       eventSpawn,
       maxCountMessage: 0,

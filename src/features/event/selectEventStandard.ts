@@ -24,7 +24,7 @@ export const selectEventStandard = async (server: ServerType) => {
     randomEvent.statMultipliers,
   );
 
-  const eventSpawn = EventSpawn.createDefault();
+  const eventSpawn = EventSpawn.createDefault(server.settings);
   eventSpawn.whatEvent = event;
 
   effectEvent(eventSpawn, server);

@@ -33,7 +33,7 @@ describe("spawn command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("spawnPokemonActivate", serverThen.language),
+      content: language("spawnPokemonActivate", serverThen.settings.language),
     });
     expect(serverThen.channelAllowed).toContain(interaction.channel.id);
   });
@@ -59,7 +59,10 @@ describe("spawn command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("spawnPokemonDesactivate", serverThen.language),
+      content: language(
+        "spawnPokemonDesactivate",
+        serverThen.settings.language,
+      ),
     });
     expect(serverThen.channelAllowed).not.toContain(interaction.channel.id);
   });
@@ -85,7 +88,10 @@ describe("spawn command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("spawnPokemonAlreadyActivate", serverThen.language),
+      content: language(
+        "spawnPokemonAlreadyActivate",
+        serverThen.settings.language,
+      ),
     });
     expect(serverThen.channelAllowed).toContain(interaction.channel.id);
   });
@@ -108,7 +114,10 @@ describe("spawn command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("spawnPokemonAlreadyDesactivate", serverThen.language),
+      content: language(
+        "spawnPokemonAlreadyDesactivate",
+        serverThen.settings.language,
+      ),
     });
     expect(serverThen.channelAllowed).not.toContain(interaction.channel.id);
   });

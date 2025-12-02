@@ -37,7 +37,7 @@ describe("language command", () => {
     expect(replyMock).toHaveBeenCalledWith({
       content: language("langIsChanged", "fr"),
     });
-    expect(serverThen.language).toBe("fr");
+    expect(serverThen.settings.language).toBe("fr");
   });
 
   test("Failed to change language because no option", async () => {
@@ -54,6 +54,6 @@ describe("language command", () => {
     expect(replyMock).toHaveBeenCalledWith({
       content: language("langErrorNoOption", "eng"),
     });
-    expect(serverThen.language).toBe("eng");
+    expect(serverThen.settings.language).toBe("eng");
   });
 });
