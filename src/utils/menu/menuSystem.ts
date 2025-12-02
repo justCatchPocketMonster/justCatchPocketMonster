@@ -179,107 +179,42 @@ export class MenuSystem<T extends MenuHandler> {
       "collect",
       async (buttonInteraction: ButtonInteraction) => {
         try {
-          console.log(
-            `[MenuSystem] Button clicked: ${buttonInteraction.customId}`,
-          );
-          newLogger(
-            "info",
-            `[MenuSystem] Button clicked: ${buttonInteraction.customId}`,
-          );
           if (!this.message || !this.interaction) {
-            console.log(`[MenuSystem] Message or interaction is null`);
             newLogger("warn", `[MenuSystem] Message or interaction is null`);
             return;
           }
 
           const selectionPath =
             this.currentSelectionPath.get(this.message.id) || [];
-          console.log(
-            `[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map((s) => ({ value: s.value, label: s.label })))}`,
-          );
-          newLogger(
-            "info",
-            `[MenuSystem] SelectionPath from cache: ${JSON.stringify(selectionPath.map((s) => ({ value: s.value, label: s.label })))}`,
-          );
           const mainMenuValue = selectionPath[0]?.value;
-          console.log(`[MenuSystem] MainMenuValue: ${mainMenuValue}`);
-          newLogger("info", `[MenuSystem] MainMenuValue: ${mainMenuValue}`);
 
           if (mainMenuValue) {
             const handler = this.menuHandlers.get(mainMenuValue);
-            console.log(
-              `[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`,
-            );
-            newLogger(
-              "info",
-              `[MenuSystem] Handler found: ${handler ? "yes" : "no"} for value ${mainMenuValue}`,
-            );
             if (handler) {
-              console.log(
-                `[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`,
-              );
-              newLogger(
-                "info",
-                `[MenuSystem] Calling handleAction on handler for ${mainMenuValue}`,
-              );
               try {
                 await handler.handleAction(selectionPath);
-                console.log(
-                  `[MenuSystem] handleAction completed for ${mainMenuValue}`,
-                );
-                newLogger(
-                  "info",
-                  `[MenuSystem] handleAction completed for ${mainMenuValue}`,
-                );
               } catch (error) {
-                console.error(`[MenuSystem] Error in handleAction:`, error);
                 newLogger(
                   "error",
                   `[MenuSystem] Error in handleAction: ${error}`,
                   `Error calling handleAction for ${mainMenuValue}: ${error instanceof Error ? error.message : String(error)}`,
                 );
-                if (error instanceof Error) {
-                  console.error(`[MenuSystem] Error stack:`, error.stack);
-                  newLogger(
-                    "error",
-                    `[MenuSystem] Error stack: ${error.stack}`,
-                    error.stack || "",
-                  );
-                }
               }
             } else {
-              console.log(
-                `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`,
-              );
-              console.log(
-                `[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`,
-              );
               newLogger(
                 "warn",
                 `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`,
               );
-              newLogger(
-                "info",
-                `[MenuSystem] Available handlers: ${Array.from(this.menuHandlers.keys()).join(", ")}`,
-              );
             }
-          } else {
-            console.log(`[MenuSystem] No mainMenuValue found in selectionPath`);
-            newLogger(
-              "warn",
-              `[MenuSystem] No mainMenuValue found in selectionPath`,
-            );
           }
 
           if (this.config.onButtonClick) {
-            console.log(`[MenuSystem] Calling onButtonClick`);
             await this.config.onButtonClick(
               buttonInteraction,
               this.message,
               selectionPath,
               this.config.lang,
             );
-            console.log(`[MenuSystem] onButtonClick completed`);
           }
 
           const resetOnButtonClick = this.config.resetOnButtonClick ?? false;
@@ -290,7 +225,6 @@ export class MenuSystem<T extends MenuHandler> {
             // Regenerate menu handlers and generate menuOptions automatically
             this.menuHandlers = await Promise.resolve(this.regenerateMenu());
             this.menuOptions = this.generateMenuOptions(this.menuHandlers);
-            console.log(`[MenuSystem] Menu options and handlers regenerated`);
 
             // Use placeholder from first menu option if available, otherwise use config default
             const placeholder =
@@ -349,20 +283,11 @@ export class MenuSystem<T extends MenuHandler> {
             this.buttonCollector?.stop();
           }
         } catch (error) {
-          console.error("[ERROR] Error in buttonCollector:", error);
           newLogger(
             "error",
             `[MenuSystem] Error in buttonCollector: ${error}`,
             `Error in buttonCollector: ${error instanceof Error ? error.message : String(error)}`,
           );
-          if (error instanceof Error) {
-            console.error("[ERROR] Error stack:", error.stack);
-            newLogger(
-              "error",
-              `[MenuSystem] Error stack: ${error.stack}`,
-              error.stack || "",
-            );
-          }
         }
       },
     );
@@ -382,7 +307,7 @@ export class MenuSystem<T extends MenuHandler> {
             components: [],
           });
         } catch (e) {
-          console.error("[ERROR] Error in mainCollector end:", e);
+          newLogger("error", `[MenuSystem] Error in mainCollector end: ${e}`);
         }
       }
       handleEnd();
@@ -395,7 +320,7 @@ export class MenuSystem<T extends MenuHandler> {
             components: [],
           });
         } catch (e) {
-          console.error("[ERROR] Error in buttonCollector end:", e);
+          newLogger("error", `[MenuSystem] Error in buttonCollector end: ${e}`);
         }
       }
       handleEnd();

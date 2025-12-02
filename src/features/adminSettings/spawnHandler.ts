@@ -4,12 +4,12 @@ import { updateServer, getServerById } from "../../cache/ServerCache";
 import language from "../../lang/language";
 import {
   BaseGuildTextChannel,
-  PermissionFlagsBits,
   ChatInputCommandInteraction,
   Guild,
   EmbedBuilder,
 } from "discord.js";
 import { newLogger } from "../../middlewares/logger";
+import { hasChannelPermissions } from "./utils";
 
 export class spawnHandler implements MenuHandler {
   server: Server;
@@ -122,32 +122,18 @@ export class spawnHandler implements MenuHandler {
         channel.parent?.name || language("adminSettingsSpawnNoCategory", lang);
       const displayName = `${categoryName} - ${channelName}`;
 
-      if (botMember) {
-        const permissions = botMember.permissionsIn(channel);
-        const hasPermission =
-          permissions.has(PermissionFlagsBits.SendMessages) &&
-          permissions.has(PermissionFlagsBits.ViewChannel);
-
-        if (hasPermission) {
-          goodPermissionsCount++;
-          channelsList.push(
-            language(
-              "adminSettingsSpawnEmbedChannelWithPermission",
-              lang,
-            ).replace("{channelName}", displayName),
-          );
-        } else {
-          channelsList.push(
-            language(
-              "adminSettingsSpawnEmbedChannelWithoutPermission",
-              lang,
-            ).replace("{channelName}", displayName),
-          );
-        }
-      } else {
+      if (hasChannelPermissions(channel, botMember || null)) {
+        goodPermissionsCount++;
         channelsList.push(
           language(
             "adminSettingsSpawnEmbedChannelWithPermission",
+            lang,
+          ).replace("{channelName}", displayName),
+        );
+      } else {
+        channelsList.push(
+          language(
+            "adminSettingsSpawnEmbedChannelWithoutPermission",
             lang,
           ).replace("{channelName}", displayName),
         );
@@ -197,11 +183,7 @@ export class spawnHandler implements MenuHandler {
       const botMember = guild.members.cache.get(guild.client.user?.id);
       if (!botMember) return;
 
-      const permissions = botMember.permissionsIn(channel);
-      if (
-        !permissions.has(PermissionFlagsBits.SendMessages) ||
-        !permissions.has(PermissionFlagsBits.ViewChannel)
-      ) {
+      if (!hasChannelPermissions(channel, botMember || null)) {
         return;
       }
 
@@ -289,16 +271,12 @@ export class spawnHandler implements MenuHandler {
       const channelName = channel.name;
       const displayName = `${categoryName} - ${channelName}`;
 
-      let permissionEmoji = "✅";
-      if (botMember) {
-        const permissions = botMember.permissionsIn(channel);
-        const hasPermission =
-          permissions.has(PermissionFlagsBits.SendMessages) &&
-          permissions.has(PermissionFlagsBits.ViewChannel);
-        if (!hasPermission) {
-          permissionEmoji = "❌";
-        }
-      }
+      const permissionEmoji = hasChannelPermissions(
+        channel,
+        botMember || null,
+      )
+        ? "✅"
+        : "❌";
 
       const label = `${permissionEmoji} ${displayName}`;
       const finalLabel =

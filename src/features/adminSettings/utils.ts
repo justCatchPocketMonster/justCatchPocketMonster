@@ -4,6 +4,11 @@ import {
   ActionRowBuilder,
   Message,
   ButtonInteraction,
+  BaseGuildTextChannel,
+  PermissionFlagsBits,
+  Guild,
+  GuildMember,
+  GuildChannelResolvable,
 } from "discord.js";
 import { SelectionPath, MenuOption } from "../../utils/menu";
 import language from "../../lang/language";
@@ -83,4 +88,53 @@ export function findMenuOption(
     }
   }
   return undefined;
+}
+
+/**
+ * Checks if a channel has the required permissions for the bot
+ */
+export function hasChannelPermissions(
+  channel: BaseGuildTextChannel,
+  botMember: GuildMember | null,
+): boolean {
+  if (!botMember) return false;
+  const permissions = botMember.permissionsIn(channel as GuildChannelResolvable);
+  return (
+    permissions.has(PermissionFlagsBits.SendMessages) &&
+    permissions.has(PermissionFlagsBits.ViewChannel)
+  );
+}
+
+/**
+ * Counts channels with good permissions from a list of channel IDs
+ */
+export function countChannelsWithPermissions(
+  guild: Guild,
+  channelIds: string[],
+): { goodCount: number; totalCount: number } {
+  let goodPermissionsCount = 0;
+  let totalCount = 0;
+  const botMember = guild.members.cache.get(guild.client.user?.id || "");
+
+  channelIds.forEach((channelId: string) => {
+    totalCount++;
+    const channel = guild.channels.cache.get(channelId);
+
+    if (!channel) {
+      return;
+    }
+
+    if (
+      !channel.isTextBased() ||
+      !(channel instanceof BaseGuildTextChannel)
+    ) {
+      return;
+    }
+
+    if (hasChannelPermissions(channel, botMember || null)) {
+      goodPermissionsCount++;
+    }
+  });
+
+  return { goodCount: goodPermissionsCount, totalCount };
 }

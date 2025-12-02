@@ -1,8 +1,6 @@
 import {
   ChatInputCommandInteraction,
   EmbedBuilder,
-  BaseGuildTextChannel,
-  PermissionFlagsBits,
 } from "discord.js";
 import { Server } from "../../core/classes/Server";
 import {
@@ -11,7 +9,11 @@ import {
   MenuOption,
   SelectionPath,
 } from "../../utils/menu";
-import { createShowValuesButton, handleButtonClick } from "./utils";
+import {
+  createShowValuesButton,
+  handleButtonClick,
+  countChannelsWithPermissions,
+} from "./utils";
 import { minSpawnsHandler } from "./minSpawnsHandler";
 import { maxSpawnsHandler } from "./maxSpawnsHandler";
 import { languageHandler } from "./languageHandler";
@@ -84,41 +86,14 @@ export async function adminSettings(
     });
 
     if (interaction.guild) {
-      let goodPermissionsCount = 0;
-      let totalCount = 0;
-      const botMember = interaction.guild.members.cache.get(
-        interaction.guild.client.user?.id,
+      const { goodCount, totalCount } = countChannelsWithPermissions(
+        interaction.guild,
+        serverMain.channelAllowed,
       );
-
-      serverMain.channelAllowed.forEach((channelId: string) => {
-        totalCount++;
-        const channel = interaction.guild!.channels.cache.get(channelId);
-
-        if (!channel) {
-          return;
-        }
-
-        if (
-          !channel.isTextBased() ||
-          !(channel instanceof BaseGuildTextChannel)
-        ) {
-          return;
-        }
-
-        if (botMember) {
-          const permissions = botMember.permissionsIn(channel);
-          const hasPermission =
-            permissions.has(PermissionFlagsBits.SendMessages) &&
-            permissions.has(PermissionFlagsBits.ViewChannel);
-          if (hasPermission) {
-            goodPermissionsCount++;
-          }
-        }
-      });
 
       embed.addFields({
         name: language("adminSettingsSpawnEmbedPermissionsCount", lang)
-          .replace("{goodCount}", goodPermissionsCount.toString())
+          .replace("{goodCount}", goodCount.toString())
           .replace("{totalCount}", totalCount.toString()),
         value: language("adminSettingsSpawnLabel", lang),
         inline: false,

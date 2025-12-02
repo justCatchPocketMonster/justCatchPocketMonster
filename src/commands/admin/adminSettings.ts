@@ -25,7 +25,6 @@ export default {
         return;
       }
       let server = await getServerById(interaction.guildId);
-      console.log(interaction.guildId);
       await adminSettings(interaction, server);
     } catch (e) {
       newLogger(

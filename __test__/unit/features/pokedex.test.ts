@@ -73,7 +73,7 @@ describe("pokedex", () => {
       channelAllowed: [],
       charmeChroma: false,
       settings: {
-        language: "fr",
+      language: "fr",
         spawnMin: 5,
         spawnMax: 20,
       },
