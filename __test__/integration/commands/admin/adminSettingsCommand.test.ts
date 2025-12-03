@@ -14,11 +14,21 @@ describe("adminSettings command", () => {
   beforeEach(async () => {
     await resetTestEnv();
     interaction = createMockInteraction();
+    interaction.guild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map(),
+      },
+      members: {
+        cache: new Map(),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as any;
   });
 
   test("should execute adminSettings command successfully", async () => {
-    const server = await getServerById(interaction.guildId!);
-
     await adminSettingsCommand.execute(interaction);
 
     expect(interaction.reply).toHaveBeenCalled();
@@ -36,9 +46,8 @@ describe("adminSettings command", () => {
   });
 
   test("should handle error during execution", async () => {
-    const server = await getServerById(interaction.guildId!);
-    const getServerByIdSpy = jest
-      .spyOn(require("../../../../src/cache/ServerCache"), "getServerById")
+    const adminSettingsSpy = jest
+      .spyOn(require("../../../../src/features/adminSettings/adminSettings"), "adminSettings")
       .mockRejectedValueOnce(new Error("Database error"));
 
     await adminSettingsCommand.execute(interaction);
@@ -47,6 +56,6 @@ describe("adminSettings command", () => {
       language("errorCatch", "eng"),
     );
 
-    getServerByIdSpy.mockRestore();
+    adminSettingsSpy.mockRestore();
   });
 });

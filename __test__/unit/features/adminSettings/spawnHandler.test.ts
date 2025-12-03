@@ -724,9 +724,9 @@ describe("spawnHandler", () => {
   test("getMainEmbed should truncate long channel list", () => {
     const longChannelList = Array.from({ length: 50 }, (_, i) => ({
       id: `channel${i}`,
-      name: `Channel ${i}`,
+      name: `Very Long Channel Name ${i} with many characters to make it longer`,
       isTextBased: () => true,
-      parent: { name: "Category" },
+      parent: { name: `Very Long Category Name ${i}` },
       send: jest.fn().mockResolvedValue(undefined),
     })) as unknown as BaseGuildTextChannel[];
 
@@ -760,12 +760,16 @@ describe("spawnHandler", () => {
 
     expect(embed).toBeDefined();
     const fields = embed.data.fields;
-    if (fields && fields.length > 0) {
-      const channelsField = fields.find((f: any) =>
-        f.name?.includes("Permissions"),
-      );
-      if (channelsField && channelsField.value) {
-        expect(channelsField.value.length).toBeLessThanOrEqual(1024);
+    expect(fields).toBeDefined();
+    expect(fields!.length).toBeGreaterThan(0);
+    const channelsField = fields!.find((f: any) =>
+      f.name?.includes("Permissions"),
+    );
+    expect(channelsField).toBeDefined();
+    if (channelsField && channelsField.value) {
+      expect(channelsField.value.length).toBeLessThanOrEqual(1024);
+      if (channelsField.value.length === 1024) {
+        expect(channelsField.value.endsWith("...")).toBe(true);
       }
     }
   });

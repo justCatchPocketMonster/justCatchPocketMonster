@@ -1,5 +1,4 @@
 import { checkTimeForResetEventStat } from "../../../../src/features/event/checkTimeForResetEventStat";
-import { Server } from "../../../../src/core/classes/Server";
 import { EventSpawn } from "../../../../src/core/classes/EventSpawn";
 import { Event } from "../../../../src/core/classes/Event";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
@@ -16,12 +15,12 @@ describe("checkTimeForResetEventStat", () => {
 
   test("should not reset when event has no endTime", async () => {
     const server = await getServerById("test-server");
-    const originalEventSpawn = server.eventSpawn;
+    const originalWhatEvent = server.eventSpawn.whatEvent;
 
     await checkTimeForResetEventStat(server);
 
     const updatedServer = await getServerById("test-server");
-    expect(updatedServer.eventSpawn).toBe(originalEventSpawn);
+    expect(updatedServer.eventSpawn.whatEvent).toBe(originalWhatEvent);
   });
 
   test("should reset event when endTime has passed", async () => {
@@ -38,7 +37,11 @@ describe("checkTimeForResetEventStat", () => {
       "test-image.png",
       "testEffectDescription" as any,
       pastDate,
-      {},
+      {
+        level1: {},
+        level2: {},
+        level3: {},
+      },
     );
 
     server.eventSpawn = new EventSpawn(
@@ -54,8 +57,9 @@ describe("checkTimeForResetEventStat", () => {
     );
 
     await updateServer(server.discordId, server);
+    const serverWithEvent = await getServerById("test-server");
 
-    await checkTimeForResetEventStat(server);
+    await checkTimeForResetEventStat(serverWithEvent);
 
     const updatedServer = await getServerById("test-server");
     expect(updatedServer.eventSpawn.whatEvent).toBeNull();
@@ -75,7 +79,11 @@ describe("checkTimeForResetEventStat", () => {
       "test-image.png",
       "testEffectDescription" as any,
       futureDate,
-      {},
+      {
+        level1: {},
+        level2: {},
+        level3: {},
+      },
     );
 
     server.eventSpawn = new EventSpawn(
@@ -91,8 +99,9 @@ describe("checkTimeForResetEventStat", () => {
     );
 
     await updateServer(server.discordId, server);
+    const serverWithEvent = await getServerById("test-server");
 
-    await checkTimeForResetEventStat(server);
+    await checkTimeForResetEventStat(serverWithEvent);
 
     const updatedServer = await getServerById("test-server");
     expect(updatedServer.eventSpawn.whatEvent).not.toBeNull();
