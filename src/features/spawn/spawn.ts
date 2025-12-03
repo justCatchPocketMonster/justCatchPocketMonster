@@ -161,9 +161,7 @@ function generateEmbedEvent(
   let eventEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText(event.name, server.settings.language))
-    .setDescription(
-      getText(event.description as LanguageKey, server.settings.language),
-    )
+    .setDescription(getText(event.description, server.settings.language))
     .addFields({
       name: getText("effect", server.settings.language),
       value: event.effectDescription,

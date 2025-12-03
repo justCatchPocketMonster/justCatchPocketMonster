@@ -3,7 +3,7 @@ import { Server } from "../../core/classes/Server";
 import { updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
-export class languageHandler implements MenuHandler {
+export class LanguageHandler implements MenuHandler {
   server: Server;
   constructor(server: Server) {
     this.server = server;
@@ -42,7 +42,7 @@ export class languageHandler implements MenuHandler {
   }
 
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
-    const selectedValue = selectionPath[selectionPath.length - 1].value;
+    const selectedValue = selectionPath.at(-1)!.value;
 
     this.server.settings.language = selectedValue;
     await updateServer(this.server.discordId, this.server);

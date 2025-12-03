@@ -80,7 +80,7 @@ export function buildAllMenus(
 
     const lastOption = findMenuOption(
       lastParentOptions,
-      selectionPath[selectionPath.length - 1].value,
+      selectionPath.at(-1)!.value,
     );
 
     if (lastOption?.children && lastOption.children.length > 0) {

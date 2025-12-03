@@ -11,7 +11,7 @@ import {
 import { newLogger } from "../../middlewares/logger";
 import { hasChannelPermissions } from "./utils";
 
-export class spawnHandler implements MenuHandler {
+export class SpawnHandler implements MenuHandler {
   server: Server;
   interaction?: ChatInputCommandInteraction;
   guild?: Guild;

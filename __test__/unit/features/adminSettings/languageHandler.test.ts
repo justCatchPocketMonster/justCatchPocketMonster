@@ -1,4 +1,4 @@
-import { languageHandler } from "../../../../src/features/adminSettings/languageHandler";
+import { languageHandler } from "../../../../src/features/adminSettings/LanguageHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById } from "../../../../src/cache/ServerCache";

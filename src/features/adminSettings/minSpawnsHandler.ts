@@ -3,7 +3,7 @@ import { Server } from "../../core/classes/Server";
 import { updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
-export class minSpawnsHandler implements MenuHandler {
+export class MinSpawnsHandler implements MenuHandler {
   server: Server;
   constructor(server: Server) {
     this.server = server;
@@ -43,9 +43,9 @@ export class minSpawnsHandler implements MenuHandler {
   }
 
   async handleAction(selectionPath: SelectionPath[]): Promise<void> {
-    const selectedValue = selectionPath[selectionPath.length - 1].value;
+    const selectedValue = selectionPath.at(-1)!.value;
 
-    this.server.eventSpawn.messageSpawn.min = parseInt(selectedValue);
+    this.server.eventSpawn.messageSpawn.min = Number.parseInt(selectedValue);
     await updateServer(this.server.discordId, this.server);
   }
 }

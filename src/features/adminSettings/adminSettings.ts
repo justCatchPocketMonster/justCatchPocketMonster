@@ -1,20 +1,15 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { Server } from "../../core/classes/Server";
-import {
-  MenuHandler,
-  MenuSystem,
-  MenuOption,
-  SelectionPath,
-} from "../../utils/menu";
+import { MenuHandler, MenuSystem } from "../../utils/menu";
 import {
   createShowValuesButton,
   handleButtonClick,
   countChannelsWithPermissions,
 } from "./utils";
-import { minSpawnsHandler } from "./minSpawnsHandler";
-import { maxSpawnsHandler } from "./maxSpawnsHandler";
-import { languageHandler } from "./languageHandler";
-import { spawnHandler } from "./spawnHandler";
+import { MinSpawnsHandler } from "./minSpawnsHandler";
+import { MaxSpawnsHandler } from "./maxSpawnsHandler";
+import { LanguageHandler } from "./languageHandler";
+import { SpawnHandler } from "./spawnHandler";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 
@@ -25,10 +20,10 @@ function createMenuHandlers(
   interaction: ChatInputCommandInteraction,
 ): Map<string, MenuHandler> {
   const handlers = new Map<string, MenuHandler>();
-  handlers.set("minSpawns", new minSpawnsHandler(server));
-  handlers.set("maxSpawns", new maxSpawnsHandler(server));
-  handlers.set("language", new languageHandler(server));
-  const spawnHandlerInstance = new spawnHandler(server, interaction);
+  handlers.set("minSpawns", new MinSpawnsHandler(server));
+  handlers.set("maxSpawns", new MaxSpawnsHandler(server));
+  handlers.set("language", new LanguageHandler(server));
+  const spawnHandlerInstance = new SpawnHandler(server, interaction);
   handlers.set("spawn", spawnHandlerInstance);
   return handlers;
 }

@@ -58,8 +58,8 @@ export class Server implements ServerType {
     const whatEvent = e.whatEvent
       ? new Event(
           e.whatEvent.id,
-          e.whatEvent.name as LanguageKey,
-          e.whatEvent.description as LanguageKey,
+          e.whatEvent.name,
+          e.whatEvent.description,
           e.whatEvent.type,
           e.whatEvent.color,
           e.whatEvent.image,

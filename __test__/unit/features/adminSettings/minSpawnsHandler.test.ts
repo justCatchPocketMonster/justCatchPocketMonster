@@ -1,4 +1,4 @@
-import { minSpawnsHandler } from "../../../../src/features/adminSettings/minSpawnsHandler";
+import { minSpawnsHandler } from "../../../../src/features/adminSettings/MinSpawnsHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById } from "../../../../src/cache/ServerCache";
@@ -29,7 +29,7 @@ describe("minSpawnsHandler", () => {
   test("getMenuStructure should have children starting from 5", () => {
     const structure = handler.getMenuStructure();
     const childrenValues = structure.children!.map((c: MenuOption) =>
-      parseInt(c.value),
+      Number.parseInt(c.value),
     );
     const minValue = Math.min(...childrenValues);
     expect(minValue).toBe(5);

@@ -1,4 +1,4 @@
-import { maxSpawnsHandler } from "../../../../src/features/adminSettings/maxSpawnsHandler";
+import { maxSpawnsHandler } from "../../../../src/features/adminSettings/MaxSpawnsHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
@@ -35,7 +35,7 @@ describe("maxSpawnsHandler", () => {
     const structure = newHandler.getMenuStructure();
 
     const childrenValues = structure.children!.map((c: MenuOption) =>
-      parseInt(c.value),
+      Number.parseInt(c.value),
     );
     const minPossibleValue = Math.ceil(10 / 5) * 5 + 15;
     const minValue = Math.min(...childrenValues);

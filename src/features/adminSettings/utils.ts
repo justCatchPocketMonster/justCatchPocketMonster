@@ -12,6 +12,7 @@ import {
 } from "discord.js";
 import { SelectionPath, MenuOption } from "../../utils/menu";
 import language from "../../lang/language";
+import { newLogger } from "../../middlewares/logger";
 
 export function createShowValuesButton(lang: string): ButtonBuilder {
   const label = language("adminSettingsShowValues", lang);
@@ -34,7 +35,12 @@ export function createDisabledButton(lang: string): ButtonBuilder {
     .setDisabled(true);
 }
 
-export function logValues(selectionPath: SelectionPath[]) {}
+export function logValues(selectionPath: SelectionPath[]): void {
+  const pathString = selectionPath
+    .map((selection) => `${selection.value}:${selection.label}`)
+    .join(" -> ");
+  newLogger("debug", "Admin settings selection path", { path: pathString });
+}
 
 export async function handleButtonClick(
   buttonInteraction: ButtonInteraction,

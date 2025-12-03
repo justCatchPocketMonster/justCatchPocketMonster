@@ -54,7 +54,7 @@ describe("adminSettings command", () => {
     await adminSettings(interaction2, server);
 
     const replyCalls = (interaction2.reply as jest.Mock).mock.calls;
-    const lastCall = replyCalls[replyCalls.length - 1][0];
+    const lastCall = replyCalls.at(-1)![0];
     expect(lastCall.content).toBe(
       language("adminSettingsAlreadyActive", server.settings.language),
     );

@@ -116,7 +116,7 @@ export async function handleMenuSelection<T extends MenuHandler>(
     menuLevel = 0;
   } else {
     const customIdParts = customId.split("_");
-    menuLevel = parseInt(customIdParts[1]) || 0;
+    menuLevel = Number.parseInt(customIdParts[1]) || 0;
     pathValues = customIdParts.slice(2);
   }
 
@@ -160,12 +160,10 @@ export async function handleMenuSelection<T extends MenuHandler>(
     newSelectionPath.length > 0
       ? findMenuOption(
           newSelectionPath.length > 1
-            ? findMenuOption(
-                config.menuOptions,
-                newSelectionPath[newSelectionPath.length - 2].value,
-              )?.children || []
+            ? findMenuOption(config.menuOptions, newSelectionPath.at(-2)!.value)
+                ?.children || []
             : config.menuOptions,
-          newSelectionPath[newSelectionPath.length - 1].value,
+          newSelectionPath.at(-1)!.value,
         )
       : null;
 

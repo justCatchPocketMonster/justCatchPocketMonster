@@ -1,4 +1,4 @@
-import { spawnHandler } from "../../../../src/features/adminSettings/spawnHandler";
+import { spawnHandler } from "../../../../src/features/adminSettings/SpawnHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";

@@ -35,7 +35,7 @@ export function pokedex(
 
   let nbPage = 1;
   let nbPageMax = 2;
-  nbPageMax += Math.trunc(allPokemon[allPokemon.length - 1].id / 21);
+  nbPageMax += Math.trunc(allPokemon.at(-1)!.id / 21);
 
   if (pageChoice > nbPageMax) {
     interaction.reply(language("valeurTropHaute", server.settings.language));
@@ -70,11 +70,11 @@ export function pokedex(
         value:
           user.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -84,11 +84,11 @@ export function pokedex(
         value:
           user.savePokemon.countUniquePokemonsShinyCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsShinyCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -98,11 +98,11 @@ export function pokedex(
         value:
           server.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -115,11 +115,7 @@ export function pokedex(
 
   arrayEmbed.push({ page: mainPage });
   nbPage++;
-  for (
-    let y = 0;
-    y <= allPokemon[allPokemon.length - 1].id;
-    y += maxPokemonParPage
-  ) {
+  for (let y = 0; y <= allPokemon.at(-1)!.id; y += maxPokemonParPage) {
     const pokeSave = buildPokedexEmbed(interaction, user, server);
     const start = 1 + maxPokemonParPage * (nbPage - 2);
     const end = maxPokemonParPage * (nbPage - 1);
@@ -220,11 +216,11 @@ function buildPokedexEmbed(
         value:
           user.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -234,11 +230,11 @@ function buildPokedexEmbed(
         value:
           user.savePokemon.countUniquePokemonsShinyCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsShinyCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
