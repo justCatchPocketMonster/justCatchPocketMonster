@@ -184,6 +184,40 @@ describe("adminSettings utils", () => {
       const result = hasChannelPermissions(mockChannel, mockBotMember);
       expect(result).toBe(false);
     });
+
+    test("should return false when bot lacks SendMessages permission", () => {
+      const mockChannel = {
+        id: "channel123",
+      } as BaseGuildTextChannel;
+
+      const mockBotMember = {
+        permissionsIn: jest.fn().mockReturnValue({
+          has: jest.fn((flag: bigint) => {
+            return flag === PermissionFlagsBits.ViewChannel;
+          }),
+        }),
+      } as unknown as GuildMember;
+
+      const result = hasChannelPermissions(mockChannel, mockBotMember);
+      expect(result).toBe(false);
+    });
+
+    test("should return false when bot lacks ViewChannel permission", () => {
+      const mockChannel = {
+        id: "channel123",
+      } as BaseGuildTextChannel;
+
+      const mockBotMember = {
+        permissionsIn: jest.fn().mockReturnValue({
+          has: jest.fn((flag: bigint) => {
+            return flag === PermissionFlagsBits.SendMessages;
+          }),
+        }),
+      } as unknown as GuildMember;
+
+      const result = hasChannelPermissions(mockChannel, mockBotMember);
+      expect(result).toBe(false);
+    });
   });
 
   describe("countChannelsWithPermissions", () => {
@@ -293,6 +327,34 @@ describe("adminSettings utils", () => {
       const result = countChannelsWithPermissions(mockGuild, [
         "deleted-channel",
       ]);
+      expect(result.goodCount).toBe(0);
+      expect(result.totalCount).toBe(1);
+    });
+
+    test("should handle non-text channels", () => {
+      const mockNonTextChannel = {
+        id: "voice-channel",
+        isTextBased: jest.fn().mockReturnValue(false),
+      } as any;
+
+      const mockGuild = {
+        id: "guild123",
+        client: {
+          user: { id: "bot-id" },
+        },
+        members: {
+          cache: {
+            get: jest.fn().mockReturnValue(null),
+          },
+        },
+        channels: {
+          cache: {
+            get: jest.fn().mockReturnValue(mockNonTextChannel),
+          },
+        },
+      } as unknown as Guild;
+
+      const result = countChannelsWithPermissions(mockGuild, ["voice-channel"]);
       expect(result.goodCount).toBe(0);
       expect(result.totalCount).toBe(1);
     });

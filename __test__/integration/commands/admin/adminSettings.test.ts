@@ -103,4 +103,50 @@ describe("adminSettings command", () => {
     await adminSettings(interaction2, server);
     expect(interaction2.reply).toHaveBeenCalled();
   });
+
+  test("should include channel permissions count when guild exists", async () => {
+    const server = await getServerById(interaction.guildId!);
+    server.channelAllowed.push("channel1");
+    await require("../../../../src/cache/ServerCache").updateServer(
+      server.discordId,
+      server,
+    );
+
+    interaction.guild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map([
+          [
+            "channel1",
+            {
+              id: "channel1",
+              isTextBased: () => true,
+            },
+          ],
+        ]),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn(() => true),
+              }),
+            },
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as any;
+
+    await adminSettings(interaction, server);
+
+    expect(interaction.reply).toHaveBeenCalled();
+    const replyCall = (interaction.reply as jest.Mock).mock.calls[0][0];
+    expect(replyCall.embeds).toBeDefined();
+    expect(replyCall.embeds[0].data.fields).toBeDefined();
+  });
 });

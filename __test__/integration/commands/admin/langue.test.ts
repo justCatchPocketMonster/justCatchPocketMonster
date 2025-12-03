@@ -56,4 +56,29 @@ describe("language command", () => {
     });
     expect(serverThen.settings.language).toBe("eng");
   });
+
+  test("should handle error when guildId is missing", async () => {
+    const interactionWithoutGuild = {
+      ...interaction,
+      guildId: null,
+    } as any;
+
+    await langue.execute(interactionWithoutGuild);
+
+    expect(interactionWithoutGuild.reply).not.toHaveBeenCalled();
+  });
+
+  test("should handle error during execution", async () => {
+    const getServerByIdSpy = jest
+      .spyOn(require("../../../../src/cache/ServerCache"), "getServerById")
+      .mockRejectedValueOnce(new Error("Database error"));
+
+    await langue.execute(interaction);
+
+    expect(interaction.reply).toHaveBeenCalledWith(
+      language("errorCatch", "eng"),
+    );
+
+    getServerByIdSpy.mockRestore();
+  });
 });

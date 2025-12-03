@@ -9,6 +9,7 @@ import catchPokemon from "../../../../src/commands/user/catchPokemon";
 import { Pokemon } from "../../../../src/core/classes/Pokemon";
 import { initHint } from "../../../../src/features/hint/initHint";
 import { ChatInputCommandInteraction } from "discord.js";
+import { generateCatchMessage } from "../../../../src/features/catch/catch";
 
 describe("catch command", () => {
   let interaction: any;
@@ -176,6 +177,91 @@ describe("catch command", () => {
       "Sorry TestNick. The current Pokémon is not Badoof.",
     );
     await checkCatchForAllSavePokemon(interaction, 0, 0);
+  });
+
+  test("Catch pokemon with null nickname uses displayName", async () => {
+    // given
+    const serverGiven = await getServerById(interaction.guildId);
+    serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
+    await updateServer(serverGiven.discordId, serverGiven);
+    (interaction.member as any).nickname = null;
+    (interaction.options.getString as jest.Mock).mockImplementation(
+      (name: string) => {
+        if (name === language("commandCatchOptionName", "eng")) return "Bidoof";
+        return null;
+      },
+    );
+
+    // when
+    await catchPokemon.execute(interaction);
+
+    // then
+    const replyMock = interaction.reply as jest.Mock;
+    expect(replyMock).toHaveBeenCalledTimes(1);
+    expect(replyMock).toHaveBeenCalledWith(
+      expect.stringContaining("Test Member"),
+    );
+  });
+
+  test("Catch pokemon handles error when updating caches", async () => {
+    // given
+    const serverGiven = await getServerById(interaction.guildId);
+    serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
+    await updateServer(serverGiven.discordId, serverGiven);
+    (interaction.options.getString as jest.Mock).mockImplementation(
+      (name: string) => {
+        if (name === language("commandCatchOptionName", "eng")) return "Bidoof";
+        return null;
+      },
+    );
+
+    const updateUserSpy = jest
+      .spyOn(require("../../../../src/cache/UserCache"), "updateUser")
+      .mockRejectedValueOnce(new Error("Update error"));
+
+    // when
+    await catchPokemon.execute(interaction);
+
+    // then
+    const replyMock = interaction.reply as jest.Mock;
+    expect(replyMock).toHaveBeenCalledTimes(1);
+
+    updateUserSpy.mockRestore();
+  });
+
+  test("generateCatchMessage should handle same name in both languages", async () => {
+    const user = await getUserById(interaction.user.id);
+    const server = await getServerById(interaction.guildId!);
+
+    const pokemon = {
+      name: {
+        nameFr: ["Pikachu"],
+        nameEng: ["Pikachu"],
+      },
+      isShiny: false,
+    };
+
+    const message = generateCatchMessage(pokemon, "TestNick", user, server);
+
+    expect(message).toContain("Pikachu");
+    expect(message).not.toContain("/");
+  });
+
+  test("generateCatchMessage should handle different names in both languages", async () => {
+    const user = await getUserById(interaction.user.id);
+    const server = await getServerById(interaction.guildId!);
+
+    const pokemon = {
+      name: {
+        nameFr: ["Keunotor"],
+        nameEng: ["Bidoof"],
+      },
+      isShiny: false,
+    };
+
+    const message = generateCatchMessage(pokemon, "TestNick", user, server);
+
+    expect(message).toContain("Keunotor/Bidoof");
   });
 });
 

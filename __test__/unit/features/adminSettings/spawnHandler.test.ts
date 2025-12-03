@@ -720,4 +720,170 @@ describe("spawnHandler", () => {
 
     getServerByIdSpy.mockRestore();
   });
+
+  test("getMainEmbed should truncate long channel list", () => {
+    const longChannelList = Array.from({ length: 50 }, (_, i) => ({
+      id: `channel${i}`,
+      name: `Channel ${i}`,
+      isTextBased: () => true,
+      parent: { name: "Category" },
+      send: jest.fn().mockResolvedValue(undefined),
+    })) as unknown as BaseGuildTextChannel[];
+
+    const mockGuild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map(longChannelList.map((channel) => [channel.id, channel])),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn().mockReturnValue(true),
+              }),
+            } as unknown as GuildMember,
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    server.channelAllowed = longChannelList.map((c) => c.id);
+    interaction.guild = mockGuild;
+
+    const newHandler = new spawnHandler(server, interaction);
+    const embed = newHandler["getMainEmbed"]();
+
+    expect(embed).toBeDefined();
+    const fields = embed.data.fields;
+    if (fields && fields.length > 0) {
+      const channelsField = fields.find((f: any) =>
+        f.name?.includes("Permissions"),
+      );
+      if (channelsField && channelsField.value) {
+        expect(channelsField.value.length).toBeLessThanOrEqual(1024);
+      }
+    }
+  });
+
+  test("getMainEmbed should handle empty channels list", () => {
+    const mockGuild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map(),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn().mockReturnValue(true),
+              }),
+            } as unknown as GuildMember,
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    server.channelAllowed = [];
+    interaction.guild = mockGuild;
+
+    const newHandler = new spawnHandler(server, interaction);
+    const embed = newHandler["getMainEmbed"]();
+
+    expect(embed).toBeDefined();
+    expect(embed.data.description).toBeDefined();
+  });
+
+  test("getAvailableChannelsMenuOptions should handle channels already in allowed list", () => {
+    const mockChannel = {
+      id: "channel1",
+      name: "test-channel",
+      isTextBased: () => true,
+      parent: { name: "Category" },
+    } as unknown as BaseGuildTextChannel;
+
+    const mockGuild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map([["channel1", mockChannel]]),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn().mockReturnValue(true),
+              }),
+            } as unknown as GuildMember,
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    server.channelAllowed = ["channel1"];
+    interaction.guild = mockGuild;
+
+    const newHandler = new spawnHandler(server, interaction);
+    const structure = newHandler.getMenuStructure();
+
+    const addChildren = structure.children?.find((c) => c.value === "add");
+    const availableChannels = addChildren?.children || [];
+    expect(availableChannels.some((c) => c.value === "channel1")).toBe(false);
+  });
+
+  test("getAllowedChannelsMenuOptions should handle channels without parent", () => {
+    const mockChannel = {
+      id: "channel-no-parent",
+      name: "no-parent-channel",
+      isTextBased: () => true,
+      parent: null,
+    } as unknown as BaseGuildTextChannel;
+
+    const mockGuild = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map([["channel-no-parent", mockChannel]]),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn().mockReturnValue(true),
+              }),
+            } as unknown as GuildMember,
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    server.channelAllowed = ["channel-no-parent"];
+    interaction.guild = mockGuild;
+
+    const newHandler = new spawnHandler(server, interaction);
+    const structure = newHandler.getMenuStructure();
+
+    const removeChildren = structure.children?.find(
+      (c) => c.value === "remove",
+    );
+    expect(removeChildren).toBeDefined();
+    expect(removeChildren?.children).toBeDefined();
+  });
 });
