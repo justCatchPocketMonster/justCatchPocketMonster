@@ -722,13 +722,17 @@ describe("spawnHandler", () => {
   });
 
   test("getMainEmbed should truncate long channel list", () => {
-    const longChannelList = Array.from({ length: 50 }, (_, i) => ({
-      id: `channel${i}`,
-      name: `Very Long Channel Name ${i} with many characters to make it longer`,
-      isTextBased: () => true,
-      parent: { name: `Very Long Category Name ${i}` },
-      send: jest.fn().mockResolvedValue(undefined),
-    })) as unknown as BaseGuildTextChannel[];
+    const longChannelList = Array.from({ length: 50 }, (_, i) => {
+      const channel = {
+        id: `channel${i}`,
+        name: `Very Long Channel Name ${i} with many characters to make it longer`,
+        isTextBased: () => true,
+        parent: { name: `Very Long Category Name ${i}` },
+        send: jest.fn().mockResolvedValue(undefined),
+      };
+      Object.setPrototypeOf(channel, BaseGuildTextChannel.prototype);
+      return channel;
+    }) as unknown as BaseGuildTextChannel[];
 
     const mockGuild = {
       id: interaction.guildId,

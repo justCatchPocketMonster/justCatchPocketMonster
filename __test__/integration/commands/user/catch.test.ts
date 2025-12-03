@@ -181,6 +181,7 @@ describe("catch command", () => {
 
   test("Catch pokemon with null nickname uses displayName", async () => {
     // given
+    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -201,10 +202,12 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledWith(
       expect.stringContaining("Test Member"),
     );
+    jest.spyOn(Math, "random").mockRestore();
   });
 
   test("Catch pokemon handles error when updating caches", async () => {
     // given
+    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -227,6 +230,7 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledTimes(1);
 
     updateUserSpy.mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
 
   test("generateCatchMessage should handle same name in both languages", async () => {

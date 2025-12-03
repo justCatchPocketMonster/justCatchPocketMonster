@@ -47,7 +47,10 @@ describe("adminSettings command", () => {
 
   test("should handle error during execution", async () => {
     const adminSettingsSpy = jest
-      .spyOn(require("../../../../src/features/adminSettings/adminSettings"), "adminSettings")
+      .spyOn(
+        require("../../../../src/features/adminSettings/adminSettings"),
+        "adminSettings",
+      )
       .mockRejectedValueOnce(new Error("Database error"));
 
     await adminSettingsCommand.execute(interaction);
