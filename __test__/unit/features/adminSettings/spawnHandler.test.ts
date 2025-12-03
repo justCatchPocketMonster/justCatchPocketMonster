@@ -514,4 +514,219 @@ describe("spawnHandler", () => {
     const updatedServer = await getServerById(server.discordId);
     expect(updatedServer.channelAllowed).not.toContain(channelId);
   });
+
+  test("handleAction should handle unknown action", async () => {
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "unknown", label: "Unknown" },
+      { value: "channel1", label: "Test Channel" },
+    ];
+
+    await handler.handleAction(selectionPath);
+    // Should not throw and not modify server
+  });
+
+  test("handleAction should handle remove with index -1", async () => {
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "remove", label: "Remove" },
+      { value: "nonexistent-channel", label: "Test Channel" },
+    ];
+
+    await handler.handleAction(selectionPath);
+    // Should not throw and not modify server
+  });
+
+  test("getMenuStructure should handle null guild", () => {
+    const handlerWithoutGuild = new spawnHandler(server, {} as any);
+    const structure = handlerWithoutGuild.getMenuStructure();
+
+    expect(structure).toBeDefined();
+    expect(structure.value).toBe("spawn");
+    expect(structure.children).toBeDefined();
+  });
+
+  test("getMenuStructure should handle channels without botMember", () => {
+    const mockGuildWithoutBot = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map([
+          [
+            "channel1",
+            {
+              id: "channel1",
+              name: "test-channel",
+              isTextBased: () => true,
+              parent: { name: "Category" },
+            } as unknown as BaseGuildTextChannel,
+          ],
+        ]),
+      },
+      members: {
+        cache: {
+          get: jest.fn().mockReturnValue(null),
+        },
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    const handlerWithoutBot = new spawnHandler(
+      server,
+      { guild: mockGuildWithoutBot } as any,
+    );
+    const structure = handlerWithoutBot.getMenuStructure();
+
+    expect(structure).toBeDefined();
+    expect(structure.children).toBeDefined();
+  });
+
+  test("getMenuStructure should handle long channel names", () => {
+    const longChannelName = "a".repeat(100);
+    const mockGuildWithLongName = {
+      id: interaction.guildId,
+      channels: {
+        cache: new Map([
+          [
+            "channel1",
+            {
+              id: "channel1",
+              name: longChannelName,
+              isTextBased: () => true,
+              parent: { name: "Category" },
+            } as unknown as BaseGuildTextChannel,
+          ],
+        ]),
+      },
+      members: {
+        cache: new Map([
+          [
+            "bot-id",
+            {
+              permissionsIn: jest.fn().mockReturnValue({
+                has: jest.fn().mockReturnValue(true),
+              }),
+            } as unknown as GuildMember,
+          ],
+        ]),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as unknown as Guild;
+
+    const handlerWithLongName = new spawnHandler(
+      server,
+      { guild: mockGuildWithLongName } as any,
+    );
+    const structure = handlerWithLongName.getMenuStructure();
+
+    expect(structure).toBeDefined();
+    if (structure.children && structure.children[0].children) {
+      const addChildren = structure.children[0].children;
+      const longNameOption = addChildren.find(
+        (c: any) => c.value === "channel1",
+      );
+      if (longNameOption) {
+        expect(longNameOption.label.length).toBeLessThanOrEqual(100);
+      }
+    }
+  });
+
+  test("handleAction should handle updateServerData error", async () => {
+    const updateServerSpy = jest
+      .spyOn(require("../../../../src/cache/ServerCache"), "updateServer")
+      .mockRejectedValueOnce(new Error("Update error"));
+
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "add", label: "Add" },
+      { value: "channel1", label: "Test Channel" },
+    ];
+
+    await handler.handleAction(selectionPath);
+
+    updateServerSpy.mockRestore();
+  });
+
+  test("handleAction should handle sendChannelMessage error", async () => {
+    const channelId = "channel1";
+    const mockChannel = {
+      id: channelId,
+      name: "test-channel",
+      isTextBased: () => true,
+      send: jest.fn().mockRejectedValue(new Error("Send error")),
+    } as unknown as BaseGuildTextChannel;
+
+    const mockGuildWithError = {
+      id: interaction.guildId,
+      channels: {
+        cache: {
+          get: jest.fn().mockReturnValue(mockChannel),
+        },
+      },
+      members: {
+        cache: new Map(),
+      },
+      client: {
+        user: { id: "bot-id" },
+      },
+    } as any;
+
+    Object.setPrototypeOf(mockChannel, BaseGuildTextChannel.prototype);
+
+    const handlerWithError = new spawnHandler(
+      server,
+      { guild: mockGuildWithError } as any,
+    );
+
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "add", label: "Add" },
+      { value: channelId, label: "Test Channel" },
+    ];
+
+    await handlerWithError.handleAction(selectionPath);
+  });
+
+  test("handleAction should handle sendFollowUp error", async () => {
+    const channelId = "channel1";
+    const mockInteractionWithError = {
+      ...interaction,
+      followUp: jest.fn().mockRejectedValue(new Error("FollowUp error")),
+    };
+
+    const handlerWithError = new spawnHandler(
+      server,
+      mockInteractionWithError,
+    );
+
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "add", label: "Add" },
+      { value: channelId, label: "Test Channel" },
+    ];
+
+    await handlerWithError.handleAction(selectionPath);
+  });
+
+  test("handleAction should handle reloadServer error", async () => {
+    const getServerByIdSpy = jest
+      .spyOn(
+        require("../../../../src/cache/ServerCache"),
+        "getServerById",
+      )
+      .mockRejectedValueOnce(new Error("Reload error"));
+
+    const selectionPath = [
+      { value: "spawn", label: "Spawn" },
+      { value: "add", label: "Add" },
+      { value: "channel1", label: "Test Channel" },
+    ];
+
+    await handler.handleAction(selectionPath);
+
+    getServerByIdSpy.mockRestore();
+  });
 });

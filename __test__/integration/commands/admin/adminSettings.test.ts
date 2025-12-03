@@ -74,11 +74,14 @@ describe("adminSettings command", () => {
 
   test("should handle adminSettings without guild", async () => {
     const server = await getServerById(interaction.guildId!);
-    interaction.guild = null;
+    const interactionWithoutGuild = {
+      ...interaction,
+      guild: null,
+    } as any;
 
-    await adminSettings(interaction, server);
+    await adminSettings(interactionWithoutGuild, server);
 
-    expect(interaction.reply).toHaveBeenCalled();
+    expect(interactionWithoutGuild.reply).toHaveBeenCalled();
   });
 
   test("should cleanup on error", async () => {

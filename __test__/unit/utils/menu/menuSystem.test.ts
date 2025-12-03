@@ -521,4 +521,70 @@ describe("MenuSystem", () => {
     await menuSystem.initialize(interaction);
     await new Promise((resolve) => setTimeout(resolve, 50));
   });
+
+  test("should handle mainCollector with customId not main_menu", async () => {
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => {
+              callback({
+                customId: "menu_option1",
+                user: { id: interaction.user.id },
+                values: ["option1"],
+                deferUpdate: jest.fn().mockResolvedValue(undefined),
+              });
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    await menuSystem.initialize(interaction);
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
+
+  test("should handle setupMainMenu with null message", async () => {
+    menuSystem["message"] = null;
+    await menuSystem["setupMainMenu"](interaction);
+    // Should return early without error
+  });
+
+  test("should handle error in handleMenuSelection", async () => {
+    const mockMessage = {
+      id: "message123",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => {
+              callback({
+                customId: "main_menu",
+                user: { id: interaction.user.id },
+                values: ["option1"],
+                deferUpdate: jest.fn().mockRejectedValue(new Error("Error")),
+              });
+            }, 10);
+          }
+          return {
+            on: jest.fn(),
+            stop: jest.fn(),
+          };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+    await menuSystem.initialize(interaction);
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  });
 });

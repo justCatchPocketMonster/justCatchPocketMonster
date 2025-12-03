@@ -170,7 +170,7 @@ export class MenuSystem<T extends MenuHandler> {
             handlerConfig,
           );
         } catch (error) {
-          console.error("[ERROR] Error in mainCollector:", error);
+          newLogger("error", `[MenuSystem] Error in mainCollector: ${error}`);
         }
       },
     );
