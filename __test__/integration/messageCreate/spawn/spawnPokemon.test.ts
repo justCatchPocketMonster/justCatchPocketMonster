@@ -34,8 +34,7 @@ describe("Spawn Pokemon", () => {
   });
   afterEach(() => {
     jest.clearAllMocks();
-    // on “remet” les vraies fonctions pour les autres tests
-    // (si tu veux être carré)
+    // restore original functions for other tests
     const { generationSelect, raritySelect, typeSelect } = jest.requireActual(
       "../../../../src/features/pokemon/selectPokemon",
     );

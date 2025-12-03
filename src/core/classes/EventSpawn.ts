@@ -72,7 +72,7 @@ export class EventSpawn implements EventSpawnType {
         this.messageSpawn.max = updatedValue;
     }
 
-    // booléens
+    // booleans
     if (
       percentageMods.mega !== undefined &&
       this.allowedForm.mega !== percentageMods.mega
@@ -92,7 +92,7 @@ export class EventSpawn implements EventSpawnType {
       this.nightMode = percentageMods.nightMode;
     }
 
-    // tag d’événement
+    // event tag
     if (
       percentageMods.whatEvent !== undefined &&
       this.whatEvent !== percentageMods.whatEvent

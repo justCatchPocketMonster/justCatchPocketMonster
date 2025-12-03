@@ -1,7 +1,4 @@
-import {
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import { Server } from "../../core/classes/Server";
 import {
   MenuHandler,

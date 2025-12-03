@@ -9,6 +9,7 @@ import {
 import { MenuOption, SelectionPath, MenuHandler } from "./types";
 import { findMenuOption } from "./utils";
 import { buildAllMenus, MenuBuilderOptions } from "./menuBuilder";
+import { newLogger } from "../../middlewares/logger";
 
 /**
  * Finds the appropriate embed to use based on the selection path.
@@ -100,7 +101,11 @@ export async function handleMenuSelection<T extends MenuHandler>(
   try {
     await selectInteraction.deferUpdate();
   } catch (error) {
-    console.error("[ERROR] Failed to defer update:", error);
+    newLogger(
+      "error",
+      error as string,
+      "Failed to defer update in menu selection",
+    );
     return;
   }
 
@@ -187,7 +192,11 @@ export async function handleMenuSelection<T extends MenuHandler>(
         components: components,
       });
     } catch (error) {
-      console.error("[ERROR] Failed to edit reply:", error);
+      newLogger(
+        "error",
+        error as string,
+        "Failed to edit reply in menu selection",
+      );
       return;
     }
   } else {
@@ -217,7 +226,11 @@ export async function handleMenuSelection<T extends MenuHandler>(
         components: components,
       });
     } catch (error) {
-      console.error("[ERROR] Failed to edit reply:", error);
+      newLogger(
+        "error",
+        error as string,
+        "Failed to edit reply in menu selection",
+      );
       return;
     }
 

@@ -189,7 +189,9 @@ describe("adminSettings utils", () => {
   describe("countChannelsWithPermissions", () => {
     test("should count channels with permissions correctly", () => {
       jest.mock("../../../../src/features/adminSettings/utils", () => {
-        const originalModule = jest.requireActual("../../../../src/features/adminSettings/utils");
+        const originalModule = jest.requireActual(
+          "../../../../src/features/adminSettings/utils",
+        );
         return {
           ...originalModule,
           hasChannelPermissions: jest.fn((channel: any, botMember: any) => {
@@ -288,7 +290,9 @@ describe("adminSettings utils", () => {
         },
       } as unknown as Guild;
 
-      const result = countChannelsWithPermissions(mockGuild, ["deleted-channel"]);
+      const result = countChannelsWithPermissions(mockGuild, [
+        "deleted-channel",
+      ]);
       expect(result.goodCount).toBe(0);
       expect(result.totalCount).toBe(1);
     });

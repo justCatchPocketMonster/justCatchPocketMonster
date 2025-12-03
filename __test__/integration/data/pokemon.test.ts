@@ -71,8 +71,5 @@ const limitNet = pLimit(4);
 
 async function imageExists(url: string): Promise<boolean> {
   const response = await fetch(url);
-  if (!response.ok) {
-    console.error(`Image not found: ${url}`);
-  }
   return response.ok;
 }

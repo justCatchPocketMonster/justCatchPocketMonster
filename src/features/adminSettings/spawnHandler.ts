@@ -271,10 +271,7 @@ export class spawnHandler implements MenuHandler {
       const channelName = channel.name;
       const displayName = `${categoryName} - ${channelName}`;
 
-      const permissionEmoji = hasChannelPermissions(
-        channel,
-        botMember || null,
-      )
+      const permissionEmoji = hasChannelPermissions(channel, botMember || null)
         ? "✅"
         : "❌";
 

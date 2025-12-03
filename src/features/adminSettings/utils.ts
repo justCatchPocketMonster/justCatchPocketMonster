@@ -98,7 +98,9 @@ export function hasChannelPermissions(
   botMember: GuildMember | null,
 ): boolean {
   if (!botMember) return false;
-  const permissions = botMember.permissionsIn(channel as GuildChannelResolvable);
+  const permissions = botMember.permissionsIn(
+    channel as GuildChannelResolvable,
+  );
   return (
     permissions.has(PermissionFlagsBits.SendMessages) &&
     permissions.has(PermissionFlagsBits.ViewChannel)
@@ -124,10 +126,7 @@ export function countChannelsWithPermissions(
       return;
     }
 
-    if (
-      !channel.isTextBased() ||
-      !(channel instanceof BaseGuildTextChannel)
-    ) {
+    if (!channel.isTextBased() || !(channel instanceof BaseGuildTextChannel)) {
       return;
     }
 

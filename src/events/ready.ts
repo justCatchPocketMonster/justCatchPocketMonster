@@ -6,14 +6,13 @@ import randomStatus from "../features/other/randomStatus";
 
 export default (client: Client) => {
   if (!client?.user) {
-    return console.error("Bot is not ready");
+    return newLogger("error", "Bot is not ready");
   }
 
   try {
     initializeBot(client);
     loadCommands(client);
   } catch (error) {
-    console.error("Bot is not ready");
     newLogger(
       "error",
       error as string,
@@ -25,7 +24,7 @@ export default (client: Client) => {
 function initializeBot(client: Client) {
   randomStatus(client);
   client.user!.setStatus("online");
-  console.log("Bot is ready");
+  newLogger("info", "Bot is ready");
 }
 
 function loadCommands(client: Client) {
@@ -49,7 +48,8 @@ function loadCommands(client: Client) {
           await client.application.commands.delete(command.name);
         }
 
-        console.log(
+        newLogger(
+          "info",
           `Command ${command.name} loaded and is active :${command.actif}`,
         );
       });

@@ -572,10 +572,9 @@ describe("spawnHandler", () => {
       },
     } as unknown as Guild;
 
-    const handlerWithoutBot = new spawnHandler(
-      server,
-      { guild: mockGuildWithoutBot } as any,
-    );
+    const handlerWithoutBot = new spawnHandler(server, {
+      guild: mockGuildWithoutBot,
+    } as any);
     const structure = handlerWithoutBot.getMenuStructure();
 
     expect(structure).toBeDefined();
@@ -616,10 +615,9 @@ describe("spawnHandler", () => {
       },
     } as unknown as Guild;
 
-    const handlerWithLongName = new spawnHandler(
-      server,
-      { guild: mockGuildWithLongName } as any,
-    );
+    const handlerWithLongName = new spawnHandler(server, {
+      guild: mockGuildWithLongName,
+    } as any);
     const structure = handlerWithLongName.getMenuStructure();
 
     expect(structure).toBeDefined();
@@ -676,10 +674,9 @@ describe("spawnHandler", () => {
 
     Object.setPrototypeOf(mockChannel, BaseGuildTextChannel.prototype);
 
-    const handlerWithError = new spawnHandler(
-      server,
-      { guild: mockGuildWithError } as any,
-    );
+    const handlerWithError = new spawnHandler(server, {
+      guild: mockGuildWithError,
+    } as any);
 
     const selectionPath = [
       { value: "spawn", label: "Spawn" },
@@ -697,10 +694,7 @@ describe("spawnHandler", () => {
       followUp: jest.fn().mockRejectedValue(new Error("FollowUp error")),
     };
 
-    const handlerWithError = new spawnHandler(
-      server,
-      mockInteractionWithError,
-    );
+    const handlerWithError = new spawnHandler(server, mockInteractionWithError);
 
     const selectionPath = [
       { value: "spawn", label: "Spawn" },
@@ -713,10 +707,7 @@ describe("spawnHandler", () => {
 
   test("handleAction should handle reloadServer error", async () => {
     const getServerByIdSpy = jest
-      .spyOn(
-        require("../../../../src/cache/ServerCache"),
-        "getServerById",
-      )
+      .spyOn(require("../../../../src/cache/ServerCache"), "getServerById")
       .mockRejectedValueOnce(new Error("Reload error"));
 
     const selectionPath = [

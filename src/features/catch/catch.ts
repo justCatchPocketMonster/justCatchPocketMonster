@@ -8,6 +8,7 @@ import { nameStatGeneral, version } from "../../config/default/misc";
 import { updateUser } from "../../cache/UserCache";
 import { updateServer } from "../../cache/ServerCache";
 import allPokemon from "../../data/pokemon.json";
+import { newLogger } from "../../middlewares/logger";
 
 export async function catchPokemon(
   user: UserType,
@@ -71,7 +72,11 @@ export async function catchPokemon(
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
   } catch (e) {
-    console.error("Error updating caches after catching a Pokémon:", e);
+    newLogger(
+      "error",
+      e as string,
+      "Error updating caches after catching a Pokémon",
+    );
   }
 
   const getPokemonData = allPokemon
