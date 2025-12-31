@@ -1,4 +1,4 @@
-import { minSpawnsHandler } from "../../../../src/features/adminSettings/MinSpawnsHandler";
+import { MinSpawnsHandler } from "../../../../src/features/adminSettings/MinSpawnsHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById } from "../../../../src/cache/ServerCache";
@@ -7,13 +7,13 @@ import { MenuOption } from "../../../../src/utils/menu";
 
 describe("minSpawnsHandler", () => {
   let server: Server;
-  let handler: minSpawnsHandler;
+  let handler: MinSpawnsHandler;
 
   beforeEach(async () => {
     await resetTestEnv();
     const interaction = createMockInteraction();
     server = await getServerById(interaction.guildId!);
-    handler = new minSpawnsHandler(server);
+    handler = new MinSpawnsHandler(server);
   });
 
   test("getMenuStructure should return correct menu structure", () => {

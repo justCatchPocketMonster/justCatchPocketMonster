@@ -6,10 +6,10 @@ import {
   handleButtonClick,
   countChannelsWithPermissions,
 } from "./utils";
-import { MinSpawnsHandler } from "./minSpawnsHandler";
-import { MaxSpawnsHandler } from "./maxSpawnsHandler";
-import { LanguageHandler } from "./languageHandler";
-import { SpawnHandler } from "./spawnHandler";
+import { MinSpawnsHandler } from "./MinSpawnsHandler";
+import { MaxSpawnsHandler } from "./MaxSpawnsHandler";
+import { LanguageHandler } from "./LanguageHandler";
+import { SpawnHandler } from "./SpawnHandler";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 

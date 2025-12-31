@@ -1,4 +1,4 @@
-import { languageHandler } from "../../../../src/features/adminSettings/LanguageHandler";
+import { LanguageHandler } from "../../../../src/features/adminSettings/LanguageHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById } from "../../../../src/cache/ServerCache";
@@ -7,13 +7,13 @@ import { MenuOption } from "../../../../src/utils/menu";
 
 describe("languageHandler", () => {
   let server: Server;
-  let handler: languageHandler;
+  let handler: LanguageHandler;
 
   beforeEach(async () => {
     await resetTestEnv();
     const interaction = createMockInteraction();
     server = await getServerById(interaction.guildId!);
-    handler = new languageHandler(server);
+    handler = new LanguageHandler(server);
   });
 
   test("getMenuStructure should return correct menu structure", () => {

@@ -1,4 +1,4 @@
-import { maxSpawnsHandler } from "../../../../src/features/adminSettings/MaxSpawnsHandler";
+import { MaxSpawnsHandler } from "../../../../src/features/adminSettings/MaxSpawnsHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
@@ -7,13 +7,13 @@ import { MenuOption } from "../../../../src/utils/menu";
 
 describe("maxSpawnsHandler", () => {
   let server: Server;
-  let handler: maxSpawnsHandler;
+  let handler: MaxSpawnsHandler;
 
   beforeEach(async () => {
     await resetTestEnv();
     const interaction = createMockInteraction();
     server = await getServerById(interaction.guildId!);
-    handler = new maxSpawnsHandler(server);
+    handler = new MaxSpawnsHandler(server);
   });
 
   test("getMenuStructure should return correct menu structure", () => {
@@ -31,7 +31,7 @@ describe("maxSpawnsHandler", () => {
     await updateServer(server.discordId, server);
 
     const freshServer = await getServerById(server.discordId);
-    const newHandler = new maxSpawnsHandler(freshServer);
+    const newHandler = new MaxSpawnsHandler(freshServer);
     const structure = newHandler.getMenuStructure();
 
     const childrenValues = structure.children!.map((c: MenuOption) =>

@@ -84,6 +84,7 @@ describe("code command", () => {
     // given
     const statGiven = await getStatById(nameStatGeneral);
     statGiven.pokemonSpawned = 6485;
+    statGiven.pokemonCaught = 0; // Ensure pokemonCaught is initialized
     await updateStat(statGiven.version, statGiven);
     (interaction.options.getString as jest.Mock).mockImplementation(
       (name: string) => {

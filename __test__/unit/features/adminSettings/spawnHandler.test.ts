@@ -1,4 +1,4 @@
-import { spawnHandler } from "../../../../src/features/adminSettings/SpawnHandler";
+import { SpawnHandler } from "../../../../src/features/adminSettings/SpawnHandler";
 import { Server } from "../../../../src/core/classes/Server";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
@@ -9,6 +9,7 @@ import {
   GuildMember,
   PermissionFlagsBits,
 } from "discord.js";
+import { MenuOption } from "../../../../src/utils/menu";
 
 jest.mock("../../../../src/middlewares/logger", () => ({
   newLogger: jest.fn(),
@@ -16,7 +17,7 @@ jest.mock("../../../../src/middlewares/logger", () => ({
 
 describe("spawnHandler", () => {
   let server: Server;
-  let handler: spawnHandler;
+  let handler: SpawnHandler;
   let interaction: any;
 
   beforeEach(async () => {
@@ -58,7 +59,7 @@ describe("spawnHandler", () => {
     } as unknown as Guild;
 
     interaction.guild = mockGuild;
-    handler = new spawnHandler(server, interaction);
+    handler = new SpawnHandler(server, interaction);
   });
 
   test("getMenuStructure should return correct menu structure", () => {
@@ -73,7 +74,7 @@ describe("spawnHandler", () => {
 
   test("getMenuStructure should have add and remove children", () => {
     const structure = handler.getMenuStructure();
-    const childrenValues = structure.children!.map((c) => c.value);
+    const childrenValues = structure.children!.map((c: MenuOption) => c.value);
     expect(childrenValues).toContain("add");
     expect(childrenValues).toContain("remove");
   });
@@ -136,7 +137,7 @@ describe("spawnHandler", () => {
     const structure = handler.getMenuStructure();
 
     const removeChildren = structure.children?.find(
-      (c) => c.value === "remove",
+      (c: MenuOption) => c.value === "remove",
     );
     expect(removeChildren).toBeDefined();
   });
@@ -177,7 +178,7 @@ describe("spawnHandler", () => {
     interaction.guild = mockGuild;
     server.channelAllowed.push("channel-no-perms");
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
     expect(structure).toBeDefined();
@@ -218,7 +219,7 @@ describe("spawnHandler", () => {
 
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
     expect(structure).toBeDefined();
@@ -260,10 +261,10 @@ describe("spawnHandler", () => {
 
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c) => c.value === "add");
+    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
     expect(addChildren).toBeDefined();
   });
 
@@ -292,12 +293,12 @@ describe("spawnHandler", () => {
 
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c) => c.value === "add");
+    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
     expect(addChildren?.children).toBeDefined();
-    expect(addChildren?.children?.some((c) => c.value === "no_channels")).toBe(
+    expect(addChildren?.children?.some((c: MenuOption) => c.value === "no_channels")).toBe(
       true,
     );
   });
@@ -337,14 +338,14 @@ describe("spawnHandler", () => {
     interaction.guild = mockGuild;
     server.channelAllowed.push("voice-channel");
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
     expect(structure).toBeDefined();
   });
 
   test("getMainEmbed should handle no guild", () => {
-    const handlerWithoutGuild = new spawnHandler(server, {} as any);
+    const handlerWithoutGuild = new SpawnHandler(server, {} as any);
     const embed = handlerWithoutGuild["getMainEmbed"]();
 
     expect(embed).toBeDefined();
@@ -375,7 +376,7 @@ describe("spawnHandler", () => {
 
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const selectionPath = [
       { value: "spawn", label: "Spawn" },
       { value: "add", label: "Add" },
@@ -482,7 +483,7 @@ describe("spawnHandler", () => {
     server.channelAllowed.push(channelId);
     await updateServer(server.discordId, server);
 
-    const handlerWithoutGuild = new spawnHandler(server, {} as any);
+    const handlerWithoutGuild = new SpawnHandler(server, {} as any);
     const selectionPath = [
       { value: "spawn", label: "Spawn" },
       { value: "remove", label: "Remove" },
@@ -500,7 +501,7 @@ describe("spawnHandler", () => {
     server.channelAllowed.push(channelId);
     await updateServer(server.discordId, server);
 
-    const handlerWithoutInteraction = new spawnHandler(server, {
+    const handlerWithoutInteraction = new SpawnHandler(server, {
       guild: interaction.guild,
     } as any);
     const selectionPath = [
@@ -538,7 +539,7 @@ describe("spawnHandler", () => {
   });
 
   test("getMenuStructure should handle null guild", () => {
-    const handlerWithoutGuild = new spawnHandler(server, {} as any);
+    const handlerWithoutGuild = new SpawnHandler(server, {} as any);
     const structure = handlerWithoutGuild.getMenuStructure();
 
     expect(structure).toBeDefined();
@@ -572,7 +573,7 @@ describe("spawnHandler", () => {
       },
     } as unknown as Guild;
 
-    const handlerWithoutBot = new spawnHandler(server, {
+    const handlerWithoutBot = new SpawnHandler(server, {
       guild: mockGuildWithoutBot,
     } as any);
     const structure = handlerWithoutBot.getMenuStructure();
@@ -615,7 +616,7 @@ describe("spawnHandler", () => {
       },
     } as unknown as Guild;
 
-    const handlerWithLongName = new spawnHandler(server, {
+    const handlerWithLongName = new SpawnHandler(server, {
       guild: mockGuildWithLongName,
     } as any);
     const structure = handlerWithLongName.getMenuStructure();
@@ -674,7 +675,7 @@ describe("spawnHandler", () => {
 
     Object.setPrototypeOf(mockChannel, BaseGuildTextChannel.prototype);
 
-    const handlerWithError = new spawnHandler(server, {
+    const handlerWithError = new SpawnHandler(server, {
       guild: mockGuildWithError,
     } as any);
 
@@ -694,7 +695,7 @@ describe("spawnHandler", () => {
       followUp: jest.fn().mockRejectedValue(new Error("FollowUp error")),
     };
 
-    const handlerWithError = new spawnHandler(server, mockInteractionWithError);
+    const handlerWithError = new SpawnHandler(server, mockInteractionWithError);
 
     const selectionPath = [
       { value: "spawn", label: "Spawn" },
@@ -759,7 +760,7 @@ describe("spawnHandler", () => {
     server.channelAllowed = longChannelList.map((c) => c.id);
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const embed = newHandler["getMainEmbed"]();
 
     expect(embed).toBeDefined();
@@ -804,7 +805,7 @@ describe("spawnHandler", () => {
     server.channelAllowed = [];
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const embed = newHandler["getMainEmbed"]();
 
     expect(embed).toBeDefined();
@@ -844,12 +845,12 @@ describe("spawnHandler", () => {
     server.channelAllowed = ["channel1"];
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c) => c.value === "add");
+    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
     const availableChannels = addChildren?.children || [];
-    expect(availableChannels.some((c) => c.value === "channel1")).toBe(false);
+    expect(availableChannels.some((c: MenuOption) => c.value === "channel1")).toBe(false);
   });
 
   test("getAllowedChannelsMenuOptions should handle channels without parent", () => {
@@ -885,11 +886,11 @@ describe("spawnHandler", () => {
     server.channelAllowed = ["channel-no-parent"];
     interaction.guild = mockGuild;
 
-    const newHandler = new spawnHandler(server, interaction);
+    const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
     const removeChildren = structure.children?.find(
-      (c) => c.value === "remove",
+      (c: MenuOption) => c.value === "remove",
     );
     expect(removeChildren).toBeDefined();
     expect(removeChildren?.children).toBeDefined();
