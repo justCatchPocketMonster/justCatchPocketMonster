@@ -264,7 +264,9 @@ describe("spawnHandler", () => {
     const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
+    const addChildren = structure.children?.find(
+      (c: MenuOption) => c.value === "add",
+    );
     expect(addChildren).toBeDefined();
   });
 
@@ -296,11 +298,13 @@ describe("spawnHandler", () => {
     const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
-    expect(addChildren?.children).toBeDefined();
-    expect(addChildren?.children?.some((c: MenuOption) => c.value === "no_channels")).toBe(
-      true,
+    const addChildren = structure.children?.find(
+      (c: MenuOption) => c.value === "add",
     );
+    expect(addChildren?.children).toBeDefined();
+    expect(
+      addChildren?.children?.some((c: MenuOption) => c.value === "no_channels"),
+    ).toBe(true);
   });
 
   test("getMenuStructure should handle non-text channels", () => {
@@ -848,9 +852,13 @@ describe("spawnHandler", () => {
     const newHandler = new SpawnHandler(server, interaction);
     const structure = newHandler.getMenuStructure();
 
-    const addChildren = structure.children?.find((c: MenuOption) => c.value === "add");
+    const addChildren = structure.children?.find(
+      (c: MenuOption) => c.value === "add",
+    );
     const availableChannels = addChildren?.children || [];
-    expect(availableChannels.some((c: MenuOption) => c.value === "channel1")).toBe(false);
+    expect(
+      availableChannels.some((c: MenuOption) => c.value === "channel1"),
+    ).toBe(false);
   });
 
   test("getAllowedChannelsMenuOptions should handle channels without parent", () => {
