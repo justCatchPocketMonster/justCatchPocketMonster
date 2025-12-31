@@ -60,6 +60,14 @@
     "fr": ["langue"],
     "eng": ["language"]
   },
+  "commandAdminSettingsName": {
+    "fr": ["parametresadmin"],
+    "eng": ["adminsettings"]
+  },
+  "commandAdminSettingsExplication": {
+    "fr": ["Permet de configurer les paramètres d'administration du bot"],
+    "eng": ["Allows you to configure the bot's administration settings"]
+  },
   "commandLangExplication": {
     "fr": ["Permet de changer la langue de réponse du bot"],
     "eng": ["Allows you to change the bot's response language"]
@@ -1110,6 +1118,219 @@
     ],
     "eng": [
       "According to an old legend, pairs of Fire and Fairy Pokémon like Vulpix and Flabébé dance together, their flames and petals creating luminous patterns in the night."
+    ]
+  },
+
+  "adminSettingsTitle": {
+    "fr": ["Paramètres Admin"],
+    "eng": ["Admin Settings"]
+  },
+  "adminSettingsSelectSubElement": {
+    "fr": ["Sélectionnez un sous-élément:"],
+    "eng": ["Select a sub-element:"]
+  },
+  "adminSettingsSelectSubElementPlaceholder": {
+    "fr": ["Sélectionnez un sous-élément"],
+    "eng": ["Select a sub-element"]
+  },
+  "adminSettingsClickButtonConfirm": {
+    "fr": ["Cliquez sur le bouton pour confirmer l'action."],
+    "eng": ["Click the button to confirm the action."]
+  },
+  "adminSettingsSelectMainOption": {
+    "fr": ["Sélectionnez une option dans le menu principal"],
+    "eng": ["Select an option from the main menu"]
+  },
+  "adminSettingsSelectMainMenuPlaceholder": {
+    "fr": ["Sélectionnez un menu principal"],
+    "eng": ["Select a main menu"]
+  },
+  "adminSettingsErrorInCommand": {
+    "fr": ["Erreur dans la commande adminSettings"],
+    "eng": ["Error in adminSettings command"]
+  },
+  "adminSettingsMinSpawnsLabel": {
+    "fr": ["Min Spawns"],
+    "eng": ["Min Spawns"]
+  },
+  "adminSettingsMinSpawnsDescription": {
+    "fr": ["Minimum de spawns"],
+    "eng": ["Minimum spawns"]
+  },
+  "adminSettingsMaxSpawnsLabel": {
+    "fr": ["Max Spawns"],
+    "eng": ["Max Spawns"]
+  },
+  "adminSettingsMaxSpawnsDescription": {
+    "fr": ["Maximum de spawns"],
+    "eng": ["Maximum spawns"]
+  },
+  "adminSettingsLanguageLabel": {
+    "fr": ["Langue"],
+    "eng": ["Language"]
+  },
+  "adminSettingsLanguageDescription": {
+    "fr": ["Choisissez la langue du bot"],
+    "eng": ["Choose the bot's language"]
+  },
+  "adminSettingsSpawnLabel": {
+    "fr": ["Salons autorisés"],
+    "eng": ["Allowed channels"]
+  },
+  "adminSettingsSpawnDescription": {
+    "fr": ["Gérer les salons autorisés pour les spawns"],
+    "eng": ["Manage allowed channels for spawns"]
+  },
+  "adminSettingsSpawnAdd": {
+    "fr": ["Ajouter"],
+    "eng": ["Add"]
+  },
+  "adminSettingsSpawnAddDescription": {
+    "fr": ["Ajouter un salon autorisé"],
+    "eng": ["Add an allowed channel"]
+  },
+  "adminSettingsSpawnRemove": {
+    "fr": ["Supprimer"],
+    "eng": ["Remove"]
+  },
+  "adminSettingsSpawnRemoveDescription": {
+    "fr": ["Supprimer un salon autorisé"],
+    "eng": ["Remove an allowed channel"]
+  },
+  "adminSettingsSpawnNoChannelsAvailable": {
+    "fr": ["Aucun salon disponible"],
+    "eng": ["No channels available"]
+  },
+  "adminSettingsSpawnNoChannelsAvailableDescription": {
+    "fr": [
+      "Tous les salons sont déjà autorisés ou le bot n'a pas les permissions"
+    ],
+    "eng": [
+      "All channels are already allowed or the bot doesn't have permissions"
+    ]
+  },
+  "adminSettingsSpawnNoChannelsAllowed": {
+    "fr": ["Aucun salon autorisé"],
+    "eng": ["No allowed channels"]
+  },
+  "adminSettingsSpawnNoChannelsAllowedDescription": {
+    "fr": ["Aucun salon n'est actuellement autorisé"],
+    "eng": ["No channels are currently allowed"]
+  },
+  "adminSettingsSpawnAddChannelDescription": {
+    "fr": ["Ajouter {channelName} aux salons autorisés"],
+    "eng": ["Add {channelName} to allowed channels"]
+  },
+  "adminSettingsSpawnRemoveChannelDescription": {
+    "fr": ["Supprimer {channelName} des salons autorisés"],
+    "eng": ["Remove {channelName} from allowed channels"]
+  },
+  "adminSettingsSpawnDeletedChannel": {
+    "fr": ["Salon supprimé ({channelId})"],
+    "eng": ["Deleted channel ({channelId})"]
+  },
+  "adminSettingsSpawnDeletedChannelDescription": {
+    "fr": ["Ce salon n'existe plus sur le serveur"],
+    "eng": ["This channel no longer exists on the server"]
+  },
+  "adminSettingsSpawnNoCategory": {
+    "fr": ["Sans catégorie"],
+    "eng": ["No category"]
+  },
+  "adminSettingsShowValues": {
+    "fr": ["Afficher les valeurs"],
+    "eng": ["Show values"]
+  },
+  "adminSettingsShowValuesAlreadyShown": {
+    "fr": ["Afficher les valeurs (déjà affiché)"],
+    "eng": ["Show values (already shown)"]
+  },
+  "adminSettingsMainMenu": {
+    "fr": ["Menu principal: "],
+    "eng": ["Main menu: "]
+  },
+  "adminSettingsSubElement": {
+    "fr": ["Sous-élément: "],
+    "eng": ["Sub-element: "]
+  },
+  "adminSettingsSpawnChannelAddedMessage": {
+    "fr": ["✅ Ce salon a été autorisé pour les spawns de Pokémon."],
+    "eng": ["✅ This channel has been authorized for Pokémon spawns."]
+  },
+  "adminSettingsSpawnChannelRemovedMessage": {
+    "fr": ["❌ Ce salon n'est plus autorisé pour les spawns de Pokémon."],
+    "eng": ["❌ This channel is no longer authorized for Pokémon spawns."]
+  },
+  "adminSettingsSpawnEmbedTitle": {
+    "fr": ["Salons autorisés pour les spawns"],
+    "eng": ["Channels authorized for spawns"]
+  },
+  "adminSettingsSpawnEmbedDescription": {
+    "fr": ["Liste des salons autorisés pour les spawns de Pokémon"],
+    "eng": ["List of channels authorized for Pokémon spawns"]
+  },
+  "adminSettingsSpawnEmbedNoChannels": {
+    "fr": ["Aucun salon autorisé"],
+    "eng": ["No authorized channels"]
+  },
+  "adminSettingsSpawnEmbedChannelWithPermission": {
+    "fr": ["✅ {channelName}"],
+    "eng": ["✅ {channelName}"]
+  },
+  "adminSettingsSpawnEmbedChannelWithoutPermission": {
+    "fr": ["❌ {channelName} (pas de permission)"],
+    "eng": ["❌ {channelName} (no permission)"]
+  },
+  "adminSettingsSpawnEmbedChannelDeleted": {
+    "fr": ["🗑️ Salon supprimé ({channelId})"],
+    "eng": ["🗑️ Deleted channel ({channelId})"]
+  },
+  "adminSettingsSpawnEmbedPermissionsCount": {
+    "fr": ["Permissions: {goodCount}/{totalCount}"],
+    "eng": ["Permissions: {goodCount}/{totalCount}"]
+  },
+  "adminSettingsSpawnPlaceholder": {
+    "fr": ["Sélectionnez une option de spawn"],
+    "eng": ["Select a spawn option"]
+  },
+  "adminSettingsSpawnAddPlaceholder": {
+    "fr": ["Choisissez un salon à ajouter"],
+    "eng": ["Choose a channel to add"]
+  },
+  "adminSettingsSpawnRemovePlaceholder": {
+    "fr": ["Choisissez un salon à supprimer"],
+    "eng": ["Choose a channel to remove"]
+  },
+  "adminSettingsLanguagePlaceholder": {
+    "fr": ["Choisissez une langue"],
+    "eng": ["Choose a language"]
+  },
+  "adminSettingsMinSpawnsPlaceholder": {
+    "fr": ["Choisissez le nombre minimum de spawns"],
+    "eng": ["Choose the minimum number of spawns"]
+  },
+  "adminSettingsMaxSpawnsPlaceholder": {
+    "fr": ["Choisissez le nombre maximum de spawns"],
+    "eng": ["Choose the maximum number of spawns"]
+  },
+  "adminSettingsSpawnEmbedTutorialTitle": {
+    "fr": ["📖 Légende"],
+    "eng": ["📖 Legend"]
+  },
+  "adminSettingsSpawnEmbedTutorialContent": {
+    "fr": [
+      "✅ Salon avec permissions\n❌ Salon sans permissions\n🗑️ Salon supprimé"
+    ],
+    "eng": [
+      "✅ Channel with permissions\n❌ Channel without permissions\n🗑️ Deleted channel"
+    ]
+  },
+  "adminSettingsAlreadyActive": {
+    "fr": [
+      "❌ Un menu de paramètres d'administration est déjà actif sur ce serveur. Veuillez terminer la session en cours avant d'en ouvrir une nouvelle."
+    ],
+    "eng": [
+      "❌ An admin settings menu is already active on this server. Please finish the current session before opening a new one."
     ]
   },
 

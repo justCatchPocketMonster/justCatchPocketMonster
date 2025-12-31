@@ -34,8 +34,7 @@ describe("Spawn Pokemon", () => {
   });
   afterEach(() => {
     jest.clearAllMocks();
-    // on “remet” les vraies fonctions pour les autres tests
-    // (si tu veux être carré)
+    // restore original functions for other tests
     const { generationSelect, raritySelect, typeSelect } = jest.requireActual(
       "../../../../src/features/pokemon/selectPokemon",
     );
@@ -56,6 +55,13 @@ describe("Spawn Pokemon", () => {
       });
       test.each(rarityPossibility)(`%s`, async (rarity) => {
         // given
+        // Reset server state before each test to ensure spawn works
+        const serverBeforeTest = await getServerById(message.guildId!);
+        serverBeforeTest.countMessage = 19;
+        serverBeforeTest.maxCountMessage = 20;
+        serverBeforeTest.channelAllowed = [message.channelId];
+        await updateServer(serverBeforeTest.discordId, serverBeforeTest);
+
         mockGenerationSelect.mockReturnValue(generation);
         mockRaritySelect.mockReturnValue(rarity);
         mockTypeSelect.mockReturnValue(type);
@@ -77,6 +83,8 @@ describe("Spawn Pokemon", () => {
         // when
         const data = await spawn(message.guildId!, message.channelId);
         // then
+        expect(data).toBeDefined();
+        expect(data).not.toBeNull();
         expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
         expect(data?.embed.data.description).toBe(
           'To catch it, do "/catch [Pokémon\'s name]".',

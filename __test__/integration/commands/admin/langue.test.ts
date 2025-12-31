@@ -37,7 +37,7 @@ describe("language command", () => {
     expect(replyMock).toHaveBeenCalledWith({
       content: language("langIsChanged", "fr"),
     });
-    expect(serverThen.language).toBe("fr");
+    expect(serverThen.settings.language).toBe("fr");
   });
 
   test("Failed to change language because no option", async () => {
@@ -54,6 +54,31 @@ describe("language command", () => {
     expect(replyMock).toHaveBeenCalledWith({
       content: language("langErrorNoOption", "eng"),
     });
-    expect(serverThen.language).toBe("eng");
+    expect(serverThen.settings.language).toBe("eng");
+  });
+
+  test("should handle error when guildId is missing", async () => {
+    const interactionWithoutGuild = {
+      ...interaction,
+      guildId: null,
+    } as any;
+
+    await langue.execute(interactionWithoutGuild);
+
+    expect(interactionWithoutGuild.reply).not.toHaveBeenCalled();
+  });
+
+  test("should handle error during execution", async () => {
+    const getServerByIdSpy = jest
+      .spyOn(require("../../../../src/cache/ServerCache"), "getServerById")
+      .mockRejectedValueOnce(new Error("Database error"));
+
+    await langue.execute(interaction);
+
+    expect(interaction.reply).toHaveBeenCalledWith(
+      language("errorCatch", "eng"),
+    );
+
+    getServerByIdSpy.mockRestore();
   });
 });

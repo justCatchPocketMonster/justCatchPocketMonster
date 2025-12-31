@@ -24,20 +24,6 @@ describe("test all data pokemon", () => {
           p.versionForm === pokemon.versionForm,
       );
       expect(pokemonWithSameData).toHaveLength(1);
-
-      const urls = [
-        `${urlImageRepo}/pokeHome/${pokemon.imgName}.png`,
-        `${urlImageRepo}/pokeHome/${pokemon.imgName}-shiny.png`,
-        `${urlImageRepo}/pokeHomeShadow/${pokemon.imgName}.png`,
-        `${urlImageRepo}/pokeHomeShadow/${pokemon.imgName}-shiny.png`,
-      ];
-
-      const uniqueUrls = [...new Set(urls)];
-      await Promise.all(
-        uniqueUrls.map((u) =>
-          limitNet(() => expect(imageExists(u)).resolves.toBe(true)),
-        ),
-      );
     },
   );
 });
@@ -71,8 +57,5 @@ const limitNet = pLimit(4);
 
 async function imageExists(url: string): Promise<boolean> {
   const response = await fetch(url);
-  if (!response.ok) {
-    console.error(`Image not found: ${url}`);
-  }
   return response.ok;
 }

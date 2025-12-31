@@ -33,7 +33,7 @@ describe("hint command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).not.toHaveBeenCalledWith({
-      content: language("noHint", serverThen.language),
+      content: language("noHint", serverThen.settings.language),
     });
   });
 
@@ -53,7 +53,7 @@ describe("hint command", () => {
 
     expect(replyMock).toHaveBeenCalledTimes(1);
     expect(replyMock).toHaveBeenCalledWith({
-      content: language("noHint", serverThen.language),
+      content: language("noHint", serverThen.settings.language),
       ephemeral: true,
     });
   });

@@ -30,22 +30,24 @@ export default {
         createPageForMenu(
           new EmbedBuilder()
             .setColor("#0099ff")
-            .setTitle(language("tutorialTitle", server.language))
-            .setDescription(language("tutorialDescription", server.language))
+            .setTitle(language("tutorialTitle", server.settings.language))
+            .setDescription(
+              language("tutorialDescription", server.settings.language),
+            )
             .addFields(
               {
-                name: language("tutorialField1Title", server.language),
-                value: language("tutorialField1Desc", server.language),
+                name: language("tutorialField1Title", server.settings.language),
+                value: language("tutorialField1Desc", server.settings.language),
                 inline: false,
               },
               {
-                name: language("tutorialField2Title", server.language),
-                value: language("tutorialField2Desc", server.language),
+                name: language("tutorialField2Title", server.settings.language),
+                value: language("tutorialField2Desc", server.settings.language),
                 inline: false,
               },
               {
-                name: language("tutorialField3Title", server.language),
-                value: language("tutorialField3Desc", server.language),
+                name: language("tutorialField3Title", server.settings.language),
+                value: language("tutorialField3Desc", server.settings.language),
                 inline: false,
               },
             )
@@ -53,7 +55,7 @@ export default {
               "https://cdn.discordapp.com/attachments/1150766647905366086/1150767117206036510/botGifTuto.gif",
             ),
           null,
-          language("baseTutorialTitle", server.language),
+          language("baseTutorialTitle", server.settings.language),
         ),
       );
 
@@ -61,30 +63,42 @@ export default {
         createPageForMenu(
           new EmbedBuilder()
             .setColor("#7B68EE")
-            .setTitle(language("tutorialAdminTitle", server.language))
+            .setTitle(language("tutorialAdminTitle", server.settings.language))
             .setDescription(
-              language("tutorialAdminDescription", server.language),
+              language("tutorialAdminDescription", server.settings.language),
             )
             .addFields(
               {
-                name: language("tutorialAdminField1Title", server.language),
-                value: language("tutorialAdminField1Desc", server.language),
+                name: language(
+                  "tutorialAdminField1Title",
+                  server.settings.language,
+                ),
+                value: language(
+                  "tutorialAdminField1Desc",
+                  server.settings.language,
+                ),
                 inline: false,
               },
               {
-                name: language("tutorialAdminField2Title", server.language),
-                value: language("tutorialAdminField2Desc", server.language),
+                name: language(
+                  "tutorialAdminField2Title",
+                  server.settings.language,
+                ),
+                value: language(
+                  "tutorialAdminField2Desc",
+                  server.settings.language,
+                ),
                 inline: false,
               },
             ),
           null,
-          language("tutorialAdminTitle", server.language),
+          language("tutorialAdminTitle", server.settings.language),
         ),
       );
 
       paginationMenu(
         interaction,
-        language("selectAPage", server.language),
+        language("selectAPage", server.settings.language),
         pages,
       );
     } catch (e) {

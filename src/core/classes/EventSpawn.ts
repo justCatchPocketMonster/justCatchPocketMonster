@@ -6,8 +6,6 @@ import {
   TypeStat,
 } from "../types/EventSpawnType";
 import {
-  maximumCount,
-  minimumCount,
   rateMaxShiny,
   valueMaxChoiceEgg,
   valuePerGen,
@@ -17,6 +15,7 @@ import {
 import { deepCloneObject } from "../../utils/helperFunction";
 import { EventSpawnFlatModsStrict } from "../types/EventSpawnFlatModsLooseType";
 import { selectEventSeasonal } from "../../features/event/selectEventSeasonal";
+import { ServerSettings } from "../types/ServerType";
 
 export class EventSpawn implements EventSpawnType {
   constructor(
@@ -73,7 +72,7 @@ export class EventSpawn implements EventSpawnType {
         this.messageSpawn.max = updatedValue;
     }
 
-    // booléens
+    // booleans
     if (
       percentageMods.mega !== undefined &&
       this.allowedForm.mega !== percentageMods.mega
@@ -93,7 +92,7 @@ export class EventSpawn implements EventSpawnType {
       this.nightMode = percentageMods.nightMode;
     }
 
-    // tag d’événement
+    // event tag
     if (
       percentageMods.whatEvent !== undefined &&
       this.whatEvent !== percentageMods.whatEvent
@@ -102,7 +101,7 @@ export class EventSpawn implements EventSpawnType {
     }
   }
 
-  static createDefault(): EventSpawn {
+  static createDefault(serverSettings: ServerSettings): EventSpawn {
     const defaultEventSpawn = new EventSpawn(
       deepCloneObject(valuePerGen),
       deepCloneObject(valuePerType),
@@ -111,8 +110,8 @@ export class EventSpawn implements EventSpawnType {
       null,
       { mega: false, giga: false },
       {
-        min: minimumCount,
-        max: maximumCount,
+        min: serverSettings.spawnMin,
+        max: serverSettings.spawnMax,
       },
       false,
       valueMaxChoiceEgg,

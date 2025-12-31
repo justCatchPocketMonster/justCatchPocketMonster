@@ -77,7 +77,7 @@ export class SaveAllPokemon implements SaveAllPokemonType {
 
   getThisSaveUniqueIdWithByIdRange(
     minId: number = 1,
-    maxId: number = allPokemon[allPokemon.length - 1]["id"],
+    maxId: number = allPokemon.at(-1)!["id"],
   ): SaveAllPokemon {
     const uniqueData: Record<string, SaveOnePokemon> = {};
     for (const key in this.data) {

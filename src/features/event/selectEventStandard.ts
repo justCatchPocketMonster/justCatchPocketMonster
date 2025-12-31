@@ -24,7 +24,7 @@ export const selectEventStandard = async (server: ServerType) => {
     randomEvent.statMultipliers,
   );
 
-  const eventSpawn = EventSpawn.createDefault();
+  const eventSpawn = EventSpawn.createDefault(server.settings);
   eventSpawn.whatEvent = event;
 
   effectEvent(eventSpawn, server);
@@ -77,26 +77,26 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
   ) {
     const eventHandlers: Record<string, () => string> = {
       "1": () =>
-        `${getText("auraLegendary", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
-      "2": () => getText("nothing", server.language),
+        `${getText("auraLegendary", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
+      "2": () => getText("nothing", server.settings.language),
       "3": () =>
-        `${getText("auraGeneration", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraGeneration", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "4": () =>
-        `${getText("auraMythical", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraMythical", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "5": () =>
-        `${getText("auraType", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraType", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "6": () =>
-        `${getText("auraChroma", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraChroma", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "7": () =>
-        `${getText("auraMega", server.language)}${lvl}. ${getDurationText(lvl)}`,
+        `${getText("auraMega", server.settings.language)}${lvl}. ${getDurationText(lvl)}`,
       "8": () =>
-        `${getText("auraEncen", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraEncen", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "9": () =>
-        `${getText("auraRepousse", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraRepousse", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "10": () =>
-        `${getText("auraNuit", server.language)}${lvl}. ${getDurationText(lvl)}`,
+        `${getText("auraNuit", server.settings.language)}${lvl}. ${getDurationText(lvl)}`,
       "11": () =>
-        `${getText("auraOvale", server.language)}${lvl}. ${getText("pendantTrenteMinute", server.language)}`,
+        `${getText("auraOvale", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
     };
 
     const handler = eventHandlers[eventId];
@@ -115,7 +115,7 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     } else {
       key = "pendantQuinzeMinute";
     }
-    return getText(key, server.language);
+    return getText(key, server.settings.language);
   }
 };
 function getRandomGen(): keyof GenStat {

@@ -8,6 +8,7 @@ import { nameStatGeneral, version } from "../../config/default/misc";
 import { updateUser } from "../../cache/UserCache";
 import { updateServer } from "../../cache/ServerCache";
 import allPokemon from "../../data/pokemon.json";
+import { newLogger } from "../../middlewares/logger";
 
 export async function catchPokemon(
   user: UserType,
@@ -28,16 +29,18 @@ export async function catchPokemon(
   }
 
   if (!pokemon) {
-    interaction.reply(language("noPokemonDisponible", server.language));
+    interaction.reply(
+      language("noPokemonDisponible", server.settings.language),
+    );
     return;
   }
   if (!pokemon.nameIsSame(pokemonInput)) {
     interaction.reply(
-      language("failCatchGoodPokemonPart1", server.language) +
+      language("failCatchGoodPokemonPart1", server.settings.language) +
         " " +
         memberDisplayName +
         "" +
-        language("failCatchGoodPokemonPart2", server.language) +
+        language("failCatchGoodPokemonPart2", server.settings.language) +
         " " +
         pokemonInput +
         ".",
@@ -69,7 +72,11 @@ export async function catchPokemon(
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
   } catch (e) {
-    console.error("Error updating caches after catching a Pokémon:", e);
+    newLogger(
+      "error",
+      e as string,
+      "Error updating caches after catching a Pokémon",
+    );
   }
 
   const getPokemonData = allPokemon
@@ -99,9 +106,9 @@ export function generateCatchMessage(
   server: ServerType,
 ): string {
   let message =
-    language("congratYouCatchPart1", server.language) +
+    language("congratYouCatchPart1", server.settings.language) +
     memberDisplayName +
-    language("congratYouCatchPart2", server.language) +
+    language("congratYouCatchPart2", server.settings.language) +
     (pokemon.name.nameFr[0] !== pokemon.name.nameEng[0]
       ? `${pokemon.name.nameFr[0]}/${pokemon.name.nameEng[0]}`
       : pokemon.name.nameFr[0]);

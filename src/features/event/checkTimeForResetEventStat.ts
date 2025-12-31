@@ -10,7 +10,7 @@ export async function checkTimeForResetEventStat(
   const dateNow = new Date();
   const dateEnd = new Date(server.eventSpawn.whatEvent.endTime);
   if (dateNow > dateEnd) {
-    server.eventSpawn = EventSpawn.createDefault();
+    server.eventSpawn = EventSpawn.createDefault(server.settings);
     await updateServer(server.discordId, server);
   }
 }

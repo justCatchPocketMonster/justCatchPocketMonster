@@ -35,10 +35,10 @@ export function pokedex(
 
   let nbPage = 1;
   let nbPageMax = 2;
-  nbPageMax += Math.trunc(allPokemon[allPokemon.length - 1].id / 21);
+  nbPageMax += Math.trunc(allPokemon.at(-1)!.id / 21);
 
   if (pageChoice > nbPageMax) {
-    interaction.reply(language("valeurTropHaute", server.language));
+    interaction.reply(language("valeurTropHaute", server.settings.language));
     pageSelectedDefault = 1;
   } else {
     pageSelectedDefault = pageChoice;
@@ -61,46 +61,48 @@ export function pokedex(
     .setThumbnail(avatar)
     .setColor("#0099FF")
     .setDescription("\u200B")
-    .setTitle(language("pokedexOf", server.language) + memberDisplayName)
+    .setTitle(
+      language("pokedexOf", server.settings.language) + memberDisplayName,
+    )
     .addFields(
       {
-        name: language("nationalDex", server.language),
+        name: language("nationalDex", server.settings.language),
         value:
           user.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
       },
       {
-        name: language("shinyDex", server.language),
+        name: language("shinyDex", server.settings.language),
         value:
           user.savePokemon.countUniquePokemonsShinyCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsShinyCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
       },
       {
-        name: language("nationalDexServer", server.language),
+        name: language("nationalDexServer", server.settings.language),
         value:
           server.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -113,11 +115,7 @@ export function pokedex(
 
   arrayEmbed.push({ page: mainPage });
   nbPage++;
-  for (
-    let y = 0;
-    y <= allPokemon[allPokemon.length - 1].id;
-    y += maxPokemonParPage
-  ) {
+  for (let y = 0; y <= allPokemon.at(-1)!.id; y += maxPokemonParPage) {
     const pokeSave = buildPokedexEmbed(interaction, user, server);
     const start = 1 + maxPokemonParPage * (nbPage - 2);
     const end = maxPokemonParPage * (nbPage - 1);
@@ -160,18 +158,20 @@ function buildPokemonField(
   );
 
   let emote = emotePokeballDark;
-  let value = language("noCatch", server.language);
+  let value = language("noCatch", server.settings.language);
 
   if (savePokemon.shinyCount > 0) {
     emote = emotePokeballShiny;
-    value = language("catched", server.language) + savePokemon.shinyCount;
+    value =
+      language("catched", server.settings.language) + savePokemon.shinyCount;
   } else if (savePokemon.normalCount > 0) {
     emote = emotePokeballLight;
-    value = language("catched", server.language) + savePokemon.normalCount;
+    value =
+      language("catched", server.settings.language) + savePokemon.normalCount;
   }
 
   let field = {
-    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name" + capitalizeFirstLetter(server.language)] : "?????"}  ${emote}`,
+    name: `${pokemonData.id} ${savePokemon.normalCount > 0 ? pokemonData.name["name" + capitalizeFirstLetter(server.settings.language)] : "?????"}  ${emote}`,
 
     value: value,
     inline: true,
@@ -207,33 +207,34 @@ function buildPokedexEmbed(
     .setColor("#0099FF")
     .setDescription("\u200B")
     .setTitle(
-      language("pokedexOf", server.language) + interaction.user.username,
+      language("pokedexOf", server.settings.language) +
+        interaction.user.username,
     )
     .addFields(
       {
-        name: language("nationalDex", server.language),
+        name: language("nationalDex", server.settings.language),
         value:
           user.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
       },
       {
-        name: language("shinyDex", server.language),
+        name: language("shinyDex", server.settings.language),
         value:
           user.savePokemon.countUniquePokemonsShinyCaught() +
           "/" +
-          allPokemon[allPokemon.length - 1]["id"] +
+          allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsShinyCaught(),
-            allPokemon[allPokemon.length - 1]["id"],
+            allPokemon.at(-1)!["id"],
           ) +
           "%",
         inline: true,
@@ -285,13 +286,13 @@ function processRegion(
     value = `${shiny}/ ${rangeSize} - ${shinyPercentage}`;
 
     if (shiny === rangeSize) {
-      name = `<:pokeballShinyStar:1005992732541603960> ${language(("shinyDex" + regionName) as LanguageKey, server.language)}`;
+      name = `<:pokeballShinyStar:1005992732541603960> ${language(("shinyDex" + regionName) as LanguageKey, server.settings.language)}`;
     } else {
-      name = `<:pokeballLight:981974905568522331> ${language(("shinydexDe" + regionName) as LanguageKey, server.language)}`;
+      name = `<:pokeballLight:981974905568522331> ${language(("shinydexDe" + regionName) as LanguageKey, server.settings.language)}`;
     }
   } else {
     const caughtPercentage = getPercentage(caught, rangeSize) + "%";
-    name = `<:pokeballDark:981974919212572682> ${language(("pokedexDe" + regionName) as LanguageKey, server.language)}`;
+    name = `<:pokeballDark:981974919212572682> ${language(("pokedexDe" + regionName) as LanguageKey, server.settings.language)}`;
     value = `${caught}/ ${rangeSize} - ${caughtPercentage}`;
   }
 

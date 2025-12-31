@@ -9,7 +9,7 @@
     "start": "node dist/index.cjs",
     "build": "tsup src/index.ts",
     "prettier": "npx prettier . --write",
-    "test": "jest --runInBand --coverage --coverageReporters=lcov",
+    "test": "jest --runInBand --coverage --coverageReporters=lcov --verbose",
     "test:watch": "jest --watch"
   },
   "dependencies": {
