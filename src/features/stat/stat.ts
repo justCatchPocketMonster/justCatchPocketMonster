@@ -127,6 +127,9 @@ export function createPaginationStat(
     createSectionHeader(getLang("statCategoryMythical")),
     ...createStatEntries("mythical", "statCategoryMythical", "rarity"),
 
+    createSectionHeader(getLang("statCategoryUltraBeast")),
+    ...createStatEntries("ultraBeast", "statCategoryUltraBeast", "rarity"),
+
     createSectionHeader(getLang("statCategoryMega")),
     ...createStatEntries("mega", "statCategoryMega", "form"),
   ];

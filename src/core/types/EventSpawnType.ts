@@ -37,6 +37,7 @@ export interface RarityStat {
   ordinary: number;
   legendary: number;
   mythical: number;
+  ultraBeast: number;
 }
 
 export interface EventSpawnType {

@@ -42,6 +42,7 @@ export const valuePerRarity: RarityStat = {
   ordinary: 990,
   legendary: 9,
   mythical: 1,
+  ultraBeast: 9,
 };
 
 export const rateMaxShiny = 4096;

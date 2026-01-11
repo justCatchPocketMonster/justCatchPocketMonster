@@ -97,6 +97,8 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
         `${getText("auraNuit", server.settings.language)}${lvl}. ${getDurationText(lvl)}`,
       "11": () =>
         `${getText("auraOvale", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
+      "12": () =>
+        `${getText("auraUltraBeast", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
     };
 
     const handler = eventHandlers[eventId];
