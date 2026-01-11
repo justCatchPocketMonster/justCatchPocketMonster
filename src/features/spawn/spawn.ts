@@ -4,7 +4,7 @@ import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
 import { selectEventStandard } from "../event/selectEventStandard";
 import getText, { LanguageKey } from "../../lang/language";
-import { colorByType } from "../../utils/helperFunction";
+import { colorByType, random } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { valueMaxChoiceEvent } from "../../config/default/spawn";
@@ -70,8 +70,9 @@ function initMaxCount(server: ServerType): void {
     return;
 
   do {
-    server.maxCountMessage = Math.floor(
-      Math.random() * server.eventSpawn.messageSpawn.max,
+    server.maxCountMessage = random(
+      server.eventSpawn.messageSpawn.max,
+      server.eventSpawn.messageSpawn.min,
     );
   } while (server.maxCountMessage < server.eventSpawn.messageSpawn.min);
   server.countMessage = 0;
@@ -81,9 +82,7 @@ function choiceChannel(server: ServerType, idChannel: string): string {
   if (server.channelAllowed.length === 0) return "";
   if (server.channelAllowed.includes(idChannel)) return idChannel;
 
-  return server.channelAllowed[
-    Math.floor(Math.random() * server.channelAllowed.length)
-  ];
+  return server.channelAllowed[random(server.channelAllowed.length)];
 }
 
 async function choiceTypeOfSpawn(
@@ -91,15 +90,14 @@ async function choiceTypeOfSpawn(
   idChannel: string,
 ): Promise<{ embed: EmbedBuilder }> {
   await checkTimeForResetEventStat(server);
-  const randomCategorySpawn = Math.floor(Math.random() * valueMaxChoiceEvent);
+  const randomCategorySpawn = random(valueMaxChoiceEvent);
   if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
     await selectEventStandard(server);
     if (server.eventSpawn.whatEvent) {
       return generateEmbedEvent(server.eventSpawn.whatEvent, server);
     }
   }
-  const isEgg =
-    0 == Math.floor(Math.random() * server.eventSpawn.valueMaxChoiceEgg);
+  const isEgg = 0 == random(server.eventSpawn.valueMaxChoiceEgg);
   let pokemonChoice: PokemonType;
   if (isEgg) {
     pokemonChoice = selectEggPokemon(server, 0);
@@ -131,7 +129,7 @@ function generateEmbedPokemon(
     : urlImageRepo + "/pokeHome/" + imageName;
 
   const color: ColorResolvable = colorByType(
-    pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
+    pokemon.arrayType[random(pokemon.arrayType.length)],
   );
 
   let pokeEmbed = new EmbedBuilder()

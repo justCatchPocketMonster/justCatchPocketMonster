@@ -10,6 +10,7 @@ import { Pokemon } from "../../../../src/core/classes/Pokemon";
 import { initHint } from "../../../../src/features/hint/initHint";
 import { ChatInputCommandInteraction } from "discord.js";
 import { generateCatchMessage } from "../../../../src/features/catch/catch";
+import * as helperFunction from "../../../../src/utils/helperFunction";
 
 describe("catch command", () => {
   let interaction: any;
@@ -74,7 +75,7 @@ describe("catch command", () => {
 
   test("Catch present pokemon but shiny event", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.00001);
+    jest.spyOn(helperFunction, "random").mockReturnValue(1); // Return 1 to trigger shiny (random(tauxShiny) === 1)
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -105,7 +106,7 @@ describe("catch command", () => {
 
   test("Catch present pokemon shiny but not shiny event", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.00001);
+    jest.spyOn(helperFunction, "random").mockReturnValue(1); // Return 1 to trigger shiny event check
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(true);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -181,7 +182,7 @@ describe("catch command", () => {
 
   test("Catch pokemon with null nickname uses displayName", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
+    jest.spyOn(helperFunction, "random").mockReturnValue(2); // Return 2 to prevent shiny (random(tauxShiny) !== 1)
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -202,12 +203,12 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledWith(
       expect.stringContaining("Test Member"),
     );
-    jest.spyOn(Math, "random").mockRestore();
+    jest.spyOn(helperFunction, "random").mockRestore();
   });
 
   test("Catch pokemon handles error when updating caches", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
+    jest.spyOn(helperFunction, "random").mockReturnValue(2); // Return 2 to prevent shiny (random(tauxShiny) !== 1)
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -230,7 +231,7 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledTimes(1);
 
     updateUserSpy.mockRestore();
-    jest.spyOn(Math, "random").mockRestore();
+    jest.spyOn(helperFunction, "random").mockRestore();
   });
 
   test("generateCatchMessage should handle same name in both languages", async () => {

@@ -11,6 +11,7 @@ import {
 import { __deps } from "../../../../src/features/pokemon/selectPokemon";
 import { pokemonDb } from "../../../../src/core/types/pokemonDb";
 import allPokemon from "../../../../src/data/pokemon.json";
+import * as helperFunction from "../../../../src/utils/helperFunction";
 
 const mockGenerationSelect = jest.fn();
 const mockRaritySelect = jest.fn();
@@ -65,10 +66,11 @@ describe("Spawn Pokemon", () => {
         mockGenerationSelect.mockReturnValue(generation);
         mockRaritySelect.mockReturnValue(rarity);
         mockTypeSelect.mockReturnValue(type);
+        // Mock random to return 0 (first element) for array selections
         jest
-          .spyOn(Math, "random")
-          .mockImplementationOnce(() => 0.9)
-          .mockImplementationOnce(() => 0.9);
+          .spyOn(helperFunction, "random")
+          .mockImplementationOnce(() => 0) // For pokemon selection in pokemonPassType array
+          .mockImplementationOnce(() => 0); // For type selection in arrayType for color
 
         const pokemonWithSameData: pokemonDb[] = allPokemon.filter(
           (p) =>

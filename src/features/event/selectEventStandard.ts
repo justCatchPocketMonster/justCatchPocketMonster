@@ -1,7 +1,7 @@
 import eventData from "../../data/eventData.json";
 import { ServerType } from "../../core/types/ServerType";
 import { updateServer } from "../../cache/ServerCache";
-import { deepCloneObject } from "../../utils/helperFunction";
+import { deepCloneObject, random } from "../../utils/helperFunction";
 import getText from "../../lang/language";
 import { valuePerType, valuePerGen } from "../../config/default/spawn";
 import { EventSpawn } from "../../core/classes/EventSpawn";
@@ -11,7 +11,7 @@ import type { LanguageKey } from "../../lang/language";
 import { TypeStat, GenStat } from "../../core/types/EventSpawnType";
 
 export const selectEventStandard = async (server: ServerType) => {
-  let randomEvent = eventData[Math.floor(Math.random() * eventData.length)];
+  let randomEvent = eventData[random(eventData.length)];
   const event = new Event(
     randomEvent.id.toString(),
     randomEvent.name as LanguageKey,
@@ -122,12 +122,12 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
 };
 function getRandomGen(): keyof GenStat {
   const gen = Object.keys(valuePerGen) as (keyof GenStat)[];
-  return gen[Math.floor(Math.random() * gen.length)];
+  return gen[random(gen.length)];
 }
 
 function getRandomType(): keyof TypeStat {
   const types = Object.keys(valuePerType) as (keyof TypeStat)[];
-  return types[Math.floor(Math.random() * types.length)];
+  return types[random(types.length)];
 }
 
 function addDuration(ms: number) {
@@ -135,7 +135,7 @@ function addDuration(ms: number) {
 }
 
 function getLevel() {
-  const rand = Math.floor(Math.random() * 100);
+  const rand = random(100);
   let level: number;
   if (rand >= 99) {
     level = 3;
