@@ -35,7 +35,7 @@ describe("Spawn Pokemon", () => {
   });
   afterEach(() => {
     jest.clearAllMocks();
-    // restore original functions for other tests
+    jest.restoreAllMocks();
     const { generationSelect, raritySelect, typeSelect } = jest.requireActual(
       "../../../../src/features/pokemon/selectPokemon",
     );
@@ -56,7 +56,6 @@ describe("Spawn Pokemon", () => {
       });
       test.each(rarityPossibility)(`%s`, async (rarity) => {
         // given
-        // Reset server state before each test to ensure spawn works
         const serverBeforeTest = await getServerById(message.guildId!);
         serverBeforeTest.countMessage = 19;
         serverBeforeTest.maxCountMessage = 20;
@@ -66,11 +65,13 @@ describe("Spawn Pokemon", () => {
         mockGenerationSelect.mockReturnValue(generation);
         mockRaritySelect.mockReturnValue(rarity);
         mockTypeSelect.mockReturnValue(type);
-        // Mock random to return 0 (first element) for array selections
-        jest
-          .spyOn(helperFunction, "random")
-          .mockImplementationOnce(() => 0) // For pokemon selection in pokemonPassType array
-          .mockImplementationOnce(() => 0); // For type selection in arrayType for color
+        const randomSpy = jest.spyOn(helperFunction, "random");
+        randomSpy.mockImplementation((max: number, min: number = 0) => {
+          if (max === 100 && min === 0) return 2;
+          if (max === 300 && min === 0) return 1;
+          if (min > 0) return Math.floor((max + min) / 2);
+          return 0;
+        });
 
         const pokemonWithSameData: pokemonDb[] = allPokemon.filter(
           (p) =>
@@ -102,6 +103,8 @@ describe("Spawn Pokemon", () => {
         expect(
           serverThen.pokemonPresent[message.channelId].arrayType,
         ).toContain(type);
+
+        randomSpy.mockRestore();
       });
     });
   });

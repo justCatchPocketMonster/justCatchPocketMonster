@@ -10,12 +10,12 @@ import {
 } from "discord.js";
 
 export interface PageData {
-  page: EmbedBuilder;
+  page: EmbedBuilder | null;
   imagePage?: AttachmentBuilder;
   information: PageInformation;
 }
 export function createPageForMenu(
-  page: EmbedBuilder,
+  page: EmbedBuilder | null,
   image: AttachmentBuilder | null,
   nameSelection: string,
   descriptionSelection?: string,
@@ -57,11 +57,31 @@ export async function paginationMenu(
   if (pages.length === 0) return;
   let currentPage = pageParDefaut - 1;
 
-  const menuOptions: APISelectMenuOption[] = pages.map((p, index) => ({
-    label: p.information.nameSelection,
-    description: p.information.descriptionSelection ?? undefined,
-    value: index.toString(),
-  }));
+  if (
+    currentPage < 0 ||
+    currentPage >= pages.length ||
+    !pages[currentPage].page
+  ) {
+    currentPage = pages.findIndex((p) => p.page !== null);
+    if (currentPage === -1) return;
+  }
+
+  const menuOptions: APISelectMenuOption[] = pages
+    .map((p, index) => ({
+      label: p.information.nameSelection,
+      description: p.information.descriptionSelection ?? undefined,
+      value: index.toString(),
+    }))
+    .filter((opt, index) => {
+      return (
+        pages[index].page !== null &&
+        opt.label.length > 0 &&
+        opt.label.length <= 100
+      );
+    });
+
+  if (menuOptions.length === 0) return;
+
   const menu = new StringSelectMenuBuilder()
     .setCustomId("pagination_menu")
     .setPlaceholder(defaultText)
@@ -71,14 +91,17 @@ export async function paginationMenu(
     menu,
   );
 
+  const currentPageData = pages[currentPage];
+  if (!currentPageData.page) return; // Should not happen after finding valid page
+
   const replyPayload: Parameters<typeof interaction.reply>[0] = {
-    embeds: [pages[currentPage].page],
+    embeds: [currentPageData.page],
     components: [row],
     fetchReply: true,
   };
 
-  if (pages[currentPage].imagePage) {
-    replyPayload.files = [pages[currentPage].imagePage!];
+  if (currentPageData.imagePage) {
+    replyPayload.files = [currentPageData.imagePage];
   }
 
   const message = await interaction.reply(replyPayload);
@@ -115,12 +138,15 @@ export async function paginationMenu(
 
       currentPage = pageSelection;
 
+      const pageData = pages[currentPage];
+      if (!pageData.page) return; // Should not happen after finding valid page
+
       const newPayload: Parameters<typeof selectInteraction.editReply>[0] = {
-        embeds: [pages[currentPage].page],
+        embeds: [pageData.page],
       };
 
-      if (pages[currentPage].imagePage) {
-        newPayload.files = [pages[currentPage].imagePage!];
+      if (pageData.imagePage) {
+        newPayload.files = [pageData.imagePage];
       }
 
       await selectInteraction.editReply(newPayload);

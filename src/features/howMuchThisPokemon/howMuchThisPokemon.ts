@@ -187,11 +187,7 @@ function generateEmbedData(
         inline: true,
       },
     )
-    .setColor(
-      colorByType(
-        pokemon.arrayType[random(pokemon.arrayType.length)],
-      ),
-    );
+    .setColor(colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]));
   return { page: embed };
 }
 

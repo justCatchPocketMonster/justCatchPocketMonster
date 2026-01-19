@@ -4,6 +4,7 @@ import { Message } from "discord.js";
 import { createMockMessage } from "../../../utils/mock/mockMessage";
 import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
 import { Server } from "../../../../src/core/classes/Server";
+import * as helperFunction from "../../../../src/utils/helperFunction";
 
 describe("Spawn event", () => {
   let message: Message;
@@ -18,6 +19,10 @@ describe("Spawn event", () => {
     await updateServer(serverBeforeAll.discordId, serverBeforeAll);
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   afterAll(async () => {});
 
   test("rarity legendary event", async () => {
@@ -25,6 +30,13 @@ describe("Spawn event", () => {
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
+      .mockImplementationOnce(() => 0);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
     // when
@@ -39,6 +51,8 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.rarity.mythical).toBe(
       serverDefault.eventSpawn.rarity.mythical,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("rarity mythical event", async () => {
     // given
@@ -46,6 +60,13 @@ describe("Spawn event", () => {
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
       .mockImplementationOnce(() => 0.3);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 3)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
     // when
     const data = await spawn(message.guildId!, message.channelId);
@@ -58,6 +79,8 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.rarity.mythical).toBeGreaterThan(
       serverDefault.eventSpawn.rarity.mythical,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("nothing event", async () => {
     // given
@@ -65,6 +88,13 @@ describe("Spawn event", () => {
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
       .mockImplementationOnce(() => 0.1);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
     // when
     const data = await spawn(message.guildId!, message.channelId);
@@ -96,13 +126,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.valueMaxChoiceEgg).toStrictEqual(
       serverThen.eventSpawn.valueMaxChoiceEgg,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("generation event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.2)
+      .mockImplementationOnce(() => 0.2);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 2)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -117,13 +154,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.gen["1"]).toBeGreaterThan(
       serverDefault.eventSpawn.gen["1"],
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("type event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.4)
+      .mockImplementationOnce(() => 0.4);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 4)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -136,13 +180,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.type.steel).toBeGreaterThan(
       serverDefault.eventSpawn.type.steel,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("shiny event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.5)
+      .mockImplementationOnce(() => 0.5);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 5)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -157,13 +208,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.shiny).toBeLessThan(
       serverDefault.eventSpawn.shiny,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("mega event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.6)
+      .mockImplementationOnce(() => 0.6);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 6)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     // when
@@ -173,13 +231,20 @@ describe("Spawn event", () => {
     expect(data?.embed.data.description).toBe("It falls from the sky");
     const serverThen = await getServerById(message.guildId!);
     expect(serverThen.eventSpawn.allowedForm.mega).toBe(true);
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("more pokemon event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.7)
+      .mockImplementationOnce(() => 0.7);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 7)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -197,13 +262,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.messageSpawn.min).toBeLessThan(
       serverDefault.eventSpawn.messageSpawn.min,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("less pokemon event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.8)
+      .mockImplementationOnce(() => 0.8);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 8)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -221,13 +293,20 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.messageSpawn.min).toBeGreaterThan(
       serverDefault.eventSpawn.messageSpawn.min,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("night mode event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.9)
+      .mockImplementationOnce(() => 0.9);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 9)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     // when
@@ -239,13 +318,20 @@ describe("Spawn event", () => {
     );
     const serverThen = await getServerById(message.guildId!);
     expect(serverThen.eventSpawn.nightMode).toBe(true);
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
   test("more egg event", async () => {
     // given
     jest
       .spyOn(Math, "random")
       .mockImplementationOnce(() => 0.001)
-      .mockImplementationOnce(() => 0.95)
+      .mockImplementationOnce(() => 0.95);
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 10)
+      .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0);
     const serverDefault = Server.createDefault("id");
@@ -260,5 +346,7 @@ describe("Spawn event", () => {
     expect(serverThen.eventSpawn.valueMaxChoiceEgg).toBeLessThan(
       serverDefault.eventSpawn.valueMaxChoiceEgg,
     );
+    jest.spyOn(helperFunction, "random").mockRestore();
+    jest.spyOn(Math, "random").mockRestore();
   });
 });

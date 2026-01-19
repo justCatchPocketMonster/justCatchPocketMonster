@@ -39,7 +39,7 @@ export async function catchPokemon(
       language("failCatchGoodPokemonPart1", server.settings.language) +
         " " +
         memberDisplayName +
-        "" +
+        " " +
         language("failCatchGoodPokemonPart2", server.settings.language) +
         " " +
         pokemonInput +
