@@ -167,6 +167,11 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
         required: true,
         default: valuePerRarity.mythical,
       },
+      ultraBeast: {
+        type: Number,
+        required: true,
+        default: valuePerRarity.ultraBeast,
+      },
     },
     shiny: {
       type: Number,

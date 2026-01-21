@@ -4,7 +4,11 @@ import { StatType } from "../../core/types/StatType";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { SaveOnePokemon } from "../../core/classes/SaveOnePokemon";
-import { capitalizeFirstLetter, colorByType } from "../../utils/helperFunction";
+import {
+  capitalizeFirstLetter,
+  colorByType,
+  random,
+} from "../../utils/helperFunction";
 import { pageType, paginationButton } from "../other/paginationButton";
 import allPokemon from "../../data/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
@@ -183,11 +187,7 @@ function generateEmbedData(
         inline: true,
       },
     )
-    .setColor(
-      colorByType(
-        pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
-      ),
-    );
+    .setColor(colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]));
   return { page: embed };
 }
 

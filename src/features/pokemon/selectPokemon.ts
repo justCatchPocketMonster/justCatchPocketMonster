@@ -10,7 +10,7 @@ import {
 } from "../../config/default/spawn";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import { initHint } from "../hint/initHint";
-import { capitalizeFirstLetter } from "../../utils/helperFunction";
+import { capitalizeFirstLetter, random } from "../../utils/helperFunction";
 export const __deps = {
   generationSelect,
   raritySelect,
@@ -47,9 +47,7 @@ export const selectEggPokemon = (
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
   if (idPokemon === 0) {
-    const randomIdPokemon = Math.floor(
-      Math.random() * allPokemon[allPokemon.length].id,
-    );
+    const randomIdPokemon = random(allPokemon[allPokemon.length].id);
     pokemonChoiced = selectPokemonWithId(randomIdPokemon);
   } else {
     pokemonChoiced = selectPokemonWithId(idPokemon);
@@ -94,7 +92,7 @@ function shinySelect(
     tauxShiny /= 1.1;
   }
 
-  let nbRandomShiny: number = Math.floor(Math.random() * tauxShiny);
+  let nbRandomShiny: number = random(tauxShiny);
   return nbRandomShiny === 1;
 }
 
@@ -102,14 +100,13 @@ function isHiddenPokemon(
   server: ServerType,
   pokemon: PokemonType,
 ): PokemonType {
-  let randomNumber: number = Math.floor(Math.random() * hidePokemon.maxValue);
+  let randomNumber: number = random(hidePokemon.maxValue);
 
   if (randomNumber == 1) {
     const allPokemonWithId = allPokemon.filter((pokemon) =>
       hidePokemon.idPokemon.includes(pokemon.id),
     );
-    const choicePokemon =
-      allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+    const choicePokemon = allPokemonWithId[random(allPokemonWithId.length)];
 
     pokemon.id = choicePokemon.id.toString();
     pokemon.arrayType.push(...choicePokemon.arrayType);
@@ -143,8 +140,7 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
   const allPokemonWithId = allPokemon.filter(
     (pokemon) => pokemon.id === idPokemon,
   );
-  const randomPokemon =
-    allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+  const randomPokemon = allPokemonWithId[random(allPokemonWithId.length)];
 
   return new Pokemon(
     randomPokemon.id.toString(),
@@ -187,8 +183,7 @@ function selectRandomPokemon(
       pokemon.arrayType.includes(type),
     );
   } while (pokemonPassType[0] === undefined);
-  const randomPokemon =
-    pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)];
+  const randomPokemon = pokemonPassType[random(pokemonPassType.length)];
   return {
     id: randomPokemon.id.toString(),
     name: {
@@ -211,7 +206,7 @@ function selectRandomPokemon(
 }
 
 function generationSelect(server: ServerType): string {
-  const randomNumber = Math.floor(Math.random() * (nbGeneration * 100));
+  const randomNumber = random(nbGeneration * 100);
   let somStatByGen = 0;
 
   for (let gen = 1; gen <= 9; gen++) {
@@ -225,7 +220,7 @@ function generationSelect(server: ServerType): string {
 }
 
 function raritySelect(server: ServerType): string {
-  const randomNumber = Math.floor(Math.random() * 1000);
+  const randomNumber = random(1000);
   let somStatByRarity = 0;
   let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (const element of arrayRarity) {
@@ -240,8 +235,8 @@ function raritySelect(server: ServerType): string {
 }
 
 function typeSelect(server: ServerType): string {
-  const randomNumber = Math.floor(
-    Math.random() * Object.values(valuePerType).reduce((a, b) => a + b, 0),
+  const randomNumber = random(
+    Object.values(valuePerType).reduce((a, b) => a + b, 0),
   );
   let somStatByType = 0;
   let arrayType: string[] = Object.keys(valuePerType);

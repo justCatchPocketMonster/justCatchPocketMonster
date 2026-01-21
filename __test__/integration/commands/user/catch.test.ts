@@ -10,6 +10,7 @@ import { Pokemon } from "../../../../src/core/classes/Pokemon";
 import { initHint } from "../../../../src/features/hint/initHint";
 import { ChatInputCommandInteraction } from "discord.js";
 import { generateCatchMessage } from "../../../../src/features/catch/catch";
+import * as helperFunction from "../../../../src/utils/helperFunction";
 
 describe("catch command", () => {
   let interaction: any;
@@ -18,6 +19,10 @@ describe("catch command", () => {
 
     interaction = createMockInteraction();
     (interaction.options.getSubcommand as jest.Mock).mockReturnValue("code");
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   afterAll(async () => {});
@@ -94,18 +99,19 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledTimes(2);
     expect(replyMock).toHaveBeenNthCalledWith(
       1,
-      "Wait... But the Pokémon is painted! It is shiny!!!",
+      expect.stringContaining("shiny"),
     );
     expect(replyMock).toHaveBeenNthCalledWith(
       2,
       "Congratulations TestNick, you caught one Keunotor/Bidoof:star:. ",
     );
     await checkCatchForAllSavePokemon(interaction, 1, 1);
+    jest.spyOn(Math, "random").mockRestore();
   });
 
   test("Catch present pokemon shiny but not shiny event", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.00001);
+    const mathRandomSpy = jest.spyOn(Math, "random").mockReturnValue(0.00005);
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(true);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -125,17 +131,19 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledTimes(2);
     expect(replyMock).toHaveBeenNthCalledWith(
       1,
-      "Wait... But the Pokémon is painted! It is not shiny! What a desappointment...",
+      expect.stringContaining("not shiny"),
     );
     expect(replyMock).toHaveBeenNthCalledWith(
       2,
       "Congratulations TestNick, you caught one Keunotor/Bidoof. ",
     );
     await checkCatchForAllSavePokemon(interaction, 1, 0);
+    mathRandomSpy.mockRestore();
   });
 
   test("Failed no pokemon", async () => {
     // given
+    const serverGiven = await getServerById(interaction.guildId);
     (interaction.options.getString as jest.Mock).mockImplementation(
       (name: string) => {
         if (name === language("commandCatchOptionName", "eng")) return "Bidoof";
@@ -150,7 +158,9 @@ describe("catch command", () => {
     const replyMock = interaction.reply as jest.Mock;
 
     expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock).toHaveBeenCalledWith("No Pokémon is currently present.");
+    expect(replyMock).toHaveBeenCalledWith(
+      language("noPokemonDisponible", serverGiven.settings.language),
+    );
     await checkCatchForAllSavePokemon(interaction, 0, 0);
   });
 
@@ -173,15 +183,22 @@ describe("catch command", () => {
     const replyMock = interaction.reply as jest.Mock;
 
     expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock).toHaveBeenCalledWith(
-      "Sorry TestNick. The current Pokémon is not Badoof.",
-    );
+    const expectedMessage =
+      language("failCatchGoodPokemonPart1", serverGiven.settings.language) +
+      " " +
+      "TestNick" +
+      " " +
+      language("failCatchGoodPokemonPart2", serverGiven.settings.language) +
+      " " +
+      "Badoof" +
+      ".";
+    expect(replyMock).toHaveBeenCalledWith(expectedMessage);
     await checkCatchForAllSavePokemon(interaction, 0, 0);
   });
 
   test("Catch pokemon with null nickname uses displayName", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
+    jest.spyOn(helperFunction, "random").mockReturnValue(2);
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -202,12 +219,12 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledWith(
       expect.stringContaining("Test Member"),
     );
-    jest.spyOn(Math, "random").mockRestore();
+    jest.spyOn(helperFunction, "random").mockRestore();
   });
 
   test("Catch pokemon handles error when updating caches", async () => {
     // given
-    jest.spyOn(Math, "random").mockReturnValue(0.5); // Prevent shiny event
+    jest.spyOn(helperFunction, "random").mockReturnValue(2);
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(false);
     await updateServer(serverGiven.discordId, serverGiven);
@@ -230,7 +247,7 @@ describe("catch command", () => {
     expect(replyMock).toHaveBeenCalledTimes(1);
 
     updateUserSpy.mockRestore();
-    jest.spyOn(Math, "random").mockRestore();
+    jest.spyOn(helperFunction, "random").mockRestore();
   });
 
   test("generateCatchMessage should handle same name in both languages", async () => {

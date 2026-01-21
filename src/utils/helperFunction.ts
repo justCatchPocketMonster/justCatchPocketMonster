@@ -58,3 +58,7 @@ export function capitalizeFirstLetter(str: string) {
 export function deepCloneObject<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
 }
+
+export function random(max: number, min: number = 0): number {
+  return Math.floor(Math.random() * (max - min) + min);
+}

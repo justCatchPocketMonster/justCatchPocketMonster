@@ -1,5 +1,6 @@
 import language from "../data/language.json";
 import { newLogger } from "../middlewares/logger";
+import { random } from "../utils/helperFunction";
 
 interface Translation {
   [key: string]: string[];
@@ -19,7 +20,7 @@ export default function getText(key: LanguageKey, lang: string): string {
       langTextArray.push("Error: Key not found");
     }
 
-    const randomTextIndex = Math.floor(Math.random() * langTextArray.length);
+    const randomTextIndex = random(langTextArray.length);
 
     return langTextArray[randomTextIndex];
   } catch (e) {

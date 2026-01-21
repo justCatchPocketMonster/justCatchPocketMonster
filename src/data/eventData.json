@@ -207,5 +207,24 @@
         "valueMaxChoiceEgg": -85
       }
     }
+  },
+  {
+    "id": 12,
+    "name": "eventUltraBeastTitre",
+    "description": "eventUltraBeastDesc",
+    "type": "justEmbed",
+    "color": "8B00FF",
+    "image": "0000-000",
+    "statMultipliers": {
+      "level1": {
+        "ultraBeast": 25
+      },
+      "level2": {
+        "ultraBeast": 50
+      },
+      "level3": {
+        "ultraBeast": 100
+      }
+    }
   }
 ]

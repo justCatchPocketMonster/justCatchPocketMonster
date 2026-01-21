@@ -472,6 +472,18 @@
     "fr": ["Elle vous montre le fameux charme ovale."],
     "eng": ["She shows you the famous oval charm."]
   },
+  "eventUltraBeastTitre": {
+    "fr": ["Ultra-Brèches !!!"],
+    "eng": ["Ultra Wormholes !!!"]
+  },
+  "eventUltraBeastDesc": {
+    "fr": ["Des créatures venues d'un autre monde apparaissent !"],
+    "eng": ["Creatures from another world appear!"]
+  },
+  "auraUltraBeast": {
+    "fr": ["Aura Ultra-Chimère de niveau "],
+    "eng": ["Level of Ultra Beast Aura "]
+  },
 
   "pokedexDeKanto": {
     "fr": ["Pokedex Kanto"],
@@ -769,6 +781,10 @@
   "statCategoryMythical": {
     "fr": ["Fabuleux"],
     "eng": ["Mythical"]
+  },
+  "statCategoryUltraBeast": {
+    "fr": ["Ultra-Chimère"],
+    "eng": ["Ultra Beast"]
   },
   "statCategoryMega": {
     "fr": ["Méga-évolution"],
