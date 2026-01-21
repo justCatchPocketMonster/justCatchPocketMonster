@@ -3,6 +3,7 @@ import {
   ChatInputCommandInteraction,
   Client,
   GuildChannelResolvable,
+  ButtonInteraction,
 } from "discord.js";
 import langue from "../commands/admin/langue";
 import spawn from "../commands/admin/spawn";
@@ -16,10 +17,51 @@ import effect from "../commands/server/effect";
 import code from "../commands/user/code";
 import catchPokemon from "../commands/user/catchPokemon";
 import adminSettings from "../commands/admin/adminSettings";
+import trade from "../commands/user/trade";
+import {
+  handleTradeAccept,
+  handleTradeRefuse,
+  handleTradeRefuseWeek,
+  handleTradeConfirm,
+  handleTradeCancel,
+} from "../features/trade/tradeHandlers";
 import { newLogger } from "../middlewares/logger";
 
 export default async (client: Client, interaction: Interaction) => {
   try {
+    // Handle button interactions for trades
+    if (interaction instanceof ButtonInteraction) {
+      if (interaction.customId.startsWith("trade_")) {
+        const parts = interaction.customId.split("_");
+        if (parts.length >= 3) {
+          const action = parts[1];
+          const tradeId = parts.slice(2).join("_");
+
+          switch (action) {
+            case "accept":
+              await handleTradeAccept(interaction, tradeId);
+              return;
+            case "refuse":
+              if (parts[2] === "week") {
+                const weekTradeId = parts.slice(3).join("_");
+                await handleTradeRefuseWeek(interaction, weekTradeId);
+              } else {
+                await handleTradeRefuse(interaction, tradeId);
+              }
+              return;
+            case "confirm":
+              await handleTradeConfirm(interaction, tradeId);
+              return;
+            case "cancel":
+              await handleTradeCancel(interaction, tradeId);
+              return;
+          }
+        }
+      }
+      // For other button interactions, let them pass through
+      return;
+    }
+
     if (!verification(client, interaction as ChatInputCommandInteraction)) {
       return;
     }
@@ -64,6 +106,9 @@ export default async (client: Client, interaction: Interaction) => {
           break;
         case adminSettings.name:
           await adminSettings.execute(interaction);
+          break;
+        case trade.name:
+          await trade.execute(interaction);
           break;
       }
     }
