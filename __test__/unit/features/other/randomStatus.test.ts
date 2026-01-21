@@ -47,7 +47,9 @@ describe("randomStatus", () => {
     const client = {
       user: {
         id: "test-bot-id",
-        setActivity: jest.fn().mockRejectedValue(new Error("Test error")),
+        setActivity: jest.fn().mockImplementation(() => {
+          throw new Error("Test error");
+        }),
       },
     } as unknown as Client;
 
@@ -56,6 +58,8 @@ describe("randomStatus", () => {
     } as any);
     jest.spyOn(helperFunction, "random").mockReturnValue(0);
 
-    await expect(randomStatus(client)).resolves.not.toThrow();
+    await randomStatus(client);
+    
+    expect(client.user?.setActivity).toHaveBeenCalled();
   });
 });

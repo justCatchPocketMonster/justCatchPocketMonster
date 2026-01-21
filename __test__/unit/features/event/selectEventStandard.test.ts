@@ -237,6 +237,7 @@ describe("selectEventStandard", () => {
   });
 
   test("should handle getDurationText with level 3", async () => {
+    server.settings.language = "fr";
     jest
       .spyOn(helperFunction, "random")
       .mockReturnValueOnce(6)
@@ -261,6 +262,7 @@ describe("selectEventStandard", () => {
   });
 
   test("should handle getDurationText with level 1", async () => {
+    server.settings.language = "fr";
     jest
       .spyOn(helperFunction, "random")
       .mockReturnValueOnce(6)
@@ -269,6 +271,6 @@ describe("selectEventStandard", () => {
 
     await selectEventStandard(server);
 
-    expect(server.eventSpawn.whatEvent?.effectDescription).toContain("quinze");
+    expect(server.eventSpawn.whatEvent?.effectDescription).toContain("15 minutes");
   });
 });

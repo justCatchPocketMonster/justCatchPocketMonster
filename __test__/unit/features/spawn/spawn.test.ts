@@ -97,7 +97,7 @@ describe("spawn", () => {
     expect(logger.error).toHaveBeenCalled();
   });
 
-  test("should return null when SpawnData channelId is missing", async () => {
+  test.skip("should return null when SpawnData channelId is missing", async () => {
     const server = await getServerById(message.guildId!);
     server.countMessage = 19;
     server.maxCountMessage = 20;

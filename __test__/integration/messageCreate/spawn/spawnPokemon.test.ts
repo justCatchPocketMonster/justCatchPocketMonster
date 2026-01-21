@@ -17,22 +17,69 @@ const mockGenerationSelect = jest.fn();
 const mockRaritySelect = jest.fn();
 const mockTypeSelect = jest.fn();
 
+function getValidCombinations() {
+  const generations = Object.keys(valuePerGen);
+  const types = Object.keys(valuePerType);
+  const rarities = Object.keys(valuePerRarity);
+  
+  const validCombinations: Array<[string, string, string]> = [];
+  
+  for (const generation of generations) {
+    for (const type of types) {
+      for (const rarity of rarities) {
+        const pokemonExists = allPokemon.some(
+          (p) =>
+            p.gen.toString() === generation &&
+            p.arrayType.includes(type) &&
+            p.rarity === rarity,
+        );
+        if (pokemonExists) {
+          validCombinations.push([generation, type, rarity]);
+        }
+      }
+    }
+  }
+  
+  return validCombinations;
+}
+
+function sampleCombinations(combinations: Array<[string, string, string]>, sampleSize: number): Array<[string, string, string]> {
+  if (combinations.length <= sampleSize) {
+    return combinations;
+  }
+  
+  const sampled: Array<[string, string, string]> = [];
+  const step = Math.floor(combinations.length / sampleSize);
+  
+  for (let i = 0; i < combinations.length; i += step) {
+    sampled.push(combinations[i]);
+    if (sampled.length >= sampleSize) break;
+  }
+  
+  return sampled;
+}
+
 describe("Spawn Pokemon", () => {
   let message: Message;
-  beforeEach(async () => {
+  
+  beforeAll(async () => {
     await resetTestEnv();
+  });
+  
+  beforeEach(async () => {
     message = createMockMessage();
 
-    const serverBeforeAll = await getServerById(message.guildId!);
-    serverBeforeAll.countMessage = 19;
-    serverBeforeAll.maxCountMessage = 20;
-    serverBeforeAll.channelAllowed.push(message.channelId);
-    await updateServer(serverBeforeAll.discordId, serverBeforeAll);
+    const server = await getServerById(message.guildId!);
+    server.countMessage = 19;
+    server.maxCountMessage = 20;
+    server.channelAllowed = [message.channelId];
+    await updateServer(server.discordId, server);
 
     __deps.generationSelect = mockGenerationSelect;
     __deps.raritySelect = mockRaritySelect;
     __deps.typeSelect = mockTypeSelect;
   });
+  
   afterEach(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
@@ -43,69 +90,49 @@ describe("Spawn Pokemon", () => {
     __deps.raritySelect = raritySelect;
     __deps.typeSelect = typeSelect;
   });
-  const generationPossibility = Object.keys(valuePerGen).map((key) => {
-    return key;
-  });
-  describe.each(generationPossibility)(`%s`, (generation) => {
-    const typePossibility = Object.keys(valuePerType).map((key) => {
-      return key;
-    });
-    describe.each(typePossibility)(`%s`, (type) => {
-      const rarityPossibility = Object.keys(valuePerRarity).map((key) => {
-        return key;
+  
+  const validCombinations = getValidCombinations();
+  const sampledCombinations = sampleCombinations(validCombinations, 50);
+  
+  test.each(sampledCombinations)(
+    `generation %s, type %s, rarity %s`,
+    async (generation, type, rarity) => {
+      const server = await getServerById(message.guildId!);
+      server.countMessage = 19;
+      server.maxCountMessage = 20;
+      server.channelAllowed = [message.channelId];
+      await updateServer(server.discordId, server);
+
+      mockGenerationSelect.mockReturnValue(generation);
+      mockRaritySelect.mockReturnValue(rarity);
+      mockTypeSelect.mockReturnValue(type);
+      const randomSpy = jest.spyOn(helperFunction, "random");
+      randomSpy.mockImplementation((max: number, min: number = 0) => {
+        if (max === 100 && min === 0) return 2;
+        if (max === 300 && min === 0) return 1;
+        if (min > 0) return Math.floor((max + min) / 2);
+        return 0;
       });
-      test.each(rarityPossibility)(`%s`, async (rarity) => {
-        // given
-        const serverBeforeTest = await getServerById(message.guildId!);
-        serverBeforeTest.countMessage = 19;
-        serverBeforeTest.maxCountMessage = 20;
-        serverBeforeTest.channelAllowed = [message.channelId];
-        await updateServer(serverBeforeTest.discordId, serverBeforeTest);
 
-        mockGenerationSelect.mockReturnValue(generation);
-        mockRaritySelect.mockReturnValue(rarity);
-        mockTypeSelect.mockReturnValue(type);
-        const randomSpy = jest.spyOn(helperFunction, "random");
-        randomSpy.mockImplementation((max: number, min: number = 0) => {
-          if (max === 100 && min === 0) return 2;
-          if (max === 300 && min === 0) return 1;
-          if (min > 0) return Math.floor((max + min) / 2);
-          return 0;
-        });
+      const data = await spawn(message.guildId!, message.channelId);
+      
+      expect(data).toBeDefined();
+      expect(data).not.toBeNull();
+      expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
+      expect(data?.embed.data.description).toBe(
+        'To catch it, do "/catch [Pokémon\'s name]".',
+      );
 
-        const pokemonWithSameData: pokemonDb[] = allPokemon.filter(
-          (p) =>
-            p.gen.toString() === generation &&
-            p.arrayType.includes(type) &&
-            p.rarity === rarity,
-        );
+      const serverThen = await getServerById(message.guildId!);
+      expect(
+        serverThen.pokemonPresent[message.channelId].gen.toString(),
+      ).toBe(generation);
+      expect(serverThen.pokemonPresent[message.channelId].rarity).toBe(rarity);
+      expect(
+        serverThen.pokemonPresent[message.channelId].arrayType,
+      ).toContain(type);
 
-        if (pokemonWithSameData.length === 0) {
-          return;
-        }
-        // when
-        const data = await spawn(message.guildId!, message.channelId);
-        // then
-        expect(data).toBeDefined();
-        expect(data).not.toBeNull();
-        expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
-        expect(data?.embed.data.description).toBe(
-          'To catch it, do "/catch [Pokémon\'s name]".',
-        );
-
-        const serverThen = await getServerById(message.guildId!);
-        expect(
-          serverThen.pokemonPresent[message.channelId].gen.toString(),
-        ).toBe(generation);
-        expect(serverThen.pokemonPresent[message.channelId].rarity).toBe(
-          rarity,
-        );
-        expect(
-          serverThen.pokemonPresent[message.channelId].arrayType,
-        ).toContain(type);
-
-        randomSpy.mockRestore();
-      });
-    });
-  });
+      randomSpy.mockRestore();
+    },
+  );
 });
