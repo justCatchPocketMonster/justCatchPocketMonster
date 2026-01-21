@@ -97,32 +97,6 @@ describe("spawn", () => {
     expect(logger.error).toHaveBeenCalled();
   });
 
-  test.skip("should return null when SpawnData channelId is missing", async () => {
-    const server = await getServerById(message.guildId!);
-    server.countMessage = 19;
-    server.maxCountMessage = 20;
-    server.channelAllowed.push(message.channelId);
-    await updateServer(server.discordId, server);
-
-    jest.spyOn(helperFunction, "random").mockImplementation(() => 2);
-    mockGenerationSelect.mockReturnValue("1");
-    mockRaritySelect.mockReturnValue("ordinary");
-    mockTypeSelect.mockReturnValue("normal");
-
-    jest
-      .spyOn(
-        require("../../../../src/features/spawn/spawn"),
-        "choiceTypeOfSpawn",
-      )
-      .mockResolvedValueOnce({
-        embed: null as any,
-      });
-
-    const result = await spawn(message.guildId!, message.channelId);
-
-    expect(result).toBeNull();
-  });
-
   test("should handle choiceChannel returning different channel", async () => {
     const server = await getServerById(message.guildId!);
     server.countMessage = 19;

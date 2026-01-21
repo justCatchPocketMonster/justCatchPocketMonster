@@ -21,9 +21,9 @@ function getValidCombinations() {
   const generations = Object.keys(valuePerGen);
   const types = Object.keys(valuePerType);
   const rarities = Object.keys(valuePerRarity);
-  
+
   const validCombinations: Array<[string, string, string]> = [];
-  
+
   for (const generation of generations) {
     for (const type of types) {
       for (const rarity of rarities) {
@@ -39,33 +39,36 @@ function getValidCombinations() {
       }
     }
   }
-  
+
   return validCombinations;
 }
 
-function sampleCombinations(combinations: Array<[string, string, string]>, sampleSize: number): Array<[string, string, string]> {
+function sampleCombinations(
+  combinations: Array<[string, string, string]>,
+  sampleSize: number,
+): Array<[string, string, string]> {
   if (combinations.length <= sampleSize) {
     return combinations;
   }
-  
+
   const sampled: Array<[string, string, string]> = [];
   const step = Math.floor(combinations.length / sampleSize);
-  
+
   for (let i = 0; i < combinations.length; i += step) {
     sampled.push(combinations[i]);
     if (sampled.length >= sampleSize) break;
   }
-  
+
   return sampled;
 }
 
 describe("Spawn Pokemon", () => {
   let message: Message;
-  
+
   beforeAll(async () => {
     await resetTestEnv();
   });
-  
+
   beforeEach(async () => {
     message = createMockMessage();
 
@@ -79,7 +82,7 @@ describe("Spawn Pokemon", () => {
     __deps.raritySelect = mockRaritySelect;
     __deps.typeSelect = mockTypeSelect;
   });
-  
+
   afterEach(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
@@ -90,10 +93,10 @@ describe("Spawn Pokemon", () => {
     __deps.raritySelect = raritySelect;
     __deps.typeSelect = typeSelect;
   });
-  
+
   const validCombinations = getValidCombinations();
   const sampledCombinations = sampleCombinations(validCombinations, 50);
-  
+
   test.each(sampledCombinations)(
     `generation %s, type %s, rarity %s`,
     async (generation, type, rarity) => {
@@ -115,7 +118,7 @@ describe("Spawn Pokemon", () => {
       });
 
       const data = await spawn(message.guildId!, message.channelId);
-      
+
       expect(data).toBeDefined();
       expect(data).not.toBeNull();
       expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
@@ -124,13 +127,13 @@ describe("Spawn Pokemon", () => {
       );
 
       const serverThen = await getServerById(message.guildId!);
-      expect(
-        serverThen.pokemonPresent[message.channelId].gen.toString(),
-      ).toBe(generation);
+      expect(serverThen.pokemonPresent[message.channelId].gen.toString()).toBe(
+        generation,
+      );
       expect(serverThen.pokemonPresent[message.channelId].rarity).toBe(rarity);
-      expect(
-        serverThen.pokemonPresent[message.channelId].arrayType,
-      ).toContain(type);
+      expect(serverThen.pokemonPresent[message.channelId].arrayType).toContain(
+        type,
+      );
 
       randomSpy.mockRestore();
     },

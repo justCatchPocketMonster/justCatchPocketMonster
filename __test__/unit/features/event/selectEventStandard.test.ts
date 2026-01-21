@@ -271,6 +271,8 @@ describe("selectEventStandard", () => {
 
     await selectEventStandard(server);
 
-    expect(server.eventSpawn.whatEvent?.effectDescription).toContain("15 minutes");
+    expect(server.eventSpawn.whatEvent?.effectDescription).toContain(
+      "15 minutes",
+    );
   });
 });

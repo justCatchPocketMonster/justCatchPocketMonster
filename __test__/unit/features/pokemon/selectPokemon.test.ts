@@ -25,12 +25,12 @@ describe("selectPokemon", () => {
   beforeEach(async () => {
     const interaction = createMockInteraction();
     server = await getServerById(interaction.guildId!);
-    
+
     server.eventSpawn.allowedForm.mega = false;
     server.eventSpawn.allowedForm.giga = false;
-    
+
     server.savePokemon.initMissingPokemons();
-    
+
     for (const key in server.savePokemon.data) {
       server.savePokemon.data[key].normalCount = 0;
       server.savePokemon.data[key].shinyCount = 0;
@@ -55,7 +55,8 @@ describe("selectPokemon", () => {
   });
 
   test("should return errorGen when generationSelect fails", () => {
-    __deps.generationSelect = jest.fn()
+    __deps.generationSelect = jest
+      .fn()
       .mockReturnValueOnce("errorGen")
       .mockReturnValue("1");
     __deps.raritySelect = jest.fn().mockReturnValue("ordinary");
@@ -68,7 +69,8 @@ describe("selectPokemon", () => {
 
   test("should return errorRarity when raritySelect fails", () => {
     __deps.generationSelect = jest.fn().mockReturnValue("1");
-    __deps.raritySelect = jest.fn()
+    __deps.raritySelect = jest
+      .fn()
       .mockReturnValueOnce("errorRarity")
       .mockReturnValue("ordinary");
     __deps.typeSelect = jest.fn().mockReturnValue("normal");
@@ -81,7 +83,8 @@ describe("selectPokemon", () => {
   test("should return errorType when typeSelect fails", () => {
     __deps.generationSelect = jest.fn().mockReturnValue("1");
     __deps.raritySelect = jest.fn().mockReturnValue("ordinary");
-    __deps.typeSelect = jest.fn()
+    __deps.typeSelect = jest
+      .fn()
       .mockReturnValueOnce("errorType")
       .mockReturnValue("normal");
 
@@ -95,18 +98,6 @@ describe("selectPokemon", () => {
 
     expect(pokemon.id).toBe("25");
     expect(pokemon.isShiny).toBeDefined();
-  });
-
-  test.skip("should select random egg pokemon when id is 0", () => {
-    const allPokemon = require("../../../../src/data/pokemon.json");
-    const maxId = allPokemon[allPokemon.length - 1].id;
-    jest.spyOn(helperFunction, "random").mockReturnValue(25);
-
-    const pokemon = selectEggPokemon(server, 0);
-
-    expect(pokemon).toBeDefined();
-    expect(pokemon.name).toBeDefined();
-    expect(pokemon.imgName).toBeDefined();
   });
 
   test("should handle shiny selection with different saveServer values", () => {

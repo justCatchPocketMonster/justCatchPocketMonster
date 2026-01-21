@@ -59,7 +59,7 @@ describe("randomStatus", () => {
     jest.spyOn(helperFunction, "random").mockReturnValue(0);
 
     await randomStatus(client);
-    
+
     expect(client.user?.setActivity).toHaveBeenCalled();
   });
 });
