@@ -10,16 +10,13 @@ import {
   TradeCooldown,
   TradeData,
 } from "./tradeCache";
+import { formatTimestamp } from "../../utils/helperFunction";
 
 const RARITY_COOLDOWNS: Record<string, number> = {
   legendary: 86400000, // 1 day
   fabulous: 604800000, // 1 week
   ultraBeast: 86400000, // 1 day
 };
-
-export function formatTimestamp(timestamp: number): string {
-  return `<t:${Math.floor(timestamp / 1000)}:R>`;
-}
 
 export function calculateCooldownRemaining(
   userId: string,

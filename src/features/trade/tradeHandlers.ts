@@ -28,6 +28,7 @@ import allPokemon from "../../data/pokemon.json";
 import { MenuOption } from "../../utils/menu/types";
 import { buildAllMenus } from "../../utils/menu/menuBuilder";
 import { findMenuOption } from "../../utils/menu/utils";
+import { getEligiblePokemon } from "./tradeUtils";
 
 export async function handleTradeAccept(
   buttonInteraction: ButtonInteraction,
@@ -35,6 +36,7 @@ export async function handleTradeAccept(
 ): Promise<void> {
   try {
     await buttonInteraction.deferUpdate();
+    newLogger("debug", `handleTradeAccept: Getting trade with tradeId=${tradeId}, type=${typeof tradeId}`);
     const trade = getTrade(tradeId);
     if (!trade) {
       await buttonInteraction.followUp({
@@ -44,7 +46,23 @@ export async function handleTradeAccept(
       return;
     }
 
-    if (buttonInteraction.user.id !== trade.targetId) {
+    newLogger("debug", 
+      `handleTradeAccept: Trade retrieved`,
+      `tradeId=${trade.tradeId}`,
+      `initiatorId=${JSON.stringify(trade.initiatorId)}, type=${typeof trade.initiatorId}`,
+      `targetId=${JSON.stringify(trade.targetId)}, type=${typeof trade.targetId}`
+    );
+
+    const safeInitiatorId = typeof trade.initiatorId === "string" ? trade.initiatorId : String(trade.initiatorId && typeof trade.initiatorId === "object" && "discordId" in trade.initiatorId ? (trade.initiatorId as any).discordId : trade.initiatorId);
+    const safeTargetId = typeof trade.targetId === "string" ? trade.targetId : String(trade.targetId && typeof trade.targetId === "object" && "discordId" in trade.targetId ? (trade.targetId as any).discordId : trade.targetId);
+
+    newLogger("debug",
+      `handleTradeAccept: IDs converted`,
+      `safeInitiatorId=${safeInitiatorId}, type=${typeof safeInitiatorId}`,
+      `safeTargetId=${safeTargetId}, type=${typeof safeTargetId}`
+    );
+
+    if (buttonInteraction.user.id !== safeTargetId) {
       await buttonInteraction.followUp({
         content: language("tradeNotAuthorized", "eng"),
         ephemeral: true,
@@ -60,13 +78,30 @@ export async function handleTradeAccept(
       return;
     }
 
-    // Update trade status
+    newLogger("debug", `handleTradeAccept: Calling updateTrade with tradeId=${tradeId}, type=${typeof tradeId}`);
     updateTrade(tradeId, { status: "accepted" });
-
-    // Send menu to both users
-    const initiator = await getUserById(trade.initiatorId);
-    const target = await getUserById(trade.targetId);
-    const server = await getServerById(buttonInteraction.guildId!);
+    
+    newLogger("debug", `handleTradeAccept: Calling getUserById with safeInitiatorId=${safeInitiatorId}, type=${typeof safeInitiatorId}`);
+    const initiator = await getUserById(safeInitiatorId);
+    newLogger("debug", `handleTradeAccept: Calling getUserById with safeTargetId=${safeTargetId}, type=${typeof safeTargetId}`);
+    const target = await getUserById(safeTargetId);
+    
+    if (!trade.serverId) {
+      newLogger("error", "handleTradeAccept: trade.serverId is missing, trade may be from old version");
+      await buttonInteraction.followUp({
+        content: language("tradeError", "eng"),
+        ephemeral: true,
+      });
+      return;
+    }
+    
+    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    newLogger("debug", `handleTradeAccept: Calling getServerById with serverId=${safeServerId}, type=${typeof safeServerId}, from trade.serverId=${JSON.stringify(trade.serverId)}, type=${typeof trade.serverId}`);
+    if (!safeServerId) {
+      newLogger("error", "handleTradeAccept: serverId is null or undefined from trade");
+      return;
+    }
+    const server = await getServerById(safeServerId);
 
     if (!server) {
       return;
@@ -74,10 +109,71 @@ export async function handleTradeAccept(
 
     const client = buttonInteraction.client;
 
+    const initiatorEligible = getEligiblePokemon(initiator);
+    const targetEligible = getEligiblePokemon(target);
+
+    if (initiatorEligible.length === 0 || targetEligible.length === 0) {
+      const initiatorUser = await client.users.fetch(safeInitiatorId);
+      const targetUser = await client.users.fetch(safeTargetId);
+      const initiatorName = initiatorUser.username;
+      const targetName = targetUser.username;
+      
+      let errorMessage: string;
+      if (initiatorEligible.length === 0 && targetEligible.length === 0) {
+        errorMessage = language("tradeNoValidPokemonBoth", server.settings.language)
+          .replace("{initiator}", initiatorName)
+          .replace("{target}", targetName);
+      } else if (initiatorEligible.length === 0) {
+        errorMessage = language("tradeNoValidPokemon", server.settings.language).replace("{user}", initiatorName);
+      } else {
+        errorMessage = language("tradeNoValidPokemon", server.settings.language).replace("{user}", targetName);
+      }
+
+      const errorEmbed = new EmbedBuilder()
+        .setTitle(language("tradeImpossible", server.settings.language))
+        .setDescription(errorMessage)
+        .setColor(0xe74c3c);
+
+      try {
+        if (trade.initiatorMessageId) {
+          const initiatorDM = await initiatorUser.createDM();
+          const initiatorMessage = await initiatorDM.messages.fetch(trade.initiatorMessageId);
+          await initiatorMessage.edit({
+            embeds: [errorEmbed],
+            components: [],
+          });
+        }
+      } catch (error) {
+        newLogger("error", error as string, "Failed to update initiator message");
+      }
+
+      try {
+        if (trade.targetMessageId) {
+          const targetDM = await targetUser.createDM();
+          const targetMessage = await targetDM.messages.fetch(trade.targetMessageId);
+          await targetMessage.edit({
+            embeds: [errorEmbed],
+            components: [],
+          });
+        }
+      } catch (error) {
+        newLogger("error", error as string, "Failed to update target message");
+      }
+
+      await buttonInteraction.editReply({
+        embeds: [errorEmbed],
+        components: [],
+      });
+
+      updateTrade(tradeId, { status: "cancelled" });
+      deleteTrade(tradeId);
+      return;
+    }
+
     // Send menu to initiator
     await sendTradeMenuToUser(
       client,
-      trade.initiatorId,
+      safeInitiatorId,
       tradeId,
       initiator,
       server,
@@ -87,7 +183,7 @@ export async function handleTradeAccept(
     // Send menu to target
     await sendTradeMenuToUser(
       client,
-      trade.targetId,
+      safeTargetId,
       tradeId,
       target,
       server,
@@ -104,8 +200,15 @@ export async function handleTradeAccept(
       embeds: [updatedEmbed],
       components: [],
     });
-  } catch (error) {
-    newLogger("error", error as string, "Error handling trade accept");
+  } catch (error: any) {
+    const stack = error?.stack || new Error().stack;
+    newLogger("error", 
+      "Error handling trade accept",
+      `error=${error}`,
+      `errorMessage=${error?.message || error}`,
+      `tradeId=${tradeId}, type=${typeof tradeId}`,
+      `stack=${stack}`
+    );
   }
 }
 
@@ -428,7 +531,9 @@ export async function handleTradeRefuse(
 
     updateTrade(tradeId, { status: "cancelled" });
 
-    const server = await getServerById(buttonInteraction.guildId!);
+    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    if (!safeServerId) return;
+    const server = await getServerById(safeServerId);
     if (!server) return;
 
     const embed = new EmbedBuilder()
@@ -477,7 +582,9 @@ export async function handleTradeRefuseWeek(
 
     updateTrade(tradeId, { status: "cancelled" });
 
-    const server = await getServerById(buttonInteraction.guildId!);
+    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    if (!safeServerId) return;
+    const server = await getServerById(safeServerId);
     if (!server) return;
 
     const embed = new EmbedBuilder()
@@ -537,7 +644,9 @@ export async function handleTradeConfirm(
     if (trade.initiatorChoice && trade.targetChoice) {
       const success = await executeTrade(trade);
 
-      const server = await getServerById(buttonInteraction.guildId!);
+      const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+      if (!safeServerId) return;
+      const server = await getServerById(safeServerId);
       if (!server) return;
 
       if (success) {
@@ -616,7 +725,9 @@ export async function handleTradeCancel(
       targetChoice: undefined,
     });
 
-    const server = await getServerById(buttonInteraction.guildId!);
+    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    if (!safeServerId) return;
+    const server = await getServerById(safeServerId);
     if (!server) return;
 
     await buttonInteraction.followUp({

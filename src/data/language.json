@@ -1492,6 +1492,18 @@
     "fr": ["Vous n'avez aucun Pokémon éligible pour l'échange"],
     "eng": ["You have no eligible Pokémon for trade"]
   },
+  "tradeNoValidPokemon": {
+    "fr": ["Échange impossible : {user} n'a pas de Pokémon valide pour l'échange"],
+    "eng": ["Trade impossible: {user} has no valid Pokémon for trade"]
+  },
+  "tradeNoValidPokemonBoth": {
+    "fr": ["Échange impossible : {initiator} et {target} n'ont pas de Pokémon valide pour l'échange"],
+    "eng": ["Trade impossible: {initiator} and {target} have no valid Pokémon for trade"]
+  },
+  "tradeImpossible": {
+    "fr": ["Échange impossible"],
+    "eng": ["Trade impossible"]
+  },
   "tradeSummaryTitle": {
     "fr": ["Résumé de l'échange"],
     "eng": ["Trade summary"]

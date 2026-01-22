@@ -3,8 +3,11 @@ import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
 import {
   createTrade,
+  getTrade,
   getTradeBlock,
   getUserActiveTrade,
+  updateTrade,
+  deleteTrade,
   TradeData,
 } from "./tradeCache";
 import { createEmbedAsk } from "./tradeUtils";
@@ -63,6 +66,7 @@ export async function initiateTrade(
       tradeId,
       initiatorId: initiator.discordId,
       targetId: target.discordId,
+      serverId: server.discordId,
       status: "pending",
       createdAt: Date.now(),
       expiresAt,
@@ -83,7 +87,8 @@ export async function initiateTrade(
         initiatorDiscordUser.username,
         targetDiscordUser.username,
       );
-      await initiatorDM.send({ embeds: [initiatorEmbed] });
+      const initiatorMessage = await initiatorDM.send({ embeds: [initiatorEmbed] });
+      updateTrade(tradeId, { initiatorMessageId: initiatorMessage.id });
     } catch (error) {
       newLogger(
         "error",
@@ -132,6 +137,7 @@ export async function initiateTrade(
         embeds: [targetEmbed],
         components: [row],
       });
+      updateTrade(tradeId, { targetMessageId: targetMessage.id });
 
       // Setup timeout collector
       const timeoutCollector = targetMessage.createMessageComponentCollector({
@@ -140,10 +146,9 @@ export async function initiateTrade(
 
       timeoutCollector.on("end", async (collected, reason) => {
         if (reason === "time") {
-          const trade = require("./tradeCache").getTrade(tradeId);
+          const trade = getTrade(tradeId);
           if (trade && trade.status === "pending") {
-            // Timeout - treat as refusal
-            require("./tradeCache").updateTrade(tradeId, {
+            updateTrade(tradeId, {
               status: "cancelled",
             });
 
@@ -170,7 +175,7 @@ export async function initiateTrade(
               // DM might be disabled
             }
 
-            require("./tradeCache").deleteTrade(tradeId);
+            deleteTrade(tradeId);
           }
         }
       });
@@ -185,7 +190,7 @@ export async function initiateTrade(
         error as string,
         `Failed to send DM to target ${target.discordId}`,
       );
-      require("./tradeCache").deleteTrade(tradeId);
+      deleteTrade(tradeId);
       return {
         success: false,
         message: language("tradeFailedToSendDM", server.settings.language),
