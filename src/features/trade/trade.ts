@@ -11,17 +11,11 @@ import {
   TradeData,
 } from "./tradeCache";
 import { createEmbedAsk } from "./tradeUtils";
-import {
-  ButtonBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  EmbedBuilder,
-} from "discord.js";
+import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
-import { checkCooldown } from "./tradeValidation";
 
-const TRADE_TIMEOUT_MS = 300000; // 5 minutes
+const TRADE_TIMEOUT_MS = 300000;
 
 export async function initiateTrade(
   client: Client,
@@ -31,25 +25,30 @@ export async function initiateTrade(
   server: ServerType,
 ): Promise<{ success: boolean; message?: string }> {
   try {
-    // Check if initiator has active trade
     const initiatorActiveTrade = getUserActiveTrade(initiator.discordId);
-    if (initiatorActiveTrade && initiatorActiveTrade.status !== "completed" && initiatorActiveTrade.status !== "cancelled") {
+    if (
+      initiatorActiveTrade &&
+      initiatorActiveTrade.status !== "completed" &&
+      initiatorActiveTrade.status !== "cancelled"
+    ) {
       return {
         success: false,
         message: language("tradeInitiatorHasActiveTrade", server.settings.language),
       };
     }
 
-    // Check if target has active trade
     const targetActiveTrade = getUserActiveTrade(target.discordId);
-    if (targetActiveTrade && targetActiveTrade.status !== "completed" && targetActiveTrade.status !== "cancelled") {
+    if (
+      targetActiveTrade &&
+      targetActiveTrade.status !== "completed" &&
+      targetActiveTrade.status !== "cancelled"
+    ) {
       return {
         success: false,
         message: language("tradeTargetHasActiveTrade", server.settings.language),
       };
     }
 
-    // Check if target has blocked trades
     const block = getTradeBlock(target.discordId);
     if (block && block.expiresAt > Date.now()) {
       return {
@@ -58,7 +57,6 @@ export async function initiateTrade(
       };
     }
 
-    // Create trade data
     const tradeId = `trade_${initiator.discordId}_${target.discordId}_${Date.now()}`;
     const expiresAt = Date.now() + TRADE_TIMEOUT_MS;
 
@@ -74,11 +72,8 @@ export async function initiateTrade(
 
     createTrade(tradeData);
 
-    // Send embed to initiator (confirmation message)
     try {
-      const initiatorDiscordUser = await client.users.fetch(
-        initiator.discordId,
-      );
+      const initiatorDiscordUser = await client.users.fetch(initiator.discordId);
       const initiatorDM = await initiatorDiscordUser.createDM();
       const initiatorEmbed = createEmbedAsk(
         tradeData,
@@ -90,22 +85,17 @@ export async function initiateTrade(
       const initiatorMessage = await initiatorDM.send({ embeds: [initiatorEmbed] });
       updateTrade(tradeId, { initiatorMessageId: initiatorMessage.id });
     } catch (error) {
-      newLogger(
-        "error",
-        error as string,
-        `Failed to send DM to initiator ${initiator.discordId}`,
-      );
-      // Continue anyway
+      newLogger("error", error as string, `Failed to send DM to initiator`);
     }
 
-    // Send embed to target (with buttons)
     try {
       const targetDM = await targetDiscordUser.createDM();
+      const initiatorName = (await client.users.fetch(initiator.discordId)).username;
       const targetEmbed = createEmbedAsk(
         tradeData,
         server,
         false,
-        (await client.users.fetch(initiator.discordId)).username,
+        initiatorName,
         targetDiscordUser.username,
       );
 
@@ -139,7 +129,6 @@ export async function initiateTrade(
       });
       updateTrade(tradeId, { targetMessageId: targetMessage.id });
 
-      // Setup timeout collector
       const timeoutCollector = targetMessage.createMessageComponentCollector({
         time: TRADE_TIMEOUT_MS,
       });
@@ -148,27 +137,16 @@ export async function initiateTrade(
         if (reason === "time") {
           const trade = getTrade(tradeId);
           if (trade && trade.status === "pending") {
-            updateTrade(tradeId, {
-              status: "cancelled",
-            });
+            updateTrade(tradeId, { status: "cancelled" });
 
             const timeoutEmbed = new EmbedBuilder()
               .setTitle(language("tradeTimeoutTitle", server.settings.language))
-              .setDescription(
-                language("tradeTimeoutDesc", server.settings.language),
-              )
+              .setDescription(language("tradeTimeoutDesc", server.settings.language))
               .setColor(0xe74c3c);
 
             try {
-              await targetMessage.edit({
-                embeds: [timeoutEmbed],
-                components: [],
-              });
-
-              // Notify initiator
-              const initiatorUser = await client.users.fetch(
-                initiator.discordId,
-              );
+              await targetMessage.edit({ embeds: [timeoutEmbed], components: [] });
+              const initiatorUser = await client.users.fetch(initiator.discordId);
               const initiatorDM = await initiatorUser.createDM();
               await initiatorDM.send({ embeds: [timeoutEmbed] });
             } catch (error) {
@@ -185,11 +163,7 @@ export async function initiateTrade(
         message: language("tradeRequestSentSuccess", server.settings.language),
       };
     } catch (error) {
-      newLogger(
-        "error",
-        error as string,
-        `Failed to send DM to target ${target.discordId}`,
-      );
+      newLogger("error", error as string, `Failed to send DM to target`);
       deleteTrade(tradeId);
       return {
         success: false,
