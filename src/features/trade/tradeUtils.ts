@@ -133,8 +133,9 @@ export function createEmbedAsk(
 
   // Add timeout information
   const timeoutTimestamp = formatTimestamp(tradeData.expiresAt);
-  embed.setFooter({
-    text: language("tradeTimeout", lang).replace("{time}", timeoutTimestamp),
+  embed.addFields({
+    name: language("tradeTimeout", lang).replace("{time}", timeoutTimestamp),
+    value: cooldownFields.join("\n"),
   });
 
   embed.setColor(0x3498db);

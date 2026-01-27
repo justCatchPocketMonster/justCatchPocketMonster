@@ -17,8 +17,86 @@ import {
   TradeData,
   PokemonChoice,
 } from "./tradeCache";
-import { createTradeSummaryEmbed } from "./tradeUtils";
-import { executeTrade, getRarityCooldownMs } from "./tradeValidation";
+import { createTradeSummaryEmbed, calculateCooldownRemaining } from "./tradeUtils";
+import { executeTrade } from "./tradeValidation";
+import { formatTimestamp } from "../../utils/helperFunction";
+
+function extractDiscordId(value: string | { discordId: string } | unknown): string {
+  if (typeof value === "string") {
+    return value;
+  }
+  if (value && typeof value === "object" && "discordId" in value) {
+    const obj = value as { discordId: unknown };
+    return String(obj.discordId);
+  }
+  return String(value);
+}
+
+function createTradeCompletedEmbed(
+  trade: TradeData,
+  server: any,
+  isInitiator: boolean,
+  initiatorName: string,
+  targetName: string,
+  user: any,
+): EmbedBuilder {
+  const lang = server.settings.language;
+  const embed = new EmbedBuilder()
+    .setTitle(language("tradeCompleted", lang))
+    .setColor(0x2ecc71);
+
+  if (!trade.initiatorChoice || !trade.targetChoice) {
+    embed.setDescription(language("tradeCompletedDesc", lang));
+    return embed;
+  }
+
+  const myChoice = isInitiator ? trade.initiatorChoice : trade.targetChoice;
+  const receivedChoice = isInitiator ? trade.targetChoice : trade.initiatorChoice;
+
+  const myPokemonData = allPokemon.find(
+    (p) =>
+      p.id.toString() === myChoice.pokemonId &&
+      `${p.id}-${p.form}-${p.versionForm}` === myChoice.pokemonKey,
+  );
+  const receivedPokemonData = allPokemon.find(
+    (p) =>
+      p.id.toString() === receivedChoice.pokemonId &&
+      `${p.id}-${p.form}-${p.versionForm}` === receivedChoice.pokemonKey,
+  );
+
+  if (!myPokemonData || !receivedPokemonData) {
+    embed.setDescription(language("tradeCompletedDesc", lang));
+    return embed;
+  }
+
+  const myPokemonName = myPokemonData.name[
+    `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as "nameFr" | "nameEng"
+  ][0];
+  const receivedPokemonName = receivedPokemonData.name[
+    `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as "nameFr" | "nameEng"
+  ][0];
+
+  const myPokemon = user.savePokemon.data[myChoice.pokemonKey];
+  const receivedPokemon = user.savePokemon.data[receivedChoice.pokemonKey];
+  
+  const myCount = myPokemon ? myPokemon.normalCount : 0;
+  const receivedCount = receivedPokemon ? receivedPokemon.normalCount : 0;
+
+  return embed.setDescription(
+    language("tradeCompletedDesc", lang)
+  ).addFields(
+    {
+      name: language("tradeYouGive", lang),
+      value: `${myPokemonName} (${myCount})`,
+      inline: true,
+    },
+    {
+      name: language("tradeYouReceive", lang),
+      value: `${receivedPokemonName} (${receivedCount})`,
+      inline: true,
+    },
+  );
+}
 import { getUserById } from "../../cache/UserCache";
 import { getServerById } from "../../cache/ServerCache";
 import language from "../../lang/language";
@@ -53,8 +131,8 @@ export async function handleTradeAccept(
       `targetId=${JSON.stringify(trade.targetId)}, type=${typeof trade.targetId}`
     );
 
-    const safeInitiatorId = typeof trade.initiatorId === "string" ? trade.initiatorId : String(trade.initiatorId && typeof trade.initiatorId === "object" && "discordId" in trade.initiatorId ? (trade.initiatorId as any).discordId : trade.initiatorId);
-    const safeTargetId = typeof trade.targetId === "string" ? trade.targetId : String(trade.targetId && typeof trade.targetId === "object" && "discordId" in trade.targetId ? (trade.targetId as any).discordId : trade.targetId);
+    const safeInitiatorId = extractDiscordId(trade.initiatorId);
+    const safeTargetId = extractDiscordId(trade.targetId);
 
     newLogger("debug",
       `handleTradeAccept: IDs converted`,
@@ -95,7 +173,7 @@ export async function handleTradeAccept(
       return;
     }
     
-    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    const safeServerId = extractDiscordId(trade.serverId);
     newLogger("debug", `handleTradeAccept: Calling getServerById with serverId=${safeServerId}, type=${typeof safeServerId}, from trade.serverId=${JSON.stringify(trade.serverId)}, type=${typeof trade.serverId}`);
     if (!safeServerId) {
       newLogger("error", "handleTradeAccept: serverId is null or undefined from trade");
@@ -244,14 +322,41 @@ async function sendTradeMenuToUser(
       .setDescription(language("tradeSelectPokemonDesc", server.settings.language))
       .setColor(0x3498db);
 
+    const cooldownFields: string[] = [];
+    const rarities = ["legendary", "fabulous", "ultraBeast"];
+    const rarityNames: Record<string, string> = {
+      legendary: language("statCategoryLegendary", server.settings.language),
+      fabulous: language("statCategoryFabulous", server.settings.language),
+      ultraBeast: language("statCategoryUltraBeast", server.settings.language),
+    };
+
+    for (const rarity of rarities) {
+      const remaining = calculateCooldownRemaining(userId, rarity);
+      if (remaining !== null) {
+        const expiresAt = Date.now() + remaining;
+        cooldownFields.push(
+          `${rarityNames[rarity]}: ${formatTimestamp(expiresAt)}`,
+        );
+      }
+    }
+
+    if (cooldownFields.length > 0) {
+      embed.addFields({
+        name: language("tradeCooldownsTitle", server.settings.language),
+        value: cooldownFields.join("\n"),
+      });
+    }
+
     const mainMenu = new StringSelectMenuBuilder()
-      .setCustomId(`trade_menu_${tradeId}_${userId}_main`)
+      .setCustomId(`tm_${tradeId}_${userId}_0`)
       .setPlaceholder(language("tradeSelectGeneration", server.settings.language))
       .addOptions(
         menuStructure.children.map((opt: MenuOption) => ({
-          label: opt.label,
-          value: opt.value,
-          description: opt.description,
+          label: opt.label.length > 100 ? opt.label.substring(0, 97) + "..." : opt.label,
+          value: opt.value.length > 100 ? opt.value.substring(0, 100) : opt.value,
+          description: opt.description && opt.description.length > 100 
+            ? opt.description.substring(0, 97) + "..." 
+            : opt.description,
         })),
       );
 
@@ -269,7 +374,7 @@ async function sendTradeMenuToUser(
       componentType: ComponentType.StringSelect,
       filter: (i) =>
         i.user.id === userId &&
-        i.customId.startsWith(`trade_menu_${tradeId}_${userId}`),
+        i.customId.startsWith(`tm_${tradeId}_${userId}_`),
       time: 600000, // 10 minutes
     });
 
@@ -284,13 +389,19 @@ async function sendTradeMenuToUser(
         let currentOptions = menuOptions;
         let selectedOption: MenuOption | undefined;
 
-        // Find the selected option
-        for (const opt of currentOptions) {
-          if (opt.value === selectedValue) {
-            selectedOption = opt;
+        // Navigate through selectionPath to find the correct level
+        for (let i = 0; i < selectionPath.length; i++) {
+          const pathValue = selectionPath[i].value;
+          const foundOption = currentOptions.find((opt) => opt.value === pathValue);
+          if (foundOption && foundOption.children) {
+            currentOptions = foundOption.children;
+          } else {
             break;
           }
         }
+
+        // Find the selected option in the current level
+        selectedOption = currentOptions.find((opt) => opt.value === selectedValue);
 
         if (!selectedOption) return;
 
@@ -301,32 +412,67 @@ async function sendTradeMenuToUser(
 
         // If it has children, show next level menu
         if (selectedOption.children && selectedOption.children.length > 0) {
+          // Build menus manually with correct customId format (shortened to avoid 100 char limit)
+          const allMenus: ActionRowBuilder<StringSelectMenuBuilder>[] = [];
+          let currentLevelOptions = menuOptions;
+          
+          // Build menus for each level in the path
+          for (let i = 0; i < selectionPath.length; i++) {
+            const pathItem = selectionPath[i];
+            // Use shorter format: trade_menu_{tradeId}_{userId}_{level}
+            // Path is stored in selectionPath, no need to include in customId
+            const menu = new StringSelectMenuBuilder()
+              .setCustomId(
+                `tm_${tradeId}_${userId}_${i}`,
+              )
+              .setPlaceholder(pathItem.label.length > 150 ? pathItem.label.substring(0, 147) + "..." : pathItem.label)
+              .addOptions(
+                currentLevelOptions.slice(0, 25).map((opt: MenuOption) => ({
+                  label: opt.label.length > 100 ? opt.label.substring(0, 97) + "..." : opt.label,
+                  value: opt.value.length > 100 ? opt.value.substring(0, 100) : opt.value,
+                  description: opt.description && opt.description.length > 100 
+                    ? opt.description.substring(0, 97) + "..." 
+                    : opt.description,
+                  default: opt.value === pathItem.value,
+                })),
+              );
+            
+            allMenus.push(
+              new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menu),
+            );
+            
+            // Navigate to next level
+            const foundOption = currentLevelOptions.find((opt) => opt.value === pathItem.value);
+            if (foundOption?.children) {
+              currentLevelOptions = foundOption.children;
+            }
+          }
+          
+          // Add next level menu
+          const placeholderText = selectedOption.placeholder || selectedOption.label;
+          const childrenOptions = selectedOption.children.slice(0, 25).map((child: MenuOption) => ({
+            label: child.label.length > 100 ? child.label.substring(0, 97) + "..." : child.label,
+            value: child.value.length > 100 ? child.value.substring(0, 100) : child.value,
+            description: child.description && child.description.length > 100 
+              ? child.description.substring(0, 97) + "..." 
+              : child.description,
+          }));
+          
+          if (childrenOptions.length === 0) {
+            newLogger("warn", "No valid children options for menu", `tradeId=${tradeId}`, `userId=${userId}`);
+            return;
+          }
+          
           const nextMenu = new StringSelectMenuBuilder()
             .setCustomId(
-              `trade_menu_${tradeId}_${userId}_${selectionPath.length}_${selectionPath.map((p) => p.value).join("_")}`,
+              `tm_${tradeId}_${userId}_${selectionPath.length}`,
             )
-            .setPlaceholder(selectedOption.placeholder || selectedOption.label)
-            .addOptions(
-              selectedOption.children.map((child: MenuOption) => ({
-                label: child.label,
-                value: child.value,
-                description: child.description,
-              })),
-            );
-
-          const nextRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-            nextMenu,
+            .setPlaceholder(placeholderText.length > 150 ? placeholderText.substring(0, 147) + "..." : placeholderText)
+            .addOptions(childrenOptions);
+          
+          allMenus.push(
+            new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(nextMenu),
           );
-
-          // Build all menus up to current level
-          const allMenus = buildAllMenus(
-            selectionPath.map((p) => ({ value: p.value, label: p.label })),
-            menuOptions,
-            {
-              subElementPlaceholder: language("tradeSubElementPlaceholder", server.settings.language),
-            },
-          );
-          allMenus.push(nextRow);
 
           await selectInteraction.editReply({
             embeds: [embed],
@@ -391,9 +537,17 @@ async function handlePokemonSelection(
   // If both have selected, move to confirmation phase
   const updatedTrade = getTrade(tradeId);
   if (updatedTrade?.initiatorChoice && updatedTrade?.targetChoice) {
+    // Reset confirmations when entering confirmation phase
+    updateTrade(tradeId, {
+      initiatorConfirmed: false,
+      targetConfirmed: false,
+    });
+    const tradeWithReset = getTrade(tradeId);
+    if (!tradeWithReset) return;
+    
     // Check rarity match
     if (
-      updatedTrade.initiatorChoice.rarity !== updatedTrade.targetChoice.rarity
+      tradeWithReset.initiatorChoice!.rarity !== tradeWithReset.targetChoice!.rarity
     ) {
             // Rarity mismatch - notify users and reset
       if (client) {
@@ -435,7 +589,7 @@ async function handlePokemonSelection(
     }
 
     if (client) {
-      await sendConfirmationEmbeds(updatedTrade, server, client);
+      await sendConfirmationEmbeds(tradeWithReset, server, client);
     }
   } else {
     // Notify user that selection is confirmed and waiting for other
@@ -475,28 +629,73 @@ async function sendConfirmationEmbeds(
       targetName,
     );
 
-    const confirmButton = new ButtonBuilder()
+    // Add confirmation status to embeds
+    const lang = server.settings.language;
+    const confirmedText = language("tradeCompleted", lang);
+    const waitingText = language("tradeWaitingOther", lang);
+    const initiatorStatus = trade.initiatorConfirmed 
+      ? `✅ ${confirmedText}` 
+      : `⏳ ${waitingText}`;
+    const targetStatus = trade.targetConfirmed 
+      ? `✅ ${confirmedText}` 
+      : `⏳ ${waitingText}`;
+
+    const statusTitle = language("tradeSummaryTitle", lang);
+    initiatorEmbed.addFields({
+      name: statusTitle,
+      value: `${initiatorName}: ${initiatorStatus}\n${targetName}: ${targetStatus}`,
+    });
+
+    targetEmbed.addFields({
+      name: statusTitle,
+      value: `${initiatorName}: ${initiatorStatus}\n${targetName}: ${targetStatus}`,
+    });
+
+    // Create buttons for initiator
+    const initiatorConfirmButton = new ButtonBuilder()
       .setCustomId(`trade_confirm_${trade.tradeId}`)
-      .setLabel(language("tradeConfirmButton", server.settings.language))
+      .setLabel(language("tradeConfirmButton", lang))
       .setStyle(ButtonStyle.Success)
-      .setEmoji("✅");
+      .setEmoji("✅")
+      .setDisabled(trade.initiatorConfirmed || false);
 
-    const cancelButton = new ButtonBuilder()
+    const initiatorCancelButton = new ButtonBuilder()
       .setCustomId(`trade_cancel_${trade.tradeId}`)
-      .setLabel(language("tradeCancelButton", server.settings.language))
+      .setLabel(language("tradeCancelButton", lang))
       .setStyle(ButtonStyle.Danger)
-      .setEmoji("❌");
+      .setEmoji("❌")
+      .setDisabled(trade.initiatorConfirmed || false);
 
-    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-      confirmButton,
-      cancelButton,
+    const initiatorRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      initiatorConfirmButton,
+      initiatorCancelButton,
+    );
+
+    // Create buttons for target
+    const targetConfirmButton = new ButtonBuilder()
+      .setCustomId(`trade_confirm_${trade.tradeId}`)
+      .setLabel(language("tradeConfirmButton", lang))
+      .setStyle(ButtonStyle.Success)
+      .setEmoji("✅")
+      .setDisabled(trade.targetConfirmed || false);
+
+    const targetCancelButton = new ButtonBuilder()
+      .setCustomId(`trade_cancel_${trade.tradeId}`)
+      .setLabel(language("tradeCancelButton", lang))
+      .setStyle(ButtonStyle.Danger)
+      .setEmoji("❌")
+      .setDisabled(trade.targetConfirmed || false);
+
+    const targetRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      targetConfirmButton,
+      targetCancelButton,
     );
 
     try {
       const initiatorDM = await initiatorUser.createDM();
       await initiatorDM.send({
         embeds: [initiatorEmbed],
-        components: [row],
+        components: [initiatorRow],
       });
     } catch (error) {
       newLogger("error", error as string, "Failed to send confirmation to initiator");
@@ -506,7 +705,7 @@ async function sendConfirmationEmbeds(
       const targetDM = await targetUser.createDM();
       await targetDM.send({
         embeds: [targetEmbed],
-        components: [row],
+        components: [targetRow],
       });
     } catch (error) {
       newLogger("error", error as string, "Failed to send confirmation to target");
@@ -531,7 +730,7 @@ export async function handleTradeRefuse(
 
     updateTrade(tradeId, { status: "cancelled" });
 
-    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    const safeServerId = extractDiscordId(trade.serverId);
     if (!safeServerId) return;
     const server = await getServerById(safeServerId);
     if (!server) return;
@@ -582,7 +781,7 @@ export async function handleTradeRefuseWeek(
 
     updateTrade(tradeId, { status: "cancelled" });
 
-    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    const safeServerId = extractDiscordId(trade.serverId);
     if (!safeServerId) return;
     const server = await getServerById(safeServerId);
     if (!server) return;
@@ -640,39 +839,89 @@ export async function handleTradeConfirm(
       return;
     }
 
-    // Execute trade
-    if (trade.initiatorChoice && trade.targetChoice) {
-      const success = await executeTrade(trade);
+    if (!trade.initiatorChoice || !trade.targetChoice) {
+      return;
+    }
 
-      const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
-      if (!safeServerId) return;
-      const server = await getServerById(safeServerId);
-      if (!server) return;
+    const safeServerId = extractDiscordId(trade.serverId);
+    if (!safeServerId) return;
+    const server = await getServerById(safeServerId);
+    if (!server) return;
+
+    const isInitiator = buttonInteraction.user.id === trade.initiatorId;
+    const updates: Partial<TradeData> = {};
+    
+    if (isInitiator) {
+      updates.initiatorConfirmed = true;
+    } else {
+      updates.targetConfirmed = true;
+    }
+
+    updateTrade(tradeId, updates);
+    const updatedTrade = getTrade(tradeId);
+    if (!updatedTrade) return;
+
+    const bothConfirmed = updatedTrade.initiatorConfirmed && updatedTrade.targetConfirmed;
+
+    if (bothConfirmed) {
+      // Both confirmed, execute trade
+      const success = await executeTrade(updatedTrade);
 
       if (success) {
         updateTrade(tradeId, { status: "completed" });
 
-        const successEmbed = new EmbedBuilder()
-          .setTitle(language("tradeCompleted", server.settings.language))
-          .setDescription(language("tradeCompletedDesc", server.settings.language))
-          .setColor(0x2ecc71);
+        // Get updated user data to show final counts
+        const updatedInitiator = await getUserById(updatedTrade.initiatorId);
+        const updatedTarget = await getUserById(updatedTrade.targetId);
+        
+        if (!updatedInitiator || !updatedTarget) {
+          const errorEmbed = new EmbedBuilder()
+            .setTitle(language("tradeFailed", server.settings.language))
+            .setDescription(language("tradeFailedDesc", server.settings.language))
+            .setColor(0xe74c3c);
+          await buttonInteraction.editReply({
+            embeds: [errorEmbed],
+            components: [],
+          });
+          return;
+        }
 
+        const initiatorUser = await buttonInteraction.client.users.fetch(updatedTrade.initiatorId);
+        const targetUser = await buttonInteraction.client.users.fetch(updatedTrade.targetId);
+        const initiatorName = initiatorUser.username;
+        const targetName = targetUser.username;
+
+        // Create personalized embeds for each user with counts
+        const initiatorEmbed = createTradeCompletedEmbed(
+          updatedTrade,
+          server,
+          true,
+          initiatorName,
+          targetName,
+          updatedInitiator,
+        );
+        const targetEmbed = createTradeCompletedEmbed(
+          updatedTrade,
+          server,
+          false,
+          initiatorName,
+          targetName,
+          updatedTarget,
+        );
+
+        const userEmbed = isInitiator ? initiatorEmbed : targetEmbed;
         await buttonInteraction.editReply({
-          embeds: [successEmbed],
+          embeds: [userEmbed],
           components: [],
         });
 
-        // Notify other user
-        const otherUserId =
-          buttonInteraction.user.id === trade.initiatorId
-            ? trade.targetId
-            : trade.initiatorId;
+        // Notify other user with their personalized embed
+        const otherUserId = isInitiator ? updatedTrade.targetId : updatedTrade.initiatorId;
+        const otherEmbed = isInitiator ? targetEmbed : initiatorEmbed;
         try {
-          const otherUser = await buttonInteraction.client.users.fetch(
-            otherUserId,
-          );
+          const otherUser = await buttonInteraction.client.users.fetch(otherUserId);
           const otherDM = await otherUser.createDM();
-          await otherDM.send({ embeds: [successEmbed] });
+          await otherDM.send({ embeds: [otherEmbed] });
         } catch (error) {
           // DM might be disabled
         }
@@ -694,8 +943,13 @@ export async function handleTradeConfirm(
           status: "accepted",
           initiatorChoice: undefined,
           targetChoice: undefined,
+          initiatorConfirmed: false,
+          targetConfirmed: false,
         });
       }
+    } else {
+      // Only one confirmed, update embeds to show confirmation status
+      await sendConfirmationEmbeds(updatedTrade, server, buttonInteraction.client);
     }
   } catch (error) {
     newLogger("error", error as string, "Error handling trade confirm");
@@ -725,7 +979,7 @@ export async function handleTradeCancel(
       targetChoice: undefined,
     });
 
-    const safeServerId = typeof trade.serverId === "string" ? trade.serverId : String(trade.serverId && typeof trade.serverId === "object" && "discordId" in trade.serverId ? (trade.serverId as any).discordId : trade.serverId);
+    const safeServerId = extractDiscordId(trade.serverId);
     if (!safeServerId) return;
     const server = await getServerById(safeServerId);
     if (!server) return;

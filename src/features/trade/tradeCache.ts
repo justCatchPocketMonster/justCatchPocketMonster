@@ -22,6 +22,8 @@ export interface TradeData {
     | "cancelled";
   initiatorChoice?: PokemonChoice;
   targetChoice?: PokemonChoice;
+  initiatorConfirmed?: boolean;
+  targetConfirmed?: boolean;
   initiatorMessageId?: string;
   targetMessageId?: string;
   createdAt: number;

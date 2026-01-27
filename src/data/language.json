@@ -1528,6 +1528,18 @@
     "fr": ["Annuler"],
     "eng": ["Cancel"]
   },
+  "tradeConfirmed": {
+    "fr": ["Confirmé"],
+    "eng": ["Confirmed"]
+  },
+  "tradeWaitingConfirmation": {
+    "fr": ["En attente"],
+    "eng": ["Waiting"]
+  },
+  "tradeConfirmationStatus": {
+    "fr": ["Statut de confirmation"],
+    "eng": ["Confirmation status"]
+  },
   "tradeCompleted": {
     "fr": ["Échange terminé"],
     "eng": ["Trade completed"]

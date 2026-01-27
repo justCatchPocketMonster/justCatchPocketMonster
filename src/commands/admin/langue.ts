@@ -35,7 +35,7 @@ export default {
         )
         .setRequired(true),
     )
-    .setDefaultMemberPermissions(0),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {

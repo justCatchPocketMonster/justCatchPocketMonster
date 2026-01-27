@@ -46,7 +46,8 @@ export default {
         //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(false),
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
@@ -97,6 +98,7 @@ export default {
         });
       }
     } catch (e) {
+    
       newLogger(
         "error",
         e as string,
