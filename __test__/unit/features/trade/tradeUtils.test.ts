@@ -198,7 +198,13 @@ describe("TradeUtils", () => {
         settings: { language: "eng" },
       } as any;
 
-      const embed = createEmbedAsk(tradeData, server, true, "Initiator", "Target");
+      const embed = createEmbedAsk(
+        tradeData,
+        server,
+        true,
+        "Initiator",
+        "Target",
+      );
       expect(embed).toBeDefined();
       expect(embed.data.title).toBeDefined();
     });
@@ -219,7 +225,13 @@ describe("TradeUtils", () => {
         settings: { language: "eng" },
       } as any;
 
-      const embed = createEmbedAsk(tradeData, server, false, "Initiator", "Target");
+      const embed = createEmbedAsk(
+        tradeData,
+        server,
+        false,
+        "Initiator",
+        "Target",
+      );
       expect(embed).toBeDefined();
       expect(embed.data.title).toBeDefined();
     });
@@ -252,7 +264,13 @@ describe("TradeUtils", () => {
         settings: { language: "eng" },
       } as any;
 
-      const embed = createTradeSummaryEmbed(tradeData, server, true, "Initiator", "Target");
+      const embed = createTradeSummaryEmbed(
+        tradeData,
+        server,
+        true,
+        "Initiator",
+        "Target",
+      );
       expect(embed).toBeDefined();
       expect(embed.data.description).toBeDefined();
     });
@@ -273,7 +291,13 @@ describe("TradeUtils", () => {
         settings: { language: "eng" },
       } as any;
 
-      const embed = createTradeSummaryEmbed(tradeData, server, true, "Initiator", "Target");
+      const embed = createTradeSummaryEmbed(
+        tradeData,
+        server,
+        true,
+        "Initiator",
+        "Target",
+      );
       expect(embed).toBeDefined();
     });
   });

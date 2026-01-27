@@ -61,11 +61,18 @@ export function createTrade(tradeData: TradeData): void {
     targetId: extractId(tradeData.targetId),
   };
 
-  const ttl = Math.max(0, Math.floor((cleanData.expiresAt - Date.now()) / 1000));
+  const ttl = Math.max(
+    0,
+    Math.floor((cleanData.expiresAt - Date.now()) / 1000),
+  );
 
   try {
     tradeCache.set(cleanData.tradeId, cleanData, ttl);
-    tradeCache.set(`trade_user_${cleanData.initiatorId}`, cleanData.tradeId, ttl);
+    tradeCache.set(
+      `trade_user_${cleanData.initiatorId}`,
+      cleanData.tradeId,
+      ttl,
+    );
     tradeCache.set(`trade_user_${cleanData.targetId}`, cleanData.tradeId, ttl);
   } catch (error: any) {
     newLogger("error", error as string, "Error creating trade");
@@ -78,13 +85,19 @@ export function getTrade(tradeId: string): TradeData | undefined {
     const trade = tradeCache.get<TradeData>(String(tradeId));
     if (!trade) return undefined;
 
-    if (typeof trade.initiatorId !== "string" || typeof trade.targetId !== "string") {
+    if (
+      typeof trade.initiatorId !== "string" ||
+      typeof trade.targetId !== "string"
+    ) {
       const fixedTrade: TradeData = {
         ...trade,
         initiatorId: extractId(trade.initiatorId),
         targetId: extractId(trade.targetId),
       };
-      const ttl = Math.max(0, Math.floor((fixedTrade.expiresAt - Date.now()) / 1000));
+      const ttl = Math.max(
+        0,
+        Math.floor((fixedTrade.expiresAt - Date.now()) / 1000),
+      );
       tradeCache.set(String(tradeId), fixedTrade, ttl);
       return fixedTrade;
     }
@@ -106,7 +119,10 @@ export function getTradeByUserId(userId: string): TradeData | undefined {
   }
 }
 
-export function updateTrade(tradeId: string, updates: Partial<TradeData>): void {
+export function updateTrade(
+  tradeId: string,
+  updates: Partial<TradeData>,
+): void {
   const existing = getTrade(tradeId);
   if (!existing) return;
 
@@ -155,7 +171,11 @@ export function setTradeCooldown(
       expiresAt,
     };
     const ttl = Math.max(0, Math.floor((expiresAt - Date.now()) / 1000));
-    cooldownCache.set(`cooldown_${String(userId)}_${String(rarity)}`, cooldown, ttl);
+    cooldownCache.set(
+      `cooldown_${String(userId)}_${String(rarity)}`,
+      cooldown,
+      ttl,
+    );
   } catch (error: any) {
     newLogger("error", error as string, "Error setting cooldown");
     throw error;
@@ -166,7 +186,9 @@ export function getTradeCooldown(
   userId: string,
   rarity: string,
 ): TradeCooldown | undefined {
-  return cooldownCache.get<TradeCooldown>(`cooldown_${String(userId)}_${String(rarity)}`);
+  return cooldownCache.get<TradeCooldown>(
+    `cooldown_${String(userId)}_${String(rarity)}`,
+  );
 }
 
 export function setTradeBlock(userId: string, expiresAt: number): void {

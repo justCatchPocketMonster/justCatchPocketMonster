@@ -60,8 +60,9 @@ export function newLogger(
   ...args: any[]
 ): void {
   const callerInfo = getCallerInfo();
-  const fullMessage = args.length > 0 ? `${message} ${args.join(" ")}` : message;
-  
+  const fullMessage =
+    args.length > 0 ? `${message} ${args.join(" ")}` : message;
+
   const logData: TransformableInfo = {
     level,
     message: fullMessage,

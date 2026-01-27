@@ -144,7 +144,9 @@ describe("TradeCache", () => {
     });
 
     it("should not update non-existent trade", () => {
-      expect(() => updateTrade("non_existent", { status: "accepted" })).not.toThrow();
+      expect(() =>
+        updateTrade("non_existent", { status: "accepted" }),
+      ).not.toThrow();
     });
   });
 
@@ -220,6 +222,71 @@ describe("TradeCache", () => {
     it("should return undefined for non-existent block", () => {
       const block = getTradeBlock("user20");
       expect(block).toBeUndefined();
+    });
+  });
+
+  describe("error handling", () => {
+    it("should handle getTrade with non-string IDs", () => {
+      const tradeData: TradeData = {
+        tradeId: "error_trade_2",
+        initiatorId: { discordId: "user23" } as any,
+        targetId: { discordId: "user24" } as any,
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("error_trade_2");
+      expect(trade).toBeDefined();
+      expect(trade?.initiatorId).toBe("user23");
+      expect(trade?.targetId).toBe("user24");
+    });
+
+    it("should handle getTradeByUserId", () => {
+      const tradeData: TradeData = {
+        tradeId: "error_trade_3",
+        initiatorId: "user25",
+        targetId: "user26",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTradeByUserId("user25");
+      expect(trade).toBeDefined();
+    });
+
+    it("should handle updateTrade", () => {
+      const tradeData: TradeData = {
+        tradeId: "error_trade_4",
+        initiatorId: "user27",
+        targetId: "user28",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      updateTrade("error_trade_4", { status: "accepted" });
+      const trade = getTrade("error_trade_4");
+      expect(trade?.status).toBe("accepted");
+    });
+
+    it("should handle setTradeCooldown", () => {
+      const expiresAt = Date.now() + 86400000;
+      expect(() =>
+        setTradeCooldown("user29", "legendary", expiresAt),
+      ).not.toThrow();
+    });
+
+    it("should handle setTradeBlock", () => {
+      const expiresAt = Date.now() + 604800000;
+      expect(() => setTradeBlock("user30", expiresAt)).not.toThrow();
     });
   });
 });

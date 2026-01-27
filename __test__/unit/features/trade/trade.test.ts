@@ -68,7 +68,13 @@ describe("Trade", () => {
 
     const mockClient = {} as Client;
 
-    const result = await initiateTrade(mockClient, initiator, target, targetDiscordUser, server);
+    const result = await initiateTrade(
+      mockClient,
+      initiator,
+      target,
+      targetDiscordUser,
+      server,
+    );
 
     expect(result.success).toBe(false);
     expect(result.message).toBeDefined();
@@ -108,14 +114,22 @@ describe("Trade", () => {
 
     const mockClient = {} as Client;
 
-    const result = await initiateTrade(mockClient, initiator, target, targetDiscordUser, server);
+    const result = await initiateTrade(
+      mockClient,
+      initiator,
+      target,
+      targetDiscordUser,
+      server,
+    );
 
     expect(result.success).toBe(false);
     expect(result.message).toBeDefined();
   });
 
   it("should reject when target is blocked", async () => {
-    const { setTradeBlock } = require("../../../../src/features/trade/tradeCache");
+    const {
+      setTradeBlock,
+    } = require("../../../../src/features/trade/tradeCache");
     setTradeBlock("user6", Date.now() + 3600000);
 
     const initiator: UserType = {
@@ -139,7 +153,13 @@ describe("Trade", () => {
 
     const mockClient = {} as Client;
 
-    const result = await initiateTrade(mockClient, initiator, target, targetDiscordUser, server);
+    const result = await initiateTrade(
+      mockClient,
+      initiator,
+      target,
+      targetDiscordUser,
+      server,
+    );
 
     expect(result.success).toBe(false);
     expect(result.message).toBeDefined();
@@ -321,5 +341,159 @@ describe("Trade", () => {
     );
 
     expect(result.success).toBe(false);
+  });
+
+  it("should handle timeout collector", async () => {
+    const initiator: UserType = {
+      discordId: "user16",
+    } as any;
+
+    const target: UserType = {
+      discordId: "user17",
+    } as any;
+
+    let timeoutCallback: any;
+    const targetMessage = {
+      id: "target_message_id",
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event: string, callback: any) => {
+          if (event === "end") {
+            timeoutCallback = callback;
+          }
+          return {
+            on: jest.fn().mockReturnThis(),
+          };
+        }),
+      }),
+      edit: jest.fn().mockResolvedValue({}),
+    };
+
+    const targetDiscordUser = {
+      id: "user17",
+      username: "Target",
+      bot: false,
+      createDM: jest.fn().mockResolvedValue({
+        send: jest.fn().mockResolvedValue(targetMessage),
+      }),
+    } as unknown as DiscordUser;
+
+    const initiatorDiscordUser = {
+      id: "user16",
+      username: "Initiator",
+      createDM: jest.fn().mockResolvedValue({
+        send: jest.fn().mockResolvedValue({
+          id: "initiator_message_id",
+        }),
+      }),
+    };
+
+    const server: ServerType = {
+      discordId: "server1",
+      settings: { language: "eng" },
+    } as any;
+
+    const mockClient = {
+      users: {
+        fetch: jest.fn().mockResolvedValue(initiatorDiscordUser),
+      },
+    } as unknown as Client;
+
+    const result = await initiateTrade(
+      mockClient,
+      initiator,
+      target,
+      targetDiscordUser,
+      server,
+    );
+
+    expect(result.success).toBe(true);
+
+    if (timeoutCallback) {
+      const {
+        getTrade,
+        getUserActiveTrade,
+      } = require("../../../../src/features/trade/tradeCache");
+      const activeTrade = getUserActiveTrade("user16");
+      if (activeTrade) {
+        await timeoutCallback([], "time");
+        expect(targetMessage.edit).toHaveBeenCalled();
+      }
+    }
+  });
+
+  it("should handle timeout collector when trade status is not pending", async () => {
+    const initiator: UserType = {
+      discordId: "user18",
+    } as any;
+
+    const target: UserType = {
+      discordId: "user19",
+    } as any;
+
+    const targetDiscordUser = {
+      id: "user19",
+      username: "Target",
+      bot: false,
+      createDM: jest.fn().mockResolvedValue({
+        send: jest.fn().mockResolvedValue({
+          id: "target_message_id",
+          createMessageComponentCollector: jest.fn().mockReturnValue({
+            on: jest.fn((event: string, callback: any) => {
+              if (event === "end") {
+                setTimeout(() => {
+                  const {
+                    getTrade,
+                    updateTrade,
+                  } = require("../../../../src/features/trade/tradeCache");
+                  const tradeId = `trade_user18_user19_${Date.now()}`;
+                  const trade = getTrade(tradeId);
+                  if (trade) {
+                    updateTrade(tradeId, { status: "accepted" });
+                  }
+                  callback([], "time");
+                }, 10);
+              }
+              return {
+                on: jest.fn().mockReturnThis(),
+              };
+            }),
+          }),
+          edit: jest.fn().mockResolvedValue({}),
+        }),
+      }),
+    } as unknown as DiscordUser;
+
+    const initiatorDiscordUser = {
+      id: "user18",
+      username: "Initiator",
+      createDM: jest.fn().mockResolvedValue({
+        send: jest.fn().mockResolvedValue({
+          id: "initiator_message_id",
+        }),
+      }),
+    };
+
+    const server: ServerType = {
+      discordId: "server1",
+      settings: { language: "eng" },
+    } as any;
+
+    const mockClient = {
+      users: {
+        fetch: jest.fn().mockResolvedValue(initiatorDiscordUser),
+      },
+    } as unknown as Client;
+
+    const result = await initiateTrade(
+      mockClient,
+      initiator,
+      target,
+      targetDiscordUser,
+      server,
+    );
+
+    expect(result.success).toBe(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 50));
   });
 });

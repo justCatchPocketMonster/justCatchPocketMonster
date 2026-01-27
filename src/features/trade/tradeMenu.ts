@@ -69,11 +69,13 @@ export class TradeMenuHandler implements MenuHandler {
           .map((type) => {
             const typePokemon = typeMap.get(type)!;
             const pokemonOptions: MenuOption[] = typePokemon.map((item) => {
-              const langKey = `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-                | "nameFr"
-                | "nameEng";
+              const langKey =
+                `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+                  | "nameFr"
+                  | "nameEng";
               const pokemonName = item.data.name[langKey][0];
-              const totalCount = item.pokemon.normalCount + item.pokemon.shinyCount;
+              const totalCount =
+                item.pokemon.normalCount + item.pokemon.shinyCount;
               return {
                 label: `${pokemonName} (${totalCount})`,
                 value: item.key,
@@ -132,6 +134,11 @@ export function regenerateTradeMenu(
   requiredRarity: string | undefined,
   onPokemonSelected: (pokemonKey: string) => void,
 ): Map<string, MenuHandler> {
-  const handler = new TradeMenuHandler(user, server, requiredRarity, onPokemonSelected);
+  const handler = new TradeMenuHandler(
+    user,
+    server,
+    requiredRarity,
+    onPokemonSelected,
+  );
   return new Map([["generation", handler]]);
 }

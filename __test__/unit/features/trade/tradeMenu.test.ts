@@ -1,4 +1,7 @@
-import { TradeMenuHandler, regenerateTradeMenu } from "../../../../src/features/trade/tradeMenu";
+import {
+  TradeMenuHandler,
+  regenerateTradeMenu,
+} from "../../../../src/features/trade/tradeMenu";
 import { UserType } from "../../../../src/core/types/UserType";
 import { ServerType } from "../../../../src/core/types/ServerType";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
@@ -107,7 +110,12 @@ describe("TradeMenu", () => {
         settings: { language: "eng" },
       } as any;
 
-      const handler = new TradeMenuHandler(user, server, "legendary", jest.fn());
+      const handler = new TradeMenuHandler(
+        user,
+        server,
+        "legendary",
+        jest.fn(),
+      );
       const structure = handler.getMenuStructure();
       expect(structure.children).toBeDefined();
     });
@@ -126,7 +134,12 @@ describe("TradeMenu", () => {
         settings: { language: "eng" },
       } as any;
 
-      const handler = new TradeMenuHandler(user, server, undefined, onPokemonSelected);
+      const handler = new TradeMenuHandler(
+        user,
+        server,
+        undefined,
+        onPokemonSelected,
+      );
       handler.handleAction([{ value: "25-ordinary-1" }]);
       expect(onPokemonSelected).toHaveBeenCalledWith("25-ordinary-1");
     });
@@ -145,7 +158,12 @@ describe("TradeMenu", () => {
         settings: { language: "eng" },
       } as any;
 
-      const handler = new TradeMenuHandler(user, server, undefined, onPokemonSelected);
+      const handler = new TradeMenuHandler(
+        user,
+        server,
+        undefined,
+        onPokemonSelected,
+      );
       handler.handleAction([{ value: "gen_1" }]);
       expect(onPokemonSelected).not.toHaveBeenCalled();
     });

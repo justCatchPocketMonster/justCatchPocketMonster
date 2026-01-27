@@ -1385,8 +1385,12 @@
     "eng": ["Trade rules"]
   },
   "tradeRules": {
-    "fr": ["• Vous devez posséder au moins 2 exemplaires du Pokémon à échanger\n• Les échanges se font uniquement entre Pokémon de la même rareté\n• Respectez les délais entre échanges selon la rareté"],
-    "eng": ["• You must own at least 2 copies of the Pokémon to trade\n• Trades can only be made between Pokémon of the same rarity\n• Respect the cooldowns between trades according to rarity"]
+    "fr": [
+      "• Vous devez posséder au moins 2 exemplaires du Pokémon à échanger\n• Les échanges se font uniquement entre Pokémon de la même rareté\n• Respectez les délais entre échanges selon la rareté"
+    ],
+    "eng": [
+      "• You must own at least 2 copies of the Pokémon to trade\n• Trades can only be made between Pokémon of the same rarity\n• Respect the cooldowns between trades according to rarity"
+    ]
   },
   "tradeCooldownsTitle": {
     "fr": ["Temps restant avant prochain échange"],
@@ -1429,8 +1433,12 @@
     "eng": ["Trade refused - One week block"]
   },
   "tradeRefusedWeekDesc": {
-    "fr": ["L'échange a été refusé. Les demandes d'échange seront bloquées pendant 1 semaine."],
-    "eng": ["The trade has been refused. Trade requests will be blocked for 1 week."]
+    "fr": [
+      "L'échange a été refusé. Les demandes d'échange seront bloquées pendant 1 semaine."
+    ],
+    "eng": [
+      "The trade has been refused. Trade requests will be blocked for 1 week."
+    ]
   },
   "tradeSelectPokemonTitle": {
     "fr": ["Sélectionnez votre Pokémon"],
@@ -1493,12 +1501,18 @@
     "eng": ["You have no eligible Pokémon for trade"]
   },
   "tradeNoValidPokemon": {
-    "fr": ["Échange impossible : {user} n'a pas de Pokémon valide pour l'échange"],
+    "fr": [
+      "Échange impossible : {user} n'a pas de Pokémon valide pour l'échange"
+    ],
     "eng": ["Trade impossible: {user} has no valid Pokémon for trade"]
   },
   "tradeNoValidPokemonBoth": {
-    "fr": ["Échange impossible : {initiator} et {target} n'ont pas de Pokémon valide pour l'échange"],
-    "eng": ["Trade impossible: {initiator} and {target} have no valid Pokémon for trade"]
+    "fr": [
+      "Échange impossible : {initiator} et {target} n'ont pas de Pokémon valide pour l'échange"
+    ],
+    "eng": [
+      "Trade impossible: {initiator} and {target} have no valid Pokémon for trade"
+    ]
   },
   "tradeImpossible": {
     "fr": ["Échange impossible"],
@@ -1561,8 +1575,12 @@
     "eng": ["Trade cancelled. Returning to selection..."]
   },
   "tradeRarityMismatch": {
-    "fr": ["Les raretés ne correspondent pas. Veuillez sélectionner un Pokémon de la même rareté."],
-    "eng": ["The rarities do not match. Please select a Pokémon of the same rarity."]
+    "fr": [
+      "Les raretés ne correspondent pas. Veuillez sélectionner un Pokémon de la même rareté."
+    ],
+    "eng": [
+      "The rarities do not match. Please select a Pokémon of the same rarity."
+    ]
   },
   "tradeSelectYourPokemon": {
     "fr": ["Sélectionnez votre Pokémon à échanger"],
@@ -1613,8 +1631,12 @@
     "eng": ["Trade request sent successfully"]
   },
   "tradeFailedToSendDM": {
-    "fr": ["Impossible d'envoyer le message privé. Vérifiez que les messages privés sont activés."],
-    "eng": ["Failed to send private message. Please check that DMs are enabled."]
+    "fr": [
+      "Impossible d'envoyer le message privé. Vérifiez que les messages privés sont activés."
+    ],
+    "eng": [
+      "Failed to send private message. Please check that DMs are enabled."
+    ]
   },
   "tradeError": {
     "fr": ["Une erreur s'est produite lors de l'échange"],

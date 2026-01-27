@@ -1,5 +1,9 @@
 import { handlePokemonSelection } from "../../../../src/features/trade/tradeSelection";
-import { TradeData, createTrade, getTrade } from "../../../../src/features/trade/tradeCache";
+import {
+  TradeData,
+  createTrade,
+  getTrade,
+} from "../../../../src/features/trade/tradeCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getUserById } from "../../../../src/cache/UserCache";
 
@@ -30,7 +34,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("non_existent", "user1", "25-ordinary-1", server);
+    await handlePokemonSelection(
+      "non_existent",
+      "user1",
+      "25-ordinary-1",
+      server,
+    );
     const trade = getTrade("non_existent");
     expect(trade).toBeUndefined();
   });
@@ -53,7 +62,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("test_trade_1", "user2", "invalid-key", server);
+    await handlePokemonSelection(
+      "test_trade_1",
+      "user2",
+      "invalid-key",
+      server,
+    );
     const trade = getTrade("test_trade_1");
     expect(trade?.initiatorChoice).toBeUndefined();
   });
@@ -76,7 +90,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("test_trade_2", "user4", "25-ordinary-1", server);
+    await handlePokemonSelection(
+      "test_trade_2",
+      "user4",
+      "25-ordinary-1",
+      server,
+    );
     const trade = getTrade("test_trade_2");
     expect(trade?.initiatorChoice).toBeDefined();
     expect(trade?.initiatorChoice?.pokemonKey).toBe("25-ordinary-1");
@@ -101,7 +120,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("test_trade_3", "user7", "1-ordinary-1", server);
+    await handlePokemonSelection(
+      "test_trade_3",
+      "user7",
+      "1-ordinary-1",
+      server,
+    );
     const trade = getTrade("test_trade_3");
     expect(trade?.targetChoice).toBeDefined();
     expect(trade?.targetChoice?.pokemonKey).toBe("1-ordinary-1");
@@ -131,7 +155,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("test_trade_4", "user9", "1-ordinary-1", server);
+    await handlePokemonSelection(
+      "test_trade_4",
+      "user9",
+      "1-ordinary-1",
+      server,
+    );
     const trade = getTrade("test_trade_4");
     expect(trade?.status).toBe("confirming");
   });
@@ -161,7 +190,12 @@ describe("TradeSelection", () => {
       settings: { language: "eng" },
     };
 
-    await handlePokemonSelection("test_trade_5", "user11", "1-ordinary-1", server);
+    await handlePokemonSelection(
+      "test_trade_5",
+      "user11",
+      "1-ordinary-1",
+      server,
+    );
     const trade = getTrade("test_trade_5");
     expect(trade?.initiatorConfirmed).toBe(false);
     expect(trade?.targetConfirmed).toBe(false);

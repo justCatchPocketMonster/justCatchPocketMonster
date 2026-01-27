@@ -7,7 +7,10 @@ import { TradeData } from "../../../../src/features/trade/tradeCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getUserById } from "../../../../src/cache/UserCache";
 import { updateUser } from "../../../../src/cache/UserCache";
-import { setTradeCooldown, getTradeCooldown } from "../../../../src/features/trade/tradeCache";
+import {
+  setTradeCooldown,
+  getTradeCooldown,
+} from "../../../../src/features/trade/tradeCache";
 
 jest.mock("../../../../src/cache/UserCache", () => {
   const actual = jest.requireActual("../../../../src/cache/UserCache");
@@ -19,7 +22,9 @@ jest.mock("../../../../src/cache/UserCache", () => {
 });
 
 jest.mock("../../../../src/features/trade/tradeCache", () => {
-  const actual = jest.requireActual("../../../../src/features/trade/tradeCache");
+  const actual = jest.requireActual(
+    "../../../../src/features/trade/tradeCache",
+  );
   return {
     ...actual,
     setTradeCooldown: jest.fn(),

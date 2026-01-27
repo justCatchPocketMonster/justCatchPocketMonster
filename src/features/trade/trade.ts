@@ -11,7 +11,12 @@ import {
   TradeData,
 } from "./tradeCache";
 import { createEmbedAsk } from "./tradeUtils";
-import { ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from "discord.js";
+import {
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+  EmbedBuilder,
+} from "discord.js";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
 
@@ -33,7 +38,10 @@ export async function initiateTrade(
     ) {
       return {
         success: false,
-        message: language("tradeInitiatorHasActiveTrade", server.settings.language),
+        message: language(
+          "tradeInitiatorHasActiveTrade",
+          server.settings.language,
+        ),
       };
     }
 
@@ -45,7 +53,10 @@ export async function initiateTrade(
     ) {
       return {
         success: false,
-        message: language("tradeTargetHasActiveTrade", server.settings.language),
+        message: language(
+          "tradeTargetHasActiveTrade",
+          server.settings.language,
+        ),
       };
     }
 
@@ -73,7 +84,9 @@ export async function initiateTrade(
     createTrade(tradeData);
 
     try {
-      const initiatorDiscordUser = await client.users.fetch(initiator.discordId);
+      const initiatorDiscordUser = await client.users.fetch(
+        initiator.discordId,
+      );
       const initiatorDM = await initiatorDiscordUser.createDM();
       const initiatorEmbed = createEmbedAsk(
         tradeData,
@@ -82,7 +95,9 @@ export async function initiateTrade(
         initiatorDiscordUser.username,
         targetDiscordUser.username,
       );
-      const initiatorMessage = await initiatorDM.send({ embeds: [initiatorEmbed] });
+      const initiatorMessage = await initiatorDM.send({
+        embeds: [initiatorEmbed],
+      });
       updateTrade(tradeId, { initiatorMessageId: initiatorMessage.id });
     } catch (error) {
       newLogger("error", error as string, `Failed to send DM to initiator`);
@@ -90,7 +105,8 @@ export async function initiateTrade(
 
     try {
       const targetDM = await targetDiscordUser.createDM();
-      const initiatorName = (await client.users.fetch(initiator.discordId)).username;
+      const initiatorName = (await client.users.fetch(initiator.discordId))
+        .username;
       const targetEmbed = createEmbedAsk(
         tradeData,
         server,
@@ -141,12 +157,19 @@ export async function initiateTrade(
 
             const timeoutEmbed = new EmbedBuilder()
               .setTitle(language("tradeTimeoutTitle", server.settings.language))
-              .setDescription(language("tradeTimeoutDesc", server.settings.language))
+              .setDescription(
+                language("tradeTimeoutDesc", server.settings.language),
+              )
               .setColor(0xe74c3c);
 
             try {
-              await targetMessage.edit({ embeds: [timeoutEmbed], components: [] });
-              const initiatorUser = await client.users.fetch(initiator.discordId);
+              await targetMessage.edit({
+                embeds: [timeoutEmbed],
+                components: [],
+              });
+              const initiatorUser = await client.users.fetch(
+                initiator.discordId,
+              );
               const initiatorDM = await initiatorUser.createDM();
               await initiatorDM.send({ embeds: [timeoutEmbed] });
             } catch (error) {

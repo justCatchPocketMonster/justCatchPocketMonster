@@ -19,13 +19,15 @@ export async function validateTrade(tradeData: TradeData): Promise<boolean> {
 
   const initiatorPokemon =
     initiator.savePokemon.data[tradeData.initiatorChoice.pokemonKey];
-  const targetPokemon = target.savePokemon.data[tradeData.targetChoice.pokemonKey];
+  const targetPokemon =
+    target.savePokemon.data[tradeData.targetChoice.pokemonKey];
 
   if (!initiatorPokemon || !targetPokemon) {
     return false;
   }
 
-  const initiatorTotal = initiatorPokemon.normalCount + initiatorPokemon.shinyCount;
+  const initiatorTotal =
+    initiatorPokemon.normalCount + initiatorPokemon.shinyCount;
   const targetTotal = targetPokemon.normalCount + targetPokemon.shinyCount;
 
   if (initiatorTotal < 2 || targetTotal < 2) {
@@ -59,7 +61,10 @@ function initializePokemonIfNeeded(
   }
 }
 
-function removeOnePokemon(pokemon: { normalCount: number; shinyCount: number }): void {
+function removeOnePokemon(pokemon: {
+  normalCount: number;
+  shinyCount: number;
+}): void {
   if (pokemon.normalCount > 0) {
     pokemon.normalCount--;
   } else if (pokemon.shinyCount > 0) {
@@ -83,14 +88,16 @@ export async function executeTrade(tradeData: TradeData): Promise<boolean> {
     const initiatorChoice = tradeData.initiatorChoice!;
     const targetChoice = tradeData.targetChoice!;
 
-    const initiatorPokemon = initiator.savePokemon.data[initiatorChoice.pokemonKey];
+    const initiatorPokemon =
+      initiator.savePokemon.data[initiatorChoice.pokemonKey];
     const targetPokemon = target.savePokemon.data[targetChoice.pokemonKey];
 
     if (!initiatorPokemon || !targetPokemon) {
       return false;
     }
 
-    const initiatorTotal = initiatorPokemon.normalCount + initiatorPokemon.shinyCount;
+    const initiatorTotal =
+      initiatorPokemon.normalCount + initiatorPokemon.shinyCount;
     const targetTotal = targetPokemon.normalCount + targetPokemon.shinyCount;
 
     if (initiatorTotal < 2 || targetTotal < 2) {
@@ -103,7 +110,8 @@ export async function executeTrade(tradeData: TradeData): Promise<boolean> {
     removeOnePokemon(initiatorPokemon);
     removeOnePokemon(targetPokemon);
 
-    const initiatorReceived = initiator.savePokemon.data[targetChoice.pokemonKey];
+    const initiatorReceived =
+      initiator.savePokemon.data[targetChoice.pokemonKey];
     const targetReceived = target.savePokemon.data[initiatorChoice.pokemonKey];
 
     if (initiatorReceived) {
@@ -126,7 +134,11 @@ export async function executeTrade(tradeData: TradeData): Promise<boolean> {
 
     return true;
   } catch (error) {
-    newLogger("error", error as string, `Error executing trade ${tradeData.tradeId}`);
+    newLogger(
+      "error",
+      error as string,
+      `Error executing trade ${tradeData.tradeId}`,
+    );
     return false;
   }
 }

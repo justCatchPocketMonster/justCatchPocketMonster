@@ -82,7 +82,7 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
         .setTitle(language("noEvent", server.settings.language))
         .setDescription(
           language("nextSeasonalEvent", server.settings.language) +
-          formatTimestamp(nextEvent.startDate.getTime()),
+            formatTimestamp(nextEvent.startDate.getTime()),
         ),
       null,
       language("seasonalEvent", server.settings.language),

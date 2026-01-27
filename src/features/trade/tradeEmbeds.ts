@@ -21,7 +21,9 @@ export function createTradeCompletedEmbed(
   }
 
   const myChoice = isInitiator ? trade.initiatorChoice : trade.targetChoice;
-  const receivedChoice = isInitiator ? trade.targetChoice : trade.initiatorChoice;
+  const receivedChoice = isInitiator
+    ? trade.targetChoice
+    : trade.initiatorChoice;
 
   const myPokemonData = allPokemon.find(
     (p) =>
@@ -47,18 +49,16 @@ export function createTradeCompletedEmbed(
   const receivedCount =
     user.savePokemon.data[receivedChoice.pokemonKey]?.normalCount || 0;
 
-  return embed
-    .setDescription(language("tradeCompletedDesc", lang))
-    .addFields(
-      {
-        name: language("tradeYouGive", lang),
-        value: `${myPokemonName} (${myCount})`,
-        inline: true,
-      },
-      {
-        name: language("tradeYouReceive", lang),
-        value: `${receivedPokemonName} (${receivedCount})`,
-        inline: true,
-      },
-    );
+  return embed.setDescription(language("tradeCompletedDesc", lang)).addFields(
+    {
+      name: language("tradeYouGive", lang),
+      value: `${myPokemonName} (${myCount})`,
+      inline: true,
+    },
+    {
+      name: language("tradeYouReceive", lang),
+      value: `${receivedPokemonName} (${receivedCount})`,
+      inline: true,
+    },
+  );
 }

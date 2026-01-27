@@ -8,7 +8,9 @@ config();
 
 async function giveRandomPokemon() {
   if (process.env.ENVIRONMENT !== "dev") {
-    console.error("This script can only run in dev environment. Set ENVIRONMENT=dev in .env");
+    console.error(
+      "This script can only run in dev environment. Set ENVIRONMENT=dev in .env",
+    );
     process.exit(1);
   }
 
@@ -28,7 +30,7 @@ async function giveRandomPokemon() {
 
     for (const user of users) {
       const savePokemon = user.savePokemon?.data || {};
-      
+
       if (!savePokemon || Object.keys(savePokemon).length === 0) {
         console.log(`Skipping user ${user.discordId} - no pokemon initialized`);
         continue;
@@ -64,11 +66,13 @@ async function giveRandomPokemon() {
 
       await User.updateOne(
         { discordId: user.discordId },
-        { $set: { "savePokemon.data": savePokemon } }
+        { $set: { "savePokemon.data": savePokemon } },
       );
 
       updatedCount++;
-      console.log(`Updated user ${user.discordId}: Added ${pokemonAdded} pokemon entries`);
+      console.log(
+        `Updated user ${user.discordId}: Added ${pokemonAdded} pokemon entries`,
+      );
     }
 
     console.log(`\nCompleted! Updated ${updatedCount} users`);

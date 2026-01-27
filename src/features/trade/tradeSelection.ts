@@ -51,7 +51,8 @@ export async function handlePokemonSelection(
   if (!tradeWithReset) return;
 
   if (
-    tradeWithReset.initiatorChoice!.rarity !== tradeWithReset.targetChoice!.rarity
+    tradeWithReset.initiatorChoice!.rarity !==
+    tradeWithReset.targetChoice!.rarity
   ) {
     if (client) {
       try {
@@ -59,8 +60,12 @@ export async function handlePokemonSelection(
         const targetUser = await client.users.fetch(trade.targetId);
         const initiatorDM = await initiatorUser.createDM();
         const targetDM = await targetUser.createDM();
-        await initiatorDM.send(language("tradeRarityMismatch", server.settings.language));
-        await targetDM.send(language("tradeRarityMismatch", server.settings.language));
+        await initiatorDM.send(
+          language("tradeRarityMismatch", server.settings.language),
+        );
+        await targetDM.send(
+          language("tradeRarityMismatch", server.settings.language),
+        );
       } catch (error) {
         // DM might be disabled
       }

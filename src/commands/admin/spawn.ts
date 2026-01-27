@@ -98,7 +98,6 @@ export default {
         });
       }
     } catch (e) {
-    
       newLogger(
         "error",
         e as string,

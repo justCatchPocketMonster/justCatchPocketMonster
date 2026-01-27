@@ -191,11 +191,13 @@ describe("Trade Handlers", () => {
       settings: { language: "eng" },
     };
 
-    (userCache.getUserById as jest.Mock).mockImplementation(async (id: string) => {
-      if (id === initiatorId) return mockInitiator;
-      if (id === targetId) return mockTarget;
-      return mockInitiator;
-    });
+    (userCache.getUserById as jest.Mock).mockImplementation(
+      async (id: string) => {
+        if (id === initiatorId) return mockInitiator;
+        if (id === targetId) return mockTarget;
+        return mockInitiator;
+      },
+    );
     (serverCache.getServerById as jest.Mock).mockResolvedValue(mockServer);
 
     (tradeCache.getTrade as jest.Mock).mockReturnValue(undefined);
@@ -211,7 +213,10 @@ describe("Trade Handlers", () => {
 
   describe("handleTradeAccept", () => {
     it("should handle trade not found", async () => {
-      const interaction = createMockButtonInteraction(targetId, `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
@@ -226,7 +231,10 @@ describe("Trade Handlers", () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction("wrongUser", `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        "wrongUser",
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
@@ -238,10 +246,19 @@ describe("Trade Handlers", () => {
     });
 
     it("should reject if trade status is not pending", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "accepted");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "accepted",
+      );
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
@@ -257,7 +274,10 @@ describe("Trade Handlers", () => {
       trade.serverId = "" as any;
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
@@ -273,7 +293,10 @@ describe("Trade Handlers", () => {
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
       (tradeUtils.getEligiblePokemon as jest.Mock).mockReturnValue([]);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
@@ -294,22 +317,34 @@ describe("Trade Handlers", () => {
         },
       };
 
-      (tradeUtils.getEligiblePokemon as jest.Mock).mockReturnValue([mockPokemon]);
-      (tradeMenuHandler.sendTradeMenuToUser as jest.Mock).mockResolvedValue(undefined);
+      (tradeUtils.getEligiblePokemon as jest.Mock).mockReturnValue([
+        mockPokemon,
+      ]);
+      (tradeMenuHandler.sendTradeMenuToUser as jest.Mock).mockResolvedValue(
+        undefined,
+      );
 
-      const interaction = createMockButtonInteraction(targetId, `trade_accept_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
 
       await handleTradeAccept(interaction, tradeId);
 
       expect(interaction.deferUpdate).toHaveBeenCalled();
-      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, { status: "accepted" });
+      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, {
+        status: "accepted",
+      });
       expect(tradeMenuHandler.sendTradeMenuToUser).toHaveBeenCalledTimes(2);
     });
   });
 
   describe("handleTradeRefuse", () => {
     it("should handle trade not found", async () => {
-      const interaction = createMockButtonInteraction(targetId, `trade_refuse_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_refuse_${tradeId}`,
+      );
 
       await handleTradeRefuse(interaction, tradeId);
 
@@ -320,7 +355,10 @@ describe("Trade Handlers", () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction("wrongUser", `trade_refuse_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        "wrongUser",
+        `trade_refuse_${tradeId}`,
+      );
 
       await handleTradeRefuse(interaction, tradeId);
 
@@ -332,19 +370,27 @@ describe("Trade Handlers", () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_refuse_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_refuse_${tradeId}`,
+      );
 
       await handleTradeRefuse(interaction, tradeId);
 
       expect(interaction.deferUpdate).toHaveBeenCalled();
-      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, { status: "cancelled" });
+      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, {
+        status: "cancelled",
+      });
       expect(tradeCache.deleteTrade).toHaveBeenCalledWith(tradeId);
     });
   });
 
   describe("handleTradeRefuseWeek", () => {
     it("should handle trade not found", async () => {
-      const interaction = createMockButtonInteraction(targetId, `trade_refuse_week_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_refuse_week_${tradeId}`,
+      );
 
       await handleTradeRefuseWeek(interaction, tradeId);
 
@@ -355,7 +401,10 @@ describe("Trade Handlers", () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction("wrongUser", `trade_refuse_week_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        "wrongUser",
+        `trade_refuse_week_${tradeId}`,
+      );
 
       await handleTradeRefuseWeek(interaction, tradeId);
 
@@ -367,20 +416,28 @@ describe("Trade Handlers", () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_refuse_week_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_refuse_week_${tradeId}`,
+      );
 
       await handleTradeRefuseWeek(interaction, tradeId);
 
       expect(interaction.deferUpdate).toHaveBeenCalled();
       expect(tradeCache.setTradeBlock).toHaveBeenCalled();
-      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, { status: "cancelled" });
+      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, {
+        status: "cancelled",
+      });
       expect(tradeCache.deleteTrade).toHaveBeenCalledWith(tradeId);
     });
   });
 
   describe("handleTradeConfirm", () => {
     it("should handle trade not found", async () => {
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -392,10 +449,19 @@ describe("Trade Handlers", () => {
     });
 
     it("should reject if user is not part of the trade", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction("wrongUser", `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        "wrongUser",
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -404,10 +470,19 @@ describe("Trade Handlers", () => {
     });
 
     it("should reject if trade status is not confirming", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "accepted");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "accepted",
+      );
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -416,10 +491,19 @@ describe("Trade Handlers", () => {
     });
 
     it("should reject if choices are missing", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -428,7 +512,13 @@ describe("Trade Handlers", () => {
     });
 
     it("should update confirmation status for initiator", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       trade.initiatorChoice = {
         pokemonKey: "25-ordinary-1",
         pokemonId: "25",
@@ -441,7 +531,10 @@ describe("Trade Handlers", () => {
       };
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -452,7 +545,13 @@ describe("Trade Handlers", () => {
     });
 
     it("should update confirmation status for target", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       trade.initiatorChoice = {
         pokemonKey: "25-ordinary-1",
         pokemonId: "25",
@@ -465,7 +564,10 @@ describe("Trade Handlers", () => {
       };
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction(targetId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -476,7 +578,13 @@ describe("Trade Handlers", () => {
     });
 
     it("should execute trade when both users confirmed", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       trade.initiatorChoice = {
         pokemonKey: "25-ordinary-1",
         pokemonId: "25",
@@ -493,18 +601,29 @@ describe("Trade Handlers", () => {
 
       (tradeValidation.executeTrade as jest.Mock).mockResolvedValue(true);
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
       expect(interaction.deferUpdate).toHaveBeenCalled();
       expect(tradeValidation.executeTrade).toHaveBeenCalled();
-      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, { status: "completed" });
+      expect(tradeCache.updateTrade).toHaveBeenCalledWith(tradeId, {
+        status: "completed",
+      });
       expect(tradeCache.deleteTrade).toHaveBeenCalledWith(tradeId);
     });
 
     it("should handle trade execution failure", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       trade.initiatorChoice = {
         pokemonKey: "25-ordinary-1",
         pokemonId: "25",
@@ -521,7 +640,10 @@ describe("Trade Handlers", () => {
 
       (tradeValidation.executeTrade as jest.Mock).mockResolvedValue(false);
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_confirm_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
 
       await handleTradeConfirm(interaction, tradeId);
 
@@ -540,7 +662,10 @@ describe("Trade Handlers", () => {
 
   describe("handleTradeCancel", () => {
     it("should handle trade not found", async () => {
-      const interaction = createMockButtonInteraction(initiatorId, `trade_cancel_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_cancel_${tradeId}`,
+      );
 
       await handleTradeCancel(interaction, tradeId);
 
@@ -548,10 +673,19 @@ describe("Trade Handlers", () => {
     });
 
     it("should reject if user is not part of the trade", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      const interaction = createMockButtonInteraction("wrongUser", `trade_cancel_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        "wrongUser",
+        `trade_cancel_${tradeId}`,
+      );
 
       await handleTradeCancel(interaction, tradeId);
 
@@ -560,7 +694,13 @@ describe("Trade Handlers", () => {
     });
 
     it("should successfully cancel trade and reset choices", async () => {
-      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId, "confirming");
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
       trade.initiatorChoice = {
         pokemonKey: "25-ordinary-1",
         pokemonId: "25",
@@ -573,9 +713,14 @@ describe("Trade Handlers", () => {
       };
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
 
-      (tradeMenuHandler.sendTradeMenuToUser as jest.Mock).mockResolvedValue(undefined);
+      (tradeMenuHandler.sendTradeMenuToUser as jest.Mock).mockResolvedValue(
+        undefined,
+      );
 
-      const interaction = createMockButtonInteraction(initiatorId, `trade_cancel_${tradeId}`);
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_cancel_${tradeId}`,
+      );
 
       await handleTradeCancel(interaction, tradeId);
 

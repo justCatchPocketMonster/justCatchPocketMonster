@@ -1,4 +1,7 @@
-import { SlashCommandBuilder, SlashCommandUserOption } from "@discordjs/builders";
+import {
+  SlashCommandBuilder,
+  SlashCommandUserOption,
+} from "@discordjs/builders";
 import { ChatInputCommandInteraction } from "discord.js";
 import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
@@ -45,7 +48,10 @@ export default {
       // Check if trading with self
       if (targetUser.id === interaction.user.id) {
         await interaction.reply({
-          content: language("tradeCannotTradeWithSelf", interaction.guild.preferredLocale || "eng"),
+          content: language(
+            "tradeCannotTradeWithSelf",
+            interaction.guild.preferredLocale || "eng",
+          ),
           ephemeral: true,
         });
         return;
@@ -54,7 +60,10 @@ export default {
       // Check if target is a bot
       if (targetUser.bot) {
         await interaction.reply({
-          content: language("tradeCannotTradeWithBot", interaction.guild.preferredLocale || "eng"),
+          content: language(
+            "tradeCannotTradeWithBot",
+            interaction.guild.preferredLocale || "eng",
+          ),
           ephemeral: true,
         });
         return;
@@ -66,7 +75,10 @@ export default {
 
       if (!server) {
         await interaction.reply({
-          content: language("tradeServerNotFound", interaction.guild.preferredLocale || "eng"),
+          content: language(
+            "tradeServerNotFound",
+            interaction.guild.preferredLocale || "eng",
+          ),
           ephemeral: true,
         });
         return;
@@ -82,12 +94,15 @@ export default {
 
       if (result.success) {
         await interaction.reply({
-          content: result.message || language("tradeRequestSentSuccess", server.settings.language),
+          content:
+            result.message ||
+            language("tradeRequestSentSuccess", server.settings.language),
           ephemeral: true,
         });
       } else {
         await interaction.reply({
-          content: result.message || language("tradeError", server.settings.language),
+          content:
+            result.message || language("tradeError", server.settings.language),
           ephemeral: true,
         });
       }

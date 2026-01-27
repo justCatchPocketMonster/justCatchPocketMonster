@@ -14,7 +14,10 @@ const RARITY_COOLDOWNS: Record<string, number> = {
   ultraBeast: 86400000,
 };
 
-export function calculateCooldownRemaining(userId: string, rarity: string): number | null {
+export function calculateCooldownRemaining(
+  userId: string,
+  rarity: string,
+): number | null {
   const cooldown = getTradeCooldown(userId, rarity);
   if (!cooldown || cooldown.expiresAt <= Date.now()) {
     return null;
@@ -94,7 +97,10 @@ export function createEmbedAsk(
   } else {
     embed.setTitle(language("tradeRequestReceived", lang));
     embed.setDescription(
-      language("tradeRequestReceivedDesc", lang).replace("{user}", initiatorName),
+      language("tradeRequestReceivedDesc", lang).replace(
+        "{user}",
+        initiatorName,
+      ),
     );
   }
 
@@ -145,10 +151,16 @@ export function createTradeSummaryEmbed(
   targetName: string,
 ): EmbedBuilder {
   const lang = server.settings.language;
-  const embed = new EmbedBuilder().setTitle(language("tradeSummaryTitle", lang));
+  const embed = new EmbedBuilder().setTitle(
+    language("tradeSummaryTitle", lang),
+  );
 
-  const myChoice = isInitiator ? tradeData.initiatorChoice : tradeData.targetChoice;
-  const theirChoice = isInitiator ? tradeData.targetChoice : tradeData.initiatorChoice;
+  const myChoice = isInitiator
+    ? tradeData.initiatorChoice
+    : tradeData.targetChoice;
+  const theirChoice = isInitiator
+    ? tradeData.targetChoice
+    : tradeData.initiatorChoice;
 
   if (myChoice && theirChoice) {
     const myPokemonData = allPokemon.find(
@@ -163,7 +175,11 @@ export function createTradeSummaryEmbed(
     );
 
     const myPokemonName = getPokemonName(myPokemonData, myChoice, lang);
-    const theirPokemonName = getPokemonName(theirPokemonData, theirChoice, lang);
+    const theirPokemonName = getPokemonName(
+      theirPokemonData,
+      theirChoice,
+      lang,
+    );
     const myName = isInitiator ? initiatorName : targetName;
     const theirName = isInitiator ? targetName : initiatorName;
 

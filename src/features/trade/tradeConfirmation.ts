@@ -1,4 +1,9 @@
-import { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+import {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} from "discord.js";
 import { TradeData } from "./tradeCache";
 import { createTradeSummaryEmbed } from "./tradeUtils";
 import { getUserById } from "../../cache/UserCache";
@@ -66,7 +71,10 @@ export async function sendConfirmationEmbeds(
         .setEmoji("❌")
         .setDisabled(isConfirmed);
 
-      return new ActionRowBuilder<ButtonBuilder>().addComponents(confirmButton, cancelButton);
+      return new ActionRowBuilder<ButtonBuilder>().addComponents(
+        confirmButton,
+        cancelButton,
+      );
     };
 
     try {
@@ -76,7 +84,11 @@ export async function sendConfirmationEmbeds(
         components: [createButtons(trade.initiatorConfirmed || false)],
       });
     } catch (error) {
-      newLogger("error", error as string, "Failed to send confirmation to initiator");
+      newLogger(
+        "error",
+        error as string,
+        "Failed to send confirmation to initiator",
+      );
     }
 
     try {
@@ -86,7 +98,11 @@ export async function sendConfirmationEmbeds(
         components: [createButtons(trade.targetConfirmed || false)],
       });
     } catch (error) {
-      newLogger("error", error as string, "Failed to send confirmation to target");
+      newLogger(
+        "error",
+        error as string,
+        "Failed to send confirmation to target",
+      );
     }
   } catch (error) {
     newLogger("error", error as string, "Error sending confirmation embeds");
