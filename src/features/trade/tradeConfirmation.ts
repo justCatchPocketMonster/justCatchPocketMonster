@@ -1,25 +1,26 @@
 import {
+  Client,
   EmbedBuilder,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
 } from "discord.js";
-import { TradeData } from "./tradeCache";
+import { TradeData, updateTrade, extractId } from "./tradeCache";
 import { createTradeSummaryEmbed } from "./tradeUtils";
-import { getUserById } from "../../cache/UserCache";
+import type { ServerType } from "../../core/types/ServerType";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
 
 export async function sendConfirmationEmbeds(
   trade: TradeData,
-  server: any,
-  client: any,
+  server: ServerType,
+  client: Client,
 ): Promise<void> {
   try {
-    const initiator = await getUserById(trade.initiatorId);
-    const target = await getUserById(trade.targetId);
-    const initiatorUser = await client.users.fetch(trade.initiatorId);
-    const targetUser = await client.users.fetch(trade.targetId);
+    const initiatorId = extractId(trade.initiatorId);
+    const targetId = extractId(trade.targetId);
+    const initiatorUser = await client.users.fetch(initiatorId);
+    const targetUser = await client.users.fetch(targetId);
 
     if (!initiatorUser || !targetUser) return;
 
@@ -77,32 +78,87 @@ export async function sendConfirmationEmbeds(
       );
     };
 
-    try {
-      const initiatorDM = await initiatorUser.createDM();
-      await initiatorDM.send({
-        embeds: [initiatorEmbed],
-        components: [createButtons(trade.initiatorConfirmed || false)],
-      });
-    } catch (error) {
-      newLogger(
-        "error",
-        error as string,
-        "Failed to send confirmation to initiator",
-      );
-    }
+    const initiatorRow = createButtons(trade.initiatorConfirmed || false);
+    const targetRow = createButtons(trade.targetConfirmed || false);
 
-    try {
-      const targetDM = await targetUser.createDM();
-      await targetDM.send({
-        embeds: [targetEmbed],
-        components: [createButtons(trade.targetConfirmed || false)],
-      });
-    } catch (error) {
-      newLogger(
-        "error",
-        error as string,
-        "Failed to send confirmation to target",
-      );
+    const hasExistingMessages =
+      trade.initiatorConfirmationMessageId &&
+      trade.targetConfirmationMessageId;
+
+    if (hasExistingMessages) {
+      try {
+        const initiatorDM = await initiatorUser.createDM();
+        const initiatorMessage = await initiatorDM.messages.fetch(
+          trade.initiatorConfirmationMessageId!,
+        );
+        await initiatorMessage.edit({
+          embeds: [initiatorEmbed],
+          components: [initiatorRow],
+        });
+      } catch (error) {
+        newLogger(
+          "error",
+          error as string,
+          "Failed to edit confirmation for initiator",
+        );
+      }
+
+      try {
+        const targetDM = await targetUser.createDM();
+        const targetMessage = await targetDM.messages.fetch(
+          trade.targetConfirmationMessageId!,
+        );
+        await targetMessage.edit({
+          embeds: [targetEmbed],
+          components: [targetRow],
+        });
+      } catch (error) {
+        newLogger(
+          "error",
+          error as string,
+          "Failed to edit confirmation for target",
+        );
+      }
+    } else {
+      let initiatorMessageId: string | undefined;
+      let targetMessageId: string | undefined;
+
+      try {
+        const initiatorDM = await initiatorUser.createDM();
+        const initiatorMessage = await initiatorDM.send({
+          embeds: [initiatorEmbed],
+          components: [initiatorRow],
+        });
+        initiatorMessageId = initiatorMessage.id;
+      } catch (error) {
+        newLogger(
+          "error",
+          error as string,
+          "Failed to send confirmation to initiator",
+        );
+      }
+
+      try {
+        const targetDM = await targetUser.createDM();
+        const targetMessage = await targetDM.send({
+          embeds: [targetEmbed],
+          components: [targetRow],
+        });
+        targetMessageId = targetMessage.id;
+      } catch (error) {
+        newLogger(
+          "error",
+          error as string,
+          "Failed to send confirmation to target",
+        );
+      }
+
+      if (initiatorMessageId && targetMessageId) {
+        updateTrade(trade.tradeId, {
+          initiatorConfirmationMessageId: initiatorMessageId,
+          targetConfirmationMessageId: targetMessageId,
+        });
+      }
     }
   } catch (error) {
     newLogger("error", error as string, "Error sending confirmation embeds");

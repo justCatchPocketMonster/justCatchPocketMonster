@@ -26,6 +26,8 @@ export interface TradeData {
   targetConfirmed?: boolean;
   initiatorMessageId?: string;
   targetMessageId?: string;
+  initiatorConfirmationMessageId?: string;
+  targetConfirmationMessageId?: string;
   createdAt: number;
   expiresAt: number;
 }
@@ -45,7 +47,9 @@ const tradeCache = new NodeCache({ stdTTL: ttlCache });
 const cooldownCache = new NodeCache({ stdTTL: ttlCache });
 const blockCache = new NodeCache({ stdTTL: 604800 });
 
-function extractId(value: string | { discordId: string } | unknown): string {
+export function extractId(
+  value: string | { discordId: string } | unknown,
+): string {
   if (typeof value === "string") return value;
   if (value && typeof value === "object" && "discordId" in value) {
     return String((value as { discordId: unknown }).discordId);

@@ -204,7 +204,7 @@ describe("TradeCache", () => {
     });
 
     it("should return undefined for non-existent cooldown", () => {
-      const cooldown = getTradeCooldown("user18", "fabulous");
+      const cooldown = getTradeCooldown("user18", "mythical");
       expect(cooldown).toBeUndefined();
     });
   });

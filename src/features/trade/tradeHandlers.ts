@@ -4,6 +4,7 @@ import {
   updateTrade,
   deleteTrade,
   setTradeBlock,
+  extractId,
   TradeData,
 } from "./tradeCache";
 import { executeTrade } from "./tradeValidation";
@@ -15,16 +16,6 @@ import { newLogger } from "../../middlewares/logger";
 import { sendTradeMenuToUser } from "./tradeMenuHandler";
 import { createTradeCompletedEmbed } from "./tradeEmbeds";
 import { sendConfirmationEmbeds } from "./tradeConfirmation";
-
-function extractDiscordId(
-  value: string | { discordId: string } | unknown,
-): string {
-  if (typeof value === "string") return value;
-  if (value && typeof value === "object" && "discordId" in value) {
-    return String((value as { discordId: unknown }).discordId);
-  }
-  return String(value);
-}
 
 export async function handleTradeAccept(
   buttonInteraction: ButtonInteraction,
@@ -41,8 +32,8 @@ export async function handleTradeAccept(
       return;
     }
 
-    const initiatorId = extractDiscordId(trade.initiatorId);
-    const targetId = extractDiscordId(trade.targetId);
+    const initiatorId = extractId(trade.initiatorId);
+    const targetId = extractId(trade.targetId);
 
     if (buttonInteraction.user.id !== targetId) {
       await buttonInteraction.followUp({
@@ -64,7 +55,7 @@ export async function handleTradeAccept(
 
     const initiator = await getUserById(initiatorId);
     const target = await getUserById(targetId);
-    const serverId = extractDiscordId(trade.serverId);
+    const serverId = extractId(trade.serverId);
 
     if (!serverId) {
       await buttonInteraction.followUp({
@@ -189,7 +180,7 @@ export async function handleTradeRefuse(
 
     updateTrade(tradeId, { status: "cancelled" });
 
-    const serverId = extractDiscordId(trade.serverId);
+    const serverId = extractId(trade.serverId);
     if (!serverId) return;
     const server = await getServerById(serverId);
     if (!server) return;
@@ -229,7 +220,7 @@ export async function handleTradeRefuseWeek(
     setTradeBlock(trade.targetId, Date.now() + 604800000);
     updateTrade(tradeId, { status: "cancelled" });
 
-    const serverId = extractDiscordId(trade.serverId);
+    const serverId = extractId(trade.serverId);
     if (!serverId) return;
     const server = await getServerById(serverId);
     if (!server) return;
@@ -289,7 +280,7 @@ export async function handleTradeConfirm(
       return;
     }
 
-    const serverId = extractDiscordId(trade.serverId);
+    const serverId = extractId(trade.serverId);
     if (!serverId) return;
     const server = await getServerById(serverId);
     if (!server) return;
@@ -365,10 +356,21 @@ export async function handleTradeConfirm(
             ? updatedTrade.targetId
             : updatedTrade.initiatorId;
           const otherEmbed = isInitiator ? targetEmbed : initiatorEmbed;
+          const otherMessageId = isInitiator
+            ? updatedTrade.targetConfirmationMessageId
+            : updatedTrade.initiatorConfirmationMessageId;
           const otherUser =
             await buttonInteraction.client.users.fetch(otherUserId);
           const otherDM = await otherUser.createDM();
-          await otherDM.send({ embeds: [otherEmbed] });
+          if (otherMessageId) {
+            const otherMessage = await otherDM.messages.fetch(otherMessageId);
+            await otherMessage.edit({
+              embeds: [otherEmbed],
+              components: [],
+            });
+          } else {
+            await otherDM.send({ embeds: [otherEmbed] });
+          }
         } catch (error) {
           // DM might be disabled
         }
@@ -391,6 +393,8 @@ export async function handleTradeConfirm(
           targetChoice: undefined,
           initiatorConfirmed: false,
           targetConfirmed: false,
+          initiatorConfirmationMessageId: undefined,
+          targetConfirmationMessageId: undefined,
         });
       }
     } else {
@@ -424,9 +428,11 @@ export async function handleTradeCancel(
       status: "accepted",
       initiatorChoice: undefined,
       targetChoice: undefined,
+      initiatorConfirmationMessageId: undefined,
+      targetConfirmationMessageId: undefined,
     });
 
-    const serverId = extractDiscordId(trade.serverId);
+    const serverId = extractId(trade.serverId);
     if (!serverId) return;
     const server = await getServerById(serverId);
     if (!server) return;

@@ -3,14 +3,16 @@ import language from "../../lang/language";
 import { TradeData } from "./tradeCache";
 import allPokemon from "../../data/pokemon.json";
 import type { pokemonDb } from "../../core/types/pokemonDb";
+import type { ServerType } from "../../core/types/ServerType";
+import type { UserType } from "../../core/types/UserType";
 
 export function createTradeCompletedEmbed(
   trade: TradeData,
-  server: any,
+  server: ServerType,
   isInitiator: boolean,
   initiatorName: string,
   targetName: string,
-  user: any,
+  user: UserType,
 ): EmbedBuilder {
   const lang = server.settings.language;
   const embed = new EmbedBuilder()

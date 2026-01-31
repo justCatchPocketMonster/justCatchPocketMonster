@@ -41,16 +41,20 @@ async function giveRandomPokemon() {
       for (const pokemon of validPokemon) {
         const pokemonKey = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
 
-        const normalCount = random(11);
-        const shinyCount = random(normalCount + 1);
+        const setToZero = Math.random() < 0.5;
+        let newNormalCount: number;
+        let newShinyCount: number;
 
-        if (normalCount === 0 && shinyCount === 0) {
-          continue;
+        if (setToZero) {
+          newNormalCount = 0;
+          newShinyCount = 0;
+        } else {
+          const currentPokemon = savePokemon[pokemonKey];
+          const normalCount = random(11);
+          const shinyCount = random(normalCount + 1);
+          newNormalCount = (currentPokemon?.normalCount || 0) + normalCount;
+          newShinyCount = (currentPokemon?.shinyCount || 0) + shinyCount;
         }
-
-        const currentPokemon = savePokemon[pokemonKey];
-        const newNormalCount = (currentPokemon?.normalCount || 0) + normalCount;
-        const newShinyCount = (currentPokemon?.shinyCount || 0) + shinyCount;
 
         savePokemon[pokemonKey] = {
           idPokemon: pokemon.id.toString(),

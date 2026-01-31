@@ -1396,6 +1396,10 @@
     "fr": ["Temps restant avant prochain échange"],
     "eng": ["Time remaining before next trade"]
   },
+  "tradeCooldownNone": {
+    "fr": ["Aucun"],
+    "eng": ["None"]
+  },
   "tradeTimeout": {
     "fr": ["Temps restant: {time}"],
     "eng": ["Time remaining: {time}"]

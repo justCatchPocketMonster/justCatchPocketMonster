@@ -242,7 +242,7 @@ describe("TradeSelection", () => {
       mockClient,
     );
     const trade = getTrade("test_trade_6");
-    expect(trade?.status).toBe("accepted");
+    expect(trade?.status).toBe("selecting");
     expect(trade?.initiatorChoice).toBeUndefined();
     expect(trade?.targetChoice).toBeUndefined();
   });

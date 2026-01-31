@@ -1,13 +1,15 @@
 import { sendConfirmationEmbeds } from "../../../../src/features/trade/tradeConfirmation";
-import { TradeData } from "../../../../src/features/trade/tradeCache";
-import { getUserById } from "../../../../src/cache/UserCache";
+import {
+  TradeData,
+  updateTrade,
+} from "../../../../src/features/trade/tradeCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 
-jest.mock("../../../../src/cache/UserCache", () => {
-  const actual = jest.requireActual("../../../../src/cache/UserCache");
+jest.mock("../../../../src/features/trade/tradeCache", () => {
+  const actual = jest.requireActual("../../../../src/features/trade/tradeCache");
   return {
     ...actual,
-    getUserById: jest.fn(),
+    updateTrade: jest.fn(),
   };
 });
 
@@ -47,28 +49,13 @@ describe("TradeConfirmation", () => {
       },
     };
 
-    const initiator = {
-      discordId: "user1",
-      savePokemon: { data: {} },
-    };
-
-    const target = {
-      discordId: "user2",
-      savePokemon: { data: {} },
-    };
-
-    (getUserById as jest.Mock).mockImplementation(async (id: string) => {
-      if (id === "user1") return initiator;
-      if (id === "user2") return target;
-      return null;
-    });
-
+    const mockSend = jest.fn().mockResolvedValue({ id: "msg_123" });
     const mockClient = {
       users: {
         fetch: jest.fn().mockResolvedValue({
           username: "TestUser",
           createDM: jest.fn().mockResolvedValue({
-            send: jest.fn().mockResolvedValue({}),
+            send: mockSend,
           }),
         }),
       },
@@ -82,7 +69,11 @@ describe("TradeConfirmation", () => {
     await sendConfirmationEmbeds(tradeData, server, mockClient);
 
     expect(mockClient.users.fetch).toHaveBeenCalledTimes(2);
-    expect(getUserById).toHaveBeenCalledTimes(2);
+    expect(mockSend).toHaveBeenCalledTimes(2);
+    expect(updateTrade).toHaveBeenCalledWith("test_trade", {
+      initiatorConfirmationMessageId: "msg_123",
+      targetConfirmationMessageId: "msg_123",
+    });
   });
 
   it("should handle missing users", async () => {

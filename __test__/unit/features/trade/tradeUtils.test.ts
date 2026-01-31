@@ -307,8 +307,8 @@ describe("TradeUtils", () => {
       expect(getRarityCooldownMs("legendary")).toBe(86400000);
     });
 
-    it("should return cooldown for fabulous", () => {
-      expect(getRarityCooldownMs("fabulous")).toBe(604800000);
+    it("should return cooldown for mythical", () => {
+      expect(getRarityCooldownMs("mythical")).toBe(604800000);
     });
 
     it("should return cooldown for ultraBeast", () => {

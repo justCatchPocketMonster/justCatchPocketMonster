@@ -1,6 +1,6 @@
 import { UserType } from "../../core/types/UserType";
 import { updateUser, getUserById } from "../../cache/UserCache";
-import { TradeData, setTradeCooldown } from "./tradeCache";
+import { TradeData, setTradeCooldown, getTradeCooldown } from "./tradeCache";
 import { getRarityCooldownMs } from "./tradeUtils";
 import { newLogger } from "../../middlewares/logger";
 import allPokemon from "../../data/pokemon.json";
@@ -128,8 +128,8 @@ export async function executeTrade(tradeData: TradeData): Promise<boolean> {
     const cooldownMs = getRarityCooldownMs(rarity);
     if (cooldownMs > 0) {
       const expiresAt = Date.now() + cooldownMs;
-      setTradeCooldown(initiator.discordId, rarity, expiresAt);
-      setTradeCooldown(target.discordId, rarity, expiresAt);
+      setTradeCooldown(String(initiator.discordId), rarity, expiresAt);
+      setTradeCooldown(String(target.discordId), rarity, expiresAt);
     }
 
     return true;
@@ -152,8 +152,7 @@ export function checkCooldown(
     return { allowed: true };
   }
 
-  const { getTradeCooldown } = require("./tradeCache");
-  const cooldown = getTradeCooldown(userId, rarity);
+  const cooldown = getTradeCooldown(String(userId), rarity);
 
   if (!cooldown || cooldown.expiresAt <= Date.now()) {
     return { allowed: true };

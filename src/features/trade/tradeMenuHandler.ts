@@ -1,4 +1,5 @@
 import {
+  Client,
   StringSelectMenuInteraction,
   ComponentType,
   StringSelectMenuBuilder,
@@ -6,9 +7,10 @@ import {
   EmbedBuilder,
 } from "discord.js";
 import { MenuOption } from "../../utils/menu/types";
+import { UserType } from "../../core/types/UserType";
+import { ServerType } from "../../core/types/ServerType";
 import { regenerateTradeMenu } from "./tradeMenu";
-import { calculateCooldownRemaining } from "./tradeUtils";
-import { formatTimestamp } from "../../utils/helperFunction";
+import { getCooldownDisplayText } from "./tradeUtils";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
 import { handlePokemonSelection } from "./tradeSelection";
@@ -24,11 +26,11 @@ function truncateText(
 }
 
 export async function sendTradeMenuToUser(
-  client: any,
+  client: Client,
   userId: string,
   tradeId: string,
-  user: any,
-  server: any,
+  user: UserType,
+  server: ServerType,
 ): Promise<void> {
   try {
     const discordUser = await client.users.fetch(userId);
@@ -66,27 +68,10 @@ export async function sendTradeMenuToUser(
       )
       .setColor(0x3498db);
 
-    const rarities = ["legendary", "fabulous", "ultraBeast"];
-    const rarityNames: Record<string, string> = {
-      legendary: language("statCategoryLegendary", server.settings.language),
-      fabulous: language("statCategoryFabulous", server.settings.language),
-      ultraBeast: language("statCategoryUltraBeast", server.settings.language),
-    };
-
-    const cooldownFields = rarities
-      .map((rarity) => {
-        const remaining = calculateCooldownRemaining(userId, rarity);
-        if (remaining === null) return null;
-        return `${rarityNames[rarity]}: ${formatTimestamp(Date.now() + remaining)}`;
-      })
-      .filter((field): field is string => field !== null);
-
-    if (cooldownFields.length > 0) {
-      embed.addFields({
-        name: language("tradeCooldownsTitle", server.settings.language),
-        value: cooldownFields.join("\n"),
-      });
-    }
+    embed.addFields({
+      name: language("tradeCooldownsTitle", server.settings.language),
+      value: getCooldownDisplayText(userId, server.settings.language),
+    });
 
     const mainMenu = new StringSelectMenuBuilder()
       .setCustomId(`tm_${tradeId}_${userId}_0`)
@@ -125,8 +110,16 @@ export async function sendTradeMenuToUser(
         try {
           await selectInteraction.deferUpdate();
           const selectedValue = selectInteraction.values[0];
-          let currentOptions = menuOptions;
+          const lastUnderscore = selectInteraction.customId.lastIndexOf("_");
+          const levelStr = selectInteraction.customId.substring(
+            lastUnderscore + 1,
+          );
+          const menuLevel = parseInt(levelStr, 10);
+          const level = Number.isNaN(menuLevel) ? 0 : Math.max(0, menuLevel);
 
+          selectionPath.length = level;
+
+          let currentOptions = menuOptions;
           for (const pathItem of selectionPath) {
             const foundOption = currentOptions.find(
               (opt) => opt.value === pathItem.value,

@@ -20,6 +20,7 @@ jest.mock("../../../../src/features/trade/tradeSelection", () => ({
 
 jest.mock("../../../../src/features/trade/tradeUtils", () => ({
   calculateCooldownRemaining: jest.fn().mockReturnValue(null),
+  getCooldownDisplayText: jest.fn().mockReturnValue("Legendary: None\nMythical: None\nUltra Beast: None"),
 }));
 
 describe("TradeMenuHandler", () => {

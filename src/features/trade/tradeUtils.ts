@@ -10,9 +10,16 @@ import { formatTimestamp } from "../../utils/helperFunction";
 
 const RARITY_COOLDOWNS: Record<string, number> = {
   legendary: 86400000,
-  fabulous: 604800000,
+  mythical: 604800000,
   ultraBeast: 86400000,
 };
+
+const COOLDOWN_RARITIES = ["legendary", "mythical", "ultraBeast"] as const;
+
+function getRarityLabelKey(rarity: string): string {
+  const key = rarity.charAt(0).toUpperCase() + rarity.slice(1);
+  return `statCategory${key}` as "statCategoryLegendary" | "statCategoryMythical" | "statCategoryUltraBeast";
+}
 
 export function calculateCooldownRemaining(
   userId: string,
@@ -54,6 +61,17 @@ export function getEligiblePokemon(
           p.versionForm === pokemon.versionForm,
       );
       if (pokemonData) {
+        const rarity = pokemonData.rarity;
+        const cooldownMs = RARITY_COOLDOWNS[rarity];
+        if (cooldownMs > 0) {
+          const remaining = calculateCooldownRemaining(
+            String(user.discordId),
+            rarity,
+          );
+          if (remaining !== null) {
+            continue;
+          }
+        }
         eligible.push({ key, pokemon, data: pokemonData });
       }
     }
@@ -62,21 +80,18 @@ export function getEligiblePokemon(
   return eligible;
 }
 
-function getCooldownFields(userId: string, lang: string): string[] {
-  const rarities = ["legendary", "fabulous", "ultraBeast"];
-  const rarityNames: Record<string, string> = {
-    legendary: language("statCategoryLegendary", lang),
-    fabulous: language("statCategoryFabulous", lang),
-    ultraBeast: language("statCategoryUltraBeast", lang),
-  };
-
-  return rarities
-    .map((rarity) => {
-      const remaining = calculateCooldownRemaining(userId, rarity);
-      if (remaining === null) return null;
-      return `${rarityNames[rarity]}: ${formatTimestamp(Date.now() + remaining)}`;
-    })
-    .filter((field): field is string => field !== null);
+/** Texte d'affichage des cooldowns (3 raretés) pour l'embed. */
+export function getCooldownDisplayText(userId: string, lang: string): string {
+  const noneText = language("tradeCooldownNone", lang);
+  return COOLDOWN_RARITIES.map((rarity) => {
+    const label = language(getRarityLabelKey(rarity), lang);
+    const remaining = calculateCooldownRemaining(userId, rarity);
+    const value =
+      remaining === null
+        ? noneText
+        : formatTimestamp(Date.now() + remaining);
+    return `${label}: ${value}`;
+  }).join("\n");
 }
 
 export function createEmbedAsk(
@@ -104,27 +119,18 @@ export function createEmbedAsk(
     );
   }
 
-  const userId = isInitiator ? tradeData.initiatorId : tradeData.targetId;
-  const cooldownFields = getCooldownFields(userId, lang);
+  const userId = String(
+    isInitiator ? tradeData.initiatorId : tradeData.targetId,
+  );
 
   embed.addFields({
     name: language("tradeRulesTitle", lang),
     value: language("tradeRules", lang),
   });
 
-  if (cooldownFields.length > 0) {
-    embed.addFields({
-      name: language("tradeCooldownsTitle", lang),
-      value: cooldownFields.join("\n"),
-    });
-  }
-
   embed.addFields({
-    name: language("tradeTimeout", lang).replace(
-      "{time}",
-      formatTimestamp(tradeData.expiresAt),
-    ),
-    value: cooldownFields.join("\n"),
+    name: language("tradeCooldownsTitle", lang),
+    value: getCooldownDisplayText(userId, lang),
   });
 
   embed.setColor(0x3498db);
