@@ -69,15 +69,15 @@ export class TradeMenuHandler implements MenuHandler {
           .map((type) => {
             const typePokemon = typeMap.get(type)!;
             const pokemonOptions: MenuOption[] = typePokemon.map((item) => {
-              const langKey =
-                `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-                  | "nameFr"
-                  | "nameEng";
-              const pokemonName = item.data.name[langKey][0];
+              const completKey =
+                `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+                  | "nameCompletFr"
+                  | "nameCompletEng";
+              const completeName = item.data.name[completKey][0];
               const totalCount =
                 item.pokemon.normalCount + item.pokemon.shinyCount;
               return {
-                label: `${pokemonName} (${totalCount})`,
+                label: `${completeName} (${totalCount})`,
                 value: item.key,
                 description: `${language("tradePokemonCount", lang)}: ${totalCount}`,
               };

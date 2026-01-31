@@ -137,10 +137,11 @@ function getPokemonName(
   lang: string,
 ): string {
   if (!pokemonData) return choice.pokemonId;
-  const langKey = `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-    | "nameFr"
-    | "nameEng";
-  return pokemonData.name[langKey][0];
+  const completKey = `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+    | "nameCompletFr"
+    | "nameCompletEng";
+
+  return pokemonData.name[completKey][0];
 }
 
 export function createTradeSummaryEmbed(

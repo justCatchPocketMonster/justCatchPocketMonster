@@ -2,6 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { TradeData } from "./tradeCache";
 import allPokemon from "../../data/pokemon.json";
+import type { pokemonDb } from "../../core/types/pokemonDb";
 
 export function createTradeCompletedEmbed(
   trade: TradeData,
@@ -25,12 +26,12 @@ export function createTradeCompletedEmbed(
     ? trade.targetChoice
     : trade.initiatorChoice;
 
-  const myPokemonData = allPokemon.find(
+  const myPokemonData = (allPokemon as pokemonDb[]).find(
     (p) =>
       p.id.toString() === myChoice.pokemonId &&
       `${p.id}-${p.form}-${p.versionForm}` === myChoice.pokemonKey,
   );
-  const receivedPokemonData = allPokemon.find(
+  const receivedPokemonData = (allPokemon as pokemonDb[]).find(
     (p) =>
       p.id.toString() === receivedChoice.pokemonId &&
       `${p.id}-${p.form}-${p.versionForm}` === receivedChoice.pokemonKey,
@@ -43,8 +44,12 @@ export function createTradeCompletedEmbed(
   const langKey = `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
     | "nameFr"
     | "nameEng";
-  const myPokemonName = myPokemonData.name[langKey][0];
-  const receivedPokemonName = receivedPokemonData.name[langKey][0];
+  const completKey = `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+    | "nameCompletFr"
+    | "nameCompletEng";
+  const myCompleteName = myPokemonData.name[completKey][0];
+  const receivedCompleteName = receivedPokemonData.name[completKey][0];
+
   const myCount = user.savePokemon.data[myChoice.pokemonKey]?.normalCount || 0;
   const receivedCount =
     user.savePokemon.data[receivedChoice.pokemonKey]?.normalCount || 0;
@@ -52,12 +57,12 @@ export function createTradeCompletedEmbed(
   return embed.setDescription(language("tradeCompletedDesc", lang)).addFields(
     {
       name: language("tradeYouGive", lang),
-      value: `${myPokemonName} (${myCount})`,
+      value: `${myCompleteName} (${myCount})`,
       inline: true,
     },
     {
       name: language("tradeYouReceive", lang),
-      value: `${receivedPokemonName} (${receivedCount})`,
+      value: `${receivedCompleteName} (${receivedCount})`,
       inline: true,
     },
   );

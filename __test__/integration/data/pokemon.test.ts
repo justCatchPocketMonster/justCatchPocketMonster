@@ -10,6 +10,12 @@ describe("test all data pokemon", () => {
       expect(pokemon.id).toBeDefined();
       expect(pokemon.name?.nameEng).toBeDefined();
       expect(pokemon.name?.nameFr).toBeDefined();
+      expect(pokemon.name?.nameCompletFr).toBeDefined();
+      expect(pokemon.name?.nameCompletEng).toBeDefined();
+      expect(pokemon.name?.nameCompletFr).toHaveLength(1);
+      expect(pokemon.name?.nameCompletEng).toHaveLength(1);
+      expect(pokemon.name?.nameCompletFr?.[0]).toBeTruthy();
+      expect(pokemon.name?.nameCompletEng?.[0]).toBeTruthy();
       expect(pokemon.arrayType).toBeDefined();
       expect(pokemon.rarity).toBeDefined();
       expect(pokemon.gen).toBeDefined();
