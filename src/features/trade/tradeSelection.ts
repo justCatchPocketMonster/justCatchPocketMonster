@@ -94,13 +94,7 @@ export async function handlePokemonSelection(
             initiator,
             server,
           );
-          await sendTradeMenuToUser(
-            client,
-            targetId,
-            tradeId,
-            target,
-            server,
-          );
+          await sendTradeMenuToUser(client, targetId, tradeId, target, server);
         }
       } catch (error) {
         newLogger(

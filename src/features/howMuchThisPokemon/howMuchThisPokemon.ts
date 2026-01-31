@@ -137,7 +137,8 @@ function generateEmbedData(
     ? urlImageRepo + "/pokeHomeShadow/" + imageName
     : urlImageRepo + "/pokeHome/" + imageName;
 
-  const completKey = ("nameComplet" + capitalizeFirstLetter(server.settings.language)) as
+  const completKey = ("nameComplet" +
+    capitalizeFirstLetter(server.settings.language)) as
     | "nameCompletFr"
     | "nameCompletEng";
 

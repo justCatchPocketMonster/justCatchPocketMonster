@@ -198,9 +198,11 @@ function selectRandomPokemon(
     versionForm: randomPokemon.versionForm,
     isShiny: false,
     hint: initHint(
-      (randomPokemon.name[
-        "name" + capitalizeFirstLetter(server.settings.language)
-      ] as string[])[0],
+      (
+        randomPokemon.name[
+          "name" + capitalizeFirstLetter(server.settings.language)
+        ] as string[]
+      )[0],
     ),
   };
 }

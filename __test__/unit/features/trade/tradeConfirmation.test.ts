@@ -6,7 +6,9 @@ import {
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 
 jest.mock("../../../../src/features/trade/tradeCache", () => {
-  const actual = jest.requireActual("../../../../src/features/trade/tradeCache");
+  const actual = jest.requireActual(
+    "../../../../src/features/trade/tradeCache",
+  );
   return {
     ...actual,
     updateTrade: jest.fn(),

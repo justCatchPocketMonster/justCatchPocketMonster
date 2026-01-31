@@ -82,8 +82,7 @@ export async function sendConfirmationEmbeds(
     const targetRow = createButtons(trade.targetConfirmed || false);
 
     const hasExistingMessages =
-      trade.initiatorConfirmationMessageId &&
-      trade.targetConfirmationMessageId;
+      trade.initiatorConfirmationMessageId && trade.targetConfirmationMessageId;
 
     if (hasExistingMessages) {
       try {

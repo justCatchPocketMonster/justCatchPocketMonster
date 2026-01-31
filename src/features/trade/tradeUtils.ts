@@ -18,7 +18,10 @@ const COOLDOWN_RARITIES = ["legendary", "mythical", "ultraBeast"] as const;
 
 function getRarityLabelKey(rarity: string): string {
   const key = rarity.charAt(0).toUpperCase() + rarity.slice(1);
-  return `statCategory${key}` as "statCategoryLegendary" | "statCategoryMythical" | "statCategoryUltraBeast";
+  return `statCategory${key}` as
+    | "statCategoryLegendary"
+    | "statCategoryMythical"
+    | "statCategoryUltraBeast";
 }
 
 export function calculateCooldownRemaining(
@@ -87,9 +90,7 @@ export function getCooldownDisplayText(userId: string, lang: string): string {
     const label = language(getRarityLabelKey(rarity), lang);
     const remaining = calculateCooldownRemaining(userId, rarity);
     const value =
-      remaining === null
-        ? noneText
-        : formatTimestamp(Date.now() + remaining);
+      remaining === null ? noneText : formatTimestamp(Date.now() + remaining);
     return `${label}: ${value}`;
   }).join("\n");
 }
@@ -143,9 +144,10 @@ function getPokemonName(
   lang: string,
 ): string {
   if (!pokemonData) return choice.pokemonId;
-  const completKey = `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-    | "nameCompletFr"
-    | "nameCompletEng";
+  const completKey =
+    `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+      | "nameCompletFr"
+      | "nameCompletEng";
 
   return pokemonData.name[completKey][0];
 }

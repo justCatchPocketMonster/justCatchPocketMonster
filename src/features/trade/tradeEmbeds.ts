@@ -46,9 +46,10 @@ export function createTradeCompletedEmbed(
   const langKey = `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
     | "nameFr"
     | "nameEng";
-  const completKey = `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-    | "nameCompletFr"
-    | "nameCompletEng";
+  const completKey =
+    `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
+      | "nameCompletFr"
+      | "nameCompletEng";
   const myCompleteName = myPokemonData.name[completKey][0];
   const receivedCompleteName = receivedPokemonData.name[completKey][0];
 
