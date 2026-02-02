@@ -9,6 +9,27 @@ import { createTradeSummaryEmbed } from "./tradeUtils";
 import type { ServerType } from "../../core/types/ServerType";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
+import type { EmbedBuilder, User } from "discord.js";
+
+async function editConfirmationForUser(
+  user: User,
+  messageId: string,
+  embed: EmbedBuilder,
+  row: ActionRowBuilder<ButtonBuilder>,
+  logContext: string,
+): Promise<void> {
+  try {
+    const dm = await user.createDM();
+    const message = await dm.messages.fetch(messageId);
+    await message.edit({ embeds: [embed], components: [row] });
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      logContext,
+    );
+  }
+}
 
 export async function sendConfirmationEmbeds(
   trade: TradeData,
@@ -77,79 +98,42 @@ export async function sendConfirmationEmbeds(
       );
     };
 
-    const initiatorRow = createButtons(trade.initiatorConfirmed || false);
-    const targetRow = createButtons(trade.targetConfirmed || false);
+    const initiatorRow = createButtons(trade.initiatorConfirmed ?? false);
+    const targetRow = createButtons(trade.targetConfirmed ?? false);
 
     const hasExistingMessages =
       trade.initiatorConfirmationMessageId && trade.targetConfirmationMessageId;
 
     if (hasExistingMessages) {
-      try {
-        const initiatorDM = await initiatorUser.createDM();
-        const initiatorMessage = await initiatorDM.messages.fetch(
-          trade.initiatorConfirmationMessageId!,
-        );
-        await initiatorMessage.edit({
-          embeds: [initiatorEmbed],
-          components: [initiatorRow],
-        });
-      } catch (error) {
-        newLogger(
-          "error",
-          error as string,
-          "Failed to edit confirmation for initiator",
-        );
-      }
-
-      try {
-        const targetDM = await targetUser.createDM();
-        const targetMessage = await targetDM.messages.fetch(
-          trade.targetConfirmationMessageId!,
-        );
-        await targetMessage.edit({
-          embeds: [targetEmbed],
-          components: [targetRow],
-        });
-      } catch (error) {
-        newLogger(
-          "error",
-          error as string,
-          "Failed to edit confirmation for target",
-        );
-      }
+      await editConfirmationForUser(
+        initiatorUser,
+        trade.initiatorConfirmationMessageId!,
+        initiatorEmbed,
+        initiatorRow,
+        "Failed to edit confirmation for initiator",
+      );
+      await editConfirmationForUser(
+        targetUser,
+        trade.targetConfirmationMessageId!,
+        targetEmbed,
+        targetRow,
+        "Failed to edit confirmation for target",
+      );
     } else {
-      let initiatorMessageId: string | undefined;
-      let targetMessageId: string | undefined;
-
-      try {
-        const initiatorDM = await initiatorUser.createDM();
-        const initiatorMessage = await initiatorDM.send({
-          embeds: [initiatorEmbed],
-          components: [initiatorRow],
-        });
-        initiatorMessageId = initiatorMessage.id;
-      } catch (error) {
-        newLogger(
-          "error",
-          error as string,
+      const [initiatorMessageId, targetMessageId] = await Promise.all([
+        sendConfirmationToUser(
+          initiatorUser,
+          initiatorEmbed,
+          initiatorRow,
           "Failed to send confirmation to initiator",
-        );
-      }
-
-      try {
-        const targetDM = await targetUser.createDM();
-        const targetMessage = await targetDM.send({
-          embeds: [targetEmbed],
-          components: [targetRow],
-        });
-        targetMessageId = targetMessage.id;
-      } catch (error) {
-        newLogger(
-          "error",
-          error as string,
+        ),
+        sendConfirmationToUser(
+          targetUser,
+          targetEmbed,
+          targetRow,
           "Failed to send confirmation to target",
-        );
-      }
+        ),
+      ]);
 
       if (initiatorMessageId && targetMessageId) {
         updateTrade(trade.tradeId, {
@@ -159,6 +143,33 @@ export async function sendConfirmationEmbeds(
       }
     }
   } catch (error) {
-    newLogger("error", error as string, "Error sending confirmation embeds");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error sending confirmation embeds",
+    );
+  }
+}
+
+async function sendConfirmationToUser(
+  user: User,
+  embed: EmbedBuilder,
+  row: ActionRowBuilder<ButtonBuilder>,
+  logContext: string,
+): Promise<string | undefined> {
+  try {
+    const dm = await user.createDM();
+    const message = await dm.send({
+      embeds: [embed],
+      components: [row],
+    });
+    return message.id;
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      logContext,
+    );
+    return undefined;
   }
 }

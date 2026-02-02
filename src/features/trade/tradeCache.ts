@@ -52,7 +52,11 @@ export function extractId(
 ): string {
   if (typeof value === "string") return value;
   if (value && typeof value === "object" && "discordId" in value) {
-    return String((value as { discordId: string }).discordId);
+    const discordId = (value as { discordId: string }).discordId;
+    return typeof discordId === "string" ? discordId : String(discordId);
+  }
+  if (typeof value === "object" && value !== null) {
+    return JSON.stringify(value);
   }
   return String(value);
 }

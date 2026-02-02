@@ -25,6 +25,63 @@ function truncateText(
     : text;
 }
 
+function buildChildrenMenus(
+  tradeId: string,
+  userId: string,
+  menuOptions: MenuOption[],
+  selectionPath: Array<{ value: string; label: string }>,
+  selectedOption: MenuOption,
+): ActionRowBuilder<StringSelectMenuBuilder>[] {
+  const allMenus: ActionRowBuilder<StringSelectMenuBuilder>[] = [];
+  let currentLevelOptions = menuOptions;
+
+  for (let i = 0; i < selectionPath.length; i++) {
+    const pathItem = selectionPath[i];
+    const menu = new StringSelectMenuBuilder()
+      .setCustomId(`tm_${tradeId}_${userId}_${i}`)
+      .setPlaceholder(truncateText(pathItem.label, 150) || "")
+      .addOptions(
+        currentLevelOptions.slice(0, 25).map((opt: MenuOption) => ({
+          label: truncateText(opt.label, 100) || "",
+          value: truncateText(opt.value, 100) || "",
+          description: truncateText(opt.description, 100),
+          default: opt.value === pathItem.value,
+        })),
+      );
+    allMenus.push(
+      new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menu),
+    );
+    const foundOption = currentLevelOptions.find(
+      (opt) => opt.value === pathItem.value,
+    );
+    if (foundOption?.children) {
+      currentLevelOptions = foundOption.children;
+    }
+  }
+
+  const childrenOptions = (selectedOption.children ?? [])
+    .slice(0, 25)
+    .map((child: MenuOption) => ({
+      label: truncateText(child.label, 100) || "",
+      value: truncateText(child.value, 100) || "",
+      description: truncateText(child.description, 100),
+    }));
+
+  if (childrenOptions.length === 0) return [];
+
+  const nextMenu = new StringSelectMenuBuilder()
+    .setCustomId(`tm_${tradeId}_${userId}_${selectionPath.length}`)
+    .setPlaceholder(
+      truncateText(selectedOption.placeholder ?? selectedOption.label, 150) ??
+        "",
+    )
+    .addOptions(childrenOptions);
+  allMenus.push(
+    new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(nextMenu),
+  );
+  return allMenus;
+}
+
 export async function sendTradeMenuToUser(
   client: Client,
   userId: string,
@@ -114,7 +171,7 @@ export async function sendTradeMenuToUser(
           const levelStr = selectInteraction.customId.substring(
             lastUnderscore + 1,
           );
-          const menuLevel = parseInt(levelStr, 10);
+          const menuLevel = Number.parseInt(levelStr, 10);
           const level = Number.isNaN(menuLevel) ? 0 : Math.max(0, menuLevel);
 
           selectionPath.length = level;
@@ -141,67 +198,21 @@ export async function sendTradeMenuToUser(
             label: selectedOption.label,
           });
 
-          if (selectedOption.children && selectedOption.children.length > 0) {
-            const allMenus: ActionRowBuilder<StringSelectMenuBuilder>[] = [];
-            let currentLevelOptions = menuOptions;
-
-            for (let i = 0; i < selectionPath.length; i++) {
-              const pathItem = selectionPath[i];
-              const menu = new StringSelectMenuBuilder()
-                .setCustomId(`tm_${tradeId}_${userId}_${i}`)
-                .setPlaceholder(truncateText(pathItem.label, 150) || "")
-                .addOptions(
-                  currentLevelOptions.slice(0, 25).map((opt: MenuOption) => ({
-                    label: truncateText(opt.label, 100) || "",
-                    value: truncateText(opt.value, 100) || "",
-                    description: truncateText(opt.description, 100),
-                    default: opt.value === pathItem.value,
-                  })),
-                );
-
-              allMenus.push(
-                new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-                  menu,
-                ),
-              );
-
-              const foundOption = currentLevelOptions.find(
-                (opt) => opt.value === pathItem.value,
-              );
-              if (foundOption?.children) {
-                currentLevelOptions = foundOption.children;
-              }
-            }
-
-            const childrenOptions = selectedOption.children
-              .slice(0, 25)
-              .map((child: MenuOption) => ({
-                label: truncateText(child.label, 100) || "",
-                value: truncateText(child.value, 100) || "",
-                description: truncateText(child.description, 100),
-              }));
-
-            if (childrenOptions.length === 0) return;
-
-            const nextMenu = new StringSelectMenuBuilder()
-              .setCustomId(`tm_${tradeId}_${userId}_${selectionPath.length}`)
-              .setPlaceholder(
-                truncateText(
-                  selectedOption.placeholder || selectedOption.label,
-                  150,
-                ) || "",
-              )
-              .addOptions(childrenOptions);
-
-            allMenus.push(
-              new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-                nextMenu,
-              ),
+          const hasChildren = (selectedOption.children?.length ?? 0) > 0;
+          if (hasChildren) {
+            const allMenus = buildChildrenMenus(
+              tradeId,
+              userId,
+              menuOptions,
+              selectionPath,
+              selectedOption,
             );
-            await selectInteraction.editReply({
-              embeds: [embed],
-              components: allMenus,
-            });
+            if (allMenus.length > 0) {
+              await selectInteraction.editReply({
+                embeds: [embed],
+                components: allMenus,
+              });
+            }
           } else {
             await handlePokemonSelection(
               tradeId,

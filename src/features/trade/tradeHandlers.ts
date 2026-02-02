@@ -38,6 +38,79 @@ function getNoEligibleErrorMessage(
   return language("tradeNoValidPokemon", lang).replace("{user}", targetName);
 }
 
+async function handleNoEligiblePokemon(
+  buttonInteraction: ButtonInteraction,
+  tradeId: string,
+  trade: TradeData,
+  initiatorId: string,
+  targetId: string,
+  server: Awaited<ReturnType<typeof getServerById>>,
+): Promise<void> {
+  const client = buttonInteraction.client;
+  const initiatorUser = await client.users.fetch(initiatorId);
+  const targetUser = await client.users.fetch(targetId);
+  const initiatorEligible = getEligiblePokemon(await getUserById(initiatorId));
+  const targetEligible = getEligiblePokemon(await getUserById(targetId));
+  const errorMessage = getNoEligibleErrorMessage(
+    initiatorEligible.length,
+    targetEligible.length,
+    initiatorUser.username,
+    targetUser.username,
+    server.settings.language,
+  );
+  const errorEmbed = new EmbedBuilder()
+    .setTitle(language("tradeImpossible", server.settings.language))
+    .setDescription(errorMessage)
+    .setColor(0xe74c3c);
+
+  try {
+    const initiatorMessage = trade.initiatorMessageId
+      ? await (
+          await initiatorUser.createDM()
+        ).messages.fetch(trade.initiatorMessageId)
+      : null;
+    if (initiatorMessage) {
+      await initiatorMessage.edit({
+        embeds: [errorEmbed],
+        components: [],
+      });
+    }
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Failed to update initiator message",
+    );
+  }
+
+  try {
+    const targetMessage = trade.targetMessageId
+      ? await (
+          await targetUser.createDM()
+        ).messages.fetch(trade.targetMessageId)
+      : null;
+    if (targetMessage) {
+      await targetMessage.edit({
+        embeds: [errorEmbed],
+        components: [],
+      });
+    }
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Failed to update target message",
+    );
+  }
+
+  await buttonInteraction.editReply({
+    embeds: [errorEmbed],
+    components: [],
+  });
+  updateTrade(tradeId, { status: "cancelled" });
+  deleteTrade(tradeId);
+}
+
 async function handleBothConfirmedTrade(
   buttonInteraction: ButtonInteraction,
   tradeId: string,
@@ -203,70 +276,14 @@ export async function handleTradeAccept(
     const targetEligible = getEligiblePokemon(target);
 
     if (initiatorEligible.length === 0 || targetEligible.length === 0) {
-      const client = buttonInteraction.client;
-      const initiatorUser = await client.users.fetch(initiatorId);
-      const targetUser = await client.users.fetch(targetId);
-      const initiatorName = initiatorUser.username;
-      const targetName = targetUser.username;
-      const errorMessage = getNoEligibleErrorMessage(
-        initiatorEligible.length,
-        targetEligible.length,
-        initiatorName,
-        targetName,
-        server.settings.language,
+      await handleNoEligiblePokemon(
+        buttonInteraction,
+        tradeId,
+        trade,
+        initiatorId,
+        targetId,
+        server,
       );
-
-      const errorEmbed = new EmbedBuilder()
-        .setTitle(language("tradeImpossible", server.settings.language))
-        .setDescription(errorMessage)
-        .setColor(0xe74c3c);
-
-      try {
-        const initiatorMessage = trade.initiatorMessageId
-          ? await (
-              await initiatorUser.createDM()
-            ).messages.fetch(trade.initiatorMessageId)
-          : null;
-        if (initiatorMessage) {
-          await initiatorMessage.edit({
-            embeds: [errorEmbed],
-            components: [],
-          });
-        }
-      } catch (error) {
-        newLogger(
-          "error",
-          error instanceof Error ? error.message : String(error),
-          "Failed to update initiator message",
-        );
-      }
-
-      try {
-        const targetMessage = trade.targetMessageId
-          ? await (
-              await targetUser.createDM()
-            ).messages.fetch(trade.targetMessageId)
-          : null;
-        if (targetMessage) {
-          await targetMessage.edit({
-            embeds: [errorEmbed],
-            components: [],
-          });
-        }
-      } catch (error) {
-        newLogger(
-          "error",
-          error instanceof Error ? error.message : String(error),
-          "Failed to update target message",
-        );
-      }
-
-      await buttonInteraction.editReply({
-        embeds: [errorEmbed],
-        components: [],
-      });
-      updateTrade(tradeId, { status: "cancelled" });
-      deleteTrade(tradeId);
       return;
     }
 
@@ -310,7 +327,11 @@ export async function handleTradeRefuse(
   try {
     await buttonInteraction.deferUpdate();
     const trade = getTrade(tradeId);
-    if (!trade || buttonInteraction.user.id !== trade.targetId) return;
+    if (
+      !trade?.targetId ||
+      buttonInteraction.user?.id !== extractId(trade.targetId)
+    )
+      return;
 
     updateTrade(tradeId, { status: "cancelled" });
 
@@ -357,7 +378,11 @@ export async function handleTradeRefuseWeek(
   try {
     await buttonInteraction.deferUpdate();
     const trade = getTrade(tradeId);
-    if (!trade || buttonInteraction.user.id !== trade.targetId) return;
+    if (
+      !trade?.targetId ||
+      buttonInteraction.user?.id !== extractId(trade.targetId)
+    )
+      return;
 
     setTradeBlock(trade.targetId, Date.now() + 604800000);
     updateTrade(tradeId, { status: "cancelled" });
@@ -400,64 +425,71 @@ export async function handleTradeRefuseWeek(
   }
 }
 
+type ConfirmTradeContext = {
+  trade: TradeData;
+  server: Awaited<ReturnType<typeof getServerById>>;
+  isInitiator: boolean;
+};
+
+async function getConfirmTradeContext(
+  buttonInteraction: ButtonInteraction,
+  tradeId: string,
+): Promise<ConfirmTradeContext | null> {
+  const trade = getTrade(tradeId);
+  if (!trade) {
+    await buttonInteraction.followUp({
+      content: language("tradeNotFound", "eng"),
+      ephemeral: true,
+    });
+    return null;
+  }
+  const userId = buttonInteraction.user?.id;
+  const initiatorId = extractId(trade.initiatorId);
+  const targetId = extractId(trade.targetId);
+  if (userId !== initiatorId && userId !== targetId) return null;
+  if (
+    trade.status !== "confirming" ||
+    !trade.initiatorChoice ||
+    !trade.targetChoice
+  ) {
+    return null;
+  }
+  const serverId = extractId(trade.serverId);
+  if (!serverId) return null;
+  const server = await getServerById(serverId);
+  if (!server) return null;
+  const isInitiator = userId === initiatorId;
+  updateTrade(tradeId, {
+    [isInitiator ? "initiatorConfirmed" : "targetConfirmed"]: true,
+  });
+  const updatedTrade = getTrade(tradeId);
+  if (!updatedTrade) return null;
+  return { trade: updatedTrade, server, isInitiator };
+}
+
 export async function handleTradeConfirm(
   buttonInteraction: ButtonInteraction,
   tradeId: string,
 ): Promise<void> {
   try {
     await buttonInteraction.deferUpdate();
-    const trade = getTrade(tradeId);
-    if (!trade) {
-      await buttonInteraction.followUp({
-        content: language("tradeNotFound", "eng"),
-        ephemeral: true,
-      });
-      return;
-    }
-
-    if (
-      buttonInteraction.user.id !== trade.initiatorId &&
-      buttonInteraction.user.id !== trade.targetId
-    ) {
-      return;
-    }
-
-    if (
-      trade.status !== "confirming" ||
-      !trade.initiatorChoice ||
-      !trade.targetChoice
-    ) {
-      return;
-    }
-
-    const serverId = extractId(trade.serverId);
-    if (!serverId) return;
-    const server = await getServerById(serverId);
-    if (!server) return;
-
-    const isInitiator = buttonInteraction.user.id === trade.initiatorId;
-    updateTrade(tradeId, {
-      [isInitiator ? "initiatorConfirmed" : "targetConfirmed"]: true,
-    });
-
-    const updatedTrade = getTrade(tradeId);
-    if (!updatedTrade) return;
+    const ctx = await getConfirmTradeContext(buttonInteraction, tradeId);
+    if (!ctx) return;
 
     const bothConfirmed =
-      updatedTrade.initiatorConfirmed && updatedTrade.targetConfirmed;
-
+      ctx.trade.initiatorConfirmed && ctx.trade.targetConfirmed;
     if (bothConfirmed) {
       await handleBothConfirmedTrade(
         buttonInteraction,
         tradeId,
-        updatedTrade,
-        server,
-        isInitiator,
+        ctx.trade,
+        ctx.server,
+        ctx.isInitiator,
       );
     } else {
       await sendConfirmationEmbeds(
-        updatedTrade,
-        server,
+        ctx.trade,
+        ctx.server,
         buttonInteraction.client,
       );
     }

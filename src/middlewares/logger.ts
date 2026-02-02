@@ -17,32 +17,31 @@ interface TransformableInfo {
   [key: string]: any;
 }
 
+const LINE_COL_REGEX = /:(\d+):(\d+)\)?\s*$/;
+
+function parseStackLine(line: string): { file: string; line: string } | null {
+  if (line.includes("logger.ts") || !line.includes("at ")) return null;
+  const match = LINE_COL_REGEX.exec(line);
+  if (!match) return null;
+  const lineNumber = match[1];
+  const endIndex = line.indexOf(match[0]);
+  if (endIndex === -1) return null;
+  const pathPart = line
+    .slice(0, endIndex)
+    .replace(/^\s*at\s+/, "")
+    .replace(/^\s*\(\s*/, "")
+    .trim();
+  if (!pathPart) return null;
+  return { file: basename(pathPart), line: lineNumber };
+}
+
 function getCallerInfo(): { file: string; line: string } | null {
   const stack = new Error("caller stack").stack;
   if (!stack) return null;
-
   const stackLines = stack.split("\n");
-  const lineColRegex = /:(\d+):(\d+)\)?\s*$/;
   for (let i = 3; i < stackLines.length; i++) {
-    const line = stackLines[i];
-    if (!line.includes("logger.ts") && line.includes("at ")) {
-      const match = lineColRegex.exec(line);
-      if (match) {
-        const lineNumber = match[1];
-        const endIndex = line.indexOf(match[0]);
-        if (endIndex !== -1) {
-          const pathPart = line
-            .slice(0, endIndex)
-            .replace(/^\s*at\s+/, "")
-            .replace(/^\s*\(\s*/, "")
-            .trim();
-          if (pathPart) {
-            const fileName = basename(pathPart);
-            return { file: fileName, line: lineNumber };
-          }
-        }
-      }
-    }
+    const result = parseStackLine(stackLines[i]);
+    if (result) return result;
   }
   return null;
 }

@@ -23,6 +23,12 @@ import { newLogger } from "../../middlewares/logger";
 
 const TRADE_TIMEOUT_MS = 300000;
 
+function hasActiveTrade(userId: string): boolean {
+  const trade = getUserActiveTrade(userId);
+  if (!trade) return false;
+  return trade.status !== "completed" && trade.status !== "cancelled";
+}
+
 export async function initiateTrade(
   client: Client,
   initiator: UserType,
@@ -31,40 +37,27 @@ export async function initiateTrade(
   server: ServerType,
 ): Promise<{ success: boolean; message?: string }> {
   try {
-    const initiatorActiveTrade = getUserActiveTrade(initiator.discordId);
-    if (initiatorActiveTrade) {
-      if (
-        initiatorActiveTrade.status !== "completed" &&
-        initiatorActiveTrade.status !== "cancelled"
-      ) {
-        return {
-          success: false,
-          message: language(
-            "tradeInitiatorHasActiveTrade",
-            server.settings.language,
-          ),
-        };
-      }
+    if (hasActiveTrade(initiator.discordId)) {
+      return {
+        success: false,
+        message: language(
+          "tradeInitiatorHasActiveTrade",
+          server.settings.language,
+        ),
+      };
     }
-
-    const targetActiveTrade = getUserActiveTrade(target.discordId);
-    if (targetActiveTrade) {
-      if (
-        targetActiveTrade.status !== "completed" &&
-        targetActiveTrade.status !== "cancelled"
-      ) {
-        return {
-          success: false,
-          message: language(
-            "tradeTargetHasActiveTrade",
-            server.settings.language,
-          ),
-        };
-      }
+    if (hasActiveTrade(target.discordId)) {
+      return {
+        success: false,
+        message: language(
+          "tradeTargetHasActiveTrade",
+          server.settings.language,
+        ),
+      };
     }
 
     const block = getTradeBlock(target.discordId);
-    if (block && block.expiresAt > Date.now()) {
+    if (block?.expiresAt != null && block.expiresAt > Date.now()) {
       return {
         success: false,
         message: language("tradeTargetBlocked", server.settings.language),
@@ -159,7 +152,7 @@ export async function initiateTrade(
       timeoutCollector.on("end", async (collected, reason) => {
         if (reason === "time") {
           const trade = getTrade(tradeId);
-          if (trade && trade.status === "pending") {
+          if (trade?.status === "pending") {
             updateTrade(tradeId, { status: "cancelled" });
 
             const timeoutEmbed = new EmbedBuilder()
