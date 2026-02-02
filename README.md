@@ -18,7 +18,7 @@ git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
+## Integrate with your tool
 
 - [ ] [Set up project integrations](https://gitlab.com/pvcsam/botdiscord-justcatchpocketmonster/-/settings/integrations)
 
