@@ -30,7 +30,10 @@ function getNoEligibleErrorMessage(
       .replace("{target}", targetName);
   }
   if (initiatorEligibleLength === 0) {
-    return language("tradeNoValidPokemon", lang).replace("{user}", initiatorName);
+    return language("tradeNoValidPokemon", lang).replace(
+      "{user}",
+      initiatorName,
+    );
   }
   return language("tradeNoValidPokemon", lang).replace("{user}", targetName);
 }
@@ -53,9 +56,7 @@ async function handleBothConfirmedTrade(
     if (!updatedInitiator || !updatedTarget) {
       const errorEmbed = new EmbedBuilder()
         .setTitle(language("tradeFailed", server.settings.language))
-        .setDescription(
-          language("tradeFailedDesc", server.settings.language),
-        )
+        .setDescription(language("tradeFailedDesc", server.settings.language))
         .setColor(0xe74c3c);
       await buttonInteraction.editReply({
         embeds: [errorEmbed],
@@ -104,8 +105,7 @@ async function handleBothConfirmedTrade(
       const otherMessageId = isInitiator
         ? updatedTrade.targetConfirmationMessageId
         : updatedTrade.initiatorConfirmationMessageId;
-      const otherUser =
-        await buttonInteraction.client.users.fetch(otherUserId);
+      const otherUser = await buttonInteraction.client.users.fetch(otherUserId);
       const otherDM = await otherUser.createDM();
       if (otherMessageId) {
         const otherMessage = await otherDM.messages.fetch(otherMessageId);
@@ -223,9 +223,9 @@ export async function handleTradeAccept(
 
       try {
         const initiatorMessage = trade.initiatorMessageId
-          ? await (await initiatorUser.createDM()).messages.fetch(
-              trade.initiatorMessageId,
-            )
+          ? await (
+              await initiatorUser.createDM()
+            ).messages.fetch(trade.initiatorMessageId)
           : null;
         if (initiatorMessage) {
           await initiatorMessage.edit({
@@ -243,9 +243,9 @@ export async function handleTradeAccept(
 
       try {
         const targetMessage = trade.targetMessageId
-          ? await (await targetUser.createDM()).messages.fetch(
-              trade.targetMessageId,
-            )
+          ? await (
+              await targetUser.createDM()
+            ).messages.fetch(trade.targetMessageId)
           : null;
         if (targetMessage) {
           await targetMessage.edit({

@@ -1,9 +1,4 @@
-import {
-  getTrade,
-  updateTrade,
-  extractId,
-  PokemonChoice,
-} from "./tradeCache";
+import { getTrade, updateTrade, extractId, PokemonChoice } from "./tradeCache";
 import allPokemon from "../../data/pokemon.json";
 import { getUserById } from "../../cache/UserCache";
 import type { ServerType } from "../../core/types/ServerType";
@@ -40,7 +35,13 @@ async function notifyRarityMismatchAndResendMenus(
     const initiator = await getUserById(initiatorId);
     const target = await getUserById(targetId);
     if (initiator && target) {
-      await sendTradeMenuToUser(client, initiatorId, tradeId, initiator, server);
+      await sendTradeMenuToUser(
+        client,
+        initiatorId,
+        tradeId,
+        initiator,
+        server,
+      );
       await sendTradeMenuToUser(client, targetId, tradeId, target, server);
     }
   } catch (error) {

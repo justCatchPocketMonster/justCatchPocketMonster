@@ -57,10 +57,9 @@ jest.mock("../../../../src/features/trade/tradeMenu", () => ({
 }));
 
 jest.mock("../../../../src/features/trade/tradeCache", () => {
-  const actual =
-    jest.requireActual<typeof import("../../../../src/features/trade/tradeCache")>(
-      "../../../../src/features/trade/tradeCache",
-    );
+  const actual = jest.requireActual<
+    typeof import("../../../../src/features/trade/tradeCache")
+  >("../../../../src/features/trade/tradeCache");
   return {
     ...actual,
     createTrade: jest.fn(),

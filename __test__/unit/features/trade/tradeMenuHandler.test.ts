@@ -159,7 +159,13 @@ describe("TradeMenuHandler", () => {
       settings: { language: "eng" },
     } as ServerType;
 
-    await sendTradeMenuToUser(mockClient as unknown as Client, "user2", "trade_2", user as unknown as UserType, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user2",
+      "trade_2",
+      user as unknown as UserType,
+      server,
+    );
 
     expect(mockDM.send).toHaveBeenCalled();
   });
@@ -182,7 +188,13 @@ describe("TradeMenuHandler", () => {
     };
 
     await expect(
-      sendTradeMenuToUser(mockClient as unknown as Client, "user3", "trade_3", user as unknown as UserType, server),
+      sendTradeMenuToUser(
+        mockClient as unknown as Client,
+        "user3",
+        "trade_3",
+        user as unknown as UserType,
+        server,
+      ),
     ).resolves.not.toThrow();
   });
 
@@ -260,7 +272,13 @@ describe("TradeMenuHandler", () => {
       settings: { language: "eng" },
     } as ServerType;
 
-    await sendTradeMenuToUser(mockClient as unknown as Client, "user5", "trade_5", user as unknown as UserType, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user5",
+      "trade_5",
+      user as unknown as UserType,
+      server,
+    );
 
     expect(mockDM.send).toHaveBeenCalled();
     const sentEmbed = mockDM.send.mock.calls[0][0].embeds[0];
@@ -370,7 +388,13 @@ describe("TradeMenuHandler", () => {
       settings: { language: "eng" },
     } as ServerType;
 
-    await sendTradeMenuToUser(mockClient as unknown as Client, "user6", "trade_6", user as unknown as UserType, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user6",
+      "trade_6",
+      user as unknown as UserType,
+      server,
+    );
 
     expect(mockMessage.createMessageComponentCollector).toHaveBeenCalled();
 
@@ -499,7 +523,13 @@ describe("TradeMenuHandler", () => {
       settings: { language: "eng" },
     } as ServerType;
 
-    await sendTradeMenuToUser(mockClient as unknown as Client, "user7", "trade_7", user as unknown as UserType, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user7",
+      "trade_7",
+      user as unknown as UserType,
+      server,
+    );
 
     if (collectCallback) {
       const mockInteraction = {
@@ -599,7 +629,13 @@ describe("TradeMenuHandler", () => {
       settings: { language: "eng" },
     } as ServerType;
 
-    await sendTradeMenuToUser(mockClient as unknown as Client, "user8", "trade_8", user as unknown as UserType, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user8",
+      "trade_8",
+      user as unknown as UserType,
+      server,
+    );
 
     if (collectCallback) {
       const mockInteraction = {
