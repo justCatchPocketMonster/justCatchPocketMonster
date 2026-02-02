@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from "winston";
-import { basename } from "path";
+import { basename } from "node:path";
 const { combine, timestamp, printf } = format;
 
 interface LogEntry {
@@ -18,20 +18,28 @@ interface TransformableInfo {
 }
 
 function getCallerInfo(): { file: string; line: string } | null {
-  const stack = new Error().stack;
+  const stack = new Error("caller stack").stack;
   if (!stack) return null;
 
   const stackLines = stack.split("\n");
+  const lineColRegex = /:(\d+):(\d+)\)?\s*$/;
   for (let i = 3; i < stackLines.length; i++) {
     const line = stackLines[i];
     if (!line.includes("logger.ts") && line.includes("at ")) {
-      const match = line.match(/\((.+):(\d+):(\d+)\)|at (.+):(\d+):(\d+)/);
+      const match = lineColRegex.exec(line);
       if (match) {
-        const filePath = match[1] || match[4];
-        const lineNumber = match[2] || match[5];
-        if (filePath) {
-          const fileName = basename(filePath);
-          return { file: fileName, line: lineNumber };
+        const lineNumber = match[1];
+        const endIndex = line.indexOf(match[0]);
+        if (endIndex !== -1) {
+          const pathPart = line
+            .slice(0, endIndex)
+            .replace(/^\s*at\s+/, "")
+            .replace(/^\s*\(\s*/, "")
+            .trim();
+          if (pathPart) {
+            const fileName = basename(pathPart);
+            return { file: fileName, line: lineNumber };
+          }
         }
       }
     }

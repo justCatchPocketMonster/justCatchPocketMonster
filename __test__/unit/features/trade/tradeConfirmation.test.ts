@@ -3,6 +3,8 @@ import {
   TradeData,
   updateTrade,
 } from "../../../../src/features/trade/tradeCache";
+import type { ServerType } from "../../../../src/core/types/ServerType";
+import type { Client } from "discord.js";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 
 jest.mock("../../../../src/features/trade/tradeCache", () => {
@@ -66,9 +68,13 @@ describe("TradeConfirmation", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendConfirmationEmbeds(tradeData, server, mockClient);
+    await sendConfirmationEmbeds(
+      tradeData,
+      server,
+      mockClient as unknown as Client,
+    );
 
     expect(mockClient.users.fetch).toHaveBeenCalledTimes(2);
     expect(mockSend).toHaveBeenCalledTimes(2);
@@ -98,9 +104,13 @@ describe("TradeConfirmation", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendConfirmationEmbeds(tradeData, server, mockClient);
+    await sendConfirmationEmbeds(
+      tradeData,
+      server,
+      mockClient as unknown as Client,
+    );
     expect(mockClient.users.fetch).toHaveBeenCalled();
   });
 });

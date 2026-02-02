@@ -1,6 +1,5 @@
 import {
   Client,
-  EmbedBuilder,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,

@@ -48,11 +48,11 @@ const cooldownCache = new NodeCache({ stdTTL: ttlCache });
 const blockCache = new NodeCache({ stdTTL: 604800 });
 
 export function extractId(
-  value: string | { discordId: string } | unknown,
+  value: string | { discordId: string } | Record<string, unknown>,
 ): string {
   if (typeof value === "string") return value;
   if (value && typeof value === "object" && "discordId" in value) {
-    return String((value as { discordId: unknown }).discordId);
+    return String((value as { discordId: string }).discordId);
   }
   return String(value);
 }
@@ -78,8 +78,12 @@ export function createTrade(tradeData: TradeData): void {
       ttl,
     );
     tradeCache.set(`trade_user_${cleanData.targetId}`, cleanData.tradeId, ttl);
-  } catch (error: any) {
-    newLogger("error", error as string, "Error creating trade");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error creating trade",
+    );
     throw error;
   }
 }
@@ -107,8 +111,12 @@ export function getTrade(tradeId: string): TradeData | undefined {
     }
 
     return trade;
-  } catch (error: any) {
-    newLogger("error", error as string, "Error getting trade");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error getting trade",
+    );
     throw error;
   }
 }
@@ -117,8 +125,12 @@ export function getTradeByUserId(userId: string): TradeData | undefined {
   try {
     const tradeId = tradeCache.get<string>(`trade_user_${String(userId)}`);
     return tradeId ? getTrade(String(tradeId)) : undefined;
-  } catch (error: any) {
-    newLogger("error", error as string, "Error getting trade by user");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error getting trade by user",
+    );
     throw error;
   }
 }
@@ -144,8 +156,12 @@ export function updateTrade(
     tradeCache.set(safeTradeId, updated, ttl);
     tradeCache.set(`trade_user_${updated.initiatorId}`, safeTradeId, ttl);
     tradeCache.set(`trade_user_${updated.targetId}`, safeTradeId, ttl);
-  } catch (error: any) {
-    newLogger("error", error as string, "Error updating trade");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error updating trade",
+    );
     throw error;
   }
 }
@@ -180,8 +196,12 @@ export function setTradeCooldown(
       cooldown,
       ttl,
     );
-  } catch (error: any) {
-    newLogger("error", error as string, "Error setting cooldown");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error setting cooldown",
+    );
     throw error;
   }
 }
@@ -203,8 +223,12 @@ export function setTradeBlock(userId: string, expiresAt: number): void {
     };
     const ttl = Math.max(0, Math.floor((expiresAt - Date.now()) / 1000));
     blockCache.set(`block_${String(userId)}`, block, ttl);
-  } catch (error: any) {
-    newLogger("error", error as string, "Error setting block");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error setting block",
+    );
     throw error;
   }
 }

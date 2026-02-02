@@ -43,9 +43,6 @@ export function createTradeCompletedEmbed(
     return embed.setDescription(language("tradeCompletedDesc", lang));
   }
 
-  const langKey = `name${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
-    | "nameFr"
-    | "nameEng";
   const completKey =
     `nameComplet${lang.charAt(0).toUpperCase() + lang.slice(1)}` as
       | "nameCompletFr"

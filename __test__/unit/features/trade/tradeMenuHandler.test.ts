@@ -1,4 +1,7 @@
 import { sendTradeMenuToUser } from "../../../../src/features/trade/tradeMenuHandler";
+import type { Client } from "discord.js";
+import type { UserType } from "../../../../src/core/types/UserType";
+import type { ServerType } from "../../../../src/core/types/ServerType";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getUserById } from "../../../../src/cache/UserCache";
 
@@ -23,6 +26,10 @@ jest.mock("../../../../src/features/trade/tradeUtils", () => ({
   getCooldownDisplayText: jest
     .fn()
     .mockReturnValue("Legendary: None\nMythical: None\nUltra Beast: None"),
+}));
+
+jest.mock("../../../../src/middlewares/logger", () => ({
+  newLogger: jest.fn(),
 }));
 
 describe("TradeMenuHandler", () => {
@@ -97,9 +104,15 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user1", "trade_1", user, server);
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user1",
+      "trade_1",
+      user as unknown as UserType,
+      server,
+    );
 
     expect(mockClient.users.fetch).toHaveBeenCalledWith("user1");
     expect(mockDM.send).toHaveBeenCalled();
@@ -144,9 +157,9 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user2", "trade_2", user, server);
+    await sendTradeMenuToUser(mockClient as unknown as Client, "user2", "trade_2", user as unknown as UserType, server);
 
     expect(mockDM.send).toHaveBeenCalled();
   });
@@ -161,7 +174,7 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     const user = {
       discordId: "user3",
@@ -169,7 +182,7 @@ describe("TradeMenuHandler", () => {
     };
 
     await expect(
-      sendTradeMenuToUser(mockClient, "user3", "trade_3", user, server),
+      sendTradeMenuToUser(mockClient as unknown as Client, "user3", "trade_3", user as unknown as UserType, server),
     ).resolves.not.toThrow();
   });
 
@@ -245,9 +258,9 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user5", "trade_5", user, server);
+    await sendTradeMenuToUser(mockClient as unknown as Client, "user5", "trade_5", user as unknown as UserType, server);
 
     expect(mockDM.send).toHaveBeenCalled();
     const sentEmbed = mockDM.send.mock.calls[0][0].embeds[0];
@@ -355,9 +368,9 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user6", "trade_6", user, server);
+    await sendTradeMenuToUser(mockClient as unknown as Client, "user6", "trade_6", user as unknown as UserType, server);
 
     expect(mockMessage.createMessageComponentCollector).toHaveBeenCalled();
 
@@ -484,9 +497,9 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user7", "trade_7", user, server);
+    await sendTradeMenuToUser(mockClient as unknown as Client, "user7", "trade_7", user as unknown as UserType, server);
 
     if (collectCallback) {
       const mockInteraction = {
@@ -584,9 +597,9 @@ describe("TradeMenuHandler", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
-    await sendTradeMenuToUser(mockClient, "user8", "trade_8", user, server);
+    await sendTradeMenuToUser(mockClient as unknown as Client, "user8", "trade_8", user as unknown as UserType, server);
 
     if (collectCallback) {
       const mockInteraction = {

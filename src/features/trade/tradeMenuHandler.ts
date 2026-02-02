@@ -214,7 +214,11 @@ export async function sendTradeMenuToUser(
             collector.stop();
           }
         } catch (error) {
-          newLogger("error", error as string, "Error in menu collector");
+          newLogger(
+            "error",
+            error instanceof Error ? error.message : String(error),
+            "Error in menu collector",
+          );
         }
       },
     );
@@ -222,14 +226,18 @@ export async function sendTradeMenuToUser(
     collector.on("end", async () => {
       try {
         await message.edit({ components: [] });
-      } catch (error) {
-        // Message might be deleted
+      } catch (editError) {
+        newLogger(
+          "warn",
+          editError instanceof Error ? editError.message : String(editError),
+          "Could not clear menu components (message may be deleted)",
+        );
       }
     });
   } catch (error) {
     newLogger(
       "error",
-      error as string,
+      error instanceof Error ? error.message : String(error),
       `Failed to send menu to user ${userId}`,
     );
   }

@@ -87,7 +87,10 @@ export function getEligiblePokemon(
 export function getCooldownDisplayText(userId: string, lang: string): string {
   const noneText = language("tradeCooldownNone", lang);
   return COOLDOWN_RARITIES.map((rarity) => {
-    const label = language(getRarityLabelKey(rarity), lang);
+    const label = language(
+      getRarityLabelKey(rarity) as Parameters<typeof language>[0],
+      lang,
+    );
     const remaining = calculateCooldownRemaining(userId, rarity);
     const value =
       remaining === null ? noneText : formatTimestamp(Date.now() + remaining);

@@ -1,4 +1,11 @@
-import { Client, User as DiscordUser } from "discord.js";
+import {
+  Client,
+  User as DiscordUser,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+  EmbedBuilder,
+} from "discord.js";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
 import {
@@ -11,12 +18,6 @@ import {
   TradeData,
 } from "./tradeCache";
 import { createEmbedAsk } from "./tradeUtils";
-import {
-  ButtonBuilder,
-  ButtonStyle,
-  ActionRowBuilder,
-  EmbedBuilder,
-} from "discord.js";
 import language from "../../lang/language";
 import { newLogger } from "../../middlewares/logger";
 
@@ -31,33 +32,35 @@ export async function initiateTrade(
 ): Promise<{ success: boolean; message?: string }> {
   try {
     const initiatorActiveTrade = getUserActiveTrade(initiator.discordId);
-    if (
-      initiatorActiveTrade &&
-      initiatorActiveTrade.status !== "completed" &&
-      initiatorActiveTrade.status !== "cancelled"
-    ) {
-      return {
-        success: false,
-        message: language(
-          "tradeInitiatorHasActiveTrade",
-          server.settings.language,
-        ),
-      };
+    if (initiatorActiveTrade) {
+      if (
+        initiatorActiveTrade.status !== "completed" &&
+        initiatorActiveTrade.status !== "cancelled"
+      ) {
+        return {
+          success: false,
+          message: language(
+            "tradeInitiatorHasActiveTrade",
+            server.settings.language,
+          ),
+        };
+      }
     }
 
     const targetActiveTrade = getUserActiveTrade(target.discordId);
-    if (
-      targetActiveTrade &&
-      targetActiveTrade.status !== "completed" &&
-      targetActiveTrade.status !== "cancelled"
-    ) {
-      return {
-        success: false,
-        message: language(
-          "tradeTargetHasActiveTrade",
-          server.settings.language,
-        ),
-      };
+    if (targetActiveTrade) {
+      if (
+        targetActiveTrade.status !== "completed" &&
+        targetActiveTrade.status !== "cancelled"
+      ) {
+        return {
+          success: false,
+          message: language(
+            "tradeTargetHasActiveTrade",
+            server.settings.language,
+          ),
+        };
+      }
     }
 
     const block = getTradeBlock(target.discordId);
@@ -100,7 +103,11 @@ export async function initiateTrade(
       });
       updateTrade(tradeId, { initiatorMessageId: initiatorMessage.id });
     } catch (error) {
-      newLogger("error", error as string, `Failed to send DM to initiator`);
+      newLogger(
+        "error",
+        error instanceof Error ? error.message : String(error),
+        "Failed to send DM to initiator",
+      );
     }
 
     try {
@@ -172,8 +179,12 @@ export async function initiateTrade(
               );
               const initiatorDM = await initiatorUser.createDM();
               await initiatorDM.send({ embeds: [timeoutEmbed] });
-            } catch (error) {
-              // DM might be disabled
+            } catch (dmError) {
+              newLogger(
+                "warn",
+                dmError instanceof Error ? dmError.message : String(dmError),
+                "Could not send timeout notification to initiator (DM may be disabled)",
+              );
             }
 
             deleteTrade(tradeId);
@@ -186,7 +197,11 @@ export async function initiateTrade(
         message: language("tradeRequestSentSuccess", server.settings.language),
       };
     } catch (error) {
-      newLogger("error", error as string, `Failed to send DM to target`);
+      newLogger(
+        "error",
+        error instanceof Error ? error.message : String(error),
+        "Failed to send DM to target",
+      );
       deleteTrade(tradeId);
       return {
         success: false,
@@ -194,7 +209,11 @@ export async function initiateTrade(
       };
     }
   } catch (error) {
-    newLogger("error", error as string, "Error initiating trade");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error initiating trade",
+    );
     return {
       success: false,
       message: language("tradeError", server.settings.language),

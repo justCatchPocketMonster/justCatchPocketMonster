@@ -56,18 +56,25 @@ jest.mock("../../../../src/features/trade/tradeMenu", () => ({
   regenerateTradeMenu: jest.fn(),
 }));
 
-jest.mock("../../../../src/features/trade/tradeCache", () => ({
-  createTrade: jest.fn(),
-  getTrade: jest.fn(),
-  updateTrade: jest.fn(),
-  deleteTrade: jest.fn(),
-  setTradeBlock: jest.fn(),
-  getTradeByUserId: jest.fn(),
-  getUserActiveTrade: jest.fn(),
-  setTradeCooldown: jest.fn(),
-  getTradeCooldown: jest.fn(),
-  getTradeBlock: jest.fn(),
-}));
+jest.mock("../../../../src/features/trade/tradeCache", () => {
+  const actual =
+    jest.requireActual<typeof import("../../../../src/features/trade/tradeCache")>(
+      "../../../../src/features/trade/tradeCache",
+    );
+  return {
+    ...actual,
+    createTrade: jest.fn(),
+    getTrade: jest.fn(),
+    updateTrade: jest.fn(),
+    deleteTrade: jest.fn(),
+    setTradeBlock: jest.fn(),
+    getTradeByUserId: jest.fn(),
+    getUserActiveTrade: jest.fn(),
+    setTradeCooldown: jest.fn(),
+    getTradeCooldown: jest.fn(),
+    getTradeBlock: jest.fn(),
+  };
+});
 
 jest.mock("../../../../src/features/trade/tradeMenuHandler", () => ({
   sendTradeMenuToUser: jest.fn(),

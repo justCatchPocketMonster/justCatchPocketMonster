@@ -4,6 +4,7 @@ import {
   createTrade,
   getTrade,
 } from "../../../../src/features/trade/tradeCache";
+import type { ServerType } from "../../../../src/core/types/ServerType";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
 import { getUserById } from "../../../../src/cache/UserCache";
 
@@ -32,7 +33,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "non_existent",
@@ -60,7 +61,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_1",
@@ -88,7 +89,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_2",
@@ -118,7 +119,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_3",
@@ -153,7 +154,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_4",
@@ -188,7 +189,7 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_5",
@@ -232,14 +233,14 @@ describe("TradeSelection", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     await handlePokemonSelection(
       "test_trade_6",
       "user13",
       "144-ordinary-1",
       server,
-      mockClient,
+      mockClient as any,
     );
     const trade = getTrade("test_trade_6");
     expect(trade?.status).toBe("selecting");

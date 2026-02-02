@@ -1,16 +1,14 @@
 import { MenuHandler, MenuOption } from "../../utils/menu/types";
 import { UserType } from "../../core/types/UserType";
 import { getEligiblePokemon } from "./tradeUtils";
-import allPokemon from "../../data/pokemon.json";
-import { pokemonDb } from "../../core/types/pokemonDb";
 import language from "../../lang/language";
 import { ServerType } from "../../core/types/ServerType";
 
 export class TradeMenuHandler implements MenuHandler {
-  private user: UserType;
-  private server: ServerType;
-  private requiredRarity?: string;
-  private onPokemonSelected: (pokemonKey: string) => void;
+  private readonly user: UserType;
+  private readonly server: ServerType;
+  private readonly requiredRarity?: string;
+  private readonly onPokemonSelected: (pokemonKey: string) => void;
 
   constructor(
     user: UserType,
@@ -65,7 +63,7 @@ export class TradeMenuHandler implements MenuHandler {
         }
 
         const typeOptions: MenuOption[] = Array.from(typeMap.keys())
-          .sort()
+          .sort((a, b) => a.localeCompare(b))
           .map((type) => {
             const typePokemon = typeMap.get(type)!;
             const pokemonOptions: MenuOption[] = typePokemon.map((item) => {
@@ -117,7 +115,7 @@ export class TradeMenuHandler implements MenuHandler {
   }
 
   handleAction(selectionPath: any[]): void {
-    const pokemonValue = selectionPath[selectionPath.length - 1]?.value;
+    const pokemonValue = selectionPath.at(-1)?.value;
     if (
       pokemonValue &&
       !pokemonValue.startsWith("gen_") &&

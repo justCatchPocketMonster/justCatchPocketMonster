@@ -187,8 +187,8 @@ function selectRandomPokemon(
   return {
     id: randomPokemon.id.toString(),
     name: {
-      nameEng: randomPokemon.name["nameEng"] as string[],
-      nameFr: randomPokemon.name["nameFr"] as string[],
+      nameEng: randomPokemon.name["nameEng"],
+      nameFr: randomPokemon.name["nameFr"],
     },
     arrayType: randomPokemon.arrayType,
     rarity: randomPokemon.rarity,
@@ -198,11 +198,9 @@ function selectRandomPokemon(
     versionForm: randomPokemon.versionForm,
     isShiny: false,
     hint: initHint(
-      (
-        randomPokemon.name[
-          "name" + capitalizeFirstLetter(server.settings.language)
-        ] as string[]
-      )[0],
+      randomPokemon.name[
+        "name" + capitalizeFirstLetter(server.settings.language)
+      ][0],
     ),
   };
 }

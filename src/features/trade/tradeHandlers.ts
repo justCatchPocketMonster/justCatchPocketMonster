@@ -5,7 +5,7 @@ import {
   deleteTrade,
   setTradeBlock,
   extractId,
-  TradeData,
+  type TradeData,
 } from "./tradeCache";
 import { executeTrade } from "./tradeValidation";
 import { getEligiblePokemon } from "./tradeUtils";
@@ -16,6 +16,137 @@ import { newLogger } from "../../middlewares/logger";
 import { sendTradeMenuToUser } from "./tradeMenuHandler";
 import { createTradeCompletedEmbed } from "./tradeEmbeds";
 import { sendConfirmationEmbeds } from "./tradeConfirmation";
+
+function getNoEligibleErrorMessage(
+  initiatorEligibleLength: number,
+  targetEligibleLength: number,
+  initiatorName: string,
+  targetName: string,
+  lang: string,
+): string {
+  if (initiatorEligibleLength === 0 && targetEligibleLength === 0) {
+    return language("tradeNoValidPokemonBoth", lang)
+      .replace("{initiator}", initiatorName)
+      .replace("{target}", targetName);
+  }
+  if (initiatorEligibleLength === 0) {
+    return language("tradeNoValidPokemon", lang).replace("{user}", initiatorName);
+  }
+  return language("tradeNoValidPokemon", lang).replace("{user}", targetName);
+}
+
+async function handleBothConfirmedTrade(
+  buttonInteraction: ButtonInteraction,
+  tradeId: string,
+  updatedTrade: TradeData,
+  server: Awaited<ReturnType<typeof getServerById>>,
+  isInitiator: boolean,
+): Promise<void> {
+  const success = await executeTrade(updatedTrade);
+
+  if (success) {
+    updateTrade(tradeId, { status: "completed" });
+
+    const updatedInitiator = await getUserById(updatedTrade.initiatorId);
+    const updatedTarget = await getUserById(updatedTrade.targetId);
+
+    if (!updatedInitiator || !updatedTarget) {
+      const errorEmbed = new EmbedBuilder()
+        .setTitle(language("tradeFailed", server.settings.language))
+        .setDescription(
+          language("tradeFailedDesc", server.settings.language),
+        )
+        .setColor(0xe74c3c);
+      await buttonInteraction.editReply({
+        embeds: [errorEmbed],
+        components: [],
+      });
+      return;
+    }
+
+    const initiatorUser = await buttonInteraction.client.users.fetch(
+      updatedTrade.initiatorId,
+    );
+    const targetUser = await buttonInteraction.client.users.fetch(
+      updatedTrade.targetId,
+    );
+    const initiatorName = initiatorUser.username;
+    const targetName = targetUser.username;
+
+    const initiatorEmbed = createTradeCompletedEmbed(
+      updatedTrade,
+      server,
+      true,
+      initiatorName,
+      targetName,
+      updatedInitiator,
+    );
+    const targetEmbed = createTradeCompletedEmbed(
+      updatedTrade,
+      server,
+      false,
+      initiatorName,
+      targetName,
+      updatedTarget,
+    );
+
+    const userEmbed = isInitiator ? initiatorEmbed : targetEmbed;
+    await buttonInteraction.editReply({
+      embeds: [userEmbed],
+      components: [],
+    });
+
+    try {
+      const otherUserId = isInitiator
+        ? updatedTrade.targetId
+        : updatedTrade.initiatorId;
+      const otherEmbed = isInitiator ? targetEmbed : initiatorEmbed;
+      const otherMessageId = isInitiator
+        ? updatedTrade.targetConfirmationMessageId
+        : updatedTrade.initiatorConfirmationMessageId;
+      const otherUser =
+        await buttonInteraction.client.users.fetch(otherUserId);
+      const otherDM = await otherUser.createDM();
+      if (otherMessageId) {
+        const otherMessage = await otherDM.messages.fetch(otherMessageId);
+        await otherMessage.edit({
+          embeds: [otherEmbed],
+          components: [],
+        });
+      } else {
+        await otherDM.send({ embeds: [otherEmbed] });
+      }
+    } catch (dmError) {
+      newLogger(
+        "warn",
+        dmError instanceof Error ? dmError.message : String(dmError),
+        "Could not send completion embed to other user (DM may be disabled)",
+      );
+    }
+
+    deleteTrade(tradeId);
+  } else {
+    const errorEmbed = new EmbedBuilder()
+      .setTitle(language("tradeFailed", server.settings.language))
+      .setDescription(language("tradeFailedDesc", server.settings.language))
+      .setColor(0xe74c3c);
+
+    await buttonInteraction.editReply({
+      embeds: [errorEmbed],
+      components: [],
+    });
+
+    updateTrade(tradeId, {
+      status: "accepted",
+      initiatorChoice: undefined,
+      targetChoice: undefined,
+      initiatorConfirmed: false,
+      targetConfirmed: false,
+      initiatorConfirmationMessageId: undefined,
+      targetConfirmationMessageId: undefined,
+    });
+  }
+}
 
 export async function handleTradeAccept(
   buttonInteraction: ButtonInteraction,
@@ -77,26 +208,13 @@ export async function handleTradeAccept(
       const targetUser = await client.users.fetch(targetId);
       const initiatorName = initiatorUser.username;
       const targetName = targetUser.username;
-
-      let errorMessage: string;
-      if (initiatorEligible.length === 0 && targetEligible.length === 0) {
-        errorMessage = language(
-          "tradeNoValidPokemonBoth",
-          server.settings.language,
-        )
-          .replace("{initiator}", initiatorName)
-          .replace("{target}", targetName);
-      } else if (initiatorEligible.length === 0) {
-        errorMessage = language(
-          "tradeNoValidPokemon",
-          server.settings.language,
-        ).replace("{user}", initiatorName);
-      } else {
-        errorMessage = language(
-          "tradeNoValidPokemon",
-          server.settings.language,
-        ).replace("{user}", targetName);
-      }
+      const errorMessage = getNoEligibleErrorMessage(
+        initiatorEligible.length,
+        targetEligible.length,
+        initiatorName,
+        targetName,
+        server.settings.language,
+      );
 
       const errorEmbed = new EmbedBuilder()
         .setTitle(language("tradeImpossible", server.settings.language))
@@ -104,31 +222,43 @@ export async function handleTradeAccept(
         .setColor(0xe74c3c);
 
       try {
-        if (trade.initiatorMessageId) {
-          const initiatorDM = await initiatorUser.createDM();
-          const initiatorMessage = await initiatorDM.messages.fetch(
-            trade.initiatorMessageId,
-          );
-          await initiatorMessage.edit({ embeds: [errorEmbed], components: [] });
+        const initiatorMessage = trade.initiatorMessageId
+          ? await (await initiatorUser.createDM()).messages.fetch(
+              trade.initiatorMessageId,
+            )
+          : null;
+        if (initiatorMessage) {
+          await initiatorMessage.edit({
+            embeds: [errorEmbed],
+            components: [],
+          });
         }
       } catch (error) {
         newLogger(
           "error",
-          error as string,
+          error instanceof Error ? error.message : String(error),
           "Failed to update initiator message",
         );
       }
 
       try {
-        if (trade.targetMessageId) {
-          const targetDM = await targetUser.createDM();
-          const targetMessage = await targetDM.messages.fetch(
-            trade.targetMessageId,
-          );
-          await targetMessage.edit({ embeds: [errorEmbed], components: [] });
+        const targetMessage = trade.targetMessageId
+          ? await (await targetUser.createDM()).messages.fetch(
+              trade.targetMessageId,
+            )
+          : null;
+        if (targetMessage) {
+          await targetMessage.edit({
+            embeds: [errorEmbed],
+            components: [],
+          });
         }
       } catch (error) {
-        newLogger("error", error as string, "Failed to update target message");
+        newLogger(
+          "error",
+          error instanceof Error ? error.message : String(error),
+          "Failed to update target message",
+        );
       }
 
       await buttonInteraction.editReply({
@@ -164,8 +294,12 @@ export async function handleTradeAccept(
       embeds: [updatedEmbed],
       components: [],
     });
-  } catch (error: any) {
-    newLogger("error", error as string, "Error handling trade accept");
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error handling trade accept",
+    );
   }
 }
 
@@ -198,13 +332,21 @@ export async function handleTradeRefuse(
       );
       const initiatorDM = await initiatorUser.createDM();
       await initiatorDM.send({ embeds: [embed] });
-    } catch (error) {
-      // DM might be disabled
+    } catch (dmError) {
+      newLogger(
+        "warn",
+        dmError instanceof Error ? dmError.message : String(dmError),
+        "Could not notify initiator of trade refusal (DM may be disabled)",
+      );
     }
 
     deleteTrade(tradeId);
   } catch (error) {
-    newLogger("error", error as string, "Error handling trade refuse");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error handling trade refuse",
+    );
   }
 }
 
@@ -240,13 +382,21 @@ export async function handleTradeRefuseWeek(
       );
       const initiatorDM = await initiatorUser.createDM();
       await initiatorDM.send({ embeds: [embed] });
-    } catch (error) {
-      // DM might be disabled
+    } catch (dmError) {
+      newLogger(
+        "warn",
+        dmError instanceof Error ? dmError.message : String(dmError),
+        "Could not notify initiator of trade block (DM may be disabled)",
+      );
     }
 
     deleteTrade(tradeId);
   } catch (error) {
-    newLogger("error", error as string, "Error handling trade refuse week");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error handling trade refuse week",
+    );
   }
 }
 
@@ -297,106 +447,13 @@ export async function handleTradeConfirm(
       updatedTrade.initiatorConfirmed && updatedTrade.targetConfirmed;
 
     if (bothConfirmed) {
-      const success = await executeTrade(updatedTrade);
-
-      if (success) {
-        updateTrade(tradeId, { status: "completed" });
-
-        const updatedInitiator = await getUserById(updatedTrade.initiatorId);
-        const updatedTarget = await getUserById(updatedTrade.targetId);
-
-        if (!updatedInitiator || !updatedTarget) {
-          const errorEmbed = new EmbedBuilder()
-            .setTitle(language("tradeFailed", server.settings.language))
-            .setDescription(
-              language("tradeFailedDesc", server.settings.language),
-            )
-            .setColor(0xe74c3c);
-          await buttonInteraction.editReply({
-            embeds: [errorEmbed],
-            components: [],
-          });
-          return;
-        }
-
-        const initiatorUser = await buttonInteraction.client.users.fetch(
-          updatedTrade.initiatorId,
-        );
-        const targetUser = await buttonInteraction.client.users.fetch(
-          updatedTrade.targetId,
-        );
-        const initiatorName = initiatorUser.username;
-        const targetName = targetUser.username;
-
-        const initiatorEmbed = createTradeCompletedEmbed(
-          updatedTrade,
-          server,
-          true,
-          initiatorName,
-          targetName,
-          updatedInitiator,
-        );
-        const targetEmbed = createTradeCompletedEmbed(
-          updatedTrade,
-          server,
-          false,
-          initiatorName,
-          targetName,
-          updatedTarget,
-        );
-
-        const userEmbed = isInitiator ? initiatorEmbed : targetEmbed;
-        await buttonInteraction.editReply({
-          embeds: [userEmbed],
-          components: [],
-        });
-
-        try {
-          const otherUserId = isInitiator
-            ? updatedTrade.targetId
-            : updatedTrade.initiatorId;
-          const otherEmbed = isInitiator ? targetEmbed : initiatorEmbed;
-          const otherMessageId = isInitiator
-            ? updatedTrade.targetConfirmationMessageId
-            : updatedTrade.initiatorConfirmationMessageId;
-          const otherUser =
-            await buttonInteraction.client.users.fetch(otherUserId);
-          const otherDM = await otherUser.createDM();
-          if (otherMessageId) {
-            const otherMessage = await otherDM.messages.fetch(otherMessageId);
-            await otherMessage.edit({
-              embeds: [otherEmbed],
-              components: [],
-            });
-          } else {
-            await otherDM.send({ embeds: [otherEmbed] });
-          }
-        } catch (error) {
-          // DM might be disabled
-        }
-
-        deleteTrade(tradeId);
-      } else {
-        const errorEmbed = new EmbedBuilder()
-          .setTitle(language("tradeFailed", server.settings.language))
-          .setDescription(language("tradeFailedDesc", server.settings.language))
-          .setColor(0xe74c3c);
-
-        await buttonInteraction.editReply({
-          embeds: [errorEmbed],
-          components: [],
-        });
-
-        updateTrade(tradeId, {
-          status: "accepted",
-          initiatorChoice: undefined,
-          targetChoice: undefined,
-          initiatorConfirmed: false,
-          targetConfirmed: false,
-          initiatorConfirmationMessageId: undefined,
-          targetConfirmationMessageId: undefined,
-        });
-      }
+      await handleBothConfirmedTrade(
+        buttonInteraction,
+        tradeId,
+        updatedTrade,
+        server,
+        isInitiator,
+      );
     } else {
       await sendConfirmationEmbeds(
         updatedTrade,
@@ -405,7 +462,11 @@ export async function handleTradeConfirm(
       );
     }
   } catch (error) {
-    newLogger("error", error as string, "Error handling trade confirm");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error handling trade confirm",
+    );
   }
 }
 
@@ -458,6 +519,10 @@ export async function handleTradeCancel(
     );
     await sendTradeMenuToUser(client, trade.targetId, tradeId, target, server);
   } catch (error) {
-    newLogger("error", error as string, "Error handling trade cancel");
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Error handling trade cancel",
+    );
   }
 }

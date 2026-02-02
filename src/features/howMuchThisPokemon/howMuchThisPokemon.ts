@@ -142,7 +142,7 @@ function generateEmbedData(
     | "nameCompletFr"
     | "nameCompletEng";
 
-  const pokemonTitle = pokemon.name[completKey][0] as string;
+  const pokemonTitle = pokemon.name[completKey][0];
 
   const embed = new EmbedBuilder()
     .setTitle(pokemonTitle)

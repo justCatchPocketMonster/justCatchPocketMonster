@@ -1,5 +1,7 @@
 import { createTradeCompletedEmbed } from "../../../../src/features/trade/tradeEmbeds";
 import { TradeData } from "../../../../src/features/trade/tradeCache";
+import type { ServerType } from "../../../../src/core/types/ServerType";
+import type { UserType } from "../../../../src/core/types/UserType";
 
 describe("TradeEmbeds", () => {
   it("should create embed without choices", () => {
@@ -16,12 +18,12 @@ describe("TradeEmbeds", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     const user = {
       discordId: "user1",
       savePokemon: { data: {} },
-    };
+    } as unknown as UserType;
 
     const embed = createTradeCompletedEmbed(
       tradeData,
@@ -60,7 +62,7 @@ describe("TradeEmbeds", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     const user = {
       discordId: "user3",
@@ -76,7 +78,7 @@ describe("TradeEmbeds", () => {
           },
         },
       },
-    };
+    } as unknown as UserType;
 
     const embed = createTradeCompletedEmbed(
       tradeData,
@@ -116,12 +118,12 @@ describe("TradeEmbeds", () => {
     const server = {
       discordId: "server1",
       settings: { language: "eng" },
-    };
+    } as ServerType;
 
     const user = {
       discordId: "user5",
       savePokemon: { data: {} },
-    };
+    } as unknown as UserType;
 
     const embed = createTradeCompletedEmbed(
       tradeData,

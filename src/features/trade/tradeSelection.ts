@@ -1,4 +1,9 @@
-import { getTrade, updateTrade, extractId, PokemonChoice } from "./tradeCache";
+import {
+  getTrade,
+  updateTrade,
+  extractId,
+  PokemonChoice,
+} from "./tradeCache";
 import allPokemon from "../../data/pokemon.json";
 import { getUserById } from "../../cache/UserCache";
 import type { ServerType } from "../../core/types/ServerType";
@@ -7,6 +12,45 @@ import { newLogger } from "../../middlewares/logger";
 import { sendConfirmationEmbeds } from "./tradeConfirmation";
 import { sendTradeMenuToUser } from "./tradeMenuHandler";
 import type { Client } from "discord.js";
+
+async function notifyRarityMismatchAndResendMenus(
+  client: Client,
+  initiatorId: string,
+  targetId: string,
+  tradeId: string,
+  server: ServerType,
+): Promise<void> {
+  try {
+    const initiatorUser = await client.users.fetch(initiatorId);
+    const targetUser = await client.users.fetch(targetId);
+    const initiatorDM = await initiatorUser.createDM();
+    const targetDM = await targetUser.createDM();
+    const msg = language("tradeRarityMismatch", server.settings.language);
+    await initiatorDM.send(msg);
+    await targetDM.send(msg);
+  } catch (dmError) {
+    newLogger(
+      "warn",
+      dmError instanceof Error ? dmError.message : String(dmError),
+      "Could not send rarity mismatch DM (DM may be disabled)",
+    );
+  }
+
+  try {
+    const initiator = await getUserById(initiatorId);
+    const target = await getUserById(targetId);
+    if (initiator && target) {
+      await sendTradeMenuToUser(client, initiatorId, tradeId, initiator, server);
+      await sendTradeMenuToUser(client, targetId, tradeId, target, server);
+    }
+  } catch (error) {
+    newLogger(
+      "error",
+      error instanceof Error ? error.message : String(error),
+      "Failed to re-send trade selection menu after rarity mismatch",
+    );
+  }
+}
 
 export async function handlePokemonSelection(
   tradeId: string,
@@ -52,10 +96,14 @@ export async function handlePokemonSelection(
   const tradeWithReset = getTrade(tradeId);
   if (!tradeWithReset) return;
 
-  if (
-    tradeWithReset.initiatorChoice!.rarity !==
-    tradeWithReset.targetChoice!.rarity
-  ) {
+  const initiatorChoice = tradeWithReset.initiatorChoice;
+  const targetChoice = tradeWithReset.targetChoice;
+  const isRarityMismatch =
+    initiatorChoice &&
+    targetChoice &&
+    initiatorChoice.rarity !== targetChoice.rarity;
+
+  if (isRarityMismatch) {
     const initiatorId = extractId(trade.initiatorId);
     const targetId = extractId(trade.targetId);
 
@@ -68,41 +116,13 @@ export async function handlePokemonSelection(
     });
 
     if (client) {
-      try {
-        const initiatorUser = await client.users.fetch(initiatorId);
-        const targetUser = await client.users.fetch(targetId);
-        const initiatorDM = await initiatorUser.createDM();
-        const targetDM = await targetUser.createDM();
-        await initiatorDM.send(
-          language("tradeRarityMismatch", server.settings.language),
-        );
-        await targetDM.send(
-          language("tradeRarityMismatch", server.settings.language),
-        );
-      } catch (error) {
-        // DM might be disabled
-      }
-
-      try {
-        const initiator = await getUserById(initiatorId);
-        const target = await getUserById(targetId);
-        if (initiator && target) {
-          await sendTradeMenuToUser(
-            client,
-            initiatorId,
-            tradeId,
-            initiator,
-            server,
-          );
-          await sendTradeMenuToUser(client, targetId, tradeId, target, server);
-        }
-      } catch (error) {
-        newLogger(
-          "error",
-          error as string,
-          "Failed to re-send trade selection menu after rarity mismatch",
-        );
-      }
+      await notifyRarityMismatchAndResendMenus(
+        client,
+        initiatorId,
+        targetId,
+        tradeId,
+        server,
+      );
     }
     return;
   }
