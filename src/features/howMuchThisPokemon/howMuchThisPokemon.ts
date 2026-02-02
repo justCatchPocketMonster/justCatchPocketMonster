@@ -137,12 +137,15 @@ function generateEmbedData(
     ? urlImageRepo + "/pokeHomeShadow/" + imageName
     : urlImageRepo + "/pokeHome/" + imageName;
 
+  const completKey = ("nameComplet" +
+    capitalizeFirstLetter(server.settings.language)) as
+    | "nameCompletFr"
+    | "nameCompletEng";
+
+  const pokemonTitle = pokemon.name[completKey][0];
+
   const embed = new EmbedBuilder()
-    .setTitle(
-      pokemon["name"][
-        "name" + capitalizeFirstLetter(server.settings.language)
-      ][0],
-    )
+    .setTitle(pokemonTitle)
     .setImage(imageUrl)
     .setThumbnail(avatarUser)
     .addFields(

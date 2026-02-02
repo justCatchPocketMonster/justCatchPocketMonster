@@ -7,21 +7,27 @@ import { ttlCache } from "../config/default/misc";
 export const cache = new NodeCache({ stdTTL: ttlCache });
 
 export async function getServerById(serverId: string): Promise<Server> {
-  const cached = cache.get<Server>(serverId);
+  const safeServerId = String(serverId);
+  if (typeof safeServerId !== "string") {
+    throw new TypeError(
+      `getServerById: serverId must be a string, got ${typeof serverId}`,
+    );
+  }
+  const cached = cache.get<Server>(safeServerId);
   if (cached) return cached;
 
   const data = await ServerModel.findOne({
-    discordId: serverId,
+    discordId: safeServerId,
   }).lean<ServerType>();
   if (!data) {
-    const defaultServer = Server.createDefault(serverId);
-    cache.set(serverId, defaultServer);
-    await updateServer(serverId, defaultServer);
+    const defaultServer = Server.createDefault(safeServerId);
+    cache.set(safeServerId, defaultServer);
+    await updateServer(safeServerId, defaultServer);
     return defaultServer;
   }
 
   const server = Server.fromMongo(data);
-  cache.set(serverId, server);
+  cache.set(safeServerId, server);
   return server;
 }
 
@@ -29,10 +35,11 @@ export async function updateServer(
   serverId: string,
   update: ServerType,
 ): Promise<Server> {
-  cache.set(serverId, update);
+  const safeServerId = String(serverId);
+  cache.set(safeServerId, update);
   await ServerModel.findOneAndUpdate(
-    { discordId: serverId },
-    { $set: { ...update, discordId: serverId } },
+    { discordId: safeServerId },
+    { $set: { ...update, discordId: safeServerId } },
     { upsert: true, new: true },
   ).lean<ServerType>();
 

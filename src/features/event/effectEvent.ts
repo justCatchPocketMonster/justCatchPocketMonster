@@ -15,6 +15,7 @@ import {
   selectEventSeasonal,
   selectNextEventSeasonal,
 } from "./selectEventSeasonal";
+import { formatTimestamp } from "../../utils/helperFunction";
 
 export const effectEvent = (
   interaction: ChatInputCommandInteraction,
@@ -50,7 +51,7 @@ function selectEventStandard(server: ServerType): PageData {
       })
       .addFields({
         name: language("timeLeft", server.settings.language),
-        value: `<t:${dateEnd.getTime()}:R>`,
+        value: formatTimestamp(dateEnd.getTime()),
         inline: false,
       })
       .setImage("attachment://" + nameImage);
@@ -81,7 +82,7 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
         .setTitle(language("noEvent", server.settings.language))
         .setDescription(
           language("nextSeasonalEvent", server.settings.language) +
-            ` <t:${Math.floor(nextEvent.startDate.getTime() / 1000)}:D>`,
+            formatTimestamp(nextEvent.startDate.getTime()),
         ),
       null,
       language("seasonalEvent", server.settings.language),
@@ -96,7 +97,7 @@ function generateEmbedEventSeasonal(server: ServerType): PageData | undefined {
     .addFields({
       name: "End",
       value: selected.endDate
-        ? `<t:${Math.floor(selected.endDate.getTime() / 1000)}:D>`
+        ? formatTimestamp(selected.endDate.getTime())
         : "-",
       inline: true,
     });

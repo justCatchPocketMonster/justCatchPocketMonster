@@ -1350,5 +1350,312 @@
     ]
   },
 
-  "seasonalEvent": {}
+  "seasonalEvent": {},
+
+  "commandTradeExplication": {
+    "fr": ["Permet d'échanger un Pokémon avec un autre utilisateur"],
+    "eng": ["Allows you to trade a Pokémon with another user"]
+  },
+  "commandTradeOptionUser": {
+    "fr": ["utilisateur"],
+    "eng": ["user"]
+  },
+  "commandTradeOptionUserDesc": {
+    "fr": ["L'utilisateur avec qui vous voulez échanger"],
+    "eng": ["The user you want to trade with"]
+  },
+  "tradeRequestSent": {
+    "fr": ["Demande d'échange envoyée"],
+    "eng": ["Trade request sent"]
+  },
+  "tradeRequestSentDesc": {
+    "fr": ["Votre demande d'échange a été envoyée à {user}"],
+    "eng": ["Your trade request has been sent to {user}"]
+  },
+  "tradeRequestReceived": {
+    "fr": ["Demande d'échange reçue"],
+    "eng": ["Trade request received"]
+  },
+  "tradeRequestReceivedDesc": {
+    "fr": ["{user} souhaite échanger un Pokémon avec vous"],
+    "eng": ["{user} wants to trade a Pokémon with you"]
+  },
+  "tradeRulesTitle": {
+    "fr": ["Règles de l'échange"],
+    "eng": ["Trade rules"]
+  },
+  "tradeRules": {
+    "fr": [
+      "• Vous devez posséder au moins 2 exemplaires du Pokémon à échanger\n• Les échanges se font uniquement entre Pokémon de la même rareté\n• Respectez les délais entre échanges selon la rareté"
+    ],
+    "eng": [
+      "• You must own at least 2 copies of the Pokémon to trade\n• Trades can only be made between Pokémon of the same rarity\n• Respect the cooldowns between trades according to rarity"
+    ]
+  },
+  "tradeCooldownsTitle": {
+    "fr": ["Temps restant avant prochain échange"],
+    "eng": ["Time remaining before next trade"]
+  },
+  "tradeCooldownNone": {
+    "fr": ["Aucun"],
+    "eng": ["None"]
+  },
+  "tradeTimeout": {
+    "fr": ["Temps restant: {time}"],
+    "eng": ["Time remaining: {time}"]
+  },
+  "tradeAcceptButton": {
+    "fr": ["Accepter"],
+    "eng": ["Accept"]
+  },
+  "tradeRefuseButton": {
+    "fr": ["Refuser"],
+    "eng": ["Refuse"]
+  },
+  "tradeRefuseWeekButton": {
+    "fr": ["Refuser pendant 1 semaine"],
+    "eng": ["Refuse for 1 week"]
+  },
+  "tradeAccepted": {
+    "fr": ["Échange accepté"],
+    "eng": ["Trade accepted"]
+  },
+  "tradeAcceptedDesc": {
+    "fr": ["L'échange a été accepté. Sélectionnez votre Pokémon."],
+    "eng": ["The trade has been accepted. Select your Pokémon."]
+  },
+  "tradeRefused": {
+    "fr": ["Échange refusé"],
+    "eng": ["Trade refused"]
+  },
+  "tradeRefusedDesc": {
+    "fr": ["L'échange a été refusé."],
+    "eng": ["The trade has been refused."]
+  },
+  "tradeRefusedWeek": {
+    "fr": ["Échange refusé - Blocage d'une semaine"],
+    "eng": ["Trade refused - One week block"]
+  },
+  "tradeRefusedWeekDesc": {
+    "fr": [
+      "L'échange a été refusé. Les demandes d'échange seront bloquées pendant 1 semaine."
+    ],
+    "eng": [
+      "The trade has been refused. Trade requests will be blocked for 1 week."
+    ]
+  },
+  "tradeSelectPokemonTitle": {
+    "fr": ["Sélectionnez votre Pokémon"],
+    "eng": ["Select your Pokémon"]
+  },
+  "tradeSelectPokemonDesc": {
+    "fr": ["Choisissez le Pokémon que vous souhaitez échanger"],
+    "eng": ["Choose the Pokémon you want to trade"]
+  },
+  "tradeSelectGeneration": {
+    "fr": ["Sélectionnez une génération"],
+    "eng": ["Select a generation"]
+  },
+  "tradeSelectGenerationDesc": {
+    "fr": ["Choisissez la génération du Pokémon"],
+    "eng": ["Choose the Pokémon's generation"]
+  },
+  "tradeMainMenuText": {
+    "fr": ["Menu principal"],
+    "eng": ["Main menu"]
+  },
+  "tradeSubElementText": {
+    "fr": ["Sous-élément"],
+    "eng": ["Sub-element"]
+  },
+  "tradeSelectSubElementText": {
+    "fr": ["Sélectionnez un sous-élément"],
+    "eng": ["Select a sub-element"]
+  },
+  "tradeConfirmSelection": {
+    "fr": ["Confirmer la sélection"],
+    "eng": ["Confirm selection"]
+  },
+  "tradeSubElementPlaceholder": {
+    "fr": ["Sélectionnez..."],
+    "eng": ["Select..."]
+  },
+  "tradeSelectionConfirmed": {
+    "fr": ["Sélection confirmée"],
+    "eng": ["Selection confirmed"]
+  },
+  "tradeWaitingOther": {
+    "fr": ["Attente de la confirmation de l'autre partie..."],
+    "eng": ["Waiting for the other party's confirmation..."]
+  },
+  "tradePokemonCount": {
+    "fr": ["Nombre"],
+    "eng": ["Count"]
+  },
+  "tradePokemonAvailable": {
+    "fr": ["Pokémon disponibles"],
+    "eng": ["Pokémon available"]
+  },
+  "tradeNoPokemonAvailable": {
+    "fr": ["Aucun Pokémon disponible"],
+    "eng": ["No Pokémon available"]
+  },
+  "tradeNoPokemonAvailableDesc": {
+    "fr": ["Vous n'avez aucun Pokémon éligible pour l'échange"],
+    "eng": ["You have no eligible Pokémon for trade"]
+  },
+  "tradeNoValidPokemon": {
+    "fr": [
+      "Échange impossible : {user} n'a pas de Pokémon valide pour l'échange"
+    ],
+    "eng": ["Trade impossible: {user} has no valid Pokémon for trade"]
+  },
+  "tradeNoValidPokemonBoth": {
+    "fr": [
+      "Échange impossible : {initiator} et {target} n'ont pas de Pokémon valide pour l'échange"
+    ],
+    "eng": [
+      "Trade impossible: {initiator} and {target} have no valid Pokémon for trade"
+    ]
+  },
+  "tradeImpossible": {
+    "fr": ["Échange impossible"],
+    "eng": ["Trade impossible"]
+  },
+  "tradeSummaryTitle": {
+    "fr": ["Résumé de l'échange"],
+    "eng": ["Trade summary"]
+  },
+  "tradeSummaryDesc": {
+    "fr": ["{myName} échange {myPokemon} contre {theirPokemon} de {theirName}"],
+    "eng": ["{myName} trades {myPokemon} for {theirPokemon} from {theirName}"]
+  },
+  "tradeYouGive": {
+    "fr": ["Vous donnez"],
+    "eng": ["You give"]
+  },
+  "tradeYouReceive": {
+    "fr": ["Vous recevez"],
+    "eng": ["You receive"]
+  },
+  "tradeConfirmButton": {
+    "fr": ["Confirmer"],
+    "eng": ["Confirm"]
+  },
+  "tradeCancelButton": {
+    "fr": ["Annuler"],
+    "eng": ["Cancel"]
+  },
+  "tradeConfirmed": {
+    "fr": ["Confirmé"],
+    "eng": ["Confirmed"]
+  },
+  "tradeWaitingConfirmation": {
+    "fr": ["En attente"],
+    "eng": ["Waiting"]
+  },
+  "tradeConfirmationStatus": {
+    "fr": ["Statut de confirmation"],
+    "eng": ["Confirmation status"]
+  },
+  "tradeCompleted": {
+    "fr": ["Échange terminé"],
+    "eng": ["Trade completed"]
+  },
+  "tradeCompletedDesc": {
+    "fr": ["L'échange a été effectué avec succès !"],
+    "eng": ["The trade has been completed successfully!"]
+  },
+  "tradeFailed": {
+    "fr": ["Échange échoué"],
+    "eng": ["Trade failed"]
+  },
+  "tradeFailedDesc": {
+    "fr": ["L'échange a échoué. Veuillez réessayer."],
+    "eng": ["The trade failed. Please try again."]
+  },
+  "tradeCancelledReturningToSelection": {
+    "fr": ["Échange annulé. Retour à la sélection..."],
+    "eng": ["Trade cancelled. Returning to selection..."]
+  },
+  "tradeRarityMismatch": {
+    "fr": [
+      "Les raretés ne correspondent pas. Veuillez sélectionner un Pokémon de la même rareté."
+    ],
+    "eng": [
+      "The rarities do not match. Please select a Pokémon of the same rarity."
+    ]
+  },
+  "tradeSelectYourPokemon": {
+    "fr": ["Sélectionnez votre Pokémon à échanger"],
+    "eng": ["Select your Pokémon to trade"]
+  },
+  "tradeNotFound": {
+    "fr": ["Échange introuvable"],
+    "eng": ["Trade not found"]
+  },
+  "tradeNotAuthorized": {
+    "fr": ["Vous n'êtes pas autorisé à effectuer cette action"],
+    "eng": ["You are not authorized to perform this action"]
+  },
+  "tradeInvalidStatus": {
+    "fr": ["Le statut de l'échange n'est pas valide"],
+    "eng": ["The trade status is not valid"]
+  },
+  "tradeGuildRequired": {
+    "fr": ["Cette commande doit être utilisée dans un serveur"],
+    "eng": ["This command must be used in a server"]
+  },
+  "tradeCannotTradeWithSelf": {
+    "fr": ["Vous ne pouvez pas échanger avec vous-même"],
+    "eng": ["You cannot trade with yourself"]
+  },
+  "tradeCannotTradeWithBot": {
+    "fr": ["Vous ne pouvez pas échanger avec un bot"],
+    "eng": ["You cannot trade with a bot"]
+  },
+  "tradeServerNotFound": {
+    "fr": ["Serveur introuvable"],
+    "eng": ["Server not found"]
+  },
+  "tradeInitiatorHasActiveTrade": {
+    "fr": ["Vous avez déjà un échange en cours"],
+    "eng": ["You already have an active trade"]
+  },
+  "tradeTargetHasActiveTrade": {
+    "fr": ["Cet utilisateur a déjà un échange en cours"],
+    "eng": ["This user already has an active trade"]
+  },
+  "tradeTargetBlocked": {
+    "fr": ["Cet utilisateur a bloqué les demandes d'échange"],
+    "eng": ["This user has blocked trade requests"]
+  },
+  "tradeRequestSentSuccess": {
+    "fr": ["Demande d'échange envoyée avec succès"],
+    "eng": ["Trade request sent successfully"]
+  },
+  "tradeFailedToSendDM": {
+    "fr": [
+      "Impossible d'envoyer le message privé. Vérifiez que les messages privés sont activés."
+    ],
+    "eng": [
+      "Failed to send private message. Please check that DMs are enabled."
+    ]
+  },
+  "tradeError": {
+    "fr": ["Une erreur s'est produite lors de l'échange"],
+    "eng": ["An error occurred during the trade"]
+  },
+  "tradeTimeoutTitle": {
+    "fr": ["Échange expiré"],
+    "eng": ["Trade expired"]
+  },
+  "tradeTimeoutDesc": {
+    "fr": ["Le délai de réponse à la demande d'échange a expiré"],
+    "eng": ["The trade request response time has expired"]
+  },
+  "statCategoryFabulous": {
+    "fr": ["Fabuleux"],
+    "eng": ["Mythical"]
+  }
 }

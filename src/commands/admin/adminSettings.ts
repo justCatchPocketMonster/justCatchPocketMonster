@@ -16,8 +16,7 @@ export default {
     .setDescriptionLocalizations({
       fr: language("commandAdminSettingsExplication", "fr"),
     })
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-    .setDefaultMemberPermissions(0),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {

@@ -48,10 +48,10 @@ function loadCommands(client: Client) {
           await client.application.commands.delete(command.name);
         }
 
-        newLogger(
+        /*newLogger(
           "info",
           `Command ${command.name} loaded and is active :${command.actif}`,
-        );
+        );*/
       });
     }
   }

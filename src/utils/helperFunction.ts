@@ -62,3 +62,7 @@ export function deepCloneObject<T>(obj: T): T {
 export function random(max: number, min: number = 0): number {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+export function formatTimestamp(timestamp: number): string {
+  return `<t:${Math.floor(timestamp / 1000)}:R>`;
+}

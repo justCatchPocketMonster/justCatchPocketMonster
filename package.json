@@ -11,7 +11,8 @@
     "prettier": "npx prettier . --write",
     "test": "jest --runInBand --coverage --coverageReporters=lcov --verbose",
     "test:watch": "jest --watch",
-    "test:measure": "tsx __test__/measure-test-times.ts"
+    "test:measure": "tsx __test__/measure-test-times.ts",
+    "dev:give-pokemon": "tsx scripts/dev-give-pokemon.ts"
   },
   "dependencies": {
     "discord.js": "^14.21.0",
