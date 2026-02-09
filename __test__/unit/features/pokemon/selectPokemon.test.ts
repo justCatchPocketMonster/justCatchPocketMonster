@@ -52,6 +52,7 @@ describe("selectPokemon", () => {
 
     expect(pokemon.id).toBe("25");
     expect(pokemon.isShiny).toBeDefined();
+    expect(typeof pokemon.canSosBattle).toBe("boolean");
   });
 
   test("should return errorGen when generationSelect fails", () => {
@@ -98,6 +99,7 @@ describe("selectPokemon", () => {
 
     expect(pokemon.id).toBe("25");
     expect(pokemon.isShiny).toBeDefined();
+    expect(pokemon.canSosBattle).toBe(false);
   });
 
   test("should handle shiny selection with different saveServer values", () => {
@@ -285,5 +287,15 @@ describe("selectPokemon", () => {
     const pokemon = selectPokemon(server, 0);
 
     expect(pokemon).toBeDefined();
+  });
+
+  test("should have canSosBattle defined on random spawn", () => {
+    __deps.generationSelect = jest.fn().mockReturnValue("1");
+    __deps.raritySelect = jest.fn().mockReturnValue("ordinary");
+    __deps.typeSelect = jest.fn().mockReturnValue("normal");
+
+    const pokemon = selectPokemon(server, 0);
+
+    expect(typeof pokemon.canSosBattle).toBe("boolean");
   });
 });

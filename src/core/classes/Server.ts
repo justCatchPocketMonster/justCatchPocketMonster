@@ -51,6 +51,8 @@ export class Server implements ServerType {
         value.versionForm,
         value.isShiny,
         value.hint,
+        value.canSosBattle ?? false,
+        value.sosChainLvl,
       );
     }
 

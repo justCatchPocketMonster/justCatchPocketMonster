@@ -197,6 +197,43 @@
     "eng": ["To catch it, do \"/catch [Pokémon's name]\"."]
   },
 
+  "sosEmbedTitleOrdinary": {
+    "fr": ["Appel SOS — Un Pokémon est apparu !"],
+    "eng": ["SOS Call — A Pokémon appeared!"]
+  },
+  "sosEmbedDescriptionOrdinary": {
+    "fr": ["Pour l'attraper faites \"/catch [nom du Pokémon]\"."],
+    "eng": ["To catch it, do \"/catch [Pokémon's name]\"."]
+  },
+  "sosEmbedTitleLegendary": {
+    "fr": ["Appel SOS — Un autre est apparu ?"],
+    "eng": ["SOS Call — An other Pokémon appeared?"]
+  },
+  "sosEmbedDescriptionLegendary": {
+    "fr": ["Comment est-ce possible ! Faites \"/catch [nom du Pokémon]\" vite !"],
+    "eng": ["How is this possible! Do \"/catch [Pokémon's name]\" fast!"]
+  },
+  "sosEmbedTitleMythical": {
+    "fr": ["Appel SOS — PARDON?!"],
+    "eng": ["SOS Call — EHH?"]
+  },
+  "sosEmbedDescriptionMythical": {
+    "fr": ["Les stats sont cassées ! Faites \"/catch [nom du Pokémon]\" de toutes urgences !"],
+    "eng": ["The stats are broken! Do \"/catch [Pokémon's name]\" as soon as possible!"]
+  },
+  "sosEmbedTitleUltraBeast": {
+    "fr": ["Appel SOS — Une Ultra-Chimère est apparue !"],
+    "eng": ["SOS Call — An Ultra Beast appeared!"]
+  },
+  "sosEmbedDescriptionUltraBeast": {
+    "fr": ["La brèche ne s'est pas fermée ! Faites \"/catch [nom du Pokémon]\"."],
+    "eng": ["The wormhole is not closed! Do \"/catch [Pokémon's name]\"."]
+  },
+  "sosEmbedFooter": {
+    "fr": ["Chaîne SOS niveau"],
+    "eng": ["SOS chain level"]
+  },
+
   "congratYouCatchPart1": {
     "fr": ["Félicitations "],
     "eng": ["Congratulations "]

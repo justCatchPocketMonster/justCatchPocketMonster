@@ -4,7 +4,7 @@ import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
 import { selectEventStandard } from "../event/selectEventStandard";
 import getText, { LanguageKey } from "../../lang/language";
-import { colorByType, random } from "../../utils/helperFunction";
+import { capitalizeFirstLetter, colorByType, random } from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { valueMaxChoiceEvent } from "../../config/default/spawn";
@@ -117,7 +117,7 @@ async function choiceTypeOfSpawn(
   return generateEmbedPokemon(pokemonChoice, server);
 }
 
-function generateEmbedPokemon(
+export function generateEmbedPokemon(
   pokemon: PokemonType,
   server: ServerType,
 ): { embed: EmbedBuilder } {
@@ -143,6 +143,47 @@ function generateEmbedPokemon(
   return {
     embed: pokeEmbed,
   };
+}
+
+const sosRarityColor: Record<string, ColorResolvable> = {
+  ordinary: 0x9e9e9e,
+  legendary: 0xf1c40f,
+  mythical: 0x9b59b6,
+  ultraBeast: 0xe74c3c,
+};
+
+export function generateEmbedSosPokemon(
+  pokemon: PokemonType,
+  server: ServerType,
+): { embed: EmbedBuilder } {
+  const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
+  const imageName: string = pokemon.imgName + suffix;
+  const imageUrl = server.eventSpawn.nightMode
+    ? urlImageRepo + "/pokeHomeShadow/" + imageName
+    : urlImageRepo + "/pokeHome/" + imageName;
+
+  const rarityKey =
+    "sosEmbedTitle" + capitalizeFirstLetter(pokemon.rarity);
+  const descKey =
+    "sosEmbedDescription" + capitalizeFirstLetter(pokemon.rarity);
+  const title = getText(rarityKey as LanguageKey, server.settings.language);
+  const description = getText(descKey as LanguageKey, server.settings.language);
+  const color: ColorResolvable =
+    sosRarityColor[pokemon.rarity] ??
+    colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]);
+
+  const chainLvl = pokemon.sosChainLvl ?? 1;
+  const footerText =
+    getText("sosEmbedFooter", server.settings.language) + " " + chainLvl;
+
+  const embed = new EmbedBuilder()
+    .setColor(color)
+    .setTitle(title)
+    .setDescription(description)
+    .setImage(imageUrl)
+    .setFooter({ text: footerText });
+
+  return { embed };
 }
 
 function generateEmbedEvent(

@@ -14,6 +14,8 @@ export class Pokemon implements PokemonType {
     public versionForm: number,
     public isShiny: boolean | undefined,
     public hint: string,
+    public canSosBattle: boolean = false,
+    public sosChainLvl?: number,
   ) {}
 
   nameIsSame(name: string): boolean {
@@ -35,6 +37,8 @@ export class Pokemon implements PokemonType {
       raw.versionForm ?? 0,
       raw.isShiny ?? false,
       raw.hint ?? "",
+      raw.canSosBattle ?? false,
+      raw.sosChainLvl,
     );
   }
 }

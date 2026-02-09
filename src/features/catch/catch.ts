@@ -9,6 +9,10 @@ import { updateUser } from "../../cache/UserCache";
 import { updateServer } from "../../cache/ServerCache";
 import allPokemon from "../../data/pokemon.json";
 import { newLogger } from "../../middlewares/logger";
+import { Pokemon } from "../../core/classes/Pokemon";
+import { selectSosPokemon } from "../pokemon/selectPokemon";
+import { generateEmbedSosPokemon } from "../spawn/spawn";
+import { random } from "../../utils/helperFunction";
 
 export async function catchPokemon(
   user: UserType,
@@ -66,6 +70,30 @@ export async function catchPokemon(
   server.savePokemon.addOneCatch(pokemon);
 
   server.removePokemonByIdChannel(idChannel);
+
+  if (pokemon.canSosBattle && random(2) === 1) {
+    const nextChainLvl = (pokemon.sosChainLvl ?? 0) + 1;
+    const sosPokemonType = selectSosPokemon(server, pokemon.id, nextChainLvl);
+    const sosPokemon = Pokemon.from(sosPokemonType);
+    server.pokemonPresent[idChannel] = sosPokemon;
+    statVersion.addSpawn(sosPokemon);
+    statAll.addSpawn(sosPokemon);
+    try {
+      await updateServer(server.discordId, server);
+      await updateStat(version, statVersion);
+      await updateStat(nameStatGeneral, statAll);
+    } catch (e) {
+      newLogger(
+        "error",
+        e as string,
+        "Error updating caches after SOS spawn",
+      );
+    }
+    await interaction.followUp({
+      embeds: [generateEmbedSosPokemon(sosPokemonType, server).embed],
+    });
+  }
+
   try {
     await updateUser(user.discordId, user);
     await updateServer(server.discordId, server);
