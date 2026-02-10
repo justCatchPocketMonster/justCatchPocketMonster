@@ -11,4 +11,6 @@ export interface PokemonType {
   versionForm: number;
   isShiny: boolean | undefined;
   hint: string;
+  canSosBattle?: boolean;
+  sosChainLvl?: number;
 }

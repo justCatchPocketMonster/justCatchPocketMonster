@@ -284,6 +284,35 @@ describe("catch command", () => {
 
     expect(message).toContain("Keunotor/Bidoof");
   });
+
+  test("Catch pokemon with canSosBattle triggers SOS and followUp with new pokemon", async () => {
+    jest
+      .spyOn(helperFunction, "random")
+      .mockImplementation((n: number) => (n === 2 ? 1 : 0));
+    const serverGiven = await getServerById(interaction.guildId);
+    serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(
+      false,
+      true,
+    );
+    await updateServer(serverGiven.discordId, serverGiven);
+    (interaction.options.getString as jest.Mock).mockImplementation(
+      (name: string) => {
+        if (name === language("commandCatchOptionName", "eng")) return "Bidoof";
+        return null;
+      },
+    );
+
+    await catchPokemon.execute(interaction);
+
+    expect(interaction.reply).toHaveBeenCalledTimes(1);
+    expect(interaction.followUp).toHaveBeenCalledTimes(1);
+    const serverThen = await getServerById(interaction.guildId!);
+    const sosPokemon = serverThen.pokemonPresent[interaction.channel.id];
+    expect(sosPokemon).toBeDefined();
+    expect(sosPokemon.id).toBe("399");
+    expect(sosPokemon.canSosBattle).toBe(true);
+    expect(sosPokemon.sosChainLvl).toBe(1);
+  });
 });
 
 async function checkCatchForAllSavePokemon(
@@ -324,7 +353,10 @@ async function checkCatchForAllSavePokemon(
   ).toBe(countShiny);
 }
 
-function defaultPokemon(isShiny: boolean): Pokemon {
+function defaultPokemon(
+  isShiny: boolean,
+  canSosBattle: boolean = false,
+): Pokemon {
   return new Pokemon(
     "399",
     {
@@ -339,5 +371,6 @@ function defaultPokemon(isShiny: boolean): Pokemon {
     1,
     isShiny,
     initHint("Bidoof"),
+    canSosBattle,
   );
 }

@@ -34,7 +34,7 @@ export const selectPokemon = (
     pokemonChoiced = selectRandomPokemon(server, isMegaFilter);
     pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
   } else {
-    pokemonChoiced = selectPokemonWithId(idPokemon);
+    pokemonChoiced = selectPokemonWithId(idPokemon, random(2) === 1);
   }
 
   pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, false);
@@ -48,11 +48,12 @@ export const selectEggPokemon = (
   let pokemonChoiced: PokemonType;
   if (idPokemon === 0) {
     const randomIdPokemon = random(allPokemon[allPokemon.length].id);
-    pokemonChoiced = selectPokemonWithId(randomIdPokemon);
+    pokemonChoiced = selectPokemonWithId(randomIdPokemon, false);
   } else {
-    pokemonChoiced = selectPokemonWithId(idPokemon);
+    pokemonChoiced = selectPokemonWithId(idPokemon, false);
   }
   pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
+  pokemonChoiced.canSosBattle = false;
   const eggObject = allPokemon[0];
 
   pokemonChoiced.name = eggObject.name;
@@ -136,7 +137,50 @@ function gigaIsAllowed(
   }
 }
 
-function selectPokemonWithId(idPokemon: number): Pokemon {
+export function selectSosPokemon(
+  server: ServerType,
+  idPokemon: string,
+  sosChainLvl: number,
+): PokemonType {
+  let sameSpecies = allPokemon.filter(
+    (p) => p.id.toString() === idPokemon,
+  ) as pokemonDb[];
+  sameSpecies = gigaIsAllowed(server, sameSpecies);
+  sameSpecies = megaIsAllowed(server, sameSpecies);
+  if (sameSpecies.length === 0) {
+    throw new Error(`No allowed form for SOS pokemon id ${idPokemon}`);
+  }
+  const randomPokemon = sameSpecies[random(sameSpecies.length)];
+  const shinyRate = server.eventSpawn.shiny / Math.pow(2, sosChainLvl);
+  const isShiny = random(Math.max(1, Math.floor(shinyRate))) === 1;
+  const hint = initHint(
+    randomPokemon.name[
+      "name" + capitalizeFirstLetter(server.settings.language)
+    ][0],
+  );
+  return {
+    id: randomPokemon.id.toString(),
+    name: {
+      nameEng: randomPokemon.name["nameEng"],
+      nameFr: randomPokemon.name["nameFr"],
+    },
+    arrayType: randomPokemon.arrayType,
+    rarity: randomPokemon.rarity,
+    imgName: randomPokemon.imgName,
+    gen: randomPokemon.gen,
+    form: randomPokemon.form,
+    versionForm: randomPokemon.versionForm,
+    isShiny,
+    hint,
+    canSosBattle: true,
+    sosChainLvl,
+  };
+}
+
+function selectPokemonWithId(
+  idPokemon: number,
+  canSosBattle: boolean = false,
+): Pokemon {
   const allPokemonWithId = allPokemon.filter(
     (pokemon) => pokemon.id === idPokemon,
   );
@@ -153,6 +197,7 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
     randomPokemon.versionForm,
     false,
     "",
+    canSosBattle,
   );
 }
 function selectRandomPokemon(
@@ -202,6 +247,7 @@ function selectRandomPokemon(
         "name" + capitalizeFirstLetter(server.settings.language)
       ][0],
     ),
+    canSosBattle: random(2) === 1,
   };
 }
 
