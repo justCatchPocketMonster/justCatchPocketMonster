@@ -210,7 +210,9 @@
     "eng": ["SOS Call — An other Pokémon appeared?"]
   },
   "sosEmbedDescriptionLegendary": {
-    "fr": ["Comment est-ce possible ! Faites \"/catch [nom du Pokémon]\" vite !"],
+    "fr": [
+      "Comment est-ce possible ! Faites \"/catch [nom du Pokémon]\" vite !"
+    ],
     "eng": ["How is this possible! Do \"/catch [Pokémon's name]\" fast!"]
   },
   "sosEmbedTitleMythical": {
@@ -218,15 +220,21 @@
     "eng": ["SOS Call — EHH?"]
   },
   "sosEmbedDescriptionMythical": {
-    "fr": ["Les stats sont cassées ! Faites \"/catch [nom du Pokémon]\" de toutes urgences !"],
-    "eng": ["The stats are broken! Do \"/catch [Pokémon's name]\" as soon as possible!"]
+    "fr": [
+      "Les stats sont cassées ! Faites \"/catch [nom du Pokémon]\" de toutes urgences !"
+    ],
+    "eng": [
+      "The stats are broken! Do \"/catch [Pokémon's name]\" as soon as possible!"
+    ]
   },
   "sosEmbedTitleUltraBeast": {
     "fr": ["Appel SOS — Une Ultra-Chimère est apparue !"],
     "eng": ["SOS Call — An Ultra Beast appeared!"]
   },
   "sosEmbedDescriptionUltraBeast": {
-    "fr": ["La brèche ne s'est pas fermée ! Faites \"/catch [nom du Pokémon]\"."],
+    "fr": [
+      "La brèche ne s'est pas fermée ! Faites \"/catch [nom du Pokémon]\"."
+    ],
     "eng": ["The wormhole is not closed! Do \"/catch [Pokémon's name]\"."]
   },
   "sosEmbedFooter": {

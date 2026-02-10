@@ -83,11 +83,7 @@ export async function catchPokemon(
       await updateStat(version, statVersion);
       await updateStat(nameStatGeneral, statAll);
     } catch (e) {
-      newLogger(
-        "error",
-        e as string,
-        "Error updating caches after SOS spawn",
-      );
+      newLogger("error", e as string, "Error updating caches after SOS spawn");
     }
     await interaction.followUp({
       embeds: [generateEmbedSosPokemon(sosPokemonType, server).embed],

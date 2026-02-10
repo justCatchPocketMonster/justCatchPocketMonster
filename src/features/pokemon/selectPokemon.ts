@@ -150,12 +150,9 @@ export function selectSosPokemon(
   if (sameSpecies.length === 0) {
     throw new Error(`No allowed form for SOS pokemon id ${idPokemon}`);
   }
-  const randomPokemon =
-    sameSpecies[random(sameSpecies.length)] as pokemonDb;
-  const shinyRate =
-    server.eventSpawn.shiny / Math.pow(2, sosChainLvl);
-  const isShiny =
-    random(Math.max(1, Math.floor(shinyRate))) === 1;
+  const randomPokemon = sameSpecies[random(sameSpecies.length)];
+  const shinyRate = server.eventSpawn.shiny / Math.pow(2, sosChainLvl);
+  const isShiny = random(Math.max(1, Math.floor(shinyRate))) === 1;
   const hint = initHint(
     randomPokemon.name[
       "name" + capitalizeFirstLetter(server.settings.language)

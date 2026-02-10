@@ -4,7 +4,11 @@ import { EventType } from "../../core/types/EventType";
 import { selectEggPokemon, selectPokemon } from "../pokemon/selectPokemon";
 import { selectEventStandard } from "../event/selectEventStandard";
 import getText, { LanguageKey } from "../../lang/language";
-import { capitalizeFirstLetter, colorByType, random } from "../../utils/helperFunction";
+import {
+  capitalizeFirstLetter,
+  colorByType,
+  random,
+} from "../../utils/helperFunction";
 import logger from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { valueMaxChoiceEvent } from "../../config/default/spawn";
@@ -162,10 +166,8 @@ export function generateEmbedSosPokemon(
     ? urlImageRepo + "/pokeHomeShadow/" + imageName
     : urlImageRepo + "/pokeHome/" + imageName;
 
-  const rarityKey =
-    "sosEmbedTitle" + capitalizeFirstLetter(pokemon.rarity);
-  const descKey =
-    "sosEmbedDescription" + capitalizeFirstLetter(pokemon.rarity);
+  const rarityKey = "sosEmbedTitle" + capitalizeFirstLetter(pokemon.rarity);
+  const descKey = "sosEmbedDescription" + capitalizeFirstLetter(pokemon.rarity);
   const title = getText(rarityKey as LanguageKey, server.settings.language);
   const description = getText(descKey as LanguageKey, server.settings.language);
   const color: ColorResolvable =
