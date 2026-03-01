@@ -1,12 +1,21 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+  PermissionFlagsBits,
+} from "discord.js";
 import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
-import {
-  createPageForMenu,
-  paginationMenu,
-} from "../../features/other/paginationMenu";
 import { getServerById } from "../../cache/ServerCache";
+import { MenuSystem, MenuHandler } from "../../utils/menu";
+import {
+  CommandsTutorialHandler,
+  GameplayTutorialHandler,
+  AdminTutorialHandler,
+} from "../../features/tutorial";
+
+const TUTORIAL_IMAGE_URL =
+  "https://cdn.discordapp.com/attachments/1150766647905366086/1150767117206036510/botGifTuto.gif";
 
 export default {
   name: "tutorial",
@@ -23,84 +32,46 @@ export default {
   async execute(interaction: ChatInputCommandInteraction) {
     try {
       if (interaction.guildId === null) return;
-      let server = await getServerById(interaction.guildId);
-      const pages = [];
+      const server = await getServerById(interaction.guildId);
+      const lang = server.settings.language;
 
-      pages.push(
-        createPageForMenu(
-          new EmbedBuilder()
-            .setColor("#0099ff")
-            .setTitle(language("tutorialTitle", server.settings.language))
-            .setDescription(
-              language("tutorialDescription", server.settings.language),
-            )
-            .addFields(
-              {
-                name: language("tutorialField1Title", server.settings.language),
-                value: language("tutorialField1Desc", server.settings.language),
-                inline: false,
-              },
-              {
-                name: language("tutorialField2Title", server.settings.language),
-                value: language("tutorialField2Desc", server.settings.language),
-                inline: false,
-              },
-              {
-                name: language("tutorialField3Title", server.settings.language),
-                value: language("tutorialField3Desc", server.settings.language),
-                inline: false,
-              },
-            )
-            .setImage(
-              "https://cdn.discordapp.com/attachments/1150766647905366086/1150767117206036510/botGifTuto.gif",
-            ),
-          null,
-          language("baseTutorialTitle", server.settings.language),
-        ),
-      );
+      const getMainEmbed = async (): Promise<EmbedBuilder> => {
+        const freshServer = await getServerById(interaction.guildId!);
+        const l = freshServer.settings.language;
+        return new EmbedBuilder()
+          .setColor(0x0099ff)
+          .setTitle(language("tutorialTitle", l))
+          .setDescription(language("tutorialDescription", l))
+          .setImage(TUTORIAL_IMAGE_URL);
+      };
 
-      pages.push(
-        createPageForMenu(
-          new EmbedBuilder()
-            .setColor("#7B68EE")
-            .setTitle(language("tutorialAdminTitle", server.settings.language))
-            .setDescription(
-              language("tutorialAdminDescription", server.settings.language),
-            )
-            .addFields(
-              {
-                name: language(
-                  "tutorialAdminField1Title",
-                  server.settings.language,
-                ),
-                value: language(
-                  "tutorialAdminField1Desc",
-                  server.settings.language,
-                ),
-                inline: false,
-              },
-              {
-                name: language(
-                  "tutorialAdminField2Title",
-                  server.settings.language,
-                ),
-                value: language(
-                  "tutorialAdminField2Desc",
-                  server.settings.language,
-                ),
-                inline: false,
-              },
-            ),
-          null,
-          language("tutorialAdminTitle", server.settings.language),
-        ),
-      );
+      const regenerateMenu = async (): Promise<Map<string, MenuHandler>> => {
+        const freshServer = await getServerById(interaction.guildId!);
+        const handlers = new Map<string, MenuHandler>();
+        handlers.set("commands", new CommandsTutorialHandler(freshServer));
+        handlers.set("gameplay", new GameplayTutorialHandler(freshServer));
+        if (
+          interaction.memberPermissions?.has(PermissionFlagsBits.Administrator)
+        ) {
+          handlers.set("admin", new AdminTutorialHandler(freshServer));
+        }
+        return handlers;
+      };
 
-      paginationMenu(
-        interaction,
-        language("selectAPage", server.settings.language),
-        pages,
-      );
+      const menuSystem = new MenuSystem({
+        regenerateMenu,
+        getMainEmbed,
+        mainMenuPlaceholder: language("tutorialMainPlaceholder", lang),
+        mainMenuText: language("tutorialCategoryCommands", lang),
+        subElementText: language("tutorialSubPlaceholder", lang),
+        selectSubElementText: language("tutorialSubPlaceholder", lang),
+        clickButtonConfirmText: "",
+        subElementPlaceholder: language("tutorialSubPlaceholder", lang),
+        lang,
+        timeout: 60000,
+      });
+
+      await menuSystem.initialize(interaction);
     } catch (e) {
       newLogger(
         "error",
