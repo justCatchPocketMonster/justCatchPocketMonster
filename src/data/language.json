@@ -993,6 +993,142 @@
     "fr": ["Fonctionnement de base"],
     "eng": ["Basic operation"]
   },
+  "tutorialMainPlaceholder": {
+    "fr": ["Choisir une catégorie"],
+    "eng": ["Choose a category"]
+  },
+  "tutorialSubPlaceholder": {
+    "fr": ["Choisir un sujet"],
+    "eng": ["Choose a topic"]
+  },
+  "tutorialCategoryCommands": {
+    "fr": ["Commandes"],
+    "eng": ["Commands"]
+  },
+  "tutorialCategoryCommandsDesc": {
+    "fr": ["Explication des commandes utilisateur"],
+    "eng": ["User commands explained"]
+  },
+  "tutorialCategoryGameplay": {
+    "fr": ["Fonctionnement du jeu"],
+    "eng": ["How the game works"]
+  },
+  "tutorialCategoryGameplayDesc": {
+    "fr": ["Spawn, œufs, chaîne SOS, événements..."],
+    "eng": ["Spawn, eggs, SOS chain, events..."]
+  },
+  "tutorialCategoryAdmin": {
+    "fr": ["Admin"],
+    "eng": ["Admin"]
+  },
+  "tutorialCmdCatch": {
+    "fr": ["/catch"],
+    "eng": ["/catch"]
+  },
+  "tutorialCmdCode": {
+    "fr": ["/code"],
+    "eng": ["/code"]
+  },
+  "tutorialCmdPokedex": {
+    "fr": ["/pokedex"],
+    "eng": ["/pokedex"]
+  },
+  "tutorialCmdHint": {
+    "fr": ["/hint"],
+    "eng": ["/hint"]
+  },
+  "tutorialCmdStat": {
+    "fr": ["/stat"],
+    "eng": ["/stat"]
+  },
+  "tutorialCmdInformation": {
+    "fr": ["/information"],
+    "eng": ["/information"]
+  },
+  "tutorialCmdEffect": {
+    "fr": ["/effect"],
+    "eng": ["/effect"]
+  },
+  "tutorialCmdTrade": {
+    "fr": ["/trade"],
+    "eng": ["/trade"]
+  },
+  "tutorialCmdHowHave": {
+    "fr": ["/howHaveThisPokemon"],
+    "eng": ["/howHaveThisPokemon"]
+  },
+  "tutorialCmdShortDesc": {
+    "fr": ["Voir l'explication de cette commande"],
+    "eng": ["See this command's explanation"]
+  },
+  "tutorialGameplayShortDesc": {
+    "fr": ["Voir l'explication"],
+    "eng": ["See explanation"]
+  },
+  "tutorialGameplaySpawnLabel": {
+    "fr": ["Spawn et apparition"],
+    "eng": ["Spawn and appearance"]
+  },
+  "tutorialGameplaySpawnTitle": {
+    "fr": ["Apparition des Pokémon"],
+    "eng": ["Pokémon spawn"]
+  },
+  "tutorialGameplaySpawnDesc": {
+    "fr": [
+      "Parlez dans les salons autorisés et les Pokémon apparaîtront de manière aléatoire. Les administrateurs choisissent les salons avec /spawn. Des événements peuvent modifier les taux (plus de Pokémon Feu, etc.)."
+    ],
+    "eng": [
+      "Talk in allowed channels and Pokémon will appear randomly. Administrators choose channels with /spawn. Events can modify rates (more Fire Pokémon, etc.)."
+    ]
+  },
+  "tutorialGameplayEggsLabel": {
+    "fr": ["Œufs"],
+    "eng": ["Eggs"]
+  },
+  "tutorialGameplayEggsTitle": {
+    "fr": ["Les œufs"],
+    "eng": ["Eggs"]
+  },
+  "tutorialGameplayEggsDesc": {
+    "fr": [
+      "Parfois un œuf apparaît à la place d'un Pokémon. Le nom affiché est « Oeuf » mais une fois capturé il se transforme en un Pokémon aléatoire. Les œufs ont un taux shiny amélioré."
+    ],
+    "eng": [
+      "Sometimes an egg appears instead of a Pokémon. The displayed name is \"Egg\" but once caught it turns into a random Pokémon. Eggs have an improved shiny rate."
+    ]
+  },
+  "tutorialGameplaySosLabel": {
+    "fr": ["Chaîne SOS"],
+    "eng": ["SOS chain"]
+  },
+  "tutorialGameplaySosTitle": {
+    "fr": ["Appel SOS (chaîne)"],
+    "eng": ["SOS call (chain)"]
+  },
+  "tutorialGameplaySosDesc": {
+    "fr": [
+      "Certains Pokémon peuvent en appeler un autre du même species après avoir été capturés (50% de chance). Chaque apparition en chaîne divise le taux shiny par 2. Seuls les Pokémon spawnés normalement (pas les œufs) peuvent déclencher un appel SOS."
+    ],
+    "eng": [
+      "Some Pokémon can call another of the same species after being caught (50% chance). Each chain appearance halves the shiny rate. Only normally spawned Pokémon (not eggs) can trigger an SOS call."
+    ]
+  },
+  "tutorialGameplayEventsLabel": {
+    "fr": ["Événements"],
+    "eng": ["Events"]
+  },
+  "tutorialGameplayEventsTitle": {
+    "fr": ["Événements"],
+    "eng": ["Events"]
+  },
+  "tutorialGameplayEventsDesc": {
+    "fr": [
+      "Des événements peuvent être actifs sur le serveur et modifier temporairement les taux (génération, rareté, type, shiny...) ou autoriser des formes spéciales (Méga, Gigamax). Utilisez /effect pour voir l'événement en cours."
+    ],
+    "eng": [
+      "Events can be active on the server and temporarily modify rates (generation, rarity, type, shiny...) or allow special forms (Mega, Gigantamax). Use /effect to see the current event."
+    ]
+  },
   "tutorialAdmin": {
     "fr": ["Truc d'admin"],
     "eng": ["Admin stuff"]

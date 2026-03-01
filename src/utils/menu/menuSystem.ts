@@ -65,6 +65,8 @@ export interface MenuSystemConfig<T extends MenuHandler> {
 /**
  * Main menu system class that handles interactive menu navigation and selection.
  */
+const MAX_COLLECTOR_TIME_MS = 86400000;
+
 export class MenuSystem<T extends MenuHandler> {
   private config: MenuSystemConfig<T>;
   private message: Message | null = null;
@@ -77,6 +79,7 @@ export class MenuSystem<T extends MenuHandler> {
     | Map<string, MenuHandler>;
   private menuOptions: MenuOption[] = [];
   private menuHandlers: Map<string, MenuHandler> = new Map();
+  private inactivityTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
   /**
    * Helper function to generate menuOptions from menuHandlers
@@ -107,7 +110,6 @@ export class MenuSystem<T extends MenuHandler> {
   async initialize(interaction: ChatInputCommandInteraction): Promise<void> {
     this.interaction = interaction;
 
-    // Initialize menuHandlers from regenerateMenu and generate menuOptions automatically
     this.menuHandlers = await Promise.resolve(this.regenerateMenu());
     this.menuOptions = this.generateMenuOptions(this.menuHandlers);
 
@@ -123,22 +125,43 @@ export class MenuSystem<T extends MenuHandler> {
   private setupCollectors(interaction: ChatInputCommandInteraction): void {
     if (!this.message) return;
 
-    const timeout = this.config.timeout || 60000;
+    const inactivityMs = this.config.timeout || 60000;
 
     this.mainCollector = this.message.createMessageComponentCollector({
       componentType: ComponentType.StringSelect,
       filter: (i) =>
         (i.customId === "main_menu" || i.customId.startsWith("menu_")) &&
         i.user.id === interaction.user.id,
-      time: timeout,
+      time: MAX_COLLECTOR_TIME_MS,
     });
 
     this.buttonCollector = this.message.createMessageComponentCollector({
       componentType: ComponentType.Button,
       filter: (i) =>
         i.customId === "show_values" && i.user.id === interaction.user.id,
-      time: timeout,
+      time: MAX_COLLECTOR_TIME_MS,
     });
+
+    const scheduleInactivityClear = () => {
+      if (this.inactivityTimeoutId) {
+        clearTimeout(this.inactivityTimeoutId);
+        this.inactivityTimeoutId = null;
+      }
+      this.inactivityTimeoutId = setTimeout(async () => {
+        this.inactivityTimeoutId = null;
+        try {
+          await interaction.editReply({ components: [] });
+        } catch (e) {
+          newLogger(
+            "error",
+            "[MenuSystem] Failed to clear menu on inactivity",
+            e instanceof Error ? e.message : String(e),
+          );
+        }
+        this.mainCollector?.stop();
+        this.buttonCollector?.stop();
+      }, inactivityMs);
+    };
 
     this.mainCollector.on(
       "collect",
@@ -169,8 +192,13 @@ export class MenuSystem<T extends MenuHandler> {
             customId,
             handlerConfig,
           );
+          scheduleInactivityClear();
         } catch (error) {
-          newLogger("error", `[MenuSystem] Error in mainCollector: ${error}`);
+          newLogger(
+            "error",
+            "[MenuSystem] Error in mainCollector",
+            error instanceof Error ? error.message : String(error),
+          );
         }
       },
     );
@@ -179,10 +207,7 @@ export class MenuSystem<T extends MenuHandler> {
       "collect",
       async (buttonInteraction: ButtonInteraction) => {
         try {
-          if (!this.message || !this.interaction) {
-            newLogger("warn", `[MenuSystem] Message or interaction is null`);
-            return;
-          }
+          if (!this.message || !this.interaction) return;
 
           const selectionPath =
             this.currentSelectionPath.get(this.message.id) || [];
@@ -191,20 +216,7 @@ export class MenuSystem<T extends MenuHandler> {
           if (mainMenuValue) {
             const handler = this.menuHandlers.get(mainMenuValue);
             if (handler) {
-              try {
-                await handler.handleAction(selectionPath);
-              } catch (error) {
-                newLogger(
-                  "error",
-                  `[MenuSystem] Error in handleAction: ${error}`,
-                  `Error calling handleAction for ${mainMenuValue}: ${error instanceof Error ? error.message : String(error)}`,
-                );
-              }
-            } else {
-              newLogger(
-                "warn",
-                `[MenuSystem] No handler found for mainMenuValue: ${mainMenuValue}`,
-              );
+              await handler.handleAction(selectionPath);
             }
           }
 
@@ -219,10 +231,10 @@ export class MenuSystem<T extends MenuHandler> {
 
           const resetOnButtonClick = this.config.resetOnButtonClick ?? false;
 
+          scheduleInactivityClear();
+
           if (resetOnButtonClick) {
             this.currentSelectionPath.delete(this.message.id);
-
-            // Regenerate menu handlers and generate menuOptions automatically
             this.menuHandlers = await Promise.resolve(this.regenerateMenu());
             this.menuOptions = this.generateMenuOptions(this.menuHandlers);
 
@@ -265,8 +277,8 @@ export class MenuSystem<T extends MenuHandler> {
         } catch (error) {
           newLogger(
             "error",
-            `[MenuSystem] Error in buttonCollector: ${error}`,
-            `Error in buttonCollector: ${error instanceof Error ? error.message : String(error)}`,
+            "[MenuSystem] Error in buttonCollector",
+            error instanceof Error ? error.message : String(error),
           );
         }
       },
@@ -280,26 +292,20 @@ export class MenuSystem<T extends MenuHandler> {
       }
     };
 
-    const createEndHandler = (collectorName: string) => {
-      return async (collected: any, reason: string) => {
-        if (reason === "time" && collected.size === 0) {
-          try {
-            await interaction.editReply({
-              components: [],
-            });
-          } catch (e) {
-            newLogger(
-              "error",
-              `[MenuSystem] Error in ${collectorName} end: ${e}`,
-            );
-          }
+    const createEndHandler = () => {
+      return () => {
+        if (this.inactivityTimeoutId) {
+          clearTimeout(this.inactivityTimeoutId);
+          this.inactivityTimeoutId = null;
         }
         handleEnd();
       };
     };
 
-    this.mainCollector.on("end", createEndHandler("mainCollector"));
-    this.buttonCollector.on("end", createEndHandler("buttonCollector"));
+    this.mainCollector.on("end", createEndHandler());
+    this.buttonCollector.on("end", createEndHandler());
+
+    scheduleInactivityClear();
   }
 
   private buildMainMenuRow(): ActionRowBuilder<StringSelectMenuBuilder> {
