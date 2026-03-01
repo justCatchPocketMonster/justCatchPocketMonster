@@ -1,4 +1,4 @@
-import { GameplayTutorialHandler } from "../../../../src/features/tutorial/gameplayTutorialHandler";
+import { GameplayTutorialHandler } from "../../../../src/features/tutorial";
 import { Server } from "../../../../src/core/classes/Server";
 import { EmbedBuilder } from "discord.js";
 

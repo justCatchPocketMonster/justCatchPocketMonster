@@ -1,4 +1,4 @@
-import { AdminTutorialHandler } from "../../../../src/features/tutorial/adminTutorialHandler";
+import { AdminTutorialHandler } from "../../../../src/features/tutorial";
 import { Server } from "../../../../src/core/classes/Server";
 import { EmbedBuilder } from "discord.js";
 

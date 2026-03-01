@@ -1,4 +1,4 @@
-import { CommandsTutorialHandler } from "../../../../src/features/tutorial/commandsTutorialHandler";
+import { CommandsTutorialHandler } from "../../../../src/features/tutorial";
 import { Server } from "../../../../src/core/classes/Server";
 import { EmbedBuilder } from "discord.js";
 

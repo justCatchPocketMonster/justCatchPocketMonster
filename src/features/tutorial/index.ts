@@ -1,3 +1,5 @@
-export { CommandsTutorialHandler } from "./commandsTutorialHandler";
-export { GameplayTutorialHandler } from "./gameplayTutorialHandler";
-export { AdminTutorialHandler } from "./adminTutorialHandler";
+export {
+  CommandsTutorialHandler,
+  AdminTutorialHandler,
+  GameplayTutorialHandler,
+} from "./tutorialHandlers";
