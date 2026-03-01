@@ -8,15 +8,51 @@ const COMMAND_ENTRIES: Array<{
   labelKey: string;
   explicationKey: string;
 }> = [
-  { value: "catch", labelKey: "tutorialCmdCatch", explicationKey: "commandCatchExplication" },
-  { value: "code", labelKey: "tutorialCmdCode", explicationKey: "commandCodeExplication" },
-  { value: "pokedex", labelKey: "tutorialCmdPokedex", explicationKey: "commandPokedexExplication" },
-  { value: "hint", labelKey: "tutorialCmdHint", explicationKey: "commandHintExplication" },
-  { value: "stat", labelKey: "tutorialCmdStat", explicationKey: "commandStatExplication" },
-  { value: "information", labelKey: "tutorialCmdInformation", explicationKey: "commandInformationExplication" },
-  { value: "effect", labelKey: "tutorialCmdEffect", explicationKey: "commandEffectEvent" },
-  { value: "trade", labelKey: "tutorialCmdTrade", explicationKey: "commandTradeExplication" },
-  { value: "howHaveThisPokemon", labelKey: "tutorialCmdHowHave", explicationKey: "commandHowExplication" },
+  {
+    value: "catch",
+    labelKey: "tutorialCmdCatch",
+    explicationKey: "commandCatchExplication",
+  },
+  {
+    value: "code",
+    labelKey: "tutorialCmdCode",
+    explicationKey: "commandCodeExplication",
+  },
+  {
+    value: "pokedex",
+    labelKey: "tutorialCmdPokedex",
+    explicationKey: "commandPokedexExplication",
+  },
+  {
+    value: "hint",
+    labelKey: "tutorialCmdHint",
+    explicationKey: "commandHintExplication",
+  },
+  {
+    value: "stat",
+    labelKey: "tutorialCmdStat",
+    explicationKey: "commandStatExplication",
+  },
+  {
+    value: "information",
+    labelKey: "tutorialCmdInformation",
+    explicationKey: "commandInformationExplication",
+  },
+  {
+    value: "effect",
+    labelKey: "tutorialCmdEffect",
+    explicationKey: "commandEffectEvent",
+  },
+  {
+    value: "trade",
+    labelKey: "tutorialCmdTrade",
+    explicationKey: "commandTradeExplication",
+  },
+  {
+    value: "howHaveThisPokemon",
+    labelKey: "tutorialCmdHowHave",
+    explicationKey: "commandHowExplication",
+  },
 ];
 
 export class CommandsTutorialHandler implements MenuHandler {
@@ -40,9 +76,14 @@ export class CommandsTutorialHandler implements MenuHandler {
     };
   }
 
-  private buildCommandEmbed(value: string, explicationKey: string): EmbedBuilder {
+  private buildCommandEmbed(
+    value: string,
+    explicationKey: string,
+  ): EmbedBuilder {
     const lang = this.server.settings.language;
-    const labelKey = COMMAND_ENTRIES.find((e) => e.value === value)?.labelKey ?? "tutorialCmdCatch";
+    const labelKey =
+      COMMAND_ENTRIES.find((e) => e.value === value)?.labelKey ??
+      "tutorialCmdCatch";
     return new EmbedBuilder()
       .setColor(0x0099ff)
       .setTitle(language(labelKey as LanguageKey, lang))

@@ -56,7 +56,9 @@ export class GameplayTutorialHandler implements MenuHandler {
     };
   }
 
-  private buildGameplayEmbed(entry: (typeof GAMEPLAY_ENTRIES)[0]): EmbedBuilder {
+  private buildGameplayEmbed(
+    entry: (typeof GAMEPLAY_ENTRIES)[0],
+  ): EmbedBuilder {
     const lang = this.server.settings.language;
     return new EmbedBuilder()
       .setColor(0x7b68ee)
