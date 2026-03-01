@@ -1,15 +1,9 @@
 import { MenuHandler, MenuOption, SelectionPath } from "../../utils/menu";
 import { Server } from "../../core/classes/Server";
-import { EmbedBuilder } from "discord.js";
-import language, { type LanguageKey } from "../../lang/language";
-import { buildTutorialMenuStructure } from "./tutorialMenuBuilder";
+import { buildTitleDescTutorialMenu } from "./tutorialMenuBuilder";
+import type { TitleDescTutorialEntry } from "./tutorialMenuBuilder";
 
-const GAMEPLAY_ENTRIES: Array<{
-  value: string;
-  labelKey: string;
-  titleKey: string;
-  descKey: string;
-}> = [
+const GAMEPLAY_ENTRIES: TitleDescTutorialEntry[] = [
   {
     value: "spawn",
     labelKey: "tutorialGameplaySpawnLabel",
@@ -42,21 +36,15 @@ export class GameplayTutorialHandler implements MenuHandler {
   constructor(private server: Server) {}
 
   getMenuStructure(): MenuOption {
-    return buildTutorialMenuStructure(this.server, {
-      categoryLabelKey: "tutorialCategoryGameplay",
-      categoryValue: "gameplay",
-      categoryDescKey: "tutorialCategoryGameplayDesc",
-      placeholderKey: "tutorialSubPlaceholder",
-      shortDescKey: "tutorialGameplayShortDesc",
-      entries: GAMEPLAY_ENTRIES,
-      getLabel: (entry, lang) => language(entry.labelKey as LanguageKey, lang),
-      color: GAMEPLAY_COLOR,
-      buildEmbed: (entry, lang) =>
-        new EmbedBuilder()
-          .setColor(GAMEPLAY_COLOR)
-          .setTitle(language(entry.titleKey as LanguageKey, lang))
-          .setDescription(language(entry.descKey as LanguageKey, lang)),
-    });
+    return buildTitleDescTutorialMenu(
+      this.server,
+      "tutorialCategoryGameplay",
+      "gameplay",
+      "tutorialCategoryGameplayDesc",
+      "tutorialGameplayShortDesc",
+      GAMEPLAY_ENTRIES,
+      GAMEPLAY_COLOR,
+    );
   }
 
   handleAction(_selectionPath: SelectionPath[]): void {}

@@ -1,15 +1,9 @@
 import { MenuHandler, MenuOption, SelectionPath } from "../../utils/menu";
 import { Server } from "../../core/classes/Server";
-import { EmbedBuilder } from "discord.js";
-import language, { type LanguageKey } from "../../lang/language";
-import { buildTutorialMenuStructure } from "./tutorialMenuBuilder";
+import { buildTitleDescTutorialMenu } from "./tutorialMenuBuilder";
+import type { TitleDescTutorialEntry } from "./tutorialMenuBuilder";
 
-const ADMIN_ENTRIES: Array<{
-  value: string;
-  labelKey: string;
-  titleKey: string;
-  descKey: string;
-}> = [
+const ADMIN_ENTRIES: TitleDescTutorialEntry[] = [
   {
     value: "language",
     labelKey: "tutorialAdminField1Title",
@@ -30,21 +24,15 @@ export class AdminTutorialHandler implements MenuHandler {
   constructor(private server: Server) {}
 
   getMenuStructure(): MenuOption {
-    return buildTutorialMenuStructure(this.server, {
-      categoryLabelKey: "tutorialCategoryAdmin",
-      categoryValue: "admin",
-      categoryDescKey: "tutorialAdminDescription",
-      placeholderKey: "tutorialSubPlaceholder",
-      shortDescKey: "tutorialGameplayShortDesc",
-      entries: ADMIN_ENTRIES,
-      getLabel: (entry, lang) => language(entry.labelKey as LanguageKey, lang),
-      color: ADMIN_COLOR,
-      buildEmbed: (entry, lang) =>
-        new EmbedBuilder()
-          .setColor(ADMIN_COLOR)
-          .setTitle(language(entry.titleKey as LanguageKey, lang))
-          .setDescription(language(entry.descKey as LanguageKey, lang)),
-    });
+    return buildTitleDescTutorialMenu(
+      this.server,
+      "tutorialCategoryAdmin",
+      "admin",
+      "tutorialAdminDescription",
+      "tutorialGameplayShortDesc",
+      ADMIN_ENTRIES,
+      ADMIN_COLOR,
+    );
   }
 
   handleAction(_selectionPath: SelectionPath[]): void {}

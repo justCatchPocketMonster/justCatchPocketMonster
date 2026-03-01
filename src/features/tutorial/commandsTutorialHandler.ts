@@ -1,14 +1,9 @@
 import { MenuHandler, MenuOption, SelectionPath } from "../../utils/menu";
 import { Server } from "../../core/classes/Server";
-import { EmbedBuilder } from "discord.js";
-import language, { type LanguageKey } from "../../lang/language";
-import { buildTutorialMenuStructure } from "./tutorialMenuBuilder";
+import { buildCommandsTutorialMenu } from "./tutorialMenuBuilder";
+import type { CommandsTutorialEntry } from "./tutorialMenuBuilder";
 
-const COMMAND_ENTRIES: Array<{
-  value: string;
-  labelKey: string;
-  explicationKey: string;
-}> = [
+const COMMAND_ENTRIES: CommandsTutorialEntry[] = [
   {
     value: "catch",
     labelKey: "tutorialCmdCatch",
@@ -62,21 +57,15 @@ export class CommandsTutorialHandler implements MenuHandler {
   constructor(private server: Server) {}
 
   getMenuStructure(): MenuOption {
-    return buildTutorialMenuStructure(this.server, {
-      categoryLabelKey: "tutorialCategoryCommands",
-      categoryValue: "commands",
-      categoryDescKey: "tutorialCategoryCommandsDesc",
-      placeholderKey: "tutorialSubPlaceholder",
-      shortDescKey: "tutorialCmdShortDesc",
-      entries: COMMAND_ENTRIES,
-      getLabel: (entry, lang) => language(entry.labelKey as LanguageKey, lang),
-      color: COMMANDS_COLOR,
-      buildEmbed: (entry, lang) =>
-        new EmbedBuilder()
-          .setColor(COMMANDS_COLOR)
-          .setTitle(language(entry.labelKey as LanguageKey, lang))
-          .setDescription(language(entry.explicationKey as LanguageKey, lang)),
-    });
+    return buildCommandsTutorialMenu(
+      this.server,
+      "tutorialCategoryCommands",
+      "commands",
+      "tutorialCategoryCommandsDesc",
+      "tutorialCmdShortDesc",
+      COMMAND_ENTRIES,
+      COMMANDS_COLOR,
+    );
   }
 
   handleAction(_selectionPath: SelectionPath[]): void {}
