@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { PermissionFlagsBits } from "discord.js";
 import { createMockInteraction } from "../../../utils/mock/mockInteraction";
 import tutorial from "../../../../src/commands/information/tutorial";
 
@@ -16,6 +17,14 @@ describe("tutorial command", () => {
   });
 
   test("Should reply a message because it's a success", async () => {
+    await tutorial.execute(interaction);
+    expect(interaction.reply).toHaveBeenCalledTimes(1);
+  });
+
+  test("Should include admin handler when user has Administrator permission", async () => {
+    interaction.memberPermissions = {
+      has: (flag: bigint) => flag === PermissionFlagsBits.Administrator,
+    };
     await tutorial.execute(interaction);
     expect(interaction.reply).toHaveBeenCalledTimes(1);
   });

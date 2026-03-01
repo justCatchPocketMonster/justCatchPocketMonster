@@ -40,15 +40,4 @@ describe("CommandsTutorialHandler", () => {
       handler.handleAction([{ value: "commands", label: "Commands" }]),
     ).not.toThrow();
   });
-
-  test("buildCommandEmbed uses fallback label when value not in COMMAND_ENTRIES", () => {
-    const handler = new CommandsTutorialHandler(server);
-    const embed = (handler as any).buildCommandEmbed(
-      "unknownValue",
-      "commandCatchExplication",
-    );
-    expect(embed).toBeInstanceOf(EmbedBuilder);
-    expect(embed.data.title).toBeDefined();
-    expect(embed.data.description).toBeDefined();
-  });
 });

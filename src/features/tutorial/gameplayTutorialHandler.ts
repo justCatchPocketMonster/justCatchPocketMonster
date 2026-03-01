@@ -2,6 +2,7 @@ import { MenuHandler, MenuOption, SelectionPath } from "../../utils/menu";
 import { Server } from "../../core/classes/Server";
 import { EmbedBuilder } from "discord.js";
 import language, { type LanguageKey } from "../../lang/language";
+import { buildTutorialMenuStructure } from "./tutorialMenuBuilder";
 
 const GAMEPLAY_ENTRIES: Array<{
   value: string;
@@ -35,35 +36,27 @@ const GAMEPLAY_ENTRIES: Array<{
   },
 ];
 
+const GAMEPLAY_COLOR = 0x7b68ee;
+
 export class GameplayTutorialHandler implements MenuHandler {
   constructor(private server: Server) {}
 
   getMenuStructure(): MenuOption {
-    const lang = this.server.settings.language;
-    const children: MenuOption[] = GAMEPLAY_ENTRIES.map((entry) => ({
-      label: language(entry.labelKey as LanguageKey, lang),
-      value: entry.value,
-      description: language("tutorialGameplayShortDesc", lang),
-      getEmbed: () => this.buildGameplayEmbed(entry),
-    }));
-
-    return {
-      label: language("tutorialCategoryGameplay", lang),
-      value: "gameplay",
-      description: language("tutorialCategoryGameplayDesc", lang),
-      placeholder: language("tutorialSubPlaceholder", lang),
-      children,
-    };
-  }
-
-  private buildGameplayEmbed(
-    entry: (typeof GAMEPLAY_ENTRIES)[0],
-  ): EmbedBuilder {
-    const lang = this.server.settings.language;
-    return new EmbedBuilder()
-      .setColor(0x7b68ee)
-      .setTitle(language(entry.titleKey as LanguageKey, lang))
-      .setDescription(language(entry.descKey as LanguageKey, lang));
+    return buildTutorialMenuStructure(this.server, {
+      categoryLabelKey: "tutorialCategoryGameplay",
+      categoryValue: "gameplay",
+      categoryDescKey: "tutorialCategoryGameplayDesc",
+      placeholderKey: "tutorialSubPlaceholder",
+      shortDescKey: "tutorialGameplayShortDesc",
+      entries: GAMEPLAY_ENTRIES,
+      getLabel: (entry, lang) => language(entry.labelKey as LanguageKey, lang),
+      color: GAMEPLAY_COLOR,
+      buildEmbed: (entry, lang) =>
+        new EmbedBuilder()
+          .setColor(GAMEPLAY_COLOR)
+          .setTitle(language(entry.titleKey as LanguageKey, lang))
+          .setDescription(language(entry.descKey as LanguageKey, lang)),
+    });
   }
 
   handleAction(_selectionPath: SelectionPath[]): void {}
