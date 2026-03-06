@@ -9,6 +9,7 @@ import {
   getTradeCooldown,
   setTradeBlock,
   getTradeBlock,
+  extractId,
   TradeData,
 } from "../../../../src/features/trade/tradeCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
@@ -20,6 +21,36 @@ describe("TradeCache", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  describe("extractId", () => {
+    it("should return string as-is", () => {
+      expect(extractId("user123")).toBe("user123");
+    });
+
+    it("should extract discordId from object", () => {
+      expect(extractId({ discordId: "user456" })).toBe("user456");
+    });
+
+    it("should convert non-string discordId to string", () => {
+      expect(extractId({ discordId: 789 } as any)).toBe("789");
+    });
+
+    it("should JSON.stringify plain object without discordId", () => {
+      expect(extractId({ foo: "bar" })).toBe('{"foo":"bar"}');
+    });
+
+    it("should handle null", () => {
+      expect(extractId(null as any)).toBe("null");
+    });
+
+    it("should handle undefined", () => {
+      expect(extractId(undefined as any)).toBe("undefined");
+    });
+
+    it("should handle number", () => {
+      expect(extractId(42 as any)).toBe("42");
+    });
   });
 
   describe("createTrade", () => {
