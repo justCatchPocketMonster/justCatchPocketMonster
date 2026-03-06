@@ -1844,8 +1844,12 @@
     "eng": ["A Gigantamax Raid appeared!"]
   },
   "raidEmbedDescription": {
-    "fr": ["Rejoignez le raid pour tenter de capturer ce Pokémon ! Faites \"/catch [nom du Pokémon]\" pour participer."],
-    "eng": ["Join the raid to try to catch this Pokémon! Use \"/catch [Pokémon name]\" to participate."]
+    "fr": [
+      "Rejoignez le raid pour tenter de capturer ce Pokémon ! Faites \"/catch [nom du Pokémon]\" pour participer."
+    ],
+    "eng": [
+      "Join the raid to try to catch this Pokémon! Use \"/catch [Pokémon name]\" to participate."
+    ]
   },
   "raidEmbedPlayers": {
     "fr": ["Joueurs"],
@@ -1856,8 +1860,12 @@
     "eng": ["Time remaining"]
   },
   "raidEmbedFooter": {
-    "fr": ["Aucun spawn dans ce salon • Capture : 1j=25% | 2j=50% | 3j=75% | 4j=100% • Shiny : /4"],
-    "eng": ["No spawn in this channel • Capture: 1p=25% | 2p=50% | 3p=75% | 4p=100% • Shiny: /4"]
+    "fr": [
+      "Aucun spawn dans ce salon • Capture : 1j=25% | 2j=50% | 3j=75% | 4j=100% • Shiny : /4"
+    ],
+    "eng": [
+      "No spawn in this channel • Capture: 1p=25% | 2p=50% | 3p=75% | 4p=100% • Shiny: /4"
+    ]
   },
   "raidJoined": {
     "fr": ["A rejoint le raid !"],

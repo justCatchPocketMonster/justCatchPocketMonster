@@ -122,9 +122,8 @@ export async function resolveRaid(
 
   const playerCount = raid.players.length;
   const catchRate = CATCH_RATE_PER_PLAYER * playerCount;
-  const success =
-    playerCount > 0 && Math.random() < catchRate;
-  
+  const success = playerCount > 0 && Math.random() < catchRate;
+
   try {
     const server = await getServerById(serverId);
     const statVersion = await getStatById(version);

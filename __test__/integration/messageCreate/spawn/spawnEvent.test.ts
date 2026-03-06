@@ -33,7 +33,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid (must be !== 0)
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -62,7 +63,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.3);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 3)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -90,7 +92,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.1);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 1)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -137,7 +140,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.2);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 2)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -165,7 +169,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.4);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 4)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -191,7 +196,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.5);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 5)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -219,7 +225,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.6);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 6)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -242,7 +249,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.7);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 7)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -273,7 +281,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.8);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 8)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -304,7 +313,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.9);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 9)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)
@@ -329,7 +339,8 @@ describe("Spawn event", () => {
       .mockImplementationOnce(() => 0.95);
     jest
       .spyOn(helperFunction, "random")
-      .mockImplementationOnce(() => 0)
+      .mockImplementationOnce(() => 1) // skip raid
+      .mockImplementationOnce(() => 0) // valueMaxChoiceEvent <= 1
       .mockImplementationOnce(() => 10)
       .mockImplementationOnce(() => 0)
       .mockImplementationOnce(() => 0)

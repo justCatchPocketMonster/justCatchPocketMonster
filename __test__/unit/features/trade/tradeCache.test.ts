@@ -58,6 +58,56 @@ describe("TradeCache", () => {
       expect(trade?.initiatorId).toBe("user3");
       expect(trade?.targetId).toBe("user4");
     });
+
+    it("should handle trade with discordId as number", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2b",
+        initiatorId: { discordId: 12345 } as any,
+        targetId: { discordId: 67890 } as any,
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2b");
+      expect(trade?.initiatorId).toBe("12345");
+      expect(trade?.targetId).toBe("67890");
+    });
+
+    it("should handle trade with plain object as ID", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2c",
+        initiatorId: { foo: "bar" } as any,
+        targetId: "user4",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2c");
+      expect(trade?.initiatorId).toBe('{"foo":"bar"}');
+      expect(trade?.targetId).toBe("user4");
+    });
+
+    it("should handle trade with expired TTL", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2d",
+        initiatorId: "user1",
+        targetId: "user2",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now() - 7200000,
+        expiresAt: Date.now() - 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2d");
+      expect(trade).toBeDefined();
+    });
   });
 
   describe("getTrade", () => {

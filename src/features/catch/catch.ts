@@ -59,10 +59,7 @@ export async function catchPokemon(
     return;
   }
 
-  if (
-    interaction.guild &&
-    isChannelInRaid(interaction.guild.id, idChannel)
-  ) {
+  if (interaction.guild && isChannelInRaid(interaction.guild.id, idChannel)) {
     await handleRaidCatch(interaction, server, memberDisplayName);
     return;
   }
