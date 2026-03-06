@@ -55,3 +55,5 @@ export const hidePokemon = {
 };
 
 export const valueMaxChoiceEvent = 100;
+
+export const valueMaxChoiceRaid = 100;

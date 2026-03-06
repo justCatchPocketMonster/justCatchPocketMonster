@@ -4,6 +4,7 @@ import {
   maximumCount,
   minimumCount,
   rateMaxShiny,
+  valueMaxChoiceRaid,
   valuePerGen,
   valuePerRarity,
   valuePerType,
@@ -215,6 +216,11 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
     valueMaxChoiceEgg: {
       type: Number,
       required: true,
+    },
+    valueMaxChoiceRaid: {
+      type: Number,
+      required: true,
+      default: valueMaxChoiceRaid,
     },
   },
   {

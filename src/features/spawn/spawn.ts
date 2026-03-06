@@ -21,11 +21,16 @@ import {
   version,
 } from "../../config/default/misc";
 import { checkTimeForResetEventStat } from "../event/checkTimeForResetEventStat";
+import { getActiveRaid, isChannelInRaid } from "../raid/raidManager";
+import { selectRaidPokemon } from "../raid/selectRaidPokemon";
+import { generateRaidEmbed } from "../raid/raidEmbed";
 
-interface SpawnData {
+export interface SpawnData {
   embed: EmbedBuilder;
   image?: AttachmentBuilder;
   channelId: string;
+  isRaid?: boolean;
+  raidPokemon?: PokemonType;
 }
 
 const spawnLocks = new Set<string>();
@@ -84,16 +89,48 @@ function initMaxCount(server: ServerType): void {
 
 function choiceChannel(server: ServerType, idChannel: string): string {
   if (server.channelAllowed.length === 0) return "";
-  if (server.channelAllowed.includes(idChannel)) return idChannel;
 
-  return server.channelAllowed[random(server.channelAllowed.length)];
+  const available = server.channelAllowed.filter(
+    (ch) => !isChannelInRaid(server.discordId, ch),
+  );
+  if (available.length === 0) return "";
+
+  if (available.includes(idChannel)) return idChannel;
+
+  return available[random(available.length)];
 }
 
 async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
-): Promise<{ embed: EmbedBuilder }> {
+): Promise<{
+  embed: EmbedBuilder;
+  image?: AttachmentBuilder;
+  isRaid?: boolean;
+  raidPokemon?: PokemonType;
+}> {
   await checkTimeForResetEventStat(server);
+
+  const isRaidRoll =
+    random(server.eventSpawn.valueMaxChoiceRaid) === 0 &&
+    !getActiveRaid(server.discordId);
+  if (isRaidRoll) {
+    const raidPokemon = selectRaidPokemon(server);
+    const endTimestamp = Math.floor((Date.now() + 2 * 60 * 1000) / 1000);
+
+    server.pokemonPresent[idChannel] = raidPokemon;
+
+    const statVersion = await getStatById(version);
+    const statAll = await getStatById(nameStatGeneral);
+    statVersion.addSpawn(raidPokemon as Pokemon);
+    statAll.addSpawn(raidPokemon as Pokemon);
+    await updateServer(server.discordId, server);
+    await updateStat(version, statVersion);
+    await updateStat(nameStatGeneral, statAll);
+    const { embed } = generateRaidEmbed(raidPokemon, server, [], endTimestamp);
+    return { embed, isRaid: true, raidPokemon };
+  }
+
   const randomCategorySpawn = random(valueMaxChoiceEvent);
   if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
     await selectEventStandard(server);

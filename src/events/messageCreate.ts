@@ -1,6 +1,7 @@
 import { BaseGuildTextChannel, Client, Message } from "discord.js";
 import { newLogger } from "../middlewares/logger";
 import { spawn } from "../features/spawn/spawn";
+import { startRaid } from "../features/raid/raidManager";
 
 export default async (client: Client, message: Message) => {
   try {
@@ -9,22 +10,46 @@ export default async (client: Client, message: Message) => {
     }
     if (!message.guild) return;
 
-    await spawn(message.guild.id, message.channel.id).then((result) => {
-      if (result) {
-        const channel = client.channels.cache.get(result.channelId);
-        if (
-          channel &&
-          channel.isTextBased() &&
-          channel instanceof BaseGuildTextChannel
-        ) {
-          if (result.image) {
-            channel.send({ embeds: [result.embed], files: [result.image] });
-          } else {
-            channel.send({ embeds: [result.embed] });
-          }
-        }
+    const result = await spawn(message.guild.id, message.channel.id);
+
+    if (!result) return;
+
+    const channel = client.channels.cache.get(result.channelId);
+    if (
+      !channel ||
+      !channel.isTextBased() ||
+      !(channel instanceof BaseGuildTextChannel)
+    )
+      return;
+
+    if (result.image) {
+      const sentMessage = await channel.send({
+        embeds: [result.embed],
+        files: [result.image],
+      });
+
+      if (result.isRaid && result.raidPokemon) {
+        startRaid(
+          client,
+          message.guild.id,
+          result.channelId,
+          result.raidPokemon,
+          sentMessage.id,
+        );
       }
-    });
+    } else {
+      const sentMessage = await channel.send({ embeds: [result.embed] });
+
+      if (result.isRaid && result.raidPokemon) {
+        startRaid(
+          client,
+          message.guild.id,
+          result.channelId,
+          result.raidPokemon,
+          sentMessage.id,
+        );
+      }
+    }
   } catch (e) {
     newLogger(
       "error",

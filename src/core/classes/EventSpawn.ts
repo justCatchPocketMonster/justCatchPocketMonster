@@ -8,6 +8,7 @@ import {
 import {
   rateMaxShiny,
   valueMaxChoiceEgg,
+  valueMaxChoiceRaid,
   valuePerGen,
   valuePerRarity,
   valuePerType,
@@ -34,6 +35,7 @@ export class EventSpawn implements EventSpawnType {
     },
     public nightMode: boolean,
     public valueMaxChoiceEgg: number,
+    public valueMaxChoiceRaid: number,
   ) {}
 
   public applyModifiersInPlace(percentageMods: EventSpawnFlatModsStrict): void {
@@ -54,6 +56,14 @@ export class EventSpawn implements EventSpawnType {
       );
       if (updatedValue !== this.valueMaxChoiceEgg)
         this.valueMaxChoiceEgg = updatedValue;
+    }
+    if (percentageMods.valueMaxChoiceRaid !== undefined) {
+      const updatedValue = computePercentage(
+        this.valueMaxChoiceRaid,
+        percentageMods.valueMaxChoiceRaid,
+      );
+      if (updatedValue !== this.valueMaxChoiceRaid)
+        this.valueMaxChoiceRaid = updatedValue;
     }
     if (percentageMods.min !== undefined) {
       const updatedValue = computePercentage(
@@ -115,6 +125,7 @@ export class EventSpawn implements EventSpawnType {
       },
       false,
       valueMaxChoiceEgg,
+      valueMaxChoiceRaid,
     );
 
     const eventSeason = selectEventSeasonal();

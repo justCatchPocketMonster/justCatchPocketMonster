@@ -13,6 +13,13 @@ import { Pokemon } from "../../core/classes/Pokemon";
 import { selectSosPokemon } from "../pokemon/selectPokemon";
 import { generateEmbedSosPokemon } from "../spawn/spawn";
 import { random } from "../../utils/helperFunction";
+import {
+  isChannelInRaid,
+  joinRaid,
+  isRaidFull,
+  resolveRaid,
+  updateRaidEmbed,
+} from "../raid/raidManager";
 
 export async function catchPokemon(
   user: UserType,
@@ -49,6 +56,14 @@ export async function catchPokemon(
         pokemonInput +
         ".",
     );
+    return;
+  }
+
+  if (
+    interaction.guild &&
+    isChannelInRaid(interaction.guild.id, idChannel)
+  ) {
+    await handleRaidCatch(interaction, server, memberDisplayName);
     return;
   }
 
@@ -121,6 +136,42 @@ export async function catchPokemon(
   interaction.reply(
     generateCatchMessage(getPokemonData, memberDisplayName, user, server),
   );
+}
+
+async function handleRaidCatch(
+  interaction: ChatInputCommandInteraction,
+  server: ServerType,
+  memberDisplayName: string,
+): Promise<void> {
+  const serverId = interaction.guild!.id;
+  const { joined, raid } = joinRaid(serverId, interaction.user.id);
+
+  if (!raid) {
+    await interaction.reply(
+      language("noPokemonDisponible", server.settings.language),
+    );
+    return;
+  }
+
+  if (!joined) {
+    await interaction.reply(
+      language("raidAlreadyJoined", server.settings.language),
+    );
+    return;
+  }
+
+  await interaction.reply(
+    language("raidJoined", server.settings.language) +
+      " " +
+      memberDisplayName +
+      ` (${raid.players.length}/4)`,
+  );
+
+  await updateRaidEmbed(interaction.client, serverId);
+
+  if (isRaidFull(serverId)) {
+    await resolveRaid(interaction.client, serverId);
+  }
 }
 
 export function generateCatchMessage(

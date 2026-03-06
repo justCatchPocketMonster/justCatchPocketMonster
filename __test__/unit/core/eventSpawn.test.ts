@@ -18,6 +18,7 @@ describe("EventSpawn.applyModifiersInPlace", () => {
       { min: 5, max: 10 },
       false,
       100,
+      100,
     );
 
     const dummyEvent = {

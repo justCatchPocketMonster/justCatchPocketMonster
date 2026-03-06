@@ -54,6 +54,7 @@ describe("checkTimeForResetEventStat", () => {
       server.eventSpawn.messageSpawn,
       server.eventSpawn.nightMode,
       server.eventSpawn.valueMaxChoiceEgg,
+      server.eventSpawn.valueMaxChoiceRaid,
     );
 
     await updateServer(server.discordId, server);
@@ -96,6 +97,7 @@ describe("checkTimeForResetEventStat", () => {
       server.eventSpawn.messageSpawn,
       server.eventSpawn.nightMode,
       server.eventSpawn.valueMaxChoiceEgg,
+      server.eventSpawn.valueMaxChoiceRaid,
     );
 
     await updateServer(server.discordId, server);
