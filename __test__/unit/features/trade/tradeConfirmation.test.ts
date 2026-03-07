@@ -84,6 +84,48 @@ describe("TradeConfirmation", () => {
     });
   });
 
+  it("should edit existing confirmation messages when both exist", async () => {
+    const tradeData: TradeData = {
+      tradeId: "test_trade_edit",
+      initiatorId: "user1",
+      targetId: "user2",
+      serverId: "server1",
+      status: "confirming",
+      createdAt: Date.now(),
+      expiresAt: Date.now() + 3600000,
+      initiatorConfirmationMessageId: "msg_init",
+      targetConfirmationMessageId: "msg_targ",
+    };
+
+    const mockEdit = jest.fn().mockResolvedValue(undefined);
+    const mockClient = {
+      users: {
+        fetch: jest.fn().mockResolvedValue({
+          username: "TestUser",
+          createDM: jest.fn().mockResolvedValue({
+            messages: {
+              fetch: jest.fn().mockResolvedValue({ edit: mockEdit }),
+            },
+          }),
+        }),
+      },
+    };
+
+    const server = {
+      discordId: "server1",
+      settings: { language: "eng" },
+    } as ServerType;
+
+    await sendConfirmationEmbeds(
+      tradeData,
+      server,
+      mockClient as unknown as Client,
+    );
+
+    expect(mockEdit).toHaveBeenCalledTimes(2);
+    expect(updateTrade).not.toHaveBeenCalled();
+  });
+
   it("should handle missing users", async () => {
     const tradeData: TradeData = {
       tradeId: "test_trade_2",

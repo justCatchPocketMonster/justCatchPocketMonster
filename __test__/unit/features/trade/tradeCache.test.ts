@@ -9,6 +9,7 @@ import {
   getTradeCooldown,
   setTradeBlock,
   getTradeBlock,
+  extractId,
   TradeData,
 } from "../../../../src/features/trade/tradeCache";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
@@ -20,6 +21,36 @@ describe("TradeCache", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  describe("extractId", () => {
+    it("should return string as-is", () => {
+      expect(extractId("user123")).toBe("user123");
+    });
+
+    it("should extract discordId from object", () => {
+      expect(extractId({ discordId: "user456" })).toBe("user456");
+    });
+
+    it("should convert non-string discordId to string", () => {
+      expect(extractId({ discordId: 789 } as any)).toBe("789");
+    });
+
+    it("should JSON.stringify plain object without discordId", () => {
+      expect(extractId({ foo: "bar" })).toBe('{"foo":"bar"}');
+    });
+
+    it("should handle null", () => {
+      expect(extractId(null as any)).toBe("null");
+    });
+
+    it("should handle undefined", () => {
+      expect(extractId(undefined as any)).toBe("undefined");
+    });
+
+    it("should handle number", () => {
+      expect(extractId(42 as any)).toBe("42");
+    });
   });
 
   describe("createTrade", () => {
@@ -57,6 +88,56 @@ describe("TradeCache", () => {
       const trade = getTrade("test_trade_2");
       expect(trade?.initiatorId).toBe("user3");
       expect(trade?.targetId).toBe("user4");
+    });
+
+    it("should handle trade with discordId as number", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2b",
+        initiatorId: { discordId: 12345 } as any,
+        targetId: { discordId: 67890 } as any,
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2b");
+      expect(trade?.initiatorId).toBe("12345");
+      expect(trade?.targetId).toBe("67890");
+    });
+
+    it("should handle trade with plain object as ID", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2c",
+        initiatorId: { foo: "bar" } as any,
+        targetId: "user4",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2c");
+      expect(trade?.initiatorId).toBe('{"foo":"bar"}');
+      expect(trade?.targetId).toBe("user4");
+    });
+
+    it("should handle trade with expired TTL", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_2d",
+        initiatorId: "user1",
+        targetId: "user2",
+        serverId: "server1",
+        status: "pending",
+        createdAt: Date.now() - 7200000,
+        expiresAt: Date.now() - 3600000,
+      };
+
+      createTrade(tradeData);
+      const trade = getTrade("test_trade_2d");
+      expect(trade).toBeDefined();
     });
   });
 

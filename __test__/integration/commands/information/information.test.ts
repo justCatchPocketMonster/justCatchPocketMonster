@@ -19,6 +19,14 @@ describe("information command", () => {
 
   afterAll(async () => {});
 
+  test("Should return early when guildId is null", async () => {
+    interaction.guildId = null;
+
+    await information.execute(interaction);
+
+    expect(interaction.reply).not.toHaveBeenCalled();
+  });
+
   test("Should reply a message because it's a success", async () => {
     // given
     getCode().shiny.push("testForShiny");

@@ -5,6 +5,7 @@ import {
   createEmbedAsk,
   createTradeSummaryEmbed,
   getRarityCooldownMs,
+  getCooldownDisplayText,
 } from "../../../../src/features/trade/tradeUtils";
 import { SaveOnePokemon } from "../../../../src/core/classes/SaveOnePokemon";
 import { UserType } from "../../../../src/core/types/UserType";
@@ -150,6 +151,30 @@ describe("TradeUtils", () => {
       expect(eligible[0].key).toBe("25-ordinary-1");
     });
 
+    it("should exclude pokemon when cooldown is active", async () => {
+      setTradeCooldown("user_cooldown", "legendary", Date.now() + 86400000);
+      const user: UserType = {
+        discordId: "user_cooldown",
+        savePokemon: {
+          data: {
+            "144-ordinary-1": {
+              idPokemon: "144",
+              rarity: "legendary",
+              form: "ordinary",
+              versionForm: 1,
+              normalCount: 3,
+              shinyCount: 0,
+            },
+          },
+        },
+      } as any;
+
+      const eligible = getEligiblePokemon(user);
+      expect(eligible.filter((e) => e.key === "144-ordinary-1")).toHaveLength(
+        0,
+      );
+    });
+
     it("should filter by required rarity", async () => {
       const user: UserType = {
         discordId: "user6",
@@ -275,6 +300,43 @@ describe("TradeUtils", () => {
       expect(embed.data.description).toBeDefined();
     });
 
+    it("should create summary with non-matching pokemon key", () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade",
+        initiatorId: "user11",
+        targetId: "user12",
+        serverId: "server1",
+        status: "confirming",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+        initiatorChoice: {
+          pokemonKey: "99999-ordinary-1",
+          pokemonId: "99999",
+          rarity: "ordinary",
+        },
+        targetChoice: {
+          pokemonKey: "1-ordinary-1",
+          pokemonId: "1",
+          rarity: "ordinary",
+        },
+      };
+
+      const server: ServerType = {
+        discordId: "server1",
+        settings: { language: "eng" },
+      } as any;
+
+      const embed = createTradeSummaryEmbed(
+        tradeData,
+        server,
+        true,
+        "Initiator",
+        "Target",
+      );
+      expect(embed).toBeDefined();
+      expect(embed.data.description).toContain("99999");
+    });
+
     it("should handle missing choices", () => {
       const tradeData: TradeData = {
         tradeId: "test_trade",
@@ -299,6 +361,21 @@ describe("TradeUtils", () => {
         "Target",
       );
       expect(embed).toBeDefined();
+    });
+  });
+
+  describe("getCooldownDisplayText", () => {
+    it("should return cooldown text for each rarity", () => {
+      const text = getCooldownDisplayText("user1", "eng");
+      expect(text).toContain("Legendary");
+      expect(text).toContain("Mythical");
+      expect(text).toContain("Ultra Beast");
+    });
+
+    it("should show remaining time when cooldown active", () => {
+      setTradeCooldown("user_cd", "legendary", Date.now() + 3600000);
+      const text = getCooldownDisplayText("user_cd", "eng");
+      expect(text).toBeDefined();
     });
   });
 

@@ -23,6 +23,14 @@ describe("effect command", () => {
     Date.now = realNow;
   });
 
+  test("Should return early when guildId is null", async () => {
+    interaction.guildId = null;
+
+    await effect.execute(interaction);
+
+    expect(interaction.reply).not.toHaveBeenCalled();
+  });
+
   test("Reply event", async () => {
     // given
     const serverGiven = await getServerById(interaction.guildId);

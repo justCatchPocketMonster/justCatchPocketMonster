@@ -66,6 +66,7 @@ describe("pokedex", () => {
       messageSpawn: { min: 5, max: 20 },
       nightMode: false,
       valueMaxChoiceEgg: 300,
+      valueMaxChoiceRaid: 100,
     };
 
     const server = {
@@ -146,6 +147,7 @@ describe("pokedex", () => {
       messageSpawn: { min: 5, max: 20 },
       nightMode: false,
       valueMaxChoiceEgg: 300,
+      valueMaxChoiceRaid: 100,
     };
 
     const server = {

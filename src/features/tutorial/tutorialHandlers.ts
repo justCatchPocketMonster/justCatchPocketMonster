@@ -95,6 +95,12 @@ const GAMEPLAY_ENTRIES: TitleDescTutorialEntry[] = [
     titleKey: "tutorialGameplayEventsTitle",
     descKey: "tutorialGameplayEventsDesc",
   },
+  {
+    value: "raids",
+    labelKey: "tutorialGameplayRaidLabel",
+    titleKey: "tutorialGameplayRaidTitle",
+    descKey: "tutorialGameplayRaidDesc",
+  },
 ];
 
 function createTutorialHandler(

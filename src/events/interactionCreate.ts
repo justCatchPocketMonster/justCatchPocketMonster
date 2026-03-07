@@ -58,7 +58,6 @@ export default async (client: Client, interaction: Interaction) => {
           }
         }
       }
-      // For other button interactions, let them pass through
       return;
     }
 

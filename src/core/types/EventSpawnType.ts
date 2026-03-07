@@ -56,4 +56,5 @@ export interface EventSpawnType {
   };
   nightMode: boolean;
   valueMaxChoiceEgg: number;
+  valueMaxChoiceRaid: number;
 }

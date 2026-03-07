@@ -294,7 +294,7 @@ describe("Trade Handlers", () => {
       });
     });
 
-    it("should handle users with no eligible pokemon", async () => {
+    it("should handle users with no eligible pokemon (both)", async () => {
       const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
       (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
       (tradeUtils.getEligiblePokemon as jest.Mock).mockReturnValue([]);
@@ -309,6 +309,44 @@ describe("Trade Handlers", () => {
       expect(interaction.deferUpdate).toHaveBeenCalled();
       expect(tradeCache.updateTrade).toHaveBeenCalled();
       expect(tradeCache.deleteTrade).toHaveBeenCalled();
+    });
+
+    it("should handle only initiator with no eligible pokemon", async () => {
+      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
+      (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
+      (tradeUtils.getEligiblePokemon as jest.Mock).mockImplementation(
+        (user: any) =>
+          user.discordId === initiatorId ? [] : [{ key: "25-ordinary-1" }],
+      );
+
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
+
+      await handleTradeAccept(interaction, tradeId);
+
+      expect(interaction.deferUpdate).toHaveBeenCalled();
+      expect(tradeCache.updateTrade).toHaveBeenCalled();
+    });
+
+    it("should handle only target with no eligible pokemon", async () => {
+      const trade = createMockTrade(tradeId, initiatorId, targetId, serverId);
+      (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
+      (tradeUtils.getEligiblePokemon as jest.Mock).mockImplementation(
+        (user: any) =>
+          user.discordId === targetId ? [] : [{ key: "25-ordinary-1" }],
+      );
+
+      const interaction = createMockButtonInteraction(
+        targetId,
+        `trade_accept_${tradeId}`,
+      );
+
+      await handleTradeAccept(interaction, tradeId);
+
+      expect(interaction.deferUpdate).toHaveBeenCalled();
+      expect(tradeCache.updateTrade).toHaveBeenCalled();
     });
 
     it("should successfully accept trade and send menus", async () => {
@@ -620,6 +658,146 @@ describe("Trade Handlers", () => {
         status: "completed",
       });
       expect(tradeCache.deleteTrade).toHaveBeenCalledWith(tradeId);
+    });
+
+    it("should send completion to other user via DM when no confirmation message id", async () => {
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
+      trade.initiatorChoice = {
+        pokemonKey: "25-ordinary-1",
+        pokemonId: "25",
+        rarity: "ordinary",
+      };
+      trade.targetChoice = {
+        pokemonKey: "1-ordinary-1",
+        pokemonId: "1",
+        rarity: "ordinary",
+      };
+      trade.initiatorConfirmed = true;
+      trade.targetConfirmed = true;
+      trade.targetConfirmationMessageId = undefined;
+      trade.initiatorConfirmationMessageId = undefined;
+      (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
+
+      (tradeValidation.executeTrade as jest.Mock).mockResolvedValue(true);
+
+      const mockDMSend = jest.fn().mockResolvedValue({});
+      const mockUser = {
+        id: targetId,
+        username: "TargetUser",
+        createDM: jest.fn().mockResolvedValue({
+          send: mockDMSend,
+          messages: { fetch: jest.fn().mockResolvedValue({ edit: jest.fn() }) },
+        }),
+      };
+
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
+      (interaction.client.users.fetch as jest.Mock).mockImplementation(
+        (id: string) =>
+          Promise.resolve(id === targetId ? mockUser : interaction.user),
+      );
+
+      await handleTradeConfirm(interaction, tradeId);
+
+      expect(mockDMSend).toHaveBeenCalledWith(
+        expect.objectContaining({
+          embeds: expect.any(Array),
+        }),
+      );
+    });
+
+    it("should handle DM error when sending completion to other user", async () => {
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
+      trade.initiatorChoice = {
+        pokemonKey: "25-ordinary-1",
+        pokemonId: "25",
+        rarity: "ordinary",
+      };
+      trade.targetChoice = {
+        pokemonKey: "1-ordinary-1",
+        pokemonId: "1",
+        rarity: "ordinary",
+      };
+      trade.initiatorConfirmed = true;
+      trade.targetConfirmed = true;
+      trade.targetConfirmationMessageId = undefined;
+      (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
+
+      (tradeValidation.executeTrade as jest.Mock).mockResolvedValue(true);
+
+      const mockUser = {
+        id: targetId,
+        username: "TargetUser",
+        createDM: jest.fn().mockRejectedValue(new Error("DM disabled")),
+      };
+
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
+      (interaction.client.users.fetch as jest.Mock).mockImplementation(
+        (id: string) =>
+          Promise.resolve(id === targetId ? mockUser : interaction.user),
+      );
+
+      await handleTradeConfirm(interaction, tradeId);
+
+      expect(interaction.editReply).toHaveBeenCalled();
+      expect(tradeCache.deleteTrade).toHaveBeenCalledWith(tradeId);
+    });
+
+    it("should handle getUserById returning null when completing trade", async () => {
+      const trade = createMockTrade(
+        tradeId,
+        initiatorId,
+        targetId,
+        serverId,
+        "confirming",
+      );
+      trade.initiatorChoice = {
+        pokemonKey: "25-ordinary-1",
+        pokemonId: "25",
+        rarity: "ordinary",
+      };
+      trade.targetChoice = {
+        pokemonKey: "1-ordinary-1",
+        pokemonId: "1",
+        rarity: "ordinary",
+      };
+      trade.initiatorConfirmed = true;
+      trade.targetConfirmed = true;
+      (tradeCache.getTrade as jest.Mock).mockReturnValue(trade);
+
+      (tradeValidation.executeTrade as jest.Mock).mockResolvedValue(true);
+      (userCache.getUserById as jest.Mock).mockResolvedValue(null);
+
+      const interaction = createMockButtonInteraction(
+        initiatorId,
+        `trade_confirm_${tradeId}`,
+      );
+
+      await handleTradeConfirm(interaction, tradeId);
+
+      expect(interaction.editReply).toHaveBeenCalledWith(
+        expect.objectContaining({
+          embeds: expect.any(Array),
+          components: [],
+        }),
+      );
     });
 
     it("should handle trade execution failure", async () => {

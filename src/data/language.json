@@ -1838,5 +1838,73 @@
   "statCategoryFabulous": {
     "fr": ["Fabuleux"],
     "eng": ["Mythical"]
+  },
+  "raidEmbedTitle": {
+    "fr": ["Un Raid Gigamax apparaît !"],
+    "eng": ["A Gigantamax Raid appeared!"]
+  },
+  "raidEmbedDescription": {
+    "fr": [
+      "Rejoignez le raid pour tenter de capturer ce Pokémon ! Faites \"/catch [nom du Pokémon]\" pour participer."
+    ],
+    "eng": [
+      "Join the raid to try to catch this Pokémon! Use \"/catch [Pokémon name]\" to participate."
+    ]
+  },
+  "raidEmbedPlayers": {
+    "fr": ["Joueurs"],
+    "eng": ["Players"]
+  },
+  "raidEmbedTimeRemaining": {
+    "fr": ["Temps restant"],
+    "eng": ["Time remaining"]
+  },
+  "raidEmbedFooter": {
+    "fr": [
+      "Aucun spawn dans ce salon • Capture : 1j=25% | 2j=50% | 3j=75% | 4j=100% • Shiny : /4"
+    ],
+    "eng": [
+      "No spawn in this channel • Capture: 1p=25% | 2p=50% | 3p=75% | 4p=100% • Shiny: /4"
+    ]
+  },
+  "raidJoined": {
+    "fr": ["A rejoint le raid !"],
+    "eng": ["Joined the raid!"]
+  },
+  "raidAlreadyJoined": {
+    "fr": ["Vous avez déjà rejoint ce raid."],
+    "eng": ["You already joined this raid."]
+  },
+  "raidSuccess": {
+    "fr": ["Le raid est un succès !"],
+    "eng": ["The raid was a success!"]
+  },
+  "raidFail": {
+    "fr": ["Le raid a échoué..."],
+    "eng": ["The raid failed..."]
+  },
+  "raidEndPlayers": {
+    "fr": ["Participants"],
+    "eng": ["Participants"]
+  },
+  "raidNoPlayers": {
+    "fr": ["Personne n'a rejoint le raid."],
+    "eng": ["Nobody joined the raid."]
+  },
+  "tutorialGameplayRaidLabel": {
+    "fr": ["Raids Gigamax"],
+    "eng": ["Gigantamax Raids"]
+  },
+  "tutorialGameplayRaidTitle": {
+    "fr": ["Les Raids Gigamax"],
+    "eng": ["Gigantamax Raids"]
+  },
+  "tutorialGameplayRaidDesc": {
+    "fr": [
+      "Un Pokémon Gigamax peut apparaître sous forme de raid (1 chance sur 100). Jusqu'à 4 joueurs peuvent rejoindre le raid en faisant \"/catch [nom du Pokémon]\" comme pour un spawn classique. Plus il y a de joueurs, plus les chances de capture augmentent : 1 joueur = 25%, 2 = 50%, 3 = 75%, 4 = 100%. Le raid dure 2 minutes maximum. Le taux de shiny est divisé par 4 par rapport à la normale. Un seul raid peut être actif par serveur. Pendant un raid, aucun autre Pokémon n'apparaît dans le salon du raid."
+    ],
+    "eng": [
+      "A Gigantamax Pokémon can appear as a raid (1 in 100 chance). Up to 4 players can join the raid by using \"/catch [Pokémon name]\" just like a normal spawn. More players means higher catch rate: 1 player = 25%, 2 = 50%, 3 = 75%, 4 = 100%. The raid lasts 2 minutes max. The shiny rate is divided by 4 compared to normal. Only one raid can be active per server. During a raid, no other Pokémon will spawn in the raid channel."
+    ]
   }
 }

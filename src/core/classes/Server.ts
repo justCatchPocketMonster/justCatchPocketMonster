@@ -5,7 +5,11 @@ import { defaultLanguage } from "../../config/default/server";
 import { SaveAllPokemon } from "./SaveAllPokemon";
 import { Event } from "./Event";
 import type { LanguageKey } from "../../lang/language";
-import { maximumCount, minimumCount } from "../../config/default/spawn";
+import {
+  maximumCount,
+  minimumCount,
+  valueMaxChoiceRaid,
+} from "../../config/default/spawn";
 
 export class Server implements ServerType {
   constructor(
@@ -80,6 +84,7 @@ export class Server implements ServerType {
       e.messageSpawn,
       e.nightMode,
       e.valueMaxChoiceEgg,
+      e.valueMaxChoiceRaid ?? valueMaxChoiceRaid,
     );
 
     const settings: ServerSettings = data.settings ?? {

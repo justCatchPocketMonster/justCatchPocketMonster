@@ -8,6 +8,7 @@ import {
 import {
   rateMaxShiny,
   valueMaxChoiceEgg,
+  valueMaxChoiceRaid,
   valuePerGen,
   valuePerRarity,
   valuePerType,
@@ -34,70 +35,43 @@ export class EventSpawn implements EventSpawnType {
     },
     public nightMode: boolean,
     public valueMaxChoiceEgg: number,
+    public valueMaxChoiceRaid: number,
   ) {}
 
   public applyModifiersInPlace(percentageMods: EventSpawnFlatModsStrict): void {
-    if (!percentageMods) return;
+    if (percentageMods) {
+      applyPercentageToNumericStats(this.gen, percentageMods);
+      applyPercentageToNumericStats(this.type, percentageMods);
+      applyPercentageToNumericStats(this.rarity, percentageMods);
 
-    applyPercentageToNumericStats(this.gen, percentageMods);
-    applyPercentageToNumericStats(this.type, percentageMods);
-    applyPercentageToNumericStats(this.rarity, percentageMods);
-
-    if (percentageMods.shiny !== undefined) {
-      const updatedValue = computePercentage(this.shiny, percentageMods.shiny);
-      if (updatedValue !== this.shiny) this.shiny = updatedValue;
-    }
-    if (percentageMods.valueMaxChoiceEgg !== undefined) {
-      const updatedValue = computePercentage(
+      this.shiny = applyNumericMod(this.shiny, percentageMods.shiny);
+      this.valueMaxChoiceEgg = applyNumericMod(
         this.valueMaxChoiceEgg,
         percentageMods.valueMaxChoiceEgg,
       );
-      if (updatedValue !== this.valueMaxChoiceEgg)
-        this.valueMaxChoiceEgg = updatedValue;
-    }
-    if (percentageMods.min !== undefined) {
-      const updatedValue = computePercentage(
+      this.valueMaxChoiceRaid = applyNumericMod(
+        this.valueMaxChoiceRaid,
+        percentageMods.valueMaxChoiceRaid,
+      );
+      this.messageSpawn.min = applyNumericMod(
         this.messageSpawn.min,
         percentageMods.min,
       );
-      if (updatedValue !== this.messageSpawn.min)
-        this.messageSpawn.min = updatedValue;
-    }
-    if (percentageMods.max !== undefined) {
-      const updatedValue = computePercentage(
+      this.messageSpawn.max = applyNumericMod(
         this.messageSpawn.max,
         percentageMods.max,
       );
-      if (updatedValue !== this.messageSpawn.max)
-        this.messageSpawn.max = updatedValue;
-    }
 
-    // booleans
-    if (
-      percentageMods.mega !== undefined &&
-      this.allowedForm.mega !== percentageMods.mega
-    ) {
-      this.allowedForm.mega = percentageMods.mega;
-    }
-    if (
-      percentageMods.giga !== undefined &&
-      this.allowedForm.giga !== percentageMods.giga
-    ) {
-      this.allowedForm.giga = percentageMods.giga;
-    }
-    if (
-      percentageMods.nightMode !== undefined &&
-      this.nightMode !== percentageMods.nightMode
-    ) {
-      this.nightMode = percentageMods.nightMode;
-    }
-
-    // event tag
-    if (
-      percentageMods.whatEvent !== undefined &&
-      this.whatEvent !== percentageMods.whatEvent
-    ) {
-      this.whatEvent = percentageMods.whatEvent ?? null;
+      this.allowedForm.mega = applyBoolMod(
+        this.allowedForm.mega,
+        percentageMods.mega,
+      );
+      this.allowedForm.giga = applyBoolMod(
+        this.allowedForm.giga,
+        percentageMods.giga,
+      );
+      this.nightMode = applyBoolMod(this.nightMode, percentageMods.nightMode);
+      this.whatEvent = percentageMods.whatEvent ?? this.whatEvent;
     }
   }
 
@@ -115,13 +89,13 @@ export class EventSpawn implements EventSpawnType {
       },
       false,
       valueMaxChoiceEgg,
+      valueMaxChoiceRaid,
     );
 
     const eventSeason = selectEventSeasonal();
     if (eventSeason) {
       defaultEventSpawn.applyModifiersInPlace(eventSeason.statMultipliers);
     }
-
     return defaultEventSpawn;
   }
 }
@@ -129,8 +103,18 @@ export class EventSpawn implements EventSpawnType {
 const computePercentage = (current: number, percentDelta: number): number =>
   Math.floor(current * (1 + percentDelta / 100) * 100) / 100;
 
-function keysOf<T extends object>(obj: T): Array<Extract<keyof T, string>> {
-  return Object.keys(obj) as Array<Extract<keyof T, string>>;
+function applyNumericMod(
+  current: number,
+  percentDelta: number | undefined,
+): number {
+  if (percentDelta !== undefined) {
+    return computePercentage(current, percentDelta);
+  }
+  return current;
+}
+
+function applyBoolMod(current: boolean, value: boolean | undefined): boolean {
+  return value ?? current;
 }
 
 type NumericKeys<T> = {
@@ -148,9 +132,10 @@ function applyPercentageToNumericStats<T extends object>(
     if (percentDelta !== undefined) {
       const currentValue = numericStats[statKey];
       const updatedValue = computePercentage(currentValue, percentDelta);
-      if (updatedValue !== currentValue) {
-        numericStats[statKey] = updatedValue;
+      if (updatedValue === currentValue) {
+        continue;
       }
+      numericStats[statKey] = updatedValue;
     }
   }
 }

@@ -5,7 +5,7 @@ import { EmbedBuilder } from "discord.js";
 describe("GameplayTutorialHandler", () => {
   const server = { settings: { language: "fr" } } as unknown as Server;
 
-  test("getMenuStructure returns option with value gameplay and four children", () => {
+  test("getMenuStructure returns option with value gameplay and five children", () => {
     const handler = new GameplayTutorialHandler(server);
     const structure = handler.getMenuStructure();
 
@@ -13,12 +13,13 @@ describe("GameplayTutorialHandler", () => {
     expect(structure.label).toBeDefined();
     expect(structure.description).toBeDefined();
     expect(structure.placeholder).toBeDefined();
-    expect(structure.children).toHaveLength(4);
+    expect(structure.children).toHaveLength(5);
     expect(structure.children?.map((c) => c.value)).toEqual([
       "spawn",
       "eggs",
       "sos",
       "events",
+      "raids",
     ]);
   });
 

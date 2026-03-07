@@ -650,4 +650,201 @@ describe("TradeMenuHandler", () => {
       expect(mockInteraction.deferUpdate).toHaveBeenCalled();
     }
   });
+
+  it("should truncate long labels in menu options", async () => {
+    const tradeMenu = require("../../../../src/features/trade/tradeMenu");
+    const tradeUtils = require("../../../../src/features/trade/tradeUtils");
+
+    const longLabel = "A".repeat(150);
+
+    const user = {
+      discordId: "user9",
+      savePokemon: {
+        data: {
+          "25-ordinary-1": {
+            idPokemon: "25",
+            rarity: "ordinary",
+            form: "ordinary",
+            versionForm: 1,
+            normalCount: 3,
+            shinyCount: 0,
+          },
+        },
+      },
+    };
+
+    (getUserById as jest.Mock).mockResolvedValue(user);
+
+    tradeMenu.regenerateTradeMenu.mockReturnValue(
+      new Map([
+        [
+          "generation",
+          {
+            getMenuStructure: jest.fn().mockReturnValue({
+              children: [
+                { label: longLabel, value: "gen_1", description: "Gen 1" },
+              ],
+            }),
+          },
+        ],
+      ]),
+    );
+
+    tradeUtils.calculateCooldownRemaining.mockReturnValue(null);
+
+    const mockDM = {
+      send: jest.fn().mockResolvedValue({
+        createMessageComponentCollector: jest.fn().mockReturnValue({
+          on: jest.fn().mockReturnThis(),
+          stop: jest.fn(),
+        }),
+        edit: jest.fn().mockResolvedValue({}),
+        delete: jest.fn().mockResolvedValue({}),
+      }),
+    };
+
+    const mockClient = {
+      users: {
+        fetch: jest.fn().mockResolvedValue({
+          createDM: jest.fn().mockResolvedValue(mockDM),
+        }),
+      },
+    };
+
+    const server = {
+      discordId: "server1",
+      settings: { language: "eng" },
+    } as ServerType;
+
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user9",
+      "trade_9",
+      user as unknown as UserType,
+      server,
+    );
+
+    expect(mockDM.send).toHaveBeenCalled();
+    const payload = mockDM.send.mock.calls[0][0];
+    const row = payload.components?.[0];
+    const menu = row?.components?.[0];
+    const firstOption = menu?.data?.options?.[0];
+    if (firstOption) {
+      expect(firstOption.label.length).toBeLessThanOrEqual(100);
+      expect(firstOption.label.endsWith("...")).toBe(true);
+    }
+  });
+
+  it("should use placeholder when option has placeholder and children", async () => {
+    const tradeMenu = require("../../../../src/features/trade/tradeMenu");
+    const tradeUtils = require("../../../../src/features/trade/tradeUtils");
+    const tradeSelection = require("../../../../src/features/trade/tradeSelection");
+
+    const user = {
+      discordId: "user10",
+      savePokemon: {
+        data: {
+          "25-ordinary-1": {
+            idPokemon: "25",
+            rarity: "ordinary",
+            form: "ordinary",
+            versionForm: 1,
+            normalCount: 3,
+            shinyCount: 0,
+          },
+        },
+      },
+    };
+
+    (getUserById as jest.Mock).mockResolvedValue(user);
+
+    tradeMenu.regenerateTradeMenu.mockReturnValue(
+      new Map([
+        [
+          "generation",
+          {
+            getMenuStructure: jest.fn().mockReturnValue({
+              children: [
+                {
+                  label: "Gen 1",
+                  value: "gen_1",
+                  description: "Generation 1",
+                  placeholder: "Select generation",
+                  children: [
+                    {
+                      label: "Pikachu",
+                      value: "25-ordinary-1",
+                      description: "Electric",
+                    },
+                  ],
+                },
+              ],
+            }),
+          },
+        ],
+      ]),
+    );
+
+    tradeUtils.calculateCooldownRemaining.mockReturnValue(null);
+    tradeSelection.handlePokemonSelection.mockResolvedValue(undefined);
+
+    let collectCallback: any;
+
+    const mockCollector: { on: jest.Mock; stop: jest.Mock } = {
+      on: jest.fn((event: string, callback: any) => {
+        if (event === "collect") collectCallback = callback;
+        return mockCollector;
+      }),
+      stop: jest.fn(),
+    };
+
+    const mockMessage = {
+      createMessageComponentCollector: jest.fn().mockReturnValue(mockCollector),
+      edit: jest.fn().mockResolvedValue({}),
+      delete: jest.fn().mockResolvedValue({}),
+    };
+
+    const mockDM = {
+      send: jest.fn().mockResolvedValue(mockMessage),
+    };
+
+    const mockClient = {
+      users: {
+        fetch: jest.fn().mockResolvedValue({
+          createDM: jest.fn().mockResolvedValue(mockDM),
+        }),
+      },
+    };
+
+    const server = {
+      discordId: "server1",
+      settings: { language: "eng" },
+    } as ServerType;
+
+    await sendTradeMenuToUser(
+      mockClient as unknown as Client,
+      "user10",
+      "trade_10",
+      user as unknown as UserType,
+      server,
+    );
+
+    if (collectCallback) {
+      await collectCallback({
+        user: { id: "user10" },
+        customId: "tm_trade_10_user10_0",
+        values: ["gen_1"],
+        deferUpdate: jest.fn().mockResolvedValue({}),
+        editReply: jest.fn().mockResolvedValue({}),
+      });
+      await collectCallback({
+        user: { id: "user10" },
+        customId: "tm_trade_10_user10_1",
+        values: ["25-ordinary-1"],
+        deferUpdate: jest.fn().mockResolvedValue({}),
+        editReply: jest.fn().mockResolvedValue({}),
+      });
+      expect(tradeSelection.handlePokemonSelection).toHaveBeenCalled();
+    }
+  });
 });
