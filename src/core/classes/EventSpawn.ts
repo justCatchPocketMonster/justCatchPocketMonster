@@ -39,43 +39,40 @@ export class EventSpawn implements EventSpawnType {
   ) {}
 
   public applyModifiersInPlace(percentageMods: EventSpawnFlatModsStrict): void {
-    if (!percentageMods) return;
+    if (percentageMods) {
+      applyPercentageToNumericStats(this.gen, percentageMods);
+      applyPercentageToNumericStats(this.type, percentageMods);
+      applyPercentageToNumericStats(this.rarity, percentageMods);
 
-    applyPercentageToNumericStats(this.gen, percentageMods);
-    applyPercentageToNumericStats(this.type, percentageMods);
-    applyPercentageToNumericStats(this.rarity, percentageMods);
+      this.shiny = applyNumericMod(this.shiny, percentageMods.shiny);
+      this.valueMaxChoiceEgg = applyNumericMod(
+        this.valueMaxChoiceEgg,
+        percentageMods.valueMaxChoiceEgg,
+      );
+      this.valueMaxChoiceRaid = applyNumericMod(
+        this.valueMaxChoiceRaid,
+        percentageMods.valueMaxChoiceRaid,
+      );
+      this.messageSpawn.min = applyNumericMod(
+        this.messageSpawn.min,
+        percentageMods.min,
+      );
+      this.messageSpawn.max = applyNumericMod(
+        this.messageSpawn.max,
+        percentageMods.max,
+      );
 
-    this.shiny = applyNumericMod(this.shiny, percentageMods.shiny);
-    this.valueMaxChoiceEgg = applyNumericMod(
-      this.valueMaxChoiceEgg,
-      percentageMods.valueMaxChoiceEgg,
-    );
-    this.valueMaxChoiceRaid = applyNumericMod(
-      this.valueMaxChoiceRaid,
-      percentageMods.valueMaxChoiceRaid,
-    );
-    this.messageSpawn.min = applyNumericMod(
-      this.messageSpawn.min,
-      percentageMods.min,
-    );
-    this.messageSpawn.max = applyNumericMod(
-      this.messageSpawn.max,
-      percentageMods.max,
-    );
-
-    this.allowedForm.mega = applyBoolMod(
-      this.allowedForm.mega,
-      percentageMods.mega,
-    );
-    this.allowedForm.giga = applyBoolMod(
-      this.allowedForm.giga,
-      percentageMods.giga,
-    );
-    this.nightMode = applyBoolMod(this.nightMode, percentageMods.nightMode);
-    this.whatEvent =
-      percentageMods.whatEvent !== undefined
-        ? (percentageMods.whatEvent ?? null)
-        : this.whatEvent;
+      this.allowedForm.mega = applyBoolMod(
+        this.allowedForm.mega,
+        percentageMods.mega,
+      );
+      this.allowedForm.giga = applyBoolMod(
+        this.allowedForm.giga,
+        percentageMods.giga,
+      );
+      this.nightMode = applyBoolMod(this.nightMode, percentageMods.nightMode);
+      this.whatEvent = percentageMods.whatEvent ?? this.whatEvent;
+    }
   }
 
   static createDefault(serverSettings: ServerSettings): EventSpawn {
@@ -99,7 +96,6 @@ export class EventSpawn implements EventSpawnType {
     if (eventSeason) {
       defaultEventSpawn.applyModifiersInPlace(eventSeason.statMultipliers);
     }
-
     return defaultEventSpawn;
   }
 }
@@ -111,13 +107,14 @@ function applyNumericMod(
   current: number,
   percentDelta: number | undefined,
 ): number {
-  if (percentDelta === undefined) return current;
-  const updated = computePercentage(current, percentDelta);
-  return updated !== current ? updated : current;
+  if (percentDelta !== undefined) {
+    return computePercentage(current, percentDelta);
+  }
+  return current;
 }
 
 function applyBoolMod(current: boolean, value: boolean | undefined): boolean {
-  return value !== undefined ? value : current;
+  return value ?? current;
 }
 
 type NumericKeys<T> = {
@@ -135,9 +132,10 @@ function applyPercentageToNumericStats<T extends object>(
     if (percentDelta !== undefined) {
       const currentValue = numericStats[statKey];
       const updatedValue = computePercentage(currentValue, percentDelta);
-      if (updatedValue !== currentValue) {
-        numericStats[statKey] = updatedValue;
+      if (updatedValue === currentValue) {
+        continue;
       }
+      numericStats[statKey] = updatedValue;
     }
   }
 }
