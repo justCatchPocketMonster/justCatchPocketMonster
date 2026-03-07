@@ -30,8 +30,7 @@ export function getActiveRaid(serverId: string): RaidState | undefined {
 }
 
 export function isChannelInRaid(serverId: string, channelId: string): boolean {
-  const raid = activeRaids.get(serverId);
-  return raid !== undefined && raid.channelId === channelId;
+  return activeRaids.get(serverId)?.channelId === channelId;
 }
 
 export function startRaid(
@@ -81,8 +80,7 @@ export function joinRaid(
 }
 
 export function isRaidFull(serverId: string): boolean {
-  const raid = activeRaids.get(serverId);
-  return raid !== undefined && raid.players.length >= MAX_PLAYERS;
+  return (activeRaids.get(serverId)?.players.length ?? 0) >= MAX_PLAYERS;
 }
 
 export async function updateRaidEmbed(
@@ -101,8 +99,8 @@ export async function updateRaidEmbed(
       raid.endTimestamp,
     );
 
-    const channel = client.channels.cache.get(raid.channelId);
-    if (channel && channel instanceof BaseGuildTextChannel) {
+    const channel = client.channels?.cache?.get(raid.channelId);
+    if (channel instanceof BaseGuildTextChannel) {
       const message = await channel.messages.fetch(raid.messageId);
       await message.edit({ embeds: [embed] });
     }
@@ -157,8 +155,8 @@ export async function resolveRaid(
       success,
     );
 
-    const channel = client.channels.cache.get(raid.channelId);
-    if (channel && channel instanceof BaseGuildTextChannel) {
+    const channel = client.channels?.cache?.get(raid.channelId);
+    if (channel instanceof BaseGuildTextChannel) {
       try {
         const message = await channel.messages.fetch(raid.messageId);
         await message.edit({ embeds: [endEmbed] });

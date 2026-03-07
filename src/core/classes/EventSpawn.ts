@@ -45,70 +45,37 @@ export class EventSpawn implements EventSpawnType {
     applyPercentageToNumericStats(this.type, percentageMods);
     applyPercentageToNumericStats(this.rarity, percentageMods);
 
-    if (percentageMods.shiny !== undefined) {
-      const updatedValue = computePercentage(this.shiny, percentageMods.shiny);
-      if (updatedValue !== this.shiny) this.shiny = updatedValue;
-    }
-    if (percentageMods.valueMaxChoiceEgg !== undefined) {
-      const updatedValue = computePercentage(
-        this.valueMaxChoiceEgg,
-        percentageMods.valueMaxChoiceEgg,
-      );
-      if (updatedValue !== this.valueMaxChoiceEgg)
-        this.valueMaxChoiceEgg = updatedValue;
-    }
-    if (percentageMods.valueMaxChoiceRaid !== undefined) {
-      const updatedValue = computePercentage(
-        this.valueMaxChoiceRaid,
-        percentageMods.valueMaxChoiceRaid,
-      );
-      if (updatedValue !== this.valueMaxChoiceRaid)
-        this.valueMaxChoiceRaid = updatedValue;
-    }
-    if (percentageMods.min !== undefined) {
-      const updatedValue = computePercentage(
-        this.messageSpawn.min,
-        percentageMods.min,
-      );
-      if (updatedValue !== this.messageSpawn.min)
-        this.messageSpawn.min = updatedValue;
-    }
-    if (percentageMods.max !== undefined) {
-      const updatedValue = computePercentage(
-        this.messageSpawn.max,
-        percentageMods.max,
-      );
-      if (updatedValue !== this.messageSpawn.max)
-        this.messageSpawn.max = updatedValue;
-    }
+    this.shiny = applyNumericMod(this.shiny, percentageMods.shiny);
+    this.valueMaxChoiceEgg = applyNumericMod(
+      this.valueMaxChoiceEgg,
+      percentageMods.valueMaxChoiceEgg,
+    );
+    this.valueMaxChoiceRaid = applyNumericMod(
+      this.valueMaxChoiceRaid,
+      percentageMods.valueMaxChoiceRaid,
+    );
+    this.messageSpawn.min = applyNumericMod(
+      this.messageSpawn.min,
+      percentageMods.min,
+    );
+    this.messageSpawn.max = applyNumericMod(
+      this.messageSpawn.max,
+      percentageMods.max,
+    );
 
-    // booleans
-    if (
-      percentageMods.mega !== undefined &&
-      this.allowedForm.mega !== percentageMods.mega
-    ) {
-      this.allowedForm.mega = percentageMods.mega;
-    }
-    if (
-      percentageMods.giga !== undefined &&
-      this.allowedForm.giga !== percentageMods.giga
-    ) {
-      this.allowedForm.giga = percentageMods.giga;
-    }
-    if (
-      percentageMods.nightMode !== undefined &&
-      this.nightMode !== percentageMods.nightMode
-    ) {
-      this.nightMode = percentageMods.nightMode;
-    }
-
-    // event tag
-    if (
-      percentageMods.whatEvent !== undefined &&
-      this.whatEvent !== percentageMods.whatEvent
-    ) {
-      this.whatEvent = percentageMods.whatEvent ?? null;
-    }
+    this.allowedForm.mega = applyBoolMod(
+      this.allowedForm.mega,
+      percentageMods.mega,
+    );
+    this.allowedForm.giga = applyBoolMod(
+      this.allowedForm.giga,
+      percentageMods.giga,
+    );
+    this.nightMode = applyBoolMod(this.nightMode, percentageMods.nightMode);
+    this.whatEvent =
+      percentageMods.whatEvent !== undefined
+        ? (percentageMods.whatEvent ?? null)
+        : this.whatEvent;
   }
 
   static createDefault(serverSettings: ServerSettings): EventSpawn {
@@ -140,8 +107,17 @@ export class EventSpawn implements EventSpawnType {
 const computePercentage = (current: number, percentDelta: number): number =>
   Math.floor(current * (1 + percentDelta / 100) * 100) / 100;
 
-function keysOf<T extends object>(obj: T): Array<Extract<keyof T, string>> {
-  return Object.keys(obj) as Array<Extract<keyof T, string>>;
+function applyNumericMod(
+  current: number,
+  percentDelta: number | undefined,
+): number {
+  if (percentDelta === undefined) return current;
+  const updated = computePercentage(current, percentDelta);
+  return updated !== current ? updated : current;
+}
+
+function applyBoolMod(current: boolean, value: boolean | undefined): boolean {
+  return value !== undefined ? value : current;
 }
 
 type NumericKeys<T> = {
