@@ -2,6 +2,13 @@ import {
   spawn,
   generateEmbedSosPokemon,
 } from "../../../../src/features/spawn/spawn";
+import { urlImageRepo } from "../../../../src/config/default/misc";
+
+jest.mock("../../../../src/utils/imageUrl", () => ({
+  getImageUrl: jest.fn((subFolder: string, imageName: string) =>
+    Promise.resolve(`${urlImageRepo}/${subFolder}/${imageName}`),
+  ),
+}));
 import {
   startRaid,
   resolveRaid,
@@ -252,7 +259,7 @@ describe("generateEmbedSosPokemon", () => {
     jest.restoreAllMocks();
   });
 
-  test("should generate embed with night mode", () => {
+  test("should generate embed with night mode", async () => {
     server.eventSpawn.nightMode = true;
     const pokemon = {
       id: "1",
@@ -269,13 +276,13 @@ describe("generateEmbedSosPokemon", () => {
       sosChainLvl: 2,
     };
 
-    const { embed } = generateEmbedSosPokemon(pokemon as any, server);
+    const { embed } = await generateEmbedSosPokemon(pokemon as any, server);
 
     expect(embed.data.image?.url).toContain("pokeHomeShadow");
     expect(embed.data.footer?.text).toContain("2");
   });
 
-  test("should generate embed with shiny pokemon", () => {
+  test("should generate embed with shiny pokemon", async () => {
     const pokemon = {
       id: "1",
       name: { nameEng: ["Pikachu"], nameFr: ["Pikachu"] },
@@ -290,13 +297,13 @@ describe("generateEmbedSosPokemon", () => {
       canSosBattle: false,
     };
 
-    const { embed } = generateEmbedSosPokemon(pokemon as any, server);
+    const { embed } = await generateEmbedSosPokemon(pokemon as any, server);
 
     expect(embed.data.image?.url).toContain("-shiny.png");
     expect(embed.data.footer?.text).toContain("1");
   });
 
-  test("should use colorByType for unknown rarity", () => {
+  test("should use colorByType for unknown rarity", async () => {
     const pokemon = {
       id: "1",
       name: { nameEng: ["Pikachu"], nameFr: ["Pikachu"] },
@@ -311,7 +318,7 @@ describe("generateEmbedSosPokemon", () => {
       canSosBattle: false,
     };
 
-    const { embed } = generateEmbedSosPokemon(pokemon as any, server);
+    const { embed } = await generateEmbedSosPokemon(pokemon as any, server);
 
     expect(embed.data.color).toBeDefined();
   });

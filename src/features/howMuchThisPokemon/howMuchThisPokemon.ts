@@ -52,11 +52,23 @@ export async function howMuchThisPokemon(
 
     if (saveSpecifiqueFormUser.normalCount > 0) {
       paginationPage.push(
-        await generateEmbedData(pokemonData, server, avatar, saveField, false),
+        await generateEmbedData(
+          pokemonData,
+          server,
+          avatar,
+          saveField,
+          false,
+        ),
       );
       if (saveSpecifiqueFormUser.shinyCount > 0) {
         paginationPage.push(
-          await generateEmbedData(pokemonData, server, avatar, saveField, true),
+          await generateEmbedData(
+            pokemonData,
+            server,
+            avatar,
+            saveField,
+            true,
+          ),
         );
       }
     }

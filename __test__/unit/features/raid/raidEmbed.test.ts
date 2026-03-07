@@ -5,6 +5,13 @@ import {
 import { Server } from "../../../../src/core/classes/Server";
 import { PokemonType } from "../../../../src/core/types/PokemonType";
 import * as helperFunction from "../../../../src/utils/helperFunction";
+import { urlImageRepo } from "../../../../src/config/default/misc";
+
+jest.mock("../../../../src/utils/imageUrl", () => ({
+  getImageUrl: jest.fn((subFolder: string, imageName: string) =>
+    Promise.resolve(`${urlImageRepo}/${subFolder}/${imageName}`),
+  ),
+}));
 
 describe("raidEmbed", () => {
   const server = Server.createDefault("server1");
@@ -31,9 +38,9 @@ describe("raidEmbed", () => {
   });
 
   describe("generateRaidEmbed", () => {
-    it("should generate embed with normal mode and non-shiny pokemon", () => {
+    it("should generate embed with normal mode and non-shiny pokemon", async () => {
       server.eventSpawn.nightMode = false;
-      const { embed } = generateRaidEmbed(pokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
 
       expect(embed.data.title).toBeDefined();
       expect(embed.data.image?.url).toContain("pokeHome/");
@@ -41,22 +48,27 @@ describe("raidEmbed", () => {
       expect(embed.data.fields).toHaveLength(2);
     });
 
-    it("should generate embed with night mode", () => {
+    it("should generate embed with night mode", async () => {
       server.eventSpawn.nightMode = true;
-      const { embed } = generateRaidEmbed(pokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
 
       expect(embed.data.image?.url).toContain("pokeHomeShadow/");
     });
 
-    it("should generate embed with shiny pokemon", () => {
+    it("should generate embed with shiny pokemon", async () => {
       const shinyPokemon = { ...pokemon, isShiny: true };
-      const { embed } = generateRaidEmbed(shinyPokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(
+        shinyPokemon,
+        server,
+        [],
+        1234567890,
+      );
 
       expect(embed.data.image?.url).toContain("-shiny.png");
     });
 
-    it("should show player list when players exist", () => {
-      const { embed } = generateRaidEmbed(
+    it("should show player list when players exist", async () => {
+      const { embed } = await generateRaidEmbed(
         pokemon,
         server,
         ["user1", "user2"],
@@ -70,8 +82,8 @@ describe("raidEmbed", () => {
       expect(playersField?.value).toContain("<@user2>");
     });
 
-    it("should show no players text when players empty", () => {
-      const { embed } = generateRaidEmbed(pokemon, server, [], 1234567890);
+    it("should show no players text when players empty", async () => {
+      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
 
       const playersField = embed.data.fields?.find((f) =>
         f.name?.includes("(0/4)"),
@@ -81,36 +93,41 @@ describe("raidEmbed", () => {
   });
 
   describe("generateRaidEndEmbed", () => {
-    it("should generate success embed with green color", () => {
-      const embed = generateRaidEndEmbed(pokemon, server, ["user1"], true);
+    it("should generate success embed with green color", async () => {
+      const embed = await generateRaidEndEmbed(
+        pokemon,
+        server,
+        ["user1"],
+        true,
+      );
 
       expect(embed.data.color).toBe(0x2ecc71);
       expect(embed.data.title).toBeDefined();
     });
 
-    it("should generate fail embed with red color", () => {
-      const embed = generateRaidEndEmbed(pokemon, server, [], false);
+    it("should generate fail embed with red color", async () => {
+      const embed = await generateRaidEndEmbed(pokemon, server, [], false);
 
       expect(embed.data.color).toBe(0xe74c3c);
       expect(embed.data.title).toBeDefined();
     });
 
-    it("should use night mode image URL", () => {
+    it("should use night mode image URL", async () => {
       server.eventSpawn.nightMode = true;
-      const embed = generateRaidEndEmbed(pokemon, server, [], false);
+      const embed = await generateRaidEndEmbed(pokemon, server, [], false);
 
       expect(embed.data.image?.url).toContain("pokeHomeShadow/");
     });
 
-    it("should use shiny image for shiny pokemon", () => {
+    it("should use shiny image for shiny pokemon", async () => {
       const shinyPokemon = { ...pokemon, isShiny: true };
-      const embed = generateRaidEndEmbed(shinyPokemon, server, [], false);
+      const embed = await generateRaidEndEmbed(shinyPokemon, server, [], false);
 
       expect(embed.data.image?.url).toContain("-shiny.png");
     });
 
-    it("should show player list when players exist", () => {
-      const embed = generateRaidEndEmbed(
+    it("should show player list when players exist", async () => {
+      const embed = await generateRaidEndEmbed(
         pokemon,
         server,
         ["user1", "user2", "user3"],
