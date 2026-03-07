@@ -3,19 +3,18 @@ import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
 import getText from "../../lang/language";
 import { colorByType, random } from "../../utils/helperFunction";
-import { urlImageRepo } from "../../config/default/misc";
+import { getImageUrl } from "../../utils/imageUrl";
 
-export function generateRaidEmbed(
+export async function generateRaidEmbed(
   pokemon: PokemonType,
   server: ServerType,
   players: string[],
   endTimestamp: number,
-): { embed: EmbedBuilder } {
+): Promise<{ embed: EmbedBuilder }> {
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
   const imageName = pokemon.imgName + suffix;
-  const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo + "/pokeHomeShadow/" + imageName
-    : urlImageRepo + "/pokeHome/" + imageName;
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
 
   const color: ColorResolvable = colorByType(
     pokemon.arrayType[random(pokemon.arrayType.length)],
@@ -52,17 +51,16 @@ export function generateRaidEmbed(
   return { embed };
 }
 
-export function generateRaidEndEmbed(
+export async function generateRaidEndEmbed(
   pokemon: PokemonType,
   server: ServerType,
   players: string[],
   success: boolean,
-): EmbedBuilder {
+): Promise<EmbedBuilder> {
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
   const imageName = pokemon.imgName + suffix;
-  const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo + "/pokeHomeShadow/" + imageName
-    : urlImageRepo + "/pokeHome/" + imageName;
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
 
   const color: ColorResolvable = success
     ? (0x2ecc71 as ColorResolvable)

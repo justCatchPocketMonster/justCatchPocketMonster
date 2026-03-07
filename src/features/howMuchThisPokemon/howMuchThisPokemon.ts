@@ -12,15 +12,15 @@ import {
 import { pageType, paginationButton } from "../other/paginationButton";
 import allPokemon from "../../data/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
-import { urlImageRepo } from "../../config/default/misc";
+import { getImageUrl } from "../../utils/imageUrl";
 
-export function howMuchThisPokemon(
+export async function howMuchThisPokemon(
   interaction: ChatInputCommandInteraction,
   user: UserType,
   server: ServerType,
   stat: StatType,
   pokemonId: string,
-) {
+): Promise<void> {
   const saveOnePokemonUser = user.savePokemon.getSavesById(pokemonId);
   const saveOnePokemonServer = server.savePokemon.getSavesById(pokemonId);
   const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
@@ -52,11 +52,11 @@ export function howMuchThisPokemon(
 
     if (saveSpecifiqueFormUser.normalCount > 0) {
       paginationPage.push(
-        generateEmbedData(pokemonData, server, avatar, saveField, false),
+        await generateEmbedData(pokemonData, server, avatar, saveField, false),
       );
       if (saveSpecifiqueFormUser.shinyCount > 0) {
         paginationPage.push(
-          generateEmbedData(pokemonData, server, avatar, saveField, true),
+          await generateEmbedData(pokemonData, server, avatar, saveField, true),
         );
       }
     }
@@ -81,7 +81,13 @@ export function howMuchThisPokemon(
       ),
     };
     paginationPage.push(
-      generateEmbedData(pokemonDataOriginal, server, avatar, saveField, false),
+      await generateEmbedData(
+        pokemonDataOriginal,
+        server,
+        avatar,
+        saveField,
+        false,
+      ),
     );
   }
   paginationButton(interaction, paginationPage);
@@ -125,17 +131,16 @@ function getPokemonDataBySave(
   );
 }
 
-function generateEmbedData(
+async function generateEmbedData(
   pokemon: pokemonDb,
   server: ServerType,
   avatarUser: string,
   allSaveData: SaveFieldData,
   isShiny: boolean,
-): pageType {
+): Promise<pageType> {
   const imageName = pokemon.imgName + (isShiny ? "-shiny" : "") + ".png";
-  const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo + "/pokeHomeShadow/" + imageName
-    : urlImageRepo + "/pokeHome/" + imageName;
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
 
   const completKey = ("nameComplet" +
     capitalizeFirstLetter(server.settings.language)) as

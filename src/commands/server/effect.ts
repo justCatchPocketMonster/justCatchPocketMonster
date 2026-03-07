@@ -29,7 +29,7 @@ export default {
       let server = await getServerById(interaction.guildId);
       await checkTimeForResetEventStat(server);
 
-      effectEvent(interaction, server);
+      await effectEvent(interaction, server);
     } catch (e) {
       newLogger(
         "error",

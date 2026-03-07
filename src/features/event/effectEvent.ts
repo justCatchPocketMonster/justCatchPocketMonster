@@ -1,5 +1,4 @@
 import {
-  AttachmentBuilder,
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
@@ -16,13 +15,14 @@ import {
   selectNextEventSeasonal,
 } from "./selectEventSeasonal";
 import { formatTimestamp } from "../../utils/helperFunction";
+import { getImageUrl } from "../../utils/imageUrl";
 
-export const effectEvent = (
+export const effectEvent = async (
   interaction: ChatInputCommandInteraction,
   server: ServerType,
-): void => {
+): Promise<void> => {
   const pages: PageData[] = [];
-  pages.push(selectEventStandard(server));
+  pages.push(await selectEventStandard(server));
   const eventSeasonal = generateEmbedEventSeasonal(server);
   if (eventSeasonal) {
     pages.push(eventSeasonal);
@@ -30,18 +30,14 @@ export const effectEvent = (
   paginationMenu(interaction, "Select an event", pages, 1, 60000);
 };
 
-function selectEventStandard(server: ServerType): PageData {
-  let event = server.eventSpawn;
+async function selectEventStandard(server: ServerType): Promise<PageData> {
+  const event = server.eventSpawn;
   if (event.whatEvent) {
-    let dateEnd = new Date(event.whatEvent.endTime);
+    const dateEnd = new Date(event.whatEvent.endTime);
+    const imageName = event.whatEvent.image + ".png";
+    const imageUrl = await getImageUrl("eventImage", imageName);
 
-    let adressImage =
-      "./src/assets/eventImage/" + event.whatEvent.image + ".png";
-    let nameImage = event.whatEvent.image + ".png";
-
-    let pokeImg = new AttachmentBuilder(adressImage);
-
-    let eventEmbed = new EmbedBuilder()
+    const eventEmbed = new EmbedBuilder()
       .setColor(event.whatEvent.color as ColorResolvable)
       .setTitle(language("actualEvent", server.settings.language))
       .addFields({
@@ -54,9 +50,9 @@ function selectEventStandard(server: ServerType): PageData {
         value: formatTimestamp(dateEnd.getTime()),
         inline: false,
       })
-      .setImage("attachment://" + nameImage);
+      .setImage(imageUrl);
 
-    return createPageForMenu(eventEmbed, pokeImg, "name", "description");
+    return createPageForMenu(eventEmbed, null, "name", "description");
   }
   return createPageForMenu(
     new EmbedBuilder()
