@@ -1,6 +1,7 @@
 import { Client, BaseGuildTextChannel } from "discord.js";
 import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
+import { random } from "../../utils/helperFunction";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import { getUserById, updateUser } from "../../cache/UserCache";
 import { getStatById, updateStat } from "../../cache/StatCache";
@@ -122,7 +123,7 @@ export async function resolveRaid(
 
   const playerCount = raid.players.length;
   const catchRate = CATCH_RATE_PER_PLAYER * playerCount;
-  const success = playerCount > 0 && Math.random() < catchRate;
+  const success = playerCount > 0 && random(1000) / 1000 < catchRate;
 
   try {
     const server = await getServerById(serverId);
