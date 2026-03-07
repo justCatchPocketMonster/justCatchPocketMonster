@@ -119,4 +119,78 @@ describe("EventSpawn.applyModifiersInPlace", () => {
     expect(spawn.gen["1"]).toBe(100);
     expect(spawn.messageSpawn.min).toBe(5);
   });
+
+  it("does not update when computed value equals current value", () => {
+    const spawn = new EventSpawn(
+      { ...valuePerGen },
+      { ...valuePerType },
+      { ...valuePerRarity },
+      100,
+      null,
+      { mega: true, giga: false },
+      { min: 10, max: 20 },
+      true,
+      100,
+      100,
+    );
+
+    spawn.applyModifiersInPlace({
+      shiny: 0,
+      mega: true,
+      giga: false,
+      nightMode: true,
+    });
+
+    expect(spawn.shiny).toBe(100);
+    expect(spawn.allowedForm.mega).toBe(true);
+    expect(spawn.allowedForm.giga).toBe(false);
+    expect(spawn.nightMode).toBe(true);
+  });
+
+  it("does not update whatEvent when same reference", () => {
+    const dummyEvent = {
+      id: "e1",
+      name: "pokedexOf" as LanguageKey,
+      description: "pokedexOf" as LanguageKey,
+      type: "test",
+      color: "#fff",
+      image: "img",
+      effectDescription: "eff",
+      endTime: new Date(),
+    };
+    const spawn = new EventSpawn(
+      { ...valuePerGen },
+      { ...valuePerType },
+      { ...valuePerRarity },
+      1000,
+      dummyEvent,
+      { mega: false, giga: false },
+      { min: 5, max: 10 },
+      false,
+      100,
+      100,
+    );
+
+    spawn.applyModifiersInPlace({ whatEvent: dummyEvent });
+
+    expect(spawn.whatEvent).toBe(dummyEvent);
+  });
+});
+
+describe("EventSpawn.createDefault", () => {
+  it("should create default EventSpawn with server settings", () => {
+    const eventSpawn = EventSpawn.createDefault({
+      language: "eng",
+      spawnMax: 20,
+      spawnMin: 5,
+    });
+
+    expect(eventSpawn.gen).toBeDefined();
+    expect(eventSpawn.type).toBeDefined();
+    expect(eventSpawn.rarity).toBeDefined();
+    expect(eventSpawn.messageSpawn.min).toBe(5);
+    expect(eventSpawn.messageSpawn.max).toBe(20);
+    expect(eventSpawn.allowedForm.mega).toBe(false);
+    expect(eventSpawn.allowedForm.giga).toBe(false);
+  });
 });

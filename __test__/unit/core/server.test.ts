@@ -146,6 +146,30 @@ describe("Server", () => {
     });
   });
 
+  describe("createDefault", () => {
+    it("should create server with default values", () => {
+      const server = Server.createDefault("server-default");
+
+      expect(server.discordId).toBe("server-default");
+      expect(server.channelAllowed).toEqual([]);
+      expect(server.charmeChroma).toBe(false);
+      expect(server.settings.language).toBeDefined();
+      expect(server.settings.spawnMax).toBeDefined();
+      expect(server.settings.spawnMin).toBeDefined();
+      expect(server.maxCountMessage).toBe(10);
+      expect(server.countMessage).toBe(0);
+      expect(server.pokemonPresent).toEqual({});
+      expect(Object.keys(server.savePokemon.data).length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("getPokemonByIdChannel", () => {
+    it("should return null when channel has no pokemon", () => {
+      const server = Server.createDefault("server1");
+      expect(server.getPokemonByIdChannel("ch1")).toBeNull();
+    });
+  });
+
   describe("removePokemonByIdChannel", () => {
     it("should remove pokemon when present", () => {
       const server = Server.createDefault("server1");

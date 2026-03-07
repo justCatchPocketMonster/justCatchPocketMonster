@@ -5,16 +5,40 @@ import {
   joinRaid,
   isRaidFull,
   resolveRaid,
+  updateRaidEmbed,
 } from "../../../../src/features/raid/raidManager";
 import { Client } from "discord.js";
 import { PokemonType } from "../../../../src/core/types/PokemonType";
-import { resetTestEnv } from "../../../utils/resetTestEnv";
 
 jest.mock("../../../../src/middlewares/logger", () => ({
   __esModule: true,
   default: {
     error: jest.fn(),
   },
+}));
+
+jest.mock("../../../../src/cache/ServerCache", () => ({
+  getServerById: jest.fn().mockResolvedValue({
+    discordId: "server1",
+    settings: { language: "eng" },
+    savePokemon: { addOneCatch: jest.fn() },
+    removePokemonByIdChannel: jest.fn(),
+  }),
+  updateServer: jest.fn().mockResolvedValue(undefined),
+}));
+
+jest.mock("../../../../src/cache/UserCache", () => ({
+  getUserById: jest.fn().mockResolvedValue({
+    savePokemon: { addOneCatch: jest.fn() },
+  }),
+  updateUser: jest.fn().mockResolvedValue(undefined),
+}));
+
+jest.mock("../../../../src/cache/StatCache", () => ({
+  getStatById: jest.fn().mockResolvedValue({
+    addCatch: jest.fn(),
+  }),
+  updateStat: jest.fn().mockResolvedValue(undefined),
 }));
 
 const mockPokemon: PokemonType = {
@@ -34,8 +58,7 @@ const mockPokemon: PokemonType = {
 describe("raidManager", () => {
   let client: Client;
 
-  beforeEach(async () => {
-    await resetTestEnv();
+  beforeEach(() => {
     client = {
       channels: {
         cache: new Map(),
@@ -43,8 +66,12 @@ describe("raidManager", () => {
     } as unknown as Client;
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     jest.useRealTimers();
+    await resolveRaid(client, "server1");
+    await resolveRaid(client, "server-resolve");
+    await resolveRaid(client, "server-update");
+    await resolveRaid(client, "server-nonexistent");
   });
 
   describe("getActiveRaid", () => {
@@ -176,6 +203,35 @@ describe("raidManager", () => {
     it("should do nothing when no raid exists", async () => {
       await expect(
         resolveRaid(client, "server-nonexistent"),
+      ).resolves.not.toThrow();
+    });
+  });
+
+  describe("updateRaidEmbed", () => {
+    it("should do nothing when no raid exists", async () => {
+      await expect(
+        updateRaidEmbed(client, "server-nonexistent"),
+      ).resolves.not.toThrow();
+    });
+
+    it("should not throw when raid exists but channel not in cache", async () => {
+      const serverCache = require("../../../../src/cache/ServerCache");
+      serverCache.getServerById.mockResolvedValue({
+        discordId: "server1",
+        settings: { language: "eng" },
+      });
+
+      startRaid(
+        client,
+        "server-update",
+        "channel-unknown",
+        mockPokemon,
+        "msg1",
+      );
+      client.channels = { cache: new Map() } as any;
+
+      await expect(
+        updateRaidEmbed(client, "server-update"),
       ).resolves.not.toThrow();
     });
   });
