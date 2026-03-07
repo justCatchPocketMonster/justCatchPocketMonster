@@ -3667,7 +3667,7 @@
       "nameCompletFr": ["Méga Méganium"],
       "nameCompletEng": ["Mega Meganium"]
     },
-    "arrayType": ["grass"],
+    "arrayType": ["grass", "fairy"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0154-000-mega",
@@ -3787,7 +3787,7 @@
       "nameCompletFr": ["Méga Aligatueur"],
       "nameCompletEng": ["Mega Feraligatr"]
     },
-    "arrayType": ["Water"],
+    "arrayType": ["Water", "dragon"],
     "rarity": "ordinary",
     "gen": 2,
     "imgName": "0160-000-mega",
@@ -8145,6 +8145,21 @@
     "versionForm": 1
   },
   {
+    "id": 358,
+    "name": {
+      "nameEng": ["Mega Chimecho"],
+      "nameFr": ["Méga Éoko"],
+      "nameCompletFr": ["Méga Éoko"],
+      "nameCompletEng": ["Mega Chimecho"]
+    },
+    "arrayType": ["psychic", "steel"],
+    "rarity": "ordinary",
+    "gen": 3,
+    "imgName": "0358-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 359,
     "name": {
       "nameEng": ["Absol"],
@@ -8182,7 +8197,7 @@
       "nameCompletFr": ["Méga Absol Z"],
       "nameCompletEng": ["Mega Absol Z"]
     },
-    "arrayType": ["dark"],
+    "arrayType": ["dark", "ghost"],
     "rarity": "ordinary",
     "gen": 3,
     "imgName": "0359-000-megaz",
@@ -8977,7 +8992,7 @@
       "nameCompletFr": ["Méga Étouraptor"],
       "nameCompletEng": ["Mega Staraptor"]
     },
-    "arrayType": ["normal", "flying"],
+    "arrayType": ["fighting", "flying"],
     "rarity": "ordinary",
     "gen": 4,
     "imgName": "0398-000-mega",
@@ -10057,7 +10072,7 @@
       "nameCompletFr": ["Méga Carchacrok Z"],
       "nameCompletEng": ["Mega Garchomp Z"]
     },
-    "arrayType": ["dragon", "ground"],
+    "arrayType": ["dragon"],
     "rarity": "ordinary",
     "gen": 4,
     "imgName": "0445-000-megaz",
@@ -15742,7 +15757,7 @@
       "nameCompletFr": ["Méga Golgopathe"],
       "nameCompletEng": ["Mega Barbaracle"]
     },
-    "arrayType": ["rock", "Water"],
+    "arrayType": ["rock", "fighting"],
     "rarity": "ordinary",
     "gen": 6,
     "imgName": "0689-000-mega",
