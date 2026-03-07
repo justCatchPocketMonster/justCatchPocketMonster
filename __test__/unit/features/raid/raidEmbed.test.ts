@@ -40,7 +40,12 @@ describe("raidEmbed", () => {
   describe("generateRaidEmbed", () => {
     it("should generate embed with normal mode and non-shiny pokemon", async () => {
       server.eventSpawn.nightMode = false;
-      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(
+        pokemon,
+        server,
+        [],
+        1234567890,
+      );
 
       expect(embed.data.title).toBeDefined();
       expect(embed.data.image?.url).toContain("pokeHome/");
@@ -50,7 +55,12 @@ describe("raidEmbed", () => {
 
     it("should generate embed with night mode", async () => {
       server.eventSpawn.nightMode = true;
-      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(
+        pokemon,
+        server,
+        [],
+        1234567890,
+      );
 
       expect(embed.data.image?.url).toContain("pokeHomeShadow/");
     });
@@ -83,7 +93,12 @@ describe("raidEmbed", () => {
     });
 
     it("should show no players text when players empty", async () => {
-      const { embed } = await generateRaidEmbed(pokemon, server, [], 1234567890);
+      const { embed } = await generateRaidEmbed(
+        pokemon,
+        server,
+        [],
+        1234567890,
+      );
 
       const playersField = embed.data.fields?.find((f) =>
         f.name?.includes("(0/4)"),
