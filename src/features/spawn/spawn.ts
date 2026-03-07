@@ -15,11 +15,8 @@ import { valueMaxChoiceEvent } from "../../config/default/spawn";
 import { PokemonType } from "../../core/types/PokemonType";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { getStatById, updateStat } from "../../cache/StatCache";
-import {
-  nameStatGeneral,
-  urlImageRepo,
-  version,
-} from "../../config/default/misc";
+import { nameStatGeneral, version } from "../../config/default/misc";
+import { getImageUrl } from "../../utils/imageUrl";
 import { checkTimeForResetEventStat } from "../event/checkTimeForResetEventStat";
 import { getActiveRaid, isChannelInRaid } from "../raid/raidManager";
 import { selectRaidPokemon } from "../raid/selectRaidPokemon";
@@ -127,7 +124,12 @@ async function choiceTypeOfSpawn(
     await updateServer(server.discordId, server);
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
-    const { embed } = generateRaidEmbed(raidPokemon, server, [], endTimestamp);
+    const { embed } = await generateRaidEmbed(
+      raidPokemon,
+      server,
+      [],
+      endTimestamp,
+    );
     return { embed, isRaid: true, raidPokemon };
   }
 
@@ -135,7 +137,7 @@ async function choiceTypeOfSpawn(
   if (randomCategorySpawn <= 1 && server.eventSpawn.whatEvent === null) {
     await selectEventStandard(server);
     if (server.eventSpawn.whatEvent) {
-      return generateEmbedEvent(server.eventSpawn.whatEvent, server);
+      return await generateEmbedEvent(server.eventSpawn.whatEvent, server);
     }
   }
   const isEgg = 0 == random(server.eventSpawn.valueMaxChoiceEgg);
@@ -155,25 +157,23 @@ async function choiceTypeOfSpawn(
   await updateServer(server.discordId, server);
   await updateStat(version, statVersion);
   await updateStat(nameStatGeneral, statAll);
-  return generateEmbedPokemon(pokemonChoice, server);
+  return await generateEmbedPokemon(pokemonChoice, server);
 }
 
-export function generateEmbedPokemon(
+export async function generateEmbedPokemon(
   pokemon: PokemonType,
   server: ServerType,
-): { embed: EmbedBuilder } {
+): Promise<{ embed: EmbedBuilder }> {
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
-
-  const imageName: string = pokemon.imgName + suffix;
-  const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo + "/pokeHomeShadow/" + imageName
-    : urlImageRepo + "/pokeHome/" + imageName;
+  const imageName = pokemon.imgName + suffix;
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
 
   const color: ColorResolvable = colorByType(
     pokemon.arrayType[random(pokemon.arrayType.length)],
   );
 
-  let pokeEmbed = new EmbedBuilder()
+  const pokeEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText("embedPokemonTitle", server.settings.language))
     .setDescription(
@@ -181,9 +181,7 @@ export function generateEmbedPokemon(
     )
     .setImage(imageUrl);
 
-  return {
-    embed: pokeEmbed,
-  };
+  return { embed: pokeEmbed };
 }
 
 const sosRarityColor: Record<string, ColorResolvable> = {
@@ -193,15 +191,14 @@ const sosRarityColor: Record<string, ColorResolvable> = {
   ultraBeast: 0xe74c3c,
 };
 
-export function generateEmbedSosPokemon(
+export async function generateEmbedSosPokemon(
   pokemon: PokemonType,
   server: ServerType,
-): { embed: EmbedBuilder } {
+): Promise<{ embed: EmbedBuilder }> {
   const suffix = pokemon.isShiny ? "-shiny.png" : ".png";
-  const imageName: string = pokemon.imgName + suffix;
-  const imageUrl = server.eventSpawn.nightMode
-    ? urlImageRepo + "/pokeHomeShadow/" + imageName
-    : urlImageRepo + "/pokeHome/" + imageName;
+  const imageName = pokemon.imgName + suffix;
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
 
   const rarityKey = "sosEmbedTitle" + capitalizeFirstLetter(pokemon.rarity);
   const descKey = "sosEmbedDescription" + capitalizeFirstLetter(pokemon.rarity);
@@ -225,18 +222,16 @@ export function generateEmbedSosPokemon(
   return { embed };
 }
 
-function generateEmbedEvent(
+async function generateEmbedEvent(
   event: EventType,
   server: ServerType,
-): { embed: EmbedBuilder; image: AttachmentBuilder } {
-  const basePath = "./src/assets/eventImage/";
-
-  const adressImage: string = basePath + event.image + ".png";
-  const nameImage: string = event.image + ".png";
+): Promise<{ embed: EmbedBuilder }> {
+  const imageName = event.image + ".png";
+  const imageUrl = await getImageUrl("eventImage", imageName);
 
   const color: ColorResolvable = event.color as ColorResolvable;
 
-  let eventEmbed = new EmbedBuilder()
+  const eventEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText(event.name, server.settings.language))
     .setDescription(getText(event.description, server.settings.language))
@@ -245,10 +240,7 @@ function generateEmbedEvent(
       value: event.effectDescription,
       inline: false,
     })
-    .setImage("attachment://" + nameImage);
+    .setImage(imageUrl);
 
-  return {
-    embed: eventEmbed,
-    image: new AttachmentBuilder(adressImage),
-  };
+  return { embed: eventEmbed };
 }

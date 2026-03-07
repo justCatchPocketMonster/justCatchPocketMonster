@@ -372,7 +372,7 @@ describe("catch", () => {
         hint: "P___",
         canSosBattle: true,
       });
-      spawn.generateEmbedSosPokemon.mockReturnValue({ embed: {} });
+      spawn.generateEmbedSosPokemon.mockResolvedValue({ embed: {} });
 
       const user = createMockUser();
       const interaction = createMockInteraction();

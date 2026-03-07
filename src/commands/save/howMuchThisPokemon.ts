@@ -76,7 +76,13 @@ export default {
         return;
       }
 
-      howMuchThisPokemon(interaction, user, server, stat, resolvedPokemonId);
+      await howMuchThisPokemon(
+        interaction,
+        user,
+        server,
+        stat,
+        resolvedPokemonId,
+      );
 
       function resolvePokemonId(
         pokemonNameInput: string | null,

@@ -92,7 +92,7 @@ export async function updateRaidEmbed(
 
   try {
     const server = await getServerById(serverId);
-    const { embed } = generateRaidEmbed(
+    const { embed } = await generateRaidEmbed(
       raid.pokemon,
       server,
       raid.players,
@@ -148,7 +148,7 @@ export async function resolveRaid(
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
 
-    const endEmbed = generateRaidEndEmbed(
+    const endEmbed = await generateRaidEndEmbed(
       raid.pokemon,
       server,
       raid.players,

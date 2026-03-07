@@ -4,6 +4,13 @@ import { Server } from "../../../../src/core/classes/Server";
 import { Event } from "../../../../src/core/classes/Event";
 import * as paginationMenuModule from "../../../../src/features/other/paginationMenu";
 import * as selectEventSeasonalModule from "../../../../src/features/event/selectEventSeasonal";
+import { urlImageRepo } from "../../../../src/config/default/misc";
+
+jest.mock("../../../../src/utils/imageUrl", () => ({
+  getImageUrl: jest.fn((subFolder: string, imageName: string) =>
+    Promise.resolve(`${urlImageRepo}/${subFolder}/${imageName}`),
+  ),
+}));
 
 jest.mock("../../../../src/features/other/paginationMenu", () => ({
   paginationMenu: jest.fn(),
@@ -22,10 +29,10 @@ describe("effectEvent", () => {
     jest.clearAllMocks();
   });
 
-  test("should call paginationMenu with noEvent page when server has no whatEvent", () => {
+  test("should call paginationMenu with noEvent page when server has no whatEvent", async () => {
     server.eventSpawn.whatEvent = null;
 
-    effectEvent(interaction, server);
+    await effectEvent(interaction, server);
 
     expect(paginationMenuModule.paginationMenu).toHaveBeenCalledWith(
       interaction,
@@ -42,7 +49,7 @@ describe("effectEvent", () => {
     );
   });
 
-  test("should call paginationMenu with actualEvent when server has whatEvent", () => {
+  test("should call paginationMenu with actualEvent when server has whatEvent", async () => {
     server.eventSpawn.whatEvent = new Event(
       "1",
       "testEvent" as any,
@@ -54,7 +61,7 @@ describe("effectEvent", () => {
       new Date(Date.now() + 3600000),
     );
 
-    effectEvent(interaction, server);
+    await effectEvent(interaction, server);
 
     expect(paginationMenuModule.paginationMenu).toHaveBeenCalledWith(
       interaction,
@@ -71,7 +78,7 @@ describe("effectEvent", () => {
     );
   });
 
-  test("should add seasonal event page when selectEventSeasonal returns event", () => {
+  test("should add seasonal event page when selectEventSeasonal returns event", async () => {
     const mockSeasonalEvent = {
       id: 1,
       name: "seasonal_shells_title" as any,
@@ -86,14 +93,14 @@ describe("effectEvent", () => {
       .mockReturnValue(mockSeasonalEvent);
 
     server.eventSpawn.whatEvent = null;
-    effectEvent(interaction, server);
+    await effectEvent(interaction, server);
 
     const pages = (paginationMenuModule.paginationMenu as jest.Mock).mock
       .calls[0][2];
     expect(pages.length).toBeGreaterThanOrEqual(1);
   });
 
-  test("should add next seasonal event when selectEventSeasonal returns null but nextEvent has startDate", () => {
+  test("should add next seasonal event when selectEventSeasonal returns null but nextEvent has startDate", async () => {
     jest
       .spyOn(selectEventSeasonalModule, "selectEventSeasonal")
       .mockReturnValue(undefined);
@@ -110,14 +117,14 @@ describe("effectEvent", () => {
       } as any);
 
     server.eventSpawn.whatEvent = null;
-    effectEvent(interaction, server);
+    await effectEvent(interaction, server);
 
     const pages = (paginationMenuModule.paginationMenu as jest.Mock).mock
       .calls[0][2];
     expect(pages.length).toBe(2);
   });
 
-  test("should not add seasonal page when selectEventSeasonal and selectNextEventSeasonal return null", () => {
+  test("should not add seasonal page when selectEventSeasonal and selectNextEventSeasonal return null", async () => {
     jest
       .spyOn(selectEventSeasonalModule, "selectEventSeasonal")
       .mockReturnValue(undefined);
@@ -126,7 +133,7 @@ describe("effectEvent", () => {
       .mockReturnValue({ startDate: null } as any);
 
     server.eventSpawn.whatEvent = null;
-    effectEvent(interaction, server);
+    await effectEvent(interaction, server);
 
     const pages = (paginationMenuModule.paginationMenu as jest.Mock).mock
       .calls[0][2];

@@ -139,8 +139,8 @@
     "name": {
       "nameEng": ["Charizard"],
       "nameFr": ["Dracaufeu"],
-      "nameCompletFr": ["Méga Dracaufeu"],
-      "nameCompletEng": ["Mega Charizard"]
+      "nameCompletFr": ["Méga Dracaufeu X"],
+      "nameCompletEng": ["Mega Charizard X"]
     },
     "arrayType": ["fire", "dragon"],
     "rarity": "ordinary",
@@ -720,6 +720,36 @@
     "versionForm": 1
   },
   {
+    "id": 26,
+    "name": {
+      "nameEng": ["Raichu"],
+      "nameFr": ["Raichu"],
+      "nameCompletFr": ["Méga Raichu X"],
+      "nameCompletEng": ["Mega Raichu X"]
+    },
+    "arrayType": ["electric"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0026-000-megax",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
+    "id": 26,
+    "name": {
+      "nameEng": ["Raichu"],
+      "nameFr": ["Raichu"],
+      "nameCompletFr": ["Méga Raichu Y"],
+      "nameCompletEng": ["Mega Raichu Y"]
+    },
+    "arrayType": ["electric"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0026-000-megay",
+    "form": "mega",
+    "versionForm": 2
+  },
+  {
     "id": 27,
     "name": {
       "nameEng": ["Sandshrew"],
@@ -897,6 +927,21 @@
     "gen": 1,
     "imgName": "0036-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 36,
+    "name": {
+      "nameEng": ["Clefable"],
+      "nameFr": ["Mélodelfe"],
+      "nameCompletFr": ["Méga Mélodelfe"],
+      "nameCompletEng": ["Mega Clefable"]
+    },
+    "arrayType": ["fairy"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0036-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -1662,6 +1707,21 @@
     "gen": 1,
     "imgName": "0071-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 71,
+    "name": {
+      "nameEng": ["Victreebel"],
+      "nameFr": ["Empiflor"],
+      "nameCompletFr": ["Méga Empiflor"],
+      "nameCompletEng": ["Mega Victreebel"]
+    },
+    "arrayType": ["grass", "poison"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0071-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -2820,6 +2880,21 @@
     "versionForm": 1
   },
   {
+    "id": 121,
+    "name": {
+      "nameEng": ["Starmie"],
+      "nameFr": ["Staross"],
+      "nameCompletFr": ["Méga Staross"],
+      "nameCompletEng": ["Mega Starmie"]
+    },
+    "arrayType": ["Water", "psychic"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0121-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 122,
     "name": {
       "nameEng": ["Mr. Mime"],
@@ -3450,6 +3525,21 @@
     "versionForm": 1
   },
   {
+    "id": 149,
+    "name": {
+      "nameEng": ["Dragonite"],
+      "nameFr": ["Dracolosse"],
+      "nameCompletFr": ["Méga Dracolosse"],
+      "nameCompletEng": ["Mega Dragonite"]
+    },
+    "arrayType": ["dragon", "flying"],
+    "rarity": "ordinary",
+    "gen": 1,
+    "imgName": "0149-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 150,
     "name": {
       "nameEng": ["Mewtwo"],
@@ -3570,6 +3660,21 @@
     "versionForm": 2
   },
   {
+    "id": 154,
+    "name": {
+      "nameEng": ["Meganium"],
+      "nameFr": ["Méganium"],
+      "nameCompletFr": ["Méga Méganium"],
+      "nameCompletEng": ["Mega Meganium"]
+    },
+    "arrayType": ["grass", "fairy"],
+    "rarity": "ordinary",
+    "gen": 2,
+    "imgName": "0154-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 155,
     "name": {
       "nameEng": ["Cyndaquil"],
@@ -3672,6 +3777,21 @@
     "gen": 2,
     "imgName": "0160-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 160,
+    "name": {
+      "nameEng": ["Feraligatr"],
+      "nameFr": ["Aligatueur"],
+      "nameCompletFr": ["Méga Aligatueur"],
+      "nameCompletEng": ["Mega Feraligatr"]
+    },
+    "arrayType": ["Water", "dragon"],
+    "rarity": "ordinary",
+    "gen": 2,
+    "imgName": "0160-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -5517,6 +5637,21 @@
     "gen": 2,
     "imgName": "0227-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 227,
+    "name": {
+      "nameEng": ["Skarmory"],
+      "nameFr": ["Airmure"],
+      "nameCompletFr": ["Méga Airmure"],
+      "nameCompletEng": ["Mega Skarmory"]
+    },
+    "arrayType": ["steel", "flying"],
+    "rarity": "ordinary",
+    "gen": 2,
+    "imgName": "0227-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -8010,6 +8145,21 @@
     "versionForm": 1
   },
   {
+    "id": 358,
+    "name": {
+      "nameEng": ["Mega Chimecho"],
+      "nameFr": ["Méga Éoko"],
+      "nameCompletFr": ["Méga Éoko"],
+      "nameCompletEng": ["Mega Chimecho"]
+    },
+    "arrayType": ["psychic", "steel"],
+    "rarity": "ordinary",
+    "gen": 3,
+    "imgName": "0358-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 359,
     "name": {
       "nameEng": ["Absol"],
@@ -8038,6 +8188,21 @@
     "imgName": "0359-000-mega",
     "form": "mega",
     "versionForm": 1
+  },
+  {
+    "id": 359,
+    "name": {
+      "nameEng": ["Absol"],
+      "nameFr": ["Absol"],
+      "nameCompletFr": ["Méga Absol Z"],
+      "nameCompletEng": ["Mega Absol Z"]
+    },
+    "arrayType": ["dark", "ghost"],
+    "rarity": "ordinary",
+    "gen": 3,
+    "imgName": "0359-000-megaz",
+    "form": "mega",
+    "versionForm": 2
   },
   {
     "id": 360,
@@ -8818,6 +8983,21 @@
     "imgName": "0398-001",
     "form": "ordinary",
     "versionForm": 2
+  },
+  {
+    "id": 398,
+    "name": {
+      "nameEng": ["Staraptor"],
+      "nameFr": ["Étouraptor"],
+      "nameCompletFr": ["Méga Étouraptor"],
+      "nameCompletEng": ["Mega Staraptor"]
+    },
+    "arrayType": ["fighting", "flying"],
+    "rarity": "ordinary",
+    "gen": 4,
+    "imgName": "0398-000-mega",
+    "form": "mega",
+    "versionForm": 1
   },
   {
     "id": 399,
@@ -9885,6 +10065,21 @@
     "versionForm": 1
   },
   {
+    "id": 445,
+    "name": {
+      "nameEng": ["Garchomp"],
+      "nameFr": ["Carchacrok"],
+      "nameCompletFr": ["Méga Carchacrok Z"],
+      "nameCompletEng": ["Mega Garchomp Z"]
+    },
+    "arrayType": ["dragon"],
+    "rarity": "ordinary",
+    "gen": 4,
+    "imgName": "0445-000-megaz",
+    "form": "mega",
+    "versionForm": 2
+  },
+  {
     "id": 446,
     "name": {
       "nameEng": ["Munchlax"],
@@ -9943,6 +10138,21 @@
     "imgName": "0448-000-mega",
     "form": "mega",
     "versionForm": 1
+  },
+  {
+    "id": 448,
+    "name": {
+      "nameEng": ["Lucario"],
+      "nameFr": ["Lucario"],
+      "nameCompletFr": ["Méga Lucario Z"],
+      "nameCompletEng": ["Mega Lucario Z"]
+    },
+    "arrayType": ["fighting", "steel"],
+    "rarity": "ordinary",
+    "gen": 4,
+    "imgName": "0448-000-megaz",
+    "form": "mega",
+    "versionForm": 2
   },
   {
     "id": 449,
@@ -10605,6 +10815,21 @@
     "versionForm": 1
   },
   {
+    "id": 478,
+    "name": {
+      "nameEng": ["Froslass"],
+      "nameFr": ["Momartik"],
+      "nameCompletFr": ["Méga Momartik"],
+      "nameCompletEng": ["Mega Froslass"]
+    },
+    "arrayType": ["ice", "ghost"],
+    "rarity": "ordinary",
+    "gen": 4,
+    "imgName": "0478-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 479,
     "name": {
       "nameEng": ["Rotom"],
@@ -10815,6 +11040,21 @@
     "versionForm": 1
   },
   {
+    "id": 485,
+    "name": {
+      "nameEng": ["Heatran"],
+      "nameFr": ["Heatran"],
+      "nameCompletFr": ["Méga Heatran"],
+      "nameCompletEng": ["Mega Heatran"]
+    },
+    "arrayType": ["fire", "steel"],
+    "rarity": "legendary",
+    "gen": 4,
+    "imgName": "0485-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 486,
     "name": {
       "nameEng": ["Regigigas"],
@@ -10917,6 +11157,21 @@
     "gen": 4,
     "imgName": "0491-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 491,
+    "name": {
+      "nameEng": ["Darkrai"],
+      "nameFr": ["Darkrai"],
+      "nameCompletFr": ["Méga Darkrai"],
+      "nameCompletEng": ["Mega Darkrai"]
+    },
+    "arrayType": ["dark"],
+    "rarity": "mythical",
+    "gen": 4,
+    "imgName": "0491-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -11322,6 +11577,21 @@
     "gen": 5,
     "imgName": "0500-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 500,
+    "name": {
+      "nameEng": ["Emboar"],
+      "nameFr": ["Roitiflam"],
+      "nameCompletFr": ["Méga Roitiflam"],
+      "nameCompletEng": ["Mega Emboar"]
+    },
+    "arrayType": ["fire", "fighting"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0500-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -11805,6 +12075,21 @@
     "versionForm": 1
   },
   {
+    "id": 530,
+    "name": {
+      "nameEng": ["Excadrill"],
+      "nameFr": ["Minotaupe"],
+      "nameCompletFr": ["Méga Minotaupe"],
+      "nameCompletEng": ["Mega Excadrill"]
+    },
+    "arrayType": ["ground", "steel"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0530-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 531,
     "name": {
       "nameEng": ["Audino"],
@@ -12042,6 +12327,21 @@
     "gen": 5,
     "imgName": "0545-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 545,
+    "name": {
+      "nameEng": ["Scolipede"],
+      "nameFr": ["Brutapode"],
+      "nameCompletFr": ["Méga Brutapode"],
+      "nameCompletEng": ["Mega Scolipede"]
+    },
+    "arrayType": ["bug", "poison"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0545-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -12357,6 +12657,21 @@
     "gen": 5,
     "imgName": "0560-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 560,
+    "name": {
+      "nameEng": ["Scrafty"],
+      "nameFr": ["Baggaïd"],
+      "nameCompletFr": ["Méga Baggaïd"],
+      "nameCompletEng": ["Mega Scrafty"]
+    },
+    "arrayType": ["dark", "fighting"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0560-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -13185,6 +13500,21 @@
     "versionForm": 1
   },
   {
+    "id": 604,
+    "name": {
+      "nameEng": ["Eelektross"],
+      "nameFr": ["Ohmassacre"],
+      "nameCompletFr": ["Méga Ohmassacre"],
+      "nameCompletEng": ["Mega Eelektross"]
+    },
+    "arrayType": ["electric"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0604-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 605,
     "name": {
       "nameEng": ["Elgyem"],
@@ -13257,6 +13587,21 @@
     "gen": 5,
     "imgName": "0609-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 609,
+    "name": {
+      "nameEng": ["Chandelure"],
+      "nameFr": ["Lugulabre"],
+      "nameCompletFr": ["Méga Lugulabre"],
+      "nameCompletEng": ["Mega Chandelure"]
+    },
+    "arrayType": ["ghost", "fire"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0609-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -13482,6 +13827,21 @@
     "gen": 5,
     "imgName": "0623-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 623,
+    "name": {
+      "nameEng": ["Golurk"],
+      "nameFr": ["Golemastoc"],
+      "nameCompletFr": ["Méga Golemastoc"],
+      "nameCompletEng": ["Mega Golurk"]
+    },
+    "arrayType": ["ground", "ghost"],
+    "rarity": "ordinary",
+    "gen": 5,
+    "imgName": "0623-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -14100,6 +14460,21 @@
     "versionForm": 1
   },
   {
+    "id": 652,
+    "name": {
+      "nameEng": ["Chesnaught"],
+      "nameFr": ["Blindépique"],
+      "nameCompletFr": ["Méga Blindépique"],
+      "nameCompletEng": ["Mega Chesnaught"]
+    },
+    "arrayType": ["grass", "fighting"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0652-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 653,
     "name": {
       "nameEng": ["Fennekin"],
@@ -14145,6 +14520,21 @@
     "versionForm": 1
   },
   {
+    "id": 655,
+    "name": {
+      "nameEng": ["Delphox"],
+      "nameFr": ["Goupelin"],
+      "nameCompletFr": ["Méga Goupelin"],
+      "nameCompletEng": ["Mega Delphox"]
+    },
+    "arrayType": ["fire", "psychic"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0655-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 656,
     "name": {
       "nameEng": ["Froakie"],
@@ -14187,6 +14577,21 @@
     "gen": 6,
     "imgName": "0658-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 658,
+    "name": {
+      "nameEng": ["Greninja"],
+      "nameFr": ["Amphinobi"],
+      "nameCompletFr": ["Méga Amphinobi"],
+      "nameCompletEng": ["Mega Greninja"]
+    },
+    "arrayType": ["Water", "dark"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0658-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -14640,6 +15045,21 @@
     "versionForm": 2
   },
   {
+    "id": 668,
+    "name": {
+      "nameEng": ["Pyroar"],
+      "nameFr": ["Némélios"],
+      "nameCompletFr": ["Méga Némélios"],
+      "nameCompletEng": ["Mega Pyroar"]
+    },
+    "arrayType": ["fire", "normal"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0668-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 669,
     "name": {
       "nameEng": ["Flabébé"],
@@ -14788,6 +15208,21 @@
     "imgName": "0670-004",
     "form": "ordinary",
     "versionForm": 5
+  },
+  {
+    "id": 670,
+    "name": {
+      "nameEng": ["Floette"],
+      "nameFr": ["Floette"],
+      "nameCompletFr": ["Méga Floette"],
+      "nameCompletEng": ["Mega Floette"]
+    },
+    "arrayType": ["fairy"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0670-000-mega",
+    "form": "mega",
+    "versionForm": 1
   },
   {
     "id": 671,
@@ -15120,6 +15555,21 @@
     "versionForm": 2
   },
   {
+    "id": 678,
+    "name": {
+      "nameEng": ["Meowstic"],
+      "nameFr": ["Mistigrix"],
+      "nameCompletFr": ["Méga Mistigrix"],
+      "nameCompletEng": ["Mega Meowstic"]
+    },
+    "arrayType": ["psychic"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0678-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 679,
     "name": {
       "nameEng": ["Honedge"],
@@ -15255,6 +15705,21 @@
     "versionForm": 1
   },
   {
+    "id": 687,
+    "name": {
+      "nameEng": ["Malamar"],
+      "nameFr": ["Sepiatroce"],
+      "nameCompletFr": ["Méga Sepiatroce"],
+      "nameCompletEng": ["Mega Malamar"]
+    },
+    "arrayType": ["dark", "psychic"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0687-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 688,
     "name": {
       "nameEng": ["Binacle"],
@@ -15285,6 +15750,21 @@
     "versionForm": 1
   },
   {
+    "id": 689,
+    "name": {
+      "nameEng": ["Barbaracle"],
+      "nameFr": ["Golgopathe"],
+      "nameCompletFr": ["Méga Golgopathe"],
+      "nameCompletEng": ["Mega Barbaracle"]
+    },
+    "arrayType": ["rock", "fighting"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0689-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 690,
     "name": {
       "nameEng": ["Skrelp"],
@@ -15312,6 +15792,21 @@
     "gen": 6,
     "imgName": "0691-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 691,
+    "name": {
+      "nameEng": ["Dragalge"],
+      "nameFr": ["Kravarech"],
+      "nameCompletFr": ["Méga Kravarech"],
+      "nameCompletEng": ["Mega Dragalge"]
+    },
+    "arrayType": ["poison", "dragon"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0691-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -15462,6 +15957,21 @@
     "gen": 6,
     "imgName": "0701-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 701,
+    "name": {
+      "nameEng": ["Hawlucha"],
+      "nameFr": ["Brutalibré"],
+      "nameCompletFr": ["Méga Brutalibré"],
+      "nameCompletEng": ["Mega Hawlucha"]
+    },
+    "arrayType": ["fighting", "flying"],
+    "rarity": "ordinary",
+    "gen": 6,
+    "imgName": "0701-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -15762,6 +16272,21 @@
     "gen": 6,
     "imgName": "0718-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 718,
+    "name": {
+      "nameEng": ["Zygarde"],
+      "nameFr": ["Zygarde"],
+      "nameCompletFr": ["Méga Zygarde"],
+      "nameCompletEng": ["Mega Zygarde"]
+    },
+    "arrayType": ["dragon", "ground"],
+    "rarity": "legendary",
+    "gen": 6,
+    "imgName": "0718-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -16122,6 +16647,21 @@
     "gen": 7,
     "imgName": "0740-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 740,
+    "name": {
+      "nameEng": ["Crabominable"],
+      "nameFr": ["Crabominable"],
+      "nameCompletFr": ["Méga Crabominable"],
+      "nameCompletEng": ["Mega Crabominable"]
+    },
+    "arrayType": ["fighting", "ice"],
+    "rarity": "ordinary",
+    "gen": 7,
+    "imgName": "0740-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -16542,6 +17082,21 @@
     "gen": 7,
     "imgName": "0768-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 768,
+    "name": {
+      "nameEng": ["Golisopod"],
+      "nameFr": ["Sarmuraï"],
+      "nameCompletFr": ["Méga Sarmuraï"],
+      "nameCompletEng": ["Mega Golisopod"]
+    },
+    "arrayType": ["bug", "water"],
+    "rarity": "ordinary",
+    "gen": 7,
+    "imgName": "0768-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -17115,6 +17670,21 @@
     "versionForm": 1
   },
   {
+    "id": 780,
+    "name": {
+      "nameEng": ["Drampa"],
+      "nameFr": ["Draïeul"],
+      "nameCompletFr": ["Méga Draïeul"],
+      "nameCompletEng": ["Mega Drampa"]
+    },
+    "arrayType": ["normal", "dragon"],
+    "rarity": "ordinary",
+    "gen": 7,
+    "imgName": "0780-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 781,
     "name": {
       "nameFr": ["Sinistrail"],
@@ -17505,6 +18075,21 @@
     "versionForm": 2
   },
   {
+    "id": 801,
+    "name": {
+      "nameEng": ["Magearna"],
+      "nameFr": ["Magearna"],
+      "nameCompletFr": ["Méga Magearna"],
+      "nameCompletEng": ["Mega Magearna"]
+    },
+    "arrayType": ["steel", "fairy"],
+    "rarity": "mythical",
+    "gen": 7,
+    "imgName": "0801-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 802,
     "name": {
       "nameFr": ["Marshadow"],
@@ -17592,6 +18177,21 @@
     "gen": 7,
     "imgName": "0807-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 807,
+    "name": {
+      "nameEng": ["Zeraora"],
+      "nameFr": ["Zeraora"],
+      "nameCompletFr": ["Méga Zeraora"],
+      "nameCompletEng": ["Mega Zeraora"]
+    },
+    "arrayType": ["electric"],
+    "rarity": "mythical",
+    "gen": 7,
+    "imgName": "0807-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -18912,6 +19512,21 @@
     "gen": 8,
     "imgName": "0870-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 870,
+    "name": {
+      "nameEng": ["Falinks"],
+      "nameFr": ["Hexadron"],
+      "nameCompletFr": ["Méga Hexadron"],
+      "nameCompletEng": ["Mega Falinks"]
+    },
+    "arrayType": ["fighting"],
+    "rarity": "ordinary",
+    "gen": 8,
+    "imgName": "0870-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
@@ -20415,6 +21030,21 @@
     "versionForm": 1
   },
   {
+    "id": 952,
+    "name": {
+      "nameEng": ["Scovillain"],
+      "nameFr": ["Scovilain"],
+      "nameCompletFr": ["Méga Scovilain"],
+      "nameCompletEng": ["Mega Scovillain"]
+    },
+    "arrayType": ["grass", "fire"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0952-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 953,
     "name": {
       "nameFr": ["Léboulérou"],
@@ -20700,6 +21330,21 @@
     "versionForm": 1
   },
   {
+    "id": 970,
+    "name": {
+      "nameEng": ["Glimmora"],
+      "nameFr": ["Floréclat"],
+      "nameCompletFr": ["Méga Floréclat"],
+      "nameCompletEng": ["Mega Glimmora"]
+    },
+    "arrayType": ["rock", "poison"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0970-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
     "id": 971,
     "name": {
       "nameFr": ["Toutombe"],
@@ -20847,6 +21492,51 @@
     "gen": 9,
     "imgName": "0978-002",
     "form": "ordinary",
+    "versionForm": 3
+  },
+  {
+    "id": 978,
+    "name": {
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri"],
+      "nameCompletFr": ["Méga Nigirigon Courbée"],
+      "nameCompletEng": ["Mega Tatsugiri Curly"]
+    },
+    "arrayType": ["dragon", "water"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0978-000-mega",
+    "form": "mega",
+    "versionForm": 1
+  },
+  {
+    "id": 978,
+    "name": {
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri"],
+      "nameCompletFr": ["Méga Nigirigon Affalée"],
+      "nameCompletEng": ["Mega Tatsugiri Droopy"]
+    },
+    "arrayType": ["dragon", "water"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0978-001-mega",
+    "form": "mega",
+    "versionForm": 2
+  },
+  {
+    "id": 978,
+    "name": {
+      "nameFr": ["Nigirigon"],
+      "nameEng": ["Tatsugiri"],
+      "nameCompletFr": ["Méga Nigirigon Raide"],
+      "nameCompletEng": ["Mega Tatsugiri Stretch"]
+    },
+    "arrayType": ["dragon", "water"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0978-002-mega",
+    "form": "mega",
     "versionForm": 3
   },
   {
@@ -21162,6 +21852,21 @@
     "gen": 9,
     "imgName": "0998-000",
     "form": "ordinary",
+    "versionForm": 1
+  },
+  {
+    "id": 998,
+    "name": {
+      "nameEng": ["Baxcalibur"],
+      "nameFr": ["Glaivodo"],
+      "nameCompletFr": ["Méga Glaivodo"],
+      "nameCompletEng": ["Mega Baxcalibur"]
+    },
+    "arrayType": ["dragon", "ice"],
+    "rarity": "ordinary",
+    "gen": 9,
+    "imgName": "0998-000-mega",
+    "form": "mega",
     "versionForm": 1
   },
   {
