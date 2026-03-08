@@ -32,39 +32,72 @@ export async function pokedex(
   pageChoice: number | null,
 ) {
   const maxPokemonParPage = 21;
-  const listPokemon = [];
   const arrayEmbed: PageData[] = [];
-  pageChoice ??= 1;
+  const page = pageChoice ?? 1;
+  const nbPageMax = 2 + Math.trunc(allPokemon.at(-1)!.id / 21);
 
-  let pageSelectedDefault;
-
-  let nbPage = 1;
-  let nbPageMax = 2;
-  nbPageMax += Math.trunc(allPokemon.at(-1)!.id / 21);
-
-  if (pageChoice > nbPageMax) {
+  let pageSelectedDefault: number;
+  if (page > nbPageMax) {
     interaction.reply(language("valeurTropHaute", server.settings.language));
     pageSelectedDefault = 1;
   } else {
-    pageSelectedDefault = pageChoice;
+    pageSelectedDefault = page;
   }
 
   const avatar =
     interaction.user.avatarURL() ??
     "https://cdn.discordapp.com/embed/avatars/0.png";
-
-  let memberDisplayName: string;
   const member = interaction.member as GuildMember;
-
-  if (member.nickname != null) {
-    memberDisplayName = member.nickname;
-  } else {
-    memberDisplayName = member.displayName;
-  }
-
+  const memberDisplayName = member.nickname ?? member.displayName;
+  const lang = server.settings.language;
   const pokedexColor = getPokedexColor(user);
 
-  const mainPage = new EmbedBuilder()
+  const mainPage = buildMainPokedexPage(
+    interaction,
+    user,
+    server,
+    memberDisplayName,
+    avatar,
+    pokedexColor,
+  );
+  const summaryLabel = lang === "fr" ? "Résumé Pokédex" : "Pokédex Summary";
+  arrayEmbed.push(createPageForMenu(mainPage, null, summaryLabel));
+
+  let nbPage = 2;
+  for (let y = 0; y <= allPokemon.at(-1)!.id; y += maxPokemonParPage) {
+    const start = 1 + maxPokemonParPage * (nbPage - 2);
+    const end = maxPokemonParPage * (nbPage - 1);
+    const { embed, firstLabel, lastLabel, dot } = buildPokemonPage(
+      start,
+      end,
+      user,
+      server,
+      interaction,
+      pokedexColor,
+    );
+    const pageLabel =
+      firstLabel && lastLabel
+        ? `${firstLabel} — ${lastLabel} ${dot}`
+        : `Page ${nbPage}`;
+    nbPage++;
+    arrayEmbed.push(createPageForMenu(embed, null, pageLabel));
+  }
+
+  const defaultText =
+    lang === "fr" ? "Choisir une page..." : "Select a page...";
+  paginationMenu(interaction, defaultText, arrayEmbed, pageSelectedDefault);
+}
+
+function buildMainPokedexPage(
+  interaction: ChatInputCommandInteraction,
+  user: UserType,
+  server: ServerType,
+  memberDisplayName: string,
+  avatar: string,
+  pokedexColor: ColorResolvable,
+): EmbedBuilder {
+  const totalPokemon = allPokemon.at(-1)!["id"];
+  return new EmbedBuilder()
     .setThumbnail(avatar)
     .setColor(pokedexColor)
     .setDescription("\u200B")
@@ -77,11 +110,11 @@ export async function pokedex(
         value:
           user.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon.at(-1)!["id"] +
+          totalPokemon +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsCaught(),
-            allPokemon.at(-1)!["id"],
+            totalPokemon,
           ) +
           "%",
         inline: true,
@@ -91,11 +124,11 @@ export async function pokedex(
         value:
           user.savePokemon.countUniquePokemonsShinyCaught() +
           "/" +
-          allPokemon.at(-1)!["id"] +
+          totalPokemon +
           " - " +
           getPercentage(
             user.savePokemon.countUniquePokemonsShinyCaught(),
-            allPokemon.at(-1)!["id"],
+            totalPokemon,
           ) +
           "%",
         inline: true,
@@ -105,11 +138,11 @@ export async function pokedex(
         value:
           server.savePokemon.countUniquePokemonsCaught() +
           "/" +
-          allPokemon.at(-1)!["id"] +
+          totalPokemon +
           " - " +
           getPercentage(
             server.savePokemon.countUniquePokemonsCaught(),
-            allPokemon.at(-1)!["id"],
+            totalPokemon,
           ) +
           "%",
         inline: true,
@@ -118,70 +151,55 @@ export async function pokedex(
     )
     .addFields(...generateFieldRegionStat(user, server))
     .addFields({ name: "\u200B", value: "\u200B", inline: false });
+}
 
-  const summaryLabel =
-    server.settings.language === "fr" ? "Résumé Pokédex" : "Pokédex Summary";
-  arrayEmbed.push(createPageForMenu(mainPage, null, summaryLabel));
-  nbPage++;
+function selectPageDot(caughtOnPage: number, totalOnPage: number): string {
+  if (caughtOnPage === 0) return "⚫";
+  if (caughtOnPage === totalOnPage) return "🟢";
+  if (caughtOnPage >= totalOnPage / 2) return "🟠";
+  return "🔴";
+}
 
-  for (let y = 0; y <= allPokemon.at(-1)!.id; y += maxPokemonParPage) {
-    const pokeSave = buildPokedexEmbed(interaction, user, server, pokedexColor);
-    const start = 1 + maxPokemonParPage * (nbPage - 2);
-    const end = maxPokemonParPage * (nbPage - 1);
+function buildPokemonPage(
+  start: number,
+  end: number,
+  user: UserType,
+  server: ServerType,
+  interaction: ChatInputCommandInteraction,
+  color: ColorResolvable,
+): { embed: EmbedBuilder; firstLabel: string; lastLabel: string; dot: string } {
+  const pokeSave = buildPokedexEmbed(interaction, user, server, color);
+  const listPokemon = [];
+  let firstLabel = "";
+  let lastLabel = "";
+  let caughtOnPage = 0;
+  let totalOnPage = 0;
 
-    let firstPokemonLabel = "";
-    let lastPokemonLabel = "";
-    let caughtOnPage = 0;
-    let totalOnPage = 0;
+  for (let i = start; i <= end; i++) {
+    const pokemonData: pokemonDb | undefined = allPokemon.find(
+      (pokemon) => pokemon.id === i,
+    );
+    if (!pokemonData) continue;
 
-    for (let i = start; i <= end; i++) {
-      const pokemonData: pokemonDb | undefined = allPokemon.find(
-        (pokemon) => pokemon.id === i,
-      );
-      if (!pokemonData) continue;
+    totalOnPage++;
+    const nameKey = ("name" +
+      capitalizeFirstLetter(server.settings.language)) as "nameFr" | "nameEng";
+    const pokeName = pokemonData.name[nameKey][0];
+    const label = `${pokemonData.id} ${pokeName}`;
+    if (firstLabel === "") firstLabel = label;
+    lastLabel = label;
 
-      totalOnPage++;
-      const nameKey = ("name" +
-        capitalizeFirstLetter(server.settings.language)) as
-        | "nameFr"
-        | "nameEng";
-      const pokeName = pokemonData.name[nameKey][0];
-      const label = `${pokemonData.id} ${pokeName}`;
-      if (firstPokemonLabel === "") firstPokemonLabel = label;
-      lastPokemonLabel = label;
+    const savePokemon = user.savePokemon.getSaveOnePokemonFusedForm(
+      pokemonData.id.toString(),
+    );
+    if (savePokemon.normalCount > 0) caughtOnPage++;
 
-      const savePokemon = user.savePokemon.getSaveOnePokemonFusedForm(
-        pokemonData.id.toString(),
-      );
-      if (savePokemon.normalCount > 0) caughtOnPage++;
-
-      const field = buildPokemonField(pokemonData, user, server, interaction);
-      listPokemon.push(field);
-    }
-
-    pokeSave.addFields(listPokemon);
-    listPokemon.length = 0;
-
-    let dot: string;
-    if (caughtOnPage === 0) dot = "⚫";
-    else if (caughtOnPage === totalOnPage) dot = "🟢";
-    else if (caughtOnPage >= totalOnPage / 2) dot = "🟠";
-    else dot = "🔴";
-
-    const pageLabel =
-      firstPokemonLabel && lastPokemonLabel
-        ? `${firstPokemonLabel} — ${lastPokemonLabel} ${dot}`
-        : `Page ${nbPage}`;
-
-    nbPage++;
-    arrayEmbed.push(createPageForMenu(pokeSave, null, pageLabel));
+    listPokemon.push(buildPokemonField(pokemonData, user, server, interaction));
   }
 
-  const defaultText =
-    server.settings.language === "fr"
-      ? "Choisir une page..."
-      : "Select a page...";
-  paginationMenu(interaction, defaultText, arrayEmbed, pageSelectedDefault);
+  pokeSave.addFields(listPokemon);
+  const dot = selectPageDot(caughtOnPage, totalOnPage);
+  return { embed: pokeSave, firstLabel, lastLabel, dot };
 }
 
 function buildPokemonField(
@@ -287,7 +305,7 @@ function buildPokedexEmbed(
     );
 }
 
-function getPokedexColor(user: UserType): ColorResolvable {
+export function getPokedexColor(user: UserType): ColorResolvable {
   const regions = [
     { min: 0, max: 151 },
     { min: 151, max: 251 },

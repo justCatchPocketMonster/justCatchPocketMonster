@@ -15,6 +15,7 @@ import { updateServer } from "../../cache/ServerCache";
 import allPokemon from "../../data/pokemon.json";
 import { newLogger } from "../../middlewares/logger";
 import { Pokemon } from "../../core/classes/Pokemon";
+import { Stat } from "../../core/classes/Stat";
 import { selectSosPokemon } from "../pokemon/selectPokemon";
 import { generateEmbedSosPokemon } from "../spawn/spawn";
 import { random } from "../../utils/helperFunction";
@@ -30,6 +31,7 @@ import {
   clearSpawnMessage,
   registerSpawnMessage,
 } from "../spawn/spawnMessageRegistry";
+import { pokemonDb } from "../../core/types/pokemonDb";
 
 export async function catchPokemon(
   user: UserType,
@@ -38,16 +40,9 @@ export async function catchPokemon(
   pokemonInput: string,
   interaction: ChatInputCommandInteraction,
 ) {
-  const pokemon = server.getPokemonByIdChannel(idChannel);
-
-  let memberDisplayName = "";
   const member = interaction.member as GuildMember;
-
-  if (member.nickname != null) {
-    memberDisplayName = member.nickname;
-  } else {
-    memberDisplayName = member.displayName;
-  }
+  const memberDisplayName = member.nickname ?? member.displayName;
+  const pokemon = server.getPokemonByIdChannel(idChannel);
 
   if (!pokemon) {
     interaction.reply(
@@ -80,15 +75,9 @@ export async function catchPokemon(
   const spawnMessageId = getSpawnMessageId(serverId, idChannel);
   clearSpawnMessage(serverId, idChannel);
 
-  const shinyAfterEvent = eventShinyAfterCatch(
-    interaction,
-    pokemon.isShiny ??
-      (() => {
-        throw new Error("isShiny est undefined");
-      })(),
-    server,
-  );
-  pokemon.isShiny = shinyAfterEvent;
+  if (pokemon.isShiny === undefined) throw new Error("isShiny est undefined");
+  pokemon.isShiny = eventShinyAfterCatch(interaction, pokemon.isShiny, server);
+
   const statVersion = await getStatById(version);
   const statAll = await getStatById(nameStatGeneral);
 
@@ -96,26 +85,18 @@ export async function catchPokemon(
   statAll.savePokemonCatch.addOneCatch(pokemon);
   user.savePokemon.addOneCatch(pokemon);
   server.savePokemon.addOneCatch(pokemon);
-
   server.removePokemonByIdChannel(idChannel);
 
   if (pokemon.canSosBattle && random(2) === 1) {
-    const nextChainLvl = (pokemon.sosChainLvl ?? 0) + 1;
-    const sosPokemonType = selectSosPokemon(server, pokemon.id, nextChainLvl);
-    const sosPokemon = Pokemon.from(sosPokemonType);
-    server.pokemonPresent[idChannel] = sosPokemon;
-    statVersion.addSpawn(sosPokemon);
-    statAll.addSpawn(sosPokemon);
-    try {
-      await updateServer(server.discordId, server);
-      await updateStat(version, statVersion);
-      await updateStat(nameStatGeneral, statAll);
-    } catch (e) {
-      newLogger("error", e as string, "Error updating caches after SOS spawn");
-    }
-    const { embed } = await generateEmbedSosPokemon(sosPokemonType, server);
-    const sosMessage = await interaction.followUp({ embeds: [embed] });
-    registerSpawnMessage(serverId, idChannel, sosMessage.id);
+    await handleSosBattle(
+      server,
+      pokemon,
+      idChannel,
+      serverId,
+      interaction,
+      statVersion,
+      statAll,
+    );
   }
 
   try {
@@ -131,69 +112,113 @@ export async function catchPokemon(
     );
   }
 
+  const lang = server.settings.language;
   const pokemonDbData = allPokemon.find(
     (poke) =>
       poke.id.toString() === pokemon.id &&
       poke.form === pokemon.form &&
       poke.versionForm === pokemon.versionForm,
   );
-
-  const lang = server.settings.language;
-  const pokemonName = pokemonDbData
-    ? lang === "fr"
-      ? pokemonDbData.name.nameFr[0]
-      : pokemonDbData.name.nameEng[0]
-    : pokemonInput;
-
+  const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
   const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
     pokemon.id,
   ).normalCount;
 
-  if (spawnMessageId) {
-    try {
-      const channel = await interaction.client.channels.fetch(idChannel);
-      if (
-        channel &&
-        channel.isTextBased() &&
-        channel instanceof BaseGuildTextChannel
-      ) {
-        const spawnMessage = await channel.messages.fetch(spawnMessageId);
-        const existingEmbed = spawnMessage.embeds[0];
-        if (existingEmbed) {
-          const nameForTitle = pokemon.isShiny
-            ? `${pokemonName} ⭐`
-            : pokemonName;
-          const catchTitle =
-            lang === "fr"
-              ? `${nameForTitle} capturé !`
-              : `${nameForTitle} captured!`;
-          const fieldName =
-            lang === "fr"
-              ? `Attrapé par ${memberDisplayName} !`
-              : `Caught by ${memberDisplayName}!`;
-          const totalLabel =
-            lang === "fr"
-              ? `Vous en possédez maintenant : **${newTotal}**`
-              : `You now own: **${newTotal}**`;
-
-          const updatedEmbed = EmbedBuilder.from(existingEmbed)
-            .setTitle(catchTitle)
-            .setColor(0x57f287)
-            .setFooter(null)
-            .addFields({ name: fieldName, value: totalLabel, inline: false });
-          await spawnMessage.edit({ embeds: [updatedEmbed] });
-        }
-      }
-    } catch (e) {
-      newLogger(
-        "error",
-        e as string,
-        "Error editing spawn message after catch",
-      );
-    }
-  }
-
+  await updateSpawnEmbed(
+    spawnMessageId,
+    interaction,
+    idChannel,
+    pokemon,
+    lang,
+    pokemonName,
+    memberDisplayName,
+    newTotal,
+  );
   await interaction.deleteReply();
+}
+
+function resolvePokemonName(
+  pokemonDbData: pokemonDb | undefined,
+  lang: string,
+  fallback: string,
+): string {
+  if (!pokemonDbData) return fallback;
+  return lang === "fr"
+    ? pokemonDbData.name.nameFr[0]
+    : pokemonDbData.name.nameEng[0];
+}
+
+async function handleSosBattle(
+  server: ServerType,
+  pokemon: Pokemon,
+  idChannel: string,
+  serverId: string,
+  interaction: ChatInputCommandInteraction,
+  statVersion: Stat,
+  statAll: Stat,
+): Promise<void> {
+  const nextChainLvl = (pokemon.sosChainLvl ?? 0) + 1;
+  const sosPokemonType = selectSosPokemon(server, pokemon.id, nextChainLvl);
+  const sosPokemon = Pokemon.from(sosPokemonType);
+  server.pokemonPresent[idChannel] = sosPokemon;
+  statVersion.addSpawn(sosPokemon);
+  statAll.addSpawn(sosPokemon);
+  try {
+    await updateServer(server.discordId, server);
+    await updateStat(version, statVersion);
+    await updateStat(nameStatGeneral, statAll);
+  } catch (e) {
+    newLogger("error", e as string, "Error updating caches after SOS spawn");
+  }
+  const { embed } = await generateEmbedSosPokemon(sosPokemonType, server);
+  const sosMessage = await interaction.followUp({ embeds: [embed] });
+  registerSpawnMessage(serverId, idChannel, sosMessage.id);
+}
+
+async function updateSpawnEmbed(
+  spawnMessageId: string | undefined,
+  interaction: ChatInputCommandInteraction,
+  idChannel: string,
+  pokemon: Pokemon,
+  lang: string,
+  pokemonName: string,
+  memberDisplayName: string,
+  newTotal: number,
+): Promise<void> {
+  if (!spawnMessageId) return;
+  try {
+    const channel = await interaction.client.channels.fetch(idChannel);
+    if (
+      !channel ||
+      !channel.isTextBased() ||
+      !(channel instanceof BaseGuildTextChannel)
+    )
+      return;
+    const spawnMessage = await channel.messages.fetch(spawnMessageId);
+    const existingEmbed = spawnMessage.embeds[0];
+    if (!existingEmbed) return;
+
+    const nameForTitle = pokemon.isShiny ? `${pokemonName} ⭐` : pokemonName;
+    const catchTitle =
+      lang === "fr" ? `${nameForTitle} capturé !` : `${nameForTitle} captured!`;
+    const fieldName =
+      lang === "fr"
+        ? `Attrapé par ${memberDisplayName} !`
+        : `Caught by ${memberDisplayName}!`;
+    const totalLabel =
+      lang === "fr"
+        ? `Vous en possédez maintenant : **${newTotal}**`
+        : `You now own: **${newTotal}**`;
+
+    const updatedEmbed = EmbedBuilder.from(existingEmbed)
+      .setTitle(catchTitle)
+      .setColor(0x57f287)
+      .setFooter(null)
+      .addFields({ name: fieldName, value: totalLabel, inline: false });
+    await spawnMessage.edit({ embeds: [updatedEmbed] });
+  } catch (e) {
+    newLogger("error", e as string, "Error editing spawn message after catch");
+  }
 }
 
 async function handleRaidCatch(
