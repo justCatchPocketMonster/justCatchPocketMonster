@@ -20,7 +20,7 @@ export const selectEventStandard = async (server: ServerType) => {
     randomEvent.color,
     randomEvent.image,
     "",
-    new Date(Date.now() + 30 * 1000),
+    new Date(Date.now() + 30 * 60 * 1000),
     randomEvent.statMultipliers,
   );
 
@@ -39,7 +39,6 @@ const DURATIONS = {
 };
 
 const imagePerLvl = ["0012-000", "0012-001", "0012-002"];
-const date = new Date();
 const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
   const level = getLevel();
   const eventId = eventSpawn.whatEvent!.id;
@@ -131,7 +130,7 @@ function getRandomType(): keyof TypeStat {
 }
 
 function addDuration(ms: number) {
-  return new Date(date.getTime() + ms);
+  return new Date(Date.now() + ms);
 }
 
 function getLevel() {

@@ -180,7 +180,14 @@ async function handleSosBattle(
     );
   }
   const { embed } = await generateEmbedSosPokemon(sosPokemonType, server);
-  const sosMessage = await interaction.followUp({ embeds: [embed] });
+  const channel = await interaction.client.channels.fetch(idChannel);
+  if (
+    !channel ||
+    !channel.isTextBased() ||
+    !(channel instanceof BaseGuildTextChannel)
+  )
+    return;
+  const sosMessage = await channel.send({ embeds: [embed] });
   registerSpawnMessage(serverId, idChannel, sosMessage.id);
 }
 
