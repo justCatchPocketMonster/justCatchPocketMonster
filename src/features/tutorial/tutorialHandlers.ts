@@ -107,11 +107,13 @@ function createTutorialHandler(
   getMenu: (server: Server) => MenuOption,
 ): new (server: Server) => MenuHandler {
   return class implements MenuHandler {
-    constructor(private server: Server) {}
+    constructor(private readonly server: Server) {}
     getMenuStructure(): MenuOption {
       return getMenu(this.server);
     }
-    handleAction(_selectionPath: SelectionPath[]): void {}
+    handleAction(_selectionPath: SelectionPath[]): void {
+      /* no-op */
+    }
   };
 }
 

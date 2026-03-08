@@ -43,17 +43,12 @@ export default {
           null,
           language("principalPage", server.settings.language),
         ),
-      );
-
-      pages.push(
         createPageForMenu(
           embedRequiredinformation(server),
           null,
           language("mentionObligatoireTitle", server.settings.language),
           language("mentionObligatoireDesc", server.settings.language),
         ),
-      );
-      pages.push(
         createPageForMenu(
           codeListEmbed(user, server, stat),
           null,

@@ -4,7 +4,6 @@ import { ServerType, ServerSettings } from "../types/ServerType";
 import { defaultLanguage } from "../../config/default/server";
 import { SaveAllPokemon } from "./SaveAllPokemon";
 import { Event } from "./Event";
-import type { LanguageKey } from "../../lang/language";
 import {
   maximumCount,
   minimumCount,

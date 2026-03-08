@@ -8,7 +8,7 @@ function generateInitialHint(namePokemon: string, realName: string): string[] {
   if (namePokemon !== realName) {
     return namePokemon.split("");
   }
-  return namePokemon.replace(/[a-zA-Z0-9]/g, "_").split("");
+  return namePokemon.replaceAll(/[a-zA-Z0-9]/g, "_").split("");
 }
 
 function revealRandomLetter(

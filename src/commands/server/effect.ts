@@ -1,10 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import {
-  AttachmentBuilder,
-  ChatInputCommandInteraction,
-  ColorResolvable,
-  EmbedBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";

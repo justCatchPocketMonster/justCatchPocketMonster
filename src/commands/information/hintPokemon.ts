@@ -60,7 +60,7 @@ export default {
             server.pokemonPresent[channel.id].hint +
             " " +
             language("forChannel", server.settings.language) +
-            channel.toString(),
+            `<#${channel.id}>`,
         });
         return;
       }

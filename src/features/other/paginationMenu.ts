@@ -29,15 +29,15 @@ export function createPageForMenu(
     descriptionSelection,
   };
 
-  if (image !== null) {
+  if (image === null) {
     return {
       page,
-      imagePage: image,
       information: info,
     };
   } else {
     return {
       page,
+      imagePage: image,
       information: info,
     };
   }

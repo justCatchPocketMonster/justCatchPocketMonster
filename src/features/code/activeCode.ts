@@ -29,14 +29,8 @@ function activeCodeShiny(
   const pokemonChoiced = selectPokemon(Server.createDefault("id"));
   pokemonChoiced.isShiny = true;
 
-  let memberDisplayName = "";
   const member = interaction.member as GuildMember;
-
-  if (member.nickname != null) {
-    memberDisplayName = member.nickname;
-  } else {
-    memberDisplayName = member.displayName;
-  }
+  const memberDisplayName = member.nickname ?? member.displayName;
 
   user.savePokemon.addOneCatch(pokemonChoiced);
   interaction.reply(

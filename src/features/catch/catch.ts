@@ -276,9 +276,9 @@ export function generateCatchMessage(
     language("congratYouCatchPart1", server.settings.language) +
     memberDisplayName +
     language("congratYouCatchPart2", server.settings.language) +
-    (pokemon.name.nameFr[0] !== pokemon.name.nameEng[0]
-      ? `${pokemon.name.nameFr[0]}/${pokemon.name.nameEng[0]}`
-      : pokemon.name.nameFr[0]);
+    (pokemon.name.nameFr[0] === pokemon.name.nameEng[0]
+      ? pokemon.name.nameFr[0]
+      : `${pokemon.name.nameFr[0]}/${pokemon.name.nameEng[0]}`);
 
   if (pokemon.isShiny) {
     message += ":star:. ";

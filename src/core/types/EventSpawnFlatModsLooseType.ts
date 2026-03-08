@@ -1,21 +1,19 @@
 import type { EventType } from "./EventType";
 import type { GenStat, TypeStat, RarityStat } from "./EventSpawnType";
 
-export type Percent = number;
-
-type NumericMods<T> = Partial<Record<keyof T, Percent>>;
+type NumericMods<T> = Partial<Record<keyof T, number>>;
 
 export type EventSpawnFlatModsStrict = NumericMods<GenStat> &
   NumericMods<TypeStat> &
   NumericMods<RarityStat> &
   Partial<{
-    generationRandom: Percent;
-    typeRandom: Percent;
-    shiny: Percent;
-    valueMaxChoiceEgg: Percent;
-    valueMaxChoiceRaid: Percent;
-    min: Percent;
-    max: Percent;
+    generationRandom: number;
+    typeRandom: number;
+    shiny: number;
+    valueMaxChoiceEgg: number;
+    valueMaxChoiceRaid: number;
+    min: number;
+    max: number;
 
     mega: boolean;
     giga: boolean;

@@ -1,5 +1,5 @@
-import { activeCode } from "./activeCode";
-import { codeType } from "./codeType";
+export { activeCode } from "./activeCode";
+export { codeType } from "./codeType";
 import { eventCode, landings } from "../../config/default/code";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
@@ -83,5 +83,3 @@ export function codeListEmbed(
   }
   return embed;
 }
-
-export { activeCode, codeType };
