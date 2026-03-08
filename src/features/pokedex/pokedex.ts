@@ -29,7 +29,7 @@ export async function pokedex(
   interaction: ChatInputCommandInteraction,
   user: UserType,
   server: ServerType,
-  pageChoice: number | null,
+  pageChoice: number | null = null,
 ) {
   const maxPokemonParPage = 21;
   const arrayEmbed: PageData[] = [];

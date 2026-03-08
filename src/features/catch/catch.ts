@@ -124,17 +124,22 @@ export async function catchPokemon(
     pokemon.id,
   ).normalCount;
 
-  await updateSpawnEmbed(
-    spawnMessageId,
-    interaction,
-    idChannel,
-    pokemon,
+  await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
     lang,
     pokemonName,
+    isShiny: pokemon.isShiny ?? false,
     memberDisplayName,
     newTotal,
-  );
+  });
   await interaction.deleteReply();
+}
+
+interface SpawnEmbedUpdate {
+  lang: string;
+  pokemonName: string;
+  isShiny: boolean;
+  memberDisplayName: string;
+  newTotal: number;
 }
 
 function resolvePokemonName(
@@ -179,11 +184,7 @@ async function updateSpawnEmbed(
   spawnMessageId: string | undefined,
   interaction: ChatInputCommandInteraction,
   idChannel: string,
-  pokemon: Pokemon,
-  lang: string,
-  pokemonName: string,
-  memberDisplayName: string,
-  newTotal: number,
+  { lang, pokemonName, isShiny, memberDisplayName, newTotal }: SpawnEmbedUpdate,
 ): Promise<void> {
   if (!spawnMessageId) return;
   try {
@@ -198,7 +199,7 @@ async function updateSpawnEmbed(
     const existingEmbed = spawnMessage.embeds[0];
     if (!existingEmbed) return;
 
-    const nameForTitle = pokemon.isShiny ? `${pokemonName} ⭐` : pokemonName;
+    const nameForTitle = isShiny ? `${pokemonName} ⭐` : pokemonName;
     const catchTitle =
       lang === "fr" ? `${nameForTitle} capturé !` : `${nameForTitle} captured!`;
     const fieldName =
