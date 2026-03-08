@@ -93,6 +93,10 @@ function shinySelect(
     tauxShiny /= 1.1;
   }
 
+  if (server.charmeChroma) {
+    tauxShiny /= 10;
+  }
+
   let nbRandomShiny: number = random(tauxShiny);
   return nbRandomShiny === 1;
 }

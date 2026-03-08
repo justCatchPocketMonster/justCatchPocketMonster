@@ -43,12 +43,9 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-
-    expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock).toHaveBeenCalledWith(
-      "Congratulations TestNick, you caught one Keunotor/Bidoof. ",
-    );
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     await checkCatchForAllSavePokemon(interaction, 1, 0);
   });
 
@@ -68,12 +65,9 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-
-    expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock).toHaveBeenCalledWith(
-      "Congratulations TestNick, you caught one Keunotor/Bidoof:star:. ",
-    );
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     await checkCatchForAllSavePokemon(interaction, 1, 1);
   });
 
@@ -94,17 +88,12 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-
-    expect(replyMock).toHaveBeenCalledTimes(2);
-    expect(replyMock).toHaveBeenNthCalledWith(
-      1,
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.followUp).toHaveBeenCalledWith(
       expect.stringContaining("shiny"),
     );
-    expect(replyMock).toHaveBeenNthCalledWith(
-      2,
-      "Congratulations TestNick, you caught one Keunotor/Bidoof:star:. ",
-    );
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     await checkCatchForAllSavePokemon(interaction, 1, 1);
     jest.spyOn(Math, "random").mockRestore();
   });
@@ -126,17 +115,12 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-
-    expect(replyMock).toHaveBeenCalledTimes(2);
-    expect(replyMock).toHaveBeenNthCalledWith(
-      1,
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.followUp).toHaveBeenCalledWith(
       expect.stringContaining("not shiny"),
     );
-    expect(replyMock).toHaveBeenNthCalledWith(
-      2,
-      "Congratulations TestNick, you caught one Keunotor/Bidoof. ",
-    );
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     await checkCatchForAllSavePokemon(interaction, 1, 0);
     mathRandomSpy.mockRestore();
   });
@@ -214,11 +198,9 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-    expect(replyMock).toHaveBeenCalledTimes(1);
-    expect(replyMock).toHaveBeenCalledWith(
-      expect.stringContaining("Test Member"),
-    );
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     jest.spyOn(helperFunction, "random").mockRestore();
   });
 
@@ -243,8 +225,9 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     // then
-    const replyMock = interaction.reply as jest.Mock;
-    expect(replyMock).toHaveBeenCalledTimes(1);
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
 
     updateUserSpy.mockRestore();
     jest.spyOn(helperFunction, "random").mockRestore();
@@ -304,8 +287,10 @@ describe("catch command", () => {
 
     await catchPokemon.execute(interaction);
 
-    expect(interaction.reply).toHaveBeenCalledTimes(1);
+    expect(interaction.deferReply).toHaveBeenCalledTimes(1);
     expect(interaction.followUp).toHaveBeenCalledTimes(1);
+    expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
+    expect(interaction.reply).not.toHaveBeenCalled();
     const serverThen = await getServerById(interaction.guildId!);
     const sosPokemon = serverThen.pokemonPresent[interaction.channel.id];
     expect(sosPokemon).toBeDefined();

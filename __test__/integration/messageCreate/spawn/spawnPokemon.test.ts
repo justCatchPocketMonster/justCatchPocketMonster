@@ -122,7 +122,7 @@ describe("Spawn Pokemon", () => {
       expect(data).toBeDefined();
       expect(data).not.toBeNull();
       expect(data?.embed.data.title).toBe("Wild Pokémon appeared!");
-      expect(data?.embed.data.description).toBe(
+      expect(data?.embed.data.footer?.text).toContain(
         'To catch it, do "/catch [Pokémon\'s name]".',
       );
 

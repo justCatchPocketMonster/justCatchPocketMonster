@@ -194,6 +194,120 @@ describe("paginationMenu", () => {
     });
   });
 
+  test("should handle __prev__ navigation to switch to previous group", async () => {
+    const pages: PageData[] = new Array(30).fill(null).map((_, i) => ({
+      page: new EmbedBuilder().setTitle(`Page ${i}`),
+      information: { nameSelection: `Page ${i}` },
+    }));
+
+    const selectInteraction = {
+      user: { id: interaction.user.id },
+      values: ["__prev__"],
+      deferUpdate: jest.fn().mockResolvedValue(undefined),
+      editReply: jest.fn().mockResolvedValue(undefined),
+    };
+
+    const mockMessage = {
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => callback(selectInteraction), 10);
+          }
+          return { on: jest.fn(), stop: jest.fn() };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+
+    await paginationMenu(interaction, "Select", pages, 26);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(selectInteraction.deferUpdate).toHaveBeenCalled();
+    expect(selectInteraction.editReply).toHaveBeenCalled();
+  });
+
+  test("should handle __next__ navigation to switch to next group", async () => {
+    const pages: PageData[] = new Array(50).fill(null).map((_, i) => ({
+      page: new EmbedBuilder().setTitle(`Page ${i}`),
+      information: { nameSelection: `Page ${i}` },
+    }));
+
+    const selectInteraction = {
+      user: { id: interaction.user.id },
+      values: ["__next__"],
+      deferUpdate: jest.fn().mockResolvedValue(undefined),
+      editReply: jest.fn().mockResolvedValue(undefined),
+    };
+
+    const mockMessage = {
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => callback(selectInteraction), 10);
+          }
+          return { on: jest.fn(), stop: jest.fn() };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+
+    await paginationMenu(interaction, "Select", pages, 1);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(selectInteraction.deferUpdate).toHaveBeenCalled();
+    expect(selectInteraction.editReply).toHaveBeenCalled();
+  });
+
+  test("should include files when updated page has an imagePage", async () => {
+    const image1 = new AttachmentBuilder(Buffer.from("img1"), {
+      name: "p1.png",
+    });
+    const image2 = new AttachmentBuilder(Buffer.from("img2"), {
+      name: "p2.png",
+    });
+    const pages: PageData[] = [
+      {
+        page: new EmbedBuilder().setTitle("Page 0"),
+        imagePage: image1,
+        information: { nameSelection: "Page 0" },
+      },
+      {
+        page: new EmbedBuilder().setTitle("Page 1"),
+        imagePage: image2,
+        information: { nameSelection: "Page 1" },
+      },
+    ];
+
+    const selectInteraction = {
+      user: { id: interaction.user.id },
+      values: ["1"],
+      deferUpdate: jest.fn().mockResolvedValue(undefined),
+      editReply: jest.fn().mockResolvedValue(undefined),
+    };
+
+    const mockMessage = {
+      createMessageComponentCollector: jest.fn().mockReturnValue({
+        on: jest.fn((event, callback) => {
+          if (event === "collect") {
+            setTimeout(() => callback(selectInteraction), 10);
+          }
+          return { on: jest.fn(), stop: jest.fn() };
+        }),
+        stop: jest.fn(),
+      }),
+    };
+    (interaction.reply as jest.Mock).mockResolvedValue(mockMessage);
+
+    await paginationMenu(interaction, "Select", pages);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(selectInteraction.editReply).toHaveBeenCalledWith(
+      expect.objectContaining({ files: [image2] }),
+    );
+  });
+
   test("should handle loop limit in collector", async () => {
     const embed = new EmbedBuilder().setTitle("Test");
     const pages: PageData[] = new Array(1001).fill(null).map((_, i) => ({

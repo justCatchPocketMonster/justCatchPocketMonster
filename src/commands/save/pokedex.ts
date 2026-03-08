@@ -37,7 +37,7 @@ export default {
         language("pokedexNameOptionStringPage", "eng"),
       );
 
-      pokedex(interaction, user, server, numberPage);
+      await pokedex(interaction, user, server, numberPage);
     } catch (e) {
       newLogger(
         "error",
