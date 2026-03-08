@@ -727,7 +727,7 @@ describe("catch", () => {
       expect(interaction.deleteReply).toHaveBeenCalled();
     });
 
-    it("should trigger SOS followUp when canSosBattle and random returns 1", async () => {
+    it("should trigger SOS channel.send when canSosBattle and random returns 1", async () => {
       const pokemon = Pokemon.from({
         id: "25",
         name: { nameEng: ["Pikachu"], nameFr: ["Pikachu"] },
@@ -760,8 +760,16 @@ describe("catch", () => {
       });
       spawn.generateEmbedSosPokemon.mockResolvedValue({ embed: {} });
 
+      const mockSend = jest.fn().mockResolvedValue({ id: "sos-msg-id" });
+      const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+      mockChannel.isTextBased = () => true;
+      mockChannel.send = mockSend;
+
       const user = createMockUser();
       const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+      };
 
       await catchPokemon(
         user as any,
@@ -772,7 +780,8 @@ describe("catch", () => {
       );
 
       expect(selectSosPokemon.selectSosPokemon).toHaveBeenCalled();
-      expect(interaction.followUp).toHaveBeenCalled();
+      expect(mockSend).toHaveBeenCalled();
+      expect(interaction.followUp).not.toHaveBeenCalled();
     });
   });
 

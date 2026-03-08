@@ -8,7 +8,7 @@ import { getServerById, updateServer } from "../../../../src/cache/ServerCache";
 import catchPokemon from "../../../../src/commands/user/catchPokemon";
 import { Pokemon } from "../../../../src/core/classes/Pokemon";
 import { initHint } from "../../../../src/features/hint/initHint";
-import { ChatInputCommandInteraction } from "discord.js";
+import { BaseGuildTextChannel, ChatInputCommandInteraction } from "discord.js";
 import { generateCatchMessage } from "../../../../src/features/catch/catch";
 import * as helperFunction from "../../../../src/utils/helperFunction";
 
@@ -268,10 +268,20 @@ describe("catch command", () => {
     expect(message).toContain("Keunotor/Bidoof");
   });
 
-  test("Catch pokemon with canSosBattle triggers SOS and followUp with new pokemon", async () => {
+  test("Catch pokemon with canSosBattle triggers SOS channel.send with new pokemon", async () => {
     jest
       .spyOn(helperFunction, "random")
       .mockImplementation((n: number) => (n === 2 ? 1 : 0));
+
+    const mockSend = jest.fn().mockResolvedValue({ id: "sos-msg-id" });
+    const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+    mockChannel.isTextBased = () => true;
+    mockChannel.send = mockSend;
+    mockChannel.messages = { fetch: jest.fn().mockResolvedValue({ embeds: [], edit: jest.fn() }) };
+    (interaction as any).client = {
+      channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+    };
+
     const serverGiven = await getServerById(interaction.guildId);
     serverGiven.pokemonPresent[interaction.channel.id] = defaultPokemon(
       false,
@@ -288,7 +298,8 @@ describe("catch command", () => {
     await catchPokemon.execute(interaction);
 
     expect(interaction.deferReply).toHaveBeenCalledTimes(1);
-    expect(interaction.followUp).toHaveBeenCalledTimes(1);
+    expect(mockSend).toHaveBeenCalledTimes(1);
+    expect(interaction.followUp).not.toHaveBeenCalled();
     expect(interaction.deleteReply).toHaveBeenCalledTimes(1);
     expect(interaction.reply).not.toHaveBeenCalled();
     const serverThen = await getServerById(interaction.guildId!);
