@@ -293,6 +293,185 @@ describe("TradeValidation", () => {
   });
 
   describe("executeTrade", () => {
+    it("should decrement shinyCount when normalCount is 0 (shiny-only pokemon)", async () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_shiny",
+        initiatorId: "user_sh1",
+        targetId: "user_sh2",
+        serverId: "server1",
+        status: "confirming",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+        initiatorChoice: {
+          pokemonKey: "25-ordinary-1",
+          pokemonId: "25",
+          rarity: "ordinary",
+        },
+        targetChoice: {
+          pokemonKey: "1-ordinary-1",
+          pokemonId: "1",
+          rarity: "ordinary",
+        },
+      };
+
+      const initiatorData = {
+        "25-ordinary-1": {
+          idPokemon: "25",
+          rarity: "ordinary",
+          form: "ordinary",
+          versionForm: 1,
+          normalCount: 0,
+          shinyCount: 3,
+        },
+      };
+      const targetData = {
+        "1-ordinary-1": {
+          idPokemon: "1",
+          rarity: "ordinary",
+          form: "ordinary",
+          versionForm: 1,
+          normalCount: 3,
+          shinyCount: 0,
+        },
+      };
+
+      (getUserById as jest.Mock).mockImplementation(async (id: string) => {
+        if (id === "user_sh1")
+          return {
+            discordId: "user_sh1",
+            savePokemon: { data: initiatorData },
+          };
+        if (id === "user_sh2")
+          return { discordId: "user_sh2", savePokemon: { data: targetData } };
+        return null;
+      });
+      (updateUser as jest.Mock).mockResolvedValue(undefined);
+
+      const result = await executeTrade(tradeData);
+      expect(result).toBe(true);
+      expect(initiatorData["25-ordinary-1"].shinyCount).toBe(2);
+    });
+
+    it("should handle null targetReceived when target pokemon key not in allPokemon", async () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_nullreceived",
+        initiatorId: "user_nr1",
+        targetId: "user_nr2",
+        serverId: "server1",
+        status: "confirming",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+        initiatorChoice: {
+          pokemonKey: "9999-ordinary-1",
+          pokemonId: "9999",
+          rarity: "ordinary",
+        },
+        targetChoice: {
+          pokemonKey: "25-ordinary-1",
+          pokemonId: "25",
+          rarity: "ordinary",
+        },
+      };
+
+      type PokemonEntry = {
+        idPokemon: string;
+        rarity: string;
+        form: string;
+        versionForm: number;
+        normalCount: number;
+        shinyCount: number;
+      };
+      const initiatorData: Record<string, PokemonEntry> = {
+        "9999-ordinary-1": {
+          idPokemon: "9999",
+          rarity: "ordinary",
+          form: "ordinary",
+          versionForm: 1,
+          normalCount: 3,
+          shinyCount: 0,
+        },
+      };
+      const targetData: Record<string, PokemonEntry> = {
+        "25-ordinary-1": {
+          idPokemon: "25",
+          rarity: "ordinary",
+          form: "ordinary",
+          versionForm: 1,
+          normalCount: 3,
+          shinyCount: 0,
+        },
+      };
+
+      (getUserById as jest.Mock).mockImplementation(async (id: string) => {
+        if (id === "user_nr1")
+          return {
+            discordId: "user_nr1",
+            savePokemon: { data: initiatorData },
+          };
+        if (id === "user_nr2")
+          return { discordId: "user_nr2", savePokemon: { data: targetData } };
+        return null;
+      });
+      (updateUser as jest.Mock).mockResolvedValue(undefined);
+
+      const result = await executeTrade(tradeData);
+      expect(result).toBe(true);
+      // initiator receives Pikachu (25, exists in allPokemon) → normalCount++
+      expect(initiatorData["25-ordinary-1"]).toBeDefined();
+      // target would receive 9999 (not in allPokemon) → targetReceived is null → no increment
+    });
+
+    it("should return false and log error when getUserById throws during execution", async () => {
+      const tradeData: TradeData = {
+        tradeId: "test_trade_err",
+        initiatorId: "user_e1",
+        targetId: "user_e2",
+        serverId: "server1",
+        status: "confirming",
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 3600000,
+        initiatorChoice: {
+          pokemonKey: "25-ordinary-1",
+          pokemonId: "25",
+          rarity: "ordinary",
+        },
+        targetChoice: {
+          pokemonKey: "1-ordinary-1",
+          pokemonId: "1",
+          rarity: "ordinary",
+        },
+      };
+
+      const validUser = (discordId: string, pokemonKey: string) => ({
+        discordId,
+        savePokemon: {
+          data: {
+            [pokemonKey]: {
+              idPokemon: pokemonKey.split("-")[0],
+              rarity: "ordinary",
+              form: "ordinary",
+              versionForm: 1,
+              normalCount: 3,
+              shinyCount: 0,
+            },
+          },
+        },
+      });
+
+      let callCount = 0;
+      (getUserById as jest.Mock).mockImplementation(async (id: string) => {
+        callCount++;
+        if (callCount <= 2) {
+          if (id === "user_e1") return validUser("user_e1", "25-ordinary-1");
+          if (id === "user_e2") return validUser("user_e2", "1-ordinary-1");
+        }
+        throw new Error("DB error during execution");
+      });
+
+      const result = await executeTrade(tradeData);
+      expect(result).toBe(false);
+    });
+
     it("should return false when validation fails", async () => {
       const tradeData: TradeData = {
         tradeId: "test_trade",

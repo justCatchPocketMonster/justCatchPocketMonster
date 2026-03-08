@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { newLogger } from "../middlewares/logger";
 
-export default async () => {
+export default async function connectDatabase() {
   try {
     if (!process.env.MONGODB_URI) throw new Error("MONGODB_URI is not defined");
     await mongoose.connect(process.env.MONGODB_URI, {});
@@ -10,9 +10,9 @@ export default async () => {
   } catch (error) {
     newLogger(
       "error",
-      error as string,
+      error instanceof Error ? error.message : String(error),
       `Error in database connection: ${error instanceof Error ? error.message : "Unknown error"}`,
     );
     process.exit(1);
   }
-};
+}

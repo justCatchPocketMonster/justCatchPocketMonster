@@ -36,20 +36,10 @@ describe("TradeCache", () => {
       expect(extractId({ discordId: 789 } as any)).toBe("789");
     });
 
-    it("should JSON.stringify plain object without discordId", () => {
-      expect(extractId({ foo: "bar" })).toBe('{"foo":"bar"}');
-    });
-
-    it("should handle null", () => {
-      expect(extractId(null as any)).toBe("null");
-    });
-
-    it("should handle undefined", () => {
-      expect(extractId(undefined as any)).toBe("undefined");
-    });
-
-    it("should handle number", () => {
-      expect(extractId(42 as any)).toBe("42");
+    it("should throw for plain object without discordId", () => {
+      expect(() => extractId({ foo: "bar" } as any)).toThrow(
+        "extractId: received an object without a discordId field",
+      );
     });
   });
 
@@ -107,7 +97,7 @@ describe("TradeCache", () => {
       expect(trade?.targetId).toBe("67890");
     });
 
-    it("should handle trade with plain object as ID", () => {
+    it("should throw when trade has plain object as ID without discordId", () => {
       const tradeData: TradeData = {
         tradeId: "test_trade_2c",
         initiatorId: { foo: "bar" } as any,
@@ -118,10 +108,9 @@ describe("TradeCache", () => {
         expiresAt: Date.now() + 3600000,
       };
 
-      createTrade(tradeData);
-      const trade = getTrade("test_trade_2c");
-      expect(trade?.initiatorId).toBe('{"foo":"bar"}');
-      expect(trade?.targetId).toBe("user4");
+      expect(() => createTrade(tradeData)).toThrow(
+        "extractId: received an object without a discordId field",
+      );
     });
 
     it("should handle trade with expired TTL", () => {

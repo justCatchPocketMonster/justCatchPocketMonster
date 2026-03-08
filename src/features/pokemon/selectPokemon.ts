@@ -1,6 +1,7 @@
 import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
+import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 import allPokemon from "../../data/pokemon.json";
 import {
   hidePokemon,
@@ -47,7 +48,7 @@ export const selectEggPokemon = (
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
   if (idPokemon === 0) {
-    const randomIdPokemon = random(allPokemon[allPokemon.length].id);
+    const randomIdPokemon = random(allPokemon.at(-1)!.id);
     pokemonChoiced = selectPokemonWithId(randomIdPokemon, false);
   } else {
     pokemonChoiced = selectPokemonWithId(idPokemon, false);
@@ -107,7 +108,7 @@ function isHiddenPokemon(
 ): PokemonType {
   let randomNumber: number = random(hidePokemon.maxValue);
 
-  if (randomNumber == 1) {
+  if (randomNumber === 1) {
     const allPokemonWithId = allPokemon.filter((pokemon) =>
       hidePokemon.idPokemon.includes(pokemon.id),
     );
@@ -260,8 +261,7 @@ function generationSelect(server: ServerType): string {
   let somStatByGen = 0;
 
   for (let gen = 1; gen <= 9; gen++) {
-    // @ts-ignore
-    somStatByGen += server.eventSpawn.gen[gen];
+    somStatByGen += server.eventSpawn.gen[gen.toString() as keyof GenStat];
     if (randomNumber <= somStatByGen) {
       return gen.toString();
     }
@@ -274,8 +274,7 @@ function raritySelect(server: ServerType): string {
   let somStatByRarity = 0;
   let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (const element of arrayRarity) {
-    // @ts-ignore
-    somStatByRarity += server.eventSpawn.rarity[element];
+    somStatByRarity += server.eventSpawn.rarity[element as keyof RarityStat];
     if (randomNumber <= somStatByRarity) {
       return element;
     }
@@ -292,8 +291,7 @@ function typeSelect(server: ServerType): string {
   let arrayType: string[] = Object.keys(valuePerType);
 
   for (const element of arrayType) {
-    // @ts-ignore
-    somStatByType += server.eventSpawn.type[element];
+    somStatByType += server.eventSpawn.type[element as keyof TypeStat];
     if (randomNumber <= somStatByType) {
       return element;
     }

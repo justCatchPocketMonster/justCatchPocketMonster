@@ -3,7 +3,8 @@ import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 export const minimumCount = 4 + 1;
 export const maximumCount = 20;
 
-export const nbGeneration = 6;
+export const nbGeneration = 9;
+
 export const valuePerGen: GenStat = {
   "1": 100,
   "2": 100,

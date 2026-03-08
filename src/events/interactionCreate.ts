@@ -4,6 +4,7 @@ import {
   Client,
   GuildChannelResolvable,
   ButtonInteraction,
+  PermissionFlagsBits,
 } from "discord.js";
 import langue from "../commands/admin/langue";
 import spawn from "../commands/admin/spawn";
@@ -29,7 +30,6 @@ import { newLogger } from "../middlewares/logger";
 
 export default async (client: Client, interaction: Interaction) => {
   try {
-    // Handle button interactions for trades
     if (interaction instanceof ButtonInteraction) {
       if (interaction.customId.startsWith("trade_")) {
         const parts = interaction.customId.split("_");
@@ -55,13 +55,14 @@ export default async (client: Client, interaction: Interaction) => {
             case "cancel":
               await handleTradeCancel(interaction, tradeId);
               return;
+            default:
+              newLogger(
+                "warn",
+                `Unknown trade button action: ${action} for trade ${tradeId}`,
+              );
           }
         }
       }
-      return;
-    }
-
-    if (!verification(client, interaction as ChatInputCommandInteraction)) {
       return;
     }
 
@@ -69,6 +70,10 @@ export default async (client: Client, interaction: Interaction) => {
       interaction instanceof ChatInputCommandInteraction &&
       interaction.isCommand()
     ) {
+      if (!verification(client, interaction)) {
+        return;
+      }
+
       switch (interaction.commandName) {
         case langue.name:
           await langue.execute(interaction);
@@ -114,7 +119,7 @@ export default async (client: Client, interaction: Interaction) => {
   } catch (e) {
     newLogger(
       "error",
-      e as string,
+      e instanceof Error ? e.message : String(e),
       `Error in interactionCreate event for user ${interaction.user.id} in server ${interaction.guild?.id}`,
     );
   }
@@ -124,9 +129,6 @@ function verification(
   client: Client,
   interaction: ChatInputCommandInteraction,
 ): boolean {
-  const permissionRequiredSendMessage = "SendMessages";
-  const permissionRequiredViewChannel = "ViewChannel";
-
   const server = interaction.guild;
   const botMember = client.user
     ? server?.members.cache.get(client.user.id)
@@ -138,10 +140,10 @@ function verification(
     if (interaction.channel?.isTextBased()) {
       canSendMessage = botMember
         .permissionsIn(interaction.channel as GuildChannelResolvable)
-        .has(permissionRequiredSendMessage);
+        .has(PermissionFlagsBits.SendMessages);
       canViewChannel = botMember
         .permissionsIn(interaction.channel as GuildChannelResolvable)
-        .has(permissionRequiredViewChannel);
+        .has(PermissionFlagsBits.ViewChannel);
     }
   }
   return canViewChannel && canSendMessage;

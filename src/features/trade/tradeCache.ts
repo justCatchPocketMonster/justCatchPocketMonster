@@ -43,9 +43,11 @@ export interface TradeBlock {
   expiresAt: number;
 }
 
+const BLOCK_TTL_SECONDS = 604800;
+
 const tradeCache = new NodeCache({ stdTTL: ttlCache });
 const cooldownCache = new NodeCache({ stdTTL: ttlCache });
-const blockCache = new NodeCache({ stdTTL: 604800 });
+const blockCache = new NodeCache({ stdTTL: BLOCK_TTL_SECONDS });
 
 export function extractId(
   value: string | { discordId: string } | Record<string, unknown>,
@@ -55,10 +57,9 @@ export function extractId(
     const discordId = (value as { discordId: string }).discordId;
     return typeof discordId === "string" ? discordId : String(discordId);
   }
-  if (typeof value === "object" && value !== null) {
-    return JSON.stringify(value);
-  }
-  return String(value);
+  throw new Error(
+    `extractId: received an object without a discordId field: ${JSON.stringify(value)}`,
+  );
 }
 
 export function createTrade(tradeData: TradeData): void {

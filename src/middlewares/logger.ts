@@ -62,13 +62,14 @@ const logger = createLogger({
 });
 
 export function newLogger(
-  level: string,
-  message: string,
+  level: "error" | "warn" | "info" | "debug",
+  message: string | Error,
   ...args: any[]
 ): void {
   const callerInfo = getCallerInfo();
+  const messageStr = message instanceof Error ? message.message : message;
   const fullMessage =
-    args.length > 0 ? `${message} ${args.join(" ")}` : message;
+    args.length > 0 ? `${messageStr} ${args.join(" ")}` : messageStr;
 
   const logData: TransformableInfo = {
     level,

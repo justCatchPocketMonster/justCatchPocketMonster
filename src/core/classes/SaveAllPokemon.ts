@@ -107,7 +107,14 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     const key = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
 
     if (!this.data[key]) {
-      throw new Error(`Pokemon non référencé : ${key}`);
+      this.data[key] = new SaveOnePokemon(
+        pokemon.id,
+        pokemon.rarity,
+        pokemon.form,
+        pokemon.versionForm,
+        0,
+        0,
+      );
     }
 
     this.data[key].normalCount++;

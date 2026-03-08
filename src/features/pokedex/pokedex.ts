@@ -313,6 +313,9 @@ export function getPokedexColor(user: UserType): ColorResolvable {
     { min: 386, max: 493 },
     { min: 493, max: 649 },
     { min: 649, max: 721 },
+    { min: 721, max: 809 },
+    { min: 809, max: 905 },
+    { min: 905, max: 1025 },
   ];
 
   const totalRegions = regions.length;
@@ -345,6 +348,9 @@ function generateFieldRegionStat(
     { name: "Sinnoh", min: 386, max: 493 },
     { name: "Unys", min: 493, max: 649 },
     { name: "Kalos", min: 649, max: 721 },
+    { name: "Alola", min: 721, max: 809 },
+    { name: "Galar", min: 809, max: 905 },
+    { name: "Paldea", min: 905, max: 1025 },
   ];
 
   return regions.map(({ name, min, max }) =>
@@ -352,7 +358,16 @@ function generateFieldRegionStat(
   );
 }
 
-type RegionName = "Kanto" | "Johto" | "Hoenn" | "Sinnoh" | "Unys" | "Kalos";
+type RegionName =
+  | "Kanto"
+  | "Johto"
+  | "Hoenn"
+  | "Sinnoh"
+  | "Unys"
+  | "Kalos"
+  | "Alola"
+  | "Galar"
+  | "Paldea";
 function processRegion(
   user: UserType,
   server: ServerType,

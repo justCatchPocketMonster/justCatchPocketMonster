@@ -7,6 +7,7 @@ import {
   registerSpawnMessage,
   clearSpawnMessage,
 } from "../../../../src/features/spawn/spawnMessageRegistry";
+import { BaseGuildTextChannel } from "discord.js";
 
 jest.mock("../../../../src/features/raid/raidManager", () => ({
   isChannelInRaid: jest.fn(),
@@ -462,6 +463,268 @@ describe("catch", () => {
       );
 
       expect(raidManager.resolveRaid).toHaveBeenCalled();
+    });
+
+    it("should reply noPokemonDisponible when joinRaid returns null raid", async () => {
+      raidManager.isChannelInRaid.mockReturnValue(true);
+      raidManager.joinRaid.mockReturnValue({ joined: true, raid: null });
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      const interaction = createMockInteraction();
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(interaction.reply).toHaveBeenCalledWith(
+        expect.stringMatching(/no|pokémon|present/i),
+      );
+    });
+
+    it("should edit spawn message when channel exists and embed is present", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const mockEdit = jest.fn().mockResolvedValue(undefined);
+      const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+      mockChannel.isTextBased = () => true;
+      mockChannel.messages = {
+        fetch: jest.fn().mockResolvedValue({
+          embeds: [{ title: "A wild Bidoof appeared!", color: 0xff0000 }],
+          edit: mockEdit,
+        }),
+      };
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+      };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(mockEdit).toHaveBeenCalled();
+      clearSpawnMessage("guild1", "channel1");
+    });
+
+    it("should skip embed edit when spawnMessage has no embeds", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const mockEdit = jest.fn();
+      const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+      mockChannel.isTextBased = () => true;
+      mockChannel.messages = {
+        fetch: jest.fn().mockResolvedValue({
+          embeds: [],
+          edit: mockEdit,
+        }),
+      };
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+      };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(mockEdit).not.toHaveBeenCalled();
+      clearSpawnMessage("guild1", "channel1");
+    });
+
+    it("should include shiny star in edited embed title when pokemon is shiny", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: true,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const mockEdit = jest.fn().mockResolvedValue(undefined);
+      const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+      mockChannel.isTextBased = () => true;
+      mockChannel.messages = {
+        fetch: jest.fn().mockResolvedValue({
+          embeds: [{ title: "A wild Bidoof appeared!", color: 0xff0000 }],
+          edit: mockEdit,
+        }),
+      };
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+      };
+      eventShinyAfterCatch.eventShinyAfterCatch.mockReturnValue(true);
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(mockEdit).toHaveBeenCalled();
+      const editArg = mockEdit.mock.calls[0][0];
+      const embedTitle = editArg?.embeds?.[0]?.data?.title ?? "";
+      expect(embedTitle).toContain("⭐");
+      clearSpawnMessage("guild1", "channel1");
+    });
+
+    it("should use French labels in edited embed when language is fr", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      (server as any).settings = { language: "fr" };
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const mockEdit = jest.fn().mockResolvedValue(undefined);
+      const mockChannel = Object.create(BaseGuildTextChannel.prototype);
+      mockChannel.isTextBased = () => true;
+      mockChannel.messages = {
+        fetch: jest.fn().mockResolvedValue({
+          embeds: [{ title: "A wild Bidoof appeared!", color: 0xff0000 }],
+          edit: mockEdit,
+        }),
+      };
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
+      };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Keunotor",
+        interaction as any,
+      );
+
+      expect(mockEdit).toHaveBeenCalled();
+      const editArg = mockEdit.mock.calls[0][0];
+      const fields = editArg?.embeds?.[0]?.data?.fields ?? [];
+      const fieldNames = fields.map((f: any) => f.name).join(" ");
+      expect(fieldNames).toMatch(/attrapé|capturé|possédez/i);
+      clearSpawnMessage("guild1", "channel1");
+    });
+
+    it("should use fallback pokemon name when pokemon id not found in allPokemon", async () => {
+      const pokemon = Pokemon.from({
+        id: "9999",
+        name: { nameEng: ["UnknownMon"], nameFr: ["UnknownMon"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "9999",
+        gen: 1,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "U___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const interaction = createMockInteraction();
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "UnknownMon",
+        interaction as any,
+      );
+
+      expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
+      expect(interaction.deleteReply).toHaveBeenCalled();
     });
 
     it("should trigger SOS followUp when canSosBattle and random returns 1", async () => {

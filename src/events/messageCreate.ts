@@ -23,51 +23,28 @@ export default async (client: Client, message: Message) => {
     )
       return;
 
-    if (result.image) {
-      const sentMessage = await channel.send({
-        embeds: [result.embed],
-        files: [result.image],
-      });
+    const sentMessage = await channel.send(
+      result.image
+        ? { embeds: [result.embed], files: [result.image] }
+        : { embeds: [result.embed] },
+    );
 
-      if (result.isRaid && result.raidPokemon) {
-        startRaid(
-          client,
-          message.guild.id,
-          result.channelId,
-          result.raidPokemon,
-          sentMessage.id,
-        );
-      } else {
-        registerSpawnMessage(
-          message.guild.id,
-          result.channelId,
-          sentMessage.id,
-        );
-      }
+    if (result.isRaid && result.raidPokemon) {
+      startRaid(
+        client,
+        message.guild.id,
+        result.channelId,
+        result.raidPokemon,
+        sentMessage.id,
+      );
     } else {
-      const sentMessage = await channel.send({ embeds: [result.embed] });
-
-      if (result.isRaid && result.raidPokemon) {
-        startRaid(
-          client,
-          message.guild.id,
-          result.channelId,
-          result.raidPokemon,
-          sentMessage.id,
-        );
-      } else {
-        registerSpawnMessage(
-          message.guild.id,
-          result.channelId,
-          sentMessage.id,
-        );
-      }
+      registerSpawnMessage(message.guild.id, result.channelId, sentMessage.id);
     }
   } catch (e) {
     newLogger(
       "error",
-      e as string,
-      `Error in messageCreate event for server ${message.guild!.id} and channel ${message.channel.id}`,
+      e instanceof Error ? e.message : String(e),
+      `Error in messageCreate event for server ${message.guild?.id} and channel ${message.channel.id}`,
     );
   }
 };

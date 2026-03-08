@@ -1,6 +1,7 @@
 import {
   selectPokemon,
   selectEggPokemon,
+  selectSosPokemon,
   __deps,
 } from "../../../../src/features/pokemon/selectPokemon";
 import { resetTestEnv } from "../../../utils/resetTestEnv";
@@ -306,5 +307,74 @@ describe("selectPokemon", () => {
     const pokemon = selectPokemon(server, 0);
 
     expect(typeof pokemon.canSosBattle).toBe("boolean");
+  });
+});
+
+describe("selectSosPokemon", () => {
+  let server: any;
+
+  beforeAll(async () => {
+    const { resetTestEnv } = await import("../../../utils/resetTestEnv");
+    await resetTestEnv();
+    const { getServerById } = await import("../../../../src/cache/ServerCache");
+    const { createMockInteraction } = await import(
+      "../../../utils/mock/mockInteraction"
+    );
+    const interaction = createMockInteraction();
+    server = await getServerById(interaction.guildId!);
+    server.savePokemon.initMissingPokemons();
+    server.eventSpawn.allowedForm.mega = false;
+    server.eventSpawn.allowedForm.giga = false;
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("should return a SOS pokemon with correct structure", () => {
+    const result = selectSosPokemon(server, "25", 0);
+
+    expect(result.id).toBe("25");
+    expect(result.canSosBattle).toBe(true);
+    expect(result.sosChainLvl).toBe(0);
+    expect(typeof result.isShiny).toBe("boolean");
+    expect(typeof result.hint).toBe("string");
+  });
+
+  test("should return shiny SOS pokemon when random matches shiny rate", () => {
+    jest.spyOn(helperFunction, "random").mockReturnValue(1);
+
+    const result = selectSosPokemon(server, "25", 0);
+
+    expect(result.isShiny).toBe(true);
+  });
+
+  test("should return non-shiny SOS pokemon when random does not match", () => {
+    jest.spyOn(helperFunction, "random").mockReturnValue(0);
+
+    const result = selectSosPokemon(server, "25", 0);
+
+    expect(result.isShiny).toBe(false);
+  });
+
+  test("should throw when no allowed forms exist for unknown pokemon id", () => {
+    expect(() => selectSosPokemon(server, "9999", 0)).toThrow(
+      "No allowed form for SOS pokemon id 9999",
+    );
+  });
+
+  test("should use French name for hint when server language is fr", () => {
+    const frServer = { ...server, settings: { language: "fr" } };
+
+    const result = selectSosPokemon(frServer, "25", 0);
+
+    expect(result.hint).toBeDefined();
+    expect(typeof result.hint).toBe("string");
+  });
+
+  test("should pass through sosChainLvl unchanged", () => {
+    const result = selectSosPokemon(server, "25", 3);
+
+    expect(result.sosChainLvl).toBe(3);
   });
 });

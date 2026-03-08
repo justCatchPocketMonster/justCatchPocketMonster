@@ -412,7 +412,7 @@ describe("SaveAllPokemon", () => {
       expect(save.data["25-ordinary-1"].shinyCount).toBe(1);
     });
 
-    it("should throw when pokemon not in data", () => {
+    it("should auto-initialize and increment when pokemon not in data", () => {
       const save = new SaveAllPokemon({});
       const pokemon = Pokemon.from({
         id: "999",
@@ -427,7 +427,9 @@ describe("SaveAllPokemon", () => {
         hint: "U___",
       });
 
-      expect(() => save.addOneCatch(pokemon)).toThrow("Pokemon non référencé");
+      save.addOneCatch(pokemon);
+      expect(save.data["999-ordinary-1"].normalCount).toBe(1);
+      expect(save.data["999-ordinary-1"].shinyCount).toBe(0);
     });
   });
 

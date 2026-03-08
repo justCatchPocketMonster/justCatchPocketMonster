@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { StatType } from "../types/StatType";
-import { SaveOnePokemonSchema } from "./SaveOnePokemon";
 import { SaveAllPokemonSchema } from "./SaveAllPokemon";
 
 const StatSchema = new mongoose.Schema<StatType>(
@@ -14,9 +13,19 @@ const StatSchema = new mongoose.Schema<StatType>(
       type: Number,
       required: true,
     },
+    pokemonSpawnedShiny: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     pokemonCaught: {
       type: Number,
       required: true,
+    },
+    pokemonCaughtShiny: {
+      type: Number,
+      required: true,
+      default: 0,
     },
     savePokemonSpawn: {
       type: SaveAllPokemonSchema,
