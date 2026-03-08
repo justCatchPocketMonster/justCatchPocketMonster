@@ -277,7 +277,9 @@ describe("catch command", () => {
     const mockChannel = Object.create(BaseGuildTextChannel.prototype);
     mockChannel.isTextBased = () => true;
     mockChannel.send = mockSend;
-    mockChannel.messages = { fetch: jest.fn().mockResolvedValue({ embeds: [], edit: jest.fn() }) };
+    mockChannel.messages = {
+      fetch: jest.fn().mockResolvedValue({ embeds: [], edit: jest.fn() }),
+    };
     (interaction as any).client = {
       channels: { fetch: jest.fn().mockResolvedValue(mockChannel) },
     };
