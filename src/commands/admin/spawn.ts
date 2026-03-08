@@ -8,7 +8,7 @@ import {
   ChannelType,
   ChatInputCommandInteraction,
 } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
@@ -46,7 +46,8 @@ export default {
         //.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(false),
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
@@ -56,9 +57,13 @@ export default {
       const server = await getServerById(guildId);
       if (!interaction.channel) throw new Error("Channel not found");
 
-      const lang = server.language;
-      const boolOption = interaction.options.getBoolean(language("spawnNameOptionBool", "eng"));
-      const channelOption = interaction.options.getChannel(language("spawnNameOptionChannel", "eng"));
+      const lang = server.settings.language;
+      const boolOption = interaction.options.getBoolean(
+        language("spawnNameOptionBool", "eng"),
+      );
+      const channelOption = interaction.options.getChannel(
+        language("spawnNameOptionChannel", "eng"),
+      );
       const channel = channelOption ?? interaction.channel;
 
       const isAllowed = server.channelAllowed.includes(channel.id);
@@ -68,7 +73,9 @@ export default {
             content: language("spawnPokemonAlreadyActivate", lang),
           });
         } else {
-          server.channelAllowed = server.channelAllowed.filter(id => id !== channel.id);
+          server.channelAllowed = server.channelAllowed.filter(
+            (id) => id !== channel.id,
+          );
           await updateServer(server.discordId, server);
 
           await interaction.reply({
@@ -90,14 +97,13 @@ export default {
           content: language("spawnPokemonAlreadyDesactivate", lang),
         });
       }
-
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in spawn command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in spawn command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }
-  }
+  },
 };

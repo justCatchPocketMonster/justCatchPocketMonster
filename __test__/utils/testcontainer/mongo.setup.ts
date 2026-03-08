@@ -1,24 +1,34 @@
-import mongoose from 'mongoose';
-import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
+import mongoose from "mongoose";
+import { GenericContainer, StartedTestContainer, Wait } from "testcontainers";
 
-let container: StartedTestContainer;
+let container: StartedTestContainer | undefined;
 
 beforeAll(async () => {
-    container = await new GenericContainer('mongo:latest')
-        .withExposedPorts(27017)
-        .withWaitStrategy(Wait.forLogMessage('Waiting for connections'))
-        .start();
+  if (process.env.SKIP_TESTCONTAINERS === "1") {
+    // Allow running lightweight unit tests without Docker.
+    return;
+  }
 
-    const host = container.getHost();
-    const port = container.getMappedPort(27017);
-    const uri = `mongodb://${host}:${port}/test`;
+  container = await new GenericContainer("mongo:latest")
+    .withExposedPorts(27017)
+    .withWaitStrategy(Wait.forLogMessage("Waiting for connections"))
+    .start();
 
-    process.env.MONGODB_URI = uri;
+  const host = container.getHost();
+  const port = container.getMappedPort(27017);
+  const uri = `mongodb://${host}:${port}/test`;
 
-    await mongoose.connect(uri, { dbName: 'test' });
+  process.env.MONGODB_URI = uri;
+
+  await mongoose.connect(uri, { dbName: "test" });
 }, 60_000);
 
 afterAll(async () => {
-    await mongoose.disconnect();
+  if (process.env.SKIP_TESTCONTAINERS === "1") {
+    return;
+  }
+  await mongoose.disconnect();
+  if (container) {
     await container.stop();
+  }
 });

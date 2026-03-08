@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { PermissionFlagsBits, ChatInputCommandInteraction } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import { getServerById, updateServer } from "../../cache/ServerCache";
 import language from "../../lang/language";
 
@@ -35,7 +35,7 @@ export default {
         )
         .setRequired(true),
     )
-    .setDefaultMemberPermissions(0),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
@@ -48,23 +48,23 @@ export default {
         language("langNameOptionString", "eng"),
       );
 
-      if(!langOption) {
+      if (!langOption) {
         interaction.reply({
-          content: language("langErrorNoOption", server.language),
+          content: language("langErrorNoOption", server.settings.language),
         });
         return;
       }
 
-      server.language = langOption.toLowerCase() ?? "eng";
+      server.settings.language = langOption.toLowerCase() ?? "eng";
       interaction.reply({
-        content: language("langIsChanged", server.language),
+        content: language("langIsChanged", server.settings.language),
       });
       await updateServer(server.discordId, server);
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in langue command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in langue command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

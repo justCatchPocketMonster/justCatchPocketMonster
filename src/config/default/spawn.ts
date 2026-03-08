@@ -1,9 +1,10 @@
-import {GenStat, RarityStat, TypeStat} from "../../core/types/EventSpawnType";
+import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 
 export const minimumCount = 4 + 1;
 export const maximumCount = 20;
 
-export const nbGeneration = 6;
+export const nbGeneration = 9;
+
 export const valuePerGen: GenStat = {
   "1": 100,
   "2": 100,
@@ -42,6 +43,7 @@ export const valuePerRarity: RarityStat = {
   ordinary: 990,
   legendary: 9,
   mythical: 1,
+  ultraBeast: 9,
 };
 
 export const rateMaxShiny = 4096;
@@ -54,3 +56,5 @@ export const hidePokemon = {
 };
 
 export const valueMaxChoiceEvent = 100;
+
+export const valueMaxChoiceRaid = 100;

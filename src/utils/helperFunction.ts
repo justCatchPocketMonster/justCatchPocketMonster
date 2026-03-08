@@ -1,4 +1,4 @@
-import {ColorResolvable} from "discord.js";
+import { ColorResolvable } from "discord.js";
 
 export const colorByType = (type: string): ColorResolvable => {
   switch (type) {
@@ -43,8 +43,10 @@ export const colorByType = (type: string): ColorResolvable => {
   }
 };
 
-
-export function getPercentage(partialValue: number, totalValue: number): number {
+export function getPercentage(
+  partialValue: number,
+  totalValue: number,
+): number {
   const percentage = (partialValue / totalValue) * 100;
   return parseFloat(percentage.toFixed(1));
 }
@@ -55,4 +57,12 @@ export function capitalizeFirstLetter(str: string) {
 
 export function deepCloneObject<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
+}
+
+export function random(max: number, min: number = 0): number {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+export function formatTimestamp(timestamp: number): string {
+  return `<t:${Math.floor(timestamp / 1000)}:R>`;
 }

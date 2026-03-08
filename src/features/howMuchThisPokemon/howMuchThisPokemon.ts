@@ -1,27 +1,38 @@
 import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
-import {AttachmentBuilder, ChatInputCommandInteraction, EmbedBuilder} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { SaveOnePokemon } from "../../core/classes/SaveOnePokemon";
-import {capitalizeFirstLetter, colorByType} from "../../utils/helperFunction";
-import { pageType, paginationButton } from "../other/paginationButton";
+import {
+  capitalizeFirstLetter,
+  colorByType,
+  random,
+} from "../../utils/helperFunction";
+import {
+  createPageForMenu,
+  PageData,
+  paginationMenu,
+} from "../other/paginationMenu";
 import allPokemon from "../../data/pokemon.json";
-import {pokemonDb} from "../../core/types/pokemonDb";
+import { pokemonDb } from "../../core/types/pokemonDb";
+import { getImageUrl } from "../../utils/imageUrl";
 
-export function howMuchThisPokemon(
+export async function howMuchThisPokemon(
   interaction: ChatInputCommandInteraction,
   user: UserType,
   server: ServerType,
   stat: StatType,
   pokemonId: string,
-) {
+): Promise<void> {
   const saveOnePokemonUser = user.savePokemon.getSavesById(pokemonId);
   const saveOnePokemonServer = server.savePokemon.getSavesById(pokemonId);
   const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
   const saveOnePokemonStatCatch = stat.savePokemonCatch.getSavesById(pokemonId);
-  const paginationPage: pageType[] = [];
-  const avatar= interaction.user.avatarURL() ?? "https://cdn.discordapp.com/embed/avatars/0.png";
+  const paginationPage: PageData[] = [];
+  const avatar =
+    interaction.user.avatarURL() ??
+    "https://cdn.discordapp.com/embed/avatars/0.png";
 
   for (const save of saveOnePokemonStatSpawn) {
     const saveSpecifiqueFormUser = getSpecifiqueFormSaveData(
@@ -43,34 +54,52 @@ export function howMuchThisPokemon(
     const pokemonData = getPokemonDataBySave(save);
     if (pokemonData === null) return;
 
-
-    if(saveSpecifiqueFormUser.normalCount > 0){
+    if (saveSpecifiqueFormUser.normalCount > 0) {
       paginationPage.push(
-          generateEmbedData(pokemonData, server, avatar, saveField, false),
+        await generateEmbedData(pokemonData, server, avatar, saveField, false),
       );
       if (saveSpecifiqueFormUser.shinyCount > 0) {
         paginationPage.push(
-            generateEmbedData(pokemonData, server, avatar, saveField, true),
+          await generateEmbedData(pokemonData, server, avatar, saveField, true),
         );
       }
     }
   }
-  if(paginationPage.length === 0){
-    const pokemonDataOriginal = getPokemonDataBySave(saveOnePokemonStatSpawn[0]);
+  if (paginationPage.length === 0) {
+    const pokemonDataOriginal = getPokemonDataBySave(
+      saveOnePokemonStatSpawn[0],
+    );
     if (pokemonDataOriginal === null) return;
     pokemonDataOriginal.imgName = "0000-001";
     const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
-      saveServer: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonServer),
+      saveServer: getSpecifiqueFormSaveData(
+        saveOnePokemonStatSpawn[0],
+        saveOnePokemonServer,
+      ),
       saveStatSpawn: saveOnePokemonStatSpawn[0],
-      saveStatCatch: getSpecifiqueFormSaveData(saveOnePokemonStatSpawn[0], saveOnePokemonStatCatch),
-    }
+      saveStatCatch: getSpecifiqueFormSaveData(
+        saveOnePokemonStatSpawn[0],
+        saveOnePokemonStatCatch,
+      ),
+    };
     paginationPage.push(
-        generateEmbedData(pokemonDataOriginal, server, avatar, saveField, false),
+      await generateEmbedData(
+        pokemonDataOriginal,
+        server,
+        avatar,
+        saveField,
+        false,
+      ),
     );
   }
-  paginationButton(interaction, paginationPage);
+
+  const defaultText =
+    server.settings.language === "fr"
+      ? "Choisir une variante..."
+      : "Select a variant...";
+  paginationMenu(interaction, defaultText, paginationPage);
 }
 
 function getSpecifiqueFormSaveData(
@@ -111,72 +140,74 @@ function getPokemonDataBySave(
   );
 }
 
-function generateEmbedData(
+async function generateEmbedData(
   pokemon: pokemonDb,
   server: ServerType,
   avatarUser: string,
   allSaveData: SaveFieldData,
   isShiny: boolean,
-): pageType {
-  const imageName = pokemon.imgName+(isShiny ? "-shiny" : "")+".png";
+): Promise<PageData> {
+  const imageName = pokemon.imgName + (isShiny ? "-shiny" : "") + ".png";
+  const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
+  const imageUrl = await getImageUrl(subFolder, imageName);
+
+  const completKey = ("nameComplet" +
+    capitalizeFirstLetter(server.settings.language)) as
+    | "nameCompletFr"
+    | "nameCompletEng";
+
+  const pokemonTitle = pokemon.name[completKey][0];
+  const menuLabel = isShiny ? `${pokemonTitle} ⭐` : pokemonTitle;
 
   const embed = new EmbedBuilder()
-    .setTitle(pokemon["name"]["name" + capitalizeFirstLetter(server.language)][0])
-    .setImage("attachment://" + imageName)
+    .setTitle(pokemonTitle)
+    .setImage(imageUrl)
     .setThumbnail(avatarUser)
     .addFields(
       {
-        name: language("nombreDeCapture", server.language),
+        name: language("nombreDeCapture", server.settings.language),
         value: allSaveData.saveGlobalUser.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeCaptureShiny", server.language),
+        name: language("nombreDeCaptureShiny", server.settings.language),
         value: allSaveData.saveGlobalUser.shinyCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreCaptureVariant", server.language),
+        name: language("nombreCaptureVariant", server.settings.language),
         value: allSaveData.saveSpecifiqueFormUser.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeCaptureDuServer", server.language),
+        name: language("nombreDeCaptureDuServer", server.settings.language),
         value: allSaveData.saveServer.normalCount.toString(),
         inline: false,
       },
       {
-        name: language("nombreDeCaptureTotaly", server.language),
+        name: language("nombreDeCaptureTotaly", server.settings.language),
         value: allSaveData.saveStatCatch.normalCount.toString(),
         inline: false,
       },
       {
-        name: language("nombreDeCaptureShinyTotaly", server.language),
+        name: language("nombreDeCaptureShinyTotaly", server.settings.language),
         value: allSaveData.saveStatCatch.shinyCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeSpawnTotaly", server.language),
+        name: language("nombreDeSpawnTotaly", server.settings.language),
         value: allSaveData.saveStatSpawn.normalCount.toString(),
         inline: true,
       },
       {
-        name: language("nombreDeSpawnShinyTotaly", server.language),
+        name: language("nombreDeSpawnShinyTotaly", server.settings.language),
         value: allSaveData.saveStatSpawn.shinyCount.toString(),
         inline: true,
       },
     )
-    .setColor(
-      colorByType(
-        pokemon.arrayType[Math.floor(Math.random() * pokemon.arrayType.length)],
-      ),
-    );
+    .setColor(colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]));
 
-
-  const imagePath = server.eventSpawn.nightMode
-    ? `./src/assets/pokeHomeShadow/${imageName}`
-    : `./src/assets/pokeHome/${imageName}`;
-  return { page: embed, imagePage: new AttachmentBuilder(imagePath) };
+  return createPageForMenu(embed, null, menuLabel);
 }
 
 interface SaveFieldData {
@@ -186,4 +217,3 @@ interface SaveFieldData {
   saveStatSpawn: SaveOnePokemon;
   saveStatCatch: SaveOnePokemon;
 }
-

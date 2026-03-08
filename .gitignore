@@ -132,4 +132,5 @@ dist
 .idea/
 .vscode/
 
-prisma/migrations
+test-performance-results.md
+notes.md

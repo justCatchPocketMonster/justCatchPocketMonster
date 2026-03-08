@@ -3,7 +3,7 @@ import typescript from "@typescript-eslint/eslint-plugin";
 import typescriptParser from "@typescript-eslint/parser";
 import prettierPlugin from "eslint-plugin-prettier";
 import jsdocPlugin from "eslint-plugin-jsdoc";
-import eslintPluginJest from 'eslint-plugin-jest';
+import eslintPluginJest from "eslint-plugin-jest";
 
 export default [
   js.configs.recommended,
@@ -33,6 +33,5 @@ export default [
       "jsdoc/check-tag-names": "error",
       "jsdoc/require-description": "error",
     },
-
   },
 ];

@@ -1,9 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import {
-  ChatInputCommandInteraction,
-  EmbedBuilder,
-} from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import {
@@ -13,8 +10,8 @@ import {
 import { codeListEmbed } from "../../features/code/code";
 import { getUserById } from "../../cache/UserCache";
 import { embedRequiredinformation } from "../../utils/embedRequiredinformation";
-import {getStatById} from "../../cache/StatCache";
-import {nameStatGeneral} from "../../config/default/misc";
+import { getStatById } from "../../cache/StatCache";
+import { nameStatGeneral } from "../../config/default/misc";
 
 export default {
   name: "information",
@@ -30,49 +27,46 @@ export default {
       if (interaction.guildId === null) return;
       let server = await getServerById(interaction.guildId);
       let user = await getUserById(interaction.user.id);
-      const stat = await getStatById(nameStatGeneral)
+      const stat = await getStatById(nameStatGeneral);
 
       const pages = [];
 
       const mainPage = new EmbedBuilder()
         .setColor("#0099ff")
         .setTitle("Information")
-        .setDescription(language("informationDescription", server.language));
+        .setDescription(
+          language("informationDescription", server.settings.language),
+        );
       pages.push(
         createPageForMenu(
           mainPage,
           null,
-          language("principalPage", server.language),
+          language("principalPage", server.settings.language),
         ),
-      );
-
-      pages.push(
         createPageForMenu(
           embedRequiredinformation(server),
           null,
-          language("mentionObligatoireTitle", server.language),
-          language("mentionObligatoireDesc", server.language),
+          language("mentionObligatoireTitle", server.settings.language),
+          language("mentionObligatoireDesc", server.settings.language),
         ),
-      );
-      pages.push(
         createPageForMenu(
           codeListEmbed(user, server, stat),
           null,
-          language("codeListEmbedTitle", server.language),
-          language("codeListEmbedDescription", server.language),
+          language("codeListEmbedTitle", server.settings.language),
+          language("codeListEmbedDescription", server.settings.language),
         ),
       );
 
       paginationMenu(
         interaction,
-        language("selectAPage", server.language),
+        language("selectAPage", server.settings.language),
         pages,
       );
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in information command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in information command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

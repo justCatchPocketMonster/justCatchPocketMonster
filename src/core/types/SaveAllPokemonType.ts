@@ -13,6 +13,6 @@ export interface SaveAllPokemonType {
   ): SaveAllPokemonType;
   countUniquePokemonsCaught(): number;
   countUniquePokemonsShinyCaught(): number;
-  getAllSaveOfOnePokemon(idPokemon: string): SaveOnePokemon[]
-  getSaveOnePokemonFusedForm(idPokemon: string,): SaveOnePokemon
+  getAllSaveOfOnePokemon(idPokemon: string): SaveOnePokemon[];
+  getSaveOnePokemonFusedForm(idPokemon: string): SaveOnePokemon;
 }

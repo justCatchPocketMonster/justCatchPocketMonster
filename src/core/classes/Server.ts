@@ -1,15 +1,21 @@
 import { EventSpawn } from "./EventSpawn";
 import { Pokemon } from "./Pokemon";
-import { ServerType } from "../types/ServerType";
+import { ServerType, ServerSettings } from "../types/ServerType";
 import { defaultLanguage } from "../../config/default/server";
 import { SaveAllPokemon } from "./SaveAllPokemon";
+import { Event } from "./Event";
+import {
+  maximumCount,
+  minimumCount,
+  valueMaxChoiceRaid,
+} from "../../config/default/spawn";
 
 export class Server implements ServerType {
   constructor(
     public discordId: string,
     public channelAllowed: string[],
     public charmeChroma: boolean,
-    public language: string,
+    public settings: ServerSettings,
     public savePokemon: SaveAllPokemon,
     public eventSpawn: EventSpawn,
     public maxCountMessage: number,
@@ -20,7 +26,7 @@ export class Server implements ServerType {
   getPokemonByIdChannel(idChannel: string): Pokemon | null {
     const key = idChannel;
     if (this.pokemonPresent[key]) {
-      return Pokemon.from(this.pokemonPresent[key])
+      return Pokemon.from(this.pokemonPresent[key]);
     }
     return null;
   }
@@ -48,27 +54,49 @@ export class Server implements ServerType {
         value.versionForm,
         value.isShiny,
         value.hint,
+        value.canSosBattle ?? false,
+        value.sosChainLvl,
       );
     }
 
     const e = data.eventSpawn;
+    const whatEvent = e.whatEvent
+      ? new Event(
+          e.whatEvent.id,
+          e.whatEvent.name,
+          e.whatEvent.description,
+          e.whatEvent.type,
+          e.whatEvent.color,
+          e.whatEvent.image,
+          e.whatEvent.effectDescription,
+          new Date(e.whatEvent.endTime),
+          e.whatEvent.statMultipliers,
+        )
+      : null;
     const eventSpawn = new EventSpawn(
       e.gen,
       e.type,
       e.rarity,
       e.shiny,
-      e.whatEvent ?? null,
+      whatEvent,
       e.allowedForm,
       e.messageSpawn,
       e.nightMode,
       e.valueMaxChoiceEgg,
+      e.valueMaxChoiceRaid ?? valueMaxChoiceRaid,
     );
+
+    const settings: ServerSettings = data.settings ?? {
+      language: (data as any).language ?? defaultLanguage,
+      spawnMax: maximumCount,
+      spawnMin: minimumCount,
+    };
 
     return new Server(
       data.discordId,
       data.channelAllowed,
       data.charmeChroma,
-      data.language,
+      settings,
       savePokemon,
       eventSpawn,
       data.maxCountMessage,
@@ -84,9 +112,17 @@ export class Server implements ServerType {
       id,
       [], // channelAllowed
       false,
-      defaultLanguage,
+      {
+        language: defaultLanguage,
+        spawnMax: maximumCount,
+        spawnMin: minimumCount,
+      },
       saveAllPokemon, // savePokemon
-      EventSpawn.createDefault(),
+      EventSpawn.createDefault({
+        language: defaultLanguage,
+        spawnMax: maximumCount,
+        spawnMin: minimumCount,
+      }),
       10,
       0,
       {}, // pokemonPresent

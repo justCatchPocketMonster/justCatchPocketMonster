@@ -3,11 +3,17 @@ import { PokemonType } from "./PokemonType";
 import { SaveAllPokemonType } from "./SaveAllPokemonType";
 import { Pokemon } from "../classes/Pokemon";
 
+export interface ServerSettings {
+  language: string;
+  spawnMax: number;
+  spawnMin: number;
+}
+
 export interface ServerType {
   discordId: string;
   channelAllowed: string[];
   charmeChroma: boolean;
-  language: string;
+  settings: ServerSettings;
   savePokemon: SaveAllPokemonType;
   eventSpawn: EventSpawnType;
 

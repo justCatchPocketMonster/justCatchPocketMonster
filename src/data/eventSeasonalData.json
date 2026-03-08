@@ -1,0 +1,92 @@
+[
+  {
+    "id": 0,
+    "name": "seasonal_noEvent_title",
+    "startDate": null,
+    "endDate": null,
+    "image": null,
+    "description": "seasonal_noEvent_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 1,
+    "name": "seasonal_shells_title",
+    "startDate": "04-14",
+    "endDate": "04-20",
+    "image": null,
+    "description": "seasonal_shells_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 2,
+    "name": "seasonal_buds_title",
+    "startDate": "05-10",
+    "endDate": "05-24",
+    "image": null,
+    "description": "seasonal_buds_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 3,
+    "name": "seasonal_sun_title",
+    "startDate": "07-01",
+    "endDate": "07-21",
+    "image": null,
+    "description": "seasonal_sun_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 4,
+    "name": "seasonal_harvest_title",
+    "startDate": "09-15",
+    "endDate": "09-29",
+    "image": null,
+    "description": "seasonal_harvest_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 5,
+    "name": "seasonal_ghosts_title",
+    "startDate": "10-28",
+    "endDate": "10-31",
+    "image": null,
+    "description": "seasonal_ghosts_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 6,
+    "name": "seasonal_snow_title",
+    "startDate": "12-01",
+    "endDate": "12-15",
+    "image": null,
+    "description": "seasonal_snow_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 7,
+    "name": "seasonal_moon_title",
+    "startDate": "12-24",
+    "endDate": "12-30",
+    "image": null,
+    "description": "seasonal_moon_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 8,
+    "name": "seasonal_trainerday_title",
+    "startDate": "08-05",
+    "endDate": "08-06",
+    "image": null,
+    "description": "seasonal_trainerday_desc",
+    "statMultipliers": {}
+  },
+  {
+    "id": 9,
+    "name": "seasonal_twinflames_title",
+    "startDate": "02-12",
+    "endDate": "02-18",
+    "image": null,
+    "description": "seasonal_twinflames_desc",
+    "statMultipliers": {}
+  }
+]

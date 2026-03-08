@@ -1,4 +1,4 @@
-import {EventType} from "./EventType";
+import { EventType } from "./EventType";
 
 export interface GenStat {
   "1": number;
@@ -37,6 +37,7 @@ export interface RarityStat {
   ordinary: number;
   legendary: number;
   mythical: number;
+  ultraBeast: number;
 }
 
 export interface EventSpawnType {
@@ -55,4 +56,5 @@ export interface EventSpawnType {
   };
   nightMode: boolean;
   valueMaxChoiceEgg: number;
+  valueMaxChoiceRaid: number;
 }

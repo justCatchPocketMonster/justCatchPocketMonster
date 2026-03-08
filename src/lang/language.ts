@@ -1,5 +1,6 @@
 import language from "../data/language.json";
-import {newLogger} from "../middlewares/logger";
+import { newLogger } from "../middlewares/logger";
+import { random } from "../utils/helperFunction";
 
 interface Translation {
   [key: string]: string[];
@@ -9,7 +10,9 @@ interface LanguageStructure {
   [key: string]: Translation;
 }
 
-export default function getText(key: string, lang: string): string {
+type LanguageKey = keyof typeof language;
+
+export default function getText(key: LanguageKey, lang: string): string {
   try {
     const languageData: LanguageStructure = language;
     const langTextArray = languageData[key]?.[lang] ?? [];
@@ -17,15 +20,21 @@ export default function getText(key: string, lang: string): string {
       langTextArray.push("Error: Key not found");
     }
 
-    const randomTextIndex = Math.floor(Math.random() * langTextArray.length);
+    const randomTextIndex = random(langTextArray.length);
 
     return langTextArray[randomTextIndex];
   } catch (e) {
     newLogger(
-        'error',
-        e as string,
-        `Error in getText function for key: ${key} language: ${lang}`
+      "error",
+      e as string,
+      `Error in getText function for key: ${key} language: ${lang}`,
     );
     return "Error: Key not found";
   }
 }
+
+export function getAvailableKeys(): LanguageKey[] {
+  return Object.keys(language) as LanguageKey[];
+}
+
+export type { LanguageKey };

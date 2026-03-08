@@ -1,8 +1,9 @@
 import { Client, ActivityType } from "discord.js";
 import { getStatById } from "../../cache/StatCache";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import { getCode } from "../code/code";
-import {nameStatGeneral, version} from "../../config/default/misc";
+import { nameStatGeneral, version } from "../../config/default/misc";
+import { random } from "../../utils/helperFunction";
 
 const randomStatus = async (Client: Client) => {
   try {
@@ -19,23 +20,19 @@ const randomStatus = async (Client: Client) => {
       "I'm sorry English speakers I'm French.",
       statGlobal.pokemonSpawned + " pokemon have spawned from the start.",
       statGlobal.pokemonCaught + " pokemon have been catched.",
-      "!code " +
-        getCode()["shiny"][
-          Math.floor(Math.random() * getCode()["shiny"].length)
-        ],
+      "!code " + getCode()["shiny"][random(getCode()["shiny"].length)],
     ];
     let nbStatus = arrayStatus.length;
-    let randomStatus = Math.floor(Math.random() * nbStatus);
+    let randomStatus = random(nbStatus);
 
     Client.user.setActivity(arrayStatus[randomStatus], {
       type: ActivityType.Watching,
     });
-
   } catch (e) {
     newLogger(
-        'error',
-        e as string,
-        `Error in randomStatus function for client ${Client.user?.id}`,
+      "error",
+      e as string,
+      `Error in randomStatus function for client ${Client.user?.id}`,
     );
   }
 };

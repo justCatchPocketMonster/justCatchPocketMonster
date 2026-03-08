@@ -3,7 +3,7 @@ import {
   SlashCommandStringOption,
 } from "@discordjs/builders";
 import { ChatInputCommandInteraction } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { getUserById } from "../../cache/UserCache";
@@ -76,7 +76,13 @@ export default {
         return;
       }
 
-      howMuchThisPokemon(interaction, user, server, stat, resolvedPokemonId);
+      await howMuchThisPokemon(
+        interaction,
+        user,
+        server,
+        stat,
+        resolvedPokemonId,
+      );
 
       function resolvePokemonId(
         pokemonNameInput: string | null,
@@ -94,7 +100,7 @@ export default {
           );
 
           if (!matched) {
-            interaction.reply(language("notExist", server.language));
+            interaction.reply(language("notExist", server.settings.language));
             return null;
           }
 
@@ -106,21 +112,21 @@ export default {
             (p) => p.id !== 0 && p.id.toString() === pokemonIdInput,
           );
           if (!isValid) {
-            interaction.reply(language("notExist", server.language));
+            interaction.reply(language("notExist", server.settings.language));
             return null;
           }
 
           return pokemonIdInput;
         }
 
-        interaction.reply(language("noArgument", server.language));
+        interaction.reply(language("noArgument", server.settings.language));
         return null;
       }
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in howMuch command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in howMuch command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }

@@ -4,11 +4,12 @@ import {
   maximumCount,
   minimumCount,
   rateMaxShiny,
+  valueMaxChoiceRaid,
   valuePerGen,
   valuePerRarity,
-  valuePerType
+  valuePerType,
 } from "../../config/default/spawn";
-import {EventSchema} from "./Event";
+import { EventSchema } from "./Event";
 
 export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
   {
@@ -167,6 +168,11 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
         required: true,
         default: valuePerRarity.mythical,
       },
+      ultraBeast: {
+        type: Number,
+        required: true,
+        default: valuePerRarity.ultraBeast,
+      },
     },
     shiny: {
       type: Number,
@@ -174,9 +180,9 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
       default: rateMaxShiny,
     },
     whatEvent: {
-        type: EventSchema,
-        required: false,
-        default: null,
+      type: EventSchema,
+      required: false,
+      default: null,
     },
     allowedForm: {
       mega: {
@@ -211,9 +217,14 @@ export const EventSpawnSchema = new mongoose.Schema<EventSpawnType>(
       type: Number,
       required: true,
     },
-  },
-    {
-      _id: false,
-      timestamps: false,
+    valueMaxChoiceRaid: {
+      type: Number,
+      required: true,
+      default: valueMaxChoiceRaid,
     },
+  },
+  {
+    _id: false,
+    timestamps: false,
+  },
 );

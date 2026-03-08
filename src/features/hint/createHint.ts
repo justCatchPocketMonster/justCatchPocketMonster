@@ -1,3 +1,5 @@
+import { random } from "../../utils/helperFunction";
+
 function cleanNameHint(nameHint: string[]): string[] {
   return nameHint.filter((element) => element !== "\\");
 }
@@ -6,7 +8,7 @@ function generateInitialHint(namePokemon: string, realName: string): string[] {
   if (namePokemon !== realName) {
     return namePokemon.split("");
   }
-  return namePokemon.replace(/[a-zA-Z0-9]/g, "_").split("");
+  return namePokemon.replaceAll(/[a-zA-Z0-9]/g, "_").split("");
 }
 
 function revealRandomLetter(
@@ -15,12 +17,12 @@ function revealRandomLetter(
   namePokemon: string,
   realName: string,
 ): string[] {
-  let letterReveal = Math.floor(Math.random() * realNameArray.length);
+  let letterReveal = random(realNameArray.length);
   while (
     hintArray[letterReveal] === realNameArray[letterReveal] &&
     namePokemon !== realName
   ) {
-    letterReveal = Math.floor(Math.random() * realNameArray.length);
+    letterReveal = random(realNameArray.length);
   }
   hintArray[letterReveal] = realNameArray[letterReveal];
   return hintArray;

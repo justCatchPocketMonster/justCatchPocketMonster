@@ -3,6 +3,6 @@ export const landings = [
   250000, 300000, 400000, 500000, 750000, 1000000, 1500000, 2000000, 2500000,
   3000000,
 ];
-export const eventCode :{ [key: string]: string[] } = {
+export const eventCode: { [key: string]: string[] } = {
   shiny: [],
 };

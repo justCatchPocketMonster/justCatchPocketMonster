@@ -6,7 +6,7 @@ import { SaveAllPokemonSchema } from "./SaveAllPokemon";
 
 const UserSchema = new mongoose.Schema<UserType>(
   {
-  discordId: {
+    discordId: {
       type: String,
       required: true,
     },

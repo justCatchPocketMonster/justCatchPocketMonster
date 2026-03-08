@@ -8,7 +8,7 @@ import { paginationMenu } from "../other/paginationMenu";
 import { SortedResult } from "../../core/classes/SaveAllPokemon";
 import allPokemon from "../../data/pokemon.json";
 import { ServerType } from "../../core/types/ServerType";
-import language from "../../lang/language";
+import language, { LanguageKey } from "../../lang/language";
 
 export function createPaginationStat(
   interaction: ChatInputCommandInteraction,
@@ -19,7 +19,7 @@ export function createPaginationStat(
   const ascColor = "32CD32" as ColorResolvable;
   const descColor = "B22222" as ColorResolvable;
 
-  const getLang = (key: string) => language(key, server.language);
+  const getLang = (key: LanguageKey) => language(key, server.settings.language);
 
   const createSectionHeader = (title: string) => ({
     page: null,
@@ -39,7 +39,7 @@ export function createPaginationStat(
 
   const createStatEntries = (
     rarityOrForm: string,
-    labelKey: string,
+    labelKey: LanguageKey,
     type: "rarity" | "form",
   ) => {
     const title = getLang(labelKey);
@@ -127,6 +127,9 @@ export function createPaginationStat(
     createSectionHeader(getLang("statCategoryMythical")),
     ...createStatEntries("mythical", "statCategoryMythical", "rarity"),
 
+    createSectionHeader(getLang("statCategoryUltraBeast")),
+    ...createStatEntries("ultraBeast", "statCategoryUltraBeast", "rarity"),
+
     createSectionHeader(getLang("statCategoryMega")),
     ...createStatEntries("mega", "statCategoryMega", "form"),
   ];
@@ -141,8 +144,6 @@ function embedClassement(
   color: ColorResolvable,
 ) {
   const embed = new EmbedBuilder().setTitle(title).setColor(color);
-
-
 
   arraySortPokemon.slice(0, 21).forEach((statPokemon, index) => {
     const displayedPokemons = getPokemonNameByStatId(statPokemon, server);
@@ -159,28 +160,33 @@ function embedClassement(
   return embed;
 }
 
-function getPokemonNameByStatId(statId: SortedResult, server:ServerType): string {
-  const langKey = `name${server.language[0].toUpperCase() + server.language.slice(1)}` as "nameEng" | "nameFr";
+function getPokemonNameByStatId(
+  statId: SortedResult,
+  server: ServerType,
+): string {
+  const langKey =
+    `name${server.settings.language[0].toUpperCase() + server.settings.language.slice(1)}` as
+      | "nameEng"
+      | "nameFr";
   const names = statId.who
-      .map((id) => {
-        const pokemon = allPokemon.find((p) => p.id.toString() === id);
-        return pokemon ? pokemon.name[langKey].join(" ") : null;
-      })
-      .filter(Boolean);
+    .map((id) => {
+      const pokemon = allPokemon.find((p) => p.id.toString() === id);
+      return pokemon ? pokemon.name[langKey].join(" ") : null;
+    })
+    .filter(Boolean);
 
   const displayedNames = names.slice(0, 3);
   return names.length > 3
-      ? `${displayedNames.join(", ")}...`
-      : displayedNames.join(", ");
+    ? `${displayedNames.join(", ")}...`
+    : displayedNames.join(", ");
 }
-
 
 function principalEmbedStat(
   actualVersionStat: Stat,
   generalVersionStat: Stat,
   server: ServerType,
 ) {
-  const t = (key: string) => language(key, server.language);
+  const t = (key: LanguageKey) => language(key, server.settings.language);
 
   const embed = new EmbedBuilder().setTitle("stats").setColor("Purple");
 
@@ -244,7 +250,10 @@ function principalEmbedStat(
       name: t("pokemonLeastCaught"),
       value: getPokemonNameByStatId(leastCaught, server),
     },
-    { name: t("pokemonMostCaught"), value: getPokemonNameByStatId(mostCaught, server) },
+    {
+      name: t("pokemonMostCaught"),
+      value: getPokemonNameByStatId(mostCaught, server),
+    },
   ]);
 
   const leastSpawned = generalVersionStat.savePokemonSpawn.sortPokemonsByCount({
@@ -260,9 +269,11 @@ function principalEmbedStat(
       name: t("pokemonLeastSpawn"),
       value: getPokemonNameByStatId(leastSpawned, server),
     },
-    { name: t("pokemonMostSpawn"), value: getPokemonNameByStatId(mostSpawned, server) },
+    {
+      name: t("pokemonMostSpawn"),
+      value: getPokemonNameByStatId(mostSpawned, server),
+    },
   ]);
 
   return embed;
 }
-

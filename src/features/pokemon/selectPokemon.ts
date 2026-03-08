@@ -1,6 +1,7 @@
 import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
+import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 import allPokemon from "../../data/pokemon.json";
 import {
   hidePokemon,
@@ -8,15 +9,14 @@ import {
   valuePerRarity,
   valuePerType,
 } from "../../config/default/spawn";
-import {pokemonDb} from "../../core/types/pokemonDb";
-import {initHint} from "../hint/initHint";
-import {capitalizeFirstLetter} from "../../utils/helperFunction";
+import { pokemonDb } from "../../core/types/pokemonDb";
+import { initHint } from "../hint/initHint";
+import { capitalizeFirstLetter, random } from "../../utils/helperFunction";
 export const __deps = {
   generationSelect,
   raritySelect,
   typeSelect,
 };
-
 
 export const selectPokemon = (
   server: ServerType,
@@ -29,13 +29,13 @@ export const selectPokemon = (
     isShiny: false,
     hint: "",
   }));
-  const isOnlyGigaOrNone = gigaIsAllowed(server,pokemons);
+  const isOnlyGigaOrNone = gigaIsAllowed(server, pokemons);
   const isMegaFilter: pokemonDb[] = megaIsAllowed(server, isOnlyGigaOrNone);
   if (idPokemon === 0) {
     pokemonChoiced = selectRandomPokemon(server, isMegaFilter);
     pokemonChoiced = isHiddenPokemon(server, pokemonChoiced);
   } else {
-    pokemonChoiced = selectPokemonWithId(idPokemon);
+    pokemonChoiced = selectPokemonWithId(idPokemon, random(2) === 1);
   }
 
   pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, false);
@@ -43,24 +43,24 @@ export const selectPokemon = (
 };
 
 export const selectEggPokemon = (
-    server: ServerType,
-    idPokemon: number = 0,
+  server: ServerType,
+  idPokemon: number = 0,
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
-  if( idPokemon === 0) {
-    const randomIdPokemon = Math.floor(Math.random() * allPokemon[allPokemon.length].id);
-    pokemonChoiced = selectPokemonWithId(randomIdPokemon);
+  if (idPokemon === 0) {
+    const randomIdPokemon = random(allPokemon.at(-1)!.id);
+    pokemonChoiced = selectPokemonWithId(randomIdPokemon, false);
   } else {
-    pokemonChoiced = selectPokemonWithId(idPokemon);
+    pokemonChoiced = selectPokemonWithId(idPokemon, false);
   }
-    pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
-    const eggObject = allPokemon[0];
+  pokemonChoiced.isShiny = shinySelect(pokemonChoiced.id, server, true);
+  pokemonChoiced.canSosBattle = false;
+  const eggObject = allPokemon[0];
 
-    pokemonChoiced.name = eggObject.name;
-    pokemonChoiced.imgName = eggObject.imgName;
-    return pokemonChoiced;
-}
-
+  pokemonChoiced.name = eggObject.name;
+  pokemonChoiced.imgName = eggObject.imgName;
+  return pokemonChoiced;
+};
 
 function shinySelect(
   idPokemon: string,
@@ -94,19 +94,25 @@ function shinySelect(
     tauxShiny /= 1.1;
   }
 
-  let nbRandomShiny: number = Math.floor(Math.random() * tauxShiny);
+  if (server.charmeChroma) {
+    tauxShiny /= 10;
+  }
+
+  let nbRandomShiny: number = random(tauxShiny);
   return nbRandomShiny === 1;
 }
 
-function isHiddenPokemon(server: ServerType, pokemon: PokemonType): PokemonType {
-  let randomNumber: number = Math.floor(Math.random() * hidePokemon.maxValue);
+function isHiddenPokemon(
+  server: ServerType,
+  pokemon: PokemonType,
+): PokemonType {
+  let randomNumber: number = random(hidePokemon.maxValue);
 
-  if (randomNumber == 1) {
+  if (randomNumber === 1) {
     const allPokemonWithId = allPokemon.filter((pokemon) =>
       hidePokemon.idPokemon.includes(pokemon.id),
     );
-    const choicePokemon =
-      allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+    const choicePokemon = allPokemonWithId[random(allPokemonWithId.length)];
 
     pokemon.id = choicePokemon.id.toString();
     pokemon.arrayType.push(...choicePokemon.arrayType);
@@ -136,11 +142,54 @@ function gigaIsAllowed(
   }
 }
 
-function selectPokemonWithId(idPokemon: number): Pokemon {
+export function selectSosPokemon(
+  server: ServerType,
+  idPokemon: string,
+  sosChainLvl: number,
+): PokemonType {
+  let sameSpecies = allPokemon.filter(
+    (p) => p.id.toString() === idPokemon,
+  ) as pokemonDb[];
+  sameSpecies = gigaIsAllowed(server, sameSpecies);
+  sameSpecies = megaIsAllowed(server, sameSpecies);
+  if (sameSpecies.length === 0) {
+    throw new Error(`No allowed form for SOS pokemon id ${idPokemon}`);
+  }
+  const randomPokemon = sameSpecies[random(sameSpecies.length)];
+  const shinyRate = server.eventSpawn.shiny / Math.pow(2, sosChainLvl);
+  const isShiny = random(Math.max(1, Math.floor(shinyRate))) === 1;
+  const hint = initHint(
+    randomPokemon.name[
+      "name" + capitalizeFirstLetter(server.settings.language)
+    ][0],
+  );
+  return {
+    id: randomPokemon.id.toString(),
+    name: {
+      nameEng: randomPokemon.name["nameEng"],
+      nameFr: randomPokemon.name["nameFr"],
+    },
+    arrayType: randomPokemon.arrayType,
+    rarity: randomPokemon.rarity,
+    imgName: randomPokemon.imgName,
+    gen: randomPokemon.gen,
+    form: randomPokemon.form,
+    versionForm: randomPokemon.versionForm,
+    isShiny,
+    hint,
+    canSosBattle: true,
+    sosChainLvl,
+  };
+}
+
+function selectPokemonWithId(
+  idPokemon: number,
+  canSosBattle: boolean = false,
+): Pokemon {
   const allPokemonWithId = allPokemon.filter(
     (pokemon) => pokemon.id === idPokemon,
   );
-  const randomPokemon = allPokemonWithId[Math.floor(Math.random() * allPokemonWithId.length)];
+  const randomPokemon = allPokemonWithId[random(allPokemonWithId.length)];
 
   return new Pokemon(
     randomPokemon.id.toString(),
@@ -153,6 +202,7 @@ function selectPokemonWithId(idPokemon: number): Pokemon {
     randomPokemon.versionForm,
     false,
     "",
+    canSosBattle,
   );
 }
 function selectRandomPokemon(
@@ -183,12 +233,12 @@ function selectRandomPokemon(
       pokemon.arrayType.includes(type),
     );
   } while (pokemonPassType[0] === undefined);
-  const randomPokemon = pokemonPassType[Math.floor(Math.random() * pokemonPassType.length)]
+  const randomPokemon = pokemonPassType[random(pokemonPassType.length)];
   return {
     id: randomPokemon.id.toString(),
     name: {
       nameEng: randomPokemon.name["nameEng"],
-      nameFr:  randomPokemon.name["nameFr"],
+      nameFr: randomPokemon.name["nameFr"],
     },
     arrayType: randomPokemon.arrayType,
     rarity: randomPokemon.rarity,
@@ -197,17 +247,21 @@ function selectRandomPokemon(
     form: randomPokemon.form,
     versionForm: randomPokemon.versionForm,
     isShiny: false,
-    hint: initHint(randomPokemon.name["name" + capitalizeFirstLetter(server.language)][0]),
+    hint: initHint(
+      randomPokemon.name[
+        "name" + capitalizeFirstLetter(server.settings.language)
+      ][0],
+    ),
+    canSosBattle: random(2) === 1,
   };
 }
 
 function generationSelect(server: ServerType): string {
-  const randomNumber = Math.floor(Math.random() * (nbGeneration * 100));
+  const randomNumber = random(nbGeneration * 100);
   let somStatByGen = 0;
 
   for (let gen = 1; gen <= 9; gen++) {
-    // @ts-ignore
-    somStatByGen += server.eventSpawn.gen[gen];
+    somStatByGen += server.eventSpawn.gen[gen.toString() as keyof GenStat];
     if (randomNumber <= somStatByGen) {
       return gen.toString();
     }
@@ -216,12 +270,11 @@ function generationSelect(server: ServerType): string {
 }
 
 function raritySelect(server: ServerType): string {
-  const randomNumber = Math.floor(Math.random() * 1000);
+  const randomNumber = random(1000);
   let somStatByRarity = 0;
   let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (const element of arrayRarity) {
-    // @ts-ignore
-    somStatByRarity += server.eventSpawn.rarity[element];
+    somStatByRarity += server.eventSpawn.rarity[element as keyof RarityStat];
     if (randomNumber <= somStatByRarity) {
       return element;
     }
@@ -231,21 +284,18 @@ function raritySelect(server: ServerType): string {
 }
 
 function typeSelect(server: ServerType): string {
-  const randomNumber = Math.floor(
-    Math.random() * Object.values(valuePerType).reduce((a, b) => a + b, 0),
+  const randomNumber = random(
+    Object.values(valuePerType).reduce((a, b) => a + b, 0),
   );
   let somStatByType = 0;
   let arrayType: string[] = Object.keys(valuePerType);
 
   for (const element of arrayType) {
-    // @ts-ignore
-    somStatByType += server.eventSpawn.type[element];
+    somStatByType += server.eventSpawn.type[element as keyof TypeStat];
     if (randomNumber <= somStatByType) {
       return element;
     }
   }
 
-
   return "errorType";
 }
-

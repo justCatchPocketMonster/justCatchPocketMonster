@@ -3,11 +3,11 @@ import {
   SlashCommandChannelOption,
 } from "@discordjs/builders";
 import { ChannelType, ChatInputCommandInteraction } from "discord.js";
-import {newLogger} from "../../middlewares/logger";
+import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById, updateServer } from "../../cache/ServerCache";
-import {createHint} from "../../features/hint/createHint";
-import {capitalizeFirstLetter} from "../../utils/helperFunction";
+import { createHint } from "../../features/hint/createHint";
+import { capitalizeFirstLetter } from "../../utils/helperFunction";
 
 export default {
   name: "hint",
@@ -46,30 +46,35 @@ export default {
       if (!channel) {
         return;
       }
-      if (
-        server.pokemonPresent[channel.id]?.hint
-      ) {
+      if (server.pokemonPresent[channel.id]?.hint) {
         server.pokemonPresent[channel.id].hint = createHint(
           server.pokemonPresent[channel.id].hint,
-          server.pokemonPresent[channel.id].name["name"+capitalizeFirstLetter(server.language)][0],
+          server.pokemonPresent[channel.id].name[
+            "name" + capitalizeFirstLetter(server.settings.language)
+          ][0],
         );
         await updateServer(server.discordId, server);
         interaction.reply({
-          content: language("hintIs", server.language)+server.pokemonPresent[channel.id].hint+" "+language("forChannel", server.language)+channel.toString()
+          content:
+            language("hintIs", server.settings.language) +
+            server.pokemonPresent[channel.id].hint +
+            " " +
+            language("forChannel", server.settings.language) +
+            `<#${channel.id}>`,
         });
         return;
       }
 
       interaction.reply({
-        content: language("noHint", server.language),
+        content: language("noHint", server.settings.language),
         ephemeral: true,
       });
       return;
     } catch (e) {
       newLogger(
-          'error',
-          e as string,
-          `Error in hint command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
+        "error",
+        e as string,
+        `Error in hint command for user ${interaction.user.id} in server ${interaction.guild?.id}`,
       );
       interaction.reply(language("errorCatch", "eng"));
     }
