@@ -3,6 +3,10 @@ import {
   generateCatchMessage,
 } from "../../../../src/features/catch/catch";
 import { Pokemon } from "../../../../src/core/classes/Pokemon";
+import {
+  registerSpawnMessage,
+  clearSpawnMessage,
+} from "../../../../src/features/spawn/spawnMessageRegistry";
 
 jest.mock("../../../../src/features/raid/raidManager", () => ({
   isChannelInRaid: jest.fn(),
@@ -342,6 +346,122 @@ describe("catch", () => {
       expect(server.removePokemonByIdChannel).toHaveBeenCalledWith("channel1");
       expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
       expect(interaction.deleteReply).toHaveBeenCalled();
+    });
+
+    it("should enter spawnMessageId block and skip edit when channel.fetch returns null", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const interaction = createMockInteraction();
+      const fetchMock = jest.fn().mockResolvedValue(null);
+      (interaction as any).client = { channels: { fetch: fetchMock } };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(fetchMock).toHaveBeenCalledWith("channel1");
+      expect(interaction.deferReply).toHaveBeenCalled();
+      expect(interaction.deleteReply).toHaveBeenCalled();
+      clearSpawnMessage("guild1", "channel1");
+    });
+
+    it("should catch error when channels.fetch throws", async () => {
+      registerSpawnMessage("guild1", "channel1", "spawn-msg-id");
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+        canSosBattle: false,
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+      helperFunction.random.mockReturnValue(0);
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = {
+        channels: {
+          fetch: jest.fn().mockRejectedValue(new Error("fetch failed")),
+        },
+      };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(interaction.deferReply).toHaveBeenCalled();
+      expect(interaction.deleteReply).toHaveBeenCalled();
+    });
+
+    it("should call resolveRaid when raid is full after joining", async () => {
+      raidManager.isChannelInRaid.mockReturnValue(true);
+      raidManager.joinRaid.mockReturnValue({
+        joined: true,
+        raid: { players: ["u1", "u2", "u3", "u4"], channelId: "ch1" },
+      });
+      raidManager.isRaidFull.mockReturnValue(true);
+      raidManager.resolveRaid.mockResolvedValue(undefined);
+      raidManager.updateRaidEmbed.mockResolvedValue(undefined);
+
+      const pokemon = Pokemon.from({
+        id: "399",
+        name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
+        arrayType: ["normal"],
+        rarity: "ordinary",
+        imgName: "399",
+        gen: 4,
+        form: "ordinary",
+        versionForm: 1,
+        isShiny: false,
+        hint: "B___",
+      });
+      const server = createMockServer();
+      server.getPokemonByIdChannel.mockReturnValue(pokemon);
+
+      const interaction = createMockInteraction();
+      (interaction as any).client = { channels: { cache: new Map() } };
+
+      await catchPokemon(
+        createMockUser() as any,
+        server as any,
+        "channel1",
+        "Bidoof",
+        interaction as any,
+      );
+
+      expect(raidManager.resolveRaid).toHaveBeenCalled();
     });
 
     it("should trigger SOS followUp when canSosBattle and random returns 1", async () => {

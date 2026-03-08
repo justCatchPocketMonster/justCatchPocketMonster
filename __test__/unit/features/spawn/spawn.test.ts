@@ -1,6 +1,7 @@
 import {
   spawn,
   generateEmbedSosPokemon,
+  generateEmbedPokemon,
 } from "../../../../src/features/spawn/spawn";
 import { urlImageRepo } from "../../../../src/config/default/misc";
 
@@ -321,5 +322,97 @@ describe("generateEmbedSosPokemon", () => {
     const { embed } = await generateEmbedSosPokemon(pokemon as any, server);
 
     expect(embed.data.color).toBeDefined();
+  });
+});
+
+describe("generateEmbedPokemon", () => {
+  const server = Server.createDefault("server1");
+  const mockPokemon = {
+    id: "25",
+    name: { nameEng: ["Pikachu"], nameFr: ["Pikachu"] },
+    arrayType: ["electric"],
+    rarity: "ordinary",
+    imgName: "025",
+    gen: 1,
+    form: "ordinary",
+    versionForm: 1,
+    isShiny: false,
+    hint: "P___",
+    canSosBattle: false,
+  };
+
+  beforeEach(() => {
+    jest.spyOn(helperFunction, "random").mockReturnValue(0);
+    server.eventSpawn.nightMode = false;
+    server.eventSpawn.whatEvent = null;
+    server.settings.language = "eng";
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test("should include event time with hours and minutes when endTime is > 1h away", async () => {
+    const futureDate = new Date(Date.now() + 90 * 60 * 1000);
+    server.eventSpawn.whatEvent = { endTime: futureDate } as any;
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.footer?.text).toContain("1h");
+    expect(embed.data.footer?.text).toContain("Ongoing event");
+  });
+
+  test("should include only minutes in footer when endTime is < 1h away", async () => {
+    const futureDate = new Date(Date.now() + 30 * 60 * 1000);
+    server.eventSpawn.whatEvent = { endTime: futureDate } as any;
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.footer?.text).toContain("30min");
+    expect(embed.data.footer?.text).not.toContain("h 30min");
+  });
+
+  test("should not include event label when endTime is in the past", async () => {
+    const pastDate = new Date(Date.now() - 60 * 1000);
+    server.eventSpawn.whatEvent = { endTime: pastDate } as any;
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.footer?.text).not.toContain("Ongoing event");
+    expect(embed.data.footer?.text).not.toContain("Évènement");
+  });
+
+  test("should not include event label when no event is active", async () => {
+    server.eventSpawn.whatEvent = null;
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.footer?.text).not.toContain("Ongoing event");
+  });
+
+  test("should use French event label", async () => {
+    const futureDate = new Date(Date.now() + 60 * 60 * 1000);
+    server.eventSpawn.whatEvent = { endTime: futureDate } as any;
+    server.settings.language = "fr";
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.footer?.text).toContain("Évènement en cours");
+  });
+
+  test("should use pokeHomeShadow subfolder in night mode", async () => {
+    server.eventSpawn.nightMode = true;
+
+    const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
+
+    expect(embed.data.image?.url).toContain("pokeHomeShadow");
+  });
+
+  test("should use shiny image suffix for shiny pokemon", async () => {
+    const shinyPokemon = { ...mockPokemon, isShiny: true };
+
+    const { embed } = await generateEmbedPokemon(shinyPokemon as any, server);
+
+    expect(embed.data.image?.url).toContain("-shiny.png");
   });
 });

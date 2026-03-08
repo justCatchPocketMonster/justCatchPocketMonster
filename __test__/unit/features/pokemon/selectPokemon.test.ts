@@ -289,6 +289,15 @@ describe("selectPokemon", () => {
     expect(pokemon).toBeDefined();
   });
 
+  test("should apply charmeChroma divisor to shiny rate", () => {
+    server.charmeChroma = true;
+    jest.spyOn(helperFunction, "random").mockReturnValue(1);
+
+    const pokemon = selectPokemon(server, 25);
+
+    expect(pokemon.isShiny).toBe(true);
+  });
+
   test("should have canSosBattle defined on random spawn", () => {
     __deps.generationSelect = jest.fn().mockReturnValue("1");
     __deps.raritySelect = jest.fn().mockReturnValue("ordinary");
