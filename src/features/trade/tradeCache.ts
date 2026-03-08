@@ -180,7 +180,6 @@ export function deleteTrade(tradeId: string): void {
   tradeCache.del(String(tradeId));
 }
 
-/** Alias intentionnel de getTradeByUserId() — utilisé par les handlers pour une lecture plus expressive du contexte. */
 export function getUserActiveTrade(userId: string): TradeData | undefined {
   return getTradeByUserId(userId);
 }
