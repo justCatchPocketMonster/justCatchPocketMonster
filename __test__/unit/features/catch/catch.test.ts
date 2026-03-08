@@ -88,6 +88,9 @@ function createMockUser() {
       },
     },
     addOneCatch: jest.fn(),
+    getSaveOnePokemonFusedForm: jest
+      .fn()
+      .mockReturnValue({ normalCount: 1, shinyCount: 0 }),
   };
   return {
     discordId: "user1",
@@ -136,7 +139,9 @@ function createMockInteraction() {
       displayName: "TestDisplay",
     },
     reply: jest.fn().mockResolvedValue(undefined),
-    followUp: jest.fn().mockResolvedValue(undefined),
+    deferReply: jest.fn().mockResolvedValue(undefined),
+    deleteReply: jest.fn().mockResolvedValue(undefined),
+    followUp: jest.fn().mockResolvedValue({ id: "mock-message-id" }),
     client: {},
   };
 }
@@ -228,9 +233,8 @@ describe("catch", () => {
         interaction as any,
       );
 
-      expect(interaction.reply).toHaveBeenCalledWith(
-        expect.stringContaining("TestDisplay"),
-      );
+      expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
+      expect(interaction.deleteReply).toHaveBeenCalled();
     });
 
     it("should call handleRaidCatch when channel is in raid", async () => {
@@ -307,7 +311,7 @@ describe("catch", () => {
       );
     });
 
-    it("should successfully catch pokemon and reply with message", async () => {
+    it("should successfully catch pokemon and clean up reply", async () => {
       const pokemon = Pokemon.from({
         id: "399",
         name: { nameEng: ["Bidoof"], nameFr: ["Keunotor"] },
@@ -336,9 +340,8 @@ describe("catch", () => {
       );
 
       expect(server.removePokemonByIdChannel).toHaveBeenCalledWith("channel1");
-      expect(interaction.reply).toHaveBeenCalledWith(
-        expect.stringContaining("Keunotor"),
-      );
+      expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
+      expect(interaction.deleteReply).toHaveBeenCalled();
     });
 
     it("should trigger SOS followUp when canSosBattle and random returns 1", async () => {

@@ -108,6 +108,14 @@ export async function paginationMenu(
 ): Promise<void> {
   if (pages.length === 0) return;
 
+  const hasAnyValidOption = pages.some(
+    (p) =>
+      p.page !== null &&
+      p.information.nameSelection.length > 0 &&
+      p.information.nameSelection.length <= 100,
+  );
+  if (!hasAnyValidOption) return;
+
   let currentPage = pageParDefaut - 1;
   if (
     currentPage < 0 ||

@@ -38,7 +38,11 @@ export default async (client: Client, message: Message) => {
           sentMessage.id,
         );
       } else {
-        registerSpawnMessage(message.guild.id, result.channelId, sentMessage.id);
+        registerSpawnMessage(
+          message.guild.id,
+          result.channelId,
+          sentMessage.id,
+        );
       }
     } else {
       const sentMessage = await channel.send({ embeds: [result.embed] });
@@ -52,7 +56,11 @@ export default async (client: Client, message: Message) => {
           sentMessage.id,
         );
       } else {
-        registerSpawnMessage(message.guild.id, result.channelId, sentMessage.id);
+        registerSpawnMessage(
+          message.guild.id,
+          result.channelId,
+          sentMessage.id,
+        );
       }
     }
   } catch (e) {

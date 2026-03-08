@@ -46,8 +46,9 @@ export function createMockInteraction(): ChatInputCommandInteraction {
     isChatInputCommand: () => true,
     reply: jest.fn().mockResolvedValue(mockMessage), // fetchReply:true => retourne un Message
     deferReply: jest.fn().mockResolvedValue(undefined),
+    deleteReply: jest.fn().mockResolvedValue(undefined),
     editReply: jest.fn().mockResolvedValue(undefined),
-    followUp: jest.fn().mockResolvedValue(undefined),
+    followUp: jest.fn().mockResolvedValue({ id: "mock-message-id" }),
   };
 
   return mock as unknown as ChatInputCommandInteraction;

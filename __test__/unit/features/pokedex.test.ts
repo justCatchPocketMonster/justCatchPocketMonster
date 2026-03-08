@@ -10,13 +10,16 @@ jest.mock("../../../src/lang/language", () => {
   };
 });
 
-const paginationButtonMock = jest.fn();
-jest.mock("../../../src/features/other/paginationButton", () => ({
-  paginationButton: (...args: any[]) => paginationButtonMock(...args),
+const paginationMenuMock = jest.fn();
+jest.mock("../../../src/features/other/paginationMenu", () => ({
+  paginationMenu: (...args: any[]) => paginationMenuMock(...args),
+  createPageForMenu: jest.requireActual(
+    "../../../src/features/other/paginationMenu",
+  ).createPageForMenu,
 }));
 
 describe("pokedex", () => {
-  it("replies when pageChoice is too high and paginates from page 1", () => {
+  it("replies when pageChoice is too high and paginates from page 1", async () => {
     const interaction = createMockInteraction();
 
     const user = {
@@ -88,16 +91,16 @@ describe("pokedex", () => {
     };
     server.savePokemon.initMissingPokemons();
 
-    pokedex(interaction as any, user as any, server as any, 9_999);
+    await pokedex(interaction as any, user as any, server as any, 9_999);
 
     expect(interaction.reply).toHaveBeenCalledTimes(1);
-    expect(paginationButtonMock).toHaveBeenCalled();
+    expect(paginationMenuMock).toHaveBeenCalled();
 
-    const [, , defaultPage] = paginationButtonMock.mock.calls[0];
+    const [, , , defaultPage] = paginationMenuMock.mock.calls[0];
     expect(defaultPage).toBe(1);
   });
 
-  it("should handle null pageChoice", () => {
+  it("should handle null pageChoice", async () => {
     const interaction = createMockInteraction();
 
     const user = {
@@ -169,13 +172,11 @@ describe("pokedex", () => {
     };
     server.savePokemon.initMissingPokemons();
 
-    pokedex(interaction as any, user as any, server as any, null);
+    await pokedex(interaction as any, user as any, server as any, null);
 
-    expect(paginationButtonMock).toHaveBeenCalled();
-    const [, , defaultPage] =
-      paginationButtonMock.mock.calls[
-        paginationButtonMock.mock.calls.length - 1
-      ];
+    expect(paginationMenuMock).toHaveBeenCalled();
+    const [, , , defaultPage] =
+      paginationMenuMock.mock.calls[paginationMenuMock.mock.calls.length - 1];
     expect(defaultPage).toBe(1);
   });
 });

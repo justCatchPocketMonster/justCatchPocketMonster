@@ -145,16 +145,24 @@ export async function catchPokemon(
       : pokemonDbData.name.nameEng[0]
     : pokemonInput;
 
-  const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(pokemon.id).normalCount;
+  const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
+    pokemon.id,
+  ).normalCount;
 
   if (spawnMessageId) {
     try {
       const channel = await interaction.client.channels.fetch(idChannel);
-      if (channel && channel.isTextBased() && channel instanceof BaseGuildTextChannel) {
+      if (
+        channel &&
+        channel.isTextBased() &&
+        channel instanceof BaseGuildTextChannel
+      ) {
         const spawnMessage = await channel.messages.fetch(spawnMessageId);
         const existingEmbed = spawnMessage.embeds[0];
         if (existingEmbed) {
-          const nameForTitle = pokemon.isShiny ? `${pokemonName} ⭐` : pokemonName;
+          const nameForTitle = pokemon.isShiny
+            ? `${pokemonName} ⭐`
+            : pokemonName;
           const catchTitle =
             lang === "fr"
               ? `${nameForTitle} capturé !`
@@ -177,7 +185,11 @@ export async function catchPokemon(
         }
       }
     } catch (e) {
-      newLogger("error", e as string, "Error editing spawn message after catch");
+      newLogger(
+        "error",
+        e as string,
+        "Error editing spawn message after catch",
+      );
     }
   }
 
