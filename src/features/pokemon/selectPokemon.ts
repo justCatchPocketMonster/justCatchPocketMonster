@@ -1,11 +1,7 @@
 import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
-import {
-  GenStat,
-  RarityStat,
-  TypeStat,
-} from "../../core/types/EventSpawnType";
+import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
 import allPokemon from "../../data/pokemon.json";
 import {
   hidePokemon,
@@ -52,7 +48,7 @@ export const selectEggPokemon = (
 ): PokemonType => {
   let pokemonChoiced: PokemonType;
   if (idPokemon === 0) {
-    const randomIdPokemon = random(allPokemon[allPokemon.length - 1].id);
+    const randomIdPokemon = random(allPokemon.at(-1)!.id);
     pokemonChoiced = selectPokemonWithId(randomIdPokemon, false);
   } else {
     pokemonChoiced = selectPokemonWithId(idPokemon, false);

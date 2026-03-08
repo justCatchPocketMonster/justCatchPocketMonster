@@ -316,9 +316,7 @@ describe("selectSosPokemon", () => {
   beforeAll(async () => {
     const { resetTestEnv } = await import("../../../utils/resetTestEnv");
     await resetTestEnv();
-    const { getServerById } = await import(
-      "../../../../src/cache/ServerCache"
-    );
+    const { getServerById } = await import("../../../../src/cache/ServerCache");
     const { createMockInteraction } = await import(
       "../../../utils/mock/mockInteraction"
     );

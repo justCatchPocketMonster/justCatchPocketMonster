@@ -337,7 +337,10 @@ describe("TradeValidation", () => {
 
       (getUserById as jest.Mock).mockImplementation(async (id: string) => {
         if (id === "user_sh1")
-          return { discordId: "user_sh1", savePokemon: { data: initiatorData } };
+          return {
+            discordId: "user_sh1",
+            savePokemon: { data: initiatorData },
+          };
         if (id === "user_sh2")
           return { discordId: "user_sh2", savePokemon: { data: targetData } };
         return null;
@@ -401,7 +404,10 @@ describe("TradeValidation", () => {
 
       (getUserById as jest.Mock).mockImplementation(async (id: string) => {
         if (id === "user_nr1")
-          return { discordId: "user_nr1", savePokemon: { data: initiatorData } };
+          return {
+            discordId: "user_nr1",
+            savePokemon: { data: initiatorData },
+          };
         if (id === "user_nr2")
           return { discordId: "user_nr2", savePokemon: { data: targetData } };
         return null;
