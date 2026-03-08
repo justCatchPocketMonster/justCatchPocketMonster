@@ -136,7 +136,7 @@ export async function executeTrade(tradeData: TradeData): Promise<boolean> {
   } catch (error) {
     newLogger(
       "error",
-      error as string,
+      error instanceof Error ? error.message : String(error),
       `Error executing trade ${tradeData.tradeId}`,
     );
     return false;

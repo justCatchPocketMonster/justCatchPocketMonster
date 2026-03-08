@@ -147,14 +147,14 @@ describe("spawn", () => {
     expect(result).toBeNull();
   });
 
-  test("should handle error and return undefined", async () => {
+  test("should handle error and return null", async () => {
     jest
       .spyOn(require("../../../../src/cache/ServerCache"), "getServerById")
       .mockRejectedValueOnce(new Error("Database error"));
 
     const result = await spawn(message.guildId!, message.channelId);
 
-    expect(result).toBeUndefined();
+    expect(result).toBeNull();
     expect(logger.error).toHaveBeenCalled();
   });
 

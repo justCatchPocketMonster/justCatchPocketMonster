@@ -21,6 +21,7 @@ import { checkTimeForResetEventStat } from "../event/checkTimeForResetEventStat"
 import { getActiveRaid, isChannelInRaid } from "../raid/raidManager";
 import { selectRaidPokemon } from "../raid/selectRaidPokemon";
 import { generateRaidEmbed } from "../raid/raidEmbed";
+import { Stat } from "../../core/classes/Stat";
 
 export interface SpawnData {
   embed: EmbedBuilder;
@@ -35,7 +36,7 @@ const spawnLocks = new Set<string>();
 export const spawn = async (
   idServer: string,
   idChannel: string,
-): Promise<SpawnData | null | undefined> => {
+): Promise<SpawnData | null> => {
   if (spawnLocks.has(idServer)) return null;
   spawnLocks.add(idServer);
   try {
@@ -43,15 +44,16 @@ export const spawn = async (
     const channelId = choiceChannel(server, idChannel);
 
     if (!channelId || !(await hasReachedSpawnLimit(server))) return null;
-    let SpawnData: SpawnData | null = {
+    let spawnResult: SpawnData | null = {
       ...(await choiceTypeOfSpawn(server, channelId)),
       channelId,
     };
 
-    if (!SpawnData?.embed || !SpawnData?.channelId) SpawnData = null;
-    return SpawnData;
+    if (!spawnResult?.embed || !spawnResult?.channelId) spawnResult = null;
+    return spawnResult;
   } catch (e) {
     logger.error(e);
+    return null;
   } finally {
     spawnLocks.delete(idServer);
   }
@@ -97,6 +99,19 @@ function choiceChannel(server: ServerType, idChannel: string): string {
   return available[random(available.length)];
 }
 
+async function updateSpawnStats(
+  server: ServerType,
+  statVersion: Stat,
+  statAll: Stat,
+  pokemon: Pokemon | PokemonType,
+): Promise<void> {
+  statVersion.addSpawn(pokemon as Pokemon);
+  statAll.addSpawn(pokemon as Pokemon);
+  await updateServer(server.discordId, server);
+  await updateStat(version, statVersion);
+  await updateStat(nameStatGeneral, statAll);
+}
+
 async function choiceTypeOfSpawn(
   server: ServerType,
   idChannel: string,
@@ -119,11 +134,8 @@ async function choiceTypeOfSpawn(
 
     const statVersion = await getStatById(version);
     const statAll = await getStatById(nameStatGeneral);
-    statVersion.addSpawn(raidPokemon as Pokemon);
-    statAll.addSpawn(raidPokemon as Pokemon);
-    await updateServer(server.discordId, server);
-    await updateStat(version, statVersion);
-    await updateStat(nameStatGeneral, statAll);
+    await updateSpawnStats(server, statVersion, statAll, raidPokemon);
+
     const { embed } = await generateRaidEmbed(
       raidPokemon,
       server,
@@ -148,15 +160,11 @@ async function choiceTypeOfSpawn(
     pokemonChoice = selectPokemon(server, 0);
   }
   server.pokemonPresent[idChannel] = pokemonChoice;
+
   const statVersion = await getStatById(version);
   const statAll = await getStatById(nameStatGeneral);
+  await updateSpawnStats(server, statVersion, statAll, pokemonChoice);
 
-  statVersion.addSpawn(pokemonChoice as Pokemon);
-  statAll.addSpawn(pokemonChoice as Pokemon);
-
-  await updateServer(server.discordId, server);
-  await updateStat(version, statVersion);
-  await updateStat(nameStatGeneral, statAll);
   return await generateEmbedPokemon(pokemonChoice, server);
 }
 

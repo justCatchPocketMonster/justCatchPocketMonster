@@ -45,13 +45,13 @@ export async function catchPokemon(
   const pokemon = server.getPokemonByIdChannel(idChannel);
 
   if (!pokemon) {
-    interaction.reply(
+    await interaction.reply(
       language("noPokemonDisponible", server.settings.language),
     );
     return;
   }
   if (!pokemon.nameIsSame(pokemonInput)) {
-    interaction.reply(
+    await interaction.reply(
       language("failCatchGoodPokemonPart1", server.settings.language) +
         " " +
         memberDisplayName +
@@ -107,7 +107,7 @@ export async function catchPokemon(
   } catch (e) {
     newLogger(
       "error",
-      e as string,
+      e instanceof Error ? e.message : String(e),
       "Error updating caches after catching a Pokémon",
     );
   }
@@ -173,7 +173,11 @@ async function handleSosBattle(
     await updateStat(version, statVersion);
     await updateStat(nameStatGeneral, statAll);
   } catch (e) {
-    newLogger("error", e as string, "Error updating caches after SOS spawn");
+    newLogger(
+      "error",
+      e instanceof Error ? e.message : String(e),
+      "Error updating caches after SOS spawn",
+    );
   }
   const { embed } = await generateEmbedSosPokemon(sosPokemonType, server);
   const sosMessage = await interaction.followUp({ embeds: [embed] });
@@ -218,7 +222,11 @@ async function updateSpawnEmbed(
       .addFields({ name: fieldName, value: totalLabel, inline: false });
     await spawnMessage.edit({ embeds: [updatedEmbed] });
   } catch (e) {
-    newLogger("error", e as string, "Error editing spawn message after catch");
+    newLogger(
+      "error",
+      e instanceof Error ? e.message : String(e),
+      "Error editing spawn message after catch",
+    );
   }
 }
 

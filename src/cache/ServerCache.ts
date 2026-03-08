@@ -8,11 +8,6 @@ export const cache = new NodeCache({ stdTTL: ttlCache });
 
 export async function getServerById(serverId: string): Promise<Server> {
   const safeServerId = String(serverId);
-  if (typeof safeServerId !== "string") {
-    throw new TypeError(
-      `getServerById: serverId must be a string, got ${typeof serverId}`,
-    );
-  }
   const cached = cache.get<Server>(safeServerId);
   if (cached) return cached;
 

@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits } from "discord.js";
+import mongoose from "mongoose";
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
 import messageCreate from "./events/messageCreate";
@@ -11,7 +12,7 @@ config();
 async function main() {
   await database();
 
-  const ClientDiscord: Client = new Client({
+  const clientDiscord: Client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -20,16 +21,25 @@ async function main() {
     ],
   });
 
-  await ClientDiscord.login(process.env.DISCORD_TOKEN);
-
-  ClientDiscord.on("messageCreate", (message) =>
-    messageCreate(ClientDiscord, message),
+  clientDiscord.on("messageCreate", (message) =>
+    messageCreate(clientDiscord, message),
   );
-  ClientDiscord.on("interactionCreate", (interaction) =>
-    interactionCreate(ClientDiscord, interaction),
+  clientDiscord.on("interactionCreate", (interaction) =>
+    interactionCreate(clientDiscord, interaction),
   );
+  clientDiscord.on("ready", () => ready(clientDiscord));
 
-  ClientDiscord.on("ready", () => ready(ClientDiscord));
+  await clientDiscord.login(process.env.DISCORD_TOKEN);
+
+  const shutdown = async (signal: string) => {
+    process.stdout.write(`\nReceived ${signal}, shutting down...\n`);
+    clientDiscord.destroy();
+    await mongoose.disconnect();
+    process.exit(0);
+  };
+
+  process.on("SIGINT", () => shutdown("SIGINT"));
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
 }
 
-main();
+main().catch(console.error);
