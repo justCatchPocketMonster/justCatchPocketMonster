@@ -1,0 +1,16 @@
+﻿node.exe : PASS __test__/unit/features/hint/createHint.test.ts (8.266 s)
+At C:\Program Files\nodejs\npx.ps1:29 char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (PASS __test__/u...st.ts (8.266 s):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+PASS __test__/integration/commands/information/hintPokemon.test.ts (11.785 s)
+
+Test Suites: 2 passed, 2 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        12.682 s
+Ran all test suites matching createHint|hintPokemon.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after 
+all tests finished?
