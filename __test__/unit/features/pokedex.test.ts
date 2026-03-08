@@ -343,14 +343,14 @@ describe("pokedex – getPokedexColor and processRegion via mocked save", () => 
     expect(pages[0]?.page?.data?.color).toBe(0xcd7f32);
   });
 
-  it("returns silver color when 3 regions are complete", async () => {
+  it("returns silver color when 5 regions are complete", async () => {
     const { interaction, user, server } = buildBasePokedexFixtures();
-    const fullRegion = createFullRegionSave(151);
+    const fullRegion = createFullRegionSave(160);
     const emptySave = new SaveAllPokemon();
     let callCount = 0;
     jest
       .spyOn(user.savePokemon, "getThisSaveUniqueIdWithByIdRange")
-      .mockImplementation(() => (callCount++ < 3 ? fullRegion : emptySave));
+      .mockImplementation(() => (callCount++ < 5 ? fullRegion : emptySave));
 
     await pokedex(interaction as any, user as any, server as any, null);
 
@@ -359,7 +359,7 @@ describe("pokedex – getPokedexColor and processRegion via mocked save", () => 
     expect(pages[0]?.page?.data?.color).toBe(0xc0c0c0);
   });
 
-  it("returns gold color when all 6 regions are complete", async () => {
+  it("returns gold color when all 9 regions are complete", async () => {
     const { interaction, user, server } = buildBasePokedexFixtures();
     const fullRegion = createFullRegionSave(160); // Unys has rangeSize=156, need >= 156
     jest

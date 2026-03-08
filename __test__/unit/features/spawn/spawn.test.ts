@@ -224,6 +224,62 @@ describe("spawn", () => {
     expect(result?.embed.data.title).toContain("Raid");
   });
 
+  test("should spawn egg when isEgg condition is met", async () => {
+    const server = await getServerById(message.guildId!);
+    server.countMessage = 19;
+    server.maxCountMessage = 20;
+    server.channelAllowed.push(message.channelId);
+    await updateServer(server.discordId, server);
+
+    jest
+      .spyOn(helperFunction, "random")
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(0)
+      .mockReturnValue(0);
+
+    const result = await spawn(message.guildId!, message.channelId);
+
+    expect(result).not.toBeNull();
+    expect(result?.embed).toBeDefined();
+  });
+
+  test("should generate event embed when selectEventStandard sets whatEvent", async () => {
+    const server = await getServerById(message.guildId!);
+    server.countMessage = 19;
+    server.maxCountMessage = 20;
+    server.channelAllowed.push(message.channelId);
+    server.eventSpawn.whatEvent = null;
+    await updateServer(server.discordId, server);
+
+    const selectEventModule = require("../../../../src/features/event/selectEventStandard");
+    jest
+      .spyOn(selectEventModule, "selectEventStandard")
+      .mockImplementation(async (srv: any) => {
+        srv.eventSpawn.whatEvent = {
+          id: 1,
+          name: "eventMontagnardTitre",
+          description: "eventMontagnardDesc",
+          type: "justEmbed",
+          color: "#734101",
+          image: "0001-000",
+          effectDescription: "Legendary spawn rate increased",
+          endTime: new Date(Date.now() + 3600000),
+        };
+      });
+
+    jest
+      .spyOn(helperFunction, "random")
+      .mockReturnValueOnce(5)
+      .mockReturnValueOnce(1)
+      .mockReturnValue(0);
+
+    const result = await spawn(message.guildId!, message.channelId);
+
+    expect(result).not.toBeNull();
+    expect(result?.embed).toBeDefined();
+  });
+
   test("should handle nightMode in generateEmbedPokemon", async () => {
     const server = await getServerById(message.guildId!);
     server.countMessage = 19;
