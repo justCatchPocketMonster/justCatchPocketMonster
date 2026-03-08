@@ -1,6 +1,11 @@
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
-import { ChatInputCommandInteraction, GuildMember } from "discord.js";
+import {
+  BaseGuildTextChannel,
+  ChatInputCommandInteraction,
+  EmbedBuilder,
+  GuildMember,
+} from "discord.js";
 import { eventShinyAfterCatch } from "../event/eventShinyAfterCatch";
 import language from "../../lang/language";
 import { getStatById, updateStat } from "../../cache/StatCache";
@@ -20,6 +25,11 @@ import {
   resolveRaid,
   updateRaidEmbed,
 } from "../raid/raidManager";
+import {
+  getSpawnMessageId,
+  clearSpawnMessage,
+  registerSpawnMessage,
+} from "../spawn/spawnMessageRegistry";
 
 export async function catchPokemon(
   user: UserType,
@@ -64,6 +74,12 @@ export async function catchPokemon(
     return;
   }
 
+  await interaction.deferReply({ ephemeral: true });
+
+  const serverId = interaction.guild!.id;
+  const spawnMessageId = getSpawnMessageId(serverId, idChannel);
+  clearSpawnMessage(serverId, idChannel);
+
   const shinyAfterEvent = eventShinyAfterCatch(
     interaction,
     pokemon.isShiny ??
@@ -98,9 +114,8 @@ export async function catchPokemon(
       newLogger("error", e as string, "Error updating caches after SOS spawn");
     }
     const { embed } = await generateEmbedSosPokemon(sosPokemonType, server);
-    await interaction.followUp({
-      embeds: [embed],
-    });
+    const sosMessage = await interaction.followUp({ embeds: [embed] });
+    registerSpawnMessage(serverId, idChannel, sosMessage.id);
   }
 
   try {
@@ -116,24 +131,57 @@ export async function catchPokemon(
     );
   }
 
-  const getPokemonData = allPokemon
-    .filter(
-      (poke) =>
-        poke.id.toString() === pokemon.id &&
-        poke.form === pokemon.form &&
-        poke.versionForm === pokemon.versionForm,
-    )
-    .map((poke) => ({
-      name: {
-        nameFr: poke.name.nameFr,
-        nameEng: poke.name.nameEng,
-      },
-      isShiny: pokemon.isShiny,
-    }))[0];
-
-  interaction.reply(
-    generateCatchMessage(getPokemonData, memberDisplayName, user, server),
+  const pokemonDbData = allPokemon.find(
+    (poke) =>
+      poke.id.toString() === pokemon.id &&
+      poke.form === pokemon.form &&
+      poke.versionForm === pokemon.versionForm,
   );
+
+  const lang = server.settings.language;
+  const pokemonName = pokemonDbData
+    ? lang === "fr"
+      ? pokemonDbData.name.nameFr[0]
+      : pokemonDbData.name.nameEng[0]
+    : pokemonInput;
+
+  const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(pokemon.id).normalCount;
+
+  if (spawnMessageId) {
+    try {
+      const channel = await interaction.client.channels.fetch(idChannel);
+      if (channel && channel.isTextBased() && channel instanceof BaseGuildTextChannel) {
+        const spawnMessage = await channel.messages.fetch(spawnMessageId);
+        const existingEmbed = spawnMessage.embeds[0];
+        if (existingEmbed) {
+          const nameForTitle = pokemon.isShiny ? `${pokemonName} ⭐` : pokemonName;
+          const catchTitle =
+            lang === "fr"
+              ? `${nameForTitle} capturé !`
+              : `${nameForTitle} captured!`;
+          const fieldName =
+            lang === "fr"
+              ? `Attrapé par ${memberDisplayName} !`
+              : `Caught by ${memberDisplayName}!`;
+          const totalLabel =
+            lang === "fr"
+              ? `Vous en possédez maintenant : **${newTotal}**`
+              : `You now own: **${newTotal}**`;
+
+          const updatedEmbed = EmbedBuilder.from(existingEmbed)
+            .setTitle(catchTitle)
+            .setColor(0x57f287)
+            .setFooter(null)
+            .addFields({ name: fieldName, value: totalLabel, inline: false });
+          await spawnMessage.edit({ embeds: [updatedEmbed] });
+        }
+      }
+    } catch (e) {
+      newLogger("error", e as string, "Error editing spawn message after catch");
+    }
+  }
+
+  await interaction.deleteReply();
 }
 
 async function handleRaidCatch(

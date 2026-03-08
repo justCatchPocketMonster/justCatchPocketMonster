@@ -173,13 +173,29 @@ export async function generateEmbedPokemon(
     pokemon.arrayType[random(pokemon.arrayType.length)],
   );
 
+  let footerText = getText("embedPokemonDescription", server.settings.language);
+
+  const activeEvent = server.eventSpawn.whatEvent;
+  if (activeEvent?.endTime) {
+    const msLeft = new Date(activeEvent.endTime).getTime() - Date.now();
+    if (msLeft > 0) {
+      const totalMinutes = Math.floor(msLeft / 60000);
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const timeStr = hours > 0 ? `${hours}h ${minutes}min` : `${minutes}min`;
+      const eventLabel =
+        server.settings.language === "fr"
+          ? `Évènement en cours — se termine dans ${timeStr}`
+          : `Ongoing event — ends in ${timeStr}`;
+      footerText += ` | ${eventLabel}`;
+    }
+  }
+
   const pokeEmbed = new EmbedBuilder()
     .setColor(color)
     .setTitle(getText("embedPokemonTitle", server.settings.language))
-    .setDescription(
-      getText("embedPokemonDescription", server.settings.language),
-    )
-    .setImage(imageUrl);
+    .setImage(imageUrl)
+    .setFooter({ text: footerText });
 
   return { embed: pokeEmbed };
 }

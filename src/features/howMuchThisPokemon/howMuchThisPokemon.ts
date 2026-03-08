@@ -9,7 +9,11 @@ import {
   colorByType,
   random,
 } from "../../utils/helperFunction";
-import { pageType, paginationButton } from "../other/paginationButton";
+import {
+  createPageForMenu,
+  PageData,
+  paginationMenu,
+} from "../other/paginationMenu";
 import allPokemon from "../../data/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import { getImageUrl } from "../../utils/imageUrl";
@@ -25,7 +29,7 @@ export async function howMuchThisPokemon(
   const saveOnePokemonServer = server.savePokemon.getSavesById(pokemonId);
   const saveOnePokemonStatSpawn = stat.savePokemonSpawn.getSavesById(pokemonId);
   const saveOnePokemonStatCatch = stat.savePokemonCatch.getSavesById(pokemonId);
-  const paginationPage: pageType[] = [];
+  const paginationPage: PageData[] = [];
   const avatar =
     interaction.user.avatarURL() ??
     "https://cdn.discordapp.com/embed/avatars/0.png";
@@ -90,7 +94,12 @@ export async function howMuchThisPokemon(
       ),
     );
   }
-  paginationButton(interaction, paginationPage);
+
+  const defaultText =
+    server.settings.language === "fr"
+      ? "Choisir une variante..."
+      : "Select a variant...";
+  paginationMenu(interaction, defaultText, paginationPage);
 }
 
 function getSpecifiqueFormSaveData(
@@ -137,7 +146,7 @@ async function generateEmbedData(
   avatarUser: string,
   allSaveData: SaveFieldData,
   isShiny: boolean,
-): Promise<pageType> {
+): Promise<PageData> {
   const imageName = pokemon.imgName + (isShiny ? "-shiny" : "") + ".png";
   const subFolder = server.eventSpawn.nightMode ? "pokeHomeShadow" : "pokeHome";
   const imageUrl = await getImageUrl(subFolder, imageName);
@@ -148,6 +157,7 @@ async function generateEmbedData(
     | "nameCompletEng";
 
   const pokemonTitle = pokemon.name[completKey][0];
+  const menuLabel = isShiny ? `${pokemonTitle} ⭐` : pokemonTitle;
 
   const embed = new EmbedBuilder()
     .setTitle(pokemonTitle)
@@ -196,7 +206,8 @@ async function generateEmbedData(
       },
     )
     .setColor(colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]));
-  return { page: embed };
+
+  return createPageForMenu(embed, null, menuLabel);
 }
 
 interface SaveFieldData {

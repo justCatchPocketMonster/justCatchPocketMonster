@@ -2,6 +2,7 @@ import { BaseGuildTextChannel, Client, Message } from "discord.js";
 import { newLogger } from "../middlewares/logger";
 import { spawn } from "../features/spawn/spawn";
 import { startRaid } from "../features/raid/raidManager";
+import { registerSpawnMessage } from "../features/spawn/spawnMessageRegistry";
 
 export default async (client: Client, message: Message) => {
   try {
@@ -36,6 +37,8 @@ export default async (client: Client, message: Message) => {
           result.raidPokemon,
           sentMessage.id,
         );
+      } else {
+        registerSpawnMessage(message.guild.id, result.channelId, sentMessage.id);
       }
     } else {
       const sentMessage = await channel.send({ embeds: [result.embed] });
@@ -48,6 +51,8 @@ export default async (client: Client, message: Message) => {
           result.raidPokemon,
           sentMessage.id,
         );
+      } else {
+        registerSpawnMessage(message.guild.id, result.channelId, sentMessage.id);
       }
     }
   } catch (e) {
