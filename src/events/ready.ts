@@ -43,14 +43,18 @@ function loadCommands(client: Client) {
           const { default: command } = commandModule;
           if (!client.application) return;
 
-          const exists = client.application.commands.cache.find(
+          const registeredCommands = await client.application.commands.fetch();
+          const exists = registeredCommands.find(
             (c) => c.name === command.name,
           );
 
           if (command.actif) {
             await client.application.commands.create(command.command);
+            if (!exists) {
+              newLogger("info", `Command "${command.name}" added`);
+            }
           } else if (exists) {
-            await client.application.commands.delete(command.name);
+            await client.application.commands.delete(exists.id);
           }
         })
         .catch((err) => {
