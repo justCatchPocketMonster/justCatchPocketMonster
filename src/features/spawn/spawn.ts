@@ -227,7 +227,14 @@ export async function generateEmbedSosPokemon(
   const rarityKey = "sosEmbedTitle" + capitalizeFirstLetter(pokemon.rarity);
   const descKey = "sosEmbedDescription" + capitalizeFirstLetter(pokemon.rarity);
   const title = getText(rarityKey as LanguageKey, server.settings.language);
-  const description = getText(descKey as LanguageKey, server.settings.language);
+  const explanation = getText(
+    "sosEmbedDescriptionExplanation",
+    server.settings.language,
+  );
+  const description =
+    explanation +
+    "\n" +
+    getText(descKey as LanguageKey, server.settings.language);
   const color: ColorResolvable =
     sosRarityColor[pokemon.rarity] ??
     colorByType(pokemon.arrayType[random(pokemon.arrayType.length)]);

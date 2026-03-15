@@ -87,7 +87,7 @@
 
   "commandPokedexExplication": {
     "fr": ["Permet de voir le pokedex afin de suivre son avancement."],
-    "eng": ["Allows you to see the pokedex for to follow its progress."]
+    "eng": ["Allows you to see the pokedex to follow its progress."]
   },
   "pokedexNameOptionStringPage": {
     "fr": ["page"],
@@ -105,7 +105,7 @@
     "eng": ["Removed a permission to spawn in a room (modo only)."]
   },
   "commandCatchExplication": {
-    "fr": ["Permet d'attraper le Pokémons présent."],
+    "fr": ["Permet d'attraper les Pokémon présents."],
     "eng": ["Allows you to catch the Pokémon present."]
   },
 
@@ -240,6 +240,10 @@
   "sosEmbedFooter": {
     "fr": ["Chaîne SOS niveau"],
     "eng": ["SOS chain level"]
+  },
+  "sosEmbedDescriptionExplanation": {
+    "fr": ["Ce Pokémon a répondu à l'appel d'un autre Pokémon capturé."],
+    "eng": ["This Pokémon answered the call of a previously caught Pokémon."]
   },
 
   "congratYouCatchPart1": {
@@ -1107,7 +1111,7 @@
   },
   "tutorialGameplaySosDesc": {
     "fr": [
-      "Certains Pokémon peuvent en appeler un autre du même species après avoir été capturés (50% de chance). Chaque apparition en chaîne divise le taux shiny par 2. Seuls les Pokémon spawnés normalement (pas les œufs) peuvent déclencher un appel SOS."
+      "Certains Pokémon peuvent en appeler un autre de la même espèce après avoir été capturés (50% de chance). Chaque apparition en chaîne divise le taux shiny par 2. Seuls les Pokémon spawnés normalement (pas les œufs) peuvent déclencher un appel SOS."
     ],
     "eng": [
       "Some Pokémon can call another of the same species after being caught (50% chance). Each chain appearance halves the shiny rate. Only normally spawned Pokémon (not eggs) can trigger an SOS call."
@@ -1147,7 +1151,7 @@
     ]
   },
   "tutorialAdminField1Title": {
-    "fr": ["1 - Changé la langue"],
+    "fr": ["1 - Changer la langue"],
     "eng": ["1 - Change the language"]
   },
   "tutorialAdminField1Desc": {
