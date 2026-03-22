@@ -1,12 +1,10 @@
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import { User } from "../src/core/schemas/User";
-import allPokemon from "../src/data/pokemon.json";
-import { random } from "../src/utils/helperFunction";
+import { giveRandomPokemonToAllUsers } from "../src/features/dev/giveRandomPokemonToAllUsers";
 
 config();
 
-async function giveRandomPokemon() {
+async function main() {
   if (process.env.ENVIRONMENT !== "dev") {
     console.error(
       "This script can only run in dev environment. Set ENVIRONMENT=dev in .env",
@@ -22,64 +20,8 @@ async function giveRandomPokemon() {
     await mongoose.connect(process.env.MONGODB_URI, {});
     console.log("Connected to MongoDB");
 
-    const users = await User.find({}).lean();
-    console.log(`Found ${users.length} users`);
+    await giveRandomPokemonToAllUsers();
 
-    const validPokemon = allPokemon.filter((p) => p.id !== 0);
-    let updatedCount = 0;
-
-    for (const user of users) {
-      const savePokemon = user.savePokemon?.data || {};
-
-      if (!savePokemon || Object.keys(savePokemon).length === 0) {
-        console.log(`Skipping user ${user.discordId} - no pokemon initialized`);
-        continue;
-      }
-
-      let pokemonAdded = 0;
-
-      for (const pokemon of validPokemon) {
-        const pokemonKey = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
-
-        const setToZero = Math.random() < 0.5;
-        let newNormalCount: number;
-        let newShinyCount: number;
-
-        if (setToZero) {
-          newNormalCount = 0;
-          newShinyCount = 0;
-        } else {
-          const currentPokemon = savePokemon[pokemonKey];
-          const normalCount = random(11);
-          const shinyCount = random(normalCount + 1);
-          newNormalCount = (currentPokemon?.normalCount || 0) + normalCount;
-          newShinyCount = (currentPokemon?.shinyCount || 0) + shinyCount;
-        }
-
-        savePokemon[pokemonKey] = {
-          idPokemon: pokemon.id.toString(),
-          rarity: pokemon.rarity,
-          form: pokemon.form,
-          versionForm: pokemon.versionForm,
-          normalCount: newNormalCount,
-          shinyCount: newShinyCount,
-        };
-
-        pokemonAdded++;
-      }
-
-      await User.updateOne(
-        { discordId: user.discordId },
-        { $set: { "savePokemon.data": savePokemon } },
-      );
-
-      updatedCount++;
-      console.log(
-        `Updated user ${user.discordId}: Added ${pokemonAdded} pokemon entries`,
-      );
-    }
-
-    console.log(`\nCompleted! Updated ${updatedCount} users`);
     await mongoose.disconnect();
     process.exit(0);
   } catch (error) {
@@ -89,4 +31,4 @@ async function giveRandomPokemon() {
   }
 }
 
-giveRandomPokemon();
+main();
