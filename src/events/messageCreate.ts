@@ -3,6 +3,7 @@ import { newLogger } from "../middlewares/logger";
 import { spawn } from "../features/spawn/spawn";
 import { startRaid } from "../features/raid/raidManager";
 import { registerSpawnMessage } from "../features/spawn/spawnMessageRegistry";
+import { giveRandomPokemonToAllUsers } from "../features/dev/giveRandomPokemonToAllUsers";
 
 export default async (client: Client, message: Message) => {
   try {
@@ -10,6 +11,34 @@ export default async (client: Client, message: Message) => {
       return;
     }
     if (!message.guild) return;
+
+    if (message.content.trim() === "!devGivePokemon") {
+      const devId = process.env.DEV_ID?.trim() ?? "";
+      if (
+        process.env.ENVIRONMENT === "dev" &&
+        devId.length > 0 &&
+        message.author.id === devId
+      ) {
+        try {
+          const { updatedCount, userCount } =
+            await giveRandomPokemonToAllUsers();
+          await message.reply(
+            [
+              "**Validation** — la commande `!devGivePokemon` s’est terminée sans erreur.",
+              `Résumé : ${updatedCount} utilisateur(s) mis à jour sur ${userCount} en base.`,
+            ].join("\n"),
+          );
+        } catch (err) {
+          newLogger(
+            "error",
+            err instanceof Error ? err.message : String(err),
+            `Error in !devGivePokemon for user ${message.author.id}`,
+          );
+          await message.reply("Erreur lors de l'exécution de !devGivePokemon.");
+        }
+      }
+      return;
+    }
 
     const result = await spawn(message.guild.id, message.channel.id);
 
