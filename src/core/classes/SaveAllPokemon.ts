@@ -83,8 +83,8 @@ export class SaveAllPokemon implements SaveAllPokemonType {
     for (const key in this.data) {
       const pokemon = this.data[key];
       if (
-        Number(pokemon.idPokemon) <= minId ||
-        Number(pokemon.idPokemon) >= maxId
+        Number(pokemon.idPokemon) < minId ||
+        Number(pokemon.idPokemon) > maxId
       )
         continue;
       if (!uniqueData[pokemon.idPokemon]) {

@@ -1,4 +1,7 @@
-import { pokedex } from "../../../src/features/pokedex/pokedex";
+import {
+  getPokedexColor,
+  pokedex,
+} from "../../../src/features/pokedex/pokedex";
 import { createMockInteraction } from "../../utils/mock/mockInteraction";
 import { SaveAllPokemon } from "../../../src/core/classes/SaveAllPokemon";
 import { SaveOnePokemon } from "../../../src/core/classes/SaveOnePokemon";
@@ -405,5 +408,18 @@ describe("pokedex – getPokedexColor and processRegion via mocked save", () => 
     await pokedex(interaction as any, user as any, server as any, null);
 
     expect(paginationMenuMock).toHaveBeenCalled();
+  });
+});
+
+describe("pokedex – regional completion without range mock", () => {
+  it("counts Kanto as completed when IDs 1..151 are owned", () => {
+    const user = {
+      discordId: "u1",
+      enteredCode: [],
+      countPagination: 0,
+      savePokemon: createFullRegionSave(151, false),
+    };
+
+    expect(getPokedexColor(user as any)).toBe("#CD7F32");
   });
 });
