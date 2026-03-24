@@ -168,6 +168,41 @@ describe("SaveAllPokemon", () => {
       expect(result.data["1"]).toBeUndefined();
       expect(result.data["150"]).toBeUndefined();
     });
+
+    it("should include pokemon exactly on min and max boundaries", () => {
+      const save = new SaveAllPokemon({
+        "1-ordinary-1": new SaveOnePokemon(
+          "1",
+          "ordinary",
+          "ordinary",
+          1,
+          0,
+          1,
+        ),
+        "151-ordinary-1": new SaveOnePokemon(
+          "151",
+          "ordinary",
+          "ordinary",
+          1,
+          0,
+          1,
+        ),
+        "152-ordinary-1": new SaveOnePokemon(
+          "152",
+          "ordinary",
+          "ordinary",
+          1,
+          0,
+          1,
+        ),
+      });
+
+      const result = save.getThisSaveUniqueIdWithByIdRange(1, 151);
+
+      expect(result.data["1"]).toBeDefined();
+      expect(result.data["151"]).toBeDefined();
+      expect(result.data["152"]).toBeUndefined();
+    });
   });
 
   describe("getSavesById", () => {
