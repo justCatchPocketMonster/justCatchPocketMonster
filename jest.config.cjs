@@ -3,6 +3,7 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   testMatch: ["**/*.test.ts"],
+  testPathIgnorePatterns: ["<rootDir>/src/data/"],
   setupFilesAfterEnv: ["<rootDir>/__test__/utils/testcontainer/mongo.setup.ts"],
   testTimeout: 60000,
   collectCoverageFrom: [
@@ -10,11 +11,13 @@ module.exports = {
     "!src/**/*.test.ts",
     "!__test__/**/*",
     "!scripts/**/*",
+    "!src/data/**/*",
   ],
   coveragePathIgnorePatterns: [
     "/__test__/measure-test-times.ts",
     "src/index.ts",
     "src/events/",
+    "src/data/",
   ],
   coverageThreshold: {
     global: {

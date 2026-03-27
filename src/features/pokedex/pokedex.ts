@@ -60,7 +60,8 @@ export async function pokedex(
     avatar,
     pokedexColor,
   );
-  const summaryLabel = lang === "fr" ? "RÃ©sumÃ© PokÃ©dex" : "PokÃ©dex Summary";
+  const summaryLabel =
+    lang === "fr" ? "RÃ©sumÃ© PokÃ©dex" : "PokÃ©dex Summary";
   arrayEmbed.push(createPageForMenu(mainPage, null, summaryLabel));
 
   let nbPage = 2;

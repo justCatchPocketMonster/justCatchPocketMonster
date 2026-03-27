@@ -6,6 +6,9 @@ import jsdocPlugin from "eslint-plugin-jsdoc";
 import eslintPluginJest from "eslint-plugin-jest";
 
 export default [
+  {
+    ignores: ["src/data/**"],
+  },
   js.configs.recommended,
   {
     files: ["**/*.ts", "**/*.tsx"],
