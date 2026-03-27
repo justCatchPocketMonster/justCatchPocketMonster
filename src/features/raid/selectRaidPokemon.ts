@@ -1,6 +1,6 @@
-import { PokemonType } from "../../core/types/PokemonType";
+﻿import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import { initHint } from "../hint/initHint";
 import { capitalizeFirstLetter, random } from "../../utils/helperFunction";

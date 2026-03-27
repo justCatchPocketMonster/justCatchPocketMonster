@@ -10,7 +10,7 @@ import {
 } from "../../../../src/config/default/spawn";
 import { __deps } from "../../../../src/features/pokemon/selectPokemon";
 import { pokemonDb } from "../../../../src/core/types/pokemonDb";
-import allPokemon from "../../../../src/data/pokemon.json";
+import allPokemon from "../../../../src/data/json/pokemon.json";
 import * as helperFunction from "../../../../src/utils/helperFunction";
 
 const mockGenerationSelect = jest.fn();

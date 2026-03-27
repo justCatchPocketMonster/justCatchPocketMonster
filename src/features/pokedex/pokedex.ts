@@ -1,4 +1,4 @@
-import { UserType } from "../../core/types/UserType";
+﻿import { UserType } from "../../core/types/UserType";
 import {
   ChatInputCommandInteraction,
   ColorResolvable,
@@ -12,7 +12,7 @@ import {
   paginationMenu,
 } from "../other/paginationMenu";
 import language, { LanguageKey } from "../../lang/language";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import {
   capitalizeFirstLetter,
@@ -60,7 +60,7 @@ export async function pokedex(
     avatar,
     pokedexColor,
   );
-  const summaryLabel = lang === "fr" ? "Résumé Pokédex" : "Pokédex Summary";
+  const summaryLabel = lang === "fr" ? "RÃ©sumÃ© PokÃ©dex" : "PokÃ©dex Summary";
   arrayEmbed.push(createPageForMenu(mainPage, null, summaryLabel));
 
   let nbPage = 2;
@@ -77,7 +77,7 @@ export async function pokedex(
     );
     const pageLabel =
       firstLabel && lastLabel
-        ? `${firstLabel} — ${lastLabel} ${dot}`
+        ? `${firstLabel} â€” ${lastLabel} ${dot}`
         : `Page ${nbPage}`;
     nbPage++;
     arrayEmbed.push(createPageForMenu(embed, null, pageLabel));
@@ -154,10 +154,10 @@ function buildMainPokedexPage(
 }
 
 function selectPageDot(caughtOnPage: number, totalOnPage: number): string {
-  if (caughtOnPage === 0) return "⚫";
-  if (caughtOnPage === totalOnPage) return "🟢";
-  if (caughtOnPage >= totalOnPage / 2) return "🟠";
-  return "🔴";
+  if (caughtOnPage === 0) return "âš«";
+  if (caughtOnPage === totalOnPage) return "ðŸŸ¢";
+  if (caughtOnPage >= totalOnPage / 2) return "ðŸŸ ";
+  return "ðŸ”´";
 }
 
 function buildPokemonPage(

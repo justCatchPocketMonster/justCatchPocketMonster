@@ -1,4 +1,4 @@
-import {
+﻿import {
   SlashCommandBuilder,
   SlashCommandStringOption,
 } from "@discordjs/builders";
@@ -7,7 +7,7 @@ import { newLogger } from "../../middlewares/logger";
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { getUserById } from "../../cache/UserCache";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { howMuchThisPokemon } from "../../features/howMuchThisPokemon/howMuchThisPokemon";
 import { getStatById } from "../../cache/StatCache";
 import { version } from "../../config/default/misc";

@@ -1,5 +1,5 @@
-import { getTrade, updateTrade, extractId, PokemonChoice } from "./tradeCache";
-import allPokemon from "../../data/pokemon.json";
+﻿import { getTrade, updateTrade, extractId, PokemonChoice } from "./tradeCache";
+import allPokemon from "../../data/json/pokemon.json";
 import { getUserById } from "../../cache/UserCache";
 import type { ServerType } from "../../core/types/ServerType";
 import language from "../../lang/language";

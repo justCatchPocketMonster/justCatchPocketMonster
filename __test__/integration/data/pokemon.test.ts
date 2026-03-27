@@ -1,4 +1,4 @@
-import allPokemon from "../../../src/data/pokemon.json";
+﻿import allPokemon from "../../../src/data/json/pokemon.json";
 import { urlImageRepo } from "../../../src/config/default/misc";
 
 describe("test all data pokemon", () => {

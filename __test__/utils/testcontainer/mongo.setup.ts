@@ -11,7 +11,7 @@ beforeAll(async () => {
 
   container = await new GenericContainer("mongo:latest")
     .withExposedPorts(27017)
-    .withWaitStrategy(Wait.forLogMessage("Waiting for connections"))
+    .withWaitStrategy(Wait.forListeningPorts())
     .start();
 
   const host = container.getHost();

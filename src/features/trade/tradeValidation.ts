@@ -1,9 +1,9 @@
-import { UserType } from "../../core/types/UserType";
+﻿import { UserType } from "../../core/types/UserType";
 import { updateUser, getUserById } from "../../cache/UserCache";
 import { TradeData, setTradeCooldown, getTradeCooldown } from "./tradeCache";
 import { getRarityCooldownMs } from "./tradeUtils";
 import { newLogger } from "../../middlewares/logger";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 
 export async function validateTrade(tradeData: TradeData): Promise<boolean> {
   if (!tradeData.initiatorChoice || !tradeData.targetChoice) {

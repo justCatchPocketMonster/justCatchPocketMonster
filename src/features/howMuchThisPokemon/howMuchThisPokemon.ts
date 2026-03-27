@@ -1,4 +1,4 @@
-import { ServerType } from "../../core/types/ServerType";
+﻿import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
@@ -14,7 +14,7 @@ import {
   PageData,
   paginationMenu,
 } from "../other/paginationMenu";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { pokemonDb } from "../../core/types/pokemonDb";
 import { getImageUrl } from "../../utils/imageUrl";
 
@@ -157,7 +157,7 @@ async function generateEmbedData(
     | "nameCompletEng";
 
   const pokemonTitle = pokemon.name[completKey][0];
-  const menuLabel = isShiny ? `${pokemonTitle} ⭐` : pokemonTitle;
+  const menuLabel = isShiny ? `${pokemonTitle} â­` : pokemonTitle;
 
   const embed = new EmbedBuilder()
     .setTitle(pokemonTitle)

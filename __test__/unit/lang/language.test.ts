@@ -1,4 +1,4 @@
-import getText, {
+﻿import getText, {
   getAvailableKeys,
   type LanguageKey,
 } from "../../../src/lang/language";
@@ -28,7 +28,7 @@ describe("lang/language", () => {
 
   test("getText handles try/catch path without throwing", () => {
     jest.resetModules();
-    jest.doMock("../../../src/data/language.json", () => null, {
+    jest.doMock("../../../src/data/json/language.json", () => null, {
       virtual: true,
     });
     const faultyModule = require("../../../src/lang/language");
