@@ -1,7 +1,7 @@
-import { EmbedBuilder } from "discord.js";
+﻿import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { TradeData } from "./tradeCache";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import type { pokemonDb } from "../../core/types/pokemonDb";
 import type { ServerType } from "../../core/types/ServerType";
 import type { UserType } from "../../core/types/UserType";

@@ -1,5 +1,18 @@
 # botDiscord-justCatchPocketMonster
 
+## Submodule setup
+
+This repository uses a Git submodule for `src/data`.
+
+- Submodule repo: `https://github.com/justCatchPocketMonster/justCatchPocketMonster-assets`
+- JSON files location: `src/data/json/`
+- Images location in submodule: `src/data/images/`
+- First clone: `git clone --recurse-submodules <repo-url>`
+- Existing clone: `git submodule update --init --recursive`
+- Manual update: `git submodule update --remote --recursive`
+- Dependabot updates submodule pointers automatically (weekly), with 1 PR max at a time.
+- Workflow details: `docs/submodules.md`
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

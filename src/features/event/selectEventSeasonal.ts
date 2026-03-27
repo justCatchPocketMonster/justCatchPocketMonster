@@ -1,4 +1,4 @@
-import eventSeasonalData from "../../data/eventSeasonalData.json";
+﻿import eventSeasonalData from "../../data/json/eventSeasonalData.json";
 import { EventSeasonnal } from "../../core/types/EventSeasonnal";
 import { LanguageKey } from "../../lang/language";
 

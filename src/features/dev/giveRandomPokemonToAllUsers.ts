@@ -1,5 +1,5 @@
-import { User } from "../../core/schemas/User";
-import allPokemon from "../../data/pokemon.json";
+﻿import { User } from "../../core/schemas/User";
+import allPokemon from "../../data/json/pokemon.json";
 import { random } from "../../utils/helperFunction";
 
 export type GiveRandomPokemonToAllUsersResult = {

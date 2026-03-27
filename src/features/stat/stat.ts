@@ -1,4 +1,4 @@
-import {
+﻿import {
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
@@ -6,7 +6,7 @@ import {
 import { Stat } from "../../core/classes/Stat";
 import { paginationMenu } from "../other/paginationMenu";
 import { SortedResult } from "../../core/classes/SaveAllPokemon";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { ServerType } from "../../core/types/ServerType";
 import language, { LanguageKey } from "../../lang/language";
 
@@ -74,7 +74,7 @@ export function createPaginationStat(
 
     return [
       createEntry(
-        "🔼 " + getLang("statTopCatches") + " " + title,
+        "ðŸ”¼ " + getLang("statTopCatches") + " " + title,
         embedClassement(
           getCatches(true),
           server,
@@ -83,7 +83,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "🔽 " + getLang("statTopCatches") + " " + title,
+        "ðŸ”½ " + getLang("statTopCatches") + " " + title,
         embedClassement(
           getCatches(false),
           server,
@@ -92,7 +92,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "🔼 " + getLang("statTopSpawns") + " " + title,
+        "ðŸ”¼ " + getLang("statTopSpawns") + " " + title,
         embedClassement(
           getSpawns(true),
           server,
@@ -101,7 +101,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "🔽 " + getLang("statTopSpawns") + " " + title,
+        "ðŸ”½ " + getLang("statTopSpawns") + " " + title,
         embedClassement(
           getSpawns(false),
           server,

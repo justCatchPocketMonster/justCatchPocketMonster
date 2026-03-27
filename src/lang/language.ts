@@ -1,4 +1,4 @@
-import language from "../data/language.json";
+﻿import language from "../data/json/language.json";
 import { newLogger } from "../middlewares/logger";
 import { random } from "../utils/helperFunction";
 

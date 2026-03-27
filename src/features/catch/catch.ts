@@ -12,7 +12,7 @@ import { getStatById, updateStat } from "../../cache/StatCache";
 import { nameStatGeneral, version } from "../../config/default/misc";
 import { updateUser } from "../../cache/UserCache";
 import { updateServer } from "../../cache/ServerCache";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import { newLogger } from "../../middlewares/logger";
 import { Pokemon } from "../../core/classes/Pokemon";
 import { Stat } from "../../core/classes/Stat";
@@ -210,16 +210,18 @@ async function updateSpawnEmbed(
     const existingEmbed = spawnMessage.embeds[0];
     if (!existingEmbed) return;
 
-    const nameForTitle = isShiny ? `${pokemonName} ⭐` : pokemonName;
+    const nameForTitle = isShiny ? `${pokemonName} \u2B50` : pokemonName;
     const catchTitle =
-      lang === "fr" ? `${nameForTitle} capturé !` : `${nameForTitle} captured!`;
+      lang === "fr"
+        ? `${nameForTitle} captur\u00E9 !`
+        : `${nameForTitle} captured!`;
     const fieldName =
       lang === "fr"
-        ? `Attrapé par ${memberDisplayName} !`
+        ? `Attrap\u00E9 par ${memberDisplayName} !`
         : `Caught by ${memberDisplayName}!`;
     const totalLabel =
       lang === "fr"
-        ? `Vous en possédez maintenant : **${newTotal}**`
+        ? `Vous en poss\u00E9dez maintenant : **${newTotal}**`
         : `You now own: **${newTotal}**`;
 
     const updatedEmbed = EmbedBuilder.from(existingEmbed)

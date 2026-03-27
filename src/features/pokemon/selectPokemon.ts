@@ -1,8 +1,8 @@
-import { Pokemon } from "../../core/classes/Pokemon";
+﻿import { Pokemon } from "../../core/classes/Pokemon";
 import { PokemonType } from "../../core/types/PokemonType";
 import { ServerType } from "../../core/types/ServerType";
 import { GenStat, RarityStat, TypeStat } from "../../core/types/EventSpawnType";
-import allPokemon from "../../data/pokemon.json";
+import allPokemon from "../../data/json/pokemon.json";
 import {
   hidePokemon,
   nbGeneration,

@@ -1,11 +1,11 @@
-import eventData from "../../data/eventData.json";
+﻿import eventData from "../../data/json/eventData.json";
 import { ServerType } from "../../core/types/ServerType";
 import { updateServer } from "../../cache/ServerCache";
 import { deepCloneObject, random } from "../../utils/helperFunction";
 import getText from "../../lang/language";
 import { valuePerType, valuePerGen } from "../../config/default/spawn";
 import { EventSpawn } from "../../core/classes/EventSpawn";
-import language from "../../data/language.json";
+import language from "../../data/json/language.json";
 import { Event } from "../../core/classes/Event";
 import type { LanguageKey } from "../../lang/language";
 import { TypeStat, GenStat } from "../../core/types/EventSpawnType";
