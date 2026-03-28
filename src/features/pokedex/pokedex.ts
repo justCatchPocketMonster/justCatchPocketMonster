@@ -1,4 +1,4 @@
-﻿import { UserType } from "../../core/types/UserType";
+import { UserType } from "../../core/types/UserType";
 import {
   ChatInputCommandInteraction,
   ColorResolvable,
@@ -61,7 +61,7 @@ export async function pokedex(
     pokedexColor,
   );
   const summaryLabel =
-    lang === "fr" ? "RÃ©sumÃ© PokÃ©dex" : "PokÃ©dex Summary";
+    lang === "fr" ? "Résumé Pokédex" : "Pokédex Summary";
   arrayEmbed.push(createPageForMenu(mainPage, null, summaryLabel));
 
   let nbPage = 2;
@@ -78,7 +78,7 @@ export async function pokedex(
     );
     const pageLabel =
       firstLabel && lastLabel
-        ? `${firstLabel} â€” ${lastLabel} ${dot}`
+        ? `${firstLabel} — ${lastLabel} ${dot}`
         : `Page ${nbPage}`;
     nbPage++;
     arrayEmbed.push(createPageForMenu(embed, null, pageLabel));
@@ -155,10 +155,10 @@ function buildMainPokedexPage(
 }
 
 function selectPageDot(caughtOnPage: number, totalOnPage: number): string {
-  if (caughtOnPage === 0) return "âš«";
-  if (caughtOnPage === totalOnPage) return "ðŸŸ¢";
-  if (caughtOnPage >= totalOnPage / 2) return "ðŸŸ ";
-  return "ðŸ”´";
+  if (caughtOnPage === 0) return "\u26AB";
+  if (caughtOnPage === totalOnPage) return "\u{1F7E2}";
+  if (caughtOnPage >= totalOnPage / 2) return "\u{1F7E0}";
+  return "\u{1F534}";
 }
 
 function buildPokemonPage(

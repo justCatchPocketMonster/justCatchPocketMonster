@@ -1,4 +1,4 @@
-﻿import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import language from "../../lang/language";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
@@ -83,7 +83,7 @@ export function getEligiblePokemon(
   return eligible;
 }
 
-/** Texte d'affichage des cooldowns (3 raretÃ©s) pour l'embed. */
+/** Texte d'affichage des cooldowns (3 raretés) pour l'embed. */
 export function getCooldownDisplayText(userId: string, lang: string): string {
   const noneText = language("tradeCooldownNone", lang);
   return COOLDOWN_RARITIES.map((rarity) => {
