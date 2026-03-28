@@ -1,7 +1,45 @@
 {
+  "name": "discord-bot",
+  "version": "2.1.0",
+  "type": "module",
+  "description": "mon bot perso",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.cjs",
+    "build": "tsup src/index.ts",
+    "prettier": "npx prettier . --write",
+    "test": "jest --runInBand --coverage --coverageReporters=lcov --verbose",
+    "test:watch": "jest --watch",
+    "test:measure": "tsx __test__/measure-test-times.ts",
+    "dev:give-pokemon": "tsx scripts/dev-give-pokemon.ts"
+  },
   "dependencies": {
-    "discord.js": "^14.9.0",
+    "discord.js": "^14.21.0",
     "dotenv": "^16.3.1",
-    "lockfile": "^1.0.4"
+    "jest-mock-extended": "^4.0.0",
+    "mongoose": "8.9.5",
+    "node-cache": "^5.1.2",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.14.2",
+    "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-jsdoc": "^51.4.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "jest": "^30.0.5",
+    "prettier": "^3.5.3",
+    "testcontainers": "^11.5.1",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "tsup": "8.3.5",
+    "tsx": "^4.15.6",
+    "typescript": "^5.4.5"
   }
 }
