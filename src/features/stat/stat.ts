@@ -74,7 +74,7 @@ export function createPaginationStat(
 
     return [
       createEntry(
-        "ðŸ”¼ " + getLang("statTopCatches") + " " + title,
+        "🔼 " + getLang("statTopCatches") + " " + title,
         embedClassement(
           getCatches(true),
           server,
@@ -83,7 +83,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "ðŸ”½ " + getLang("statTopCatches") + " " + title,
+        "🔽 " + getLang("statTopCatches") + " " + title,
         embedClassement(
           getCatches(false),
           server,
@@ -92,7 +92,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "ðŸ”¼ " + getLang("statTopSpawns") + " " + title,
+        "🔼 " + getLang("statTopSpawns") + " " + title,
         embedClassement(
           getSpawns(true),
           server,
@@ -101,7 +101,7 @@ export function createPaginationStat(
         ),
       ),
       createEntry(
-        "ðŸ”½ " + getLang("statTopSpawns") + " " + title,
+        "🔽 " + getLang("statTopSpawns") + " " + title,
         embedClassement(
           getSpawns(false),
           server,
