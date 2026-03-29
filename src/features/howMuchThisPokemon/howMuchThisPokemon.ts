@@ -70,7 +70,10 @@ export async function howMuchThisPokemon(
       saveOnePokemonStatSpawn[0],
     );
     if (pokemonDataOriginal === null) return;
-    pokemonDataOriginal.imgName = "0000-001";
+    const pokemonDataWithFallback = {
+      ...pokemonDataOriginal,
+      imgName: "0000-001",
+    };
     const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
@@ -86,7 +89,7 @@ export async function howMuchThisPokemon(
     };
     paginationPage.push(
       await generateEmbedData(
-        pokemonDataOriginal,
+        pokemonDataWithFallback,
         server,
         avatar,
         saveField,

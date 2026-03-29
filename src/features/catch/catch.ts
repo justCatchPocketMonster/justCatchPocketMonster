@@ -120,9 +120,8 @@ export async function catchPokemon(
       poke.versionForm === pokemon.versionForm,
   );
   const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
-  const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
-    pokemon.id,
-  ).normalCount;
+  const formKey = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
+  const newTotal = user.savePokemon.data[formKey]?.normalCount ?? 0;
 
   await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
     lang,
