@@ -146,6 +146,7 @@ function createMockInteraction() {
     reply: jest.fn().mockResolvedValue(undefined),
     deferReply: jest.fn().mockResolvedValue(undefined),
     deleteReply: jest.fn().mockResolvedValue(undefined),
+    editReply: jest.fn().mockResolvedValue(undefined),
     followUp: jest.fn().mockResolvedValue({ id: "mock-message-id" }),
     client: {},
   };
@@ -239,7 +240,7 @@ describe("catch", () => {
       );
 
       expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
-      expect(interaction.deleteReply).toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
     });
 
     it("should call handleRaidCatch when channel is in raid", async () => {
@@ -346,7 +347,7 @@ describe("catch", () => {
 
       expect(server.removePokemonByIdChannel).toHaveBeenCalledWith("channel1");
       expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
-      expect(interaction.deleteReply).toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
     });
 
     it("should enter spawnMessageId block and skip edit when channel.fetch returns null", async () => {
@@ -383,7 +384,7 @@ describe("catch", () => {
 
       expect(fetchMock).toHaveBeenCalledWith("channel1");
       expect(interaction.deferReply).toHaveBeenCalled();
-      expect(interaction.deleteReply).toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
       clearSpawnMessage("guild1", "channel1");
     });
 
@@ -423,7 +424,7 @@ describe("catch", () => {
       );
 
       expect(interaction.deferReply).toHaveBeenCalled();
-      expect(interaction.deleteReply).toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
     });
 
     it("should call resolveRaid when raid is full after joining", async () => {
@@ -724,7 +725,7 @@ describe("catch", () => {
       );
 
       expect(interaction.deferReply).toHaveBeenCalledWith({ ephemeral: true });
-      expect(interaction.deleteReply).toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
     });
 
     it("should trigger SOS channel.send when canSosBattle and random returns 1", async () => {
@@ -782,6 +783,7 @@ describe("catch", () => {
       expect(selectSosPokemon.selectSosPokemon).toHaveBeenCalled();
       expect(mockSend).toHaveBeenCalled();
       expect(interaction.followUp).not.toHaveBeenCalled();
+      expect(interaction.editReply).toHaveBeenCalled();
     });
   });
 

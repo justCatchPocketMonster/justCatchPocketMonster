@@ -1,4 +1,4 @@
-﻿import { ServerType } from "../../core/types/ServerType";
+import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
@@ -70,7 +70,10 @@ export async function howMuchThisPokemon(
       saveOnePokemonStatSpawn[0],
     );
     if (pokemonDataOriginal === null) return;
-    pokemonDataOriginal.imgName = "0000-001";
+    const pokemonDataWithFallback = {
+      ...pokemonDataOriginal,
+      imgName: "0000-001",
+    };
     const saveField: SaveFieldData = {
       saveGlobalUser: getFusionSaveData(saveOnePokemonUser),
       saveSpecifiqueFormUser: saveOnePokemonStatSpawn[0],
@@ -86,7 +89,7 @@ export async function howMuchThisPokemon(
     };
     paginationPage.push(
       await generateEmbedData(
-        pokemonDataOriginal,
+        pokemonDataWithFallback,
         server,
         avatar,
         saveField,
@@ -157,7 +160,7 @@ async function generateEmbedData(
     | "nameCompletEng";
 
   const pokemonTitle = pokemon.name[completKey][0];
-  const menuLabel = isShiny ? `${pokemonTitle} â­` : pokemonTitle;
+  const menuLabel = isShiny ? `${pokemonTitle} \u2B50` : pokemonTitle;
 
   const embed = new EmbedBuilder()
     .setTitle(pokemonTitle)

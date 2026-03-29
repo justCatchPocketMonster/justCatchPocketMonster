@@ -120,9 +120,8 @@ export async function catchPokemon(
       poke.versionForm === pokemon.versionForm,
   );
   const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
-  const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
-    pokemon.id,
-  ).normalCount;
+  const formKey = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
+  const newTotal = user.savePokemon.data[formKey]?.normalCount ?? 0;
 
   await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
     lang,
@@ -131,7 +130,12 @@ export async function catchPokemon(
     memberDisplayName,
     newTotal,
   });
-  await interaction.deleteReply();
+  const shinySuffix = pokemon.isShiny ? " \u2B50" : "";
+  const congratsMsg =
+    lang === "fr"
+      ? `Félicitations ${memberDisplayName}, vous avez attrapé un ${pokemonName}${shinySuffix}.`
+      : `Congratulations ${memberDisplayName}, you caught a ${pokemonName}${shinySuffix}!`;
+  await interaction.editReply(congratsMsg);
 }
 
 interface SpawnEmbedUpdate {
