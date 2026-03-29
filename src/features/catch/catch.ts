@@ -131,7 +131,12 @@ export async function catchPokemon(
     memberDisplayName,
     newTotal,
   });
-  await interaction.deleteReply();
+  const shinySuffix = pokemon.isShiny ? " \u2B50" : "";
+  const congratsMsg =
+    lang === "fr"
+      ? `Félicitations ${memberDisplayName}, vous avez attrapé un ${pokemonName}${shinySuffix}.`
+      : `Congratulations ${memberDisplayName}, you caught a ${pokemonName}${shinySuffix}!`;
+  await interaction.editReply(congratsMsg);
 }
 
 interface SpawnEmbedUpdate {

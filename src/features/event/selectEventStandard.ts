@@ -1,4 +1,4 @@
-﻿import eventData from "../../data/json/eventData.json";
+import eventData from "../../data/json/eventData.json";
 import { ServerType } from "../../core/types/ServerType";
 import { updateServer } from "../../cache/ServerCache";
 import { deepCloneObject, random } from "../../utils/helperFunction";
@@ -49,17 +49,22 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
   const levelKey = `level${level}` as keyof typeof statMultipliers;
   const multipliers = statMultipliers[levelKey];
 
+  let pickedGen: keyof GenStat | undefined;
+  let pickedType: keyof TypeStat | undefined;
+
   if (multipliers.generationRandom) {
-    multipliers[getRandomGen()] = multipliers.generationRandom;
+    pickedGen = getRandomGen();
+    multipliers[pickedGen] = multipliers.generationRandom;
   }
 
   if (multipliers.typeRandom) {
-    multipliers[getRandomType()] = multipliers.typeRandom;
+    pickedType = getRandomType();
+    multipliers[pickedType] = multipliers.typeRandom;
   }
 
   eventSpawn.applyModifiersInPlace(multipliers);
 
-  setEventTextEffect(eventId, level, server);
+  setEventTextEffect(eventId, level, server, pickedGen, pickedType);
 
   if (eventId === "9") {
     eventSpawn.whatEvent!.image = imagePerLvl[level - 1];
@@ -69,21 +74,27 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     eventSpawn.whatEvent!.endTime = addDuration(DURATIONS[levelKey]);
   }
 
+  function capitalizeTypeKey(t: keyof TypeStat): string {
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+
   function setEventTextEffect(
     eventId: string,
     lvl: number,
     server: ServerType,
+    randomGen?: keyof GenStat,
+    randomType?: keyof TypeStat,
   ) {
     const eventHandlers: Record<string, () => string> = {
       "1": () =>
         `${getText("auraLegendary", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "2": () => getText("nothing", server.settings.language),
       "3": () =>
-        `${getText("auraGeneration", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
+        `${getText("auraGeneration", server.settings.language)}${lvl}${randomGen ? ` (Gen. ${randomGen})` : ""}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "4": () =>
         `${getText("auraMythical", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "5": () =>
-        `${getText("auraType", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
+        `${getText("auraType", server.settings.language)}${lvl}${randomType ? ` (${capitalizeTypeKey(randomType)})` : ""}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "6": () =>
         `${getText("auraChroma", server.settings.language)}${lvl}. ${getText("pendantTrenteMinute", server.settings.language)}`,
       "7": () =>

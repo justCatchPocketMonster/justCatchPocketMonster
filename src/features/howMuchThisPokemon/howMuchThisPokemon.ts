@@ -1,4 +1,4 @@
-﻿import { ServerType } from "../../core/types/ServerType";
+import { ServerType } from "../../core/types/ServerType";
 import { UserType } from "../../core/types/UserType";
 import { StatType } from "../../core/types/StatType";
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
@@ -157,7 +157,7 @@ async function generateEmbedData(
     | "nameCompletEng";
 
   const pokemonTitle = pokemon.name[completKey][0];
-  const menuLabel = isShiny ? `${pokemonTitle} â­` : pokemonTitle;
+  const menuLabel = isShiny ? `${pokemonTitle} \u2B50` : pokemonTitle;
 
   const embed = new EmbedBuilder()
     .setTitle(pokemonTitle)
