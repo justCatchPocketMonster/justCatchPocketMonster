@@ -30,11 +30,17 @@ export class Stat implements StatType {
 
   addCatch(pokemon: Pokemon): void {
     this.pokemonCaught++;
+    if (pokemon.isShiny) {
+      this.pokemonCaughtShiny++;
+    }
     this.savePokemonCatch.addOneCatch(pokemon);
   }
 
   addSpawn(pokemon: Pokemon): void {
     this.pokemonSpawned++;
+    if (pokemon.isShiny) {
+      this.pokemonSpawnedShiny++;
+    }
     this.savePokemonSpawn.addOneCatch(pokemon);
   }
 
