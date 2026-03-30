@@ -1,4 +1,4 @@
-﻿import {
+import {
   ChatInputCommandInteraction,
   ColorResolvable,
   EmbedBuilder,
@@ -208,32 +208,38 @@ function principalEmbedStat(
   addStatFields([
     {
       name: t("nombreDeCaptureTotaly"),
-      value: generalVersionStat.pokemonSpawned,
+      value: generalVersionStat.pokemonCaught,
     },
     {
       name: t("nombreDeCaptureShinyTotaly"),
-      value: generalVersionStat.pokemonSpawnedShiny,
+      value: generalVersionStat.pokemonCaughtShiny,
     },
-    { name: t("nombreDeSpawnTotaly"), value: generalVersionStat.pokemonCaught },
+    {
+      name: t("nombreDeSpawnTotaly"),
+      value: generalVersionStat.pokemonSpawned,
+    },
     {
       name: t("nombreDeSpawnShinyTotaly"),
-      value: generalVersionStat.pokemonCaughtShiny,
+      value: generalVersionStat.pokemonSpawnedShiny,
     },
   ]);
 
   addStatFields([
     {
       name: t("nombreDeCaptureVersion"),
-      value: actualVersionStat.pokemonSpawned,
+      value: actualVersionStat.pokemonCaught,
     },
     {
       name: t("nombreDeCaptureShinyVersion"),
-      value: actualVersionStat.pokemonSpawnedShiny,
+      value: actualVersionStat.pokemonCaughtShiny,
     },
-    { name: t("nombreDeSpawnVersion"), value: actualVersionStat.pokemonCaught },
+    {
+      name: t("nombreDeSpawnVersion"),
+      value: actualVersionStat.pokemonSpawned,
+    },
     {
       name: t("nombreDeSpawnShinyVersion"),
-      value: actualVersionStat.pokemonCaughtShiny,
+      value: actualVersionStat.pokemonSpawnedShiny,
     },
   ]);
 

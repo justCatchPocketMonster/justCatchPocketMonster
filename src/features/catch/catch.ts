@@ -81,8 +81,8 @@ export async function catchPokemon(
   const statVersion = await getStatById(version);
   const statAll = await getStatById(nameStatGeneral);
 
-  statVersion.savePokemonCatch.addOneCatch(pokemon);
-  statAll.savePokemonCatch.addOneCatch(pokemon);
+  statVersion.addCatch(pokemon);
+  statAll.addCatch(pokemon);
   user.savePokemon.addOneCatch(pokemon);
   server.savePokemon.addOneCatch(pokemon);
   server.removePokemonByIdChannel(idChannel);
