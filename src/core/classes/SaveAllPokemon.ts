@@ -1,4 +1,4 @@
-﻿import { SaveAllPokemonType } from "../types/SaveAllPokemonType";
+import { SaveAllPokemonType } from "../types/SaveAllPokemonType";
 import { SaveOnePokemon } from "./SaveOnePokemon";
 import allPokemon from "../../data/json/pokemon.json";
 import { Pokemon } from "./Pokemon";

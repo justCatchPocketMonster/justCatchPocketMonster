@@ -33,6 +33,8 @@ import {
 } from "../spawn/spawnMessageRegistry";
 import { pokemonDb } from "../../core/types/pokemonDb";
 
+const catchLocks = new Set<string>();
+
 export async function catchPokemon(
   user: UserType,
   server: ServerType,
@@ -69,73 +71,82 @@ export async function catchPokemon(
     return;
   }
 
-  await interaction.deferReply({ ephemeral: true });
-
   const serverId = interaction.guild!.id;
-  const spawnMessageId = getSpawnMessageId(serverId, idChannel);
-  clearSpawnMessage(serverId, idChannel);
-
-  if (pokemon.isShiny === undefined) throw new Error("isShiny est undefined");
-  pokemon.isShiny = eventShinyAfterCatch(interaction, pokemon.isShiny, server);
-
-  const statVersion = await getStatById(version);
-  const statAll = await getStatById(nameStatGeneral);
-
-  statVersion.addCatch(pokemon);
-  statAll.addCatch(pokemon);
-  user.savePokemon.addOneCatch(pokemon);
-  server.savePokemon.addOneCatch(pokemon);
-  server.removePokemonByIdChannel(idChannel);
-
-  if (pokemon.canSosBattle && random(2) === 1) {
-    await handleSosBattle(
-      server,
-      pokemon,
-      idChannel,
-      serverId,
-      interaction,
-      statVersion,
-      statAll,
+  const catchLockKey = `${serverId}:${idChannel}`;
+  if (catchLocks.has(catchLockKey)) {
+    await interaction.reply(
+      language("noPokemonDisponible", server.settings.language),
     );
+    return;
   }
 
+  catchLocks.add(catchLockKey);
   try {
-    await updateUser(user.discordId, user);
-    await updateServer(server.discordId, server);
-    await updateStat(version, statVersion);
-    await updateStat(nameStatGeneral, statAll);
-  } catch (e) {
-    newLogger(
-      "error",
-      e instanceof Error ? e.message : String(e),
-      "Error updating caches after catching a Pokémon",
+    await interaction.deferReply({ ephemeral: true });
+
+    const spawnMessageId = getSpawnMessageId(serverId, idChannel);
+    clearSpawnMessage(serverId, idChannel);
+
+    if (pokemon.isShiny === undefined) throw new Error("isShiny est undefined");
+    pokemon.isShiny = eventShinyAfterCatch(interaction, pokemon.isShiny, server);
+
+    const statVersion = await getStatById(version);
+    const statAll = await getStatById(nameStatGeneral);
+
+    statVersion.addCatch(pokemon);
+    statAll.addCatch(pokemon);
+    user.savePokemon.addOneCatch(pokemon);
+    server.savePokemon.addOneCatch(pokemon);
+    server.removePokemonByIdChannel(idChannel);
+
+    if (pokemon.canSosBattle && random(2) === 1) {
+      await handleSosBattle(
+        server,
+        pokemon,
+        idChannel,
+        serverId,
+        interaction,
+        statVersion,
+        statAll,
+      );
+    }
+
+    try {
+      await updateUser(user.discordId, user);
+      await updateServer(server.discordId, server);
+      await updateStat(version, statVersion);
+      await updateStat(nameStatGeneral, statAll);
+    } catch (e) {
+      newLogger(
+        "error",
+        e instanceof Error ? e.message : String(e),
+        "Error updating caches after catching a Pokémon",
+      );
+    }
+
+    const lang = server.settings.language;
+    const pokemonDbData = allPokemon.find(
+      (poke) =>
+        poke.id.toString() === pokemon.id &&
+        poke.form === pokemon.form &&
+        poke.versionForm === pokemon.versionForm,
     );
+    const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
+    const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
+      pokemon.id,
+    ).normalCount;
+
+    await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
+      lang,
+      pokemonName,
+      isShiny: pokemon.isShiny ?? false,
+      memberDisplayName,
+      newTotal,
+    });
+    await interaction.deleteReply();
+  } finally {
+    catchLocks.delete(catchLockKey);
   }
-
-  const lang = server.settings.language;
-  const pokemonDbData = allPokemon.find(
-    (poke) =>
-      poke.id.toString() === pokemon.id &&
-      poke.form === pokemon.form &&
-      poke.versionForm === pokemon.versionForm,
-  );
-  const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
-  const formKey = `${pokemon.id}-${pokemon.form}-${pokemon.versionForm}`;
-  const newTotal = user.savePokemon.data[formKey]?.normalCount ?? 0;
-
-  await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
-    lang,
-    pokemonName,
-    isShiny: pokemon.isShiny ?? false,
-    memberDisplayName,
-    newTotal,
-  });
-  const shinySuffix = pokemon.isShiny ? " \u2B50" : "";
-  const congratsMsg =
-    lang === "fr"
-      ? `Félicitations ${memberDisplayName}, vous avez attrapé un ${pokemonName}${shinySuffix}.`
-      : `Congratulations ${memberDisplayName}, you caught a ${pokemonName}${shinySuffix}!`;
-  await interaction.editReply(congratsMsg);
 }
 
 interface SpawnEmbedUpdate {
