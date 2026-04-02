@@ -88,7 +88,11 @@ export async function catchPokemon(
     clearSpawnMessage(serverId, idChannel);
 
     if (pokemon.isShiny === undefined) throw new Error("isShiny est undefined");
-    pokemon.isShiny = eventShinyAfterCatch(interaction, pokemon.isShiny, server);
+    pokemon.isShiny = eventShinyAfterCatch(
+      interaction,
+      pokemon.isShiny,
+      server,
+    );
 
     const statVersion = await getStatById(version);
     const statAll = await getStatById(nameStatGeneral);
