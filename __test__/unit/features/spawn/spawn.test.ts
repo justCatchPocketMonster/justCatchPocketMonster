@@ -419,7 +419,7 @@ describe("generateEmbedPokemon", () => {
   });
 
   test("should include only minutes in footer when endTime is < 1h away", async () => {
-    const futureDate = new Date(Date.now() + 30 * 60 * 1000);
+    const futureDate = new Date(Date.now() + 30 * 60 * 1000 + 30 * 1000);
     server.eventSpawn.whatEvent = { endTime: futureDate } as any;
 
     const { embed } = await generateEmbedPokemon(mockPokemon as any, server);
