@@ -150,7 +150,6 @@ export async function catchPokemon(
     await interaction.editReply(
       generateCatchMessage(pokemon, memberDisplayName, user, server),
     );
-    await interaction.deleteReply();
   } finally {
     catchLocks.delete(catchLockKey);
   }

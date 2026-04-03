@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk npx:*)",
+      "Bash(rtk git:*)",
+      "Bash(./node_modules/.bin/jest --runInBand --testPathPatterns=\"features/catch/catch\")"
+    ]
+  }
+}
