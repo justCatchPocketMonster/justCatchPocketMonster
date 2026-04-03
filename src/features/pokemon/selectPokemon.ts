@@ -270,12 +270,16 @@ function generationSelect(server: ServerType): string {
 }
 
 function raritySelect(server: ServerType): string {
-  const randomNumber = random(1000);
+  const arrayRarity = Object.keys(valuePerRarity) as (keyof RarityStat)[];
+  const total = arrayRarity.reduce(
+    (sum, key) => sum + server.eventSpawn.rarity[key],
+    0,
+  );
+  const randomNumber = random(total);
   let somStatByRarity = 0;
-  let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (const element of arrayRarity) {
-    somStatByRarity += server.eventSpawn.rarity[element as keyof RarityStat];
-    if (randomNumber <= somStatByRarity) {
+    somStatByRarity += server.eventSpawn.rarity[element];
+    if (randomNumber < somStatByRarity) {
       return element;
     }
   }
