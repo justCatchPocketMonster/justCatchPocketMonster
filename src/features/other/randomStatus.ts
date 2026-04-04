@@ -22,6 +22,8 @@ const randomStatus = async (Client: Client) => {
       statGlobal.pokemonSpawned + " pokemon have spawned from the start.",
       statGlobal.pokemonCaught + " pokemon have been catched.",
       "The final update is out.",
+      "Meilleure chaîne SOS : " + statGlobal.bestSosChain,
+      statGlobal.raidsWon + " raids ont été gagnés.",
       "!code " + getCode()["shiny"][random(getCode()["shiny"].length)],
     ];
     let nbStatus = arrayStatus.length;

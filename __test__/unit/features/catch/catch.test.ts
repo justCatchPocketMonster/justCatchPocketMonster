@@ -42,6 +42,7 @@ jest.mock("../../../../src/cache/StatCache", () => ({
     savePokemonCatch: { addOneCatch: jest.fn() },
     addSpawn: jest.fn(),
     addCatch: jest.fn(),
+    updateBestSosChain: jest.fn(),
   }),
   updateStat: jest.fn().mockResolvedValue(undefined),
 }));

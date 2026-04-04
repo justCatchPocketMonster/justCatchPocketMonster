@@ -74,6 +74,10 @@ const effectEvent = (eventSpawn: EventSpawn, server: ServerType) => {
     eventSpawn.whatEvent!.endTime = addDuration(DURATIONS[levelKey]);
   }
 
+  if (eventId === "2") {
+    eventSpawn.whatEvent!.endTime = new Date();
+  }
+
   function capitalizeTypeKey(t: keyof TypeStat): string {
     return t.charAt(0).toUpperCase() + t.slice(1);
   }
