@@ -40,9 +40,15 @@ export class Stat implements StatType {
     if (chainLvl > this.bestSosChain) this.bestSosChain = chainLvl;
   }
 
-  addRaidAppeared(): void { this.raidsAppeared++; }
-  addRaidWon(): void      { this.raidsWon++; }
-  addRaidLost(): void     { this.raidsLost++; }
+  addRaidAppeared(): void {
+    this.raidsAppeared++;
+  }
+  addRaidWon(): void {
+    this.raidsWon++;
+  }
+  addRaidLost(): void {
+    this.raidsLost++;
+  }
 
   addCatch(pokemon: Pokemon): void {
     this.pokemonCaught++;

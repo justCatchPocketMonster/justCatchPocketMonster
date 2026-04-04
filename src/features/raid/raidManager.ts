@@ -58,14 +58,18 @@ export function startRaid(
 
   activeRaids.set(serverId, raid);
 
-  getStatById(version).then((statVersion) => {
-    statVersion.addRaidAppeared();
-    updateStat(version, statVersion).catch((e) => logger.error(e));
-  }).catch((e) => logger.error(e));
-  getStatById(nameStatGeneral).then((statAll) => {
-    statAll.addRaidAppeared();
-    updateStat(nameStatGeneral, statAll).catch((e) => logger.error(e));
-  }).catch((e) => logger.error(e));
+  getStatById(version)
+    .then((statVersion) => {
+      statVersion.addRaidAppeared();
+      updateStat(version, statVersion).catch((e) => logger.error(e));
+    })
+    .catch((e) => logger.error(e));
+  getStatById(nameStatGeneral)
+    .then((statAll) => {
+      statAll.addRaidAppeared();
+      updateStat(nameStatGeneral, statAll).catch((e) => logger.error(e));
+    })
+    .catch((e) => logger.error(e));
 
   return raid;
 }

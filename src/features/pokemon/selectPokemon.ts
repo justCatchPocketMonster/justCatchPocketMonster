@@ -258,7 +258,10 @@ function selectRandomPokemon(
 
 function generationSelect(server: ServerType): string {
   const genKeys = Object.keys(server.eventSpawn.gen) as (keyof GenStat)[];
-  const total = genKeys.reduce((sum, key) => sum + server.eventSpawn.gen[key], 0);
+  const total = genKeys.reduce(
+    (sum, key) => sum + server.eventSpawn.gen[key],
+    0,
+  );
   const randomNumber = random(total);
   let somStatByGen = 0;
 
@@ -291,7 +294,10 @@ function raritySelect(server: ServerType): string {
 
 function typeSelect(server: ServerType): string {
   const arrayType = Object.keys(server.eventSpawn.type) as (keyof TypeStat)[];
-  const total = arrayType.reduce((sum, key) => sum + server.eventSpawn.type[key], 0);
+  const total = arrayType.reduce(
+    (sum, key) => sum + server.eventSpawn.type[key],
+    0,
+  );
   const randomNumber = random(total);
   let somStatByType = 0;
 

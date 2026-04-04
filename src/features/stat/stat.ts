@@ -244,10 +244,10 @@ function principalEmbedStat(
   ]);
 
   addStatFields([
-    { name: t("statBestSosChain"),  value: generalVersionStat.bestSosChain },
+    { name: t("statBestSosChain"), value: generalVersionStat.bestSosChain },
     { name: t("statRaidsAppeared"), value: generalVersionStat.raidsAppeared },
-    { name: t("statRaidsWon"),      value: generalVersionStat.raidsWon },
-    { name: t("statRaidsLost"),     value: generalVersionStat.raidsLost },
+    { name: t("statRaidsWon"), value: generalVersionStat.raidsWon },
+    { name: t("statRaidsLost"), value: generalVersionStat.raidsLost },
   ]);
 
   const leastCaught = generalVersionStat.savePokemonCatch.sortPokemonsByCount({
