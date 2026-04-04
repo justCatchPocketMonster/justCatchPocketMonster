@@ -11,6 +11,10 @@ export class Stat implements StatType {
     public pokemonCaughtShiny: number,
     public savePokemonSpawn: SaveAllPokemon,
     public savePokemonCatch: SaveAllPokemon,
+    public bestSosChain: number = 0,
+    public raidsAppeared: number = 0,
+    public raidsWon: number = 0,
+    public raidsLost: number = 0,
   ) {}
 
   static fromMongo(data: StatType): Stat {
@@ -25,8 +29,20 @@ export class Stat implements StatType {
       data.pokemonCaughtShiny,
       savePokemonSpawn,
       savePokemonCatch,
+      data.bestSosChain ?? 0,
+      data.raidsAppeared ?? 0,
+      data.raidsWon ?? 0,
+      data.raidsLost ?? 0,
     );
   }
+
+  updateBestSosChain(chainLvl: number): void {
+    if (chainLvl > this.bestSosChain) this.bestSosChain = chainLvl;
+  }
+
+  addRaidAppeared(): void { this.raidsAppeared++; }
+  addRaidWon(): void      { this.raidsWon++; }
+  addRaidLost(): void     { this.raidsLost++; }
 
   addCatch(pokemon: Pokemon): void {
     this.pokemonCaught++;
