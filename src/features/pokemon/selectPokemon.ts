@@ -257,25 +257,34 @@ function selectRandomPokemon(
 }
 
 function generationSelect(server: ServerType): string {
-  const randomNumber = random(nbGeneration * 100);
+  const genKeys = Object.keys(server.eventSpawn.gen) as (keyof GenStat)[];
+  const total = genKeys.reduce(
+    (sum, key) => sum + server.eventSpawn.gen[key],
+    0,
+  );
+  const randomNumber = random(total);
   let somStatByGen = 0;
 
-  for (let gen = 1; gen <= 9; gen++) {
-    somStatByGen += server.eventSpawn.gen[gen.toString() as keyof GenStat];
-    if (randomNumber <= somStatByGen) {
-      return gen.toString();
+  for (const key of genKeys) {
+    somStatByGen += server.eventSpawn.gen[key];
+    if (randomNumber < somStatByGen) {
+      return key;
     }
   }
   return "errorGen";
 }
 
 function raritySelect(server: ServerType): string {
-  const randomNumber = random(1000);
+  const arrayRarity = Object.keys(valuePerRarity) as (keyof RarityStat)[];
+  const total = arrayRarity.reduce(
+    (sum, key) => sum + server.eventSpawn.rarity[key],
+    0,
+  );
+  const randomNumber = random(total);
   let somStatByRarity = 0;
-  let arrayRarity: string[] = Object.keys(valuePerRarity);
   for (const element of arrayRarity) {
-    somStatByRarity += server.eventSpawn.rarity[element as keyof RarityStat];
-    if (randomNumber <= somStatByRarity) {
+    somStatByRarity += server.eventSpawn.rarity[element];
+    if (randomNumber < somStatByRarity) {
       return element;
     }
   }
@@ -284,15 +293,17 @@ function raritySelect(server: ServerType): string {
 }
 
 function typeSelect(server: ServerType): string {
-  const randomNumber = random(
-    Object.values(valuePerType).reduce((a, b) => a + b, 0),
+  const arrayType = Object.keys(server.eventSpawn.type) as (keyof TypeStat)[];
+  const total = arrayType.reduce(
+    (sum, key) => sum + server.eventSpawn.type[key],
+    0,
   );
+  const randomNumber = random(total);
   let somStatByType = 0;
-  let arrayType: string[] = Object.keys(valuePerType);
 
   for (const element of arrayType) {
-    somStatByType += server.eventSpawn.type[element as keyof TypeStat];
-    if (randomNumber <= somStatByType) {
+    somStatByType += server.eventSpawn.type[element];
+    if (randomNumber < somStatByType) {
       return element;
     }
   }

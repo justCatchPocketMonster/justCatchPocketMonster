@@ -281,7 +281,7 @@ function buildPokedexEmbed(
           allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
-            server.savePokemon.countUniquePokemonsCaught(),
+            user.savePokemon.countUniquePokemonsCaught(),
             allPokemon.at(-1)!["id"],
           ) +
           "%",
@@ -295,7 +295,7 @@ function buildPokedexEmbed(
           allPokemon.at(-1)!["id"] +
           " - " +
           getPercentage(
-            server.savePokemon.countUniquePokemonsShinyCaught(),
+            user.savePokemon.countUniquePokemonsShinyCaught(),
             allPokemon.at(-1)!["id"],
           ) +
           "%",

@@ -48,7 +48,7 @@ describe("EventSpawn.applyModifiersInPlace", () => {
 
     expect(spawn.gen["1"]).toBe(Math.floor(100 * 2 * 100) / 100);
     expect(spawn.type.fire).toBe(Math.floor(100 * 0.5 * 100) / 100);
-    expect(spawn.rarity.legendary).toBe(Math.floor(9 * 2 * 100) / 100);
+    expect(spawn.rarity.legendary).toBe(Math.floor(10 * 2 * 100) / 100);
 
     expect(spawn.shiny).toBe(Math.floor(1000 * 1.1 * 100) / 100);
     expect(spawn.valueMaxChoiceEgg).toBe(Math.floor(100 * 0.8 * 100) / 100);

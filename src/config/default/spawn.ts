@@ -40,10 +40,10 @@ export const valuePerType: TypeStat = {
 };
 
 export const valuePerRarity: RarityStat = {
-  ordinary: 990,
-  legendary: 9,
+  ordinary: 979,
+  legendary: 10,
   mythical: 1,
-  ultraBeast: 9,
+  ultraBeast: 10,
 };
 
 export const rateMaxShiny = 4096;

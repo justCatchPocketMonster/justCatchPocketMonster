@@ -35,6 +35,26 @@ const StatSchema = new mongoose.Schema<StatType>(
       type: SaveAllPokemonSchema,
       required: true,
     },
+    bestSosChain: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    raidsAppeared: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    raidsWon: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    raidsLost: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,

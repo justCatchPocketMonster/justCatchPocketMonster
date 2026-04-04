@@ -103,6 +103,10 @@ export async function catchPokemon(
     server.savePokemon.addOneCatch(pokemon);
     server.removePokemonByIdChannel(idChannel);
 
+    const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
+      pokemon.id,
+    ).normalCount;
+
     if (pokemon.canSosBattle && random(2) === 1) {
       await handleSosBattle(
         server,
@@ -136,9 +140,6 @@ export async function catchPokemon(
         poke.versionForm === pokemon.versionForm,
     );
     const pokemonName = resolvePokemonName(pokemonDbData, lang, pokemonInput);
-    const newTotal = user.savePokemon.getSaveOnePokemonFusedForm(
-      pokemon.id,
-    ).normalCount;
 
     await updateSpawnEmbed(spawnMessageId, interaction, idChannel, {
       lang,
@@ -189,6 +190,8 @@ async function handleSosBattle(
   server.pokemonPresent[idChannel] = sosPokemon;
   statVersion.addSpawn(sosPokemon);
   statAll.addSpawn(sosPokemon);
+  statVersion.updateBestSosChain(nextChainLvl);
+  statAll.updateBestSosChain(nextChainLvl);
   try {
     await updateServer(server.discordId, server);
     await updateStat(version, statVersion);

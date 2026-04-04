@@ -8,4 +8,8 @@ export interface StatType {
   pokemonCaughtShiny: number;
   savePokemonSpawn: SaveAllPokemonType;
   savePokemonCatch: SaveAllPokemonType;
+  bestSosChain: number;
+  raidsAppeared: number;
+  raidsWon: number;
+  raidsLost: number;
 }
