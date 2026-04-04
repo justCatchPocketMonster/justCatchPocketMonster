@@ -1,6 +1,7 @@
 export { activeCode } from "./activeCode";
 export { codeType } from "./codeType";
 import { eventCode, landings } from "../../config/default/code";
+import { version } from "../../config/default/misc";
 import { UserType } from "../../core/types/UserType";
 import { ServerType } from "../../core/types/ServerType";
 import { EmbedBuilder } from "discord.js";
@@ -27,37 +28,40 @@ export function setCode(newCode: Record<string, string[]>) {
     code[k] = v;
   }
 }
-export function updateArrayCode(stat: StatType) {
-  const current = getCode();
-
+export function updateArrayCode(generalStat: StatType, versionStat: StatType) {
   const next: Record<string, string[]> = {};
-  for (const [k, v] of Object.entries(current)) next[k] = [...v];
 
   for (const [k, v] of Object.entries(eventCode)) {
-    const existing = next[k] ?? [];
-    next[k] = Array.from(new Set([...existing, ...v]));
+    next[k] = Array.from(new Set(v));
   }
 
-  let palierChoiceSpawn: number | null = null;
-  let palierChoiceCatch: number | null = null;
+  let palierGeneralSpawn: number | null = null;
+  let palierGeneralCatch: number | null = null;
+  let palierVersionSpawn: number | null = null;
+  let palierVersionCatch: number | null = null;
 
   for (const landing of landings) {
-    if (stat.pokemonSpawned >= landing) palierChoiceSpawn = landing;
-    if (stat.pokemonCaught >= landing) palierChoiceCatch = landing;
+    if (generalStat.pokemonSpawned >= landing) palierGeneralSpawn = landing;
+    if (generalStat.pokemonCaught >= landing) palierGeneralCatch = landing;
+    if (versionStat.pokemonSpawned >= landing) palierVersionSpawn = landing;
+    if (versionStat.pokemonCaught >= landing) palierVersionCatch = landing;
   }
 
   next.shiny ??= [];
-  if (palierChoiceSpawn) next.shiny.push(`SPAWNS${palierChoiceSpawn}`);
-  if (palierChoiceCatch) next.shiny.push(`CATCHS${palierChoiceCatch}`);
+  if (palierGeneralSpawn) next.shiny.push(`SPAWNS${palierGeneralSpawn}`);
+  if (palierGeneralCatch) next.shiny.push(`CATCHS${palierGeneralCatch}`);
+  if (palierVersionSpawn) next.shiny.push(`SPAWNS${palierVersionSpawn}v${version}`);
+  if (palierVersionCatch) next.shiny.push(`CATCHS${palierVersionCatch}v${version}`);
 
   setCode(next);
 }
 export function codeListEmbed(
   user: UserType,
   server: ServerType,
-  stat: StatType,
+  generalStat: StatType,
+  versionStat: StatType,
 ) {
-  updateArrayCode(stat);
+  updateArrayCode(generalStat, versionStat);
   const embed = new EmbedBuilder();
   embed.setTitle(language("codeListEmbedTitle", server.settings.language));
   embed.setDescription(

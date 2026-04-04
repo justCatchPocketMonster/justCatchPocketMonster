@@ -14,7 +14,7 @@ import {
 import language from "../../lang/language";
 import { getServerById } from "../../cache/ServerCache";
 import { getStatById } from "../../cache/StatCache";
-import { nameStatGeneral } from "../../config/default/misc";
+import { nameStatGeneral, version } from "../../config/default/misc";
 
 export default {
   name: "code",
@@ -39,9 +39,10 @@ export default {
   actif: true,
   async execute(interaction: ChatInputCommandInteraction) {
     try {
-      const stat = await getStatById(nameStatGeneral);
+      const generalStat = await getStatById(nameStatGeneral);
+      const versionStat = await getStatById(version);
 
-      updateArrayCode(stat);
+      updateArrayCode(generalStat, versionStat);
       // @ts-ignore
       let codeEntered = interaction.options.getString(
         language("codeNameOptionString", "eng"),
